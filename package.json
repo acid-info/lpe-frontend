@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@acid-info/lsd-react": "^0.1.0-alpha.2",
     "@hookstate/core": "^4.0.1",
     "@tanstack/react-query": "^4.29.1",
     "@types/node": "18.15.11",
