@@ -4,12 +4,17 @@ import { IconButton, Typography } from "@acid-info/lsd-react";
 import { MoonIcon } from "../icons/MoonIcon";
 import { SunIcon } from "../icons/SunIcon";
 
-export default function Navbar({ isDark }: { isDark: boolean }) {
+interface NavbarProps {
+  isDark: boolean;
+  toggle: () => void;
+}
+
+export default function Navbar({ isDark, toggle }: NavbarProps) {
   return (
     <Container>
       <LogosIcon color="primary" />
       <Icons>
-        <IconButton size="small">
+        <IconButton size="small" onClick={() => toggle()}>
           {isDark ? <SunIcon color="primary" /> : <MoonIcon color="primary" />}
         </IconButton>
         <Selector size="small">

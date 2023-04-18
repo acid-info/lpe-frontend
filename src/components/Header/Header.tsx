@@ -1,4 +1,4 @@
-import { Tag, Typography } from "@acid-info/lsd-react";
+import { Typography } from "@acid-info/lsd-react";
 import styled from "@emotion/styled";
 
 export default function Header() {
@@ -13,17 +13,12 @@ export default function Header() {
       <Description component="div" variant="label2">
         Blog with media written by Logos members
       </Description>
-      <Tags>
-        <Tag disabled={false}>Privacy</Tag>
-        <Tag disabled={false}>Security</Tag>
-        <Tag disabled={false}>Liberty</Tag>
-      </Tags>
     </Container>
   );
 }
 
 const Container = styled.div`
-  padding: 16px;
+  padding: 16px 16px 8px 16px;
 `;
 
 const Title = styled(Typography)`
@@ -32,10 +27,4 @@ const Title = styled(Typography)`
 
 const Description = styled(Typography)`
   margin-top: 6px;
-`;
-
-const Tags = styled.div`
-  display: flex;
-  gap: 8px;
-  margin-top: 16px;
 `;
