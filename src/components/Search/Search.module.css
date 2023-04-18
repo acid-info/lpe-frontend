@@ -1,0 +1,8 @@
+.searchBox {
+    width: 100% !important;
+}
+
+.searchBox > div {
+    border-left: none !important;
+    border-right: none !important;
+}

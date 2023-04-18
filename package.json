@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@acid-info/lsd-react": "^0.1.0-alpha.2",
+    "@acid-info/lsd-react": "^0.1.0-alpha.3",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hookstate/core": "^4.0.1",
