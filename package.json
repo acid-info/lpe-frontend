@@ -8,7 +8,23 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --ext .tsx,ts src/ --fix"
+    ],
+    "src/**": [
+      "prettier --check 'src/**/*.ts' 'src/**/*.tsx'"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
+    "@acid-info/lsd-react": "^0.1.0-alpha.3",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@hookstate/core": "^4.0.1",
     "@tanstack/react-query": "^4.29.1",
     "@types/node": "18.15.11",
@@ -20,5 +36,10 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
+    "prettier": "^2.8.7"
   }
 }
