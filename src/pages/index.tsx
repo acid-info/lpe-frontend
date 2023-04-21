@@ -1,5 +1,6 @@
-import { HeaderLayout } from "@/layouts/HeaderLayout";
-import Head from "next/head";
+import PostsDemo from '@/components/Post/PostsDemo'
+import { HeaderLayout } from '@/layouts/HeaderLayout'
+import Head from 'next/head'
 
 export default function Home() {
   return (
@@ -15,7 +16,8 @@ export default function Home() {
       </Head>
       <main>
         <HeaderLayout />
+        <PostsDemo />
       </main>
     </>
-  );
+  )
 }
