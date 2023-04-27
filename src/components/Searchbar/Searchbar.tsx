@@ -24,11 +24,11 @@ export default function Searchbar(props: SearchbarProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const [query, setQuery] = useState<string | undefined>(undefined)
+  const [query, setQuery] = useState<string>('')
   const [filterTags, setFilterTags] = useState<string[]>([])
 
   const validateSearch = useCallback(() => {
-    return (query !== undefined && query.length > 0) || filterTags.length > 0
+    return query.length > 0 || filterTags.length > 0
   }, [query, filterTags])
 
   const performSearch = useCallback(() => {
@@ -37,7 +37,7 @@ export default function Searchbar(props: SearchbarProps) {
 
   const performClear = useCallback(() => {
     // TODO: clear input.value seems to be not working. When set to undefined, the input value is still there.
-    setQuery(undefined)
+    setQuery('')
     setFilterTags([])
   }, [setQuery, setFilterTags])
 
@@ -75,25 +75,21 @@ export default function Searchbar(props: SearchbarProps) {
 
   const isCollapsed = validateSearch() && !active
 
+  const placeholder =
+    searchScope === ESearchScope.GLOBAL
+      ? copyConfigs.search.searchbarPlaceholders.global()
+      : copyConfigs.search.searchbarPlaceholders.article()
+
   return (
     <SearchbarContainer onUnfocus={() => setActive(false)}>
       <SearchBox>
-        <Autocomplete
+        <TextField
           className={styles.searchBox}
-          placeholder={
-            searchScope === ESearchScope.GLOBAL
-              ? copyConfigs.search.searchbarPlaceholders.global()
-              : copyConfigs.search.searchbarPlaceholders.article()
-          }
+          placeholder={placeholder}
           value={query as string}
           onFocus={() => setActive(true)}
-          clearButton={false}
-          inputProps={{
-            onChange: (e) => {
-              setQuery(e.target.value)
-              console.log(e.target.value)
-            },
-            onKeyUp: (e) => handleEnter(e),
+          onChange={(e) => {
+            setQuery(e.target.value)
           }}
         />
         <div>
@@ -118,7 +114,7 @@ export default function Searchbar(props: SearchbarProps) {
         className={isCollapsed ? 'enabled' : ''}
         onClick={() => setActive(true)}
         dangerouslySetInnerHTML={{ __html: constructCollapseText() }}
-      ></Collapsed>
+      />
     </SearchbarContainer>
   )
 }

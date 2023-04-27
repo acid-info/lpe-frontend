@@ -6,12 +6,6 @@
     border: none !important;
 }
 
-/*if we use textfield*/
-/*.searchBox{*/
-/*    border: none !important;*/
-/*}*/
-
-/*if we use autocompete */
-.searchBox > div{
+.searchBox{
     border: none !important;
 }
