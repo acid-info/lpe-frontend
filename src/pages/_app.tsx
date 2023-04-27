@@ -5,14 +5,27 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { uiConfigs } from '@/configs/ui.configs'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
+import { ReactNode } from 'react'
+import { NextComponentType, NextPageContext } from 'next'
 
-export default function App({ Component, pageProps }: AppProps) {
+type NextLayoutComponentType<P = {}> = NextComponentType<
+  NextPageContext,
+  any,
+  P
+> & {
+  getLayout?: (page: ReactNode) => ReactNode
+}
+
+type AppLayoutProps<P = {}> = AppProps & {
+  Component: NextLayoutComponentType
+}
+
+export default function App({ Component, pageProps }: AppLayoutProps) {
   const isDark = useIsDarkState().get()
 
-  //TODO: fix this
-  //@ts-ignore
   const getLayout =
-    Component.getLayout || ((page) => <DefaultLayout>{page}</DefaultLayout>)
+    Component.getLayout ||
+    ((page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>)
 
   return (
     <ThemeProvider theme={isDark ? defaultThemes.dark : defaultThemes.light}>

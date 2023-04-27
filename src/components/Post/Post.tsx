@@ -68,7 +68,7 @@ export default function Post({
           {description}
         </CustomTypography>
       ),
-    [classType, description, size],
+    [classType, description],
   )
 
   const _thumbnail = useMemo(() => {

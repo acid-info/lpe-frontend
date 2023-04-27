@@ -34,8 +34,8 @@ const Container = styled.div`
   padding: 16px;
   gap: 24px;
 
+  // temporariy breakpoint
   @media (max-width: 768px) {
-    // temporariy breakpoint
     flex-direction: column;
   }
 `

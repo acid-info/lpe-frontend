@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import { LogosIcon } from '../icons/LogosIcon'
 import { IconButton, Typography } from '@acid-info/lsd-react'
-import { MoonIcon } from '../icons/MoonIcon'
-import { SunIcon } from '../icons/SunIcon'
+import { LogosIcon } from '../Icons/LogosIcon'
+import { SunIcon } from '../Icons/SunIcon'
+import { MoonIcon } from '../Icons/MoonIcon'
 
 interface NavbarProps {
   isDark: boolean
@@ -12,7 +12,9 @@ interface NavbarProps {
 export default function Navbar({ isDark, toggle }: NavbarProps) {
   return (
     <Container>
-      <LogosIcon color="primary" />
+      <LogosIconContainer>
+        <LogosIcon color="primary" />
+      </LogosIconContainer>
       <Icons>
         <IconButton size="small" onClick={() => toggle()}>
           {isDark ? <SunIcon color="primary" /> : <MoonIcon color="primary" />}
@@ -38,9 +40,19 @@ const Container = styled.nav`
   z-index: 100;
 `
 
+const LogosIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  @media (max-width: 768px) {
+    margin-left: unset;
+  }
+`
+
 const Icons = styled.div`
   display: flex;
   align-items: center;
+  margin-left: auto;
 `
 
 const Selector = styled(IconButton)`

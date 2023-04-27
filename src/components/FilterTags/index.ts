@@ -1,1 +1,1 @@
-export { default as FilterTags } from './HeaderTags'
+export { default as FilterTags } from './FilterTags'

@@ -1,6 +1,5 @@
 import { Tag } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { useState } from 'react'
 import { nope } from '@/utils/general.utils'
 
 type FilterTagsProps = {
