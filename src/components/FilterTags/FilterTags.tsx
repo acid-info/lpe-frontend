@@ -20,7 +20,6 @@ export default function FilterTags(props: FilterTagsProps) {
             disabled={false}
             key={index}
             onClick={() => onTagClick(tag)}
-            selected={selectedTags.includes(tag)}
             variant={selectedTags.includes(tag) ? 'filled' : 'outlined'}
           >
             {tag}

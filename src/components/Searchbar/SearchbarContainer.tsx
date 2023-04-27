@@ -23,7 +23,7 @@ export function SearchbarContainer({ children, onUnfocus = nope }: Props) {
       console.log('scrolling', isScrolling)
       onUnfocus()
     }
-  }, [isOutside, stickyRef, isScrolling])
+  }, [isOutside, stickyRef, isScrolling, onUnfocus])
 
   return (
     <>

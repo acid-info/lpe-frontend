@@ -2,10 +2,16 @@
     width: 100% !important;
 }
 
-.active::placeholder{
-    /*opacity: 1 !important;*/
+.searchButton{
+    border: none !important;
 }
 
-.searchBox > div {
+/*if we use textfield*/
+/*.searchBox{*/
+/*    border: none !important;*/
+/*}*/
+
+/*if we use autocompete */
+.searchBox > div{
     border: none !important;
 }
