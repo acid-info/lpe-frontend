@@ -1,0 +1,11 @@
+.searchBox {
+    width: 100% !important;
+}
+
+.active::placeholder{
+    /*opacity: 1 !important;*/
+}
+
+.searchBox > div {
+    border: none !important;
+}
