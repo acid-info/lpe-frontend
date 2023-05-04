@@ -1,17 +1,40 @@
-import useIsDarkState from "@/states/isDarkState/isDarkState";
-import { defaultThemes, ThemeProvider } from "@acid-info/lsd-react";
-import { css, Global } from "@emotion/react";
-import type { AppProps } from "next/app";
-import Head from "next/head";
+import useIsDarkState from '@/states/isDarkState/isDarkState'
+import { defaultThemes, ThemeProvider } from '@acid-info/lsd-react'
+import { css, Global } from '@emotion/react'
+import type { AppProps } from 'next/app'
+import Head from 'next/head'
+import { uiConfigs } from '@/configs/ui.configs'
+import { DefaultLayout } from '@/layouts/DefaultLayout'
+import { ReactNode } from 'react'
+import { NextComponentType, NextPageContext } from 'next'
 
-export default function App({ Component, pageProps }: AppProps) {
-  const isDark = useIsDarkState().get();
+type NextLayoutComponentType<P = {}> = NextComponentType<
+  NextPageContext,
+  any,
+  P
+> & {
+  getLayout?: (page: ReactNode) => ReactNode
+}
+
+type AppLayoutProps<P = {}> = AppProps & {
+  Component: NextLayoutComponentType
+}
+
+export default function App({ Component, pageProps }: AppLayoutProps) {
+  const isDark = useIsDarkState().get()
+
+  const getLayout =
+    Component.getLayout ||
+    ((page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>)
 
   return (
     <ThemeProvider theme={isDark ? defaultThemes.dark : defaultThemes.light}>
-      <Component {...pageProps} />
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <title>Acid</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
       </Head>
       <Global
         styles={css`
@@ -22,8 +45,12 @@ export default function App({ Component, pageProps }: AppProps) {
             width: 100%;
             height: 100%;
           }
+          :root {
+            --lpe-nav-rendered-height: ${uiConfigs.navbarRenderedHeight}px;
+          }
         `}
       />
+      {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
-  );
+  )
 }
