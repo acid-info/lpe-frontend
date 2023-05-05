@@ -4,55 +4,82 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
 import { useMemo } from 'react'
+import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+
+export enum PostImageRatio {
+  PORTRAIT = 'portrait',
+  LANDSCAPE = 'landscape',
+  SQUARE = 'square',
+}
+
+export enum PostClassType {
+  ARTICLE = 'article',
+  PODCAST = 'podcast',
+}
+
+export enum PostStyleType {
+  LSD = 'lsd',
+  DEFAULT = 'default',
+}
+
+export enum PostSize {
+  SMALL = 'small',
+  LARGE = 'large',
+}
+
+export enum PostType {
+  BODY = 'body',
+  HEADER = 'header',
+}
+
+export type PostAppearanceProps = {
+  size?: PostSize
+  classType?: PostClassType
+  postType?: PostType
+  styleType?: PostStyleType
+  aspectRatio?: PostImageRatio
+  showImage?: boolean
+}
+
+export type PostDataProps = {
+  date: string
+  title: string
+  description?: string
+  author?: string
+  tags?: string[]
+  coverImage?: UnbodyImageBlock
+}
+
+export const PostImageRatioOptions = {
+  [PostImageRatio.PORTRAIT]: '9 / 16',
+  [PostImageRatio.LANDSCAPE]: '16 / 9',
+  [PostImageRatio.SQUARE]: '1 / 1',
+}
 
 export type PostProps = CommonProps &
   React.HTMLAttributes<HTMLDivElement> & {
-    size?: 'small' | 'large'
-    classType?: 'article' | 'podcast'
-    postType?: 'body' | 'header'
-    styleType?: 'lsd' | 'default'
-    aspectRatio?: 'portrait' | 'landscape' | 'square'
-    showImage?: boolean
-    imageUrl?: string
-    date: Date
-    title: string
-    description?: string
-    author?: string
-    tags?: string[]
+    appearance?: PostAppearanceProps
+    data: PostDataProps
   }
-
-const getAspectRatio = (aspectRatio: PostProps['aspectRatio']) => {
-  switch (aspectRatio) {
-    case 'portrait':
-      return '9 / 16'
-    case 'landscape':
-      return '16 / 9'
-    case 'square':
-      return '1 / 1'
-    default:
-      return '16 / 9'
-  }
-}
 
 export default function Post({
-  size = 'small',
-  classType = 'article',
-  postType = 'body',
-  styleType = 'lsd',
-  aspectRatio = 'landscape',
-  showImage = true,
-  imageUrl,
-  date,
-  title,
-  description,
-  author,
-  tags = [],
+  appearance: {
+    size = PostSize.SMALL,
+    classType = PostClassType.ARTICLE,
+    postType = PostType.BODY,
+    styleType = PostStyleType.LSD,
+    aspectRatio = PostImageRatio.LANDSCAPE,
+    showImage = true,
+  } = {},
+  data: { coverImage, date: dateStr, title, description, author, tags = [] },
   ...props
 }: PostProps) {
+  const date = new Date(dateStr)
+
   const _title = useMemo(
     () => (
       <CustomTypography
-        variant={size === 'small' ? 'h4' : 'h2'}
+        variant={size === PostSize.SMALL ? 'h4' : 'h2'}
         genericFontFamily="serif"
       >
         {title}
@@ -63,7 +90,7 @@ export default function Post({
 
   const _description = useMemo(
     () =>
-      classType == 'article' && (
+      classType == PostClassType.ARTICLE && (
         <CustomTypography variant="body3" genericFontFamily="sans-serif">
           {description}
         </CustomTypography>
@@ -72,24 +99,24 @@ export default function Post({
   )
 
   const _thumbnail = useMemo(() => {
-    if (!showImage || !imageUrl) return null
+    if (!showImage || !coverImage) return null
     if (postType === 'body') {
       return (
         <ThumbnailContainer aspectRatio={aspectRatio}>
-          <Thumbnail fill src={imageUrl} alt={imageUrl} />
+          <Thumbnail fill src={coverImage.url} alt={coverImage.alt} />
         </ThumbnailContainer>
       )
     } else {
       // TBD
       return (
         <ThumbnailContainer aspectRatio={aspectRatio}>
-          <Thumbnail fill src={imageUrl} alt={imageUrl} />
+          <Thumbnail fill src={coverImage.url} alt={coverImage.alt} />
           {_title}
           {_description}
         </ThumbnailContainer>
       )
     }
-  }, [showImage, imageUrl, aspectRatio, postType, _title, _description])
+  }, [showImage, coverImage, aspectRatio, postType, _title, _description])
 
   const _header = useMemo(() => {
     if (postType === 'body')
@@ -153,10 +180,12 @@ const Container = styled.div`
 `
 
 const ThumbnailContainer = styled.div<{
-  aspectRatio: PostProps['aspectRatio']
+  aspectRatio: PostImageRatio
 }>`
   aspect-ratio: ${(p) =>
-    p.aspectRatio ? getAspectRatio(p.aspectRatio) : '16 / 9'};
+    p.aspectRatio
+      ? PostImageRatioOptions[p.aspectRatio]
+      : PostImageRatioOptions[PostImageRatio.PORTRAIT]};
   position: relative;
   width: 100%;
   height: 100%;
