@@ -1,13 +1,15 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import unbody, { getHomepagePosts } from '@/services/unbody.service'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
-}
-
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<any>,
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  try {
+    const data = await getHomepagePosts()
+    res.status(200).json(data)
+  } catch (e: any) {
+    console.log(e)
+    res.status(e.response.statusCode || 500).send(e.message)
+  }
 }
