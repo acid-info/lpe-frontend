@@ -1,10 +1,22 @@
-import { UnbodyExploreArgs } from './unbody.types'
+import { UnbodyGetFilters } from './unbody.types'
+import { UnbodyGraphQl } from './unbody-content.types'
 
-export const pareseExploreArgs = (args: UnbodyExploreArgs = {}): string => {
+const operators = Object.values(UnbodyGraphQl.Filters.WhereOperatorEnum)
+
+export const parseFilterArgs = (args: UnbodyGetFilters = {}): string => {
   const parse = (obj: any): string | number => {
     if (typeof obj === 'number') {
       return obj
     }
+
+    if (
+      typeof obj === 'string' &&
+      operators.includes(obj as UnbodyGraphQl.Filters.WhereOperatorEnum)
+    ) {
+      return obj
+    }
+
+    //TODO needs to be improved in order to support more complex queries
 
     if (Array.isArray(obj)) {
       const props = obj.map((value) => `${parse(value)}`).join(',')

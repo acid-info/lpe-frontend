@@ -1,12 +1,11 @@
 import { GetGoogleDocQuery } from '.'
-import { UnbodyExploreArgs } from '@/lib/unbody/unbody.types'
+import { UnbodyGetFilters } from '@/lib/unbody/unbody.types'
 
-const defaultArgs: UnbodyExploreArgs = {
+const defaultArgs: UnbodyGetFilters = {
   limit: 1,
-  nearText: { concepts: ['home'] },
 }
 
-export const getArticlePostQuery = (args: UnbodyExploreArgs = defaultArgs) =>
+export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
   GetGoogleDocQuery(args)(`
         sourceId
         remoteId
