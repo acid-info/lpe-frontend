@@ -11,17 +11,15 @@ import { moreFromAuthor, references, relatedArticles } from './tempData'
 import { ArticleReference } from '../ArticleReference'
 
 export default function Article({
-  appearance: {
-    size = PostSize.SMALL,
-    aspectRatio = PostImageRatio.LANDSCAPE,
-  } = {},
+  appearance: { aspectRatio = PostImageRatio.LANDSCAPE } = {},
   data: {
     coverImage = null,
     date: dateStr = '',
     title,
-    text,
+    blocks,
     summary,
     author,
+    authorEmail,
     tags = [],
     toc = [],
   },
@@ -42,19 +40,17 @@ export default function Article({
     )
   }, [coverImage])
 
-  const _text = useMemo(
-    () => (
-      <CustomTypography variant="body1" genericFontFamily="sans-serif">
-        {text}
-      </CustomTypography>
-    ),
-    [text],
+  // TODO : using typography for the blocks
+  const _blocks = useMemo(
+    () => <Blocks dangerouslySetInnerHTML={{ __html: blocks ?? '' }} />,
+    [blocks],
   )
 
   const _mobileToc = useMemo(
     () =>
       toc?.length > 0 && (
         <Collapse className={styles.mobileToc} label="Contents">
+          {/* @ts-ignore */}
           {toc.map((toc, idx) => (
             <Content
               onClick={() => setTocIndex(idx)}
@@ -136,19 +132,13 @@ export default function Article({
         </Row>
       </div>
 
-      <CustomTypography
-        variant={size === PostSize.SMALL ? 'h4' : 'h2'}
-        genericFontFamily="serif"
-      >
+      <Title variant={'h1'} genericFontFamily="serif">
         {title}
-      </CustomTypography>
+      </Title>
 
       {_thumbnail}
 
-      <CustomTypography
-        variant={size === PostSize.SMALL ? 'h4' : 'h2'}
-        genericFontFamily="serif"
-      >
+      <CustomTypography variant={'body1'} genericFontFamily="sans-serif">
         {summary}
       </CustomTypography>
 
@@ -162,20 +152,34 @@ export default function Article({
         </TagContainer>
       )}
 
-      <Typography variant="body3" genericFontFamily="sans-serif">
-        {author}
-      </Typography>
+      <AuthorInfo>
+        <Typography
+          variant="body3"
+          component="p"
+          genericFontFamily="sans-serif"
+        >
+          {author}
+        </Typography>
+        <Typography
+          href={`mailto:${authorEmail}`}
+          variant="body3"
+          component="a"
+          genericFontFamily="sans-serif"
+        >
+          {authorEmail}
+        </Typography>
+      </AuthorInfo>
 
       {_mobileToc}
 
-      {_text}
+      {_blocks}
 
       {_references}
 
-      <div>
+      <ArticleReferences>
         {_moreFromAuthor}
         {_relatedArticles}
-      </div>
+      </ArticleReferences>
     </ArticleContainer>
   )
 }
@@ -193,6 +197,22 @@ const ArticleContainer = styled.article`
   @media (max-width: 1024px) {
     margin-inline: 16px;
   }
+`
+
+const CustomTypography = styled(Typography)`
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: pre-wrap;
+`
+
+const Title = styled(CustomTypography)`
+  margin-bottom: 24px;
+`
+
+const Blocks = styled.div`
+  white-space: pre-wrap;
+  margin-top: 24px;
+  margin-bottom: 80px;
 `
 
 const ThumbnailContainer = styled.div<{
@@ -219,16 +239,9 @@ const Row = styled.div`
   gap: 8px;
   margin-bottom: 8px;
 `
-
-const CustomTypography = styled(Typography)`
-  text-overflow: ellipsis;
-  word-break: break-word;
-  white-space: pre-wrap;
-`
 const TagContainer = styled.div`
   display: flex;
   gap: 8px;
-  overflow-x: auto;
 `
 
 const Content = styled(CustomTypography)<{ active: boolean }>`
@@ -247,4 +260,15 @@ const Reference = styled.div`
   display: flex;
   padding: 8px 14px;
   gap: 8px;
+`
+
+const ArticleReferences = styled.div`
+  margin-top: 16px;
+`
+
+const AuthorInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
 `

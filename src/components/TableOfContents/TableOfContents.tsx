@@ -3,9 +3,12 @@ import { useArticleContainerContext } from '@/containers/ArticleContainer.Contex
 import { useSticky } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
+
+export type TableOfContentsProps = Pick<UnbodyGoogleDoc, 'toc'>
 
 type Props = {
-  contents: string[]
+  contents?: TableOfContentsProps['toc']
 }
 
 export default function TableOfContents({ contents, ...props }: Props) {
@@ -16,8 +19,14 @@ export default function TableOfContents({ contents, ...props }: Props) {
   const { sticky, stickyRef, height } = useSticky<HTMLDivElement>(dy)
 
   const handleSectionClick = (index: number) => {
+    //@ts-ignore
+    const section = document.getElementById(contents[index].href.substring(1))
+    section?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    })
     setTocIndex(index)
-    // TODO: scrollIntoView
   }
 
   return (
@@ -29,14 +38,15 @@ export default function TableOfContents({ contents, ...props }: Props) {
       className={sticky ? 'sticky' : ''}
     >
       <Title variant="body3">Contents</Title>
-      {contents.map((content, index) => (
+      {/* @ts-ignore */}
+      {contents?.map((content, index) => (
         <Section
           active={index === tocIndex}
           onClick={() => handleSectionClick(index)}
           key={index}
         >
           <Typography variant="body3" genericFontFamily="sans-serif">
-            {content}
+            {content.title}
           </Typography>
         </Section>
       ))}

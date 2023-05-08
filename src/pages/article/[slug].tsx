@@ -30,15 +30,16 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
         date: post.modifiedAt,
         title: post.title,
         summary: post.summary,
-        text: post.text,
-        author: 'Jinho',
-        tags: post.tags,
-        toc: [
-          'The dangers of totalitarian surveillance',
-          'Orwellian Future',
-          'Privacy-enhancing technology and its benefits',
-          'Ethical considerations of privacy-enhancing technology',
-        ],
+        //@ts-ignore
+        blocks: post.blocks
+          ?.map((block) => `${block.html}\n`)
+          .slice(2)
+          .join(''), // temporary solution for HTML/CSS work
+        author: 'Cameron Williamson',
+        authorEmail: 'leo@acid.info',
+        tags: ['Tools', 'Cyber Punk', 'Docs'],
+        //@ts-ignore
+        toc: JSON.parse(post?.toc),
         ...(post.blocks && post.blocks!.length > 0
           ? { coverImage: post.blocks![0] as UnbodyImageBlock }
           : {}),

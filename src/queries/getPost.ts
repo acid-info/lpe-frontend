@@ -15,11 +15,15 @@ export const getArticlePostQuery = (args: UnbodyExploreArgs = defaultArgs) =>
         tags
         createdAt
         modifiedAt
-        text
+        toc
         blocks{
           ...on ImageBlock{
                 url
                 alt
+          }
+          ... on TextBlock {
+            footnotes
+            html
           }
         }
     `)
