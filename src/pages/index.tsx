@@ -1,7 +1,7 @@
 import { PostDataProps } from '@/components/Post/Post'
 import PostsDemo from '@/components/Post/PostsDemo'
 import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
-import { getHomepagePosts } from '@/services/unbody.service'
+import api from '@/services/unbody.service'
 import { GetStaticProps } from 'next'
 
 type Props = {
@@ -18,14 +18,7 @@ export default function Home({ posts }: Props) {
 }
 
 export const getStaticProps = async () => {
-  let posts: Partial<UnbodyGoogleDoc>[] = []
-  let error = null
-
-  try {
-    posts = await getHomepagePosts()
-  } catch (e) {
-    error = JSON.stringify(e)
-  }
+  const { data: posts, errors } = await api.getHomepagePosts()
 
   return {
     props: {
@@ -39,7 +32,7 @@ export const getStaticProps = async () => {
           ? { coverImage: post.blocks![0] as UnbodyImageBlock }
           : {}),
       })),
-      error,
+      errors,
     },
   }
 }

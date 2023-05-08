@@ -1,5 +1,4 @@
 import axios, { Axios } from 'axios'
-import { UnbodyExploreArgs } from './unbody.types'
 
 export class UnbodyClient {
   public client: Axios

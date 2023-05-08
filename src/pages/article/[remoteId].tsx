@@ -3,10 +3,7 @@ import { ArticleLayout } from '@/layouts/ArticleLayout'
 import { ReactNode } from 'react'
 import ArticleContainer from '@/containers/ArticleContainer'
 import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
-import {
-  getAllArticlePostSlugs,
-  getArticlePost,
-} from '@/services/unbody.service'
+import api from '@/services/unbody.service'
 import { ArticlePostData } from '@/types/data.types'
 
 type ArticleProps = {
@@ -21,13 +18,11 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       notFound: true,
     }
   }
-
-  const article = await getArticlePost(remoteId as string)
-
+  const { data: article, errors } = await api.getArticlePost(remoteId as string)
   return {
     props: {
       data: article,
-      error: !!article,
+      error: errors,
     },
   }
 }
@@ -45,9 +40,11 @@ const ArticlePage = (props: ArticleProps) => {
 }
 
 export async function getStaticPaths() {
-  const posts = await getAllArticlePostSlugs()
+  const { data: posts, errors } = await api.getAllArticlePostSlugs()
   return {
-    paths: posts.map((post) => ({ params: { remoteId: `${post.remoteId}` } })),
+    paths: errors
+      ? []
+      : posts.map((post) => ({ params: { remoteId: `${post.remoteId}` } })),
     fallback: true,
   }
 }
