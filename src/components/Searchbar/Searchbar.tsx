@@ -7,10 +7,11 @@ import {
 import styles from './Search.module.css'
 import { SearchbarContainer } from '@/components/Searchbar/SearchbarContainer'
 import { copyConfigs } from '@/configs/copy.configs'
-import { ESearchScope } from '@/types/ui.types'
+import { ESearchScope, ESearchStatus } from '@/types/ui.types'
 import React, { useCallback, useEffect, useState } from 'react'
 import FilterTags from '@/components/FilterTags/FilterTags'
 import styled from '@emotion/styled'
+import { useSearchContext } from '@/context/SearchContext'
 
 export type SearchbarProps = {
   searchScope?: ESearchScope
@@ -19,31 +20,27 @@ export type SearchbarProps = {
 
 export default function Searchbar(props: SearchbarProps) {
   const { searchScope = ESearchScope.GLOBAL } = props
-
   const [active, setActive] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const { exec } = useSearchContext()
 
+  // const [loading, setLoading] = useState(false)
+  // const [error, setError] = useState(false)
   const [query, setQuery] = useState<string>('')
   const [filterTags, setFilterTags] = useState<string[]>([])
 
-  const validateSearch = useCallback(() => {
-    return query.length > 0 || filterTags.length > 0
-  }, [query, filterTags])
+  const isValidSearchInput = () =>
+    (query && query.length > 0) || filterTags.length > 0
 
-  const performSearch = useCallback(() => {
-    if (!validateSearch()) return
-  }, [validateSearch])
+  const performSearch = async () => {
+    if (!isValidSearchInput()) return
+    exec(query, filterTags)
+  }
 
   const performClear = useCallback(() => {
     // TODO: clear input.value seems to be not working. When set to undefined, the input value is still there.
     setQuery('')
     setFilterTags([])
   }, [setQuery, setFilterTags])
-
-  useEffect(() => {
-    performSearch()
-  }, [filterTags, performSearch])
 
   const handleTagClick = (tag: string) => {
     let newSelectedTags = [...filterTags]
@@ -73,7 +70,7 @@ export default function Searchbar(props: SearchbarProps) {
     return txt
   }
 
-  const isCollapsed = validateSearch() && !active
+  const isCollapsed = isValidSearchInput() && !active
 
   const placeholder =
     searchScope === ESearchScope.GLOBAL
@@ -88,6 +85,7 @@ export default function Searchbar(props: SearchbarProps) {
           placeholder={placeholder}
           value={query as string}
           onFocus={() => setActive(true)}
+          onKeyDown={handleEnter}
           onChange={(e) => {
             setQuery(e.target.value)
           }}
@@ -96,10 +94,10 @@ export default function Searchbar(props: SearchbarProps) {
           <IconButton
             className={styles.searchButton}
             onClick={() =>
-              validateSearch() ? performClear() : performSearch()
+              isValidSearchInput() ? performClear() : performSearch()
             }
           >
-            {validateSearch() ? <CloseIcon /> : <SearchIcon />}
+            {isValidSearchInput() ? <CloseIcon /> : <SearchIcon />}
           </IconButton>
         </div>
       </SearchBox>
