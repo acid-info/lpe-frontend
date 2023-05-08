@@ -13,49 +13,81 @@ import { getAllPostsSlugQuery } from '@/queries/getPostsSlugs'
 
 const { UNBODY_API_KEY, UNBODY_LPE_PROJECT_ID } = process.env
 
-const unbody = new UnbodyClient(
-  UNBODY_API_KEY as string,
-  UNBODY_LPE_PROJECT_ID as string,
-)
-
 type HomepagePost = Pick<
   UnbodyGoogleDoc,
   'title' | 'summary' | 'tags' | 'modifiedAt' | 'subtitle' | 'blocks'
 >
 
-export const getHomepagePosts = (): Promise<HomepagePost[]> => {
-  return unbody
-    .request<UnbodyGraphQlResponseGoogleDoc>(getHomePagePostsQuery())
-    .then(({ data }) => data.Get.GoogleDoc)
+type ApiResponse<T> = {
+  data: T
+  errors: any
 }
 
-export const getAllArticlePostSlugs = (): Promise<{ remoteId: string }[]> => {
-  console.log(getAllPostsSlugQuery())
-  return unbody
-    .request<UnbodyGraphQlResponseGoogleDoc>(getAllPostsSlugQuery())
-    .then(({ data }) => data.Get.GoogleDoc)
-}
+class ApiService extends UnbodyClient {
+  constructor() {
+    super(UNBODY_API_KEY as string, UNBODY_LPE_PROJECT_ID as string)
+  }
 
-export const getArticlePost = (id: string): Promise<UnbodyGoogleDoc> => {
-  const query = getArticlePostQuery({
-    where: {
-      path: ['remoteId'],
-      operator: UnbodyGraphQl.Filters.WhereOperatorEnum.Equal,
-      valueString: id,
-    },
-  })
-
-  return unbody
-    .request<UnbodyGraphQlResponseGoogleDoc>(getArticlePostQuery())
-    .then(({ data }) => {
-      const article = data.Get.GoogleDoc[0]
+  handleResponse = <T>(
+    data: T | null = null,
+    errors: any = null,
+  ): ApiResponse<T> => {
+    if (errors || !data) {
+      console.log(errors)
       return {
-        ...article,
-        toc: JSON.parse(
-          article.toc as string,
-        ) as Array<UnbodyGraphQl.Fragments.TocItem>,
+        data: null as any,
+        errors: JSON.stringify(errors),
       }
+    }
+    return {
+      data,
+      errors,
+    }
+  }
+
+  getHomepagePosts = (): Promise<ApiResponse<HomepagePost[]>> => {
+    return this.request<UnbodyGraphQlResponseGoogleDoc>(getHomePagePostsQuery())
+      .then(({ data }) => {
+        if (!data) return this.handleResponse([], 'No data')
+        return this.handleResponse(data.Get.GoogleDoc)
+      })
+      .catch((e) => this.handleResponse([], e))
+  }
+
+  getAllArticlePostSlugs = (): Promise<ApiResponse<{ remoteId: string }[]>> => {
+    return this.request<UnbodyGraphQlResponseGoogleDoc>(getAllPostsSlugQuery())
+      .then(({ data }) => {
+        if (!data) return this.handleResponse([], 'No data')
+        return this.handleResponse(data.Get.GoogleDoc)
+      })
+      .catch((e) => this.handleResponse([], e))
+  }
+
+  getArticlePost = (
+    id: string,
+  ): Promise<ApiResponse<UnbodyGoogleDoc | null>> => {
+    const query = getArticlePostQuery({
+      where: {
+        path: ['remoteId'],
+        operator: UnbodyGraphQl.Filters.WhereOperatorEnum.Equal,
+        valueString: id,
+      },
     })
+
+    return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
+      .then(({ data }) => {
+        if (!data) return this.handleResponse(null, 'No data')
+        const article = data.Get.GoogleDoc[0]
+        return this.handleResponse({
+          ...article,
+          toc: JSON.parse(
+            article.toc as string,
+          ) as Array<UnbodyGraphQl.Fragments.TocItem>,
+        })
+      })
+      .catch((e) => this.handleResponse(null, e))
+  }
 }
 
-export default unbody
+const api = new ApiService()
+export default api
