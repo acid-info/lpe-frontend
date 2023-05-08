@@ -3,6 +3,7 @@ import {
   UnbodyGoogleDoc,
   UnbodyGraphQlResponseGoogleDoc,
 } from '@/lib/unbody/unbody.types'
+import { getArticlePostQuery } from '@/queries/getPost'
 import { getHomePagePostsQuery } from '@/queries/getPosts'
 
 const { UNBODY_API_KEY, UNBODY_LPE_PROJECT_ID } = process.env
@@ -20,6 +21,12 @@ type HomepagePost = Pick<
 export const getHomepagePosts = (): Promise<HomepagePost[]> => {
   return unbody
     .request<UnbodyGraphQlResponseGoogleDoc>(getHomePagePostsQuery())
+    .then(({ data }) => data.Get.GoogleDoc)
+}
+
+export const getArticlePost = (): Promise<HomepagePost[]> => {
+  return unbody
+    .request<UnbodyGraphQlResponseGoogleDoc>(getArticlePostQuery())
     .then(({ data }) => data.Get.GoogleDoc)
 }
 

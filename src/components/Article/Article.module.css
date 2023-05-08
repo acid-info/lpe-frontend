@@ -1,0 +1,10 @@
+.relatedArticles > div > button {
+  border-top: none !important;
+}
+
+/* temporary breakpoint */
+@media (min-width: 1024px) {
+  .mobileToc {
+    display: none !important;
+  }
+}

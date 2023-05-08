@@ -4,7 +4,11 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
 import { useMemo } from 'react'
-import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+import {
+  UnbodyGoogleDoc,
+  UnbodyImageBlock,
+  UnbodyTextBlock,
+} from '@/lib/unbody/unbody.types'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -46,8 +50,12 @@ export type PostDataProps = {
   title: string
   description?: string
   author?: string
+  authorEmail?: string // TODO: can we get  author: { name: string, email: string }?
   tags?: string[]
-  coverImage?: UnbodyImageBlock
+  coverImage?: UnbodyImageBlock | null
+  summary?: string
+  blocks?: UnbodyTextBlock
+  toc?: Pick<UnbodyGoogleDoc, 'toc'>['toc']
 }
 
 export const PostImageRatioOptions = {
@@ -71,7 +79,14 @@ export default function Post({
     aspectRatio = PostImageRatio.LANDSCAPE,
     showImage = true,
   } = {},
-  data: { coverImage, date: dateStr, title, description, author, tags = [] },
+  data: {
+    coverImage = null,
+    date: dateStr = '',
+    title,
+    description,
+    author,
+    tags = [],
+  },
   ...props
 }: PostProps) {
   const date = new Date(dateStr)
