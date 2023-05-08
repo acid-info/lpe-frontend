@@ -16,7 +16,11 @@ export default function PostContainer({
 }: PostContainerProps) {
   return (
     <div {...props}>
-      {title && (<Title variant="body1" genericFontFamily="sans-serif">{title}</Title>)}
+      {title && (
+        <Title variant="body1" genericFontFamily="sans-serif">
+          {title}
+        </Title>
+      )}
       <Container>
         {postsData.map((post, index) => (
           <PostWrapper key={index}>
@@ -34,7 +38,7 @@ const Container = styled.div`
   padding: 16px;
   gap: 24px;
 
-  // temporariy breakpoint
+  // temporary breakpoint
   @media (max-width: 768px) {
     flex-direction: column;
   }

@@ -47,7 +47,10 @@ export type PostDataProps = {
   description?: string
   author?: string
   tags?: string[]
-  coverImage?: UnbodyImageBlock
+  coverImage?: UnbodyImageBlock | null
+  summary?: string
+  text?: string
+  toc?: string[]
 }
 
 export const PostImageRatioOptions = {
@@ -71,7 +74,14 @@ export default function Post({
     aspectRatio = PostImageRatio.LANDSCAPE,
     showImage = true,
   } = {},
-  data: { coverImage, date: dateStr, title, description, author, tags = [] },
+  data: {
+    coverImage = null,
+    date: dateStr = '',
+    title,
+    description,
+    author,
+    tags = [],
+  },
   ...props
 }: PostProps) {
   const date = new Date(dateStr)

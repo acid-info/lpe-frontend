@@ -1,6 +1,5 @@
 import {
   TextField,
-  Autocomplete,
   IconButton,
   SearchIcon,
   CloseIcon,
@@ -15,6 +14,7 @@ import styled from '@emotion/styled'
 
 export type SearchbarProps = {
   searchScope?: ESearchScope
+  className?: string
 }
 
 export default function Searchbar(props: SearchbarProps) {
