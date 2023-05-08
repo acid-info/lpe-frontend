@@ -283,8 +283,8 @@ export namespace UnbodyGraphQl {
 
     export interface WhereOperandsInpObj {
       operator?: WhereOperatorEnum
-      path: [String]
-      operands?: [WhereOperandsInpObj]
+      path: string[]
+      operands?: WhereOperandsInpObj[]
       valueGeoRange?: WhereGeoRangeInpObj
       valueNumber?: number
       valueBoolean?: boolean
@@ -315,7 +315,7 @@ export namespace UnbodyGraphQl {
     }
 
     export interface WhereInpObj {
-      path: string[]
+      path?: string[]
       valueInt?: number
       valueNumber?: number
       valueGeoRange?: WhereGeoRangeInpObj
