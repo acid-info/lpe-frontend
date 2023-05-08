@@ -11,6 +11,7 @@ export namespace UnbodyGraphQl {
       result: string
       startPosition: number
     }
+
     interface AdditionalnumbererpretationSource {
       concept: string
       occurrence: number
@@ -22,7 +23,7 @@ export namespace UnbodyGraphQl {
     }
 
     interface AdditionalFeatureProjection {
-      vector: [number]
+      vector: number[]
     }
 
     interface AdditionalNearestNeighborsNeighbor {
@@ -43,11 +44,11 @@ export namespace UnbodyGraphQl {
     }
 
     interface AdditionalClassification {
-      basedOn: [string]
-      classifiedFields: [string]
+      basedOn: string[]
+      classifiedFields: string[]
       completed: string
       id: string
-      scope: [string]
+      scope: string[]
     }
 
     export interface AdditionalProps {
@@ -58,7 +59,7 @@ export namespace UnbodyGraphQl {
       id: string
       lastUpdateTimeUnix: string
       score: string
-      vector: [number]
+      vector: number[]
 
       interpretation: Additionalnumbererpretation
       nearestNeighbors: AdditionalNearestNeighbors
@@ -83,6 +84,7 @@ export namespace UnbodyGraphQl {
 
   export namespace Fragments {
     export interface TocItem {}
+
     export interface FootnoteItem {}
   }
 
@@ -163,7 +165,7 @@ export namespace UnbodyGraphQl {
     organizerEmail: string
     organizerId: string
     organizerSelf: boolean
-    recurrence: [string]
+    recurrence: string[]
     remoteId: string
     sequence: number
     sourceId: string
@@ -176,8 +178,8 @@ export namespace UnbodyGraphQl {
     attachments: Array<ImageBlock>
   }
 
-  export namespace Explore {
-    interface ExploreNearObjectInpObj {
+  export namespace Filters {
+    interface NearObjectInpObj {
       beacon?: string
       certainty?: number
       distance?: number
@@ -206,7 +208,7 @@ export namespace UnbodyGraphQl {
       force?: number
     }
 
-    interface Txt2VecC11yExploreNearTextInpObj {
+    interface Txt2VecC11yNearTextInpObj {
       moveTo?: Txt2VecC11yExploreMoveTo
       certainty?: number
       distance?: number
@@ -214,24 +216,133 @@ export namespace UnbodyGraphQl {
       concepts?: string[]
     }
 
-    interface ExploreNearVectorInpObj {
+    interface NearVectorInpObj {
       distance?: number
       vector?: number[]
       certainty?: number
     }
 
-    interface QnATransformersExploreAskInpObj {
+    interface QnATransformersAskInpObj {
       question: string
       properties?: string[]
     }
 
     export interface ExploreArgs {
-      nearObject?: ExploreNearObjectInpObj
-      nearText?: Txt2VecC11yExploreNearTextInpObj
-      ask?: QnATransformersExploreAskInpObj
+      nearObject?: NearObjectInpObj
+      nearText?: Txt2VecC11yNearTextInpObj
+      ask?: QnATransformersAskInpObj
       offset?: number
       limit?: number
-      nearVector?: ExploreNearVectorInpObj
+      nearVector?: NearVectorInpObj
+    }
+
+    enum GroupInpObjTypeEnum {
+      closest = 'closest',
+      merge = 'merge',
+    }
+
+    export interface GroupInpObj {
+      force: number
+      type: GroupInpObjTypeEnum
+    }
+
+    export interface HybridInpObj {
+      query: string
+      alpha: number
+      vector: number[]
+    }
+
+    interface WhereGeoRangeGeoCoordinatesInpObj {
+      latitude: number
+      longitude: number
+    }
+
+    interface WhereGeoRangeDistanceInpObj {
+      max: number
+    }
+
+    export interface WhereGeoRangeInpObj {
+      geoCoordinates: WhereGeoRangeGeoCoordinatesInpObj
+      distance: WhereGeoRangeDistanceInpObj
+    }
+
+    export enum WhereOperatorEnum {
+      GreaterThanEqual = 'GreaterThanEqual',
+      WithinGeoRange = 'WithinGeoRange',
+      IsNull = 'IsNull',
+      And = 'And',
+      Like = 'Like',
+      Not = 'Not',
+      NotEqual = 'NotEqual',
+      GreaterThan = 'GreaterThan',
+      LessThan = 'LessThan',
+      LessThanEqual = 'LessThanEqual',
+      Or = 'Or',
+      Equal = 'Equal',
+    }
+
+    export interface WhereOperandsInpObj {
+      operator?: WhereOperatorEnum
+      path: [String]
+      operands?: [WhereOperandsInpObj]
+      valueGeoRange?: WhereGeoRangeInpObj
+      valueNumber?: number
+      valueBoolean?: boolean
+      valueString?: string
+      valueText?: string
+      valueDate?: string
+      valueInt?: number
+    }
+
+    export enum ObjTypeEnum {
+      asc = 'asc',
+      desc = 'desc',
+    }
+
+    export interface Bm25InpObj {
+      properties?: string[]
+      query: string
+    }
+
+    export interface AskInpObj {
+      question: string
+      properties?: string[]
+    }
+
+    export interface SortInpObj {
+      path: string[]
+      order: string
+    }
+
+    export interface WhereInpObj {
+      path: string[]
+      valueInt?: number
+      valueNumber?: number
+      valueGeoRange?: WhereGeoRangeInpObj
+      operator?: WhereOperatorEnum
+      operands?: WhereOperandsInpObj[]
+      valueBoolean?: boolean
+      valuestring?: string
+      valueDate?: string
+      valueText?: string
+      valueString?: string
+    }
+
+    export interface GetDocsArgs {
+      where?: WhereInpObj
+      bm25?: Bm25InpObj
+      ask?: AskInpObj
+      sort?: ObjTypeEnum[]
+
+      nearText?: Txt2VecC11yNearTextInpObj
+      nearVector?: NearVectorInpObj
+      nearObject?: NearObjectInpObj
+
+      offset?: number
+      limit?: number
+
+      group?: GroupInpObj
+      hybrid?: HybridInpObj
     }
   }
 }

@@ -1,30 +1,28 @@
 import { Article } from '@/components/Article'
 import { TableOfContents } from '@/components/TableOfContents'
-import { ArticleProps } from '@/pages/article/[slug]'
 import styled from '@emotion/styled'
 import { useState } from 'react'
 import { uiConfigs } from '@/configs/ui.configs'
 import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
+import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
 
-const ArticleContainer = (props: ArticleProps) => {
-  const { post } = props
+interface Props {
+  data: UnbodyGoogleDoc
+}
+
+const ArticleContainer = (props: Props) => {
+  const { data } = props
   const [tocIndex, setTocIndex] = useState(0)
 
   return (
     <Container>
-      {typeof post !== 'undefined' ? (
-        <ArticleContainerContext.Provider
-          value={{ tocIndex: tocIndex, setTocIndex: setTocIndex }}
-        >
-          <TableOfContents contents={post.toc ?? []} />
-          <Article data={post} />
-          <Right />
-        </ArticleContainerContext.Provider>
-      ) : (
-        <div style={{ marginTop: '108px', textAlign: 'center' }}>
-          <h3>Loading</h3>
-        </div>
-      )}
+      <ArticleContainerContext.Provider
+        value={{ tocIndex: tocIndex, setTocIndex: setTocIndex }}
+      >
+        <TableOfContents contents={data.toc ?? []} />
+        {/*<Article data={data} />*/}
+        <Right />
+      </ArticleContainerContext.Provider>
     </Container>
   )
 }

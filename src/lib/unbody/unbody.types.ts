@@ -5,7 +5,9 @@ export type UnbodyGoogleCalendarEvent = UnbodyGraphQl.GoogleCalendarEvent
 export type UnbodyTextBlock = UnbodyGraphQl.TextBlock
 export type UnbodyImageBlock = UnbodyGraphQl.ImageBlock
 export type UnbodyAudio = UnbodyGraphQl.AudioFile
-export type UnbodyExploreArgs = UnbodyGraphQl.Explore.ExploreArgs
+export type UnbodyGetFilters = UnbodyGraphQl.Filters.GetDocsArgs
+
+export * as UnbodyGraphQl from './unbody-content.types'
 
 export type UnbodyGraphQlResponse<T> = {
   data: {
