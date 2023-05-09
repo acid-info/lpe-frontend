@@ -11,7 +11,15 @@ import { ESearchScope, ESearchStatus } from '@/types/ui.types'
 import React, { useCallback, useEffect, useState } from 'react'
 import FilterTags from '@/components/FilterTags/FilterTags'
 import styled from '@emotion/styled'
-import { useSearchContext } from '@/context/SearchContext'
+import { useRouter } from 'next/router'
+import { ParsedUrlQuery } from 'querystring'
+import {
+  addQueryToQuery,
+  addTopicsToQuery,
+  createMinimizedSearchText,
+  extractQueryFromQuery,
+  extractTopicsFromQuery,
+} from '@/utils/search.utils'
 
 export type SearchbarProps = {
   searchScope?: ESearchScope
@@ -21,25 +29,42 @@ export type SearchbarProps = {
 export default function Searchbar(props: SearchbarProps) {
   const { searchScope = ESearchScope.GLOBAL } = props
   const [active, setActive] = useState(false)
-  const { exec } = useSearchContext()
+  const router = useRouter()
 
-  // const [loading, setLoading] = useState(false)
-  // const [error, setError] = useState(false)
-  const [query, setQuery] = useState<string>('')
-  const [filterTags, setFilterTags] = useState<string[]>([])
+  const [query, setQuery] = useState<string>(
+    extractQueryFromQuery(router.query),
+  )
+  const [filterTags, setFilterTags] = useState<string[]>(
+    extractTopicsFromQuery(router.query),
+  )
 
-  const isValidSearchInput = () =>
-    (query && query.length > 0) || filterTags.length > 0
+  const isValidSearchInput = (_filterTags: string[] = []) =>
+    (query && query.length > 0) || _filterTags.length > 0
 
-  const performSearch = async () => {
-    if (!isValidSearchInput()) return
-    exec(query, filterTags)
+  const performSearch = async (
+    q: string = query,
+    _filterTags: string[] = filterTags,
+  ) => {
+    await router.push(
+      {
+        pathname: '/search',
+        query: {
+          ...addQueryToQuery(q),
+          ...addTopicsToQuery(_filterTags),
+        },
+      },
+      undefined,
+      { shallow: true },
+    )
   }
 
+  useEffect(() => {
+    setQuery(extractQueryFromQuery(router.query))
+    setFilterTags(extractTopicsFromQuery(router.query))
+  }, [router.query.query, router.query.topics])
+
   const performClear = useCallback(() => {
-    // TODO: clear input.value seems to be not working. When set to undefined, the input value is still there.
-    setQuery('')
-    setFilterTags([])
+    performSearch('', [])
   }, [setQuery, setFilterTags])
 
   const handleTagClick = (tag: string) => {
@@ -49,25 +74,13 @@ export default function Searchbar(props: SearchbarProps) {
     } else {
       newSelectedTags.push(tag)
     }
-    setFilterTags(newSelectedTags)
+    performSearch(query, newSelectedTags)
   }
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       performSearch()
     }
-  }
-
-  const constructCollapseText = () => {
-    let txt = ''
-    if (query !== undefined && query.length > 0) {
-      txt += `<span>${query}</span>`
-    }
-    if (filterTags.length > 0) {
-      if (txt.length > 0) txt += '<b> . </b>'
-      txt += `${filterTags.map((t) => `<small>[${t}]</small>`).join(' ')}`
-    }
-    return txt
   }
 
   const isCollapsed = isValidSearchInput() && !active
@@ -111,7 +124,9 @@ export default function Searchbar(props: SearchbarProps) {
       <Collapsed
         className={isCollapsed ? 'enabled' : ''}
         onClick={() => setActive(true)}
-        dangerouslySetInnerHTML={{ __html: constructCollapseText() }}
+        dangerouslySetInnerHTML={{
+          __html: createMinimizedSearchText(query, filterTags),
+        }}
       />
     </SearchbarContainer>
   )
@@ -146,9 +161,11 @@ const Collapsed = styled.div`
   &.enabled {
     top: 0;
   }
+
   > * {
     margin-right: 4px;
   }
+
   > *:not(:first-child) {
     margin-left: 4px;
   }

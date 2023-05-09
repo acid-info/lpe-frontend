@@ -1,7 +1,5 @@
 import { PostDataProps } from '@/components/Post/Post'
 import PostsDemo from '@/components/Post/PostsDemo'
-import { SearchContainer } from '@/containers/SearchContainer'
-import { useSearchContext } from '@/context/SearchContext'
 import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import api from '@/services/unbody.service'
 import { ESearchStatus } from '@/types/ui.types'
@@ -13,15 +11,9 @@ type Props = {
 }
 
 export default function Home({ posts }: Props) {
-  const { status } = useSearchContext()
-
   return (
     <>
-      {status === ESearchStatus.NOT_ACTIVE ? (
-        <PostsDemo posts={posts} featuredPost={posts[0]} />
-      ) : (
-        <SearchContainer />
-      )}
+      <PostsDemo posts={posts} featuredPost={posts[0]} />
     </>
   )
 }

@@ -3,6 +3,9 @@ import {
   UnbodyGoogleDoc,
   UnbodyGraphQlResponseGoogleDoc,
   UnbodyGetFilters,
+  UnbodyImageBlock,
+  UnbodyTextBlock,
+  UnbodyGraphQlResponseBlocks,
 } from '@/lib/unbody/unbody.types'
 
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
@@ -17,6 +20,7 @@ import {
   GlobalSearchResponse,
   SearchResultItem,
 } from '@/types/data.types'
+import { getSearchBlocksQuery } from '@/queries/searchBlocks'
 
 const { UNBODY_API_KEY, UNBODY_LPE_PROJECT_ID } = process.env
 
@@ -24,6 +28,17 @@ type HomepagePost = Pick<
   UnbodyGoogleDoc,
   'title' | 'summary' | 'tags' | 'modifiedAt' | 'subtitle' | 'blocks'
 >
+
+type UnbodyDocTypes = UnbodyGoogleDoc | UnbodyImageBlock | UnbodyTextBlock
+
+const mapSearchResultItem = <T extends UnbodyDocTypes>(
+  q: string,
+  tags: string[],
+  item: T,
+): SearchResultItem<T> => ({
+  doc: item,
+  score: q.length > 0 || tags.length > 0 ? item._additional.certainty : 0,
+})
 
 class UnbodyService extends UnbodyClient {
   constructor() {
@@ -90,6 +105,39 @@ class UnbodyService extends UnbodyClient {
       .catch((e) => this.handleResponse(null, e))
   }
 
+  serachBlocks = async (
+    q: string = '',
+    tags: string[] = [],
+  ): Promise<
+    ApiResponse<SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]>
+  > => {
+    const query = getSearchBlocksQuery({
+      ...(q.trim().length > 0
+        ? {
+            nearText: {
+              concepts: [q, ...tags],
+              certainty: 0.75,
+            },
+          }
+        : {}),
+    })
+
+    console.log(query)
+
+    return this.request<UnbodyGraphQlResponseBlocks>(query)
+      .then(({ data }) => {
+        if (!data || !(data.Get.ImageBlock || data.Get.TextBlock))
+          return this.handleResponse([], 'No data')
+        const blocks = [...data.Get.ImageBlock, ...data.Get.TextBlock]
+        return this.handleResponse(
+          blocks
+            .map((block) => mapSearchResultItem(q, tags, block))
+            .sort((a, b) => b.score - a.score),
+        )
+      })
+      .catch((e) => this.handleResponse([], e))
+  }
+
   searchArticles = (
     q: string = '',
     tags: string[] = [],
@@ -115,11 +163,10 @@ class UnbodyService extends UnbodyClient {
         {}),
     })
 
-    console.log(q, tags, q.length, tags.length)
-
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {
-        if (!data) return this.handleResponse([], 'No data')
+        if (!data || !data.Get.GoogleDoc)
+          return this.handleResponse([], 'No data')
         return this.handleResponse(
           data.Get.GoogleDoc.map((item) => ({
             doc: item,
