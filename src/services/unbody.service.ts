@@ -26,7 +26,13 @@ const { UNBODY_API_KEY, UNBODY_LPE_PROJECT_ID } = process.env
 
 type HomepagePost = Pick<
   UnbodyGoogleDoc,
-  'title' | 'summary' | 'tags' | 'modifiedAt' | 'subtitle' | 'blocks'
+  | 'remoteId'
+  | 'title'
+  | 'summary'
+  | 'tags'
+  | 'modifiedAt'
+  | 'subtitle'
+  | 'blocks'
 >
 
 type UnbodyDocTypes = UnbodyGoogleDoc | UnbodyImageBlock | UnbodyTextBlock

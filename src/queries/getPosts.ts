@@ -10,6 +10,7 @@ const defaultArgs: UnbodyGetFilters = {
 
 export const getHomePagePostsQuery = (args: UnbodyGetFilters = defaultArgs) =>
   GetGoogleDocQuery(args)(`
+        remoteId
         title
         summary
         tags

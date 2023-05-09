@@ -2,6 +2,7 @@ import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import styled from '@emotion/styled'
 import { Post, PostProps } from '../Post'
 import { Typography } from '@acid-info/lsd-react'
+import Link from 'next/link'
 
 export type PostContainerProps = CommonProps &
   React.HTMLAttributes<HTMLDivElement> & {
@@ -23,9 +24,11 @@ export default function PostContainer({
       )}
       <Container>
         {postsData.map((post, index) => (
-          <PostWrapper key={index}>
-            <Post {...post} />
-          </PostWrapper>
+          <PostLink key={index} href={`/article/${post.data.remoteId}`}>
+            <PostWrapper>
+              <Post {...post} />
+            </PostWrapper>
+          </PostLink>
         ))}
       </Container>
     </div>
@@ -52,4 +55,8 @@ const PostWrapper = styled.div`
 
 const Title = styled(Typography)`
   padding: 0 16px;
+`
+
+const PostLink = styled(Link)`
+  text-decoration: none;
 `
