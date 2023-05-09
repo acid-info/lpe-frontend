@@ -230,7 +230,7 @@ const ArticleContainer = styled.article`
   gap: 16px;
   max-width: 700px;
   margin-inline: 5%;
-  padding-bottom: 50px;
+  padding-bottom: 80px;
 
   // temporary breakpoint
   @media (max-width: 1024px) {

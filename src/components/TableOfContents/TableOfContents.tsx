@@ -67,11 +67,7 @@ const Container = styled.aside<{ dy: number; height: number }>`
   position: sticky;
   top: ${(p) => `${p.dy}px`};
   margin-left: 16px;
-
-  &.sticky {
-    top: ${uiConfigs.navbarRenderedHeight + 78 + 1}px;
-    z-index: 100;
-  }
+  padding-bottom: 72px;
 
   // temporary breakpoint
   @media (max-width: 1024px) {

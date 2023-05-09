@@ -5,6 +5,7 @@ import { NavbarFiller } from '@/components/Navbar/NavbarFiller'
 import { Searchbar } from '@/components/Searchbar'
 import { ESearchScope } from '@/types/ui.types'
 import styles from './Article.layout.module.css'
+import { Footer } from '@/components/Footer'
 
 export default function ArticleLayout(props: PropsWithChildren<any>) {
   const isDarkState = useIsDarkState()
@@ -16,6 +17,7 @@ export default function ArticleLayout(props: PropsWithChildren<any>) {
         <Searchbar searchScope={ESearchScope.ARTICLE} />
       </header>
       <main>{props.children}</main>
+      <Footer />
     </>
   )
 }
