@@ -24,6 +24,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       posts: posts.map((post) => ({
+        remoteId: post.remoteId,
         date: post.modifiedAt,
         title: post.title,
         description: post.summary,

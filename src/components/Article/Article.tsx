@@ -15,14 +15,13 @@ interface Props {
 }
 
 export default function Article({ data }: Props) {
-  const { title, summary, blocks, toc, createdAt } = data
+  const { title, summary, blocks, toc, createdAt, tags } = data
   const articleContainer = useArticleContainerContext()
   const { tocIndex, setTocIndex } = articleContainer
 
   // temporary data - unbody doesn't provide
   const author = 'John Doe'
   const authorEmail = 'john@acid.info'
-  const tags = ['Privacy', 'Blockchain', 'Technology']
 
   const date = new Date(createdAt)
 

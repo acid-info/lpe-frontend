@@ -41,18 +41,20 @@ export default function TableOfContents({ contents, ...props }: Props) {
       className={sticky ? 'sticky' : ''}
     >
       <Title variant="body3">Contents</Title>
-      {/* @ts-ignore */}
-      {contents?.map((content, index) => (
-        <Section
-          active={index === tocIndex}
-          onClick={() => handleSectionClick(index)}
-          key={index}
-        >
-          <Typography variant="body3" genericFontFamily="sans-serif">
-            {content.title}
-          </Typography>
-        </Section>
-      ))}
+      <Contents height={height}>
+        {/* @ts-ignore */}
+        {contents?.map((content, index) => (
+          <Section
+            active={index === tocIndex}
+            onClick={() => handleSectionClick(index)}
+            key={index}
+          >
+            <Typography variant="body3" genericFontFamily="sans-serif">
+              {content.title}
+            </Typography>
+          </Section>
+        ))}
+      </Contents>
     </Container>
   )
 }
@@ -77,6 +79,19 @@ const Container = styled.aside<{ dy: number; height: number }>`
 
 const Title = styled(Typography)`
   margin-bottom: 24px;
+`
+
+const Contents = styled.div<{ height: number }>`
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: calc(
+    100vh - ${uiConfigs.navbarRenderedHeight + uiConfigs.postMarginTop + 40}px
+  );
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const Section = styled.section<{ active: boolean }>`
