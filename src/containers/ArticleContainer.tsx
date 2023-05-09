@@ -8,22 +8,25 @@ import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
 
 interface Props {
   data: UnbodyGoogleDoc
+  error: string | null
 }
 
 const ArticleContainer = (props: Props) => {
-  const { data } = props
+  const { data, error } = props
   const [tocIndex, setTocIndex] = useState(0)
 
-  return (
+  return !error?.length ? (
     <Container>
       <ArticleContainerContext.Provider
         value={{ tocIndex: tocIndex, setTocIndex: setTocIndex }}
       >
         <TableOfContents contents={data.toc ?? []} />
-        {/*<Article data={data} />*/}
+        <Article data={data} />
         <Right />
       </ArticleContainerContext.Provider>
     </Container>
+  ) : (
+    <div>{error}</div>
   )
 }
 

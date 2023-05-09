@@ -13,6 +13,7 @@ type ArticleProps = {
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const { remoteId } = params!
+
   if (!remoteId) {
     return {
       notFound: true,
@@ -29,14 +30,9 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 
 // @jinho lets handle the error directly in thew page component
 const ArticlePage = (props: ArticleProps) => {
-  if (!props.data) return <div>Opps...</div>
+  if (!props.data) return <div />
 
-  return (
-    <div>{props.data.title}</div>
-    // <ArticleContainer post={props.data}
-    //                   error={props.error}
-    // />
-  )
+  return <ArticleContainer data={props.data} error={props.error} />
 }
 
 export async function getStaticPaths() {
