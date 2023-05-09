@@ -11,7 +11,7 @@ const PostsDemo = (props: Props) => {
   const [posts, setPosts] = useState<PostDataProps[]>(props.posts)
 
   return (
-    <div style={{ marginTop: '78px' }}>
+    <div style={{ marginBlock: '78px' }}>
       {/* For Demo purposes only. Use inline CSS and styled components temporarily */}
       {/*@TODO @jinho, wht PostContainer should recive an array of postData instead of only One?*/}
       <PostContainer

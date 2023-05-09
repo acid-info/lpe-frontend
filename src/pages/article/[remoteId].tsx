@@ -30,7 +30,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 
 // @jinho lets handle the error directly in thew page component
 const ArticlePage = (props: ArticleProps) => {
-  if (!props.data) return <div />
+  if (!props.data) return <div style={{ height: '100vh' }} />
 
   return <ArticleContainer data={props.data} error={props.error} />
 }
