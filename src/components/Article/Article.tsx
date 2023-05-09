@@ -2,49 +2,79 @@ import { Tag, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import { useMemo } from 'react'
-import { PostProps } from '../Post'
-import { PostImageRatio, PostImageRatioOptions, PostSize } from '../Post/Post'
+import { PostImageRatio, PostImageRatioOptions } from '../Post/Post'
 import styles from './Article.module.css'
 import { Collapse } from '@/components/Collapse'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { moreFromAuthor, references, relatedArticles } from './tempData'
 import { ArticleReference } from '../ArticleReference'
+import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 
-export default function Article({
-  appearance: { aspectRatio = PostImageRatio.LANDSCAPE } = {},
-  data: {
-    coverImage = null,
-    date: dateStr = '',
-    title,
-    blocks,
-    summary,
-    author,
-    authorEmail,
-    tags = [],
-    toc = [],
-  },
-  ...props
-}: PostProps) {
+interface Props {
+  data: UnbodyGoogleDoc
+}
+
+export default function Article({ data }: Props) {
+  const { title, summary, blocks, toc, createdAt } = data
   const articleContainer = useArticleContainerContext()
   const { tocIndex, setTocIndex } = articleContainer
 
-  const date = new Date(dateStr)
+  // temporary data - unbody doesn't provide
+  const author = 'John Doe'
+  const authorEmail = 'john@acid.info'
+  const tags = ['Privacy', 'Blockchain', 'Technology']
+
+  const date = new Date(createdAt)
 
   const _thumbnail = useMemo(() => {
+    const imageBlocks: UnbodyImageBlock[] = blocks.filter(
+      (block): block is UnbodyImageBlock => block !== null && 'url' in block,
+    )
+
+    const coverImage = imageBlocks.reduce((prev, curr) =>
+      prev.order < curr.order ? prev : curr,
+    )
+
     if (!coverImage) return null
 
     return (
-      <ThumbnailContainer aspectRatio={aspectRatio}>
+      <ThumbnailContainer aspectRatio={PostImageRatio.LANDSCAPE}>
         <Thumbnail fill src={coverImage.url} alt={coverImage.alt} />
       </ThumbnailContainer>
     )
-  }, [coverImage])
+  }, [blocks])
 
-  // TODO : using typography for the blocks
-  const _blocks = useMemo(
-    () => <Blocks dangerouslySetInnerHTML={{ __html: blocks ?? '' }} />,
-    [blocks],
-  )
+  const _blocks = useMemo(() => {
+    // Exclude title, subtitle, coverImage
+    const articleBlocks = blocks.sort((a, b) => a.order - b.order).slice(3)
+
+    return articleBlocks.map((block, idx) => {
+      return 'url' in block ? (
+        <ThumbnailContainer
+          key={'block-' + idx}
+          aspectRatio={PostImageRatio.LANDSCAPE}
+        >
+          <Thumbnail fill src={block.url} alt={block.alt} />
+        </ThumbnailContainer>
+      ) : block.tagName.startsWith('h') ? (
+        <Headline
+          variant="body2"
+          component={block.tagName as any}
+          genericFontFamily="sans-serif"
+          key={'block-' + idx}
+          dangerouslySetInnerHTML={{ __html: block.html }}
+        />
+      ) : (
+        <Paragraph
+          variant="body1"
+          component="p"
+          genericFontFamily="sans-serif"
+          key={'block-' + idx}
+          dangerouslySetInnerHTML={{ __html: block.html }}
+        />
+      )
+    })
+  }, [blocks])
 
   const _mobileToc = useMemo(
     () =>
@@ -115,7 +145,7 @@ export default function Article({
   )
 
   return (
-    <ArticleContainer {...props}>
+    <ArticleContainer>
       <div>
         <Row>
           <Typography variant="body3" genericFontFamily="sans-serif">
@@ -132,15 +162,24 @@ export default function Article({
         </Row>
       </div>
 
-      <Title variant={'h1'} genericFontFamily="serif">
+      {/* assign id for toc scroll */}
+
+      <Title
+        /*
+        // @ts-ignore */
+        id={toc[0].href.substring(1)}
+        variant={'h1'}
+        genericFontFamily="serif"
+      >
         {title}
       </Title>
 
       {_thumbnail}
 
-      <CustomTypography variant={'body1'} genericFontFamily="sans-serif">
+      {/* subtitle returns "" so using summary instead  */}
+      <Summary variant={'body1'} genericFontFamily="sans-serif">
         {summary}
-      </CustomTypography>
+      </Summary>
 
       {tags.length > 0 && (
         <TagContainer>
@@ -172,7 +211,7 @@ export default function Article({
 
       {_mobileToc}
 
-      {_blocks}
+      <TextContainer>{_blocks}</TextContainer>
 
       {_references}
 
@@ -209,10 +248,25 @@ const Title = styled(CustomTypography)`
   margin-bottom: 24px;
 `
 
-const Blocks = styled.div`
-  white-space: pre-wrap;
+const Summary = styled(CustomTypography)`
+  margin-top: 24px;
+`
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   margin-top: 24px;
   margin-bottom: 80px;
+`
+
+const Headline = styled(Typography)`
+  white-space: pre-wrap;
+  margin-top: 24px;
+`
+
+const Paragraph = styled(Typography)`
+  white-space: pre-wrap;
 `
 
 const ThumbnailContainer = styled.div<{

@@ -19,10 +19,13 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
           ...on ImageBlock{
                 url
                 alt
+                order
           }
           ... on TextBlock {
             footnotes
             html
+            order
+            tagName
           }
         }
     `)

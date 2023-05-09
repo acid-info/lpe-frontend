@@ -21,11 +21,14 @@ export default function TableOfContents({ contents, ...props }: Props) {
   const handleSectionClick = (index: number) => {
     //@ts-ignore
     const section = document.getElementById(contents[index].href.substring(1))
-    section?.scrollIntoView({
+
+    const position = section?.getBoundingClientRect()
+
+    window.scrollTo({
+      top: Number(position?.top) + window.scrollY - 100,
       behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
     })
+
     setTocIndex(index)
   }
 
@@ -60,7 +63,7 @@ const Container = styled.aside<{ dy: number; height: number }>`
   flex-direction: column;
   width: 162px;
   box-sizing: border-box;
-  height: fit-content;
+  height: ${(p) => (p.height > 0 ? `${p.height}px` : 'fit-content')};
   position: sticky;
   top: ${(p) => `${p.dy}px`};
   margin-left: 16px;
@@ -68,7 +71,6 @@ const Container = styled.aside<{ dy: number; height: number }>`
   &.sticky {
     top: ${uiConfigs.navbarRenderedHeight + 78 + 1}px;
     z-index: 100;
-    height: ${(p) => `${p.height}px`};
   }
 
   // temporary breakpoint
