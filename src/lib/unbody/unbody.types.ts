@@ -30,3 +30,8 @@ export type UnbodyGraphQlResponseTextBlock = UnbodyGraphQlResponse<{
 export type UnbodyGraphQlResponseImageBlock = UnbodyGraphQlResponse<{
   ImageBlock: UnbodyImageBlock[]
 }>
+
+export type UnbodyGraphQlResponseBlocks = UnbodyGraphQlResponse<{
+  ImageBlock: UnbodyImageBlock[]
+  TextBlock: UnbodyTextBlock[]
+}>

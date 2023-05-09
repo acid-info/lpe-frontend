@@ -1,3 +1,5 @@
+import { SearchResultItem } from './data.types'
+
 export enum ESearchScope {
   GLOBAL = 'global',
   ARTICLE = 'article',

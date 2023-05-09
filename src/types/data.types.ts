@@ -23,3 +23,27 @@ export type GlobalSearchResponse = {
   posts: ArticlePostData[]
   blocks: Array<SearchResultItem<UnbodyTextBlock | UnbodyImageBlock>>
 }
+
+export type SearchHookDataPayload = {
+  articles: SearchResultItem<UnbodyGoogleDoc>[]
+  blocks: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]
+}
+
+export type SearchResults = {
+  articles: SearchHook<UnbodyGoogleDoc>
+  blocks: SearchHook<UnbodyImageBlock | UnbodyTextBlock>
+  search: (query: string, tags: string[]) => Promise<void>
+  reset: (initialData: SearchHookDataPayload) => void
+}
+
+export type SearchResultsItemTypes =
+  | SearchResultItem<UnbodyGoogleDoc>
+  | SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>
+
+export type SearchHook<T> = {
+  data: SearchResultItem<T>[]
+  loading: boolean
+  error: string | null
+  search: (query: string, tags: string[]) => Promise<SearchResultItem<T>[]>
+  reset: (initialData: SearchResultItem<T>[]) => void
+}

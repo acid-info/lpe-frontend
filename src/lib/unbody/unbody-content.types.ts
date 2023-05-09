@@ -70,8 +70,17 @@ export namespace UnbodyGraphQl {
     }
   }
 
+  export enum UnbodyDocumentTypeNames {
+    GoogleDoc = 'GoogleDoc',
+    GoogleCalendarEvent = 'GoogleCalendarEvent',
+    TextBlock = 'TextBlock',
+    ImageBlock = 'ImageBlock',
+    AudioFile = 'AudioFile',
+  }
+
   export interface BaseObject {
     _additional: Additional.AdditionalProps
+    __typename: UnbodyDocumentTypeNames
   }
 
   export interface BaseObjectWithRef<T> extends BaseObject {
@@ -80,6 +89,7 @@ export namespace UnbodyGraphQl {
 
   export interface Beacon {
     beacon: string
+    __typename: 'Beacon'
   }
 
   export namespace Fragments {
@@ -89,7 +99,8 @@ export namespace UnbodyGraphQl {
   }
 
   export interface ImageBlock
-    extends BaseObjectWithRef<GoogleDoc | GoogleCalendarEvent | Beacon> {
+    extends BaseObjectWithRef<GoogleDoc | GoogleCalendarEvent> {
+    __typename: UnbodyDocumentTypeNames.ImageBlock
     alt: string
     createdAt: string
     ext: string
@@ -107,7 +118,8 @@ export namespace UnbodyGraphQl {
     width: number
   }
 
-  export interface TextBlock extends BaseObjectWithRef<GoogleDoc | Beacon> {
+  export interface TextBlock extends BaseObjectWithRef<GoogleDoc> {
+    __typename: UnbodyDocumentTypeNames.TextBlock
     footnotes: string | Array<Fragments.FootnoteItem>
     html: string
     order: number
@@ -118,7 +130,7 @@ export namespace UnbodyGraphQl {
   }
 
   export interface AudioFile
-    extends BaseObjectWithRef<GoogleDoc | GoogleCalendarEvent | Beacon> {
+    extends BaseObjectWithRef<GoogleDoc | GoogleCalendarEvent> {
     duration: number
     ext: string
     mimeType: string
@@ -128,9 +140,11 @@ export namespace UnbodyGraphQl {
     size: number
     sourceId: string
     url: string
+    __typename: UnbodyDocumentTypeNames.AudioFile
   }
 
   export interface GoogleDoc extends BaseObject {
+    __typename: UnbodyDocumentTypeNames.GoogleDoc
     blocks: Array<ImageBlock | TextBlock>
     createdAt: string
     html: string
@@ -151,6 +165,7 @@ export namespace UnbodyGraphQl {
   }
 
   export interface GoogleCalendarEvent extends BaseObject {
+    __typename: UnbodyDocumentTypeNames.GoogleCalendarEvent
     createdAt: string
     creatorDisplayName: string
     creatorEmail: string
