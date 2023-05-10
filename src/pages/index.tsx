@@ -17,7 +17,6 @@ type Props = {
 export default function Home({ posts, featured }: Props) {
   return (
     <>
-      {/* For Demo purposes only. Use inline CSS and styled components temporarily */}
       {/*@TODO @jinho, wht PostContainer should recive an array of postData instead of only One?*/}
       {featured && (
         <Section title={'Featured'}>
