@@ -2,9 +2,9 @@ import { GetStaticPropsContext } from 'next'
 import { ArticleLayout } from '@/layouts/ArticleLayout'
 import { ReactNode } from 'react'
 import ArticleContainer from '@/containers/ArticleContainer'
-import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import api from '@/services/unbody.service'
 import { ArticlePostData } from '@/types/data.types'
+import { SEO } from '@/components/SEO'
 
 type ArticleProps = {
   data: ArticlePostData | null
@@ -32,7 +32,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 const ArticlePage = (props: ArticleProps) => {
   if (!props.data) return <div style={{ height: '100vh' }} />
 
-  return <ArticleContainer data={props.data} error={props.error} />
+  return (
+    <>
+      <SEO title={props.data.title} description={props.data.summary} />
+      <ArticleContainer data={props.data} error={props.error} />
+    </>
+  )
 }
 
 export async function getStaticPaths() {
