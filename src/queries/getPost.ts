@@ -15,17 +15,20 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
         createdAt
         modifiedAt
         toc
+        slug
         blocks{
           ...on ImageBlock{
                 url
                 alt
                 order
+                __typename
           }
           ... on TextBlock {
             footnotes
             html
             order
             tagName
+            __typename
           }
         }
     `)

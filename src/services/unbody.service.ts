@@ -126,7 +126,11 @@ class UnbodyService extends UnbodyClient {
   }
 
   getAllArticlePostSlugs = (): Promise<ApiResponse<{ remoteId: string }[]>> => {
-    return this.request<UnbodyGraphQlResponseGoogleDoc>(getAllPostsSlugQuery())
+    return this.request<UnbodyGraphQlResponseGoogleDoc>(
+      getAllPostsSlugQuery({
+        where: Operands.WHERE_PUBLISHED(),
+      }),
+    )
       .then(({ data }) => {
         if (!data) return this.handleResponse([], 'No data')
         return this.handleResponse(data.Get.GoogleDoc)
@@ -153,6 +157,7 @@ class UnbodyService extends UnbodyClient {
         const article = data.Get.GoogleDoc[0]
         return this.handleResponse({
           ...article,
+          blocks: article.blocks.sort((a, b) => a.order - b.order),
           toc: JSON.parse(
             article.toc as string,
           ) as Array<UnbodyGraphQl.Fragments.TocItem>,

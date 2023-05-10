@@ -7,8 +7,28 @@ import { ArticlePostData } from '@/types/data.types'
 import { SEO } from '@/components/SEO'
 
 type ArticleProps = {
-  data: ArticlePostData | null
-  error: string | null
+  data: ArticlePostData
+  errors: string | null
+}
+
+const ArticlePage = ({ data, errors }: ArticleProps) => {
+  if (errors) return <div>{errors}</div>
+  return (
+    <>
+      <SEO title={data.title} description={data.summary} />
+      <ArticleContainer data={data} />
+    </>
+  )
+}
+
+export async function getStaticPaths() {
+  const { data: posts, errors } = await api.getAllArticlePostSlugs()
+  return {
+    paths: errors
+      ? []
+      : posts.map((post) => ({ params: { remoteId: `${post.remoteId}` } })),
+    fallback: true,
+  }
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
@@ -30,30 +50,8 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   return {
     props: {
       data: article,
-      error: errors,
+      error: JSON.stringify(errors),
     },
-  }
-}
-
-// @jinho lets handle the error directly in thew page component
-const ArticlePage = (props: ArticleProps) => {
-  if (!props.data) return <div style={{ height: '100vh' }} />
-
-  return (
-    <>
-      <SEO title={props.data.title} description={props.data.summary} />
-      <ArticleContainer data={props.data} error={props.error} />
-    </>
-  )
-}
-
-export async function getStaticPaths() {
-  const { data: posts, errors } = await api.getAllArticlePostSlugs()
-  return {
-    paths: errors
-      ? []
-      : posts.map((post) => ({ params: { remoteId: `${post.remoteId}` } })),
-    fallback: true,
   }
 }
 
