@@ -93,8 +93,13 @@ export namespace UnbodyGraphQl {
   }
 
   export namespace Fragments {
-    export interface TocItem {}
-
+    export interface TocItem {
+      tag: string
+      blockIndex: number
+      href: string
+      title: string
+      level: number
+    }
     export interface FootnoteItem {}
   }
 

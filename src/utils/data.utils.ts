@@ -5,6 +5,11 @@ import {
 } from '@/lib/unbody/unbody.types'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 
+function hasClassName(inputString: string, className: string) {
+  const regex = new RegExp(`class\\s*=\\s*"[^"]*\\b${className}\\b[^"]*"`)
+  return regex.test(inputString)
+}
+
 export const getContentBlocks = (
   blocks: (UnbodyImageBlock | UnbodyTextBlock)[],
 ) => {
@@ -13,8 +18,8 @@ export const getContentBlocks = (
       (b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock &&
         b.order !== 4) ||
       (b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock &&
-        b.html.indexOf(`class="subtitle"`) === -1 &&
-        b.html.indexOf(`class="title"`) === -1)
+        !hasClassName(b.html, 'subtitle') &&
+        !hasClassName(b.html, 'title'))
     )
   })
 }

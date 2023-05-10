@@ -15,7 +15,6 @@ export const RenderArticleBlock = ({
 }: {
   block: UnbodyImageBlock | UnbodyTextBlock
 }) => {
-  console.log(block.__typename)
   switch (block.__typename) {
     case UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock:
       return (

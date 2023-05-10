@@ -12,6 +12,7 @@ import {
   UnbodyGoogleDoc,
   UnbodyImageBlock,
   UnbodyTextBlock,
+  UnbodyTocItem,
 } from '@/lib/unbody/unbody.types'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 
@@ -20,7 +21,9 @@ import { ArticleImageBlockWrapper } from './Article.ImageBlockWrapper'
 import { getArticleCover, getContentBlocks } from '@/utils/data.utils'
 
 interface Props {
-  data: UnbodyGoogleDoc
+  data: UnbodyGoogleDoc & {
+    toc: UnbodyTocItem[]
+  }
 }
 
 export default function ArticleBody({ data }: Props) {
@@ -46,6 +49,7 @@ export default function ArticleBody({ data }: Props) {
   }, [blocks])
 
   const _blocks = useMemo(() => {
+    console.log(getContentBlocks(blocks))
     return getContentBlocks(blocks).map((block, idx) => (
       <RenderArticleBlock key={'block-' + idx} block={block} />
     ))
@@ -55,7 +59,6 @@ export default function ArticleBody({ data }: Props) {
     () =>
       toc?.length > 0 && (
         <Collapse className={styles.mobileToc} label="Contents">
-          {/* @ts-ignore */}
           {toc.map((toc, idx) => (
             <Content
               onClick={() => setTocIndex(idx)}
@@ -63,7 +66,7 @@ export default function ArticleBody({ data }: Props) {
               variant="body3"
               key={idx}
             >
-              {toc}
+              {toc.title}
             </Content>
           ))}
         </Collapse>
