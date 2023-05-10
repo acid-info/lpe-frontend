@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
+        <meta property="og:image" content="https://press.logos.co/api/og" />
       </Head>
       <Global
         styles={css`
