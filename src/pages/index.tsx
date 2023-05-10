@@ -1,7 +1,10 @@
-import { PostDataProps } from '@/components/Post/Post'
-import PostsDemo from '@/components/Post/PostsDemo'
-import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import api from '@/services/unbody.service'
+
+import Post, { PostDataProps } from '@/components/Post/Post'
+import { PostsList } from '@/components/PostList/PostList'
+import { Section } from '@/components/Section/Section'
+import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+
 import { ESearchStatus } from '@/types/ui.types'
 import { GetStaticProps } from 'next'
 
@@ -14,7 +17,16 @@ type Props = {
 export default function Home({ posts, featured }: Props) {
   return (
     <>
-      <PostsDemo posts={posts} featuredPost={featured} />
+      {/* For Demo purposes only. Use inline CSS and styled components temporarily */}
+      {/*@TODO @jinho, wht PostContainer should recive an array of postData instead of only One?*/}
+      {featured && (
+        <Section title={'Featured'}>
+          <Post data={featured} />
+        </Section>
+      )}
+      <Section title={'Latest posts'}>
+        <PostsList posts={posts} />
+      </Section>
     </>
   )
 }
