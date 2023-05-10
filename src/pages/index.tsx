@@ -7,22 +7,39 @@ import { GetStaticProps } from 'next'
 
 type Props = {
   posts: PostDataProps[]
+  featured: PostDataProps | null
   error: string | null
 }
 
-export default function Home({ posts }: Props) {
+export default function Home({ posts, featured }: Props) {
   return (
     <>
-      <PostsDemo posts={posts} featuredPost={posts[0]} />
+      <PostsDemo posts={posts} featuredPost={featured} />
     </>
   )
 }
 
 export const getStaticProps = async () => {
-  const { data: posts, errors } = await api.getHomepagePosts()
+  const {
+    data: { posts, featured },
+    errors,
+  } = await api.getHomepagePosts()
 
   return {
     props: {
+      featured: featured
+        ? {
+            remoteId: featured.remoteId,
+            date: featured.modifiedAt,
+            title: featured.title,
+            description: featured.summary,
+            author: 'Jinho',
+            tags: featured.tags,
+            ...(featured.blocks && featured.blocks!.length > 0
+              ? { coverImage: featured.blocks![0] as UnbodyImageBlock }
+              : {}),
+          }
+        : null,
       posts: posts.map((post) => ({
         remoteId: post.remoteId,
         date: post.modifiedAt,

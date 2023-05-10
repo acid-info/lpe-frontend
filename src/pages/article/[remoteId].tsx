@@ -20,6 +20,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
   const { data: article, errors } = await api.getArticlePost(remoteId as string)
+
+  if (!article) {
+    return {
+      notFound: true,
+    }
+  }
+
   return {
     props: {
       data: article,

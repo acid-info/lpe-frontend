@@ -16,6 +16,7 @@ export const getHomePagePostsQuery = (args: UnbodyGetFilters = defaultArgs) =>
         tags
         createdAt
         modifiedAt
+        pathString
         blocks{
           ...on ImageBlock{
                 url

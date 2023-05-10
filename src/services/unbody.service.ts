@@ -6,9 +6,12 @@ import {
   UnbodyImageBlock,
   UnbodyTextBlock,
   UnbodyGraphQlResponseBlocks,
+  UnbodyGraphQlResponse,
 } from '@/lib/unbody/unbody.types'
 
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+
+type WhereOperandsInpObj = UnbodyGraphQl.Filters.WhereOperandsInpObj
 
 import { getArticlePostQuery } from '@/queries/getPost'
 import { getHomePagePostsQuery } from '@/queries/getPosts'
@@ -35,7 +38,40 @@ type HomepagePost = Pick<
   | 'blocks'
 >
 
+type HomePageData = {
+  posts: HomepagePost[]
+  featured: HomepagePost | null
+}
+
 type UnbodyDocTypes = UnbodyGoogleDoc | UnbodyImageBlock | UnbodyTextBlock
+
+const OperandFactory = (
+  operator: UnbodyGraphQl.Filters.WhereOperatorEnum,
+  path: string | string[],
+  value: string,
+  valuePath: string,
+): WhereOperandsInpObj => ({
+  path,
+  operator,
+  [valuePath]: value,
+})
+
+export const Operands: Record<string, (...a: any) => WhereOperandsInpObj> = {
+  WHERE_PUBLISHED: () =>
+    OperandFactory(
+      UnbodyGraphQl.Filters.WhereOperatorEnum.Like,
+      'pathString',
+      '*/published/*',
+      'valueString',
+    ),
+  WHERE_ID_IS: (id) =>
+    OperandFactory(
+      UnbodyGraphQl.Filters.WhereOperatorEnum.Equal,
+      'remoteId',
+      id,
+      'valueString',
+    ),
+}
 
 const mapSearchResultItem = <T extends UnbodyDocTypes>(
   q: string,
@@ -68,13 +104,25 @@ class UnbodyService extends UnbodyClient {
     }
   }
 
-  getHomepagePosts = (): Promise<ApiResponse<HomepagePost[]>> => {
-    return this.request<UnbodyGraphQlResponseGoogleDoc>(getHomePagePostsQuery())
+  getHomepagePosts = (): Promise<ApiResponse<HomePageData>> => {
+    const query = getHomePagePostsQuery({
+      where: Operands.WHERE_PUBLISHED(),
+    })
+
+    return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {
-        if (!data) return this.handleResponse([], 'No data')
-        return this.handleResponse(data.Get.GoogleDoc)
+        if (!data)
+          return this.handleResponse({ featured: null, posts: [] }, 'No data')
+        const featured =
+          data.Get.GoogleDoc.find((post) =>
+            post.pathString.includes('/featured/'),
+          ) || null
+        const posts = data.Get.GoogleDoc.filter(
+          (post) => !post.pathString.includes('/featured/'),
+        )
+        return this.handleResponse({ featured, posts })
       })
-      .catch((e) => this.handleResponse([], e))
+      .catch((e) => this.handleResponse({ featured: null, posts: [] }, e))
   }
 
   getAllArticlePostSlugs = (): Promise<ApiResponse<{ remoteId: string }[]>> => {
@@ -88,13 +136,15 @@ class UnbodyService extends UnbodyClient {
 
   getArticlePost = (
     id: string,
+    published: boolean = true,
   ): Promise<ApiResponse<UnbodyGoogleDoc | null>> => {
     const query = getArticlePostQuery({
-      where: {
-        path: ['remoteId'],
-        operator: UnbodyGraphQl.Filters.WhereOperatorEnum.Equal,
-        valueString: id,
-      },
+      where: published
+        ? {
+            operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
+            operands: [Operands.WHERE_PUBLISHED(), Operands.WHERE_ID_IS(id)],
+          }
+        : Operands.WHERE_ID_IS(id),
     })
 
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
@@ -114,6 +164,7 @@ class UnbodyService extends UnbodyClient {
   serachBlocks = async (
     q: string = '',
     tags: string[] = [],
+    published: boolean = true,
   ): Promise<
     ApiResponse<SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]>
   > => {
@@ -124,12 +175,14 @@ class UnbodyService extends UnbodyClient {
               concepts: [q, ...tags],
               certainty: 0.75,
             },
+            ...(published
+              ? {
+                  where: Operands.WHERE_PUBLISHED(),
+                }
+              : {}),
           }
         : {}),
     })
-
-    console.log(query)
-
     return this.request<UnbodyGraphQlResponseBlocks>(query)
       .then(({ data }) => {
         if (!data || !(data.Get.ImageBlock || data.Get.TextBlock))
@@ -147,16 +200,20 @@ class UnbodyService extends UnbodyClient {
   searchArticles = (
     q: string = '',
     tags: string[] = [],
+    published: boolean = true,
   ): Promise<ApiResponse<SearchResultItem<UnbodyGoogleDoc>[]>> => {
-    const query = getSearchArticlesQuery({
-      ...(q.trim().length > 0
-        ? {
-            nearText: {
-              concepts: [q],
-            },
-          }
-        : {}),
-      ...((tags.length > 0 && {
+    let queryFilters = {}
+    if (q.trim().length > 0) {
+      queryFilters = {
+        nearText: {
+          concepts: [q],
+        },
+      }
+    }
+
+    if (tags.length > 0) {
+      queryFilters = {
+        ...queryFilters,
         where: {
           operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
           operands: tags.map((tag) => ({
@@ -165,9 +222,20 @@ class UnbodyService extends UnbodyClient {
             valueString: tag,
           })),
         },
-      }) ||
-        {}),
-    })
+      }
+    }
+
+    if (published) {
+      queryFilters = {
+        ...queryFilters,
+        where: {
+          ...((queryFilters as any).where || {}),
+          ...Operands.WHERE_PUBLISHED(),
+        },
+      }
+    }
+
+    const query = getSearchArticlesQuery(queryFilters)
 
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {

@@ -4,7 +4,7 @@ import { PostDataProps, PostProps } from './Post'
 
 type Props = {
   posts: PostDataProps[]
-  featuredPost: PostDataProps
+  featuredPost: PostDataProps | null
 }
 
 const PostsDemo = (props: Props) => {
@@ -14,14 +14,16 @@ const PostsDemo = (props: Props) => {
     <div style={{ marginBlock: '78px' }}>
       {/* For Demo purposes only. Use inline CSS and styled components temporarily */}
       {/*@TODO @jinho, wht PostContainer should recive an array of postData instead of only One?*/}
-      <PostContainer
-        title="Featured"
-        postsData={[
-          {
-            data: props.featuredPost,
-          },
-        ]}
-      />
+      {props.featuredPost && (
+        <PostContainer
+          title="Featured"
+          postsData={[
+            {
+              data: props.featuredPost,
+            },
+          ]}
+        />
+      )}
       {posts.length > 0 ? (
         <PostContainer
           style={{ marginTop: '108px' }}
