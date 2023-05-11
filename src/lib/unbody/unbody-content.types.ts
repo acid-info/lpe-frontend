@@ -93,8 +93,13 @@ export namespace UnbodyGraphQl {
   }
 
   export namespace Fragments {
-    export interface TocItem {}
-
+    export interface TocItem {
+      tag: string
+      blockIndex: number
+      href: string
+      title: string
+      level: number
+    }
     export interface FootnoteItem {}
   }
 
@@ -152,7 +157,7 @@ export namespace UnbodyGraphQl {
     modifiedAt: string
     originalName: string
     path: string[]
-    pathstring: string
+    pathString: string
     remoteId: string
     size: number
     sourceId: string
@@ -298,7 +303,7 @@ export namespace UnbodyGraphQl {
 
     export interface WhereOperandsInpObj {
       operator?: WhereOperatorEnum
-      path: string[]
+      path: string[] | string
       operands?: WhereOperandsInpObj[]
       valueGeoRange?: WhereGeoRangeInpObj
       valueNumber?: number
@@ -330,7 +335,7 @@ export namespace UnbodyGraphQl {
     }
 
     export interface WhereInpObj {
-      path?: string[]
+      path?: string[] | string
       valueInt?: number
       valueNumber?: number
       valueGeoRange?: WhereGeoRangeInpObj

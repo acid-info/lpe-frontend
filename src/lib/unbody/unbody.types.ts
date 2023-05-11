@@ -6,6 +6,7 @@ export type UnbodyTextBlock = UnbodyGraphQl.TextBlock
 export type UnbodyImageBlock = UnbodyGraphQl.ImageBlock
 export type UnbodyAudio = UnbodyGraphQl.AudioFile
 export type UnbodyGetFilters = UnbodyGraphQl.Filters.GetDocsArgs
+export type UnbodyTocItem = UnbodyGraphQl.Fragments.TocItem
 
 export * as UnbodyGraphQl from './unbody-content.types'
 

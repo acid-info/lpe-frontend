@@ -8,13 +8,25 @@ import { Collapse } from '@/components/Collapse'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { moreFromAuthor, references, relatedArticles } from './tempData'
 import { ArticleReference } from '../ArticleReference'
-import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+import {
+  UnbodyGoogleDoc,
+  UnbodyImageBlock,
+  UnbodyTextBlock,
+  UnbodyTocItem,
+} from '@/lib/unbody/unbody.types'
+import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+
+import { RenderArticleBlock } from './Article.Block'
+import { ArticleImageBlockWrapper } from './Article.ImageBlockWrapper'
+import { getArticleCover, getContentBlocks } from '@/utils/data.utils'
 
 interface Props {
-  data: UnbodyGoogleDoc
+  data: UnbodyGoogleDoc & {
+    toc: UnbodyTocItem[]
+  }
 }
 
-export default function Article({ data }: Props) {
+export default function ArticleBody({ data }: Props) {
   const { title, summary, blocks, toc, createdAt, tags } = data
   const articleContainer = useArticleContainerContext()
   const { tocIndex, setTocIndex } = articleContainer
@@ -26,60 +38,26 @@ export default function Article({ data }: Props) {
   const date = new Date(createdAt)
 
   const _thumbnail = useMemo(() => {
-    const imageBlocks: UnbodyImageBlock[] = blocks.filter(
-      (block): block is UnbodyImageBlock => block !== null && 'url' in block,
-    )
-
-    const coverImage = imageBlocks.reduce((prev, curr) =>
-      prev.order < curr.order ? prev : curr,
-    )
-
+    const coverImage = getArticleCover(blocks)
     if (!coverImage) return null
-
     return (
-      <ThumbnailContainer aspectRatio={PostImageRatio.LANDSCAPE}>
-        <Thumbnail fill src={coverImage.url} alt={coverImage.alt} />
-      </ThumbnailContainer>
+      <ArticleImageBlockWrapper
+        ratio={PostImageRatio.LANDSCAPE}
+        image={coverImage}
+      />
     )
   }, [blocks])
 
   const _blocks = useMemo(() => {
-    // Exclude title, subtitle, coverImage
-    const articleBlocks = blocks.sort((a, b) => a.order - b.order).slice(3)
-
-    return articleBlocks.map((block, idx) => {
-      return 'url' in block ? (
-        <ThumbnailContainer
-          key={'block-' + idx}
-          aspectRatio={PostImageRatio.LANDSCAPE}
-        >
-          <Thumbnail fill src={block.url} alt={block.alt} />
-        </ThumbnailContainer>
-      ) : block.tagName.startsWith('h') ? (
-        <Headline
-          variant="body2"
-          component={block.tagName as any}
-          genericFontFamily="sans-serif"
-          key={'block-' + idx}
-          dangerouslySetInnerHTML={{ __html: block.html }}
-        />
-      ) : (
-        <Paragraph
-          variant="body1"
-          component="p"
-          genericFontFamily="sans-serif"
-          key={'block-' + idx}
-          dangerouslySetInnerHTML={{ __html: block.html }}
-        />
-      )
-    })
+    return getContentBlocks(blocks).map((block, idx) => (
+      <RenderArticleBlock key={'block-' + idx} block={block} />
+    ))
   }, [blocks])
 
   const _mobileToc = useMemo(
     () =>
       toc?.length > 0 && (
         <Collapse className={styles.mobileToc} label="Contents">
-          {/* @ts-ignore */}
           {toc.map((toc, idx) => (
             <Content
               onClick={() => setTocIndex(idx)}
@@ -87,7 +65,7 @@ export default function Article({ data }: Props) {
               variant="body3"
               key={idx}
             >
-              {toc}
+              {toc.title}
             </Content>
           ))}
         </Collapse>
@@ -161,11 +139,9 @@ export default function Article({ data }: Props) {
         </Row>
       </div>
 
-      {/* assign id for toc scroll */}
-
       <Title
         /*
-        // @ts-ignore */
+                // @ts-ignore */
         id={toc[0].href.substring(1)}
         variant={'h1'}
         genericFontFamily="serif"
@@ -257,32 +233,6 @@ const TextContainer = styled.div`
   gap: 16px;
   margin-top: 24px;
   margin-bottom: 80px;
-`
-
-const Headline = styled(Typography)`
-  white-space: pre-wrap;
-  margin-top: 24px;
-`
-
-const Paragraph = styled(Typography)`
-  white-space: pre-wrap;
-`
-
-const ThumbnailContainer = styled.div<{
-  aspectRatio: PostImageRatio
-}>`
-  aspect-ratio: ${(p) =>
-    p.aspectRatio
-      ? PostImageRatioOptions[p.aspectRatio]
-      : PostImageRatioOptions[PostImageRatio.PORTRAIT]};
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-height: 458px; // temporary max-height based on the Figma design's max height
-`
-
-const Thumbnail = styled(Image)`
-  object-fit: cover;
 `
 
 const Row = styled.div`

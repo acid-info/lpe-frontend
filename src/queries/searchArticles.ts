@@ -7,9 +7,18 @@ export const getSearchArticlesQuery = (args: UnbodyGetFilters = defaultArgs) =>
   GetGoogleDocQuery(args)(`
         remoteId
         title
+        subtitle
         summary
         tags
         modifiedAt
+        blocks{
+          ...on ImageBlock{
+                url
+                alt
+                order
+                __typename
+          }
+        }
         _additional{
           certainty 
         }

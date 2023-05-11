@@ -21,8 +21,12 @@ import {
   extractTopicsFromQuery,
 } from '@/utils/search.utils'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { SearchLayout } from '@/layouts/SearchLayout'
+import { Section } from '@/components/Section/Section'
+import { PostsList } from '@/components/PostList/PostList'
+import { getArticleCover } from '@/utils/data.utils'
 
 interface SearchPageProps {
   articles: SearchResultItem<UnbodyGoogleDoc>[]
@@ -73,24 +77,22 @@ export default function SearchPage({
 
   return (
     <div>
-      <section>
-        <strong>Related articles</strong>
-        <hr />
-        <div>
-          {articles.loading && <div>...</div>}
-          {!articles.error && articles.data && articles.data.length > 0 ? (
-            articles.data.map((article: SearchResultItem<UnbodyGoogleDoc>) => (
-              <div key={article.doc.remoteId}>
-                <h2>{article.doc.title}</h2>
-                <p>{article.doc.summary}</p>
-              </div>
-            ))
-          ) : (
-            <div>Nothing found</div>
-          )}
-        </div>
-      </section>
-      <br />
+      {articles.data?.length && (
+        <Section title={'Related Articles'} matches={articles.data?.length}>
+          <PostsList
+            posts={articles.data.map((article) => ({
+              remoteId: article.doc.remoteId,
+              date: article.doc.modifiedAt,
+              title: article.doc.title,
+              description: article.doc.subtitle, // TODO: summary is not available
+              author: 'Jinho',
+              tags: article.doc.tags,
+              coverImage: getArticleCover(article.doc.blocks),
+            }))}
+          />
+        </Section>
+      )}
+
       <section>
         <strong>Related content blocks</strong>
         <hr />
@@ -154,6 +156,10 @@ export default function SearchPage({
       </section>
     </div>
   )
+}
+
+SearchPage.getLayout = function getLayout(page: ReactNode) {
+  return <SearchLayout>{page}</SearchLayout>
 }
 
 export async function getStaticProps() {
