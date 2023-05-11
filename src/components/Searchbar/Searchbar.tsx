@@ -3,6 +3,7 @@ import {
   IconButton,
   SearchIcon,
   CloseIcon,
+  Typography,
 } from '@acid-info/lsd-react'
 import styles from './Search.module.css'
 import { SearchbarContainer } from '@/components/Searchbar/SearchbarContainer'
@@ -17,9 +18,11 @@ import {
   addQueryToQuery,
   addTopicsToQuery,
   createMinimizedSearchText,
+  createSearchLink,
   extractQueryFromQuery,
   extractTopicsFromQuery,
 } from '@/utils/search.utils'
+import Link from 'next/link'
 
 export type SearchbarProps = {
   searchScope?: ESearchScope
@@ -27,7 +30,9 @@ export type SearchbarProps = {
 }
 
 export default function Searchbar(props: SearchbarProps) {
-  const { searchScope = ESearchScope.GLOBAL } = props
+  const [searchScope, setSearchScope] = useState<ESearchScope>(
+    props.searchScope || ESearchScope.GLOBAL,
+  )
   const [active, setActive] = useState(false)
   const router = useRouter()
 
@@ -61,6 +66,11 @@ export default function Searchbar(props: SearchbarProps) {
   useEffect(() => {
     setQuery(extractQueryFromQuery(router.query))
     setFilterTags(extractTopicsFromQuery(router.query))
+    if (router.pathname === '/article/[remoteId]') {
+      setSearchScope(ESearchScope.ARTICLE)
+    } else {
+      setSearchScope(ESearchScope.GLOBAL)
+    }
   }, [router.query.query, router.query.topics])
 
   const performClear = useCallback(() => {
@@ -103,6 +113,16 @@ export default function Searchbar(props: SearchbarProps) {
             setQuery(e.target.value)
           }}
         />
+        {searchScope === ESearchScope.ARTICLE && (
+          <GlobalSearchTrigger
+            href={createSearchLink(query, filterTags)}
+            className={!active ? '' : 'hide'}
+          >
+            <Typography variant="body2" className={styles.globalSearchTrigger}>
+              global search
+            </Typography>
+          </GlobalSearchTrigger>
+        )}
         <div>
           <IconButton
             className={styles.searchButton}
@@ -179,4 +199,16 @@ const SearchBox = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+`
+
+const GlobalSearchTrigger = styled(Link)`
+  position: absolute;
+  left: 256px;
+  top: 7px;
+
+  transition: opacity 250ms ease-in-out;
+
+  &.hide {
+    opacity: 0;
+  }
 `

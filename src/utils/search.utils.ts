@@ -35,3 +35,19 @@ export const createMinimizedSearchText = (
   }
   return txt
 }
+
+export const createSearchLink = (query: string, filterTags: string[]) => {
+  let link = '/search'
+  if (query.length > 0 || filterTags.length > 0) {
+    link += '?'
+  }
+  if (query.length > 0 && filterTags.length > 0) {
+    link += `query=${query}&topics=${filterTags.join(',')}`
+  } else if (query.length > 0) {
+    link += `query=${query}`
+  } else if (filterTags.length > 0) {
+    link += `topics=${filterTags.join(',')}`
+  }
+
+  return link
+}

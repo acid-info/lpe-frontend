@@ -40,6 +40,8 @@ export default function SearchPage({
 }: SearchPageProps) {
   const router = useRouter()
   const hasUpdated = useRef(false)
+  const [mounted, setMounted] = useState(false)
+
   const {
     query: { query = '', topics = [] },
   } = router
@@ -53,11 +55,6 @@ export default function SearchPage({
     initialBlocks,
     PostTypes.Block,
   )
-
-  // console.log('articles', articles)
-  // console.log('blocks', blocks)
-
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
