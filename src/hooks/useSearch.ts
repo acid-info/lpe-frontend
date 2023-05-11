@@ -5,24 +5,27 @@ import {
 } from '@/lib/unbody/unbody.types'
 import searchApi from '@/services/search.service'
 import {
+  PostTypes,
   SearchHook,
   SearchHookDataPayload,
   SearchResultItem,
-  SearchResults,
 } from '@/types/data.types'
+import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+
 import { useState } from 'react'
 
 export const useSearchGeneric = <T>(
   initialData: SearchResultItem<T>[],
+  postType: PostTypes,
 ): SearchHook<T> => {
   const [data, setData] = useState<SearchResultItem<T>[]>(initialData)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   const search = async (query: string, tags: string[]) => {
-    if (loading) return null
+    if (loading) return Promise.resolve([])
     setLoading(true)
-    const result = await searchApi.searchArticles(query, tags)
+    const result = await searchApi.serach(query, tags, postType)
     setData(result.data)
     setLoading(false)
     return result.data
@@ -34,29 +37,4 @@ export const useSearchGeneric = <T>(
     setError(null)
   }
   return { data, loading, error, search, reset }
-}
-
-export const useSearch = (
-  initialData: SearchHookDataPayload,
-): SearchResults => {
-  const articles = useSearchGeneric<UnbodyGoogleDoc>(
-    initialData?.articles ?? null,
-  )
-  const blocks = useSearchGeneric<UnbodyImageBlock | UnbodyTextBlock>(
-    initialData?.blocks ?? null,
-  )
-
-  const search = async (query: string, tags: string[]) => {
-    const [articlesResult, blocksResult] = await Promise.all([
-      articles.loading ? () => {} : articles.search(query, tags),
-      blocks.loading ? () => {} : blocks.search(query, tags),
-    ])
-  }
-
-  const reset = (initialData: SearchHookDataPayload) => {
-    articles.reset(initialData?.articles)
-    blocks.reset(initialData?.blocks)
-  }
-
-  return { search, reset, blocks, articles }
 }

@@ -19,8 +19,12 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
               ...on GoogleDoc{
                     title
                     remoteId
+                    slug
                     __typename
                     }
+            }
+            _additional{
+              certainty
             }
         `),
       GetImageBlockQuery(args)(`
@@ -33,8 +37,12 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
               ...on GoogleDoc{
                     title
                     remoteId
+                    slug
                     __typename
                    }
+            }
+            _additional{
+              certainty
             }
         `),
     ].join(' '),

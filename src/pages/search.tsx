@@ -1,4 +1,4 @@
-import { useSearch, useSearchGeneric } from '@/hooks/useSearch'
+import { useSearchGeneric } from '@/hooks/useSearch'
 import {
   UnbodyGoogleDoc,
   UnbodyImageBlock,
@@ -10,6 +10,7 @@ import Image from 'next/image'
 
 import unbodyApi from '@/services/unbody.service'
 import {
+  PostTypes,
   SearchHook,
   SearchHookDataPayload,
   SearchResultItem,
@@ -43,10 +44,18 @@ export default function SearchPage({
     query: { query = '', topics = [] },
   } = router
 
-  const articles = useSearchGeneric<UnbodyGoogleDoc>(initialArticles)
+  const articles = useSearchGeneric<UnbodyGoogleDoc>(
+    initialArticles,
+    PostTypes.Article,
+  )
+
   const blocks = useSearchGeneric<UnbodyTextBlock | UnbodyImageBlock>(
     initialBlocks,
+    PostTypes.Block,
   )
+
+  // console.log('articles', articles)
+  // console.log('blocks', blocks)
 
   const [mounted, setMounted] = useState(false)
 
