@@ -1,4 +1,5 @@
 import {
+  GoogleDocEnhanced,
   UnbodyGoogleDoc,
   UnbodyImageBlock,
   UnbodyTextBlock,
@@ -10,8 +11,12 @@ export enum PostTypes {
   Block = 'block',
 }
 
-export interface ArticlePostData extends UnbodyGoogleDoc {
-  toc: Array<UnbodyGraphQl.Fragments.TocItem>
+export interface ArticlePostData {
+  article: GoogleDocEnhanced & {
+    toc: Array<UnbodyGraphQl.Fragments.TocItem>
+  }
+  relatedArticles: Array<GoogleDocEnhanced>
+  articlesFromSameAuthors: Array<GoogleDocEnhanced>
 }
 
 export type ApiResponse<T> = {

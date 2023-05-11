@@ -1,21 +1,16 @@
+import { GoogleDocEnhanced, UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
-export type ArticleReferenceType = {
-  title: string
-  author: string
-  date: Date
-}
-
 type Props = {
-  data: ArticleReferenceType
+  data: GoogleDocEnhanced
 }
 
 export default function ArticleReference({
-  data: { title, author, date },
+  data: { title, modifiedAt, mentions },
   ...props
 }: Props) {
-  const localDate = date.toLocaleString('en-GB', {
+  const localDate = new Date(modifiedAt).toLocaleString('en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -28,7 +23,8 @@ export default function ArticleReference({
       </Typography>
       <div>
         <Typography variant="body3" genericFontFamily="sans-serif">
-          {author}
+          {/*TODO we need handle multiple authors for same article*/}
+          {mentions[0].name}
         </Typography>
         <Typography variant="body3">•</Typography>
         <Typography variant="body3" genericFontFamily="sans-serif">

@@ -46,7 +46,7 @@ export type PostAppearanceProps = {
 }
 
 export type PostDataProps = {
-  remoteId: string // TODO: slug should be used for links
+  slug: string
   date: string
   title: string
   description?: string

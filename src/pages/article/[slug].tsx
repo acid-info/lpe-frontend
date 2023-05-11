@@ -13,9 +13,10 @@ type ArticleProps = {
 
 const ArticlePage = ({ data, errors }: ArticleProps) => {
   if (errors) return <div>{errors}</div>
+
   return (
     <>
-      <SEO title={data.title} description={data.summary} />
+      <SEO title={data.article.title} description={data.article.summary} />
       <ArticleContainer data={data} />
     </>
   )
@@ -26,30 +27,39 @@ export async function getStaticPaths() {
   return {
     paths: errors
       ? []
-      : posts.map((post) => ({ params: { remoteId: `${post.remoteId}` } })),
+      : posts.map((post) => ({ params: { slug: `${post.slug}` } })),
     fallback: true,
   }
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { remoteId } = params!
+  const { slug } = params!
 
-  if (!remoteId) {
+  if (!slug) {
     return {
       notFound: true,
     }
   }
-  const { data: article, errors } = await api.getArticlePost(remoteId as string)
-
+  const { data: article, errors } = await api.getArticlePost(slug as string)
   if (!article) {
     return {
       notFound: true,
     }
   }
 
+  article.blocks.sort((a, b) => a.order - b.order)
+  const { data: relatedArticles } = await api.getRelatedArticles(
+    article._additional.id,
+  )
+  const { data: articlesFromSameAuthors } =
+    await api.getArticlesFromSameAuthors(
+      slug as string,
+      article.mentions.map((mention) => mention.name),
+    )
+
   return {
     props: {
-      data: article,
+      data: { article, relatedArticles, articlesFromSameAuthors },
       error: JSON.stringify(errors),
     },
   }

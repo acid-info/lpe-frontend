@@ -5,5 +5,5 @@ const defaultArgs: UnbodyGetFilters = {}
 
 export const getAllPostsSlugQuery = (args: UnbodyGetFilters = defaultArgs) =>
   GetGoogleDocQuery(args)(`
-        remoteId
+        slug
   `)

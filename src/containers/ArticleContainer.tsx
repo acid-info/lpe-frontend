@@ -3,13 +3,16 @@ import styled from '@emotion/styled'
 import { useState } from 'react'
 import { uiConfigs } from '@/configs/ui.configs'
 import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
-import { UnbodyGoogleDoc, UnbodyTocItem } from '@/lib/unbody/unbody.types'
+import {
+  GoogleDocEnhanced,
+  UnbodyGoogleDoc,
+  UnbodyTocItem,
+} from '@/lib/unbody/unbody.types'
 import ArticleBody from '@/components/Article/ArticleBody'
+import { ArticlePostData } from '@/types/data.types'
 
 interface Props {
-  data: UnbodyGoogleDoc & {
-    toc: UnbodyTocItem[]
-  }
+  data: ArticlePostData
 }
 
 const ArticleContainer = (props: Props) => {
@@ -21,7 +24,7 @@ const ArticleContainer = (props: Props) => {
       <ArticleContainerContext.Provider
         value={{ tocIndex: tocIndex, setTocIndex: setTocIndex }}
       >
-        <TableOfContents contents={data.toc ?? []} />
+        <TableOfContents contents={data.article.toc ?? []} />
         <ArticleBody data={data} />
         <Right />
       </ArticleContainerContext.Provider>

@@ -66,7 +66,7 @@ export default function Searchbar(props: SearchbarProps) {
   useEffect(() => {
     setQuery(extractQueryFromQuery(router.query))
     setFilterTags(extractTopicsFromQuery(router.query))
-    if (router.pathname === '/article/[remoteId]') {
+    if (router.pathname === '/article/[slug]') {
       setSearchScope(ESearchScope.ARTICLE)
     } else {
       setSearchScope(ESearchScope.GLOBAL)
