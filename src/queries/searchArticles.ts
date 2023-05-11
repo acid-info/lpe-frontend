@@ -5,12 +5,13 @@ const defaultArgs: UnbodyGetFilters = {}
 
 export const getSearchArticlesQuery = (args: UnbodyGetFilters = defaultArgs) =>
   GetGoogleDocQuery(args)(`
-        remoteId
+        slug
         title
         subtitle
         summary
         tags
         modifiedAt
+        mentions
         blocks{
           ...on ImageBlock{
                 url

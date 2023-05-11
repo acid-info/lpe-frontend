@@ -11,7 +11,7 @@ const FeaturedPost = ({ post }: Props) => {
   return (
     <Grid>
       <GridItem className="w-16">
-        <PostLink href={`/article/${post.remoteId}`}>
+        <PostLink href={`/article/${post.slug}`}>
           <PostWrapper>
             <Post data={post} />
           </PostWrapper>

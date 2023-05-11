@@ -15,9 +15,11 @@ export const getHomePagePostsQuery = (args: UnbodyGetFilters = defaultArgs) =>
         subtitle
         summary
         tags
+        slug
         createdAt
         modifiedAt
         pathString
+        mentions
         blocks{
           ...on ImageBlock{
                 url

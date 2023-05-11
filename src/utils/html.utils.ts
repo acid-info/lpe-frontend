@@ -1,13 +1,6 @@
 const regexForInnerHtml = /<[^>]*>/
-
-// const regexForInnerHtml = /<[^>]*>([^<]*)<\/[^>]*>/
 const regexForId = /id="([^"]*)"/
 const regexForClass = /class="([^"]*)"/
-//
-// export const extractInnerHtml = (html: string) => {
-//     const match = html.match(regexForInnerHtml)
-//     return match ? match[1] : html
-// }
 
 export function extractInnerHtml(htmlString: string) {
   var regex = /^<[^>]+>([\s\S]*)<\/[^>]+>$/
@@ -28,4 +21,12 @@ export const extractIdFromFirstTag = (html: string) => {
 export const extractClassFromFirstTag = (html: string) => {
   const match = html.match(regexForClass)
   return match ? match[1] : null
+}
+
+export const isAuthorsParagraph = (html: string) => {
+  const regex = /<a\s+[^>]*href="mailto:([^"]+)"[^>]*>([^<]+)<\/a>/g
+  const matches = html.match(regex)
+  if (!matches) return false
+  // so if the email is in the first 50% of the text, it's probably the author line so we want to exclude it
+  return matches.join('').length / html.length > 0.5
 }

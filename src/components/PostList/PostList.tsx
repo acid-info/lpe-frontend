@@ -17,7 +17,7 @@ export const PostsList = (props: Props) => {
     <Grid>
       {posts.map((post, index) => (
         <GridItem className="w-4" key={index}>
-          <PostLink href={`/article/${post.remoteId}`}>
+          <PostLink href={`/article/${post.slug}`}>
             <PostWrapper>
               <Post data={post} />
             </PostWrapper>

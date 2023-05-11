@@ -7,13 +7,15 @@ import {
   UnbodyTextBlock,
   UnbodyGraphQlResponseBlocks,
   UnbodyGraphQlResponse,
+  GoogleDocEnhanced,
+  TextBlockEnhanced,
 } from '@/lib/unbody/unbody.types'
 
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 
 type WhereOperandsInpObj = UnbodyGraphQl.Filters.WhereOperandsInpObj
 
-import { getArticlePostQuery } from '@/queries/getPost'
+import { getArticlePostQuery, getRelatedArticlesQuery } from '@/queries/getPost'
 import { getHomePagePostsQuery } from '@/queries/getPosts'
 import { getAllPostsSlugQuery } from '@/queries/getPostsSlugs'
 import { getSearchArticlesQuery } from '@/queries/searchArticles'
@@ -28,7 +30,7 @@ import { getSearchBlocksQuery } from '@/queries/searchBlocks'
 const { UNBODY_API_KEY, UNBODY_LPE_PROJECT_ID } = process.env
 
 type HomepagePost = Pick<
-  UnbodyGoogleDoc,
+  GoogleDocEnhanced,
   | 'remoteId'
   | 'title'
   | 'summary'
@@ -36,6 +38,8 @@ type HomepagePost = Pick<
   | 'modifiedAt'
   | 'subtitle'
   | 'blocks'
+  | 'mentions'
+  | 'slug'
 >
 
 type HomePageData = {
@@ -43,7 +47,12 @@ type HomePageData = {
   featured: HomepagePost | null
 }
 
-type UnbodyDocTypes = UnbodyGoogleDoc | UnbodyImageBlock | UnbodyTextBlock
+type UnbodyDocTypes =
+  | UnbodyGoogleDoc
+  | UnbodyImageBlock
+  | UnbodyTextBlock
+  | GoogleDocEnhanced
+  | TextBlockEnhanced
 
 const OperandFactory = (
   operator: UnbodyGraphQl.Filters.WhereOperatorEnum,
@@ -71,6 +80,27 @@ export const Operands: Record<string, (...a: any) => WhereOperandsInpObj> = {
       id,
       'valueString',
     ),
+  WHERE_SLUG_IS: (slug) =>
+    OperandFactory(
+      UnbodyGraphQl.Filters.WhereOperatorEnum.Equal,
+      'slug',
+      slug,
+      'valueString',
+    ),
+  WHERE_SLUG_IS_NOT: (slug) =>
+    OperandFactory(
+      UnbodyGraphQl.Filters.WhereOperatorEnum.NotEqual,
+      'slug',
+      slug,
+      'valueString',
+    ),
+  WHERE_AUTHOR_IS: (author) =>
+    OperandFactory(
+      UnbodyGraphQl.Filters.WhereOperatorEnum.Like,
+      'mentions',
+      author,
+      'valueText',
+    ),
 }
 
 const mapSearchResultItem = <T extends UnbodyDocTypes>(
@@ -78,8 +108,44 @@ const mapSearchResultItem = <T extends UnbodyDocTypes>(
   tags: string[],
   item: T,
 ): SearchResultItem<T> => ({
-  doc: item,
+  // @ts-ignore
+  doc:
+    item.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
+      ? enhanceTextBlock(item)
+      : item,
   score: q.length > 0 || tags.length > 0 ? item._additional.certainty : 0,
+})
+
+const enhanceGoogleDoc = (doc: UnbodyGoogleDoc): GoogleDocEnhanced => ({
+  ...doc,
+  mentions:
+    typeof doc.mentions === 'string'
+      ? (JSON.parse(doc.mentions) as Array<UnbodyGraphQl.Fragments.MentionItem>)
+      : [],
+  toc:
+    typeof doc.toc === 'string'
+      ? (JSON.parse(doc.toc) as Array<UnbodyGraphQl.Fragments.TocItem>)
+      : [],
+  blocks:
+    doc.blocks && doc.blocks.length
+      ? doc.blocks.map((b) => {
+          return b.__typename ===
+            UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
+            ? enhanceTextBlock(b)
+            : b
+        })
+      : [],
+})
+
+const enhanceTextBlock = (block: UnbodyTextBlock): TextBlockEnhanced => ({
+  ...block,
+  footnotes:
+    typeof block.footnotes === 'string'
+      ? (JSON.parse(
+          block.footnotes,
+        ) as Array<UnbodyGraphQl.Fragments.FootnoteItem>)
+      : [],
+  document: block.document ? block.document.map(enhanceGoogleDoc) : [],
 })
 
 class UnbodyService extends UnbodyClient {
@@ -111,21 +177,28 @@ class UnbodyService extends UnbodyClient {
 
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {
-        if (!data)
+        if (!data) {
           return this.handleResponse({ featured: null, posts: [] }, 'No data')
+        }
+
         const featured =
           data.Get.GoogleDoc.find((post) =>
             post.pathString.includes('/featured/'),
           ) || null
+
         const posts = data.Get.GoogleDoc.filter(
           (post) => !post.pathString.includes('/featured/'),
         )
-        return this.handleResponse({ featured, posts })
+
+        return this.handleResponse({
+          featured: featured ? enhanceGoogleDoc(featured) : null,
+          posts: posts.map(enhanceGoogleDoc),
+        })
       })
       .catch((e) => this.handleResponse({ featured: null, posts: [] }, e))
   }
 
-  getAllArticlePostSlugs = (): Promise<ApiResponse<{ remoteId: string }[]>> => {
+  getAllArticlePostSlugs = (): Promise<ApiResponse<{ slug: string }[]>> => {
     return this.request<UnbodyGraphQlResponseGoogleDoc>(
       getAllPostsSlugQuery({
         where: Operands.WHERE_PUBLISHED(),
@@ -139,31 +212,72 @@ class UnbodyService extends UnbodyClient {
   }
 
   getArticlePost = (
-    id: string,
+    slug: string,
     published: boolean = true,
-  ): Promise<ApiResponse<UnbodyGoogleDoc | null>> => {
+  ): Promise<ApiResponse<GoogleDocEnhanced | null>> => {
     const query = getArticlePostQuery({
       where: published
         ? {
             operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
-            operands: [Operands.WHERE_PUBLISHED(), Operands.WHERE_ID_IS(id)],
+            operands: [
+              Operands.WHERE_PUBLISHED(),
+              Operands.WHERE_SLUG_IS(slug),
+            ],
           }
-        : Operands.WHERE_ID_IS(id),
+        : Operands.WHERE_SLUG_IS(slug),
     })
 
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {
         if (!data) return this.handleResponse(null, 'No data')
         const article = data.Get.GoogleDoc[0]
-        return this.handleResponse({
-          ...article,
-          blocks: article.blocks.sort((a, b) => a.order - b.order),
-          toc: JSON.parse(
-            article.toc as string,
-          ) as Array<UnbodyGraphQl.Fragments.TocItem>,
-        })
+        return this.handleResponse(enhanceGoogleDoc(article))
       })
       .catch((e) => this.handleResponse(null, e))
+  }
+
+  getRelatedArticles = (id: string, published: boolean = true) => {
+    const query = getRelatedArticlesQuery({
+      ...(published
+        ? {
+            where: Operands.WHERE_PUBLISHED(),
+          }
+        : {}),
+      nearObject: {
+        id,
+      },
+    })
+
+    return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
+      .then(({ data }) => {
+        if (!data) return this.handleResponse([], 'No data')
+        return this.handleResponse(data.Get.GoogleDoc.map(enhanceGoogleDoc))
+      })
+      .catch((e) => this.handleResponse([], e))
+  }
+
+  getArticlesFromSameAuthors = (
+    slug: string,
+    authors: string[],
+    published: boolean = true,
+  ) => {
+    const query = getRelatedArticlesQuery({
+      where: {
+        operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
+        operands: [
+          ...(published ? [Operands.WHERE_PUBLISHED()] : []),
+          ...authors.map(Operands.WHERE_AUTHOR_IS),
+          Operands.WHERE_SLUG_IS_NOT(slug),
+        ],
+      },
+    })
+
+    return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
+      .then(({ data }) => {
+        if (!data) return this.handleResponse([], 'No data')
+        return this.handleResponse(data.Get.GoogleDoc.map(enhanceGoogleDoc))
+      })
+      .catch((e) => this.handleResponse([], e))
   }
 
   serachBlocks = async (
@@ -211,7 +325,7 @@ class UnbodyService extends UnbodyClient {
     q: string = '',
     tags: string[] = [],
     published: boolean = true,
-  ): Promise<ApiResponse<SearchResultItem<UnbodyGoogleDoc>[]>> => {
+  ): Promise<ApiResponse<SearchResultItem<GoogleDocEnhanced>[]>> => {
     let queryFilters = {}
     if (q.trim().length > 0) {
       queryFilters = {
@@ -253,7 +367,7 @@ class UnbodyService extends UnbodyClient {
           return this.handleResponse([], 'No data')
         return this.handleResponse(
           data.Get.GoogleDoc.map((item) => ({
-            doc: item,
+            doc: enhanceGoogleDoc(item),
             score:
               q.length > 0 || tags.length > 0 ? item._additional.certainty : 0,
           })),

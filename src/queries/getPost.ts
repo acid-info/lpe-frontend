@@ -8,7 +8,6 @@ const defaultArgs: UnbodyGetFilters = {
 export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
   GetGoogleDocQuery(args)(`
         sourceId
-        remoteId
         title
         subtitle
         summary
@@ -17,6 +16,7 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
         modifiedAt
         toc
         slug
+        mentions
         blocks{
           ...on ImageBlock{
                 url
@@ -28,8 +28,31 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
             footnotes
             html
             order
+            text
             tagName
             __typename
+            classNames
           }
         }
+        _additional{
+            id
+       }
+    `)
+
+export const getRelatedArticlesQuery = (args: UnbodyGetFilters = defaultArgs) =>
+  GetGoogleDocQuery(args)(`
+        title
+        mentions
+        modifiedAt
+        slug
+    `)
+
+export const getArticlesFromSameAuthor = (
+  args: UnbodyGetFilters = defaultArgs,
+) =>
+  GetGoogleDocQuery(args)(`
+        title
+        mentions
+        modifiedAt
+        slug
     `)

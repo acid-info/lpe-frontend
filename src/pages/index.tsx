@@ -38,7 +38,7 @@ export const getStaticProps = async () => {
     props: {
       featured: featured
         ? {
-            remoteId: featured.remoteId,
+            slug: featured.slug,
             date: featured.modifiedAt,
             title: featured.title,
             description: featured.subtitle, // TODO: summary is not available
@@ -47,15 +47,17 @@ export const getStaticProps = async () => {
             coverImage: getArticleCover(featured.blocks),
           }
         : null,
-      posts: posts.map((post) => ({
-        remoteId: post.remoteId,
-        date: post.modifiedAt,
-        title: post.title,
-        description: post.subtitle, // TODO: summary is not available
-        author: 'Jinho',
-        tags: post.tags,
-        coverImage: getArticleCover(post.blocks),
-      })),
+      posts: posts.map((post) => {
+        return {
+          slug: post.slug,
+          date: post.modifiedAt,
+          title: post.title,
+          description: post.subtitle, // TODO: summary is not available
+          author: 'Jinho',
+          tags: post.tags,
+          coverImage: getArticleCover(post.blocks),
+        }
+      }),
       errors,
     },
   }

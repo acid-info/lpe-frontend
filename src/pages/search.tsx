@@ -87,7 +87,7 @@ export default function SearchPage({
         <Section title={'Related Articles'} matches={articles.data?.length}>
           <PostsList
             posts={articles.data.map((article) => ({
-              remoteId: article.doc.remoteId,
+              slug: article.doc.slug,
               date: article.doc.modifiedAt,
               title: article.doc.title,
               description: article.doc.subtitle, // TODO: summary is not available
@@ -117,10 +117,10 @@ export default function SearchPage({
                 switch (block.doc.__typename) {
                   case UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock:
                     return (
-                      <div key={block.doc.remoteId}>
+                      <div key={block.doc.slug}>
                         {refArticle && (
                           <h3>
-                            <Link href={`/articles/${refArticle.remoteId}`}>
+                            <Link href={`/articles/${refArticle.slug}`}>
                               {refArticle.title}
                             </Link>
                           </h3>
@@ -134,10 +134,10 @@ export default function SearchPage({
                     )
                   case UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock: {
                     return (
-                      <div key={block.doc.remoteId}>
+                      <div key={block.doc.slug}>
                         {refArticle && (
                           <h3>
-                            <Link href={`/articles/${refArticle.remoteId}`}>
+                            <Link href={`/articles/${refArticle.slug}`}>
                               {refArticle.title}
                             </Link>
                           </h3>

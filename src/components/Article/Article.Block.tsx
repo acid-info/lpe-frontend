@@ -45,7 +45,7 @@ export const RenderArticleBlock = ({
           return (
             <Paragraph
               variant="body1"
-              component="p"
+              component={block.tagName as any}
               genericFontFamily="sans-serif"
               className={extractClassFromFirstTag(block.html) || ''}
               id={extractIdFromFirstTag(block.html) || ''}

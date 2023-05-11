@@ -100,7 +100,19 @@ export namespace UnbodyGraphQl {
       title: string
       level: number
     }
-    export interface FootnoteItem {}
+
+    export interface MentionItem {
+      name: string
+      emailAddress: string
+    }
+
+    export interface FootnoteItem {
+      id: string
+      index: number
+      refId: string
+      refValue: string
+      valueHTML: string
+    }
   }
 
   export interface ImageBlock
@@ -121,6 +133,7 @@ export namespace UnbodyGraphQl {
     sourceId: string
     url: string
     width: number
+    classNames: string[]
   }
 
   export interface TextBlock extends BaseObjectWithRef<GoogleDoc> {
@@ -132,6 +145,7 @@ export namespace UnbodyGraphQl {
     sourceId: string
     tagName: string
     text: string
+    classNames: string[]
   }
 
   export interface AudioFile
@@ -159,6 +173,7 @@ export namespace UnbodyGraphQl {
     path: string[]
     pathString: string
     remoteId: string
+    slug: string
     size: number
     sourceId: string
     subtitle: string
@@ -167,6 +182,7 @@ export namespace UnbodyGraphQl {
     text: string
     title: string
     toc: string | Array<Fragments.TocItem>
+    mentions: string | Array<Fragments.MentionItem>
   }
 
   export interface GoogleCalendarEvent extends BaseObject {
@@ -186,6 +202,7 @@ export namespace UnbodyGraphQl {
     organizerId: string
     organizerSelf: boolean
     recurrence: string[]
+    slug: string
     remoteId: string
     sequence: number
     sourceId: string
@@ -306,6 +323,7 @@ export namespace UnbodyGraphQl {
       path: string[] | string
       operands?: WhereOperandsInpObj[]
       valueGeoRange?: WhereGeoRangeInpObj
+      nearObject?: NearObjectInpObj
       valueNumber?: number
       valueBoolean?: boolean
       valueString?: string

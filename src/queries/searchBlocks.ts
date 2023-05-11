@@ -15,10 +15,11 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             __typename
             text
             tagName
+            classNames
             document{
               ...on GoogleDoc{
                     title
-                    remoteId
+                    mentions
                     slug
                     __typename
                     }
@@ -36,8 +37,8 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             document{
               ...on GoogleDoc{
                     title
-                    remoteId
                     slug
+                    mentions
                     __typename
                    }
             }
