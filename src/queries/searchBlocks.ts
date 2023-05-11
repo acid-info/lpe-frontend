@@ -21,6 +21,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
                     title
                     mentions
                     slug
+                    modifiedAt
                     __typename
                     }
             }
@@ -39,6 +40,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
                     title
                     slug
                     mentions
+                    modifiedAt
                     __typename
                    }
             }
