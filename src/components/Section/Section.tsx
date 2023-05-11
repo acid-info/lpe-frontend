@@ -4,17 +4,33 @@ import { PropsWithChildren } from 'react'
 
 type Props = PropsWithChildren<{
   title: string
+  matches?: number
 }>
 
-export const Section = (props: any) => {
+export const Section = ({ title, matches, children, ...props }: Props) => {
   return (
-    <section>
-      <Title>{props.title}</Title>
-      {props.children}
+    <section {...props}>
+      <Container>
+        <Typography genericFontFamily="sans-serif" variant="body2">
+          {title}
+        </Typography>
+        {matches && (
+          <>
+            <Typography variant="body2">•</Typography>
+            <Typography genericFontFamily="sans-serif" variant="body2">
+              {matches} matches
+            </Typography>
+          </>
+        )}
+      </Container>
+      {children}
     </section>
   )
 }
 
-const Title = styled(Typography)`
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 0 16px;
 `

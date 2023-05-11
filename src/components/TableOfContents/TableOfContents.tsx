@@ -14,7 +14,7 @@ type Props = {
 export default function TableOfContents({ contents, ...props }: Props) {
   const articleContainer = useArticleContainerContext()
   const { tocIndex, setTocIndex } = articleContainer
-  const dy = uiConfigs.navbarRenderedHeight + uiConfigs.postMarginTop
+  const dy = uiConfigs.navbarRenderedHeight + uiConfigs.postSectionMargin
 
   const { sticky, stickyRef, height } = useSticky<HTMLDivElement>(dy)
 
@@ -86,7 +86,8 @@ const Contents = styled.div<{ height: number }>`
   flex-direction: column;
   overflow-y: auto;
   height: calc(
-    100vh - ${uiConfigs.navbarRenderedHeight + uiConfigs.postMarginTop + 40}px
+    100vh -
+      ${uiConfigs.navbarRenderedHeight + uiConfigs.postSectionMargin + 40}px
   );
 
   &::-webkit-scrollbar {

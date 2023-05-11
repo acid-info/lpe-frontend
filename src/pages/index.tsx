@@ -1,12 +1,11 @@
 import api from '@/services/unbody.service'
 
-import Post, { PostDataProps } from '@/components/Post/Post'
+import { PostDataProps } from '@/components/Post/Post'
 import { PostsList } from '@/components/PostList/PostList'
 import { Section } from '@/components/Section/Section'
-import { UnbodyGoogleDoc, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 
-import { ESearchStatus } from '@/types/ui.types'
-import { GetStaticProps } from 'next'
+import { getArticleCover } from '@/utils/data.utils'
+import { FeaturedPost } from '@/components/FeaturedPost'
 
 type Props = {
   posts: PostDataProps[]
@@ -17,10 +16,9 @@ type Props = {
 export default function Home({ posts, featured }: Props) {
   return (
     <>
-      {/*@TODO @jinho, wht PostContainer should recive an array of postData instead of only One?*/}
       {featured && (
         <Section title={'Featured'}>
-          <Post data={featured} />
+          <FeaturedPost post={featured} />
         </Section>
       )}
       <Section title={'Latest posts'}>
@@ -43,24 +41,20 @@ export const getStaticProps = async () => {
             remoteId: featured.remoteId,
             date: featured.modifiedAt,
             title: featured.title,
-            description: featured.summary,
+            description: featured.subtitle, // TODO: summary is not available
             author: 'Jinho',
             tags: featured.tags,
-            ...(featured.blocks && featured.blocks!.length > 0
-              ? { coverImage: featured.blocks![0] as UnbodyImageBlock }
-              : {}),
+            coverImage: getArticleCover(featured.blocks),
           }
         : null,
       posts: posts.map((post) => ({
         remoteId: post.remoteId,
         date: post.modifiedAt,
         title: post.title,
-        description: post.summary,
+        description: post.subtitle, // TODO: summary is not available
         author: 'Jinho',
         tags: post.tags,
-        ...(post.blocks && post.blocks!.length > 0
-          ? { coverImage: post.blocks![0] as UnbodyImageBlock }
-          : {}),
+        coverImage: getArticleCover(post.blocks),
       })),
       errors,
     },

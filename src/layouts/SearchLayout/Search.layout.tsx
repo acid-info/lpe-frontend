@@ -4,11 +4,11 @@ import { PropsWithChildren } from 'react'
 import { NavbarFiller } from '@/components/Navbar/NavbarFiller'
 import { Searchbar } from '@/components/Searchbar'
 import { ESearchScope } from '@/types/ui.types'
-import styles from './Article.layout.module.css'
+import styles from './Search.layout.module.css'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
 
-export default function ArticleLayout(props: PropsWithChildren<any>) {
+export default function SearchLayout(props: PropsWithChildren<any>) {
   const isDarkState = useIsDarkState()
   return (
     <>

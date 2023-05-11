@@ -10,6 +10,7 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
         sourceId
         remoteId
         title
+        subtitle
         summary
         tags
         createdAt

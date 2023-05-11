@@ -5,6 +5,7 @@ import { Hero } from '@/components/Hero'
 import { NavbarFiller } from '@/components/Navbar/NavbarFiller'
 import { Searchbar } from '@/components/Searchbar'
 import { Footer } from '@/components/Footer'
+import { Main } from '@/components/Main'
 
 export default function DefaultLayout(props: PropsWithChildren<any>) {
   const isDarkState = useIsDarkState()
@@ -17,7 +18,7 @@ export default function DefaultLayout(props: PropsWithChildren<any>) {
         <Hero />
         <Searchbar />
       </header>
-      <main>{props.children}</main>
+      <Main>{props.children}</Main>
       <Footer />
     </>
   )

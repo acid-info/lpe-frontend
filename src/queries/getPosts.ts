@@ -12,6 +12,7 @@ export const getHomePagePostsQuery = (args: UnbodyGetFilters = defaultArgs) =>
   GetGoogleDocQuery(args)(`
         remoteId
         title
+        subtitle
         summary
         tags
         createdAt
@@ -21,6 +22,8 @@ export const getHomePagePostsQuery = (args: UnbodyGetFilters = defaultArgs) =>
           ...on ImageBlock{
                 url
                 alt
+                order
+                __typename
           }
         }
    `)

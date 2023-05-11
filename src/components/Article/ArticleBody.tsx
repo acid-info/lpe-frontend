@@ -49,7 +49,6 @@ export default function ArticleBody({ data }: Props) {
   }, [blocks])
 
   const _blocks = useMemo(() => {
-    console.log(getContentBlocks(blocks))
     return getContentBlocks(blocks).map((block, idx) => (
       <RenderArticleBlock key={'block-' + idx} block={block} />
     ))

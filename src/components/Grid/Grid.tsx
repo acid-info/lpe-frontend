@@ -34,6 +34,10 @@ export const GridItem = styled.div`
     grid-column: span 8;
   }
 
+  &.w-16 {
+    grid-column: span 16;
+  }
+
   @media (max-width: 768px) {
     grid-column: span 16 !important;
   }

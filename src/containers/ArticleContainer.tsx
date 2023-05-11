@@ -3,11 +3,13 @@ import styled from '@emotion/styled'
 import { useState } from 'react'
 import { uiConfigs } from '@/configs/ui.configs'
 import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
-import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
+import { UnbodyGoogleDoc, UnbodyTocItem } from '@/lib/unbody/unbody.types'
 import ArticleBody from '@/components/Article/ArticleBody'
 
 interface Props {
-  data: UnbodyGoogleDoc
+  data: UnbodyGoogleDoc & {
+    toc: UnbodyTocItem[]
+  }
 }
 
 const ArticleContainer = (props: Props) => {
@@ -30,7 +32,6 @@ const ArticleContainer = (props: Props) => {
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${uiConfigs.postMarginTop}px;
 `
 
 const Right = styled.aside`
