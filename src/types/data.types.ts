@@ -5,6 +5,11 @@ import {
 } from '@/lib/unbody/unbody.types'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 
+export enum PostTypes {
+  Article = 'article',
+  Block = 'block',
+}
+
 export interface ArticlePostData extends UnbodyGoogleDoc {
   toc: Array<UnbodyGraphQl.Fragments.TocItem>
 }
@@ -32,7 +37,11 @@ export type SearchHookDataPayload = {
 export type SearchResults = {
   articles: SearchHook<UnbodyGoogleDoc>
   blocks: SearchHook<UnbodyImageBlock | UnbodyTextBlock>
-  search: (query: string, tags: string[]) => Promise<void>
+  search: (
+    query: string,
+    tags: string[],
+    docType: UnbodyGraphQl.UnbodyDocumentTypeNames,
+  ) => Promise<void>
   reset: (initialData: SearchHookDataPayload) => void
 }
 

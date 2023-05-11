@@ -57,10 +57,10 @@ const OperandFactory = (
 })
 
 export const Operands: Record<string, (...a: any) => WhereOperandsInpObj> = {
-  WHERE_PUBLISHED: () =>
+  WHERE_PUBLISHED: (subPath: string[] = ['pathString']) =>
     OperandFactory(
       UnbodyGraphQl.Filters.WhereOperatorEnum.Like,
-      'pathString',
+      [...subPath],
       '*/published/*',
       'valueString',
     ),
@@ -178,16 +178,21 @@ class UnbodyService extends UnbodyClient {
         ? {
             nearText: {
               concepts: [q, ...tags],
-              certainty: 0.75,
+              certainty: 0.85,
             },
             ...(published
               ? {
-                  where: Operands.WHERE_PUBLISHED(),
+                  where: Operands.WHERE_PUBLISHED([
+                    'document',
+                    'GoogleDoc',
+                    'pathString',
+                  ]),
                 }
               : {}),
           }
         : {}),
     })
+
     return this.request<UnbodyGraphQlResponseBlocks>(query)
       .then(({ data }) => {
         if (!data || !(data.Get.ImageBlock || data.Get.TextBlock))
