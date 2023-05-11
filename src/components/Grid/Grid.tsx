@@ -6,9 +6,10 @@ export const Grid = styled.div`
   padding: 16px;
   gap: 16px;
 
-  @media (max-width: 768px) {
+  // TODO: The mobile design works when commenting this out
+  /* @media (max-width: 768px) {
     grid-template-columns: 100%;
-  }
+  } */
 `
 
 export const GridItem = styled.div`

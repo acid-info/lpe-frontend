@@ -4,30 +4,18 @@ import {
   UnbodyImageBlock,
   UnbodyTextBlock,
 } from '@/lib/unbody/unbody.types'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
-
-import Image from 'next/image'
 
 import unbodyApi from '@/services/unbody.service'
+import { PostTypes, SearchResultItem } from '@/types/data.types'
 import {
-  PostTypes,
-  SearchHook,
-  SearchHookDataPayload,
-  SearchResultItem,
-  SearchResults,
-} from '@/types/data.types'
-import {
-  createMinimizedSearchText,
   extractQueryFromQuery,
   extractTopicsFromQuery,
 } from '@/utils/search.utils'
 import { useRouter } from 'next/router'
 import { ReactNode, useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 import { SearchLayout } from '@/layouts/SearchLayout'
-import { Section } from '@/components/Section/Section'
-import { PostsList } from '@/components/PostList/PostList'
-import { getArticleCover } from '@/utils/data.utils'
+import { RelatedArticles } from '@/components/RelatedArticles'
+import { RelatedContent } from '@/components/RelatedContent'
 
 interface SearchPageProps {
   articles: SearchResultItem<UnbodyGoogleDoc>[]
@@ -83,83 +71,10 @@ export default function SearchPage({
 
   return (
     <div>
-      {articles.data?.length && (
-        <Section title={'Related Articles'} matches={articles.data?.length}>
-          <PostsList
-            posts={articles.data.map((article) => ({
-              slug: article.doc.slug,
-              date: article.doc.modifiedAt,
-              title: article.doc.title,
-              description: article.doc.subtitle, // TODO: summary is not available
-              author: 'Jinho',
-              tags: article.doc.tags,
-              coverImage: getArticleCover(article.doc.blocks),
-            }))}
-          />
-        </Section>
-      )}
+      {articles.data?.length && <RelatedArticles articles={articles.data} />}
 
-      <section>
-        <strong>Related content blocks</strong>
-        <hr />
-        <div>
-          {blocks.loading && <div>...</div>}
-          {!blocks.error && blocks.data && blocks.data.length > 0 ? (
-            blocks.data.map(
-              (block: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>) => {
-                if (!block.doc.document || !block.doc.document[0]) return null
-
-                let refArticle = null
-                if (UnbodyGraphQl.UnbodyDocumentTypeNames.GoogleDoc) {
-                  refArticle = block.doc.document[0]
-                }
-
-                switch (block.doc.__typename) {
-                  case UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock:
-                    return (
-                      <div key={block.doc.slug}>
-                        {refArticle && (
-                          <h3>
-                            <Link href={`/articles/${refArticle.slug}`}>
-                              {refArticle.title}
-                            </Link>
-                          </h3>
-                        )}
-                        {
-                          <p
-                            dangerouslySetInnerHTML={{ __html: block.doc.html }}
-                          />
-                        }
-                      </div>
-                    )
-                  case UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock: {
-                    return (
-                      <div key={block.doc.slug}>
-                        {refArticle && (
-                          <h3>
-                            <Link href={`/articles/${refArticle.slug}`}>
-                              {refArticle.title}
-                            </Link>
-                          </h3>
-                        )}
-                        <Image
-                          title={block.doc.alt}
-                          src={block.doc.url}
-                          width={block.doc.width}
-                          height={block.doc.height}
-                          alt={block.doc.alt}
-                        />
-                      </div>
-                    )
-                  }
-                }
-              },
-            )
-          ) : (
-            <div>Nothing found</div>
-          )}
-        </div>
-      </section>
+      {/* TODO: used initialBlocks instead of blocks.data temporarily to render data */}
+      {initialBlocks?.length && <RelatedContent blocks={initialBlocks} />}
     </div>
   )
 }
