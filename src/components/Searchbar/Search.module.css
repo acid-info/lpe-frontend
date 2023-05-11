@@ -9,3 +9,7 @@
 .searchBox{
     border: none !important;
 }
+
+.globalSearchTrigger{
+    text-decoration: underline;
+}

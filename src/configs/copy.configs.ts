@@ -2,7 +2,7 @@ export const copyConfigs = {
   search: {
     searchbarPlaceholders: {
       global: () => 'Search through the LPE posts...',
-      article: () => `Search through the article`,
+      article: () => `Search through the article or switch to `,
     },
     filterTags: [
       'Privacy',
