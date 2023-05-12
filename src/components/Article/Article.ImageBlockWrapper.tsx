@@ -28,6 +28,7 @@ const ThumbnailContainer = styled.div<{
   width: 100%;
   height: 100%;
   max-height: 458px; // temporary max-height based on the Figma design's max height
+  margin-bottom: 32px;
 `
 
 const Thumbnail = styled(Image)`

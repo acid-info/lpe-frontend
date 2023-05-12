@@ -1,4 +1,4 @@
-import { GoogleDocEnhanced, UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
+import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
@@ -24,7 +24,7 @@ export default function ArticleReference({
       <div>
         <Typography variant="body3" genericFontFamily="sans-serif">
           {/*TODO we need handle multiple authors for same article*/}
-          {mentions[0].name}
+          {mentions[0]?.name}
         </Typography>
         <Typography variant="body3">•</Typography>
         <Typography variant="body3" genericFontFamily="sans-serif">
