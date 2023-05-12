@@ -125,7 +125,14 @@ export default function Searchbar(props: SearchbarProps) {
       : copyConfigs.search.searchbarPlaceholders.article()
 
   return (
-    <SearchbarContainer onUnfocus={() => setActive(false)}>
+    <SearchbarContainer
+      onUnfocus={() => {
+        setActive(false)
+        if (router.query.query && router.query.query.length > 0) {
+          setQuery(router.query.query as string)
+        }
+      }}
+    >
       <SearchBox>
         <TextField
           className={styles.searchBox}

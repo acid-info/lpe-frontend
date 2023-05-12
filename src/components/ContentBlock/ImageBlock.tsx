@@ -22,8 +22,6 @@ const ImageBlock = ({ doc }: Props) => {
           </ImageContainer>
           <ContentBlockHeader
             type={PostClassType.ARTICLE}
-            // TODO: type error with GoogleCalendarEvent
-            // which one do we use for date between createdAt and modifiedAt?
             date={doc?.document[0].modifiedAt}
           />
           <ContentBlockBody

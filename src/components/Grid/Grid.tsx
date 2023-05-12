@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(16, 1fr);
-  padding: 16px;
   gap: 16px;
 
   // TODO: The mobile design works when commenting this out

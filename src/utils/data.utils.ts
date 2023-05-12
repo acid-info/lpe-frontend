@@ -33,7 +33,7 @@ export const getBodyBlocks = ({
     const isTitle = classNames.includes('title')
     const isSubtitle = classNames.includes('subtitle')
     const isCoverImage =
-      b.order === 5 &&
+      b.order === 4 &&
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock
     const isAuthor =
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock &&
@@ -69,7 +69,7 @@ export const getArticleCover = (
   return (
     ((blocks || []).find(
       (b) =>
-        b.order === 5 &&
+        b.order === 4 &&
         b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock,
     ) as UnbodyImageBlock) || null
   )

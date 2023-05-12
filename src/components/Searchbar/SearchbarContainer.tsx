@@ -20,7 +20,6 @@ export function SearchbarContainer({ children, onUnfocus = nope }: Props) {
       onUnfocus()
     }
     if (isScrolling && onUnfocus) {
-      console.log('scrolling', isScrolling)
       onUnfocus()
     }
   }, [isOutside, stickyRef, isScrolling, onUnfocus])
@@ -41,11 +40,11 @@ export function SearchbarContainer({ children, onUnfocus = nope }: Props) {
 
 const SearchBarWrapper = styled.div<Props>`
   display: block;
-  width: 100%;
+  width: calc(100% - 16px);
   background: rgb(var(--lsd-surface-primary));
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
   border-top: 1px solid rgb(var(--lsd-border-primary));
-  transition: all 0.2s ease-in-out;
+  transition: top 0.2s ease-in-out;
   position: relative;
 
   overflow: hidden;

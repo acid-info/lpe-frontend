@@ -10,14 +10,11 @@ const ArticleFooter = ({ data }: { data: ArticlePostData }) => {
   const { article, relatedArticles, articlesFromSameAuthors } = data
 
   const footnotes = useMemo(() => {
-    return (
-      article.blocks
-        // @ts-ignore
-        .flatMap((b) =>
-          b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
-            ? b.footnotes
-            : [],
-        )
+    return article.blocks.flatMap((b) =>
+      // @ts-ignore
+      b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
+        ? b.footnotes
+        : [],
     )
   }, [article])
 

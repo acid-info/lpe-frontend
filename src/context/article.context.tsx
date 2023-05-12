@@ -6,7 +6,7 @@ import { createContext, useContext, useState } from 'react'
 import { useSearchBarContext } from './searchbar.context'
 
 type ArticleContext = SearchHook<UnbodyTextBlock | UnbodyImageBlock> & {
-  onSearch: (query: string, filters: string[], title: string) => void
+  onSearch: (query: string, filters: string[]) => void
   onReset: () => void
 }
 

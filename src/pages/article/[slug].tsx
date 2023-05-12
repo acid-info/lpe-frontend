@@ -14,7 +14,6 @@ type ArticleProps = {
 
 const ArticlePage = ({ data, errors }: ArticleProps) => {
   if (errors) return <div>{errors}</div>
-
   return (
     <>
       <SEO title={data.article.title} description={data.article.summary} />

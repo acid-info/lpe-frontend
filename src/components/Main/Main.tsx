@@ -7,9 +7,8 @@ const Main = ({ children }: PropsWithChildren) => {
 }
 
 const Container = styled.main`
-  display: flex;
-  justify-content: center;
-  max-width: 1440px;
+  //display: flex;
+  //justify-content: center;
   margin-block: ${uiConfigs.postSectionMargin}px;
   margin-left: auto;
   margin-right: auto;
