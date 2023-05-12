@@ -1,14 +1,8 @@
 import { TableOfContents } from '@/components/TableOfContents'
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { uiConfigs } from '@/configs/ui.configs'
 import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
-import {
-  GoogleDocEnhanced,
-  UnbodyGoogleDoc,
-  UnbodyTocItem,
-} from '@/lib/unbody/unbody.types'
-import ArticleBody from '@/components/Article/ArticleBody'
+import ArticleBody from '@/components/Article/Article.Body'
 import { ArticlePostData } from '@/types/data.types'
 
 interface Props {

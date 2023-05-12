@@ -1,5 +1,3 @@
-import { ArticleReferenceType } from '@/components/ArticleReference/ArticleReference'
-
 // temporary type
 export type ReferenceType = {
   text: string
@@ -18,7 +16,7 @@ export const references: ReferenceType[] = [
   },
 ]
 
-export const moreFromAuthor: ArticleReferenceType[] = [
+export const moreFromAuthor = [
   {
     title: 'How to Build a Practical Household Bike Generator',
     author: 'Jason Freeman',
@@ -31,7 +29,7 @@ export const moreFromAuthor: ArticleReferenceType[] = [
   },
 ]
 
-export const relatedArticles: ArticleReferenceType[] = [
+export const relatedArticles = [
   {
     title: 'How to Build a Practical Household Bike Generator',
     author: 'Jason Freeman',
