@@ -8,10 +8,20 @@ type Props = {
   posts: PostDataProps[]
 }
 
+const getGridItemWidth = (index: number) => {
+  // Each cycle consists of 6 indices: 4 for "w-4" and 2 for "w-8"
+  const cycleLength = 6
+
+  // Determine which part of the cycle this index falls into
+  const positionInCycle = index % cycleLength
+
+  // If the index is in the first 4 positions, return "w-4"
+  // Otherwise, return "w-8"
+  return positionInCycle < 4 ? 'w-4' : 'w-8'
+}
+
 export const PostsList = (props: Props) => {
   const [posts, setPosts] = useState<PostDataProps[]>(props.posts)
-
-  //TODO pagination
 
   return (
     <Grid>

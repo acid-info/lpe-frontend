@@ -7,6 +7,7 @@ import { uiConfigs } from '@/configs/ui.configs'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { ReactNode } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
+import { SearchBarProvider } from '@/context/searchbar.context'
 
 type NextLayoutComponentType<P = {}> = NextComponentType<
   NextPageContext,
@@ -47,12 +48,19 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             width: 100%;
             height: 100%;
           }
+          #__next {
+            max-width: 1440px;
+            margin-left: auto;
+            margin-right: auto;
+          }
           :root {
             --lpe-nav-rendered-height: ${uiConfigs.navbarRenderedHeight}px;
           }
         `}
       />
-      {getLayout(<Component {...pageProps} />)}
+      <SearchBarProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </SearchBarProvider>
     </ThemeProvider>
   )
 }

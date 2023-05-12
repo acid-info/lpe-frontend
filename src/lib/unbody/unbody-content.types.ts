@@ -211,7 +211,7 @@ export namespace UnbodyGraphQl {
     summary: string
     title: string
     updatedAt: string
-
+    modifiedAt: string
     attachments: Array<ImageBlock>
   }
 

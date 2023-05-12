@@ -12,4 +12,5 @@
 
 .globalSearchTrigger{
     text-decoration: underline;
+    transition: font-size 150ms ease-in-out;
 }

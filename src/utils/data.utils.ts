@@ -1,5 +1,6 @@
 import {
   GoogleDocEnhanced,
+  TextBlockEnhanced,
   UnbodyGoogleDoc,
   UnbodyImageBlock,
   UnbodyTextBlock,
@@ -13,19 +14,26 @@ function hasClassName(inputString: string, className: string) {
   return regex.test(inputString)
 }
 
+type Props = {
+  blocks: Array<UnbodyImageBlock | TextBlockEnhanced>
+  summary: string
+  tags: string[]
+  mentions: any[]
+}
+
 export const getBodyBlocks = ({
   blocks,
   summary,
   tags = [],
   mentions = [],
-}: GoogleDocEnhanced) => {
+}: Props) => {
   return (blocks || []).filter((b) => {
     const classNames = b.classNames || []
 
     const isTitle = classNames.includes('title')
     const isSubtitle = classNames.includes('subtitle')
     const isCoverImage =
-      b.order === 5 &&
+      b.order === 4 &&
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock
     const isAuthor =
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock &&
@@ -61,7 +69,7 @@ export const getArticleCover = (
   return (
     ((blocks || []).find(
       (b) =>
-        b.order === 5 &&
+        b.order === 4 &&
         b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock,
     ) as UnbodyImageBlock) || null
   )

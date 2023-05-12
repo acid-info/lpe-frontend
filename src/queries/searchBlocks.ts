@@ -27,6 +27,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             }
             _additional{
               certainty
+              id
             }
         `),
       GetImageBlockQuery(args)(`
@@ -46,6 +47,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             }
             _additional{
               certainty
+              id
             }
         `),
     ].join(' '),

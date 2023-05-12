@@ -4,6 +4,7 @@ import { LogosIcon } from '../Icons/LogosIcon'
 import { SunIcon } from '../Icons/SunIcon'
 import { MoonIcon } from '../Icons/MoonIcon'
 import { useRouter } from 'next/router'
+import { uiConfigs } from '@/configs/ui.configs'
 
 interface NavbarProps {
   isDark: boolean
@@ -37,7 +38,8 @@ const Container = styled.nav`
   border-bottom: 1px solid rgb(var(--lsd-theme-primary));
   position: fixed;
   top: 0;
-  width: calc(100% - 16px);
+  width: calc(100% + 16px);
+  max-width: ${uiConfigs.maxContainerWidth + 16}px;
   background: rgb(var(--lsd-surface-primary));
   z-index: 100;
 

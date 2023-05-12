@@ -9,7 +9,7 @@ type Props = PropsWithChildren<{
 
 export const Section = ({ title, matches, children, ...props }: Props) => {
   return (
-    <section {...props}>
+    <section style={{ width: '100%' }} {...props}>
       <Container>
         <Typography genericFontFamily="sans-serif" variant="body2">
           {title}
@@ -32,5 +32,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 16px;
+  //padding: 0 16px;
+  width: 100%;
 `

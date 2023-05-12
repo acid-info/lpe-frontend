@@ -1,3 +1,4 @@
+import { uiConfigs } from '@/configs/ui.configs'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {

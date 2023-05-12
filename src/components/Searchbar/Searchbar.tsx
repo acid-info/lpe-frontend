@@ -23,13 +23,19 @@ import {
   extractTopicsFromQuery,
 } from '@/utils/search.utils'
 import Link from 'next/link'
+import { useSearchBarContext } from '@/context/searchbar.context'
 
 export type SearchbarProps = {
   searchScope?: ESearchScope
   className?: string
+  onSearch?: (query: string, filterTags: string[]) => void
+  onReset?: () => void
 }
 
 export default function Searchbar(props: SearchbarProps) {
+  const { onSearch, onReset } = props
+  const { resultsNumber, resultsHelperText } = useSearchBarContext()
+
   const [searchScope, setSearchScope] = useState<ESearchScope>(
     props.searchScope || ESearchScope.GLOBAL,
   )
@@ -46,10 +52,20 @@ export default function Searchbar(props: SearchbarProps) {
   const isValidSearchInput = (_filterTags: string[] = []) =>
     (query && query.length > 0) || _filterTags.length > 0
 
+  const isArticlePage = router.pathname === '/article/[slug]'
+
   const performSearch = async (
     q: string = query,
     _filterTags: string[] = filterTags,
   ) => {
+    //if it is article page, just call onSearch
+    if (isArticlePage) {
+      if (onSearch) {
+        onSearch(q, _filterTags)
+      }
+      return
+    }
+
     await router.push(
       {
         pathname: '/search',
@@ -74,7 +90,15 @@ export default function Searchbar(props: SearchbarProps) {
   }, [router.query.query, router.query.topics])
 
   const performClear = useCallback(() => {
-    performSearch('', [])
+    if (!isArticlePage) {
+      performSearch('', [])
+      return
+    }
+
+    setQuery('')
+    setFilterTags([])
+    setActive(false)
+    onReset && onReset()
   }, [setQuery, setFilterTags])
 
   const handleTagClick = (tag: string) => {
@@ -101,7 +125,14 @@ export default function Searchbar(props: SearchbarProps) {
       : copyConfigs.search.searchbarPlaceholders.article()
 
   return (
-    <SearchbarContainer onUnfocus={() => setActive(false)}>
+    <SearchbarContainer
+      onUnfocus={() => {
+        setActive(false)
+        if (router.query.query && router.query.query.length > 0) {
+          setQuery(router.query.query as string)
+        }
+      }}
+    >
       <SearchBox>
         <TextField
           className={styles.searchBox}
@@ -111,6 +142,16 @@ export default function Searchbar(props: SearchbarProps) {
           onKeyDown={handleEnter}
           onChange={(e) => {
             setQuery(e.target.value)
+          }}
+          style={{
+            transition: 'height 150ms ease-in-out',
+            height: active ? '56px' : 'auto',
+          }}
+          inputProps={{
+            style: {
+              fontSize: active ? '28px' : '14px',
+              transition: 'font-size 150ms ease-in-out',
+            },
           }}
         />
         {searchScope === ESearchScope.ARTICLE && (
@@ -141,6 +182,17 @@ export default function Searchbar(props: SearchbarProps) {
           selectedTags={filterTags}
         />
       </TagsWrapper>
+      {resultsNumber !== null && (
+        <ResultsStatus>
+          <Typography variant={'subtitle2'}>{resultsNumber} matches</Typography>
+          {resultsHelperText && (
+            <Typography variant={'subtitle2'}>.</Typography>
+          )}
+          {resultsHelperText && (
+            <Typography variant={'subtitle2'}>{resultsHelperText}</Typography>
+          )}
+        </ResultsStatus>
+      )}
       <Collapsed
         className={isCollapsed ? 'enabled' : ''}
         onClick={() => setActive(true)}
@@ -153,12 +205,23 @@ export default function Searchbar(props: SearchbarProps) {
 }
 
 const TagsWrapper = styled.div`
-  transition: height 250ms ease-in-out;
+  transition: height 150ms ease-in-out;
   overflow: hidden;
   height: 0;
-
   &.active {
     height: 45px;
+  }
+`
+
+const ResultsStatus = styled.div`
+  padding: 8px 14px;
+  display: flex;
+  grid-column-gap: 8px;
+  align-items: center;
+
+  > :nth-child(2) {
+    font-size: 18px;
+    transform: translateY(-3px);
   }
 `
 
@@ -174,9 +237,9 @@ const Collapsed = styled.div`
   top: -100%;
   left: 0;
 
-  font-size: 14px;
+  font-size: 28px;
 
-  transition: top 250ms ease-in-out;
+  transition: top 150ms ease-in-out;
 
   &.enabled {
     top: 0;
@@ -206,7 +269,8 @@ const GlobalSearchTrigger = styled(Link)`
   left: 256px;
   top: 7px;
 
-  transition: opacity 250ms ease-in-out;
+  transition: opacity 50ms;
+  transition-delay: 50ms;
 
   &.hide {
     opacity: 0;

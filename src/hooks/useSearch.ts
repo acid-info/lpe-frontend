@@ -38,3 +38,32 @@ export const useSearchGeneric = <T>(
   }
   return { data, loading, error, search, reset }
 }
+
+export const useArticleSearch = (
+  initialData: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[],
+): SearchHook<UnbodyImageBlock | UnbodyTextBlock> => {
+  const [data, setData] =
+    useState<SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]>(
+      initialData,
+    )
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const search = async (query: string, tags: string[], slug: string) => {
+    if (loading) return Promise.resolve([])
+    setLoading(true)
+    const result = await searchApi.searchArticle(query, tags, slug)
+    setData(result.data)
+    setLoading(false)
+    return result.data
+  }
+
+  const reset = (
+    _initialData: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[],
+  ) => {
+    setData(_initialData)
+    setLoading(false)
+    setError(null)
+  }
+  return { data, loading, error, search, reset }
+}
