@@ -1,5 +1,6 @@
 import {
   GoogleDocEnhanced,
+  TextBlockEnhanced,
   UnbodyGoogleDoc,
   UnbodyImageBlock,
   UnbodyTextBlock,
@@ -14,6 +15,7 @@ export enum PostTypes {
 export interface ArticlePostData {
   article: GoogleDocEnhanced & {
     toc: Array<UnbodyGraphQl.Fragments.TocItem>
+    blocks: Array<UnbodyImageBlock | TextBlockEnhanced>
   }
   relatedArticles: Array<GoogleDocEnhanced>
   articlesFromSameAuthors: Array<GoogleDocEnhanced>
@@ -58,6 +60,10 @@ export type SearchHook<T> = {
   data: SearchResultItem<T>[]
   loading: boolean
   error: string | null
-  search: (query: string, tags: string[]) => Promise<SearchResultItem<T>[]>
+  search: (
+    query: string,
+    tags: string[],
+    ...args: any
+  ) => Promise<SearchResultItem<T>[]>
   reset: (initialData: SearchResultItem<T>[]) => void
 }

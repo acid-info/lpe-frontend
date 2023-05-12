@@ -5,6 +5,7 @@ import ArticleContainer from '@/containers/ArticleContainer'
 import api from '@/services/unbody.service'
 import { ArticlePostData } from '@/types/data.types'
 import { SEO } from '@/components/SEO'
+import { ArticleProvider } from '@/context/article.context'
 
 type ArticleProps = {
   data: ArticlePostData
@@ -66,7 +67,11 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 }
 
 ArticlePage.getLayout = function getLayout(page: ReactNode) {
-  return <ArticleLayout>{page}</ArticleLayout>
+  return (
+    <ArticleProvider>
+      <ArticleLayout>{page}</ArticleLayout>
+    </ArticleProvider>
+  )
 }
 
 export default ArticlePage

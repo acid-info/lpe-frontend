@@ -7,17 +7,27 @@ import { ESearchScope } from '@/types/ui.types'
 import styles from './Article.layout.module.css'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
+import { useArticleContext } from '@/context/article.context'
 
-export default function ArticleLayout(props: PropsWithChildren<any>) {
+type Props = PropsWithChildren<{
+  // onSearch: (query: string, filters: string[]) => void
+}>
+export default function ArticleLayout({ children }: Props) {
   const isDarkState = useIsDarkState()
+  const { onSearch, onReset } = useArticleContext()
+
   return (
     <>
       <header className={styles.header}>
         <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
         <NavbarFiller />
-        <Searchbar searchScope={ESearchScope.ARTICLE} />
+        <Searchbar
+          searchScope={ESearchScope.ARTICLE}
+          onSearch={onSearch}
+          onReset={onReset}
+        />
       </header>
-      <Main>{props.children}</Main>
+      <Main>{children}</Main>
       <Footer />
     </>
   )

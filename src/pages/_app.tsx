@@ -7,6 +7,7 @@ import { uiConfigs } from '@/configs/ui.configs'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { ReactNode } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
+import { SearchBarProvider } from '@/context/searchbar.context'
 
 type NextLayoutComponentType<P = {}> = NextComponentType<
   NextPageContext,
@@ -52,7 +53,9 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           }
         `}
       />
-      {getLayout(<Component {...pageProps} />)}
+      <SearchBarProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </SearchBarProvider>
     </ThemeProvider>
   )
 }

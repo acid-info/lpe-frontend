@@ -23,6 +23,9 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
                 alt
                 order
                 __typename
+                _additional{
+                    id
+               }
           }
           ... on TextBlock {
             footnotes
@@ -32,6 +35,9 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
             tagName
             __typename
             classNames
+            _additional{
+                   id
+           }
           }
         }
         _additional{

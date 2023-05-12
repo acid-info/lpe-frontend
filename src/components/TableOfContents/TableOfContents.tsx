@@ -4,6 +4,8 @@ import { useSticky } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
+import { useArticleContext } from '@/context/article.context'
+import { useSearchBarContext } from '@/context/searchbar.context'
 
 export type TableOfContentsProps = Pick<UnbodyGoogleDoc, 'toc'>
 
@@ -15,6 +17,7 @@ export default function TableOfContents({ contents, ...props }: Props) {
   const articleContainer = useArticleContainerContext()
   const { tocIndex, setTocIndex } = articleContainer
   const dy = uiConfigs.navbarRenderedHeight + uiConfigs.postSectionMargin
+  const { resultsNumber } = useSearchBarContext()
 
   const { sticky, stickyRef, height } = useSticky<HTMLDivElement>(dy)
 
@@ -28,7 +31,6 @@ export default function TableOfContents({ contents, ...props }: Props) {
       top: Number(position?.top) + window.scrollY - 100,
       behavior: 'smooth',
     })
-
     setTocIndex(index)
   }
 
@@ -38,7 +40,9 @@ export default function TableOfContents({ contents, ...props }: Props) {
       height={height}
       ref={stickyRef}
       {...props}
-      className={sticky ? 'sticky' : ''}
+      className={`${resultsNumber !== null ? 'hidden' : ''} ${
+        sticky ? 'sticky' : ''
+      }`}
     >
       <Title variant="body3">Contents</Title>
       <Contents height={height}>
@@ -70,6 +74,11 @@ const Container = styled.aside<{ dy: number; height: number }>`
   top: ${(p) => `${p.dy}px`};
   margin-left: 16px;
   padding-bottom: 72px;
+
+  transition: opacity 0.3s ease-in-out;
+  &.hidden {
+    opacity: 0;
+  }
 
   // temporary breakpoint
   @media (max-width: 1024px) {

@@ -40,6 +40,7 @@ type HomepagePost = Pick<
   | 'blocks'
   | 'mentions'
   | 'slug'
+  | '_additional'
 >
 
 type HomePageData = {
@@ -66,13 +67,14 @@ const OperandFactory = (
 })
 
 export const Operands: Record<string, (...a: any) => WhereOperandsInpObj> = {
-  WHERE_PUBLISHED: (subPath: string[] = ['pathString']) =>
-    OperandFactory(
+  WHERE_PUBLISHED: (subPath: string[] = ['pathString']) => {
+    return OperandFactory(
       UnbodyGraphQl.Filters.WhereOperatorEnum.Like,
       [...subPath],
       '*/published/*',
       'valueString',
-    ),
+    )
+  },
   WHERE_ID_IS: (id) =>
     OperandFactory(
       UnbodyGraphQl.Filters.WhereOperatorEnum.Equal,
@@ -100,6 +102,13 @@ export const Operands: Record<string, (...a: any) => WhereOperandsInpObj> = {
       'mentions',
       author,
       'valueText',
+    ),
+  WHERE_IS_IN_SLUG: (slug: string) =>
+    OperandFactory(
+      UnbodyGraphQl.Filters.WhereOperatorEnum.Equal,
+      ['document', UnbodyGraphQl.UnbodyDocumentTypeNames.GoogleDoc, 'slug'],
+      slug,
+      'valueString',
     ),
 }
 
@@ -160,7 +169,7 @@ class UnbodyService extends UnbodyClient {
     if (errors || !data) {
       console.log(errors)
       return {
-        data: null as any,
+        data: data as any,
         errors: JSON.stringify(errors),
       }
     }
@@ -280,29 +289,36 @@ class UnbodyService extends UnbodyClient {
       .catch((e) => this.handleResponse([], e))
   }
 
-  serachBlocks = async (
+  searchBlockInArticle = async (
     q: string = '',
     tags: string[] = [],
     published: boolean = true,
+    articleSlug: string,
   ): Promise<
-    ApiResponse<SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]>
+    ApiResponse<SearchResultItem<UnbodyImageBlock | TextBlockEnhanced>[]>
   > => {
     const query = getSearchBlocksQuery({
       ...(q.trim().length > 0
         ? {
             nearText: {
               concepts: [q, ...tags],
-              certainty: 0.85,
+              certainty: 0.8,
             },
-            ...(published
-              ? {
-                  where: Operands.WHERE_PUBLISHED([
-                    'document',
-                    'GoogleDoc',
-                    'pathString',
-                  ]),
-                }
-              : {}),
+            where: {
+              operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
+              operands: [
+                ...(published
+                  ? [
+                      Operands.WHERE_PUBLISHED([
+                        'document',
+                        UnbodyGraphQl.UnbodyDocumentTypeNames.GoogleDoc,
+                        'pathString',
+                      ]),
+                    ]
+                  : []),
+                Operands.WHERE_IS_IN_SLUG(articleSlug),
+              ],
+            },
           }
         : {}),
     })
@@ -311,7 +327,65 @@ class UnbodyService extends UnbodyClient {
       .then(({ data }) => {
         if (!data || !(data.Get.ImageBlock || data.Get.TextBlock))
           return this.handleResponse([], 'No data')
-        const blocks = [...data.Get.ImageBlock, ...data.Get.TextBlock]
+
+        const blocks = [
+          ...(data.Get.ImageBlock || []),
+          ...(data.Get.TextBlock || []),
+        ]
+
+        return this.handleResponse(
+          blocks
+            .map((block) => {
+              if (
+                block.__typename ===
+                UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
+              ) {
+                return mapSearchResultItem(q, tags, enhanceTextBlock(block))
+              }
+              return mapSearchResultItem(q, tags, block)
+            })
+            .sort((a, b) => b.score - a.score),
+        )
+      })
+      .catch((e) => this.handleResponse([], e))
+  }
+
+  serachBlocks = async (
+    q: string = '',
+    tags: string[] = [],
+    published: boolean = true,
+  ): Promise<
+    ApiResponse<SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]>
+  > => {
+    let whereFilters: any = []
+
+    const query = getSearchBlocksQuery({
+      ...(q.trim().length > 0
+        ? {
+            nearText: {
+              concepts: [q, ...tags],
+              certainty: 0.85,
+            },
+            where: Operands.WHERE_PUBLISHED([
+              'document',
+              UnbodyGraphQl.UnbodyDocumentTypeNames.GoogleDoc,
+              'pathString',
+            ]),
+            limit: 20,
+          }
+        : { limit: 20 }),
+    })
+
+    return this.request<UnbodyGraphQlResponseBlocks>(query)
+      .then(({ data }) => {
+        if (!data || !(data.Get.ImageBlock || data.Get.TextBlock))
+          return this.handleResponse([], 'No data')
+
+        const blocks = [
+          ...(data.Get.ImageBlock || []),
+          ...(data.Get.TextBlock || []),
+        ]
+
         return this.handleResponse(
           blocks
             .map((block) => mapSearchResultItem(q, tags, block))

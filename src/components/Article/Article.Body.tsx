@@ -5,18 +5,45 @@ import ArticleHeader from './Header/Article.Header'
 import ArticleFooter from './Footer/Article.Footer'
 import { MobileToc } from './Article.MobileToc'
 import ArticleBlocks from './Article.Blocks'
+import { useArticleContext } from '@/context/article.context'
+import { useSearchBarContext } from '@/context/searchbar.context'
+import { useEffect } from 'react'
+import { TextBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+import { Typography } from '@acid-info/lsd-react'
 
 interface Props {
   data: ArticlePostData
 }
 
 export default function ArticleBody({ data }: Props) {
+  const { resultsNumber, setResultsHelperText } = useSearchBarContext()
+  const { data: searchResultBlocks = [] } = useArticleContext()
+
+  useEffect(() => {
+    if (resultsNumber !== null) {
+      setResultsHelperText(data.article.title)
+    }
+  }, [resultsNumber])
+
+  const ids = searchResultBlocks?.map((block) => block.doc._additional.id)
+
+  const blocks =
+    resultsNumber !== null
+      ? data.article.blocks.filter((block) =>
+          ids?.includes(block._additional.id),
+        )
+      : data.article.blocks
+
   return (
     <ArticleContainer>
-      <ArticleHeader {...data.article} />
-      <MobileToc toc={data.article.toc} />
+      {resultsNumber === null && <ArticleHeader {...data.article} />}
+      {resultsNumber === null && <MobileToc toc={data.article.toc} />}
       <TextContainer>
-        <ArticleBlocks data={data} />
+        {/*@ts-ignore*/}
+        <ArticleBlocks data={{ ...data.article, blocks }} />
+        {resultsNumber === 0 && (
+          <Typography variant="body1">No results found</Typography>
+        )}
       </TextContainer>
       <ArticleFooter data={data} />
     </ArticleContainer>

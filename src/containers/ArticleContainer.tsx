@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import ArticleBody from '@/components/Article/Article.Body'
 import { ArticlePostData } from '@/types/data.types'
+import { useArticleContext } from '@/context/article.context'
+import { Grid, GridItem } from '@/components/Grid/Grid'
 
 interface Props {
   data: ArticlePostData
@@ -14,27 +16,29 @@ const ArticleContainer = (props: Props) => {
   const [tocIndex, setTocIndex] = useState(0)
 
   return (
-    <Container>
-      <ArticleContainerContext.Provider
-        value={{ tocIndex: tocIndex, setTocIndex: setTocIndex }}
+    <ArticleContainerContext.Provider
+      value={{ tocIndex: tocIndex, setTocIndex: setTocIndex }}
+    >
+      <Grid
+        style={{
+          width: '100%',
+        }}
       >
-        <TableOfContents contents={data.article.toc ?? []} />
-        <ArticleBody data={data} />
-        <Right />
-      </ArticleContainerContext.Provider>
-    </Container>
+        <Gap className={'w-1'} />
+        <GridItem className={'w-2'}>
+          <TableOfContents contents={data.article.toc ?? []} />
+        </GridItem>
+        <Gap className={'w-1'} />
+        <GridItem className={'w-8'}>
+          <ArticleBody data={data} />
+        </GridItem>
+      </Grid>
+    </ArticleContainerContext.Provider>
   )
 }
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const Right = styled.aside`
-  width: 162px;
-  // temporary breakpoint
-  @media (max-width: 1024px) {
+const Gap = styled(GridItem)`
+  @media (max-width: 550px) {
     display: none;
   }
 `
