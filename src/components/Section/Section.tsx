@@ -32,6 +32,5 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  //padding: 0 16px;
   width: 100%;
 `

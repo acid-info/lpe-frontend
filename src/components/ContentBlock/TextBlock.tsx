@@ -42,6 +42,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-top: 16px;
   padding: 16px 0;
   border-top: 1px solid rgb(var(--lsd-theme-primary));
 `
