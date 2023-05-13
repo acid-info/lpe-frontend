@@ -16,7 +16,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react'
 import { SearchLayout } from '@/layouts/SearchLayout'
 import { RelatedArticles } from '@/components/RelatedArticles'
 import { RelatedContent } from '@/components/RelatedContent'
-import { useSearchBarContext } from '@/context/searchbar.context'
+import { Section } from '@/components/Section/Section'
 
 interface SearchPageProps {
   articles: SearchResultItem<UnbodyGoogleDoc>[]
@@ -72,10 +72,16 @@ export default function SearchPage({
 
   return (
     <div>
-      {articles.data?.length && <RelatedArticles articles={articles.data} />}
-
-      {/* TODO: used initialBlocks instead of blocks.data temporarily to render data */}
-      {initialBlocks?.length && <RelatedContent blocks={initialBlocks} />}
+      {articles.data?.length ? (
+        <RelatedArticles articles={articles.data} />
+      ) : (
+        <Section title={'No Related Articles'} />
+      )}
+      {blocks.data?.length ? (
+        <RelatedContent blocks={blocks.data} />
+      ) : (
+        <Section title={'No Related Content'} />
+      )}
     </div>
   )
 }
