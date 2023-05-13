@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Grid, GridItem } from '../Grid/Grid'
 import styled from '@emotion/styled'
 import Post, { PostDataProps } from '../Post/Post'
+import { Button, Typography } from '@acid-info/lsd-react'
 
 type Props = {
   posts: PostDataProps[]
+  pageSize?: number
 }
 
 const getGridItemWidth = (index: number) => {
@@ -21,20 +23,46 @@ const getGridItemWidth = (index: number) => {
 }
 
 export const PostsList = (props: Props) => {
+  const { pageSize = 6 } = props
   const [posts, setPosts] = useState<PostDataProps[]>(props.posts)
+  const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    setPosts(props.posts)
+  }, [props.posts])
+
+  const handleMoreOrLess = () => {
+    const dir = page * pageSize < posts.length ? 1 : -1
+    setPage(
+      Math.max(1, Math.min(page + dir, Math.ceil(posts.length / pageSize))),
+    )
+  }
+
+  const postsToShow = posts.slice(0, page * pageSize)
 
   return (
-    <Grid>
-      {posts.map((post, index) => (
-        <GridItem className="w-4" key={index}>
-          <PostLink href={`/article/${post.slug}`}>
-            <PostWrapper>
-              <Post data={post} />
-            </PostWrapper>
-          </PostLink>
-        </GridItem>
-      ))}
-    </Grid>
+    <div>
+      <Grid style={{ minHeight: '500px' }}>
+        {postsToShow.length > 0 ? (
+          postsToShow.map((post, index) => (
+            <GridItem className="w-4" key={index}>
+              <PostLink href={`/article/${post.slug}`}>
+                <PostWrapper>
+                  <Post data={post} />
+                </PostWrapper>
+              </PostLink>
+            </GridItem>
+          ))
+        ) : (
+          <GridItem className="w-12">
+            <Typography variant="body1">No related articles found.</Typography>
+          </GridItem>
+        )}
+      </Grid>
+      <Button onClick={() => handleMoreOrLess()}>
+        {page * pageSize < posts.length ? 'Load More' : 'Show Less'}
+      </Button>
+    </div>
   )
 }
 

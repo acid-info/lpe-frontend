@@ -72,10 +72,8 @@ export default function SearchPage({
 
   return (
     <div>
-      {articles.data?.length && <RelatedArticles articles={articles.data} />}
-
-      {/* TODO: used initialBlocks instead of blocks.data temporarily to render data */}
-      {initialBlocks?.length && <RelatedContent blocks={initialBlocks} />}
+      <RelatedArticles data={articles} />
+      {blocks.data?.length && <RelatedContent blocks={blocks.data} />}
     </div>
   )
 }

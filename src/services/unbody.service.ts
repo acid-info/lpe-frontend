@@ -146,6 +146,13 @@ const enhanceGoogleDoc = (doc: UnbodyGoogleDoc): GoogleDocEnhanced => ({
       : [],
 })
 
+const resolveScore = (_additional: any): number => {
+  if (!_additional) {
+    return 0
+  }
+  return _additional.certainty || parseFloat(_additional.score)
+}
+
 const enhanceTextBlock = (block: UnbodyTextBlock): TextBlockEnhanced => ({
   ...block,
   footnotes:
@@ -357,8 +364,6 @@ class UnbodyService extends UnbodyClient {
   ): Promise<
     ApiResponse<SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]>
   > => {
-    let whereFilters: any = []
-
     const query = getSearchBlocksQuery({
       ...(q.trim().length > 0
         ? {
@@ -401,6 +406,8 @@ class UnbodyService extends UnbodyClient {
     published: boolean = true,
   ): Promise<ApiResponse<SearchResultItem<GoogleDocEnhanced>[]>> => {
     let queryFilters = {}
+    let whereFilters: any = []
+
     if (q.trim().length > 0) {
       queryFilters = {
         nearText: {
@@ -409,28 +416,32 @@ class UnbodyService extends UnbodyClient {
       }
     }
 
-    if (tags.length > 0) {
-      queryFilters = {
-        ...queryFilters,
-        where: {
-          operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
-          operands: tags.map((tag) => ({
-            path: ['tags'],
-            operator: UnbodyGraphQl.Filters.WhereOperatorEnum.Like,
-            valueString: tag,
-          })),
-        },
-      }
-    }
+    // if publushed is true, we add the published filter
+    // if published is false, we don't add the published filter
+    // if tags empty, we don't add the tags filter
+    // if tags not empty, we add the tags filter
 
     if (published) {
-      queryFilters = {
-        ...queryFilters,
-        where: {
-          ...((queryFilters as any).where || {}),
-          ...Operands.WHERE_PUBLISHED(),
-        },
-      }
+      whereFilters.push(Operands.WHERE_PUBLISHED())
+    }
+
+    if (tags.length > 0) {
+      whereFilters.push({
+        operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
+        operands: tags.map((tag) => ({
+          path: ['tags'],
+          operator: UnbodyGraphQl.Filters.WhereOperatorEnum.Like,
+          valueString: tag.toLowerCase(),
+        })),
+      })
+    }
+
+    queryFilters = {
+      ...queryFilters,
+      where: {
+        operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
+        operands: whereFilters,
+      },
     }
 
     const query = getSearchArticlesQuery(queryFilters)
@@ -439,11 +450,11 @@ class UnbodyService extends UnbodyClient {
       .then(({ data }) => {
         if (!data || !data.Get.GoogleDoc)
           return this.handleResponse([], 'No data')
+
         return this.handleResponse(
           data.Get.GoogleDoc.map((item) => ({
             doc: enhanceGoogleDoc(item),
-            score:
-              q.length > 0 || tags.length > 0 ? item._additional.certainty : 0,
+            score: resolveScore(item._additional),
           })),
         )
       })
