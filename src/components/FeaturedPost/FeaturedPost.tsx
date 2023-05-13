@@ -22,6 +22,7 @@ const FeaturedPost = ({ post }: Props) => {
 }
 
 const PostWrapper = styled.div`
+  margin-top: 16px;
   padding: 16px 0;
   border-top: 1px solid rgb(var(--lsd-theme-primary));
   width: 100%;
