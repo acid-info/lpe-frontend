@@ -175,13 +175,15 @@ export default function Searchbar(props: SearchbarProps) {
           </IconButton>
         </div>
       </SearchBox>
-      <TagsWrapper className={active ? 'active' : ''}>
-        <FilterTags
-          tags={copyConfigs.search.filterTags}
-          onTagClick={handleTagClick}
-          selectedTags={filterTags}
-        />
-      </TagsWrapper>
+      {!isArticlePage && (
+        <TagsWrapper className={active ? 'active' : ''}>
+          <FilterTags
+            tags={copyConfigs.search.filterTags}
+            onTagClick={handleTagClick}
+            selectedTags={filterTags}
+          />
+        </TagsWrapper>
+      )}
       {resultsNumber !== null && (
         <ResultsStatus>
           <Typography variant={'subtitle2'}>{resultsNumber} matches</Typography>

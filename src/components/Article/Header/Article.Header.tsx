@@ -9,6 +9,8 @@ import styled from '@emotion/styled'
 import ArticleTags from './Article.Tags'
 import ArticleAuthors from './Article.Authors'
 import ArticleSummary from './Article.Summary'
+import { UnbodyGraphQl } from '../../../lib/unbody/unbody-content.types'
+import { calcReadingTime } from '@/utils/string.utils'
 
 const ArticleHeader = ({
   title,
@@ -33,9 +35,24 @@ const ArticleHeader = ({
     )
   }, [blocks])
 
+  const readingTime = useMemo(() => {
+    return calcReadingTime(
+      blocks
+        .map((block) => {
+          if (
+            block.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
+          ) {
+            return block.text
+          }
+          return ''
+        })
+        .join(' '),
+    )
+  }, [blocks])
+
   return (
     <header>
-      <ArticleStats dateStr={modifiedAt} readingLength={3} />
+      <ArticleStats dateStr={modifiedAt} readingLength={readingTime} />
       <ArticleTitle
         id={toc[0].href.substring(1)}
         variant={'h1'}
