@@ -1,7 +1,7 @@
 import { Tag } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
-const ArticleTags = ({ tags }: { tags: string[] }) =>
+const Tags = ({ tags }: { tags: string[] }) =>
   tags.length > 0 ? (
     <TagContainer>
       {tags.map((tag) => (
@@ -15,7 +15,6 @@ const ArticleTags = ({ tags }: { tags: string[] }) =>
 const TagContainer = styled.div`
   display: flex;
   gap: 8px;
-  margin-top: 16px;
 `
 
-export default ArticleTags
+export default Tags
