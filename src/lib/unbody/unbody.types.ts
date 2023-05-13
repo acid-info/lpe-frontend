@@ -20,6 +20,10 @@ export type TextBlockEnhanced = UnbodyTextBlock & {
   document?: Array<GoogleDocEnhanced>
 }
 
+export type ImageBlockEnhanced = UnbodyImageBlock & {
+  blurhash?: string
+}
+
 export * as UnbodyGraphQl from './unbody-content.types'
 
 export type UnbodyGraphQlResponse<T> = {

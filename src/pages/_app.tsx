@@ -48,14 +48,26 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             width: 100%;
             height: 100%;
           }
+
           #__next {
             max-width: 1440px;
             margin-left: auto;
             margin-right: auto;
           }
+
           :root {
             --lpe-nav-rendered-height: ${uiConfigs.navbarRenderedHeight}px;
           }
+
+          //.lazyload,
+          //img.lazyloading {
+          //  opacity: 0;
+          //  transition: opacity 4000ms;
+          //}
+          //
+          //img.lazyloaded {
+          //  opacity: 1;
+          //}
         `}
       />
       <SearchBarProvider>
