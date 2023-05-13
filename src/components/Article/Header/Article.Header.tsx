@@ -6,9 +6,9 @@ import { PostImageRatio } from '../../Post/Post'
 import ArticleStats from '../Article.Stats'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import ArticleTags from './Article.Tags'
 import ArticleSummary from './Article.Summary'
 import { Authors } from '@/components/Authors'
+import { Tags } from '@/components/Tags'
 
 const ArticleHeader = ({
   title,
@@ -41,8 +41,16 @@ const ArticleHeader = ({
       >
         {title}
       </ArticleTitle>
-      {subtitle && <ArticleSubtitle>{subtitle}</ArticleSubtitle>}
-      <ArticleTags tags={tags} />
+      {subtitle && (
+        <ArticleSubtitle
+          variant="body1"
+          genericFontFamily="sans-serif"
+          component="div"
+        >
+          {subtitle}
+        </ArticleSubtitle>
+      )}
+      <Tags tags={tags} />
       <AuthorsContainer>
         <Authors mentions={mentions} email={true} />
       </AuthorsContainer>
@@ -62,7 +70,9 @@ const ArticleTitle = styled(CustomTypography)`
   margin-bottom: 24px;
 `
 
-const ArticleSubtitle = styled(CustomTypography)``
+const ArticleSubtitle = styled(CustomTypography)`
+  margin-bottom: 16px;
+`
 
 const AuthorsContainer = styled.div`
   margin-block: 24px;

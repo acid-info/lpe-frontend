@@ -1,4 +1,4 @@
-import { Tag, Typography } from '@acid-info/lsd-react'
+import { Typography } from '@acid-info/lsd-react'
 import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import styled from '@emotion/styled'
 import Image from 'next/image'
@@ -11,6 +11,7 @@ import {
 } from '@/lib/unbody/unbody.types'
 import { Authors } from '../Authors'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+import { Tags } from '@/components/Tags'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -174,15 +175,7 @@ export default function Post({
           </Typography>
         </PodcastAuthor>
       )}
-      {tags.length > 0 && (
-        <TagContainer>
-          {tags.map((tag) => (
-            <Tag size="small" disabled={false} key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </TagContainer>
-      )}
+      {tags.length > 0 && <Tags tags={tags} />}
     </Container>
   )
 }
@@ -223,11 +216,6 @@ const CustomTypography = styled(Typography)`
   text-overflow: ellipsis;
   overflow: hidden;
   word-break: break-word;
-`
-const TagContainer = styled.div`
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
 `
 
 const PodcastAuthor = styled.div`
