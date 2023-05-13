@@ -8,6 +8,7 @@ import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { ReactNode } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { SearchBarProvider } from '@/context/searchbar.context'
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 
 type NextLayoutComponentType<P = {}> = NextComponentType<
   NextPageContext,
@@ -70,6 +71,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           //}
         `}
       />
+      <ProgressBar />
       <SearchBarProvider>
         {getLayout(<Component {...pageProps} />)}
       </SearchBarProvider>
