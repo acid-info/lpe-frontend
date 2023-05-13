@@ -9,6 +9,8 @@ import {
   UnbodyImageBlock,
   UnbodyTextBlock,
 } from '@/lib/unbody/unbody.types'
+import { Authors } from '../Authors'
+import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -50,8 +52,7 @@ export type PostDataProps = {
   date: string
   title: string
   description?: string
-  author?: string
-  authorEmail?: string // TODO: can we get  author: { name: string, email: string }?
+  mentions: UnbodyGraphQl.Fragments.MentionItem[]
   tags?: string[]
   coverImage?: UnbodyImageBlock | null
   summary?: string
@@ -85,7 +86,7 @@ export default function Post({
     date: dateStr = '',
     title,
     description,
-    author,
+    mentions,
     tags = [],
   },
   ...props
@@ -164,9 +165,7 @@ export default function Post({
       {_header}
       {postType === 'body' && _description}
       {classType === 'article' ? (
-        <Typography variant="body3" genericFontFamily="sans-serif">
-          {author}
-        </Typography>
+        <Authors mentions={mentions} email={false} />
       ) : (
         <PodcastAuthor>
           <LogosCircleIcon color="primary" />

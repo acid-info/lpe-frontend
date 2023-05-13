@@ -20,7 +20,7 @@ export default function RelatedArticles({ articles }: Props) {
             date: article.doc.modifiedAt,
             title: article.doc.title,
             description: article.doc.subtitle, // TODO: summary is not available
-            author: 'Jinho',
+            mentions: article.doc.mentions,
             tags: article.doc.tags,
             coverImage: getArticleCover(article.doc.blocks),
           }))}

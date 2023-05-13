@@ -7,8 +7,8 @@ import ArticleStats from '../Article.Stats'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ArticleTags from './Article.Tags'
-import ArticleAuthors from './Article.Authors'
 import ArticleSummary from './Article.Summary'
+import { Authors } from '@/components/Authors'
 
 const ArticleHeader = ({
   title,
@@ -20,8 +20,6 @@ const ArticleHeader = ({
   modifiedAt,
   blocks,
 }: GoogleDocEnhanced) => {
-  const date = new Date(modifiedAt)
-
   const _thumbnail = useMemo(() => {
     const coverImage = getArticleCover(blocks)
     if (!coverImage) return null
@@ -45,7 +43,9 @@ const ArticleHeader = ({
       </ArticleTitle>
       {subtitle && <ArticleSubtitle>{subtitle}</ArticleSubtitle>}
       <ArticleTags tags={tags} />
-      <ArticleAuthors mentions={mentions} />
+      <AuthorsContainer>
+        <Authors mentions={mentions} email={true} />
+      </AuthorsContainer>
       {_thumbnail}
       <ArticleSummary summary={summary} />
     </header>
@@ -63,5 +63,9 @@ const ArticleTitle = styled(CustomTypography)`
 `
 
 const ArticleSubtitle = styled(CustomTypography)``
+
+const AuthorsContainer = styled.div`
+  margin-block: 24px;
+`
 
 export default ArticleHeader
