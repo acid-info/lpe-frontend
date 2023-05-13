@@ -41,8 +41,8 @@ export const getStaticProps = async () => {
             slug: featured.slug,
             date: featured.modifiedAt,
             title: featured.title,
-            description: featured.subtitle, // TODO: summary is not available
-            author: 'Jinho',
+            description: featured.summary,
+            mentions: featured.mentions,
             tags: featured.tags,
             coverImage: getArticleCover(featured.blocks),
           }
@@ -53,7 +53,7 @@ export const getStaticProps = async () => {
           date: post.modifiedAt,
           title: post.title,
           description: post.subtitle, // TODO: summary is not available
-          author: 'Jinho',
+          mentions: post.mentions,
           tags: post.tags,
           coverImage: getArticleCover(post.blocks),
         }

@@ -182,7 +182,7 @@ export namespace UnbodyGraphQl {
     text: string
     title: string
     toc: string | Array<Fragments.TocItem>
-    mentions: string | Array<Fragments.MentionItem>
+    mentions: Array<Fragments.MentionItem>
   }
 
   export interface GoogleCalendarEvent extends BaseObject {
