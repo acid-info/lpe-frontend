@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react'
 
 type Props = PropsWithChildren<{
   title: string
-  matches?: number
+  matches?: number | string
 }>
 
 export const Section = ({ title, matches, children, ...props }: Props) => {

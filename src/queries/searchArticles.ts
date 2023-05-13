@@ -22,5 +22,6 @@ export const getSearchArticlesQuery = (args: UnbodyGetFilters = defaultArgs) =>
         }
         _additional{
           certainty 
+          score
         }
     `)
