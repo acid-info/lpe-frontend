@@ -18,7 +18,7 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
   const {
     query: { slug },
   } = useRouter()
-  console.log(typeof data, slug, why)
+
   if (!data) return null
   if (errors) return <div>{errors}</div>
 

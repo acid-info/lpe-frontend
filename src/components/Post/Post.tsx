@@ -1,7 +1,7 @@
 import { Tag, Typography } from '@acid-info/lsd-react'
 import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import styled from '@emotion/styled'
-import Image from 'next/image'
+import Image, { ImageProps } from 'next/image'
 import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
 import { useMemo } from 'react'
 import {
@@ -9,7 +9,10 @@ import {
   UnbodyImageBlock,
   UnbodyTextBlock,
 } from '@/lib/unbody/unbody.types'
-import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
+import {
+  ResponsiveImage,
+  ResponsiveImageProps,
+} from '../ResponsiveImage/ResponsiveImage'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -44,6 +47,7 @@ export type PostAppearanceProps = {
   styleType?: PostStyleType
   aspectRatio?: PostImageRatio
   showImage?: boolean
+  imageProps?: ResponsiveImageProps
 }
 
 export type PostDataProps = {
@@ -80,6 +84,7 @@ export default function Post({
     styleType = PostStyleType.LSD,
     aspectRatio = PostImageRatio.LANDSCAPE,
     showImage = true,
+    imageProps,
   } = {},
   data: {
     coverImage = null,
@@ -118,14 +123,10 @@ export default function Post({
   const _thumbnail = useMemo(() => {
     if (!showImage || !coverImage) return null
     if (postType === 'body') {
-      return (
-        <ThumbnailContainer aspectRatio={aspectRatio}>
-          <ResponsiveImage data={coverImage} height={'458px'} />
-          {/*<Thumbnail fill src={coverImage.url} alt={coverImage.alt} />*/}
-        </ThumbnailContainer>
-      )
+      return <ResponsiveImage {...imageProps} data={coverImage} />
     } else {
       // TBD
+      // @jinho not sure what this is for?
       return (
         <ThumbnailContainer aspectRatio={aspectRatio}>
           <Thumbnail fill src={coverImage.url} alt={coverImage.alt} />
@@ -197,6 +198,7 @@ const Container = styled.div`
   gap: 16px;
 `
 
+// @Jinho, I have implemented the ResponsiveImage component, so I guess this is not needed anymore?
 const ThumbnailContainer = styled.div<{
   aspectRatio: PostImageRatio
 }>`

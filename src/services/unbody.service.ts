@@ -9,6 +9,7 @@ import {
   UnbodyGraphQlResponse,
   GoogleDocEnhanced,
   TextBlockEnhanced,
+  ImageBlockEnhanced,
 } from '@/lib/unbody/unbody.types'
 
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
@@ -26,6 +27,7 @@ import {
   SearchResultItem,
 } from '@/types/data.types'
 import { getSearchBlocksQuery } from '@/queries/searchBlocks'
+import axios from 'axios'
 
 const { UNBODY_API_KEY, UNBODY_LPE_PROJECT_ID } = process.env
 
@@ -145,6 +147,23 @@ const enhanceGoogleDoc = (doc: UnbodyGoogleDoc): GoogleDocEnhanced => ({
         })
       : [],
 })
+
+const enhanceImageBlock = async (
+  block: UnbodyImageBlock,
+): Promise<ImageBlockEnhanced> => {
+  try {
+    let image = await axios.get(`${block.url}?blur=200&px=16&auto=format`, {
+      responseType: 'arraybuffer',
+    })
+    let returnedB64 = Buffer.from(image.data).toString('base64')
+    return {
+      ...block,
+      placeholderBase64: `data:image/png;base64,${returnedB64}`,
+    }
+  } catch (e) {
+    return block
+  }
+}
 
 const resolveScore = (_additional: any): number => {
   if (!_additional) {

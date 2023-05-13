@@ -22,6 +22,8 @@ export const getArticlePostQuery = (args: UnbodyGetFilters = defaultArgs) =>
                 url
                 alt
                 order
+                width
+                height
                 __typename
                 _additional{
                     id

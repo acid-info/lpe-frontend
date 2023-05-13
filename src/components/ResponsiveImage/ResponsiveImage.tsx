@@ -1,31 +1,55 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
-import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+import Image, { ImageProps } from 'next/image'
+import { ImageBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import Imgix from 'react-imgix'
 import styled from '@emotion/styled'
 import { Blurhash } from 'react-blurhash'
 
-type Props = {
-  data: UnbodyImageBlock
+export type ResponsiveImageProps = {
   height?: number | string
+  nextImageProps?: ImageProps
+  fill?: boolean
 }
 
-export const ResponsiveImage = ({ data, height = '100%' }: Props) => {
+export type Props = {
+  data: UnbodyImageBlock | ImageBlockEnhanced
+} & ResponsiveImageProps
+
+export const ResponsiveImage = ({
+  data,
+  height = '100%',
+  fill = false,
+  nextImageProps,
+}: Props) => {
   const [loaded, setLoaded] = useState(false)
+
+  const lazyUrl = `${data.url}?blur=200&px=16&auto=format`
+
+  const imageProps: ImageProps = {
+    src: `${data.url}`,
+    width: data.width,
+    height: data.height,
+    alt: data.alt,
+    className: loaded ? 'loaded' : '',
+    onLoad: () => setLoaded(true),
+    loading: 'lazy',
+    ...(nextImageProps || {}),
+    style: {
+      width: '100%',
+      height: 'auto',
+    },
+  }
 
   return (
     <Container
+      className={fill ? 'fill' : ''}
       style={{
         paddingTop: `calc(${data.height / data.width} * ${height})`,
+        background: 'red',
       }}
     >
-      <img src={`${data.url}?blur=10&w=10`} />
-      {/*<Blurhash*/}
-      {/*    hash={`e8I#x__3~qD%IU~q%MRQRjtQWB%M9FxuxuNG%MWBoLayof%Mt7Rj-;`}*/}
-      {/*    width={"100%"}*/}
-      {/*    height={"100%"}*/}
-      {/*/>*/}
-      <Imgix imgixParams={{ fit: 'clip' }} src={data.url} />
+      <img src={lazyUrl} />
+      <Image {...imageProps} />
     </Container>
   )
 }
@@ -33,9 +57,9 @@ export const ResponsiveImage = ({ data, height = '100%' }: Props) => {
 const Container = styled.div`
   position: relative;
   width: 100%;
-  padding-top: 100%;
+  //padding-top: 100%;
   overflow: hidden;
-  object-fit: cover;
+  //object-fit: cover;
 
   filter: grayscale(100%);
   transition: filter 0.1s ease-in-out;
@@ -44,18 +68,33 @@ const Container = styled.div`
     filter: grayscale(0%);
   }
 
+  &.fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    > img {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: auto;
+    }
+  }
+
   > * {
     position: absolute !important;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
 
     &:last-of-type {
-      //opacity: 0.5;
-      //&.loaded{
-      //  opacity: 1;
-      //}
+      opacity: 0;
+      transition: opacity 250ms;
+      &.loaded {
+        opacity: 1;
+      }
     }
   }
 `
