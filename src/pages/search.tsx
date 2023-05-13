@@ -72,16 +72,8 @@ export default function SearchPage({
 
   return (
     <div>
-      {articles.data?.length ? (
-        <RelatedArticles articles={articles.data} />
-      ) : (
-        <Section title={'No Related Articles'} />
-      )}
-      {blocks.data?.length ? (
-        <RelatedContent blocks={blocks.data} />
-      ) : (
-        <Section title={'No Related Content'} />
-      )}
+      <RelatedArticles data={articles} />
+      {blocks.data?.length && <RelatedContent blocks={blocks.data} />}
     </div>
   )
 }
