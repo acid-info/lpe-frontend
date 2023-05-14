@@ -6,6 +6,7 @@ import { Section } from '@/components/Section/Section'
 
 import { getArticleCover } from '@/utils/data.utils'
 import { FeaturedPost } from '@/components/FeaturedPost'
+import { PostListLayout } from '@/types/ui.types'
 
 type Props = {
   posts: PostDataProps[]
@@ -22,7 +23,7 @@ export default function Home({ posts, featured }: Props) {
         </Section>
       )}
       <Section title={'Latest posts'}>
-        <PostsList posts={posts} />
+        <PostsList posts={posts} layout={PostListLayout.XXXX_XX} />
       </Section>
     </>
   )
