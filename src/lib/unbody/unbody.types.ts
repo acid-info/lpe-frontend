@@ -22,6 +22,7 @@ export type TextBlockEnhanced = UnbodyTextBlock & {
 
 export type ImageBlockEnhanced = UnbodyImageBlock & {
   blurhash?: string
+  placeholderBase64?: string
 }
 
 export * as UnbodyGraphQl from './unbody-content.types'

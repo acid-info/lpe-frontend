@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { PostImageRatio, PostImageRatioOptions } from '../Post/Post'
 import Image from 'next/image'
+import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
 type Props = {
   image: UnbodyImageBlock
@@ -11,12 +12,22 @@ type Props = {
 
 export const ArticleImageBlockWrapper = ({ image, ratio }: Props) => {
   return (
-    <ThumbnailContainer aspectRatio={ratio}>
-      <Thumbnail fill src={image.url} alt={image.alt} />
-    </ThumbnailContainer>
+    <Container>
+      <ResponsiveImage data={image} />
+    </Container>
   )
+
+  // old code
+  // return (
+  //   <ThumbnailContainer aspectRatio={ratio}>
+  //     <Thumbnail fill src={image.url} alt={image.alt} />
+  //   </ThumbnailContainer>
+  // )
 }
 
+const Container = styled.div``
+
+//Old code?
 const ThumbnailContainer = styled.div<{
   aspectRatio: PostImageRatio
 }>`
