@@ -5,9 +5,15 @@ import styled from '@emotion/styled'
 import Post, { PostDataProps } from '../Post/Post'
 import { Button, Typography } from '@acid-info/lsd-react'
 
+enum Layout {
+  XXXX = 'xxxx',
+  XXXX_XX = 'xxxx_xx',
+}
+
 type Props = {
   posts: PostDataProps[]
   pageSize?: number
+  layout?: Layout
 }
 
 const getGridItemWidth = (index: number) => {
@@ -45,7 +51,14 @@ export const PostsList = (props: Props) => {
       <Grid style={{ minHeight: '500px' }}>
         {postsToShow.length > 0 ? (
           postsToShow.map((post, index) => (
-            <GridItem className="w-4" key={index}>
+            <GridItem
+              className={
+                props.layout === Layout.XXXX_XX
+                  ? getGridItemWidth(index)
+                  : 'w-4'
+              }
+              key={index}
+            >
               <PostLink href={`/article/${post.slug}`}>
                 <PostWrapper>
                   <Post data={post} />
