@@ -13,7 +13,10 @@ const FeaturedPost = ({ post }: Props) => {
       <GridItem className="w-16">
         <PostLink href={`/article/${post.slug}`}>
           <PostWrapper>
-            <Post data={post} />
+            <Post
+              data={post}
+              appearance={{ imageProps: { fill: true, height: '480px' } }}
+            />
           </PostWrapper>
         </PostLink>
       </GridItem>
