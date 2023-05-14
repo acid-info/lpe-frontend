@@ -6,7 +6,7 @@ import { useState } from 'react'
 type Props = {
   label: string
   children: React.ReactNode
-  className: string
+  className?: string
   onClick?: () => void
 }
 
