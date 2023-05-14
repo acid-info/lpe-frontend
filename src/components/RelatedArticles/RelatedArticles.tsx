@@ -1,10 +1,9 @@
 import { getArticleCover } from '@/utils/data.utils'
-import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { PostsList } from '../PostList/PostList'
-import { Section } from '../Section/Section'
-import { SearchHook, SearchResultItem } from '@/types/data.types'
+import { SearchHook } from '@/types/data.types'
 import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
+import { SearchResultsSection } from '@/components/SearchResultsSection/SearchResultsSection'
 
 type Props = {
   data: SearchHook<UnbodyGoogleDoc>
@@ -12,32 +11,29 @@ type Props = {
 
 export default function RelatedArticles({ data }: Props) {
   if (!data.loading && !data.data) return null
-
   return (
     <Container>
-      <Section
-        title={data.loading ? 'Loading...' : 'Related Articles'}
-        matches={data.loading ? undefined : data.data.length}
+      <SearchResultsSection
+        resultSize={data.data.length}
+        loading={data.loading}
+        title={'Related Articles'}
       >
         {
           <PostsList
-            posts={
-              data.loading
-                ? []
-                : data.data.map((article) => ({
-                    slug: article.doc.slug,
-                    date: article.doc.modifiedAt,
-                    title: article.doc.title,
-                    description: article.doc.subtitle, // TODO: summary is not available
-                    mentions: article.doc.mentions,
-                    tags: article.doc.tags,
-                    coverImage: getArticleCover(article.doc.blocks),
-                  }))
-            }
+            posts={data.data.map((article) => ({
+              slug: article.doc.slug,
+              date: article.doc.modifiedAt,
+              title: article.doc.title,
+              description: article.doc.subtitle, // TODO: summary is not available
+              mentions: article.doc.mentions,
+              tags: article.doc.tags,
+              coverImage: getArticleCover(article.doc.blocks),
+            }))}
             pageSize={4}
+            loading={data.loading}
           />
         }
-      </Section>
+      </SearchResultsSection>
     </Container>
   )
 }

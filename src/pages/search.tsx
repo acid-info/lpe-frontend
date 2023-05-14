@@ -54,26 +54,22 @@ export default function SearchPage({
 
   useEffect(() => {
     if (mounted) {
-      if (query.length > 0 || topics.length > 0) {
-        const serchArgs = [
-          extractQueryFromQuery(router.query),
-          extractTopicsFromQuery(router.query),
-        ]
-        articles.search(...(serchArgs as [string, string[]]))
-        blocks.search(...(serchArgs as [string, string[]]))
-      } else {
-        articles.reset(initialArticles)
-        blocks.reset(initialBlocks)
-      }
+      const serchArgs = [
+        extractQueryFromQuery(router.query),
+        extractTopicsFromQuery(router.query),
+      ]
+      articles.search(...(serchArgs as [string, string[]]))
+      blocks.search(...(serchArgs as [string, string[]]))
     } else {
-      hasUpdated.current = true
+      articles.reset(initialArticles)
+      blocks.reset(initialBlocks)
     }
   }, [mounted, router.query])
 
   return (
-    <div>
+    <div style={{ minHeight: '80vh' }}>
       <RelatedArticles data={articles} />
-      {blocks.data?.length && <RelatedContent blocks={blocks.data} />}
+      <RelatedContent data={blocks} />
     </div>
   )
 }

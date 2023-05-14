@@ -1,25 +1,29 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 
 type Props = PropsWithChildren<{
   title: string
-  matches?: number | string
+  subtitle?: string | React.ReactNode
 }>
 
-export const Section = ({ title, matches, children, ...props }: Props) => {
+export const Section = ({ title, subtitle, children, ...props }: Props) => {
   return (
     <section style={{ width: '100%' }} {...props}>
       <Container>
         <Typography genericFontFamily="sans-serif" variant="body2">
           {title}
         </Typography>
-        {matches && (
+        {subtitle && (
           <>
             <Typography variant="body2">•</Typography>
-            <Typography genericFontFamily="sans-serif" variant="body2">
-              {matches} matches
-            </Typography>
+            {typeof subtitle === 'string' ? (
+              <Typography genericFontFamily="sans-serif" variant="body2">
+                subtitle
+              </Typography>
+            ) : (
+              subtitle
+            )}
           </>
         )}
       </Container>

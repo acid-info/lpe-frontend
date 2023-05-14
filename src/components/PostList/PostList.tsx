@@ -10,6 +10,7 @@ type Props = {
   posts: PostDataProps[]
   pageSize?: number
   layout?: PostListLayout
+  loading?: boolean
 }
 
 const getGridItemWidth = (index: number) => {
@@ -56,7 +57,7 @@ export const PostsList = (props: Props) => {
               key={index}
             >
               <PostLink href={`/article/${post.slug}`}>
-                <PostWrapper>
+                <PostWrapper className={props.loading ? 'loading' : ''}>
                   <Post data={post} />
                 </PostWrapper>
               </PostLink>
@@ -82,6 +83,12 @@ const PostWrapper = styled.div`
   padding: 16px 0;
   border-top: 1px solid rgb(var(--lsd-theme-primary));
   width: 100%;
+
+  transition: opacity 0.3s ease-in-out;
+
+  &.loading {
+    opacity: 0.5;
+  }
 `
 
 const PostLink = styled(Link)`
