@@ -21,13 +21,8 @@ export default function ArticleReference({
     year: 'numeric',
   })
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
-    router.push(`${slug}`)
-  }
-
   return (
-    <Reference onClick={handleClick} {...props}>
+    <ReferenceLink href={slug} {...props}>
       <Typography component="span" variant="body1">
         {title}
       </Typography>
@@ -43,11 +38,11 @@ export default function ArticleReference({
           {localDate}
         </Typography>
       </Info>
-    </Reference>
+    </ReferenceLink>
   )
 }
 
-const Reference = styled.div`
+const ReferenceLink = styled(Link)`
   display: flex;
   flex-direction: column;
   padding: 8px 14px;

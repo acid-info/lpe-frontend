@@ -17,6 +17,7 @@ import {
   ResponsiveImage,
   ResponsiveImageProps,
 } from '../ResponsiveImage/ResponsiveImage'
+import Link from 'next/link'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -95,6 +96,7 @@ export default function Post({
     title,
     description,
     mentions,
+    slug,
     tags = [],
   },
   ...props
@@ -103,14 +105,16 @@ export default function Post({
 
   const _title = useMemo(
     () => (
-      <CustomTypography
-        variant={size === PostSize.SMALL ? 'h4' : 'h2'}
-        genericFontFamily="serif"
-      >
-        {title}
-      </CustomTypography>
+      <PostLink href={`/article/${slug}`}>
+        <CustomTypography
+          variant={size === PostSize.SMALL ? 'h4' : 'h2'}
+          genericFontFamily="serif"
+        >
+          {title}
+        </CustomTypography>
+      </PostLink>
     ),
-    [title, size],
+    [title, size, slug],
   )
 
   const _description = useMemo(
@@ -126,16 +130,20 @@ export default function Post({
   const _thumbnail = useMemo(() => {
     if (!showImage || !coverImage) return null
     if (postType === PostType.BODY) {
-      return <ResponsiveImage {...imageProps} data={coverImage} />
-    } else {
-      // TBD
-      // @jinho not sure what this is for?
       return (
-        <ThumbnailContainer aspectRatio={aspectRatio}>
-          <Thumbnail fill src={coverImage.url} alt={coverImage.alt} />
+        <Link href={`/article/${slug}`}>
+          <ResponsiveImage {...imageProps} data={coverImage} />
+        </Link>
+      )
+    } else {
+      return (
+        <>
+          <Link href={`/article/${slug}`}>
+            <ResponsiveImage data={coverImage} alt={coverImage.alt} />
+          </Link>
           {_title}
           {_description}
-        </ThumbnailContainer>
+        </>
       )
     }
   }, [
@@ -199,21 +207,6 @@ const Container = styled.div`
   gap: 16px;
 `
 
-// @Jinho, I have implemented the ResponsiveImage component, so I guess this is not needed anymore?
-const ThumbnailContainer = styled.div<{
-  aspectRatio: PostImageRatio
-}>`
-  aspect-ratio: ${(p) =>
-    p.aspectRatio
-      ? PostImageRatioOptions[p.aspectRatio]
-      : PostImageRatioOptions[PostImageRatio.PORTRAIT]};
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-height: 458px; // temporary max-height based on the Figma design's max height
-  overflow: hidden;
-`
-
 const Thumbnail = styled(Image)`
   object-fit: cover;
 `
@@ -236,4 +229,8 @@ const PodcastAuthor = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+`
+
+const PostLink = styled(Link)`
+  text-decoration: none;
 `

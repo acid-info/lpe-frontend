@@ -11,14 +11,12 @@ const FeaturedPost = ({ post }: Props) => {
   return (
     <CustomGrid>
       <GridItem className="w-16">
-        <PostLink href={`/article/${post.slug}`}>
-          <PostWrapper>
-            <Post
-              data={post}
-              appearance={{ imageProps: { fill: true, height: '480px' } }}
-            />
-          </PostWrapper>
-        </PostLink>
+        <PostWrapper>
+          <Post
+            data={post}
+            appearance={{ imageProps: { fill: true, height: '480px' } }}
+          />
+        </PostWrapper>
       </GridItem>
     </CustomGrid>
   )
@@ -33,10 +31,6 @@ const PostWrapper = styled.div`
   padding: 16px 0;
   border-top: 1px solid rgb(var(--lsd-theme-primary));
   width: 100%;
-`
-
-const PostLink = styled(Link)`
-  text-decoration: none;
 `
 
 export default FeaturedPost

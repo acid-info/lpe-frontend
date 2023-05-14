@@ -18,13 +18,16 @@ export default function Collapse({
   ...props
 }: Props) {
   const [open, setOpen] = useState(true)
-  const handleClick = () => {
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation()
     setOpen((prev) => !prev)
     onClick && onClick()
   }
+
   return (
-    <div onClick={handleClick} {...props} className={clsx(className)}>
-      <Header>
+    <div {...props} className={clsx(className)}>
+      <Header onClick={(e) => handleClick(e)}>
         <Label color="primary" component="label" variant="label1">
           {label}
         </Label>
