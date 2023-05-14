@@ -39,9 +39,10 @@ const Container = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
-  max-width: ${uiConfigs.maxContainerWidth + 24}px; // TBD
+  max-width: ${uiConfigs.maxContainerWidth + 40}px; // TBD
   background: rgb(var(--lsd-surface-primary));
   z-index: 100;
+  box-sizing: border-box;
 
   // to center-align logo
   &:last-child {
@@ -51,9 +52,9 @@ const Container = styled.nav`
   // to center-align logo
   &:before {
     content: 'D';
+    width: 54px;
     margin: 1px auto 1px 1px;
     visibility: hidden;
-    padding: 1px;
   }
 `
 

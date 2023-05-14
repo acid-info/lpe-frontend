@@ -34,7 +34,7 @@ export default function TableOfContents({ contents, ...props }: Props) {
     return () => {
       router.events.off('hashChangeStart', onHashChangeStart)
     }
-  }, [router.events])
+  }, [setTocId, router.events])
 
   return (
     <Container

@@ -105,14 +105,14 @@ export default function Post({
 
   const _title = useMemo(
     () => (
-      <PostLink href={`/article/${slug}`}>
+      <TitleLink href={`/article/${slug}`}>
         <CustomTypography
           variant={size === PostSize.SMALL ? 'h4' : 'h2'}
           genericFontFamily="serif"
         >
           {title}
         </CustomTypography>
-      </PostLink>
+      </TitleLink>
     ),
     [title, size, slug],
   )
@@ -146,15 +146,7 @@ export default function Post({
         </>
       )
     }
-  }, [
-    showImage,
-    coverImage,
-    aspectRatio,
-    postType,
-    imageProps,
-    _title,
-    _description,
-  ])
+  }, [slug, showImage, coverImage, postType, imageProps, _title, _description])
 
   const _header = useMemo(() => {
     if (postType === 'body')
@@ -231,6 +223,6 @@ const PodcastAuthor = styled.div`
   gap: 12px;
 `
 
-const PostLink = styled(Link)`
+const TitleLink = styled(Link)`
   text-decoration: none;
 `
