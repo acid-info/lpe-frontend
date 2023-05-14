@@ -12,6 +12,7 @@ import {
 import { Authors } from '../Authors'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { Tags } from '@/components/Tags'
+import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -121,7 +122,8 @@ export default function Post({
     if (postType === 'body') {
       return (
         <ThumbnailContainer aspectRatio={aspectRatio}>
-          <Thumbnail fill src={coverImage.url} alt={coverImage.alt} />
+          <ResponsiveImage data={coverImage} height={'458px'} />
+          {/*<Thumbnail fill src={coverImage.url} alt={coverImage.alt} />*/}
         </ThumbnailContainer>
       )
     } else {
@@ -198,6 +200,7 @@ const ThumbnailContainer = styled.div<{
   width: 100%;
   height: 100%;
   max-height: 458px; // temporary max-height based on the Figma design's max height
+  overflow: hidden;
 `
 
 const Thumbnail = styled(Image)`

@@ -25,6 +25,8 @@ export const getHomePagePostsQuery = (args: UnbodyGetFilters = defaultArgs) =>
                 url
                 alt
                 order
+                width
+                height
                 __typename
           }
         }
