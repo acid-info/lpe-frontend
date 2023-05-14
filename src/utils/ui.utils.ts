@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { MutableRefObject, RefObject, useEffect, useRef, useState } from 'react'
 
 export const useSticky = <T extends HTMLElement>(dy: number = 0) => {
   const stickyRef = useRef<T>(null)
@@ -61,4 +61,42 @@ export const useIsScrolling = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [setIsScrolling])
   return isScrolling
+}
+
+export type HeadingElementsRef = MutableRefObject<{
+  [key: string]: HTMLHeadingElement | null
+}>
+
+export function useIntersectionObserver(
+  setActiveId: (id: string) => void,
+): HeadingElementsRef {
+  const headingElementsRef: HeadingElementsRef = useRef({})
+
+  useEffect(() => {
+    const callback = (headings: IntersectionObserverEntry[]) => {
+      headings.forEach((heading) => {
+        if (heading.isIntersecting && heading.target instanceof HTMLElement) {
+          const targetId = heading.target.getAttribute('id')
+          if (targetId) setActiveId(targetId)
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callback, {
+      rootMargin: '0px 0px -80% 0px',
+    })
+
+    const current = headingElementsRef.current
+    Object.values(current).forEach((element) => {
+      if (element) observer.observe(element)
+    })
+
+    return () => {
+      Object.values(current).forEach((element) => {
+        if (element) observer.unobserve(element)
+      })
+    }
+  }, [setActiveId])
+
+  return headingElementsRef
 }

@@ -309,7 +309,8 @@ class UnbodyService extends UnbodyClient {
 
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {
-        if (!data) return this.handleResponse([], 'No data')
+        if (!data || !data.Get || !data.Get.GoogleDoc)
+          return this.handleResponse([], 'No data')
         return this.handleResponse(data.Get.GoogleDoc.map(enhanceGoogleDoc))
       })
       .catch((e) => this.handleResponse([], e))

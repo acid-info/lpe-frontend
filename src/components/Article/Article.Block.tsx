@@ -1,4 +1,8 @@
-import { UnbodyImageBlock, UnbodyTextBlock } from '@/lib/unbody/unbody.types'
+import {
+  TextBlockEnhanced,
+  UnbodyImageBlock,
+  UnbodyTextBlock,
+} from '@/lib/unbody/unbody.types'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { ArticleImageBlockWrapper } from './Article.ImageBlockWrapper'
 import { PostImageRatio } from '../Post/Post'
@@ -9,11 +13,17 @@ import {
   extractIdFromFirstTag,
   extractInnerHtml,
 } from '@/utils/html.utils'
+import { HeadingElementsRef } from '@/utils/ui.utils'
+import UnbodyDocumentTypeNames = UnbodyGraphQl.UnbodyDocumentTypeNames
+import { ArticleHeading } from '@/components/Article/Article.Heading'
 
 export const RenderArticleBlock = ({
   block,
+  headingElementsRef,
 }: {
   block: UnbodyImageBlock | UnbodyTextBlock
+  activeId: string | null
+  headingElementsRef: HeadingElementsRef
 }) => {
   switch (block.__typename) {
     case UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock:
@@ -30,17 +40,14 @@ export const RenderArticleBlock = ({
         case 'h3':
         case 'h4':
         case 'h5':
-        case 'h6':
+        case 'h6': {
           return (
-            <Headline
-              variant={block.tagName as any}
-              component={block.tagName as any}
-              genericFontFamily="sans-serif"
-              className={extractClassFromFirstTag(block.html) || ''}
-              id={extractIdFromFirstTag(block.html) || ''}
-              dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
+            <ArticleHeading
+              block={block}
+              headingElementsRef={headingElementsRef}
             />
           )
+        }
         default:
           return (
             <Paragraph
@@ -57,11 +64,6 @@ export const RenderArticleBlock = ({
       return null
   }
 }
-
-const Headline = styled(Typography)`
-  white-space: pre-wrap;
-  margin-top: 24px;
-`
 
 const Paragraph = styled(Typography)`
   white-space: pre-wrap;
