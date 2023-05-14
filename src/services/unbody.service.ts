@@ -10,6 +10,7 @@ import {
   GoogleDocEnhanced,
   TextBlockEnhanced,
   ImageBlockEnhanced,
+  UnbodyGraphQlResponseTopics,
 } from '@/lib/unbody/unbody.types'
 
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
@@ -28,6 +29,7 @@ import {
 } from '@/types/data.types'
 import { getSearchBlocksQuery } from '@/queries/searchBlocks'
 import axios from 'axios'
+import { getTopicsQuery } from '@/queries/getTopics'
 
 const { UNBODY_API_KEY, UNBODY_LPE_PROJECT_ID } = process.env
 
@@ -477,6 +479,28 @@ class UnbodyService extends UnbodyClient {
             score: resolveScore(item._additional),
           })),
         )
+      })
+      .catch((e) => this.handleResponse([], e))
+  }
+
+  getTopics = (published: boolean = true): Promise<ApiResponse<string[]>> => {
+    const query = getTopicsQuery(
+      published
+        ? {
+            where: Operands.WHERE_PUBLISHED(),
+          }
+        : {},
+    )
+
+    return this.request<UnbodyGraphQlResponseTopics>(query)
+      .then(({ data }) => {
+        if (!data || !data.Get || !data.Get.GoogleDoc)
+          return this.handleResponse([], 'No data')
+        const topics: string[] = data.Get.GoogleDoc.flatMap((item) => item.tags)
+        const uniqueTopics = topics.filter(
+          (item, index) => topics.indexOf(item) === index,
+        )
+        return this.handleResponse(uniqueTopics)
       })
       .catch((e) => this.handleResponse([], e))
   }
