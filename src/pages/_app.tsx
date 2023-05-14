@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
   return (
     <ThemeProvider theme={isDark ? defaultThemes.dark : defaultThemes.light}>
       <Head>
-        <title>Acid</title>
+        <title>Logos Press Engine</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
