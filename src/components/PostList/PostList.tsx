@@ -68,9 +68,11 @@ export const PostsList = (props: Props) => {
           </GridItem>
         )}
       </Grid>
-      <Button onClick={() => handleMoreOrLess()}>
-        {page * pageSize < posts.length ? 'Load More' : 'Show Less'}
-      </Button>
+      {posts.length > pageSize && (
+        <Button onClick={() => handleMoreOrLess()}>
+          {page * pageSize < posts.length ? 'Load More' : 'Show Less'}
+        </Button>
+      )}
     </div>
   )
 }
