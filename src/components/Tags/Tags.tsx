@@ -22,12 +22,12 @@ const Tags = ({ tags }: { tags: string[] }) => {
 
   return tags.length > 0 ? (
     <TagContainer>
-      {tags.map((tag) => (
+      {tags.map((tag, idx) => (
         <Tag
           onClick={(e) => onTagClick(e, tag)}
           size="small"
           disabled={false}
-          key={tag}
+          key={`tag-${idx}`}
         >
           {tag}
         </Tag>
