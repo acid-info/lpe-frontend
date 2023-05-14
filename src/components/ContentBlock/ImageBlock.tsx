@@ -6,7 +6,7 @@ import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 
 import { GridItem } from '../Grid/Grid'
 import { PostClassType } from '../Post/Post'
-import ContentBlockHeader from './ContentBlock.Header'
+import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 import ContentBlockBody from './ContentBlock.Body'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
@@ -20,7 +20,7 @@ const ImageBlock = ({ doc }: Props) => {
         <Container>
           <ResponsiveImage data={doc} />
           <ContentBlockHeader
-            type={PostClassType.ARTICLE}
+            type={BlockType.IMAGE}
             date={doc?.document[0].modifiedAt}
           />
           <ContentBlockBody
