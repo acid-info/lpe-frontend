@@ -38,8 +38,8 @@ const Container = styled.nav`
   border-bottom: 1px solid rgb(var(--lsd-theme-primary));
   position: fixed;
   top: 0;
-  width: calc(100% + 16px);
-  max-width: ${uiConfigs.maxContainerWidth + 16}px;
+  width: 100%;
+  max-width: ${uiConfigs.maxContainerWidth + 24}px; // TBD
   background: rgb(var(--lsd-surface-primary));
   z-index: 100;
 
