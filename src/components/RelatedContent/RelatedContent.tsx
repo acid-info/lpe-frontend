@@ -19,7 +19,10 @@ export default function RelatedContent({ data }: Props) {
       >
         <Grid>
           {data.data.map(
-            (block: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>) => {
+            (
+              block: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>,
+              idx: number,
+            ) => {
               if (!block.doc.document || !block.doc.document[0]) return null
 
               let refArticle = null
@@ -28,9 +31,9 @@ export default function RelatedContent({ data }: Props) {
               }
               switch (block.doc.__typename) {
                 case UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock:
-                  return <TextBlock doc={block.doc} />
+                  return <TextBlock key={`text-${idx}`} doc={block.doc} />
                 case UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock: {
-                  return <ImageBlock doc={block.doc} />
+                  return <ImageBlock key={`image-${idx}`} doc={block.doc} />
                 }
               }
             },

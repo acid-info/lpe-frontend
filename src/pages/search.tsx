@@ -16,7 +16,6 @@ import { ReactNode, useEffect, useRef, useState } from 'react'
 import { SearchLayout } from '@/layouts/SearchLayout'
 import { RelatedArticles } from '@/components/RelatedArticles'
 import { RelatedContent } from '@/components/RelatedContent'
-import { Section } from '@/components/Section/Section'
 
 interface SearchPageProps {
   articles: SearchResultItem<UnbodyGoogleDoc>[]

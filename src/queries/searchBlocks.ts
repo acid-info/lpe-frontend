@@ -16,6 +16,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             text
             tagName
             classNames
+            order
             document{
               ...on GoogleDoc{
                     title
@@ -36,6 +37,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             width
             height
             alt
+            order
             document{
               ...on GoogleDoc{
                     title

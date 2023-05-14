@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import styled from '@emotion/styled'
-import Image from 'next/image'
 
 import { SearchResultItem } from '@/types/data.types'
 import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
@@ -9,17 +8,17 @@ import { GridItem } from '../Grid/Grid'
 import { PostClassType } from '../Post/Post'
 import ContentBlockHeader from './ContentBlock.Header'
 import ContentBlockBody from './ContentBlock.Body'
+import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
 type Props = Omit<SearchResultItem<UnbodyImageBlock>, 'score'>
 
 const ImageBlock = ({ doc }: Props) => {
   return (
     <CustomGridItem className="w-2">
-      <BlockLink href={`/article/${doc.document[0].slug}`}>
+      {/* TODO: order not working for images */}
+      <BlockLink href={`/article/${doc.document[0].slug}#p-${doc.order}`}>
         <Container>
-          <ImageContainer>
-            <Image fill src={doc.url} alt={doc.alt} />
-          </ImageContainer>
+          <ResponsiveImage data={doc} />
           <ContentBlockHeader
             type={PostClassType.ARTICLE}
             date={doc?.document[0].modifiedAt}

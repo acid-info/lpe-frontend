@@ -15,7 +15,7 @@ type Props = Omit<SearchResultItem<UnbodyTextBlock>, 'score'>
 const TextBlock = ({ doc }: Props) => {
   return (
     <GridItem className="w-4">
-      <BlockLink href={`/article/${doc.document[0].slug}`}>
+      <BlockLink href={`/article/${doc.document[0].slug}#p-${doc.order}`}>
         <Container>
           <ContentBlockHeader
             type={PostClassType.ARTICLE}
