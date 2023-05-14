@@ -35,3 +35,9 @@ function editDistance(s1: string, s2: string) {
   }
   return costs[s2.length]
 }
+
+export const calcReadingTime = (text: string): number => {
+  const wordsPerMinute = 200
+  const numberOfWords = text.split(/\s/g).length
+  return Math.ceil(numberOfWords / wordsPerMinute)
+}

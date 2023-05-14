@@ -7,6 +7,8 @@ import ArticleStats from '../Article.Stats'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ArticleSummary from './Article.Summary'
+import { UnbodyGraphQl } from '../../../lib/unbody/unbody-content.types'
+import { calcReadingTime } from '@/utils/string.utils'
 import { Authors } from '@/components/Authors'
 import { Tags } from '@/components/Tags'
 
@@ -31,9 +33,24 @@ const ArticleHeader = ({
     )
   }, [blocks])
 
+  const readingTime = useMemo(() => {
+    return calcReadingTime(
+      blocks
+        .map((block) => {
+          if (
+            block.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
+          ) {
+            return block.text
+          }
+          return ''
+        })
+        .join(' '),
+    )
+  }, [blocks])
+
   return (
     <header>
-      <ArticleStats dateStr={modifiedAt} readingLength={3} />
+      <ArticleStats dateStr={modifiedAt} readingLength={readingTime} />
       <ArticleTitle
         id={toc[0].href.substring(1)}
         variant={'h1'}

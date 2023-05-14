@@ -48,7 +48,7 @@ export const RenderArticleBlock = ({
               component={block.tagName as any}
               genericFontFamily="sans-serif"
               className={extractClassFromFirstTag(block.html) || ''}
-              id={extractIdFromFirstTag(block.html) || ''}
+              id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
               dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
             />
           )

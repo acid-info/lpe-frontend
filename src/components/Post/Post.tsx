@@ -12,7 +12,6 @@ import {
 import { Authors } from '../Authors'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { Tags } from '@/components/Tags'
-import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 import {
   ResponsiveImage,
   ResponsiveImageProps,
