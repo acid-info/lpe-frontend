@@ -7,7 +7,7 @@ import { UnbodyTextBlock } from '@/lib/unbody/unbody.types'
 import { GridItem } from '../Grid/Grid'
 import { Typography } from '@acid-info/lsd-react'
 import { PostClassType } from '../Post/Post'
-import ContentBlockHeader from './ContentBlock.Header'
+import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 import ContentBlockBody from './ContentBlock.Body'
 
 type Props = Omit<SearchResultItem<UnbodyTextBlock>, 'score'>
@@ -18,7 +18,7 @@ const TextBlock = ({ doc }: Props) => {
       <BlockLink href={`/article/${doc.document[0].slug}#p-${doc.order}`}>
         <Container>
           <ContentBlockHeader
-            type={PostClassType.ARTICLE}
+            type={BlockType.TEXT}
             date={doc?.document[0].modifiedAt}
           />
           <Typography variant="body2" genericFontFamily="sans-serif">
