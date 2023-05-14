@@ -1,7 +1,17 @@
-import { UnbodyGetFilters } from './unbody.types'
+import { ImageBlockEnhanced, UnbodyGetFilters } from './unbody.types'
 import { UnbodyGraphQl } from './unbody-content.types'
+import axios from 'axios'
 
 const operators = Object.values(UnbodyGraphQl.Filters.WhereOperatorEnum)
+
+// export const enhanceImageBlock = async (block: UnbodyGraphQl.ImageBlock): Promise<ImageBlockEnhanced> => {
+//   try{
+//     const blurHash = axios.get(`${block.url}?fm=blurhash`).then((res) => res.data)
+//     console.log(blurHash)
+//   }catch(e){
+//     console.log(e)
+//   }
+// }
 
 export const parseFilterArgs = (args: UnbodyGetFilters = {}): string => {
   const parse = (obj: any): string | number => {

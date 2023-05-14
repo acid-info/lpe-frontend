@@ -8,6 +8,7 @@ import {
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { isAuthorsParagraph } from './html.utils'
 import { similarity } from './string.utils'
+import { ArticleBlocksOrders } from '@/configs/data.configs'
 
 function hasClassName(inputString: string, className: string) {
   const regex = new RegExp(`class\\s*=\\s*"[^"]*\\b${className}\\b[^"]*"`)
@@ -32,15 +33,19 @@ export const getBodyBlocks = ({
 
     const isTitle = classNames.includes('title')
     const isSubtitle = classNames.includes('subtitle')
+
     const isCoverImage =
-      b.order === 4 &&
+      b.order === ArticleBlocksOrders.cover &&
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock
+
     const isAuthor =
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock &&
       similarity(b.text, mentions.map((m) => m.name).join('')) > 0.8
+
     const isSummary =
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock &&
       summary === b.text
+
     const isTag =
       b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock &&
       similarity(b.text, tags.map((t) => `#${t}`).join(' ')) > 0.8
@@ -69,7 +74,7 @@ export const getArticleCover = (
   return (
     ((blocks || []).find(
       (b) =>
-        b.order === 4 &&
+        b.order === ArticleBlocksOrders.cover &&
         b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock,
     ) as UnbodyImageBlock) || null
   )

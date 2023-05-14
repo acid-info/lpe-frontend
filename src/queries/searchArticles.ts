@@ -17,6 +17,8 @@ export const getSearchArticlesQuery = (args: UnbodyGetFilters = defaultArgs) =>
                 url
                 alt
                 order
+                width
+                height
                 __typename
           }
         }
