@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 
 const Tags = ({ tags }: { tags: string[] }) => {
   const router = useRouter()
+  const { query } = router
+  const { topics } = query
 
   const onTagClick = (e: React.MouseEvent<HTMLElement>, tag: string) => {
     e.preventDefault()
@@ -27,6 +29,7 @@ const Tags = ({ tags }: { tags: string[] }) => {
           onClick={(e) => onTagClick(e, tag)}
           size="small"
           disabled={false}
+          variant={topics?.includes(tag) ? 'filled' : 'outlined'}
           key={`tag-${idx}`}
         >
           {tag}
