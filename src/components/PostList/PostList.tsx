@@ -4,16 +4,12 @@ import { Grid, GridItem } from '../Grid/Grid'
 import styled from '@emotion/styled'
 import Post, { PostDataProps } from '../Post/Post'
 import { Button, Typography } from '@acid-info/lsd-react'
-
-enum Layout {
-  XXXX = 'xxxx',
-  XXXX_XX = 'xxxx_xx',
-}
+import { PostListLayout } from '@/types/ui.types'
 
 type Props = {
   posts: PostDataProps[]
   pageSize?: number
-  layout?: Layout
+  layout?: PostListLayout
 }
 
 const getGridItemWidth = (index: number) => {
@@ -53,7 +49,7 @@ export const PostsList = (props: Props) => {
           postsToShow.map((post, index) => (
             <GridItem
               className={
-                props.layout === Layout.XXXX_XX
+                props.layout === PostListLayout.XXXX_XX
                   ? getGridItemWidth(index)
                   : 'w-4'
               }

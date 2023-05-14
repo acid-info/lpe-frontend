@@ -11,3 +11,8 @@ export enum ESearchStatus {
   ERROR = 'error',
   NOT_ACTIVE = 'not_active',
 }
+
+export const enum PostListLayout {
+  XXXX = 'xxxx',
+  XXXX_XX = 'xxxx_xx',
+}
