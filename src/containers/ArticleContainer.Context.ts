@@ -1,8 +1,8 @@
 import React from 'react'
 
 export type ArticleContainerContextType = {
-  tocIndex: number
-  setTocIndex: React.Dispatch<React.SetStateAction<number>>
+  tocId: string | null
+  setTocId: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 export const ArticleContainerContext =

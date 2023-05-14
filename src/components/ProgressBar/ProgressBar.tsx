@@ -21,7 +21,6 @@ export const ProgressBar = () => {
     <NextNProgress
       color={color}
       height={1}
-      showOnShallow={true}
       options={{
         showSpinner: false,
       }}

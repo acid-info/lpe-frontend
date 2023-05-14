@@ -13,12 +13,10 @@ interface Props {
 
 const ArticleContainer = (props: Props) => {
   const { data } = props
-  const [tocIndex, setTocIndex] = useState(0)
+  const [tocId, setTocId] = useState<string | null>(null)
 
   return (
-    <ArticleContainerContext.Provider
-      value={{ tocIndex: tocIndex, setTocIndex: setTocIndex }}
-    >
+    <ArticleContainerContext.Provider value={{ tocId, setTocId }}>
       <Grid
         style={{
           width: '100%',

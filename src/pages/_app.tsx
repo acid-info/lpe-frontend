@@ -58,17 +58,27 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
 
           :root {
             --lpe-nav-rendered-height: ${uiConfigs.navbarRenderedHeight}px;
+            --lpe-article-rendered-margin-top: ${uiConfigs.articleRenderedMT}px;
           }
 
-          //.lazyload,
-          //img.lazyloading {
-          //  opacity: 0;
-          //  transition: opacity 4000ms;
-          //}
-          //
-          //img.lazyloaded {
-          //  opacity: 1;
-          //}
+          a,
+          a:visited,
+          a:hover,
+          a:active,
+          a:focus {
+            color: rgb(var(--lsd-text-primary));
+          }
+
+          .anchor {
+            margin-top: calc(-1 * var(--lpe-article-rendered-margin-top));
+            padding-bottom: var(--lpe-article-rendered-margin-top);
+            margin-bottom: -16px;
+            display: block;
+            height: 0;
+            background: red;
+            opacity: 0;
+            z-index: -1;
+          }
         `}
       />
       <ProgressBar />

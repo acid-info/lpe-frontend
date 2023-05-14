@@ -5,25 +5,28 @@ import { Typography } from '@acid-info/lsd-react'
 import styles from './Article.module.css'
 import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
 import { Collapse } from '../Collapse'
+import Link from 'next/link'
+import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 
 type Props = {
-  toc: Array<Partial<GoogleDocEnhanced>>
+  toc: UnbodyGraphQl.Fragments.TocItem[]
 }
 
 export const MobileToc = ({ toc }: Props) => {
-  const { tocIndex, setTocIndex } = useArticleContainerContext()
+  const { tocId, setTocId } = useArticleContainerContext()
 
   return toc?.length > 0 ? (
     <Collapse className={styles.mobileToc} label="Contents">
       {toc.map((toc, idx) => (
-        <Content
-          onClick={() => setTocIndex(idx)}
-          active={idx === tocIndex}
-          variant="body3"
+        <TocItem
+          href={`${idx === 0 ? '#' : toc.href}`}
           key={idx}
+          active={tocId ? toc.href.substring(1) === tocId : idx === 0}
         >
-          {toc.title}
-        </Content>
+          <Typography variant="label2" genericFontFamily="sans-serif">
+            {toc.title}
+          </Typography>
+        </TocItem>
       ))}
     </Collapse>
   ) : null
@@ -35,7 +38,7 @@ const CustomTypography = styled(Typography)`
   white-space: pre-wrap;
 `
 
-const Content = styled(CustomTypography)<{ active: boolean }>`
+const TocItem = styled(Link)<{ active: boolean }>`
   padding: 8px 14px;
   background-color: ${(p) =>
     p.active

@@ -3,36 +3,39 @@ import { useArticleContainerContext } from '@/containers/ArticleContainer.Contex
 import { useSticky } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
-import { useArticleContext } from '@/context/article.context'
 import { useSearchBarContext } from '@/context/searchbar.context'
-
-export type TableOfContentsProps = Pick<UnbodyGoogleDoc, 'toc'>
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 
 type Props = {
-  contents?: TableOfContentsProps['toc']
+  contents?: UnbodyGraphQl.Fragments.TocItem[]
 }
 
 export default function TableOfContents({ contents, ...props }: Props) {
-  const articleContainer = useArticleContainerContext()
-  const { tocIndex, setTocIndex } = articleContainer
+  const { tocId, setTocId } = useArticleContainerContext()
   const dy = uiConfigs.navbarRenderedHeight + uiConfigs.postSectionMargin
   const { resultsNumber } = useSearchBarContext()
+  const router = useRouter()
 
   const { sticky, stickyRef, height } = useSticky<HTMLDivElement>(dy)
 
-  const handleSectionClick = (index: number) => {
-    //@ts-ignore
-    const section = document.getElementById(contents[index].href.substring(1))
-
-    const position = section?.getBoundingClientRect()
-
-    window.scrollTo({
-      top: Number(position?.top) + window.scrollY - 100,
-      behavior: 'smooth',
-    })
-    setTocIndex(index)
-  }
+  useEffect(() => {
+    const onHashChangeStart = (url: string) => {
+      const hash = url.split('#')[1]
+      console.log('hash', contents)
+      if (hash) {
+        setTocId(hash)
+      } else {
+        setTocId(null)
+      }
+    }
+    router.events.on('hashChangeStart', onHashChangeStart)
+    return () => {
+      router.events.off('hashChangeStart', onHashChangeStart)
+    }
+  }, [router.events])
 
   return (
     <Container
@@ -46,17 +49,16 @@ export default function TableOfContents({ contents, ...props }: Props) {
     >
       <Title variant="body3">Contents</Title>
       <Contents height={height}>
-        {/* @ts-ignore */}
         {contents?.map((content, index) => (
-          <Section
-            active={index === tocIndex}
-            onClick={() => handleSectionClick(index)}
+          <TocItem
+            href={`${index === 0 ? '#' : content.href}`}
             key={index}
+            active={tocId ? content.href.substring(1) === tocId : index === 0}
           >
-            <Typography variant="body3" genericFontFamily="sans-serif">
+            <Typography variant="label2" genericFontFamily="sans-serif">
               {content.title}
             </Typography>
-          </Section>
+          </TocItem>
         ))}
       </Contents>
     </Container>
@@ -76,6 +78,7 @@ const Container = styled.aside<{ dy: number; height: number }>`
   padding-bottom: 72px;
 
   transition: opacity 0.3s ease-in-out;
+
   &.hidden {
     opacity: 0;
   }
@@ -104,9 +107,10 @@ const Contents = styled.div<{ height: number }>`
   }
 `
 
-const Section = styled.section<{ active: boolean }>`
+const TocItem = styled(Link)<{ active: boolean }>`
   display: flex;
   padding: 8px 0 8px 12px;
+  text-decoration: none;
   border-left: ${(p) =>
     p.active
       ? '1px solid rgb(var(--lsd-border-primary))'
