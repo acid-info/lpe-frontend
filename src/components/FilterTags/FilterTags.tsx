@@ -31,6 +31,7 @@ export default function FilterTags(props: FilterTagsProps) {
 
 const Container = styled.div`
   padding: 8px 0;
+  max-width: 100%;
 `
 
 const Tags = styled.div`

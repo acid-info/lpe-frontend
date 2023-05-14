@@ -45,4 +45,5 @@ export const ArticleHeading = ({
 const Headline = styled(Typography)`
   white-space: pre-wrap;
   margin-top: 24px;
+  margin-bottom: 24px;
 `
