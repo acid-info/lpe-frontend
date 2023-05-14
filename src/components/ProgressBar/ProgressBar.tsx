@@ -1,21 +1,21 @@
 import useIsDarkState from '@/states/isDarkState/isDarkState'
 import { defaultThemes } from '@acid-info/lsd-react'
 import NextNProgress from 'nextjs-progressbar'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export const ProgressBar = () => {
   const isDark = useIsDarkState().get()
 
-  const getColor = () => {
+  const getColor = useCallback(() => {
     if (isDark) {
       return `rgb(${defaultThemes.dark.palette.primary})`
     } else {
       return `rgb(${defaultThemes.dark.palette.secondary})`
     }
-  }
+  }, [isDark])
 
   const [color, setColor] = useState(getColor())
-  useEffect(() => setColor(getColor()), [isDark])
+  useEffect(() => setColor(getColor()), [isDark, getColor])
 
   return (
     <NextNProgress

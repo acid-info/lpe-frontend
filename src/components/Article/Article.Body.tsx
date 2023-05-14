@@ -23,7 +23,7 @@ export default function ArticleBody({ data }: Props) {
     if (resultsNumber !== null) {
       setResultsHelperText(data.article.title)
     }
-  }, [resultsNumber])
+  }, [resultsNumber, data.article.title, setResultsHelperText])
 
   const ids = searchResultBlocks?.map((block) => block.doc._additional.id)
 

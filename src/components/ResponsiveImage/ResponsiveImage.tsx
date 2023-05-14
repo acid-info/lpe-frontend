@@ -13,12 +13,14 @@ export type ResponsiveImageProps = {
 
 export type Props = {
   data: UnbodyImageBlock | ImageBlockEnhanced
+  alt?: string
 } & ResponsiveImageProps
 
 export const ResponsiveImage = ({
   data,
   height = '100%',
   fill = false,
+  alt = 'alt',
   nextImageProps,
 }: Props) => {
   const [loaded, setLoaded] = useState(false)
@@ -48,8 +50,8 @@ export const ResponsiveImage = ({
         background: 'red',
       }}
     >
-      <img src={lazyUrl} />
-      <Image {...imageProps} />
+      <img src={lazyUrl} alt={alt} />
+      <Image {...imageProps} alt={alt} />
     </Container>
   )
 }

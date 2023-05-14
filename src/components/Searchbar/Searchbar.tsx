@@ -54,30 +54,30 @@ export default function Searchbar(props: SearchbarProps) {
 
   const isArticlePage = router.pathname === '/article/[slug]'
 
-  const performSearch = async (
-    q: string = query,
-    _filterTags: string[] = filterTags,
-  ) => {
-    //if it is article page, just call onSearch
-    if (isArticlePage) {
-      if (onSearch) {
-        onSearch(q, _filterTags)
+  const performSearch = useCallback(
+    async (q: string = query, _filterTags: string[] = filterTags) => {
+      //if it is article page, just call onSearch
+      if (isArticlePage) {
+        if (onSearch) {
+          onSearch(q, _filterTags)
+        }
+        return
       }
-      return
-    }
 
-    await router.push(
-      {
-        pathname: '/search',
-        query: {
-          ...addQueryToQuery(q),
-          ...addTopicsToQuery(_filterTags),
+      await router.push(
+        {
+          pathname: '/search',
+          query: {
+            ...addQueryToQuery(q),
+            ...addTopicsToQuery(_filterTags),
+          },
         },
-      },
-      undefined,
-      { shallow: true },
-    )
-  }
+        undefined,
+        { shallow: true },
+      )
+    },
+    [isArticlePage, router, filterTags, onSearch, query],
+  )
 
   useEffect(() => {
     setQuery(extractQueryFromQuery(router.query))
@@ -87,7 +87,7 @@ export default function Searchbar(props: SearchbarProps) {
     } else {
       setSearchScope(ESearchScope.GLOBAL)
     }
-  }, [router.query.query, router.query.topics])
+  }, [router.query, router.query.topics, router.pathname])
 
   const performClear = useCallback(() => {
     if (!isArticlePage) {
@@ -99,7 +99,7 @@ export default function Searchbar(props: SearchbarProps) {
     setFilterTags([])
     setActive(false)
     onReset && onReset()
-  }, [setQuery, setFilterTags])
+  }, [isArticlePage, onReset, performSearch, setQuery, setFilterTags])
 
   const handleTagClick = (tag: string) => {
     let newSelectedTags = [...filterTags]

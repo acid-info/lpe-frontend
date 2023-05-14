@@ -5,7 +5,7 @@ import { Collapse } from '@/components/Collapse'
 
 const FromSameAuthorsArticles = ({ data }: { data: GoogleDocEnhanced[] }) =>
   data.length > 0 ? (
-    <Collapse className={styles.relatedArticles} label="From same authors">
+    <Collapse className={styles.relatedArticles} label="From The Same Authors">
       {data.map((article, idx) => (
         <ArticleReference key={idx} data={article} />
       ))}

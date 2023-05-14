@@ -99,7 +99,7 @@ export default function Post({
   },
   ...props
 }: PostProps) {
-  const date = new Date(dateStr)
+  const _date = useMemo(() => new Date(dateStr), [dateStr])
 
   const _title = useMemo(
     () => (
@@ -138,7 +138,15 @@ export default function Post({
         </ThumbnailContainer>
       )
     }
-  }, [showImage, coverImage, aspectRatio, postType, _title, _description])
+  }, [
+    showImage,
+    coverImage,
+    aspectRatio,
+    postType,
+    imageProps,
+    _title,
+    _description,
+  ])
 
   const _header = useMemo(() => {
     if (postType === 'body')
@@ -151,7 +159,7 @@ export default function Post({
               </Typography>
               <Typography variant="body3">•</Typography>
               <Typography variant="body3" genericFontFamily="sans-serif">
-                {date.toLocaleString('en-GB', {
+                {_date.toLocaleString('en-GB', {
                   day: 'numeric',
                   month: 'long', // TODO: Should be uppercase
                   year: 'numeric',
@@ -162,7 +170,7 @@ export default function Post({
           </div>
         </>
       )
-  }, [postType, classType, date, _title])
+  }, [postType, classType, _date, _title])
 
   return (
     <Container {...props}>
