@@ -24,7 +24,6 @@ export default function TableOfContents({ contents, ...props }: Props) {
   useEffect(() => {
     const onHashChangeStart = (url: string) => {
       const hash = url.split('#')[1]
-      console.log('hash', contents)
       if (hash) {
         setTocId(hash)
       } else {
@@ -51,8 +50,8 @@ export default function TableOfContents({ contents, ...props }: Props) {
       <Contents height={height}>
         {contents?.map((content, index) => (
           <TocItem
-            href={`${index === 0 ? '#' : content.href}`}
             key={index}
+            href={`${index === 0 ? '#' : content.href}`}
             active={tocId ? content.href.substring(1) === tocId : index === 0}
           >
             <Typography variant="label2" genericFontFamily="sans-serif">
@@ -116,4 +115,8 @@ const TocItem = styled(Link)<{ active: boolean }>`
       ? '1px solid rgb(var(--lsd-border-primary))'
       : '1px solid transparent'};
   cursor: pointer;
+
+  label {
+    cursor: pointer;
+  }
 `

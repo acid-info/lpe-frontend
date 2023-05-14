@@ -1,8 +1,0 @@
-.collapse > div > button {
-  width: 100% !important;
-}
-
-.collapse > div {
-  display: flex;
-  flex-direction: column;
-}
