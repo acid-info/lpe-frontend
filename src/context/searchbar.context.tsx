@@ -7,6 +7,8 @@ type SearchBarContext = SearchbarProps & {
   setResultsNumber: (resultsNumber: number | null) => void
   resultsHelperText: string | null
   setResultsHelperText: (resultsHelperText: string | null) => void
+  tags: string[]
+  setTags: (tags: string[]) => void
 }
 
 const SearchBarContext = createContext<SearchBarContext>({
@@ -14,6 +16,8 @@ const SearchBarContext = createContext<SearchBarContext>({
   setResultsNumber: () => {},
   resultsHelperText: null,
   setResultsHelperText: () => {},
+  tags: [],
+  setTags: () => {},
 })
 
 export const SearchBarProvider = ({ children }: any) => {
@@ -21,7 +25,7 @@ export const SearchBarProvider = ({ children }: any) => {
   const [resultsHelperText, setResultsHelperText] = useState<string | null>(
     null,
   )
-
+  const [tags, setTags] = useState<string[]>([])
   return (
     <SearchBarContext.Provider
       value={{
@@ -29,6 +33,8 @@ export const SearchBarProvider = ({ children }: any) => {
         setResultsNumber,
         resultsHelperText,
         setResultsHelperText,
+        tags,
+        setTags,
       }}
     >
       {children}

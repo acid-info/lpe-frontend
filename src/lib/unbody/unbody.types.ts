@@ -37,6 +37,10 @@ export type UnbodyGraphQlResponseGoogleDoc = UnbodyGraphQlResponse<{
   GoogleDoc: UnbodyGoogleDoc[]
 }>
 
+export type UnbodyGraphQlResponseTopics = UnbodyGraphQlResponse<{
+  GoogleDoc: { tags: string[] }[]
+}>
+
 export type UnbodyGraphQlResponseGoogleCalendarEvent = UnbodyGraphQlResponse<{
   GoogleCalendarEvent: UnbodyGoogleCalendarEvent[]
 }>

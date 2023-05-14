@@ -7,14 +7,23 @@ import { Section } from '@/components/Section/Section'
 import { getArticleCover } from '@/utils/data.utils'
 import { FeaturedPost } from '@/components/FeaturedPost'
 import { PostListLayout } from '@/types/ui.types'
+import { useSearchBarContext } from '@/context/searchbar.context'
+import { useEffect } from 'react'
 
 type Props = {
   posts: PostDataProps[]
   featured: PostDataProps | null
   error: string | null
+  tags: string[]
 }
 
-export default function Home({ posts, featured }: Props) {
+export default function Home({ posts, featured, tags }: Props) {
+  const { setTags } = useSearchBarContext()
+
+  useEffect(() => {
+    setTags(tags)
+  }, [setTags, tags])
+
   return (
     <>
       {featured && (
@@ -34,6 +43,8 @@ export const getStaticProps = async () => {
     data: { posts, featured },
     errors,
   } = await api.getHomepagePosts()
+
+  const { data: topics, errors: topicErrors } = await api.getTopics()
 
   return {
     props: {
@@ -60,6 +71,7 @@ export const getStaticProps = async () => {
         }
       }),
       errors,
+      tags: topics || [],
     },
   }
 }
