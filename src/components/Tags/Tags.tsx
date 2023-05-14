@@ -1,6 +1,7 @@
 import { addTopicsToQuery } from '@/utils/search.utils'
 import { Tag } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const Tags = ({ tags }: { tags: string[] }) => {
@@ -8,40 +9,30 @@ const Tags = ({ tags }: { tags: string[] }) => {
   const { query } = router
   const { topics } = query
 
-  const onTagClick = (e: React.MouseEvent<HTMLElement>, tag: string) => {
-    e.preventDefault()
-    router.push(
-      {
-        pathname: '/search',
-        query: {
-          ...addTopicsToQuery([tag]),
-        },
-      },
-      undefined,
-      { shallow: true },
-    )
-  }
-
   return tags.length > 0 ? (
-    <TagContainer>
+    <TagsContainer>
       {tags.map((tag, idx) => (
-        <Tag
-          onClick={(e) => onTagClick(e, tag)}
-          size="small"
-          disabled={false}
-          variant={topics?.includes(tag) ? 'filled' : 'outlined'}
-          key={`tag-${idx}`}
-        >
-          {tag}
-        </Tag>
+        <Link key={`tag-${idx}`} href={`/search?topics=${tag}`}>
+          <Tag
+            size="small"
+            disabled={false}
+            variant={topics?.includes(tag) ? 'filled' : 'outlined'}
+          >
+            {tag}
+          </Tag>
+        </Link>
       ))}
-    </TagContainer>
+    </TagsContainer>
   ) : null
 }
 
-const TagContainer = styled.div`
+const TagsContainer = styled.div`
   display: flex;
   gap: 8px;
+
+  a {
+    text-decoration: none;
+  }
 `
 
 export default Tags

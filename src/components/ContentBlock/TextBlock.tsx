@@ -15,21 +15,16 @@ type Props = Omit<SearchResultItem<UnbodyTextBlock>, 'score'>
 const TextBlock = ({ doc }: Props) => {
   return (
     <GridItem className="w-4">
-      <BlockLink href={`/article/${doc.document[0].slug}#p-${doc.order}`}>
-        <Container>
-          <ContentBlockHeader
-            type={BlockType.TEXT}
-            date={doc?.document[0].modifiedAt}
-          />
-          <Typography variant="body2" genericFontFamily="sans-serif">
-            {doc.text}
-          </Typography>
-          <ContentBlockBody
-            title={doc.document[0].title}
-            author="Jason Freeman"
-          />
-        </Container>
-      </BlockLink>
+      <Container>
+        <ContentBlockHeader
+          type={BlockType.TEXT}
+          date={doc?.document[0].modifiedAt}
+        />
+        <Typography variant="body2" genericFontFamily="sans-serif">
+          {doc.text}
+        </Typography>
+        <ContentBlockBody data={doc} />
+      </Container>
     </GridItem>
   )
 }
