@@ -1,3 +1,4 @@
+import React from 'react'
 import { Typography } from '@acid-info/lsd-react'
 import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import styled from '@emotion/styled'
@@ -124,7 +125,7 @@ export default function Post({
 
   const _thumbnail = useMemo(() => {
     if (!showImage || !coverImage) return null
-    if (postType === 'body') {
+    if (postType === PostType.BODY) {
       return <ResponsiveImage {...imageProps} data={coverImage} />
     } else {
       // TBD
