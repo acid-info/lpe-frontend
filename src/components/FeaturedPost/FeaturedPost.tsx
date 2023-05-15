@@ -11,26 +11,24 @@ const FeaturedPost = ({ post }: Props) => {
   return (
     <CustomGrid>
       <GridItem className="w-16">
-        <PostLink href={`/article/${post.slug}`}>
-          <PostWrapper>
-            <Post
-              data={post}
-              appearance={{
-                imageProps: {
-                  fill: true,
-                  height: '480px',
-                  nextImageProps: post.coverImage
-                    ? {
-                        quality: 100,
-                        width: post.coverImage?.width * 2,
-                        height: post.coverImage?.height * 2,
-                      }
-                    : {},
-                },
-              }}
-            />
-          </PostWrapper>
-        </PostLink>
+        <PostWrapper>
+          <Post
+            data={post}
+            appearance={{
+              imageProps: {
+                fill: true,
+                height: '480px',
+                nextImageProps: post.coverImage
+                  ? {
+                      quality: 100,
+                      width: post.coverImage?.width * 2,
+                      height: post.coverImage?.height * 2,
+                    }
+                  : {},
+              },
+            }}
+          />
+        </PostWrapper>
       </GridItem>
     </CustomGrid>
   )

@@ -14,7 +14,6 @@ export default function ArticleReference({
   data: { title, modifiedAt, mentions, slug },
   ...props
 }: Props) {
-  const router = useRouter()
   const localDate = new Date(modifiedAt).toLocaleString('en-GB', {
     day: 'numeric',
     month: 'long',
@@ -22,10 +21,12 @@ export default function ArticleReference({
   })
 
   return (
-    <ReferenceLink href={slug} {...props}>
-      <Typography component="span" variant="body1">
-        {title}
-      </Typography>
+    <Container {...props}>
+      <ArticleLink href={slug}>
+        <Typography component="span" variant="body1">
+          {title}
+        </Typography>
+      </ArticleLink>
       <Info>
         <Authors
           flexDirection={AuthorsDirection.ROW}
@@ -38,22 +39,24 @@ export default function ArticleReference({
           {localDate}
         </Typography>
       </Info>
-    </ReferenceLink>
+    </Container>
   )
 }
 
-const ReferenceLink = styled(Link)`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px 14px;
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
   text-decoration: none;
-  cursor: pointer;
 
   &:last-child {
     border-bottom: none;
   }
+`
 
+const ArticleLink = styled(Link)`
+  text-decoration: none;
   &:hover {
     text-decoration: underline;
   }

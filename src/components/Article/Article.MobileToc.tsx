@@ -24,7 +24,7 @@ export const MobileToc = ({ toc }: Props) => {
         >
           <CustomTypography variant="label2" genericFontFamily="sans-serif">
             {toc.title}
-          </Typography>
+          </CustomTypography>
         </TocItem>
       ))}
     </Collapse>
