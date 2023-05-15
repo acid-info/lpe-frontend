@@ -4,16 +4,8 @@ import styled from '@emotion/styled'
 export default function Hero() {
   return (
     <Container>
-      <Title genericFontFamily="serif" component="span" variant="h2">
-        LOGOS →{' '}
-        <Title
-          style={{ whiteSpace: 'nowrap' }}
-          genericFontFamily="serif"
-          component="span"
-          variant="h2"
-        >
-          PRESS ENGINE
-        </Title>
+      <Title genericFontFamily="serif" component="h1" variant="h1">
+        LOGOS → PRESS ENGINE
       </Title>
       <Description component="div" variant="label2">
         Blog with media written by Logos members
