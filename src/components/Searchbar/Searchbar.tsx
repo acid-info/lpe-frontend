@@ -264,6 +264,7 @@ const SearchBox = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  min-height: 44px;
 `
 
 const GlobalSearchTrigger = styled(Link)`

@@ -10,8 +10,8 @@ export enum AuthorsDirection {
 const Authors = ({
   mentions,
   email,
-  gap = 16,
-  flexDirection = AuthorsDirection.COLUMN,
+  gap = 12,
+  flexDirection = AuthorsDirection.ROW,
 }: {
   mentions: UnbodyGraphQl.Fragments.MentionItem[]
   email: boolean
@@ -21,7 +21,7 @@ const Authors = ({
   return mentions?.length > 0 ? (
     <AuthorsContainer gap={gap} flexDirection={flexDirection}>
       {mentions.map((mention) => (
-        <Author key={mention.name} mention={mention} email={email} />
+        <Author gap={gap} key={mention.name} mention={mention} email={email} />
       ))}
     </AuthorsContainer>
   ) : null
@@ -34,6 +34,16 @@ const AuthorsContainer = styled.div<{
   display: flex;
   flex-direction: ${({ flexDirection }) => flexDirection};
   gap: ${({ gap }) => gap}px;
+  align-items: center;
+
+  // WIP
+  /* &:not(:last-child) {
+    &:after {
+      justify-content: center;
+      content: '•';
+      width: 12px;
+    }
+  } */
 `
 
 export default Authors

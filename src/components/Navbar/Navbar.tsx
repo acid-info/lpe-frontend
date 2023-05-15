@@ -1,9 +1,8 @@
 import styled from '@emotion/styled'
-import { IconButton, Typography } from '@acid-info/lsd-react'
+import { IconButton } from '@acid-info/lsd-react'
 import { LogosIcon } from '../Icons/LogosIcon'
 import { SunIcon } from '../Icons/SunIcon'
 import { MoonIcon } from '../Icons/MoonIcon'
-import { useRouter } from 'next/router'
 import { uiConfigs } from '@/configs/ui.configs'
 import Link from 'next/link'
 
@@ -22,9 +21,6 @@ export default function Navbar({ isDark, toggle }: NavbarProps) {
         <IconButton size="small" onClick={() => toggle()}>
           {isDark ? <SunIcon color="primary" /> : <MoonIcon color="primary" />}
         </IconButton>
-        <Selector size="small">
-          <Typography variant="label2">Aa</Typography>
-        </Selector>
       </Icons>
     </Container>
   )
@@ -32,19 +28,19 @@ export default function Navbar({ isDark, toggle }: NavbarProps) {
 
 const Container = styled.nav`
   display: flex;
-  padding: 8px;
+  padding: 8px 0;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid rgb(var(--lsd-theme-primary));
   position: fixed;
   top: 0;
   width: 100%;
+  height: 44px;
   max-width: ${uiConfigs.maxContainerWidth + 40}px; // TBD
   background: rgb(var(--lsd-surface-primary));
   z-index: 100;
   box-sizing: border-box;
 
-  // to center-align logo
   &:last-child {
     margin-left: auto;
   }
@@ -55,6 +51,15 @@ const Container = styled.nav`
     width: 54px;
     margin: 1px auto 1px 1px;
     visibility: hidden;
+  }
+
+  /* temporary breakpoint */
+  @media (max-width: 768px) {
+    padding: 8px;
+
+    &:before {
+      display: none;
+    }
   }
 `
 

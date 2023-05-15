@@ -18,6 +18,7 @@ import {
   ResponsiveImageProps,
 } from '../ResponsiveImage/ResponsiveImage'
 import Link from 'next/link'
+import { AuthorsDirection } from '../Authors/Authors'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -78,6 +79,7 @@ export type PostProps = CommonProps &
   React.HTMLAttributes<HTMLDivElement> & {
     appearance?: PostAppearanceProps
     data: PostDataProps
+    isFeatured?: boolean
   }
 
 export default function Post({
@@ -99,6 +101,7 @@ export default function Post({
     slug,
     tags = [],
   },
+  isFeatured = false,
   ...props
 }: PostProps) {
   const _date = useMemo(() => new Date(dateStr), [dateStr])
@@ -107,24 +110,28 @@ export default function Post({
     () => (
       <TitleLink href={`/article/${slug}`}>
         <CustomTypography
-          variant={size === PostSize.SMALL ? 'h4' : 'h2'}
+          variant={size === PostSize.SMALL ? 'h4' : 'h1'}
           genericFontFamily="serif"
         >
           {title}
         </CustomTypography>
       </TitleLink>
     ),
-    [title, size, slug],
+    [title, size, slug, isFeatured],
   )
 
   const _description = useMemo(
     () =>
       classType == PostClassType.ARTICLE && (
-        <CustomTypography variant="body3" genericFontFamily="sans-serif">
+        <Description
+          variant={size === PostSize.SMALL ? 'body3' : 'h6'}
+          genericFontFamily="sans-serif"
+          isFeatured={isFeatured}
+        >
           {description}
-        </CustomTypography>
+        </Description>
       ),
-    [classType, description],
+    [classType, description, isFeatured],
   )
 
   const _thumbnail = useMemo(() => {
@@ -152,7 +159,7 @@ export default function Post({
     if (postType === 'body')
       return (
         <>
-          <div>
+          <HeaderContainer isFeatured={isFeatured}>
             <Row>
               <Typography variant="body3" genericFontFamily="sans-serif">
                 {classType.toUpperCase()}
@@ -167,10 +174,10 @@ export default function Post({
               </Typography>
             </Row>
             {_title}
-          </div>
+          </HeaderContainer>
         </>
       )
-  }, [postType, classType, _date, _title])
+  }, [postType, classType, isFeatured, _date, _title])
 
   return (
     <Container {...props}>
@@ -178,7 +185,12 @@ export default function Post({
       {_header}
       {postType === 'body' && _description}
       {classType === 'article' ? (
-        <Authors mentions={mentions} email={false} />
+        <Authors
+          mentions={mentions}
+          email={false}
+          flexDirection={AuthorsDirection.ROW}
+          gap={8}
+        />
       ) : (
         <PodcastAuthor>
           <LogosCircleIcon color="primary" />
@@ -197,10 +209,6 @@ const Container = styled.div`
   flex-direction: column;
   position: 'relative';
   gap: 16px;
-`
-
-const Thumbnail = styled(Image)`
-  object-fit: cover;
 `
 
 const Row = styled.div`
@@ -225,4 +233,13 @@ const PodcastAuthor = styled.div`
 
 const TitleLink = styled(Link)`
   text-decoration: none;
+  width: fit-content;
+`
+
+const HeaderContainer = styled(CustomTypography)<{ isFeatured: boolean }>`
+  margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
+`
+
+const Description = styled(CustomTypography)<{ isFeatured: boolean }>`
+  margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
 `

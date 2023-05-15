@@ -70,7 +70,7 @@ const Container = styled.aside<{ dy: number; height: number }>`
   flex-direction: column;
   width: 162px;
   box-sizing: border-box;
-  height: ${(p) => (p.height > 0 ? `${p.height}px` : 'fit-content')};
+  /* height: ${(p) => (p.height > 0 ? `${p.height}px` : 'fit-content')}; */
   position: sticky;
   top: ${(p) => `${p.dy}px`};
   margin-left: 16px;

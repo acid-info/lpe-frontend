@@ -29,6 +29,7 @@ const Tags = ({ tags }: { tags: string[] }) => {
 const TagsContainer = styled.div`
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 
   a {
     text-decoration: none;

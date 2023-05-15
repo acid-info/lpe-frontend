@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Grid, GridItem } from '../Grid/Grid'
 import styled from '@emotion/styled'

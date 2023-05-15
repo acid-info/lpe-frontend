@@ -171,12 +171,13 @@ export default function Footer() {
   )
 }
 
-const SECTION_MARGIN = 60
+const SECTION_MARGIN = 50
 
 const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
+  margin-top: 196px;
   padding: 16px;
   border-top: 1px solid rgb(var(--lsd-border-primary));
 `
@@ -246,6 +247,7 @@ const LinkGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 34px;
+  gap: 4px;
 `
 
 const ScrollToTop = styled(Button)`

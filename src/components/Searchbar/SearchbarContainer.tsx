@@ -41,6 +41,7 @@ export function SearchbarContainer({ children, onUnfocus = nope }: Props) {
 const SearchBarWrapper = styled.div<Props>`
   display: block;
   width: 100%;
+  min-height: 44px;
   background: rgb(var(--lsd-surface-primary));
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
   border-top: 1px solid rgb(var(--lsd-border-primary));
@@ -53,6 +54,7 @@ const SearchBarWrapper = styled.div<Props>`
     position: fixed;
     top: ${uiConfigs.navbarRenderedHeight - 1}px;
     z-index: 100;
-    max-width: ${uiConfigs.maxContainerWidth + 40}px; // TBD
+    max-width: ${uiConfigs.maxContainerWidth + 40}px;
+    border-top: none;
   }
 `
