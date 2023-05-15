@@ -15,7 +15,19 @@ const FeaturedPost = ({ post }: Props) => {
           <PostWrapper>
             <Post
               data={post}
-              appearance={{ imageProps: { fill: true, height: '480px' } }}
+              appearance={{
+                imageProps: {
+                  fill: true,
+                  height: '480px',
+                  nextImageProps: post.coverImage
+                    ? {
+                        quality: 100,
+                        width: post.coverImage?.width * 2,
+                        height: post.coverImage?.height * 2,
+                      }
+                    : {},
+                },
+              }}
             />
           </PostWrapper>
         </PostLink>

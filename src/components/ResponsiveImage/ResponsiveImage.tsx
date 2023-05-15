@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import Image, { ImageProps } from 'next/image'
 import { ImageBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
-import Imgix from 'react-imgix'
 import styled from '@emotion/styled'
-import { Blurhash } from 'react-blurhash'
 
 export type ResponsiveImageProps = {
   height?: number | string
-  nextImageProps?: ImageProps
+  nextImageProps?: Partial<ImageProps>
   fill?: boolean
 }
 
@@ -48,7 +46,12 @@ export const ResponsiveImage = ({
         background: 'red',
       }}
     >
-      <img src={lazyUrl} />
+      <Image
+        src={lazyUrl}
+        alt={data.alt}
+        width={data.width}
+        height={data.height}
+      />
       <Image {...imageProps} />
     </Container>
   )
