@@ -22,8 +22,7 @@ const ArticleContainer = (props: Props) => {
           width: '100%',
         }}
       >
-        <Gap className={'w-1'} />
-        <GridItem className={'w-2'}>
+        <GridItem className={'w-3'}>
           <TableOfContents contents={data.article.toc ?? []} />
         </GridItem>
         <Gap className={'w-1'} />

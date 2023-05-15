@@ -15,7 +15,7 @@ export const MobileToc = ({ toc }: Props) => {
   const { tocId } = useArticleContainerContext()
 
   return toc?.length > 0 ? (
-    <Collapse className={styles.mobileToc} label="Contents">
+    <Collapse className={styles.mobileToc} label="Contents" initOpen={false}>
       {toc.map((toc, idx) => (
         <TocItem
           href={`${idx === 0 ? '#' : toc.href}`}
@@ -23,7 +23,9 @@ export const MobileToc = ({ toc }: Props) => {
           active={tocId ? toc.href.substring(1) === tocId : idx === 0}
         >
           <CustomTypography variant="label2" genericFontFamily="sans-serif">
-            {toc.title}
+            {(tocId ? toc.href.substring(1) === tocId : idx === 0)
+              ? `☞ ${toc.title} ☜`
+              : toc.title}
           </CustomTypography>
         </TocItem>
       ))}
@@ -39,6 +41,8 @@ const CustomTypography = styled(Typography)`
 
 const TocItem = styled(Link)<{ active: boolean }>`
   padding: 8px 14px;
+  text-decoration: none;
+
   background-color: ${(p) =>
     p.active
       ? 'rgb(var(--lsd-theme-primary))'

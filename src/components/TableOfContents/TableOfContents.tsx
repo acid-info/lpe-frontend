@@ -15,7 +15,7 @@ type Props = {
 
 export default function TableOfContents({ contents, ...props }: Props) {
   const { tocId, setTocId } = useArticleContainerContext()
-  const dy = uiConfigs.navbarRenderedHeight + uiConfigs.postSectionMargin
+  const dy = uiConfigs.navbarRenderedHeight + 2 * uiConfigs.articleSectionMargin
   const { resultsNumber } = useSearchBarContext()
   const router = useRouter()
 
@@ -46,13 +46,16 @@ export default function TableOfContents({ contents, ...props }: Props) {
         sticky ? 'sticky' : ''
       }`}
     >
-      <Title variant="body3">Contents</Title>
+      <Title variant="body3" component={'div'}>
+        Contents
+      </Title>
       <Contents height={height}>
         {contents?.map((content, index) => (
           <TocItem
             href={`${index === 0 ? '#' : content.href}`}
             key={index}
             active={tocId ? content.href.substring(1) === tocId : index === 0}
+            className={`level-${content.level}`}
           >
             <Typography variant="label2" genericFontFamily="sans-serif">
               {content.title}
@@ -67,13 +70,10 @@ export default function TableOfContents({ contents, ...props }: Props) {
 const Container = styled.aside<{ dy: number; height: number }>`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
-  width: 162px;
+  flex-direction: row;
   box-sizing: border-box;
-  /* height: ${(p) => (p.height > 0 ? `${p.height}px` : 'fit-content')}; */
   position: sticky;
   top: ${(p) => `${p.dy}px`};
-  margin-left: 16px;
   padding-bottom: 72px;
 
   transition: opacity 0.3s ease-in-out;
@@ -96,6 +96,7 @@ const Contents = styled.div<{ height: number }>`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+
   height: calc(
     100vh -
       ${uiConfigs.navbarRenderedHeight + uiConfigs.postSectionMargin + 40}px
@@ -108,7 +109,7 @@ const Contents = styled.div<{ height: number }>`
 
 const TocItem = styled(Link)<{ active: boolean }>`
   display: flex;
-  padding: 8px 0 8px 12px;
+  padding: 4px 16px 4px 16px;
   text-decoration: none;
   border-left: ${(p) =>
     p.active
@@ -118,5 +119,13 @@ const TocItem = styled(Link)<{ active: boolean }>`
 
   label {
     cursor: pointer;
+  }
+
+  &.level-1 {
+  }
+  &.level-2 {
+  }
+  &.level-3 {
+    text-indent: 16px;
   }
 `

@@ -37,14 +37,11 @@ export default function ArticleBody({ data }: Props) {
   return (
     <ArticleContainer>
       {resultsNumber === null && <ArticleHeader {...data.article} />}
-      {resultsNumber === null && <MobileToc toc={data.article.toc} />}
-      <TextContainer>
-        {/*@ts-ignore*/}
-        <ArticleBlocks data={{ ...data.article, blocks }} />
-        {resultsNumber === 0 && (
-          <Typography variant="body1">No results found</Typography>
-        )}
-      </TextContainer>
+      {/*@ts-ignore*/}
+      <ArticleBlocks data={{ ...data.article, blocks }} />
+      {resultsNumber === 0 && (
+        <Typography variant="body1">No results found</Typography>
+      )}
       <ArticleFooter data={data} />
     </ArticleContainer>
   )
@@ -69,6 +66,5 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 24px;
   margin-bottom: 80px;
 `
