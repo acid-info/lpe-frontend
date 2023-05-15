@@ -118,7 +118,7 @@ export default function Footer() {
                     {title}:
                   </Typography>
                 </div>
-                <div>
+                <Row>
                   {links.map(({ label, href }, idx) => (
                     <Link
                       key={'second-group-link' + idx}
@@ -130,7 +130,7 @@ export default function Footer() {
                       {label}
                     </Link>
                   ))}
-                </div>
+                </Row>
               </LinkGroup>
             ))}
           </SecondLinksContainer>
@@ -146,7 +146,7 @@ export default function Footer() {
                     {title}:
                   </Typography>
                 </div>
-                <div>
+                <Row>
                   {links.map(({ label, href }, idx) => (
                     <Link
                       key={'third-group-link' + idx}
@@ -158,7 +158,7 @@ export default function Footer() {
                       {label}
                     </Link>
                   ))}
-                </div>
+                </Row>
               </LinkGroup>
             ))}
           </ThirdLinksContainer>
@@ -177,7 +177,7 @@ const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  margin-top: 196px;
+  margin-top: 200px;
   padding: 16px;
   border-top: 1px solid rgb(var(--lsd-border-primary));
 `
@@ -188,16 +188,14 @@ const Section = styled.div`
   flex-wrap: wrap;
   width: 50%;
 
-  /* temporary breakpoint */
   @media (max-width: 768px) {
     width: 100%;
   }
 `
 
 const OrgInfo = styled(Section)`
-  /* temporary breakpoint */
   @media (max-width: 768px) {
-    margin-bottom: ${SECTION_MARGIN}px;
+    margin-bottom: 76px;
   }
 `
 
@@ -205,6 +203,7 @@ const Links = styled(Section)`
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 8px;
 `
 
 const Link = styled(Typography)`
@@ -212,11 +211,16 @@ const Link = styled(Typography)`
   &:not(:last-child) {
     &:after {
       content: '•';
-      margin: 0 8px;
+      margin-left: 8px;
       text-decoration: none;
       display: inline-block;
     }
   }
+`
+
+const Row = styled.div`
+  display: flex;
+  gap: 8px;
 `
 
 const Wrapper = styled.div`
@@ -241,6 +245,10 @@ const SecondLinksContainer = styled.div`
 const ThirdLinksContainer = styled.div`
   flex: 1;
   margin-bottom: ${SECTION_MARGIN}px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 80px;
+  }
 `
 
 const LinkGroup = styled.div`
@@ -248,6 +256,10 @@ const LinkGroup = styled.div`
   flex-direction: column;
   margin-bottom: 34px;
   gap: 4px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
 `
 
 const ScrollToTop = styled(Button)`

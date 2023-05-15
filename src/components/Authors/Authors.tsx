@@ -25,7 +25,7 @@ const Authors = ({
         index < mentions.length - 1 ? (
           <>
             <Author key={mention.name} mention={mention} email={email} />
-            <Dot variant={'body2'}>.</Dot>
+            <Dot variant={'body2'}>•</Dot>
           </>
         ) : (
           <Author key={mention.name} mention={mention} email={email} />
@@ -43,20 +43,12 @@ const AuthorsContainer = styled.div<{
   flex-direction: ${({ flexDirection }) => flexDirection};
   gap: ${({ gap }) => gap}px;
   align-items: center;
-
-  // WIP
-  /* &:not(:last-child) {
-    &:after {
-      justify-content: center;
-      content: '•';
-      width: 12px;
-    }
-  } */
 `
 
 const Dot = styled(Typography)`
-  transform: translateY(1px);
-  font-size: 18px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 `
 
 export default Authors
