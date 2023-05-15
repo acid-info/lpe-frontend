@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           }
 
           #__next {
-            max-width: 1440px;
+            max-width: ${uiConfigs.maxContainerWidth}px;
             margin-left: auto;
             margin-right: auto;
           }

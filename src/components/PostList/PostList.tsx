@@ -67,7 +67,7 @@ export const PostsList = (props: Props) => {
         )}
       </Grid>
       {posts.length > pageSize && (
-        <Button onClick={() => handleMoreOrLess()}>
+        <Button onClick={() => handleMoreOrLess()} size={'large'}>
           {page * pageSize < posts.length ? 'Load More' : 'Show Less'}
         </Button>
       )}

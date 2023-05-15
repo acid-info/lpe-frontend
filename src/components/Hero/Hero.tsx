@@ -1,5 +1,6 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { uiConfigs } from '@/configs/ui.configs'
 
 export default function Hero() {
   return (

@@ -7,6 +7,7 @@ import { ESearchScope } from '@/types/ui.types'
 import styles from './Search.layout.module.css'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
+import { uiConfigs } from '@/configs/ui.configs'
 
 export default function SearchLayout(props: PropsWithChildren<any>) {
   const isDarkState = useIsDarkState()
@@ -14,7 +15,8 @@ export default function SearchLayout(props: PropsWithChildren<any>) {
     <>
       <header className={styles.header}>
         <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
-        <NavbarFiller />
+        {/*<NavbarFiller />*/}
+        <div style={{ height: `${uiConfigs.navbarRenderedHeight - 2}px` }} />
         <Searchbar searchScope={ESearchScope.ARTICLE} />
       </header>
       <Main>{props.children}</Main>

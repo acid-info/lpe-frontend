@@ -20,7 +20,6 @@ export default function ArticleLayout({ children }: Props) {
     <>
       <header className={styles.header}>
         <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
-        <NavbarFiller />
         <Searchbar
           searchScope={ESearchScope.ARTICLE}
           onSearch={onSearch}

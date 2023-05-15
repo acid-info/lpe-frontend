@@ -24,11 +24,6 @@ export default function RelatedContent({ data }: Props) {
               idx: number,
             ) => {
               if (!block.doc.document || !block.doc.document[0]) return null
-
-              let refArticle = null
-              if (UnbodyGraphQl.UnbodyDocumentTypeNames.GoogleDoc) {
-                refArticle = block.doc.document[0]
-              }
               switch (block.doc.__typename) {
                 case UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock:
                   return <TextBlock key={`text-${idx}`} doc={block.doc} />

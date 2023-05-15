@@ -36,7 +36,7 @@ const Container = styled.nav`
   top: 0;
   width: 100%;
   height: 44px;
-  max-width: ${uiConfigs.maxContainerWidth + 40}px; // TBD
+  max-width: ${uiConfigs.maxContainerWidth}px;
   background: rgb(var(--lsd-surface-primary));
   z-index: 100;
   box-sizing: border-box;

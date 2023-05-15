@@ -8,16 +8,15 @@ import {
 import styles from './Search.module.css'
 import { SearchbarContainer } from '@/components/Searchbar/SearchbarContainer'
 import { copyConfigs } from '@/configs/copy.configs'
-import { ESearchScope, ESearchStatus } from '@/types/ui.types'
+import { ESearchScope } from '@/types/ui.types'
 import React, { useCallback, useEffect, useState } from 'react'
 import FilterTags from '@/components/FilterTags/FilterTags'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
-import { ParsedUrlQuery } from 'querystring'
+
 import {
   addQueryToQuery,
   addTopicsToQuery,
-  createMinimizedSearchText,
   createSearchLink,
   extractQueryFromQuery,
   extractTopicsFromQuery,
@@ -35,6 +34,8 @@ export type SearchbarProps = {
 export default function Searchbar(props: SearchbarProps) {
   const { onSearch, onReset } = props
   const { resultsNumber, resultsHelperText, tags } = useSearchBarContext()
+
+  const [placeholder, setPlaceholder] = useState<string>()
 
   const [searchScope, setSearchScope] = useState<ESearchScope>(
     props.searchScope || ESearchScope.GLOBAL,
@@ -119,10 +120,34 @@ export default function Searchbar(props: SearchbarProps) {
 
   const isCollapsed = isValidSearchInput() && !active
 
-  const placeholder =
-    searchScope === ESearchScope.GLOBAL
-      ? copyConfigs.search.searchbarPlaceholders.global()
-      : copyConfigs.search.searchbarPlaceholders.article()
+  useEffect(() => {
+    if (active) {
+      setPlaceholder('')
+    } else {
+      setTimeout(() => {
+        setPlaceholder(
+          searchScope === ESearchScope.GLOBAL
+            ? copyConfigs.search.searchbarPlaceholders.global()
+            : copyConfigs.search.searchbarPlaceholders.article(),
+        )
+      }, 130)
+    }
+  }, [active, searchScope])
+
+  const showResultsNumber = resultsNumber !== null && active
+  const renderTagFilters = tags.length > 0 && !isArticlePage
+  const showTagFilters = renderTagFilters && active
+
+  let height = 45
+  if (active) {
+    height += 10
+  }
+  if (showResultsNumber) {
+    height += isArticlePage ? 22 : 26
+  }
+  if (showTagFilters) {
+    height += 36
+  }
 
   return (
     <SearchbarContainer
@@ -131,6 +156,10 @@ export default function Searchbar(props: SearchbarProps) {
         if (router.query.query && router.query.query.length > 0) {
           setQuery(router.query.query as string)
         }
+      }}
+      style={{
+        transition: 'height 150ms ease-in-out',
+        height: active ? `${height}px` : 'auto',
       }}
     >
       <SearchBox>
@@ -145,7 +174,7 @@ export default function Searchbar(props: SearchbarProps) {
           }}
           style={{
             transition: 'height 150ms ease-in-out',
-            height: active ? '56px' : 'auto',
+            // height: active ? '56px' : 'auto',
           }}
           inputProps={{
             style: {
@@ -175,8 +204,8 @@ export default function Searchbar(props: SearchbarProps) {
           </IconButton>
         </div>
       </SearchBox>
-      {!isArticlePage && (
-        <TagsWrapper className={active ? 'active' : ''}>
+      {renderTagFilters && (
+        <TagsWrapper className={showTagFilters ? 'active' : ''}>
           <FilterTags
             tags={tags}
             onTagClick={handleTagClick}
@@ -184,22 +213,19 @@ export default function Searchbar(props: SearchbarProps) {
           />
         </TagsWrapper>
       )}
-      {resultsNumber !== null && (
+      {showResultsNumber && (
         <ResultsStatus>
           <Typography variant={'subtitle2'}>{resultsNumber} matches</Typography>
-          {resultsHelperText && (
-            <Typography variant={'subtitle2'}>.</Typography>
-          )}
-          {resultsHelperText && (
-            <Typography variant={'subtitle2'}>{resultsHelperText}</Typography>
-          )}
         </ResultsStatus>
       )}
       <Collapsed
         className={isCollapsed ? 'enabled' : ''}
         onClick={() => setActive(true)}
+        variant={'subtitle2'}
         dangerouslySetInnerHTML={{
-          __html: createMinimizedSearchText(query, filterTags),
+          __html: [`${resultsNumber} matches`, resultsHelperText].join(
+            '<span class="dot">.</span>',
+          ),
         }}
       />
     </SearchbarContainer>
@@ -207,11 +233,13 @@ export default function Searchbar(props: SearchbarProps) {
 }
 
 const TagsWrapper = styled.div`
-  transition: height 150ms ease-in-out;
+  transition: height, margin-top 150ms ease-in-out;
   overflow: hidden;
   height: 0;
+
   &.active {
-    height: 45px;
+    margin-top: 19px;
+    height: 24px;
   }
 `
 
@@ -227,21 +255,33 @@ const ResultsStatus = styled.div`
   }
 `
 
-const Collapsed = styled.div`
+const Collapsed = styled(Typography)`
   display: flex;
-  align-items: baseline;
+  align-items: center;
   background: rgb(var(--lsd-surface-primary));
   padding: 8px 14px;
   width: calc(90% - 28px);
   position: absolute;
   z-index: auto;
 
+  gap: 8px;
+
   top: -100%;
   left: 0;
 
-  font-size: 28px;
-
   transition: top 150ms ease-in-out;
+
+  .tags {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot {
+    display: inline-block;
+    font-size: 18px;
+    transform: translateY(-4px);
+  }
 
   &.enabled {
     top: 0;
@@ -263,8 +303,7 @@ const SearchBox = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100%;
-  min-height: 44px;
+  height: 38px;
 `
 
 const GlobalSearchTrigger = styled(Link)`
