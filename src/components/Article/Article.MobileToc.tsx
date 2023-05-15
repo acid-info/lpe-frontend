@@ -22,7 +22,7 @@ export const MobileToc = ({ toc }: Props) => {
           key={idx}
           active={tocId ? toc.href.substring(1) === tocId : idx === 0}
         >
-          <Typography variant="label2" genericFontFamily="sans-serif">
+          <CustomTypography variant="label2" genericFontFamily="sans-serif">
             {toc.title}
           </Typography>
         </TocItem>
@@ -30,6 +30,12 @@ export const MobileToc = ({ toc }: Props) => {
     </Collapse>
   ) : null
 }
+
+const CustomTypography = styled(Typography)`
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: pre-wrap;
+`
 
 const TocItem = styled(Link)<{ active: boolean }>`
   padding: 8px 14px;

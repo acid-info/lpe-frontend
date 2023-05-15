@@ -34,7 +34,7 @@ export type SearchbarProps = {
 
 export default function Searchbar(props: SearchbarProps) {
   const { onSearch, onReset } = props
-  const { resultsNumber, resultsHelperText } = useSearchBarContext()
+  const { resultsNumber, resultsHelperText, tags } = useSearchBarContext()
 
   const [searchScope, setSearchScope] = useState<ESearchScope>(
     props.searchScope || ESearchScope.GLOBAL,
@@ -178,7 +178,7 @@ export default function Searchbar(props: SearchbarProps) {
       {!isArticlePage && (
         <TagsWrapper className={active ? 'active' : ''}>
           <FilterTags
-            tags={copyConfigs.search.filterTags}
+            tags={tags}
             onTagClick={handleTagClick}
             selectedTags={filterTags}
           />

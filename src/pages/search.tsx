@@ -16,19 +16,28 @@ import { ReactNode, useEffect, useRef, useState } from 'react'
 import { SearchLayout } from '@/layouts/SearchLayout'
 import { RelatedArticles } from '@/components/RelatedArticles'
 import { RelatedContent } from '@/components/RelatedContent'
+import { Section } from '@/components/Section/Section'
+import api from '@/services/unbody.service'
+import { useSearchBarContext } from '@/context/searchbar.context'
 
 interface SearchPageProps {
   articles: SearchResultItem<UnbodyGoogleDoc>[]
   blocks: SearchResultItem<UnbodyTextBlock | UnbodyImageBlock>[]
+  topics: string[]
 }
 
 export default function SearchPage({
   articles: initialArticles = [],
   blocks: initialBlocks = [],
+  topics: allTopics = [],
 }: SearchPageProps) {
+  const { setTags } = useSearchBarContext()
   const router = useRouter()
-  const hasUpdated = useRef(false)
   const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setTags(allTopics)
+  }, [setTags, allTopics])
 
   const {
     query: { query = '', topics = [] },
@@ -82,11 +91,13 @@ SearchPage.getLayout = function getLayout(page: ReactNode) {
 export async function getStaticProps() {
   const { data: articles = [] } = await unbodyApi.searchArticles()
   const { data: blocks = [] } = await unbodyApi.serachBlocks()
+  const { data: topics, errors: topicErrors } = await api.getTopics()
 
   return {
     props: {
       articles,
       blocks,
+      topics,
     },
   }
 }

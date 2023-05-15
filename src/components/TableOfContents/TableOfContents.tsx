@@ -50,8 +50,8 @@ export default function TableOfContents({ contents, ...props }: Props) {
       <Contents height={height}>
         {contents?.map((content, index) => (
           <TocItem
-            key={index}
             href={`${index === 0 ? '#' : content.href}`}
+            key={index}
             active={tocId ? content.href.substring(1) === tocId : index === 0}
           >
             <Typography variant="label2" genericFontFamily="sans-serif">

@@ -31,7 +31,8 @@ const ArticleFooter = ({ data }: { data: ArticlePostData }) => {
 
 const ArticleFooterContainer = styled.div`
   margin-top: 16px;
-
+  
+  & > div:not(:first-child) > div > button,
   & > div:not(:first-child) > div {
     border-top: none;
   }

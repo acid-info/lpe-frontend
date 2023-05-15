@@ -56,9 +56,11 @@ export const PostsList = (props: Props) => {
               }
               key={index}
             >
-              <PostWrapper className={props.loading ? 'loading' : ''}>
-                <Post data={post} />
-              </PostWrapper>
+              <PostLink href={`/article/${post.slug}`}>
+                <PostWrapper className={props.loading ? 'loading' : ''}>
+                  <Post data={post} />
+                </PostWrapper>
+              </PostLink>
             </GridItem>
           ))
         ) : (
