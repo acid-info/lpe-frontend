@@ -118,10 +118,10 @@ export default function Searchbar(props: SearchbarProps) {
     }
   }
 
-  const isCollapsed = isValidSearchInput() && !active
+  const isCollapsed = isValidSearchInput(filterTags) && !active
 
   useEffect(() => {
-    if (active) {
+    if (active && query.length > 0) {
       setPlaceholder('')
     } else {
       setTimeout(() => {

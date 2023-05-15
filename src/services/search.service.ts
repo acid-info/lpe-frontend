@@ -3,7 +3,11 @@ import { PostTypes } from '@/types/data.types'
 class SearchService {
   constructor() {}
 
-  serach = (query: string, tags: string[], postType: PostTypes) => {
+  search = (query: string, tags: string[], postType: PostTypes) => {
+    console.log(
+      `/api/search/general/${postType}?q=${query}&tags=${tags.join(',')}`,
+    )
+
     return fetch(
       `/api/search/general/${postType}?q=${query}&tags=${tags.join(',')}`,
     )

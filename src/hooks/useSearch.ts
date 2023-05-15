@@ -25,7 +25,7 @@ export const useSearchGeneric = <T>(
   const search = async (query: string, tags: string[]) => {
     if (loading) return Promise.resolve([])
     setLoading(true)
-    const result = await searchApi.serach(query, tags, postType)
+    const result = await searchApi.search(query, tags, postType)
     setData(result.data)
     setLoading(false)
     return result.data

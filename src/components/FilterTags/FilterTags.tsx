@@ -1,7 +1,6 @@
 import { Tag } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { nope } from '@/utils/general.utils'
-import Link from 'next/link'
 
 type FilterTagsProps = {
   tags: string[]
@@ -11,6 +10,7 @@ type FilterTagsProps = {
 
 export default function FilterTags(props: FilterTagsProps) {
   const { tags = [], onTagClick = nope, selectedTags } = props
+
   return (
     <Container>
       <Tags>
@@ -22,7 +22,7 @@ export default function FilterTags(props: FilterTagsProps) {
             onClick={() => onTagClick(tag)}
             variant={selectedTags.includes(tag) ? 'filled' : 'outlined'}
           >
-            <Link href={`/search?topics=${tag}`}>{tag}</Link>
+            {tag}
           </Tag>
         ))}
       </Tags>
@@ -61,9 +61,5 @@ const Tags = styled.div`
     }
 
     padding-right: 16px;
-  }
-
-  a {
-    text-decoration: none;
   }
 `
