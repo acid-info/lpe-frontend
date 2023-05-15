@@ -48,6 +48,9 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             margin: 0;
             width: 100%;
             height: 100%;
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
           }
 
           #__next {

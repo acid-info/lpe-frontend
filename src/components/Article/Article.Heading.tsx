@@ -33,7 +33,7 @@ export const ArticleHeading = ({
       <Headline
         variant={block.tagName as any}
         component={block.tagName as any}
-        genericFontFamily="sans-serif"
+        genericFontFamily="serif"
         className={extractClassFromFirstTag(block.html) || ''}
         dangerouslySetInnerHTML={{ __html: `${extractInnerHtml(block.html)}` }}
         {...(typographyProps || {})}
@@ -44,6 +44,15 @@ export const ArticleHeading = ({
 
 const Headline = styled(Typography)`
   white-space: pre-wrap;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin-top: 16px;
+
+  @media (max-width: 768px) {
+    &.title {
+      font-size: var(--lsd-h3-fontSize);
+      line-height: var(--lsd-h4-lineHeight);
+    }
+
+    font-size: var(--lsd-h4-fontSize);
+    line-height: var(--lsd-h4-lineHeight);
+  }
 `

@@ -46,7 +46,7 @@ export default function ArticleReference({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 8px 14px;
+  padding: 12px 14px;
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
   text-decoration: none;
 

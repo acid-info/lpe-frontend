@@ -1,12 +1,12 @@
 import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
 import { getArticleCover } from '@/utils/data.utils'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { ArticleImageBlockWrapper } from '../Article.ImageBlockWrapper'
 import { PostImageRatio } from '../../Post/Post'
 import ArticleStats from '../Article.Stats'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import ArticleSummary from './Article.Summary'
+import ArticleSummary, { MobileSummary } from './Article.Summary'
 import { calcReadingTime } from '@/utils/string.utils'
 import { Authors } from '@/components/Authors'
 import { Tags } from '@/components/Tags'
@@ -14,6 +14,8 @@ import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { ArticleHeading } from '@/components/Article/Article.Heading'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { useIntersectionObserver } from '@/utils/ui.utils'
+import { MobileToc } from '@/components/Article/Article.MobileToc'
+import { useSearchBarContext } from '@/context/searchbar.context'
 
 const ArticleHeader = ({
   title,
@@ -27,6 +29,7 @@ const ArticleHeader = ({
 }: GoogleDocEnhanced) => {
   const { setTocId, tocId } = useArticleContainerContext()
   const headingElementsRef = useIntersectionObserver(setTocId)
+  const { resultsNumber } = useSearchBarContext()
 
   const _thumbnail = useMemo(() => {
     const coverImage = getArticleCover(blocks)
@@ -63,6 +66,7 @@ const ArticleHeader = ({
           variant: 'h1',
           genericFontFamily: 'serif',
           component: 'h1',
+          style: { marginBottom: '16px' },
         }}
         headingElementsRef={headingElementsRef}
       />
@@ -77,13 +81,21 @@ const ArticleHeader = ({
       )}
       <Tags tags={tags} />
       <AuthorsContainer>
-        <Authors mentions={mentions} email={true} />
+        <Authors mentions={mentions} email={true} gap={12} />
       </AuthorsContainer>
+      <MobileCollapseContainer>
+        {resultsNumber === null && <MobileToc toc={toc} />}
+        {resultsNumber === null && <MobileSummary summary={summary} />}
+      </MobileCollapseContainer>
       {_thumbnail}
-      <ArticleSummary summary={summary} />
+      {/*<ArticleSummary summary={summary}/>*/}
     </header>
   )
 }
+
+const MobileCollapseContainer = styled.div`
+  margin-bottom: 32px;
+`
 
 const CustomTypography = styled(Typography)`
   text-overflow: ellipsis;
@@ -100,7 +112,9 @@ const ArticleSubtitle = styled(CustomTypography)`
 `
 
 const AuthorsContainer = styled.div`
-  margin-block: 24px;
+  //margin-block: 24px;
+  margin-top: 24px;
+  margin-bottom: 32px;
 `
 
 export default ArticleHeader

@@ -1,6 +1,7 @@
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import Author from './Author'
 import styled from '@emotion/styled'
+import { Typography } from '@acid-info/lsd-react'
 
 export enum AuthorsDirection {
   COLUMN = 'column',
@@ -20,9 +21,16 @@ const Authors = ({
 }) => {
   return mentions?.length > 0 ? (
     <AuthorsContainer gap={gap} flexDirection={flexDirection}>
-      {mentions.map((mention) => (
-        <Author gap={gap} key={mention.name} mention={mention} email={email} />
-      ))}
+      {mentions.map((mention, index) =>
+        index < mentions.length - 1 ? (
+          <>
+            <Author key={mention.name} mention={mention} email={email} />
+            <Dot variant={'body2'}>.</Dot>
+          </>
+        ) : (
+          <Author key={mention.name} mention={mention} email={email} />
+        ),
+      )}
     </AuthorsContainer>
   ) : null
 }
@@ -44,6 +52,11 @@ const AuthorsContainer = styled.div<{
       width: 12px;
     }
   } */
+`
+
+const Dot = styled(Typography)`
+  transform: translateY(1px);
+  font-size: 18px;
 `
 
 export default Authors

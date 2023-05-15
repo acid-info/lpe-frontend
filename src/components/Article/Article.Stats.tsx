@@ -8,21 +8,19 @@ const ArticleStats = ({
   dateStr: string
   readingLength: number
 }) => (
-  <div>
-    <Row>
-      <Typography variant="body3" genericFontFamily="sans-serif">
-        {readingLength} minutes read
-      </Typography>
-      <Typography variant="body3">•</Typography>
-      <Typography variant="body3" genericFontFamily="sans-serif">
-        {new Date(dateStr).toLocaleString('en-GB', {
-          day: 'numeric',
-          month: 'long', // TODO: Should be uppercase
-          year: 'numeric',
-        })}
-      </Typography>
-    </Row>
-  </div>
+  <Row>
+    <Typography variant="body3" genericFontFamily="sans-serif">
+      {readingLength} minutes read
+    </Typography>
+    <Typography variant="body3">•</Typography>
+    <Typography variant="body3" genericFontFamily="sans-serif">
+      {new Date(dateStr).toLocaleString('en-GB', {
+        day: 'numeric',
+        month: 'long', // TODO: Should be uppercase
+        year: 'numeric',
+      })}
+    </Typography>
+  </Row>
 )
 
 const Row = styled.div`
@@ -30,7 +28,7 @@ const Row = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 `
 
 export default ArticleStats

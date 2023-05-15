@@ -8,6 +8,8 @@ type Props = {
   children: React.ReactNode
   className?: string
   onClick?: () => void
+  initOpen?: boolean
+  style?: React.CSSProperties
 }
 
 export default function Collapse({
@@ -15,9 +17,10 @@ export default function Collapse({
   children,
   className,
   onClick,
+  initOpen = true,
   ...props
 }: Props) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(initOpen)
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation()
