@@ -44,7 +44,7 @@ export const PostsList = (props: Props) => {
 
   return (
     <div>
-      <Grid style={{ minHeight: '500px' }}>
+      <CustomGrid>
         {postsToShow.length > 0 ? (
           postsToShow.map((post, index) => (
             <GridItem
@@ -65,7 +65,7 @@ export const PostsList = (props: Props) => {
             <Typography variant="body1">No related articles found.</Typography>
           </GridItem>
         )}
-      </Grid>
+      </CustomGrid>
       {posts.length > pageSize && (
         <Button onClick={() => handleMoreOrLess()} size={'large'}>
           {page * pageSize < posts.length ? 'Load More' : 'Show Less'}
@@ -74,6 +74,13 @@ export const PostsList = (props: Props) => {
     </div>
   )
 }
+
+const CustomGrid = styled(Grid)`
+  min-height: 500px;
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
+`
 
 const PostWrapper = styled.div`
   margin-top: 16px;

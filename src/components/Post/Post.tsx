@@ -109,13 +109,13 @@ export default function Post({
   const _title = useMemo(
     () => (
       <TitleLink href={`/article/${slug}`}>
-        <CustomTypography
+        <Title
           variant={size === PostSize.SMALL ? 'h4' : 'h1'}
           genericFontFamily="serif"
           component="h2"
         >
           {title}
-        </CustomTypography>
+        </Title>
       </TitleLink>
     ),
     [title, size, slug, isFeatured],
@@ -125,7 +125,7 @@ export default function Post({
     () =>
       classType == PostClassType.ARTICLE && (
         <Description
-          variant={size === PostSize.SMALL ? 'body3' : 'h6'}
+          variant={size === PostSize.SMALL ? 'body2' : 'h6'}
           genericFontFamily="sans-serif"
           isFeatured={isFeatured}
         >
@@ -246,5 +246,16 @@ const HeaderContainer = styled(CustomTypography)<{ isFeatured: boolean }>`
 const Description = styled(CustomTypography)<{ isFeatured: boolean }>`
   @media (min-width: 768px) {
     margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
+  }
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+`
+
+const Title = styled(CustomTypography)`
+  @media (max-width: 768px) {
+    font-size: 28px;
+    line-height: 36px;
   }
 `
