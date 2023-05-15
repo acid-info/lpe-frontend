@@ -7,9 +7,13 @@ const Main = ({ children }: PropsWithChildren) => {
 }
 
 const Container = styled.main`
-  margin-block: ${uiConfigs.postSectionMargin}px;
+  margin-top: ${uiConfigs.postSectionMargin}px;
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 768px) {
+    margin-top: ${uiConfigs.postSectionMobileMargin}px;
+  }
 `
 
 export default Main

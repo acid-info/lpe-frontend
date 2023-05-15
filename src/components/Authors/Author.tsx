@@ -8,6 +8,7 @@ const Author = ({
 }: {
   mention: UnbodyGraphQl.Fragments.MentionItem
   email: boolean
+  gap?: number
 }) => (
   <AuthorInfo key={mention.name}>
     <Typography variant="body3" component="p" genericFontFamily="sans-serif">
@@ -29,7 +30,6 @@ const Author = ({
 const AuthorInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
 `
 
 export default Author

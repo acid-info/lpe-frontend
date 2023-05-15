@@ -7,7 +7,7 @@ export default function Hero() {
       <Title genericFontFamily="serif" component="h1" variant="h1">
         LOGOS → PRESS ENGINE
       </Title>
-      <Description component="div" variant="label2">
+      <Description component="div" variant="body1">
         Blog with media written by Logos members
       </Description>
     </Container>
@@ -23,17 +23,25 @@ const Container = styled.div`
   @media (max-width: 768px) {
     align-items: flex-start;
     text-align: left;
+    gap: 6px;
   }
 `
 
 const Title = styled(Typography)`
-  // temporary breakpoint
   @media (min-width: 1440px) {
-    padding-block: 16px;
     font-size: 90px;
+    line-height: 98px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 36px;
+    line-height: 44px;
   }
 `
 
 const Description = styled(Typography)`
-  margin-top: 6px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 16px;
+  }
 `

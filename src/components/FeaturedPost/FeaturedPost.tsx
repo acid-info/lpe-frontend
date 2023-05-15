@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Grid, GridItem } from '../Grid/Grid'
 import styled from '@emotion/styled'
-import Post, { PostDataProps } from '../Post/Post'
+import Post, { PostDataProps, PostSize } from '../Post/Post'
 
 type Props = {
   post: PostDataProps
@@ -15,6 +15,7 @@ const FeaturedPost = ({ post }: Props) => {
           <Post
             data={post}
             appearance={{
+              size: PostSize.LARGE,
               imageProps: {
                 fill: true,
                 height: '480px',
@@ -27,6 +28,7 @@ const FeaturedPost = ({ post }: Props) => {
                   : {},
               },
             }}
+            isFeatured
           />
         </PostWrapper>
       </GridItem>

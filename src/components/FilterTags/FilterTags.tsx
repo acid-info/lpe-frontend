@@ -30,7 +30,6 @@ export default function FilterTags(props: FilterTagsProps) {
 }
 
 const Container = styled.div`
-  padding: 8px 0;
   max-width: 100%;
 `
 
@@ -53,5 +52,13 @@ const Tags = styled.div`
 
   > * {
     white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    > *:first-child {
+      margin-left: 16px;
+    }
+
+    padding-right: 16px;
   }
 `

@@ -36,7 +36,7 @@ const SectionContainer = styled.section`
   width: 100%;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1440px) {
     padding-inline: 16px;
   }
 `
