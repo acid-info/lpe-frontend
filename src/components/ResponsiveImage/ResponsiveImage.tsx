@@ -40,11 +40,14 @@ export const ResponsiveImage = ({
     },
   }
 
+  console.log(height)
+
   return (
     <Container
       className={fill ? 'fill' : ''}
       style={{
-        paddingTop: `calc(${data.height / data.width} * ${height})`,
+        paddingTop: height ? 0 : `calc(${data.height / data.width} * 100%)`,
+        height: height || 'auto',
         background: 'red',
       }}
     >

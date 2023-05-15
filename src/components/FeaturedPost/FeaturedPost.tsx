@@ -18,7 +18,7 @@ const FeaturedPost = ({ post }: Props) => {
               size: PostSize.LARGE,
               imageProps: {
                 fill: true,
-                height: '480px',
+                height: '432px',
                 nextImageProps: post.coverImage
                   ? {
                       quality: 100,

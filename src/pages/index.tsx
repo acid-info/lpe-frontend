@@ -53,7 +53,7 @@ export const getStaticProps = async () => {
             slug: featured.slug,
             date: featured.modifiedAt,
             title: featured.title,
-            description: featured.summary,
+            description: featured.subtitle,
             mentions: featured.mentions,
             tags: featured.tags,
             coverImage: getArticleCover(featured.blocks),
