@@ -31,6 +31,8 @@ export default function SearchPage({
   blocks: initialBlocks = [],
   topics: allTopics = [],
 }: SearchPageProps) {
+  const { setResultsNumber, setResultsHelperText } = useSearchBarContext()
+
   const { setTags } = useSearchBarContext()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
@@ -75,6 +77,21 @@ export default function SearchPage({
     // if we follow the eslint, we will have an infinite loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, router.query])
+
+  useEffect(() => {
+    setResultsNumber(articles.data.length + blocks.data.length)
+    const tags = extractTopicsFromQuery(router.query)
+    setResultsHelperText(
+      [
+        query,
+        topics.length > 0
+          ? `<span class="tags">${tags
+              .map((t) => `<span>[${t}]</span>`)
+              .join('<span class="slash">/</span>')}</span>`
+          : '',
+      ].join(tags.length > 0 ? '<span class="dot">.</span>' : ''),
+    )
+  }, [articles, blocks])
 
   return (
     <div style={{ minHeight: '80vh' }}>

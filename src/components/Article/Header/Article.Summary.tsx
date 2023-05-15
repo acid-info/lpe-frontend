@@ -31,7 +31,10 @@ const ArticleSummary = ({ summary }: { summary: string }) => (
 
 const ArticleSummaryContainer = styled('div')`
   margin-block: 16px;
-
+  display: block;
+  @media (max-width: 770px) {
+    display: none;
+  }
   > span {
     margin-bottom: 16px;
     display: block;
@@ -44,7 +47,9 @@ const SummaryParagraph = styled(Typography)`
 `
 
 const SummaryContainerMobile = styled(Collapse)`
+  display: none;
   @media (max-width: 770px) {
+    display: block;
     p {
       padding: 12px 14px;
       margin-bottom: 0;

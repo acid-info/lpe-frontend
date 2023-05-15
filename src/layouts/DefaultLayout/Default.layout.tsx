@@ -7,6 +7,8 @@ import { Searchbar } from '@/components/Searchbar'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
 import { uiConfigs } from '@/configs/ui.configs'
+import { useRouter } from 'next/router'
+import { defaultThemes } from '@acid-info/lsd-react'
 
 export default function DefaultLayout(props: PropsWithChildren<any>) {
   const isDarkState = useIsDarkState()
@@ -19,9 +21,19 @@ export default function DefaultLayout(props: PropsWithChildren<any>) {
           marginBlock: `${uiConfigs.navbarRenderedHeight}px`,
         }}
       >
-        <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
-        <Hero />
-        <NavbarFiller />
+        <div
+          style={{
+            borderBottom: `1px solid rgb(${
+              isDarkState.get()
+                ? defaultThemes.dark.palette.border.primary
+                : defaultThemes.light.palette.border.primary
+            })`,
+          }}
+        >
+          <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
+          <Hero />
+          <NavbarFiller />
+        </div>
         <Searchbar />
       </header>
       <Main>{props.children}</Main>

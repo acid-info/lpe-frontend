@@ -3,12 +3,23 @@ import { uiConfigs } from '@/configs/ui.configs'
 import { useIsScrolling, useOutsideClick, useSticky } from '@/utils/ui.utils'
 import { PropsWithChildren, useEffect } from 'react'
 import { nope } from '@/utils/general.utils'
+import { useRaf } from 'react-use'
+import { useRouter } from 'next/router'
 
 type Props = PropsWithChildren<{
   onUnfocus?: () => void
+  style?: any
 }>
 
-export function SearchbarContainer({ children, onUnfocus = nope }: Props) {
+export function SearchbarContainer({
+  children,
+  onUnfocus = nope,
+  style = {},
+}: Props) {
+  const { pathname } = useRouter()
+  const isSearchPage = pathname === '/search'
+  const isArticlePage = pathname === '/article/[slug]'
+
   const { sticky, stickyRef, height } = useSticky<HTMLDivElement>(
     uiConfigs.navbarRenderedHeight,
   )
@@ -26,7 +37,11 @@ export function SearchbarContainer({ children, onUnfocus = nope }: Props) {
 
   return (
     <>
-      <SearchBarWrapper ref={stickyRef} className={sticky ? 'sticky' : ''}>
+      <SearchBarWrapper
+        style={style}
+        ref={stickyRef}
+        className={sticky || isSearchPage || isArticlePage ? 'sticky' : ''}
+      >
         {children}
       </SearchBarWrapper>
       <div
@@ -39,22 +54,28 @@ export function SearchbarContainer({ children, onUnfocus = nope }: Props) {
 }
 
 const SearchBarWrapper = styled.div<Props>`
+  position: relative;
   display: block;
   width: 100%;
-  min-height: 44px;
-  background: rgb(var(--lsd-surface-primary));
-  border-bottom: 1px solid rgb(var(--lsd-border-primary));
-  border-top: 1px solid rgb(var(--lsd-border-primary));
-  transition: top 0.2s ease-in-out;
-  position: relative;
 
+  background: rgb(var(--lsd-surface-primary));
+  //height: 44px;
+
+  border-bottom: 1px solid rgb(var(--lsd-border-primary));
+  //border-top: 1px solid rgb(var(--lsd-border-primary));
+  transition: top 0.2s ease-in-out;
+
+  box-sizing: border-box;
   overflow: hidden;
+  max-width: ${uiConfigs.maxContainerWidth}px;
+
+  min-height: 40px;
 
   &.sticky {
     position: fixed;
     top: ${uiConfigs.navbarRenderedHeight - 1}px;
     z-index: 100;
-    max-width: ${uiConfigs.maxContainerWidth + 40}px;
+    max-width: ${uiConfigs.maxContainerWidth}px;
     border-top: none;
   }
 `

@@ -16,7 +16,7 @@ export type Props = {
 
 export const ResponsiveImage = ({
   data,
-  height = '100%',
+  height,
   fill = false,
   alt = 'alt',
   nextImageProps,
@@ -39,8 +39,6 @@ export const ResponsiveImage = ({
       height: 'auto',
     },
   }
-
-  console.log(height)
 
   return (
     <Container

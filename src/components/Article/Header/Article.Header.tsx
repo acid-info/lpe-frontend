@@ -88,7 +88,7 @@ const ArticleHeader = ({
         {resultsNumber === null && <MobileSummary summary={summary} />}
       </MobileCollapseContainer>
       {_thumbnail}
-      {/*<ArticleSummary summary={summary}/>*/}
+      <ArticleSummary summary={summary} />
     </header>
   )
 }
