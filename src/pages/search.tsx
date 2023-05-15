@@ -19,6 +19,7 @@ import { RelatedContent } from '@/components/RelatedContent'
 import { Section } from '@/components/Section/Section'
 import api from '@/services/unbody.service'
 import { useSearchBarContext } from '@/context/searchbar.context'
+import { shuffle } from '@/utils/data.utils'
 
 interface SearchPageProps {
   articles: SearchResultItem<UnbodyGoogleDoc>[]
@@ -63,11 +64,15 @@ export default function SearchPage({
   }, [])
 
   useEffect(() => {
-    if (mounted) {
-      const serchArgs = [
-        extractQueryFromQuery(router.query),
-        extractTopicsFromQuery(router.query),
-      ]
+    const serchArgs = [
+      extractQueryFromQuery(router.query),
+      extractTopicsFromQuery(router.query),
+    ]
+
+    const hasQuery = router.query.query && router.query.query.length > 0
+    const hasTopics = router.query.topics && router.query.topics.length > 0
+
+    if (mounted && (hasQuery || hasTopics)) {
       articles.search(...(serchArgs as [string, string[]]))
       blocks.search(...(serchArgs as [string, string[]]))
     } else {
@@ -83,7 +88,7 @@ export default function SearchPage({
     const tags = extractTopicsFromQuery(router.query)
     setResultsHelperText(
       [
-        query,
+        ...(query.length > 0 ? [query] : []),
         topics.length > 0
           ? `<span class="tags">${tags
               .map((t) => `<span>[${t}]</span>`)
@@ -113,7 +118,7 @@ export async function getStaticProps() {
   return {
     props: {
       articles,
-      blocks,
+      blocks: shuffle(blocks),
       topics,
     },
   }

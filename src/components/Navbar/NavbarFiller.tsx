@@ -4,11 +4,16 @@ import { useSearchBarContext } from '@/context/searchbar.context'
 import { useRouter } from 'next/router'
 
 export const NavbarFiller = () => {
+  const router = useRouter()
   const { tags } = useSearchBarContext()
+
+  const onTagClick = (tag: string) => {
+    router.push(`/search?topics=${tag}`)
+  }
 
   return (
     <NavbarFillerContainer>
-      <FilterTags onTagClick={() => {}} tags={tags} selectedTags={[]} />
+      <FilterTags onTagClick={onTagClick} tags={tags} selectedTags={[]} />
     </NavbarFillerContainer>
   )
 }

@@ -28,6 +28,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             }
             _additional{
               certainty
+              score
               id
             }
         `),
@@ -49,6 +50,7 @@ export const getSearchBlocksQuery = (args: UnbodyGetFilters = defaultArgs) =>
             }
             _additional{
               certainty
+              score
               id
             }
         `),
