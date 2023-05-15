@@ -24,7 +24,6 @@ export default function TableOfContents({ contents, ...props }: Props) {
   useEffect(() => {
     const onHashChangeStart = (url: string) => {
       const hash = url.split('#')[1]
-      console.log('hash', contents)
       if (hash) {
         setTocId(hash)
       } else {
@@ -35,7 +34,7 @@ export default function TableOfContents({ contents, ...props }: Props) {
     return () => {
       router.events.off('hashChangeStart', onHashChangeStart)
     }
-  }, [router.events])
+  }, [setTocId, router.events])
 
   return (
     <Container
@@ -116,4 +115,8 @@ const TocItem = styled(Link)<{ active: boolean }>`
       ? '1px solid rgb(var(--lsd-border-primary))'
       : '1px solid transparent'};
   cursor: pointer;
+
+  label {
+    cursor: pointer;
+  }
 `

@@ -7,7 +7,7 @@ import { UnbodyTextBlock } from '@/lib/unbody/unbody.types'
 import { GridItem } from '../Grid/Grid'
 import { Typography } from '@acid-info/lsd-react'
 import { PostClassType } from '../Post/Post'
-import ContentBlockHeader from './ContentBlock.Header'
+import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 import ContentBlockBody from './ContentBlock.Body'
 
 type Props = Omit<SearchResultItem<UnbodyTextBlock>, 'score'>
@@ -15,21 +15,16 @@ type Props = Omit<SearchResultItem<UnbodyTextBlock>, 'score'>
 const TextBlock = ({ doc }: Props) => {
   return (
     <GridItem className="w-4">
-      <BlockLink href={`/article/${doc.document[0].slug}`}>
-        <Container>
-          <ContentBlockHeader
-            type={PostClassType.ARTICLE}
-            date={doc?.document[0].modifiedAt}
-          />
-          <Typography variant="body2" genericFontFamily="sans-serif">
-            {doc.text}
-          </Typography>
-          <ContentBlockBody
-            title={doc.document[0].title}
-            author="Jason Freeman"
-          />
-        </Container>
-      </BlockLink>
+      <Container>
+        <ContentBlockHeader
+          type={BlockType.TEXT}
+          date={doc?.document[0].modifiedAt}
+        />
+        <Typography variant="body2" genericFontFamily="sans-serif">
+          {doc.text}
+        </Typography>
+        <ContentBlockBody data={doc} />
+      </Container>
     </GridItem>
   )
 }

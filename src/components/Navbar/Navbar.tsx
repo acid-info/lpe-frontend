@@ -5,6 +5,7 @@ import { SunIcon } from '../Icons/SunIcon'
 import { MoonIcon } from '../Icons/MoonIcon'
 import { useRouter } from 'next/router'
 import { uiConfigs } from '@/configs/ui.configs'
+import Link from 'next/link'
 
 interface NavbarProps {
   isDark: boolean
@@ -12,10 +13,9 @@ interface NavbarProps {
 }
 
 export default function Navbar({ isDark, toggle }: NavbarProps) {
-  const router = useRouter()
   return (
     <Container>
-      <LogosIconContainer onClick={() => router.push('/')}>
+      <LogosIconContainer href={'/'}>
         <LogosIcon color="primary" />
       </LogosIconContainer>
       <Icons>
@@ -38,10 +38,11 @@ const Container = styled.nav`
   border-bottom: 1px solid rgb(var(--lsd-theme-primary));
   position: fixed;
   top: 0;
-  width: calc(100% + 16px);
-  max-width: ${uiConfigs.maxContainerWidth + 16}px;
+  width: 100%;
+  max-width: ${uiConfigs.maxContainerWidth + 40}px; // TBD
   background: rgb(var(--lsd-surface-primary));
   z-index: 100;
+  box-sizing: border-box;
 
   // to center-align logo
   &:last-child {
@@ -51,13 +52,13 @@ const Container = styled.nav`
   // to center-align logo
   &:before {
     content: 'D';
+    width: 54px;
     margin: 1px auto 1px 1px;
     visibility: hidden;
-    padding: 1px;
   }
 `
 
-const LogosIconContainer = styled.div`
+const LogosIconContainer = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;

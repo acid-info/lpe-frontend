@@ -27,7 +27,7 @@ export default async function handler() {
           alignItems: 'center',
         }}
       >
-        <img width="1200" height="630" src={srcBlob} />
+        <img width="1200" height="630" src={srcBlob} alt="og-image" />
       </div>
     ),
     {

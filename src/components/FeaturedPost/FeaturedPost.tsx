@@ -9,7 +9,7 @@ type Props = {
 
 const FeaturedPost = ({ post }: Props) => {
   return (
-    <Grid>
+    <CustomGrid>
       <GridItem className="w-16">
         <PostLink href={`/article/${post.slug}`}>
           <PostWrapper>
@@ -32,19 +32,19 @@ const FeaturedPost = ({ post }: Props) => {
           </PostWrapper>
         </PostLink>
       </GridItem>
-    </Grid>
+    </CustomGrid>
   )
 }
+
+const CustomGrid = styled(Grid)`
+  margin-bottom: 108px;
+`
 
 const PostWrapper = styled.div`
   margin-top: 16px;
   padding: 16px 0;
   border-top: 1px solid rgb(var(--lsd-theme-primary));
   width: 100%;
-`
-
-const PostLink = styled(Link)`
-  text-decoration: none;
 `
 
 export default FeaturedPost

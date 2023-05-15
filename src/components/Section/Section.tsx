@@ -9,7 +9,7 @@ type Props = PropsWithChildren<{
 
 export const Section = ({ title, subtitle, children, ...props }: Props) => {
   return (
-    <section style={{ width: '100%' }} {...props}>
+    <SectionContainer {...props}>
       <Container>
         <Typography genericFontFamily="sans-serif" variant="body2">
           {title}
@@ -28,9 +28,18 @@ export const Section = ({ title, subtitle, children, ...props }: Props) => {
         )}
       </Container>
       {children}
-    </section>
+    </SectionContainer>
   )
 }
+
+const SectionContainer = styled.section`
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding-inline: 16px;
+  }
+`
 
 const Container = styled.div`
   display: flex;

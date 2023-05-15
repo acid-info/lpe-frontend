@@ -1,9 +1,13 @@
 import styled from '@emotion/styled'
 import { Typography } from '@acid-info/lsd-react'
-import { PostClassType } from '../Post/Post'
+
+export enum BlockType {
+  TEXT = 'text',
+  IMAGE = 'image',
+}
 
 type Props = {
-  type: PostClassType
+  type: BlockType
   date: string
 }
 
@@ -11,7 +15,7 @@ const ContentBlockHeader = ({ type, date }: Props) => {
   return (
     <ContentBlockInfo>
       <Typography variant="body3" genericFontFamily="sans-serif">
-        {type.toUpperCase()}
+        {type === BlockType.TEXT ? 'PARAGRAPH' : 'IMAGE'}
       </Typography>
       <Typography variant="body3">•</Typography>
       <Typography variant="body3" genericFontFamily="sans-serif">

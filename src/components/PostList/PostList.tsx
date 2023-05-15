@@ -90,7 +90,3 @@ const PostWrapper = styled.div`
     opacity: 0.5;
   }
 `
-
-const PostLink = styled(Link)`
-  text-decoration: none;
-`

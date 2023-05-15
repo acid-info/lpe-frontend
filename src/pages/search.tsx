@@ -72,6 +72,8 @@ export default function SearchPage({
       articles.reset(initialArticles)
       blocks.reset(initialBlocks)
     }
+    // if we follow the eslint, we will have an infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, router.query])
 
   return (
