@@ -112,6 +112,7 @@ export default function Post({
         <CustomTypography
           variant={size === PostSize.SMALL ? 'h4' : 'h1'}
           genericFontFamily="serif"
+          component="h2"
         >
           {title}
         </CustomTypography>
@@ -237,9 +238,13 @@ const TitleLink = styled(Link)`
 `
 
 const HeaderContainer = styled(CustomTypography)<{ isFeatured: boolean }>`
-  margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
+  @media (min-width: 768px) {
+    margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
+  }
 `
 
 const Description = styled(CustomTypography)<{ isFeatured: boolean }>`
-  margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
+  @media (min-width: 768px) {
+    margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
+  }
 `
