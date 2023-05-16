@@ -43,13 +43,7 @@ const ArticleContainer = styled.article`
   flex-direction: column;
   gap: 16px;
   max-width: 700px;
-  margin-inline: 5%;
   padding-bottom: 80px;
-
-  // temporary breakpoint
-  @media (max-width: 1024px) {
-    margin-inline: 16px;
-  }
 `
 
 const TextContainer = styled.div`

@@ -1,12 +1,10 @@
-import { Navbar } from '@/components/Navbar'
 import useIsDarkState from '@/states/isDarkState/isDarkState'
 import { PropsWithChildren } from 'react'
-import { NavbarFiller } from '@/components/Navbar/NavbarFiller'
-import { Searchbar } from '@/components/Searchbar'
-import { ESearchScope } from '@/types/ui.types'
 import styles from './Search.layout.module.css'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
+import { AppBar } from '@/components/AppBar'
+import styled from '@emotion/styled'
 import { uiConfigs } from '@/configs/ui.configs'
 
 export default function SearchLayout(props: PropsWithChildren<any>) {
@@ -14,13 +12,22 @@ export default function SearchLayout(props: PropsWithChildren<any>) {
   return (
     <>
       <header className={styles.header}>
-        <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
-        {/*<NavbarFiller />*/}
-        <div style={{ height: `${uiConfigs.navbarRenderedHeight - 2}px` }} />
-        <Searchbar searchScope={ESearchScope.ARTICLE} />
+        <AppBar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
       </header>
-      <Main>{props.children}</Main>
+      <MainContainer className={'search_page'}>{props.children}</MainContainer>
       <Footer />
     </>
   )
 }
+
+const MainContainer = styled(Main)`
+  &.search_page {
+    margin-top: ${uiConfigs.postSectionMargin * 1.7}px;
+  }
+
+  @media (max-width: 768px) {
+    &.search_page {
+      margin-top: ${uiConfigs.postSectionMobileMargin * 3}px;
+    }
+  }
+`

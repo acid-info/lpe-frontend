@@ -84,7 +84,12 @@ export default function SearchPage({
   }, [mounted, router.query])
 
   useEffect(() => {
-    setResultsNumber(articles.data.length + blocks.data.length)
+    if (
+      articles.data.length + blocks.data.length <
+      initialArticles.length + initialBlocks.length
+    ) {
+      setResultsNumber(articles.data.length + blocks.data.length)
+    }
     const tags = extractTopicsFromQuery(router.query)
     setResultsHelperText(
       [

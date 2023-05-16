@@ -54,6 +54,7 @@ export type PostAppearanceProps = {
   aspectRatio?: PostImageRatio
   showImage?: boolean
   imageProps?: ResponsiveImageProps
+  imagePropsArray?: ResponsiveImageProps[]
 }
 
 export type PostDataProps = {
@@ -87,10 +88,9 @@ export default function Post({
     size = PostSize.SMALL,
     classType = PostClassType.ARTICLE,
     postType = PostType.BODY,
-    styleType = PostStyleType.LSD,
-    aspectRatio = PostImageRatio.LANDSCAPE,
     showImage = true,
     imageProps,
+    imagePropsArray = [],
   } = {},
   data: {
     coverImage = null,
@@ -137,17 +137,38 @@ export default function Post({
 
   const _thumbnail = useMemo(() => {
     if (!showImage || !coverImage) return null
+    let allImageProps = [
+      ...imagePropsArray,
+      ...(imageProps ? [imageProps] : []),
+    ]
+
     if (postType === PostType.BODY) {
       return (
         <Link href={`/article/${slug}`}>
-          <ResponsiveImage {...imageProps} data={coverImage} />
+          {allImageProps.length > 0 ? (
+            allImageProps.map((_imageProps, index) => (
+              <ResponsiveImage key={index} {..._imageProps} data={coverImage} />
+            ))
+          ) : (
+            <ResponsiveImage {...imageProps} data={coverImage} />
+          )}
         </Link>
       )
     } else {
       return (
         <>
           <Link href={`/article/${slug}`}>
-            <ResponsiveImage data={coverImage} alt={coverImage.alt} />
+            {allImageProps.length > 0 ? (
+              allImageProps.map((_imageProps, index) => (
+                <ResponsiveImage
+                  key={index}
+                  {..._imageProps}
+                  data={coverImage}
+                />
+              ))
+            ) : (
+              <ResponsiveImage {...imageProps} data={coverImage} />
+            )}
           </Link>
           {_title}
           {_description}

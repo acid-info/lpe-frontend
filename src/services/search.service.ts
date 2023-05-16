@@ -5,10 +5,6 @@ class SearchService {
   constructor() {}
 
   search = (query: string, tags: string[], postType: PostTypes) => {
-    console.log(
-      `/api/search/general/${postType}?q=${query}&tags=${tags.join(',')}`,
-    )
-
     return fetch(
       `/api/search/general/${postType}?q=${query}&tags=${tags.join(',')}`,
     )

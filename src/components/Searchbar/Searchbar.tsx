@@ -29,10 +29,18 @@ export type SearchbarProps = {
   className?: string
   onSearch?: (query: string, filterTags: string[]) => void
   onReset?: () => void
+  withFilterTags?: boolean
+  beSticky?: boolean
 }
 
 export default function Searchbar(props: SearchbarProps) {
-  const { onSearch, onReset } = props
+  const {
+    onSearch,
+    beSticky,
+    onReset,
+    className,
+    withFilterTags = true,
+  } = props
   const { resultsNumber, resultsHelperText, tags } = useSearchBarContext()
 
   const [placeholder, setPlaceholder] = useState<string>()
@@ -95,7 +103,6 @@ export default function Searchbar(props: SearchbarProps) {
       performSearch('', [])
       return
     }
-
     setQuery('')
     setFilterTags([])
     setActive(false)
@@ -118,7 +125,8 @@ export default function Searchbar(props: SearchbarProps) {
     }
   }
 
-  const isCollapsed = isValidSearchInput(filterTags) && !active
+  const withValue = isValidSearchInput(filterTags) || resultsNumber !== null
+  const isCollapsed = withValue && !active
 
   useEffect(() => {
     if (active && query.length > 0) {
@@ -135,12 +143,12 @@ export default function Searchbar(props: SearchbarProps) {
   }, [active, searchScope, query.length])
 
   const showResultsNumber = resultsNumber !== null && active
-  const renderTagFilters = tags.length > 0 && !isArticlePage
-  const showTagFilters = renderTagFilters && active
+  const showTagFilters = withFilterTags && active
 
   let height = 45
   if (active) {
-    height += 10
+    height +=
+      typeof window !== 'undefined' ? (window.innerWidth > 768 ? 10 : 0) : 0
   }
   if (showResultsNumber) {
     height += isArticlePage ? 22 : 26
@@ -151,6 +159,7 @@ export default function Searchbar(props: SearchbarProps) {
 
   return (
     <SearchbarContainer
+      className={className}
       onUnfocus={() => {
         setActive(false)
         if (router.query.query && router.query.query.length > 0) {
@@ -161,6 +170,7 @@ export default function Searchbar(props: SearchbarProps) {
         transition: 'height 150ms ease-in-out',
         height: active ? `${height}px` : 'auto',
       }}
+      beSticky={beSticky}
     >
       <SearchBox>
         <TextField
@@ -177,10 +187,7 @@ export default function Searchbar(props: SearchbarProps) {
             // height: active ? '56px' : 'auto',
           }}
           inputProps={{
-            style: {
-              fontSize: active ? '28px' : '14px',
-              transition: 'font-size 150ms ease-in-out',
-            },
+            className: `${styles.searchInput} ${active ? styles.active : ''}`,
           }}
         />
         {searchScope === ESearchScope.ARTICLE && (
@@ -196,15 +203,17 @@ export default function Searchbar(props: SearchbarProps) {
         <div>
           <IconButton
             className={styles.searchButton}
-            onClick={() =>
-              isValidSearchInput() ? performClear() : performSearch()
-            }
+            onClick={() => (withValue ? performClear() : performSearch())}
           >
-            {isValidSearchInput() ? <CloseIcon /> : <SearchIcon />}
+            {withValue ? (
+              <CloseIcon color="primary" />
+            ) : (
+              <SearchIcon color="primary" />
+            )}
           </IconButton>
         </div>
       </SearchBox>
-      {renderTagFilters && (
+      {withFilterTags && (
         <TagsWrapper className={showTagFilters ? 'active' : ''}>
           <FilterTags
             tags={tags}
@@ -223,9 +232,12 @@ export default function Searchbar(props: SearchbarProps) {
         onClick={() => setActive(true)}
         variant={'subtitle2'}
         dangerouslySetInnerHTML={{
-          __html: [`${resultsNumber} matches`, resultsHelperText].join(
-            '<span class="dot">.</span>',
-          ),
+          __html: [
+            ...(resultsNumber !== null ? [`${resultsNumber} matches`] : []),
+            ...(resultsHelperText !== null
+              ? [`<span class="helper">${resultsHelperText}<span>`]
+              : []),
+          ].join('<span class="dot">.</span>'),
         }}
       />
     </SearchbarContainer>
@@ -240,6 +252,12 @@ const TagsWrapper = styled.div`
   &.active {
     margin-top: 19px;
     height: 24px;
+  }
+
+  @media (max-width: 768px) {
+    &.active {
+      margin-top: 10px;
+    }
   }
 `
 
@@ -297,6 +315,21 @@ const Collapsed = styled(Typography)`
 
   b {
     transform: translateY(-2px);
+  }
+
+  .helper,
+  .tags {
+    display: flex;
+    gap: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .helper {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 200px;
+      white-space: nowrap;
+    }
   }
 `
 const SearchBox = styled.div`

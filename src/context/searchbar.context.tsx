@@ -37,7 +37,6 @@ export const SearchBarProvider = ({ children }: any) => {
   }, [router])
 
   const resetResults = () => {
-    console.log('resetting results')
     setResultsNumber(null)
     setResultsHelperText(null)
   }

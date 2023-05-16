@@ -1,43 +1,41 @@
-import { Navbar } from '@/components/Navbar'
+import { AppBar } from '../../components/AppBar'
 import useIsDarkState from '@/states/isDarkState/isDarkState'
 import { PropsWithChildren } from 'react'
 import { Hero } from '@/components/Hero'
-import { NavbarFiller } from '@/components/Navbar/NavbarFiller'
+import { NavbarFiller } from '@/components/AppBar/NavbarFiller'
 import { Searchbar } from '@/components/Searchbar'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
 import { uiConfigs } from '@/configs/ui.configs'
 import { useRouter } from 'next/router'
 import { defaultThemes } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 
 export default function DefaultLayout(props: PropsWithChildren<any>) {
   const isDarkState = useIsDarkState()
 
   return (
     <>
-      <header
+      <HeaderContainer
         style={{
           textAlign: 'center',
           marginBlock: `${uiConfigs.navbarRenderedHeight}px`,
         }}
       >
-        <div
-          style={{
-            borderBottom: `1px solid rgb(${
-              isDarkState.get()
-                ? defaultThemes.dark.palette.border.primary
-                : defaultThemes.light.palette.border.primary
-            })`,
-          }}
-        >
-          <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
+        <div>
+          <AppBar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
           <Hero />
-          <NavbarFiller />
         </div>
-        <Searchbar />
-      </header>
+        <Searchbar withFilterTags={false} beSticky={true} />
+      </HeaderContainer>
       <Main>{props.children}</Main>
       <Footer />
     </>
   )
 }
+
+const HeaderContainer = styled.header`
+  @media (min-width: 776px) and (max-width: ${uiConfigs.maxContainerWidth}px) {
+    padding: 0 16px;
+  }
+`
