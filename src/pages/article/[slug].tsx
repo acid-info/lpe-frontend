@@ -42,6 +42,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const { slug } = params!
+  console.log('rendering', slug)
 
   if (!slug) {
     return {

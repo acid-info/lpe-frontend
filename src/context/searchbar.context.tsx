@@ -1,6 +1,7 @@
 // context for searchbar
 import { SearchbarProps } from '@/components/Searchbar/Searchbar'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 type SearchBarContext = SearchbarProps & {
   resultsNumber: number | null
@@ -21,11 +22,25 @@ const SearchBarContext = createContext<SearchBarContext>({
 })
 
 export const SearchBarProvider = ({ children }: any) => {
+  const router = useRouter()
   const [resultsNumber, setResultsNumber] = useState<number | null>(null)
   const [resultsHelperText, setResultsHelperText] = useState<string | null>(
     null,
   )
   const [tags, setTags] = useState<string[]>([])
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', resetResults)
+    return () => {
+      router.events.off('routeChangeStart', resetResults)
+    }
+  }, [router])
+
+  const resetResults = () => {
+    setResultsNumber(null)
+    setResultsHelperText(null)
+  }
+
   return (
     <SearchBarContext.Provider
       value={{

@@ -287,7 +287,8 @@ class UnbodyService extends UnbodyClient {
 
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {
-        if (!data) return this.handleResponse([], 'No data')
+        if (!data)
+          return this.handleResponse([], 'No data for related articles')
         return this.handleResponse(data.Get.GoogleDoc.map(enhanceGoogleDoc))
       })
       .catch((e) => this.handleResponse([], e))
@@ -312,7 +313,7 @@ class UnbodyService extends UnbodyClient {
     return this.request<UnbodyGraphQlResponseGoogleDoc>(query)
       .then(({ data }) => {
         if (!data || !data.Get || !data.Get.GoogleDoc)
-          return this.handleResponse([], 'No data')
+          return this.handleResponse([], 'No data for same authors')
         return this.handleResponse(data.Get.GoogleDoc.map(enhanceGoogleDoc))
       })
       .catch((e) => this.handleResponse([], e))
@@ -355,7 +356,7 @@ class UnbodyService extends UnbodyClient {
     return this.request<UnbodyGraphQlResponseBlocks>(query)
       .then(({ data }) => {
         if (!data || !(data.Get.ImageBlock || data.Get.TextBlock))
-          return this.handleResponse([], 'No data')
+          return this.handleResponse([], 'No data for search blocks')
 
         const blocks = [
           ...(data.Get.ImageBlock || []),
@@ -415,7 +416,7 @@ class UnbodyService extends UnbodyClient {
     return this.request<UnbodyGraphQlResponseBlocks>(query)
       .then(({ data }) => {
         if (!data || !(data.Get.ImageBlock || data.Get.TextBlock))
-          return this.handleResponse([], 'No data')
+          return this.handleResponse([], 'No data for search blocks')
 
         const blocks = [
           ...(data.Get.ImageBlock || []),
