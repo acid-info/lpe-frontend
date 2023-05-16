@@ -5,6 +5,7 @@ import { SunIcon } from '../Icons/SunIcon'
 import { MoonIcon } from '../Icons/MoonIcon'
 import { uiConfigs } from '@/configs/ui.configs'
 import Link from 'next/link'
+import { toggleTheme } from '@/utils/ui.utils'
 
 interface NavbarProps {
   isDark: boolean
@@ -18,7 +19,7 @@ export default function Navbar({ isDark, toggle }: NavbarProps) {
         <LogosIcon color="primary" />
       </LogosIconContainer>
       <Icons>
-        <IconButton size="small" onClick={() => toggle()}>
+        <IconButton size="small" onClick={() => toggleTheme(isDark, toggle)}>
           {isDark ? <SunIcon color="primary" /> : <MoonIcon color="primary" />}
         </IconButton>
       </Icons>

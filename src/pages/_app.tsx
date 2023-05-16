@@ -5,10 +5,11 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { uiConfigs } from '@/configs/ui.configs'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect } from 'react'
 import { NextComponentType, NextPageContext } from 'next'
 import { SearchBarProvider } from '@/context/searchbar.context'
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
+import { checkTheme } from '@/utils/ui.utils'
 
 type NextLayoutComponentType<P = {}> = NextComponentType<
   NextPageContext,
@@ -23,7 +24,12 @@ type AppLayoutProps<P = {}> = AppProps & {
 }
 
 export default function App({ Component, pageProps }: AppLayoutProps) {
-  const isDark = useIsDarkState().get()
+  const { get, set } = useIsDarkState()
+  const isDark = get()
+
+  useEffect(() => {
+    checkTheme(set)
+  }, [checkTheme])
 
   const getLayout =
     Component.getLayout ||

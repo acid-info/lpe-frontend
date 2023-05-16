@@ -124,4 +124,21 @@ export function useWindowSize() {
   }
 }
 
+export const toggleTheme = (isDark: boolean, toggle: () => void) => {
+  localStorage.setItem('isDark', String(!isDark))
+  toggle()
+}
+
+export const checkTheme = (setIsDark: (value: boolean) => void) => {
+  if (
+    localStorage.isDark === 'true' ||
+    (!('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    setIsDark(true)
+  } else {
+    setIsDark(false)
+  }
+}
+
 export default useWindowSize
