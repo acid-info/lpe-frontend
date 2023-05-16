@@ -103,7 +103,6 @@ export default function Searchbar(props: SearchbarProps) {
       performSearch('', [])
       return
     }
-
     setQuery('')
     setFilterTags([])
     setActive(false)
@@ -126,7 +125,8 @@ export default function Searchbar(props: SearchbarProps) {
     }
   }
 
-  const isCollapsed = isValidSearchInput(filterTags) && !active
+  const withValue = isValidSearchInput(filterTags) || resultsNumber !== null
+  const isCollapsed = withValue && !active
 
   useEffect(() => {
     if (active && query.length > 0) {
@@ -203,11 +203,13 @@ export default function Searchbar(props: SearchbarProps) {
         <div>
           <IconButton
             className={styles.searchButton}
-            onClick={() =>
-              isValidSearchInput() ? performClear() : performSearch()
-            }
+            onClick={() => (withValue ? performClear() : performSearch())}
           >
-            {isValidSearchInput() ? <CloseIcon /> : <SearchIcon />}
+            {withValue ? (
+              <CloseIcon color="primary" />
+            ) : (
+              <SearchIcon color="primary" />
+            )}
           </IconButton>
         </div>
       </SearchBox>
@@ -231,8 +233,10 @@ export default function Searchbar(props: SearchbarProps) {
         variant={'subtitle2'}
         dangerouslySetInnerHTML={{
           __html: [
-            `${resultsNumber} matches`,
-            `<span class="helper">${resultsHelperText}<span>`,
+            ...(resultsNumber !== null ? [`${resultsNumber} matches`] : []),
+            ...(resultsHelperText !== null
+              ? [`<span class="helper">${resultsHelperText}<span>`]
+              : []),
           ].join('<span class="dot">.</span>'),
         }}
       />
@@ -249,6 +253,7 @@ const TagsWrapper = styled.div`
     margin-top: 19px;
     height: 24px;
   }
+
   @media (max-width: 768px) {
     &.active {
       margin-top: 10px;

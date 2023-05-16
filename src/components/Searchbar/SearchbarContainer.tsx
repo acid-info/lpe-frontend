@@ -20,10 +20,6 @@ export function SearchbarContainer({
   className,
   beSticky = false,
 }: Props) {
-  const { pathname } = useRouter()
-  const isSearchPage = pathname === '/search'
-  const isArticlePage = pathname === '/article/[slug]'
-
   const { sticky, stickyRef, height } = useSticky<HTMLDivElement>(
     uiConfigs.navbarRenderedHeight,
   )
@@ -74,9 +70,25 @@ const SearchBarWrapper = styled.div<Props>`
 
   &.sticky {
     position: fixed;
+
     top: ${uiConfigs.navbarRenderedHeight - 1}px;
     z-index: 100;
     max-width: ${uiConfigs.maxContainerWidth}px;
     border-top: none;
+  }
+
+  @media (max-width: ${uiConfigs.maxContainerWidth}px) {
+    &.sticky {
+      width: calc(100% - 32px);
+      left: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &.sticky {
+      width: 100%;
+      left: 0;
+      top: 0;
+    }
   }
 `

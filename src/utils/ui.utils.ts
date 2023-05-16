@@ -83,6 +83,7 @@ export function useIntersectionObserver(
       headings.forEach((heading) => {
         if (heading.isIntersecting && heading.target instanceof HTMLElement) {
           const targetId = heading.target.getAttribute('id')
+          console.log(targetId)
           if (targetId) setActiveId(targetId)
         }
       })

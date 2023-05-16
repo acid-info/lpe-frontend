@@ -4,24 +4,14 @@ import React from 'react'
 import { Collapse } from '@/components/Collapse'
 import useIsDarkState from '@/states/isDarkState/isDarkState'
 
-export const MobileSummary = ({ summary }: { summary: string }) => {
-  const isDark = useIsDarkState().get()
-  return (
-    <SummaryContainerMobile
-      label={'Summary'}
-      initOpen={false}
-      style={{ background: isDark ? 'black' : 'white' }}
-    >
-      <SummaryParagraph variant="h6" component={'p'}>
-        {summary}
-      </SummaryParagraph>
-    </SummaryContainerMobile>
-  )
+type Props = {
+  summary: string
+  className?: string
+  showLabel?: boolean
 }
-
-const ArticleSummary = ({ summary }: { summary: string }) => (
-  <ArticleSummaryContainer>
-    <Typography variant="body3">summary</Typography>
+const ArticleSummary = ({ summary, className, showLabel }: Props) => (
+  <ArticleSummaryContainer className={className}>
+    {showLabel && <Typography variant="body3">summary</Typography>}
     <SummaryParagraph variant="h6" component={'p'}>
       {summary}
     </SummaryParagraph>
@@ -35,6 +25,7 @@ const ArticleSummaryContainer = styled('div')`
   @media (max-width: 770px) {
     display: none;
   }
+
   > span {
     margin-bottom: 16px;
     display: block;
@@ -44,19 +35,6 @@ const ArticleSummaryContainer = styled('div')`
 const SummaryParagraph = styled(Typography)`
   margin-bottom: 32px;
   display: block;
-`
-
-const SummaryContainerMobile = styled(Collapse)`
-  display: none;
-  @media (max-width: 770px) {
-    display: block;
-    p {
-      padding: 12px 14px;
-      margin-bottom: 0;
-      font-size: var(--lsd-font-size-body2);
-      line-height: var(--lsd-line-height-body2);
-    }
-  }
 `
 
 export default ArticleSummary

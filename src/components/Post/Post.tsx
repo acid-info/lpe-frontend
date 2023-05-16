@@ -137,13 +137,20 @@ export default function Post({
 
   const _thumbnail = useMemo(() => {
     if (!showImage || !coverImage) return null
+    let allImageProps = [
+      ...imagePropsArray,
+      ...(imageProps ? [imageProps] : []),
+    ]
+
     if (postType === PostType.BODY) {
       return (
         <Link href={`/article/${slug}`}>
-          {[...imagePropsArray, ...(imageProps ? [imageProps] : [])].map(
-            (imageProps, index) => (
-              <ResponsiveImage key={index} {...imageProps} data={coverImage} />
-            ),
+          {allImageProps.length > 0 ? (
+            allImageProps.map((_imageProps, index) => (
+              <ResponsiveImage key={index} {..._imageProps} data={coverImage} />
+            ))
+          ) : (
+            <ResponsiveImage {...imageProps} data={coverImage} />
           )}
         </Link>
       )
@@ -151,14 +158,16 @@ export default function Post({
       return (
         <>
           <Link href={`/article/${slug}`}>
-            {[...imagePropsArray, ...(imageProps ? [imageProps] : [])].map(
-              (imageProps, index) => (
+            {allImageProps.length > 0 ? (
+              allImageProps.map((_imageProps, index) => (
                 <ResponsiveImage
                   key={index}
-                  {...imageProps}
+                  {..._imageProps}
                   data={coverImage}
                 />
-              ),
+              ))
+            ) : (
+              <ResponsiveImage {...imageProps} data={coverImage} />
             )}
           </Link>
           {_title}

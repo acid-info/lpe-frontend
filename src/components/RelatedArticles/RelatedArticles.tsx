@@ -29,7 +29,9 @@ export default function RelatedArticles({ data }: Props) {
               tags: article.doc.tags,
               coverImage: getArticleCover(article.doc.blocks),
             }))}
-            pageSize={4}
+            pageSize={
+              typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : 4
+            }
             loading={data.loading}
           />
         }

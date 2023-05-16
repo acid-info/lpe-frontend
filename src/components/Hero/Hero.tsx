@@ -1,7 +1,7 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { uiConfigs } from '@/configs/ui.configs'
-import { NavbarFiller } from '@/components/Navbar/NavbarFiller'
+import { NavbarFiller } from '@/components/AppBar/NavbarFiller'
 import { Searchbar } from '@/components/Searchbar'
 
 export default function Hero() {
@@ -18,7 +18,6 @@ export default function Hero() {
         </Description>
       </HeroText>
       <NavbarFiller />
-      <Searchbar className={'desktop'} />
     </Container>
   )
 }

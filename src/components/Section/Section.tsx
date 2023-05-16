@@ -35,10 +35,6 @@ export const Section = ({ title, subtitle, children, ...props }: Props) => {
 const SectionContainer = styled.section`
   width: 100%;
   box-sizing: border-box;
-
-  @media (max-width: 1440px) {
-    padding-inline: 16px;
-  }
 `
 
 const Container = styled.div`

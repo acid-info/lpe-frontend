@@ -79,6 +79,7 @@ const CustomGrid = styled(Grid)`
   min-height: 500px;
   @media (max-width: 768px) {
     gap: 8px;
+    min-height: auto;
   }
 `
 

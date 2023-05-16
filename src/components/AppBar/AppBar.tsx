@@ -12,19 +12,19 @@ import { useScrollDirection } from '@/utils/ui.utils'
 import { useRouter } from 'next/router'
 import { useSearchBarContext } from '@/context/searchbar.context'
 
-interface NavbarProps {
+interface AppBarProps {
   isDark: boolean
   toggle: () => void
   onSearch?: (query: string, tags: string[]) => void
   onReset?: () => void
 }
 
-export default function Navbar({
+export default function AppBar({
   isDark,
   toggle,
   onReset,
   onSearch,
-}: NavbarProps) {
+}: AppBarProps) {
   const { resultsNumber } = useSearchBarContext()
   const { pathname } = useRouter()
   const isSearchPage = pathname === '/search'
@@ -52,7 +52,7 @@ export default function Navbar({
 
   return (
     <Container className={`${hide ? 'hide' : ''} ${className}`}>
-      <AppBar>
+      <NavBar>
         <LogosIconContainer href={'/'}>
           <LogosIcon color="primary" />
         </LogosIconContainer>
@@ -69,10 +69,10 @@ export default function Navbar({
             size="small"
             onClick={() => onSearchIconClick()}
           >
-            <SearchIcon />
+            <SearchIcon color="primary" />
           </IconButton>
         </Icons>
-      </AppBar>
+      </NavBar>
       <MobileSearchContainer
         className={`searchBar ${hideSearch ? 'hide' : ''}`}
       >
@@ -92,8 +92,8 @@ const Container = styled.div`
   transition: top 0.2s;
   position: fixed;
   top: 0;
-  left: 0;
   z-index: 101;
+  left: calc(calc(100% - ${uiConfigs.maxContainerWidth}px) / 2);
 
   &._page {
     @media (min-width: 768px) {
@@ -110,7 +110,14 @@ const Container = styled.div`
   &.search_page {
   }
 
+  @media (max-width: ${uiConfigs.maxContainerWidth}px) {
+    left: 16px;
+    width: calc(100% - 32px);
+  }
+
   @media (max-width: 768px) {
+    left: 0;
+    width: 100%;
     &.hide {
       top: -44px;
     }
@@ -137,7 +144,7 @@ const MobileSearchContainer = styled.div`
   }
 `
 
-const AppBar = styled.nav`
+const NavBar = styled.nav`
   display: flex;
   padding: 8px 0;
   align-items: center;
@@ -203,8 +210,4 @@ const Icons = styled.div`
       display: block;
     }
   }
-`
-
-const Selector = styled(IconButton)`
-  border-left: none;
 `

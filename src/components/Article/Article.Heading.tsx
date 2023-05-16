@@ -18,6 +18,7 @@ export const ArticleHeading = ({
   block,
   headingElementsRef,
   typographyProps,
+  ...props
 }: Props) => {
   const id =
     extractIdFromFirstTag(block.html) || `${block.tagName}-${block.order}`
@@ -37,6 +38,7 @@ export const ArticleHeading = ({
         className={extractClassFromFirstTag(block.html) || ''}
         dangerouslySetInnerHTML={{ __html: `${extractInnerHtml(block.html)}` }}
         {...(typographyProps || {})}
+        {...props}
       />
     </>
   )
@@ -48,7 +50,7 @@ const Headline = styled(Typography)`
 
   @media (max-width: 768px) {
     &.title {
-      font-size: var(--lsd-h3-fontSize);
+      font-size: var(--lsd-h4-fontSize);
       line-height: var(--lsd-h4-lineHeight);
     }
 
