@@ -8,8 +8,7 @@ type Props = {
 }
 
 const FeaturedPost = ({ post }: Props) => {
-  const { width } = useWindowSize()
-
+  // const { width } = useWindowSize()
   return (
     <CustomGrid>
       <GridItem className="w-16">
@@ -18,17 +17,31 @@ const FeaturedPost = ({ post }: Props) => {
             data={post}
             appearance={{
               size: PostSize.LARGE,
-              imageProps: {
-                fill: true,
-                height: width > 786 ? '432px' : null,
-                nextImageProps: post.coverImage
-                  ? {
-                      quality: 100,
-                      width: post.coverImage?.width * 2,
-                      height: post.coverImage?.height * 2,
-                    }
-                  : {},
-              },
+              imagePropsArray: [
+                {
+                  fill: true,
+                  height: '432px',
+                  className: 'desktop',
+                  nextImageProps: post.coverImage
+                    ? {
+                        quality: 100,
+                        width: post.coverImage?.width * 2,
+                        height: post.coverImage?.height * 2,
+                      }
+                    : {},
+                },
+                {
+                  fill: false,
+                  className: 'mobile',
+                  nextImageProps: post.coverImage
+                    ? {
+                        quality: 100,
+                        width: post.coverImage?.width * 2,
+                        height: post.coverImage?.height * 2,
+                      }
+                    : {},
+                },
+              ],
             }}
             isFeatured
           />
@@ -47,6 +60,24 @@ const PostWrapper = styled.div`
   padding: 16px 0;
   border-top: 1px solid rgb(var(--lsd-theme-primary));
   width: 100%;
+
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .desktop {
+      display: none;
+    }
+
+    .mobile {
+      display: block;
+    }
+  }
 `
 
 export default FeaturedPost

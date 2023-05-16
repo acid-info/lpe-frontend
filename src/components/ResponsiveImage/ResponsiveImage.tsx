@@ -7,6 +7,7 @@ export type ResponsiveImageProps = {
   height?: number | string | null
   nextImageProps?: Partial<ImageProps>
   fill?: boolean
+  className?: string
 }
 
 export type Props = {
@@ -20,6 +21,7 @@ export const ResponsiveImage = ({
   fill = false,
   alt = 'alt',
   nextImageProps,
+  className,
 }: Props) => {
   const [loaded, setLoaded] = useState(false)
 
@@ -42,7 +44,7 @@ export const ResponsiveImage = ({
 
   return (
     <Container
-      className={fill ? 'fill' : ''}
+      className={`${fill ? 'fill' : ''} ${className || ''}`}
       style={{
         paddingTop: height ? 0 : `calc(${data.height / data.width} * 100%)`,
         height: height || 'auto',
@@ -57,10 +59,7 @@ export const ResponsiveImage = ({
 const Container = styled.div`
   position: relative;
   width: 100%;
-  //padding-top: 100%;
   overflow: hidden;
-  //object-fit: cover;
-
   filter: grayscale(100%);
   transition: filter 0.1s ease-in-out;
 
@@ -92,6 +91,7 @@ const Container = styled.div`
     &:last-of-type {
       opacity: 0;
       transition: opacity 250ms;
+
       &.loaded {
         opacity: 1;
       }
