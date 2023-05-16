@@ -28,6 +28,14 @@ const Container = styled.div`
     .desktop {
       display: none;
     }
+    h1 {
+      min-height: 32px;
+    }
+  }
+  @media (min-width: 768px) {
+    h1 {
+      min-height: 98px;
+    }
   }
 `
 
@@ -43,11 +51,10 @@ const HeroText = styled.div`
 `
 
 const Title = styled(Typography)`
-  @media (min-width: 1440px) {
+  @media (min-width: 1024px) {
     font-size: var(--lsd-display1-fontSize);
     line-height: var(--lsd-display1-lineHeight);
   }
-
   @media (max-width: 768px) {
     font-size: var(--lsd-h4-fontSize);
     line-height: var(--lsd-h4-lineHeight);
