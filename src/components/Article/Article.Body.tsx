@@ -10,18 +10,14 @@ import { useSearchBarContext } from '@/context/searchbar.context'
 import { useEffect, useState } from 'react'
 import { TextBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import { Typography } from '@acid-info/lsd-react'
+import articleBlocks from './Article.Blocks'
 
 interface Props {
   data: ArticlePostData
 }
 
 export default function ArticleBody({ data }: Props) {
-  const { resultsNumber, setResultsNumber, setResultsHelperText } =
-    useSearchBarContext()
-  const { data: searchResultBlocks = [] } = useArticleContext()
-  const [blocks, setBlocks] = useState<
-    (TextBlockEnhanced | UnbodyImageBlock)[]
-  >([])
+  const { resultsNumber, setResultsHelperText } = useSearchBarContext()
 
   useEffect(() => {
     if (resultsNumber !== null) {
@@ -29,24 +25,10 @@ export default function ArticleBody({ data }: Props) {
     }
   }, [resultsNumber, data.article.title, setResultsHelperText])
 
-  const ids = searchResultBlocks?.map((block) => block.doc._additional.id)
-
-  useEffect(() => {
-    setBlocks(
-      // @ts-ignore
-      resultsNumber !== null
-        ? data.article.blocks.filter((block) =>
-            ids?.includes(block._additional.id),
-          )
-        : data.article.blocks,
-    )
-  }, [resultsNumber])
-
   return (
     <ArticleContainer>
       {resultsNumber === null && <ArticleHeader {...data.article} />}
-      {/*@ts-ignore*/}
-      <ArticleBlocks data={{ ...data.article, blocks }} />
+      <ArticleBlocks data={data.article} />
       {resultsNumber === 0 && (
         <Typography variant="body1">No results found</Typography>
       )}

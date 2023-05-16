@@ -327,30 +327,37 @@ class UnbodyService extends UnbodyClient {
   ): Promise<
     ApiResponse<SearchResultItem<UnbodyImageBlock | TextBlockEnhanced>[]>
   > => {
-    const query = getSearchBlocksQuery({
-      ...(q.trim().length > 0
+    const nearTextFilter =
+      q.trim().length > 0
         ? {
             nearText: {
               concepts: [q, ...tags],
-              certainty: 0.2,
-            },
-            where: {
-              operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
-              operands: [
-                ...(published
-                  ? [
-                      Operands.WHERE_PUBLISHED([
-                        'document',
-                        UnbodyGraphQl.UnbodyDocumentTypeNames.GoogleDoc,
-                        'pathString',
-                      ]),
-                    ]
-                  : []),
-                Operands.WHERE_IS_IN_SLUG(articleSlug),
-              ],
+              certainty: 0.7,
             },
           }
-        : {}),
+        : {}
+
+    const whereFilter = {
+      where: {
+        operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,
+        operands: [
+          ...(published
+            ? [
+                Operands.WHERE_PUBLISHED([
+                  'document',
+                  UnbodyGraphQl.UnbodyDocumentTypeNames.GoogleDoc,
+                  'pathString',
+                ]),
+              ]
+            : []),
+          Operands.WHERE_IS_IN_SLUG(articleSlug),
+        ],
+      },
+    }
+
+    const query = getSearchBlocksQuery({
+      ...nearTextFilter,
+      ...whereFilter,
     })
 
     return this.request<UnbodyGraphQlResponseBlocks>(query)

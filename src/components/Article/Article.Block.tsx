@@ -24,6 +24,7 @@ export const RenderArticleBlock = ({
   block: UnbodyImageBlock | UnbodyTextBlock
   activeId: string | null
   headingElementsRef: HeadingElementsRef
+  hide?: boolean
 }) => {
   switch (block.__typename) {
     case UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock:
@@ -65,6 +66,4 @@ export const RenderArticleBlock = ({
   }
 }
 
-const Paragraph = styled(Typography)`
-  white-space: pre-wrap;
-`
+const Paragraph = styled(Typography)``
