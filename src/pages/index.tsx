@@ -9,6 +9,7 @@ import { FeaturedPost } from '@/components/FeaturedPost'
 import { PostListLayout } from '@/types/ui.types'
 import { useSearchBarContext } from '@/context/searchbar.context'
 import { useEffect } from 'react'
+import SEO from '../components/SEO/SEO'
 
 type Props = {
   posts: PostDataProps[]
@@ -26,6 +27,12 @@ export default function Home({ posts, featured, tags }: Props) {
 
   return (
     <>
+      <SEO
+        description={
+          'Logos online publishing and blogging platform for writers and readers.'
+        }
+        title={'Logos Press Engine'}
+      />
       {featured && (
         <Section title={'Featured'}>
           <FeaturedPost post={featured} />

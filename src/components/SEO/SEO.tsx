@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { ImageBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 
 type Metadata = {
   title: string
@@ -8,7 +9,12 @@ type Metadata = {
   site_name?: string
   pageURL?: string
   imageUrl?: string
+  image?: UnbodyImageBlock | ImageBlockEnhanced
+  tags?: string[]
+  pagePath?: string
 }
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://press.logos.co'
 
 export default function SEO({
   title,
@@ -17,7 +23,10 @@ export default function SEO({
   locale,
   site_name,
   pageURL,
-  imageUrl,
+  imageUrl = `https://press.logos.co/api/og`,
+  image,
+  tags = ['Logos Press Engine', 'Logos Press', 'Logos'],
+  pagePath = '',
 }: Metadata) {
   return (
     <Head>
@@ -27,18 +36,28 @@ export default function SEO({
       <meta property="og:locale" content={locale ?? 'en-US'} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type ?? 'website'} />
-      <meta property="og:url" content={pageURL ?? 'https://press.logos.co'} />
+      <meta property="og:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
+      <meta property="keywords" content={tags.join(', ')} />
       <meta
         property="og:site_name"
         content={site_name ?? 'Logos Press Engine'}
       />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {imageUrl && <meta property="og:image" content={imageUrl} />}
+      {image ? (
+        <meta property="og:image" content={image.url} />
+      ) : (
+        <meta property="og:image" content={imageUrl} />
+      )}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content="https://press.logos.co" />
+      <meta name="twitter:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
       <meta name="twitter:site" content="@TWITTERHANDLE" />
-      {imageUrl && <meta property="twitter:image" content={imageUrl} />}
+      {image ? (
+        <meta name="twitter:image" content={image.url} />
+      ) : (
+        <meta property="twitter:image" content={imageUrl} />
+      )}
+      <link rel="canonical" href={`${SITE_URL}${pagePath}`} />
     </Head>
   )
 }

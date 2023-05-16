@@ -7,6 +7,7 @@ import { ArticlePostData } from '@/types/data.types'
 import { SEO } from '@/components/SEO'
 import { ArticleProvider } from '@/context/article.context'
 import { useRouter } from 'next/router'
+import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 
 type ArticleProps = {
   data: ArticlePostData
@@ -22,9 +23,19 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
   if (!data) return null
   if (errors) return <div>{errors}</div>
 
+  const coverImage = data.article.blocks.find(
+    (b) => b.__typename === 'ImageBlock',
+  )
+
   return (
     <>
-      <SEO title={data.article.title} description={data.article.summary} />
+      <SEO
+        title={data.article.title}
+        description={data.article.summary}
+        image={coverImage as UnbodyImageBlock}
+        imageUrl={undefined}
+        pagePath={`/article/${slug}`}
+      />
       <ArticleContainer data={data} />
     </>
   )

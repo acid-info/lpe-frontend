@@ -20,6 +20,7 @@ import { Section } from '@/components/Section/Section'
 import api from '@/services/unbody.service'
 import { useSearchBarContext } from '@/context/searchbar.context'
 import { shuffle } from '@/utils/data.utils'
+import SEO from '../components/SEO/SEO'
 
 interface SearchPageProps {
   articles: SearchResultItem<UnbodyGoogleDoc>[]
@@ -118,6 +119,12 @@ export default function SearchPage({
 
   return (
     <div style={{ minHeight: '80vh' }}>
+      <SEO
+        description={
+          'Logos online publishing and blogging platform for writers and readers.'
+        }
+        title={'Logos Press Engine'}
+      />
       <RelatedArticles data={articles} />
       <RelatedContent data={blocks} />
     </div>
