@@ -6,7 +6,9 @@ export default function Hero() {
   return (
     <Container>
       <Title genericFontFamily="serif" component="h1" variant="h1">
-        LOGOS → PRESS ENGINE
+        <span>LOGOS</span>
+        <span> → </span>
+        <span>PRESS ENGINE</span>
       </Title>
       <Description component="div" variant="body1">
         Blog with media written by Logos members
@@ -33,10 +35,12 @@ const Title = styled(Typography)`
     font-size: 90px;
     line-height: 98px;
   }
-
   @media (max-width: 768px) {
     font-size: 36px;
     line-height: 44px;
+    > span:last-of-type {
+      display: block;
+    }
   }
 `
 

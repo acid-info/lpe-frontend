@@ -40,6 +40,8 @@ const Tags = styled.div`
   overflow-x: auto;
   padding-right: 14px;
 
+  min-height: 24px;
+
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 

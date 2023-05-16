@@ -46,7 +46,6 @@ export const ResponsiveImage = ({
       style={{
         paddingTop: height ? 0 : `calc(${data.height / data.width} * 100%)`,
         height: height || 'auto',
-        background: 'red',
       }}
     >
       <img src={lazyUrl} alt={alt} />

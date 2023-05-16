@@ -10,19 +10,12 @@ type Props = {
   ratio: PostImageRatio
 }
 
-export const ArticleImageBlockWrapper = ({ image, ratio }: Props) => {
+export const ArticleImageBlockWrapper = ({ image }: Props) => {
   return (
     <Container>
       <ResponsiveImage data={image} />
     </Container>
   )
-
-  // old code
-  // return (
-  //   <ThumbnailContainer aspectRatio={ratio}>
-  //     <Thumbnail fill src={image.url} alt={image.alt} />
-  //   </ThumbnailContainer>
-  // )
 }
 
 const Container = styled.div``

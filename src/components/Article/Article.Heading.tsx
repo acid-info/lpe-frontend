@@ -18,7 +18,6 @@ export const ArticleHeading = ({
   block,
   headingElementsRef,
   typographyProps,
-  children,
 }: Props) => {
   const id =
     extractIdFromFirstTag(block.html) || `${block.tagName}-${block.order}`
@@ -27,6 +26,7 @@ export const ArticleHeading = ({
       headingElementsRef.current[id] = ref
     },
   }
+
   return (
     <>
       <span className="anchor" id={id} {...refProp} />
