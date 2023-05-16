@@ -332,7 +332,7 @@ class UnbodyService extends UnbodyClient {
         ? {
             nearText: {
               concepts: [q, ...tags],
-              certainty: 0.85,
+              certainty: 0.2,
             },
             where: {
               operator: UnbodyGraphQl.Filters.WhereOperatorEnum.And,

@@ -23,10 +23,10 @@ const Authors = ({
     <AuthorsContainer gap={gap} flexDirection={flexDirection}>
       {mentions.map((mention, index) =>
         index < mentions.length - 1 ? (
-          <>
-            <Author key={mention.name} mention={mention} email={email} />
+          <div key={mention.name}>
+            <Author mention={mention} email={email} />
             <Dot variant={'body2'}>•</Dot>
-          </>
+          </div>
         ) : (
           <Author key={mention.name} mention={mention} email={email} />
         ),

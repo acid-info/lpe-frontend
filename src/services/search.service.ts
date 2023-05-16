@@ -1,4 +1,5 @@
 import { PostTypes } from '@/types/data.types'
+import { Console } from 'inspector'
 
 class SearchService {
   constructor() {}

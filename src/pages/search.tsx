@@ -96,6 +96,11 @@ export default function SearchPage({
           : '',
       ].join(tags.length > 0 ? '<span class="dot">.</span>' : ''),
     )
+
+    return () => {
+      setResultsNumber(null)
+      setResultsHelperText(null)
+    }
   }, [articles, blocks])
 
   return (

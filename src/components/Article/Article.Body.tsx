@@ -7,7 +7,7 @@ import { MobileToc } from './Article.MobileToc'
 import ArticleBlocks from './Article.Blocks'
 import { useArticleContext } from '@/context/article.context'
 import { useSearchBarContext } from '@/context/searchbar.context'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { TextBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import { Typography } from '@acid-info/lsd-react'
 
@@ -16,8 +16,12 @@ interface Props {
 }
 
 export default function ArticleBody({ data }: Props) {
-  const { resultsNumber, setResultsHelperText } = useSearchBarContext()
+  const { resultsNumber, setResultsNumber, setResultsHelperText } =
+    useSearchBarContext()
   const { data: searchResultBlocks = [] } = useArticleContext()
+  const [blocks, setBlocks] = useState<
+    (TextBlockEnhanced | UnbodyImageBlock)[]
+  >([])
 
   useEffect(() => {
     if (resultsNumber !== null) {
@@ -27,12 +31,16 @@ export default function ArticleBody({ data }: Props) {
 
   const ids = searchResultBlocks?.map((block) => block.doc._additional.id)
 
-  const blocks =
-    resultsNumber !== null
-      ? data.article.blocks.filter((block) =>
-          ids?.includes(block._additional.id),
-        )
-      : data.article.blocks
+  useEffect(() => {
+    setBlocks(
+      // @ts-ignore
+      resultsNumber !== null
+        ? data.article.blocks.filter((block) =>
+            ids?.includes(block._additional.id),
+          )
+        : data.article.blocks,
+    )
+  }, [resultsNumber])
 
   return (
     <ArticleContainer>
