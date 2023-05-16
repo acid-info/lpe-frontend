@@ -101,7 +101,15 @@ export default function SearchPage({
       setResultsNumber(null)
       setResultsHelperText(null)
     }
-  }, [articles, blocks])
+  }, [
+    query,
+    router.query,
+    articles,
+    blocks,
+    setResultsHelperText,
+    setResultsNumber,
+    topics.length,
+  ])
 
   return (
     <div style={{ minHeight: '80vh' }}>
