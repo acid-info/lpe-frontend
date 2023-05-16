@@ -118,7 +118,7 @@ export default function Post({
         </Title>
       </TitleLink>
     ),
-    [title, size, slug, isFeatured],
+    [title, size, slug],
   )
 
   const _description = useMemo(
@@ -132,7 +132,7 @@ export default function Post({
           {description}
         </Description>
       ),
-    [classType, description, isFeatured],
+    [classType, description, isFeatured, size],
   )
 
   const _thumbnail = useMemo(() => {
