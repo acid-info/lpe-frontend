@@ -22,7 +22,7 @@ export default function SearchLayout(props: PropsWithChildren<any>) {
 
 const MainContainer = styled(Main)`
   &.search_page {
-    margin-top: ${uiConfigs.postSectionMargin * 1.7}px;
+    // margin-top: ${uiConfigs.postSectionMargin}px;
   }
 
   @media (max-width: 768px) {

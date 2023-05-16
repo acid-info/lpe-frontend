@@ -17,22 +17,36 @@ const ArticleContainer = (props: Props) => {
 
   return (
     <ArticleContainerContext.Provider value={{ tocId, setTocId }}>
-      <Grid
-        style={{
-          width: '100%',
-        }}
-      >
-        <GridItem className={'w-3'}>
+      <ArticleGrid>
+        <ArticleTocContainer className={'w-3'}>
           <TableOfContents contents={data.article.toc ?? []} />
-        </GridItem>
+        </ArticleTocContainer>
         <Gap className={'w-1'} />
-        <GridItem className={'w-8'}>
+        <ArticleBodyContainer className={'w-8'}>
           <ArticleBody data={data} />
-        </GridItem>
-      </Grid>
+        </ArticleBodyContainer>
+      </ArticleGrid>
     </ArticleContainerContext.Provider>
   )
 }
+
+const ArticleBodyContainer = styled(GridItem)`
+  @media (min-width: 768px) and (max-width: 1200px) {
+    grid-column: span 10 !important;
+  }
+`
+
+const ArticleTocContainer = styled(GridItem)`
+  @media (min-width: 768px) and (max-width: 1200px) {
+    grid-column: span 4 !important;
+  }
+`
+
+const ArticleGrid = styled(Grid)`
+  width: 100%;
+  @media (min-width: 768px) and (max-width: 1200px) {
+  }
+`
 
 const Gap = styled(GridItem)`
   @media (max-width: 550px) {

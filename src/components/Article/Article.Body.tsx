@@ -44,6 +44,9 @@ const ArticleContainer = styled.article`
   gap: 16px;
   max-width: 700px;
   padding-bottom: 80px;
+
+  @media (min-width: 768px) and (max-width: 1200px) {
+  }
 `
 
 const TextContainer = styled.div`

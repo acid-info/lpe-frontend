@@ -78,7 +78,6 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             margin-bottom: -16px;
             display: block;
             height: 0;
-            background: red;
             opacity: 0;
             z-index: -1;
           }

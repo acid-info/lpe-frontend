@@ -82,8 +82,7 @@ const Container = styled.aside<{ dy: number; height: number }>`
     opacity: 0;
   }
 
-  // temporary breakpoint
-  @media (max-width: 1024px) {
+  @media (max-width: 776px) {
     display: none;
   }
 `

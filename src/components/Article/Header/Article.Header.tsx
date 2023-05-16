@@ -107,7 +107,6 @@ const ArticleHeaderContainer = styled.header`
 
   @media (max-width: 768px) {
     .mobileSummary {
-      color: red;
       display: block;
       p {
         font-size: var(--lsd-body3-fontSize);
