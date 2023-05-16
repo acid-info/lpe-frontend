@@ -1,13 +1,15 @@
-import Link from 'next/link'
 import { Grid, GridItem } from '../Grid/Grid'
 import styled from '@emotion/styled'
 import Post, { PostDataProps, PostSize } from '../Post/Post'
+import useWindowSize from '@/utils/ui.utils'
 
 type Props = {
   post: PostDataProps
 }
 
 const FeaturedPost = ({ post }: Props) => {
+  const { width } = useWindowSize()
+
   return (
     <CustomGrid>
       <GridItem className="w-16">
@@ -18,7 +20,7 @@ const FeaturedPost = ({ post }: Props) => {
               size: PostSize.LARGE,
               imageProps: {
                 fill: true,
-                height: '432px',
+                height: width > 786 ? '432px' : null,
                 nextImageProps: post.coverImage
                   ? {
                       quality: 100,

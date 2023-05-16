@@ -132,7 +132,7 @@ export default function Searchbar(props: SearchbarProps) {
         )
       }, 130)
     }
-  }, [active, searchScope])
+  }, [active, searchScope, query.length])
 
   const showResultsNumber = resultsNumber !== null && active
   const renderTagFilters = tags.length > 0 && !isArticlePage

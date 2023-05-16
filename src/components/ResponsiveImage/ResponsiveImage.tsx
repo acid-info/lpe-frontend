@@ -4,7 +4,7 @@ import { ImageBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import styled from '@emotion/styled'
 
 export type ResponsiveImageProps = {
-  height?: number | string
+  height?: number | string | null
   nextImageProps?: Partial<ImageProps>
   fill?: boolean
 }
