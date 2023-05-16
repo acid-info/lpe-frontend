@@ -23,10 +23,10 @@ const Authors = ({
     <AuthorsContainer gap={gap} flexDirection={flexDirection}>
       {mentions.map((mention, index) =>
         index < mentions.length - 1 ? (
-          <div key={mention.name}>
+          <AuthorContainer gap={gap} key={mention.name}>
             <Author mention={mention} email={email} />
             <Dot variant={'body2'}>•</Dot>
-          </div>
+          </AuthorContainer>
         ) : (
           <Author key={mention.name} mention={mention} email={email} />
         ),
@@ -49,6 +49,14 @@ const Dot = styled(Typography)`
   font-size: 14px;
   display: flex;
   align-items: center;
+`
+
+const AuthorContainer = styled.div<{
+  gap: number
+}>`
+  display: flex;
+  align-items: center;
+  gap: ${({ gap }) => gap}px;
 `
 
 export default Authors
