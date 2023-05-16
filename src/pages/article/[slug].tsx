@@ -35,6 +35,10 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
         image={coverImage as UnbodyImageBlock}
         imageUrl={undefined}
         pagePath={`/article/${slug}`}
+        tags={[
+          ...data.article.tags,
+          ...data.article.mentions.map((mention) => mention.name),
+        ]}
       />
       <ArticleContainer data={data} />
     </>
