@@ -70,7 +70,7 @@ export default function TableOfContents({ contents, ...props }: Props) {
 const Container = styled.aside<{ dy: number; height: number }>`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   box-sizing: border-box;
   position: sticky;
   top: ${(p) => `${p.dy}px`};
