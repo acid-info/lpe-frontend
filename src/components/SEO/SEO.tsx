@@ -23,7 +23,7 @@ export default function SEO({
   locale,
   site_name,
   pageURL,
-  imageUrl = `https://press.logos.co/api/og`,
+  imageUrl = `${SITE_URL}/api/og`,
   image,
   tags = ['Logos Press Engine', 'Logos Press', 'Logos'],
   pagePath = '',
