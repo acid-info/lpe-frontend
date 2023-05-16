@@ -15,9 +15,6 @@ export default function SearchLayout(props: PropsWithChildren<any>) {
     <>
       <header className={styles.header}>
         <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
-        {/*<NavbarFiller />*/}
-        <div style={{ height: `${uiConfigs.navbarRenderedHeight - 2}px` }} />
-        <Searchbar searchScope={ESearchScope.ARTICLE} />
       </header>
       <Main>{props.children}</Main>
       <Footer />

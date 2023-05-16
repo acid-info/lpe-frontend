@@ -22,19 +22,18 @@ export default function DefaultLayout(props: PropsWithChildren<any>) {
         }}
       >
         <div
-          style={{
-            borderBottom: `1px solid rgb(${
-              isDarkState.get()
-                ? defaultThemes.dark.palette.border.primary
-                : defaultThemes.light.palette.border.primary
-            })`,
-          }}
+        // style={{
+        //     borderBottom: `1px solid rgb(${
+        //         isDarkState.get()
+        //             ? defaultThemes.dark.palette.border.primary
+        //             : defaultThemes.light.palette.border.primary
+        //     })`,
+        // }}
         >
           <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
           <Hero />
-          <NavbarFiller />
         </div>
-        <Searchbar />
+        <Searchbar withFilterTags={false} />
       </header>
       <Main>{props.children}</Main>
       <Footer />

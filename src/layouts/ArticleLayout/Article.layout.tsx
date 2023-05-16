@@ -19,9 +19,9 @@ export default function ArticleLayout({ children }: Props) {
   return (
     <>
       <header className={styles.header}>
-        <Navbar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
-        <Searchbar
-          searchScope={ESearchScope.ARTICLE}
+        <Navbar
+          isDark={isDarkState.get()}
+          toggle={isDarkState.toggle}
           onSearch={onSearch}
           onReset={onReset}
         />

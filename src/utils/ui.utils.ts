@@ -1,4 +1,10 @@
-import { MutableRefObject, RefObject, useEffect, useRef, useState } from 'react'
+import React, {
+  MutableRefObject,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 export const useSticky = <T extends HTMLElement>(dy: number = 0) => {
   const stickyRef = useRef<T>(null)
@@ -122,6 +128,27 @@ export function useWindowSize() {
     width,
     height,
   }
+}
+
+export const useScrollDirection = () => {
+  const [scrollDirection, setScrollDirection] = useState<string | null>(null)
+  const [lastScrollTop, setLastScrollTop] = useState(0)
+
+  const handleScroll = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    const scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up'
+
+    setLastScrollTop(scrollTop)
+    setScrollDirection(scrollDirection)
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollTop])
+
+  return scrollDirection
 }
 
 export default useWindowSize

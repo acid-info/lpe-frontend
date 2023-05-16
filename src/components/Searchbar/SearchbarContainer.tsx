@@ -9,12 +9,16 @@ import { useRouter } from 'next/router'
 type Props = PropsWithChildren<{
   onUnfocus?: () => void
   style?: any
+  className?: string
+  beSticky?: boolean
 }>
 
 export function SearchbarContainer({
   children,
   onUnfocus = nope,
   style = {},
+  className,
+  beSticky = false,
 }: Props) {
   const { pathname } = useRouter()
   const isSearchPage = pathname === '/search'
@@ -40,7 +44,7 @@ export function SearchbarContainer({
       <SearchBarWrapper
         style={style}
         ref={stickyRef}
-        className={sticky || isSearchPage || isArticlePage ? 'sticky' : ''}
+        className={`${className} ${beSticky && sticky ? 'sticky' : ''}`}
       >
         {children}
       </SearchBarWrapper>
@@ -59,10 +63,7 @@ const SearchBarWrapper = styled.div<Props>`
   width: 100%;
 
   background: rgb(var(--lsd-surface-primary));
-  //height: 44px;
-
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
-  //border-top: 1px solid rgb(var(--lsd-border-primary));
   transition: top 0.2s ease-in-out;
 
   box-sizing: border-box;
