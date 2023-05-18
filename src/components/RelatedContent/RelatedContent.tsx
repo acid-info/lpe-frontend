@@ -5,6 +5,7 @@ import { Grid } from '../Grid/Grid'
 import { ImageBlock, TextBlock } from '../ContentBlock'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { SearchResultsSection } from '@/components/SearchResultsSection/SearchResultsSection'
+import { breakpoints } from '@/configs/ui.configs'
 
 type Props = {
   data: SearchHook<UnbodyTextBlock | UnbodyImageBlock>
@@ -45,7 +46,7 @@ const Container = styled.div`
   align-items: center;
   margin-top: 108px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     align-items: flex-start;
   }
 `

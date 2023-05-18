@@ -2,7 +2,6 @@ import React from 'react'
 import { Typography } from '@acid-info/lsd-react'
 import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import styled from '@emotion/styled'
-import Image, { ImageProps } from 'next/image'
 import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
 import { useMemo } from 'react'
 import {
@@ -19,6 +18,7 @@ import {
 } from '../ResponsiveImage/ResponsiveImage'
 import Link from 'next/link'
 import { AuthorsDirection } from '../Authors/Authors'
+import { breakpoints } from '@/configs/ui.configs'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -259,23 +259,23 @@ const TitleLink = styled(Link)`
 `
 
 const HeaderContainer = styled(CustomTypography)<{ isFeatured: boolean }>`
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.mobile}px) {
     margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
   }
 `
 
 const Description = styled(CustomTypography)<{ isFeatured: boolean }>`
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.mobile}px) {
     margin-right: ${({ isFeatured }) => (isFeatured ? '178px' : '0px')};
   }
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     font-size: 14px;
     line-height: 20px;
   }
 `
 
 const Title = styled(CustomTypography)`
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     font-size: 28px;
     line-height: 36px;
   }

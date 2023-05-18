@@ -1,11 +1,10 @@
 import styled from '@emotion/styled'
-import { CloseIcon, IconButton, SearchIcon } from '@acid-info/lsd-react'
+import { IconButton, SearchIcon } from '@acid-info/lsd-react'
 import { LogosIcon } from '../Icons/LogosIcon'
 import { SunIcon } from '../Icons/SunIcon'
 import { MoonIcon } from '../Icons/MoonIcon'
-import { uiConfigs } from '@/configs/ui.configs'
+import { breakpoints, uiConfigs } from '@/configs/ui.configs'
 import Link from 'next/link'
-import styles from '@/components/Searchbar/Search.module.css'
 import React, { useEffect, useState } from 'react'
 import { Searchbar } from '@/components/Searchbar'
 import { useScrollDirection } from '@/utils/ui.utils'
@@ -96,7 +95,7 @@ const Container = styled.div`
   left: calc(calc(100% - ${uiConfigs.maxContainerWidth}px) / 2);
 
   &._page {
-    @media (min-width: 768px) {
+    @media (min-width: ${breakpoints.mobile}px) {
       .searchBar {
         display: none;
       }
@@ -115,7 +114,7 @@ const Container = styled.div`
     width: calc(100% - 32px);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     left: 0;
     width: 100%;
     &.hide {
@@ -136,7 +135,7 @@ const MobileSearchContainer = styled.div`
   z-index: 98;
   transform: translateY(44px);
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     display: block;
     &.hide {
       transform: translateY(0);
@@ -172,7 +171,7 @@ const NavBar = styled.nav`
   }
 
   /* temporary breakpoint */
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     padding: 8px;
 
     &:before {
@@ -187,7 +186,7 @@ const LogosIconContainer = styled(Link)`
   justify-content: center;
   cursor: pointer;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-left: unset;
   }
 `
@@ -205,7 +204,7 @@ const Icons = styled.div`
     display: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     .searchIcon {
       display: block;
     }

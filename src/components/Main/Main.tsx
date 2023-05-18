@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { uiConfigs } from '@/configs/ui.configs'
+import { breakpoints, uiConfigs } from '@/configs/ui.configs'
 import { PropsWithChildren } from 'react'
 
 const Main = ({ children, ...props }: PropsWithChildren<any>) => {
@@ -15,7 +15,7 @@ const Container = styled.main`
     padding: 0 16px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-top: ${uiConfigs.postSectionMobileMargin}px;
   }
 `

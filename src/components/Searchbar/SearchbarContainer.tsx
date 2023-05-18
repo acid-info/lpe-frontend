@@ -1,10 +1,8 @@
 import styled from '@emotion/styled'
-import { uiConfigs } from '@/configs/ui.configs'
+import { breakpoints, uiConfigs } from '@/configs/ui.configs'
 import { useIsScrolling, useOutsideClick, useSticky } from '@/utils/ui.utils'
 import { PropsWithChildren, useEffect } from 'react'
 import { nope } from '@/utils/general.utils'
-import { useRaf } from 'react-use'
-import { useRouter } from 'next/router'
 
 type Props = PropsWithChildren<{
   onUnfocus?: () => void
@@ -84,7 +82,7 @@ const SearchBarWrapper = styled.div<Props>`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     &.sticky {
       width: 100%;
       left: 0;

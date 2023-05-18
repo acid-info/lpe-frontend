@@ -1,8 +1,7 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { uiConfigs } from '@/configs/ui.configs'
+import { breakpoints } from '@/configs/ui.configs'
 import { NavbarFiller } from '@/components/AppBar/NavbarFiller'
-import { Searchbar } from '@/components/Searchbar'
 
 export default function Hero() {
   return (
@@ -24,7 +23,7 @@ export default function Hero() {
 
 const Container = styled.div`
   border-bottom: 1px solid rgb(var(--lsd-theme-primary));
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     .desktop {
       display: none;
     }
@@ -32,7 +31,7 @@ const Container = styled.div`
       min-height: 32px;
     }
   }
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.mobile}px) {
     h1 {
       min-height: 98px;
     }
@@ -45,7 +44,7 @@ const HeroText = styled.div`
   align-items: center;
   padding: 16px 16px 8px 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     gap: 6px;
   }
 `
@@ -55,14 +54,14 @@ const Title = styled(Typography)`
     font-size: var(--lsd-display1-fontSize);
     line-height: var(--lsd-display1-lineHeight);
   }
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     font-size: var(--lsd-h4-fontSize);
     line-height: var(--lsd-h4-lineHeight);
   }
 `
 
 const Description = styled(Typography)`
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     font-size: 12px;
     line-height: 16px;
   }

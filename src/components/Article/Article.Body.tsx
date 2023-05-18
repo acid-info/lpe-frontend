@@ -3,14 +3,11 @@ import styled from '@emotion/styled'
 import { ArticlePostData } from '@/types/data.types'
 import ArticleHeader from './Header/Article.Header'
 import ArticleFooter from './Footer/Article.Footer'
-import { MobileToc } from './Article.MobileToc'
 import ArticleBlocks from './Article.Blocks'
-import { useArticleContext } from '@/context/article.context'
 import { useSearchBarContext } from '@/context/searchbar.context'
-import { useEffect, useState } from 'react'
-import { TextBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+import { useEffect } from 'react'
 import { Typography } from '@acid-info/lsd-react'
-import articleBlocks from './Article.Blocks'
+import { breakpoints } from '@/configs/ui.configs'
 
 interface Props {
   data: ArticlePostData
@@ -45,7 +42,7 @@ const ArticleContainer = styled.article`
   max-width: 700px;
   padding-bottom: 80px;
 
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.desktop}px) {
   }
 `
 

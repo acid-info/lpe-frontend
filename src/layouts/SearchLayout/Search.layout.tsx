@@ -5,7 +5,7 @@ import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
 import { AppBar } from '@/components/AppBar'
 import styled from '@emotion/styled'
-import { uiConfigs } from '@/configs/ui.configs'
+import { breakpoints, uiConfigs } from '@/configs/ui.configs'
 
 export default function SearchLayout(props: PropsWithChildren<any>) {
   const isDarkState = useIsDarkState()
@@ -25,7 +25,7 @@ const MainContainer = styled(Main)`
     // margin-top: ${uiConfigs.postSectionMargin}px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     &.search_page {
       margin-top: ${uiConfigs.postSectionMobileMargin * 3}px;
     }

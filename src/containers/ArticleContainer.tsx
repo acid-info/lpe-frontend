@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import ArticleBody from '@/components/Article/Article.Body'
 import { ArticlePostData } from '@/types/data.types'
-import { useArticleContext } from '@/context/article.context'
 import { Grid, GridItem } from '@/components/Grid/Grid'
+import { breakpoints } from '@/configs/ui.configs'
 
 interface Props {
   data: ArticlePostData
@@ -31,20 +31,20 @@ const ArticleContainer = (props: Props) => {
 }
 
 const ArticleBodyContainer = styled(GridItem)`
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.desktop}px) {
     grid-column: span 10 !important;
   }
 `
 
 const ArticleTocContainer = styled(GridItem)`
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.desktop}px) {
     grid-column: span 4 !important;
   }
 `
 
 const ArticleGrid = styled(Grid)`
   width: 100%;
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (min-width: ${breakpoints.mobile}px) and (max-width: ${breakpoints.desktop}px) {
   }
 `
 

@@ -8,6 +8,7 @@ import {
 import styled from '@emotion/styled'
 import { Typography, TypographyProps } from '@acid-info/lsd-react'
 import { PropsWithChildren } from 'react'
+import { breakpoints } from '@/configs/ui.configs'
 
 type Props = PropsWithChildren<{
   block: TextBlockEnhanced | UnbodyTextBlock
@@ -48,7 +49,7 @@ const Headline = styled(Typography)`
   white-space: pre-wrap;
   margin-top: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     &.title {
       font-size: var(--lsd-h4-fontSize);
       line-height: var(--lsd-h4-lineHeight);

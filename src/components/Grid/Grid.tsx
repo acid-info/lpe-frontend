@@ -1,3 +1,4 @@
+import { breakpoints } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 
 export const Grid = styled.div`
@@ -38,7 +39,7 @@ export const GridItem = styled.div`
     grid-column: span 16;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     grid-column: span 16 !important;
   }
 `

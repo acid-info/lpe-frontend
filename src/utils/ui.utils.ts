@@ -151,5 +151,3 @@ export const useScrollDirection = () => {
 
   return scrollDirection
 }
-
-export default useWindowSize

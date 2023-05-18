@@ -23,6 +23,7 @@ import {
 } from '@/utils/search.utils'
 import Link from 'next/link'
 import { useSearchBarContext } from '@/context/searchbar.context'
+import { breakpoints } from '@/configs/ui.configs'
 
 export type SearchbarProps = {
   searchScope?: ESearchScope
@@ -254,7 +255,7 @@ const TagsWrapper = styled.div`
     height: 24px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     &.active {
       margin-top: 10px;
     }
@@ -323,7 +324,7 @@ const Collapsed = styled(Typography)`
     gap: 4px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     .helper {
       text-overflow: ellipsis;
       overflow: hidden;

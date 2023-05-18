@@ -1,6 +1,7 @@
 import { Tag } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { nope } from '@/utils/general.utils'
+import { breakpoints } from '@/configs/ui.configs'
 
 type FilterTagsProps = {
   tags: string[]
@@ -57,7 +58,7 @@ const Tags = styled.div`
     white-space: nowrap;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     > *:first-child {
       margin-left: 16px;
     }

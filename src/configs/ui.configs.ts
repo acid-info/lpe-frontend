@@ -6,3 +6,8 @@ export const uiConfigs = {
   maxContainerWidth: 1440,
   articleRenderedMT: 45 * 2,
 }
+
+export const breakpoints = {
+  mobile: 768,
+  desktop: 1200,
+}

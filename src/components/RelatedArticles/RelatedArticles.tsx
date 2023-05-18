@@ -4,6 +4,7 @@ import { PostsList } from '../PostList/PostList'
 import { SearchHook } from '@/types/data.types'
 import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
 import { SearchResultsSection } from '@/components/SearchResultsSection/SearchResultsSection'
+import { breakpoints } from '@/configs/ui.configs'
 
 type Props = {
   data: SearchHook<UnbodyGoogleDoc>
@@ -45,7 +46,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     align-items: flex-start;
   }
 `

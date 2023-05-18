@@ -1,29 +1,29 @@
 .searchBox {
-    width: 100% !important;
+  width: 100% !important;
 }
 
-.searchInput{
-    font-size: 14px;
-    transition: font-size 150ms ease-in-out;
+.searchInput {
+  font-size: 14px;
+  transition: font-size 150ms ease-in-out;
 }
-.searchInput.active{
-    font-size: 28px;
+.searchInput.active {
+  font-size: 28px;
 }
 @media (max-width: 768px) {
-    .searchInput.active{
-        font-size: 18px;
-    }
+  .searchInput.active {
+    font-size: 18px;
+  }
 }
 
-.searchButton{
-    border: none !important;
+.searchButton {
+  border: none !important;
 }
 
-.searchBox{
-    border: none !important;
+.searchBox {
+  border: none !important;
 }
 
-.globalSearchTrigger{
-    text-decoration: underline;
-    transition: font-size 150ms ease-in-out;
+.globalSearchTrigger {
+  text-decoration: underline;
+  transition: font-size 150ms ease-in-out;
 }

@@ -1,14 +1,13 @@
 import { Grid, GridItem } from '../Grid/Grid'
 import styled from '@emotion/styled'
 import Post, { PostDataProps, PostSize } from '../Post/Post'
-import useWindowSize from '@/utils/ui.utils'
+import { breakpoints } from '@/configs/ui.configs'
 
 type Props = {
   post: PostDataProps
 }
 
 const FeaturedPost = ({ post }: Props) => {
-  // const { width } = useWindowSize()
   return (
     <CustomGrid>
       <GridItem className="w-16">
@@ -69,7 +68,7 @@ const PostWrapper = styled.div`
     display: block;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     .desktop {
       display: none;
     }

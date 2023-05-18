@@ -1,3 +1,4 @@
+import { breakpoints } from '@/configs/ui.configs'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
@@ -188,13 +189,13 @@ const Section = styled.div`
   flex-wrap: wrap;
   width: 50%;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     width: 100%;
   }
 `
 
 const OrgInfo = styled(Section)`
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-bottom: 76px;
   }
 `
@@ -228,7 +229,7 @@ const Wrapper = styled.div`
   align-items: baseline;
 
   /* temporary breakpoint */
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     flex-direction: column;
   }
 `
@@ -246,7 +247,7 @@ const ThirdLinksContainer = styled.div`
   flex: 1;
   margin-bottom: ${SECTION_MARGIN}px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-bottom: 80px;
   }
 `
@@ -257,7 +258,7 @@ const LinkGroup = styled.div`
   margin-bottom: 34px;
   gap: 4px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-bottom: 24px;
   }
 `

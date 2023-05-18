@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import Post, { PostDataProps } from '../Post/Post'
 import { Button, Typography } from '@acid-info/lsd-react'
 import { PostListLayout } from '@/types/ui.types'
+import { breakpoints } from '@/configs/ui.configs'
 
 type Props = {
   posts: PostDataProps[]
@@ -77,7 +78,7 @@ export const PostsList = (props: Props) => {
 
 const CustomGrid = styled(Grid)`
   min-height: 500px;
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     gap: 8px;
     min-height: auto;
   }

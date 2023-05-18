@@ -8,6 +8,7 @@ import { GridItem } from '../Grid/Grid'
 import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 import ContentBlockBody from './ContentBlock.Body'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
+import { breakpoints } from '@/configs/ui.configs'
 
 type Props = Omit<SearchResultItem<UnbodyImageBlock>, 'score'>
 
@@ -30,7 +31,7 @@ const ImageBlock = ({ doc }: Props) => {
 }
 
 const CustomGridItem = styled(GridItem)`
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     grid-column: span 8 !important;
   }
 `
@@ -43,12 +44,6 @@ const Container = styled.div`
   padding: 16px 0;
   border-top: 1px solid rgb(var(--lsd-theme-primary));
   position: relative;
-`
-
-const ImageContainer = styled.div`
-  position: relative;
-  margin-bottom: 8px;
-  aspect-ratio: 1 / 1; // fixed aspect ratio temporarily
 `
 
 export default ImageBlock

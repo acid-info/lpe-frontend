@@ -5,6 +5,7 @@ import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import styled from '@emotion/styled'
 import FromSameAuthorsArticles from './Article.FromSameAuthorsArticles'
 import ArticleRelatedArticles from './Article.RelatedArticles'
+import { breakpoints } from '@/configs/ui.configs'
 
 const ArticleFooter = ({ data }: { data: ArticlePostData }) => {
   const { article, relatedArticles, articlesFromSameAuthors } = data
@@ -37,7 +38,7 @@ const ArticleFooterContainer = styled.div`
     border-top: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-top: 72px;
   }
 `

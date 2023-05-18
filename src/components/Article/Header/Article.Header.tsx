@@ -14,6 +14,7 @@ import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { ArticleHeading } from '@/components/Article/Article.Heading'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { useIntersectionObserver } from '@/utils/ui.utils'
+import { breakpoints } from '@/configs/ui.configs'
 
 const ArticleHeader = ({
   summary,
@@ -105,7 +106,7 @@ const ArticleHeaderContainer = styled.header`
     display: block;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     .mobileSummary {
       display: block;
       p {
@@ -136,7 +137,7 @@ const CustomTypography = styled(Typography)`
 
 const ArticleTitle = styled(ArticleHeading)`
   margin-bottom: 16px;
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-bottom: 8px;
   }
 `
@@ -144,7 +145,7 @@ const ArticleTitle = styled(ArticleHeading)`
 const ArticleSubtitle = styled(CustomTypography)`
   margin-bottom: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     font-size: var(--lsd-subtitle1-fontSize);
   }
 `
@@ -154,7 +155,7 @@ const AuthorsContainer = styled.div`
   margin-top: 24px;
   margin-bottom: 32px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.mobile}px) {
     margin-top: 16px;
     margin-bottom: 24px;
 
