@@ -1,4 +1,5 @@
 import { ImageResponse } from '@vercel/og'
+import { handleMethodNotAllowedResponse } from 'next/dist/server/future/route-modules/helpers/response-handlers'
 
 export const config = {
   runtime: 'edge',
@@ -36,3 +37,4 @@ export default async function handler() {
     },
   )
 }
+handleMethodNotAllowedResponse()

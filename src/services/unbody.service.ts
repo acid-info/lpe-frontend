@@ -399,7 +399,7 @@ class UnbodyService extends UnbodyClient {
         ? {
             nearText: {
               concepts: [q, ...tags].filter((t) => t.trim().length > 0),
-              certainty: 0.85,
+              certainty: 0.75,
             },
           }
         : {}
@@ -419,6 +419,8 @@ class UnbodyService extends UnbodyClient {
       ...whereFilters,
       limit: 20,
     })
+
+    console.log(query)
 
     return this.request<UnbodyGraphQlResponseBlocks>(query)
       .then(({ data }) => {
