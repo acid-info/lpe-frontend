@@ -19,7 +19,7 @@ const ArticleBlocks = ({ data }: Props) => {
 
   const renderBlocks =
     resultsNumber !== null
-      ? getBodyBlocks(data)
+      ? data.blocks
           .filter((block) => ids?.includes(block._additional.id))
           .sort((a, b) => {
             const aIndex = ids?.indexOf(a._additional.id)

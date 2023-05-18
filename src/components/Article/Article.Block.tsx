@@ -66,4 +66,10 @@ export const RenderArticleBlock = ({
   }
 }
 
-const Paragraph = styled(Typography)``
+const Paragraph = styled(Typography)`
+  &.subtitle,
+  &#p-2 {
+    font-size: var(--lsd-h6-fontSize);
+    line-height: var(--lsd-h6-lineHeight);
+  }
+`
