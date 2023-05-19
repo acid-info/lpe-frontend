@@ -303,6 +303,7 @@ const Collapsed = styled(Typography)`
 
   &.enabled {
     top: 0;
+    display: none;
   }
 
   > * {
