@@ -2,17 +2,15 @@
 # yarn lockfile v1
 
 
-"@acid-info/lsd-react@^0.1.0-alpha.3":
-  version "0.1.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@acid-info/lsd-react/-/lsd-react-0.1.0-alpha.3.tgz#c0103a4a8f79c7c204aa8110a304ba70ada37b00"
-  integrity sha512-oqeVWJQXTFh/6eqYLpraam7saf8CcprqWIIl08PYIL+LdBnrepfqVPyFZCEOGmtrM3khhNIpt/4l9LP9E7CI4g==
+"@acid-info/lsd-react@^0.1.0-alpha.11":
+  version "0.1.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@acid-info/lsd-react/-/lsd-react-0.1.0-alpha.11.tgz#7c40f72d55f777fd3c308796c6ba6673a8eedaf6"
+  integrity sha512-ctB78tWN6dKIx6MIY9O7i7CVYjU/tWevxcBS26Q/cxCdIpirULwn0QbKwXJhEyuyQlbUJqW5ylrnpORrA3IG4A==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
     clsx "^1.2.1"
     lodash "^4.17.21"
-    react "^18.2.0"
-    react-dom "^18.2.0"
     react-use "^17.4.0"
 
 "@babel/code-frame@^7.0.0":
@@ -2563,7 +2561,7 @@ react-blurhash@^0.3.0:
   resolved "https://registry.yarnpkg.com/react-blurhash/-/react-blurhash-0.3.0.tgz#f125801d052644f74420c79b05981691d17c9705"
   integrity sha512-XlKr4Ns1iYFRnk6DkAblNbAwN/bTJvxTVoxMvmTcURdc5oLoXZwqAF9N3LZUh/HT+QFlq5n6IS6VsDGsviYAiQ==
 
-react-dom@18.2.0, react-dom@^18.2.0:
+react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -2622,7 +2620,7 @@ react-use@^17.4.0:
     ts-easing "^0.2.0"
     tslib "^2.1.0"
 
-react@18.2.0, react@^18.2.0:
+react@18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
