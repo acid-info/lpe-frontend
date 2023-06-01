@@ -3,8 +3,6 @@ import { uiConfigs } from '@/configs/ui.configs'
 import { useIsScrolling, useOutsideClick, useSticky } from '@/utils/ui.utils'
 import { PropsWithChildren, useEffect } from 'react'
 import { nope } from '@/utils/general.utils'
-import { useRaf } from 'react-use'
-import { useRouter } from 'next/router'
 
 type Props = PropsWithChildren<{
   onUnfocus?: () => void
