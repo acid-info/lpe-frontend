@@ -2,47 +2,44 @@ import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
 const FIRST_LINK_GRUOP = [
-  { label: 'Twitter', href: '#' },
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Terms & Conditions', href: '#' },
-  { label: 'Contact us', href: '#' },
-  { label: 'Work with us', href: '#' },
+  { label: 'Twitter', href: 'https://twitter.com/Logos_State' },
+  { label: 'Terms & Conditions', href: 'https://logos.co/terms/' },
+  { label: 'Work with us', href: 'https://jobs.status.im/' },
 ]
 
 const SECOND_LINK_GROUP = [
   {
     title: 'Research',
     links: [
-      { label: 'VacP2P', href: '#' },
-      { label: 'AFAIK', href: '#' },
-      { label: 'Institute', href: '#' },
+      { label: 'VacP2P', href: 'https://vac.dev/' },
+      { label: 'AFAIK', href: 'https://afaik.institute/' },
     ],
   },
   {
     title: 'Infrastructure',
     links: [
-      { label: 'Waku', href: '#' },
-      { label: 'Nimbus', href: '#' },
-      { label: 'Codex', href: '#' },
-      { label: 'Nomos', href: '#' },
+      { label: 'Waku', href: 'https://waku.org/' },
+      { label: 'Nimbus', href: 'https://nimbus.team/' },
+      { label: 'Codex', href: 'https://codex.storage/' },
+      { label: 'Nomos', href: 'https://nomos.tech/' },
     ],
   },
   {
     title: 'Creative Studio',
-    links: [{ label: 'Acid.info', href: '#' }],
+    links: [{ label: 'Acid.info', href: 'https://acid.info/' }],
   },
 ]
 
 const THIRD_LINKS_GROUP = [
   {
     title: 'Movement',
-    links: [{ label: 'Logos', href: '#' }],
+    links: [{ label: 'Logos', href: 'https://logos.co/' }],
   },
   {
-    title: 'User-facing / Products',
+    title: 'User-facing Products',
     links: [
-      { label: 'Status', href: '#' },
-      { label: 'Keycard', href: '#' },
+      { label: 'Status', href: 'https://status.im/' },
+      { label: 'Keycard', href: 'https://keycard.tech/' },
     ],
   },
 ]
