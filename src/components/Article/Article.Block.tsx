@@ -49,6 +49,24 @@ export const RenderArticleBlock = ({
             />
           )
         }
+        case 'p': {
+          const isIframeRegex = /<iframe[^>]*>(?:<\/iframe>|[^]*?<\/iframe>)/
+
+          const isIframe = isIframeRegex.test(block.text)
+
+          return isIframe ? (
+            <IframeContainer dangerouslySetInnerHTML={{ __html: block.text }} />
+          ) : (
+            <Paragraph
+              variant="body1"
+              component={block.tagName as any}
+              genericFontFamily="sans-serif"
+              className={extractClassFromFirstTag(block.html) || ''}
+              id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
+              dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
+            />
+          )
+        }
         default:
           return (
             <Paragraph
@@ -71,5 +89,23 @@ const Paragraph = styled(Typography)`
   &#p-2 {
     font-size: var(--lsd-h6-fontSize);
     line-height: var(--lsd-h6-lineHeight);
+  }
+`
+
+const IframeContainer = styled.div`
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+
+  & > iframe,
+  & > object,
+  & > embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 `
