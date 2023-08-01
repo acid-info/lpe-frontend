@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@acid-info/lsd-react@^0.1.0-alpha.11":
-  version "0.1.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/@acid-info/lsd-react/-/lsd-react-0.1.0-alpha.11.tgz#7c40f72d55f777fd3c308796c6ba6673a8eedaf6"
-  integrity sha512-ctB78tWN6dKIx6MIY9O7i7CVYjU/tWevxcBS26Q/cxCdIpirULwn0QbKwXJhEyuyQlbUJqW5ylrnpORrA3IG4A==
+"@acid-info/lsd-react@^0.1.0-alpha.17":
+  version "0.1.0-alpha.17"
+  resolved "https://registry.yarnpkg.com/@acid-info/lsd-react/-/lsd-react-0.1.0-alpha.17.tgz#4a0da00ad779717bcd6c5771863ec94937c701a0"
+  integrity sha512-qDnDr4uK7xXulf3StBLhCdq+0zT+6NT1TstQ+qAw3/kLonE2wiQx+w+aRlyaRobSevhtyC+bfR+QDvfFwkG8Rw==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
@@ -217,6 +217,11 @@
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@hookstate/core/-/core-4.0.1.tgz#6744380e96ce13fe3488c926c1cbae93bbea0ff6"
   integrity sha512-Uh2D8Z0z/pqOJ7t+SfC+2sj13JQcB4yFhtL+T1choCaBxTSlgOS/CKRBohgJ4cjTKoxOmTT8uSQysu3gUjX+Gw==
+
+"@hookstate/localstored@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@hookstate/localstored/-/localstored-4.0.2.tgz#6f0ef6b71baa4c28e5e8835431585500eb6a9532"
+  integrity sha512-81dbUH6xnwbePby21NQN8zrmjvMA8tOYeOOLZXqRmRGKnhtcokjTJoRNMZugpC9P3/NnacllBZ5ZUt43nmrKkA==
 
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.8"
