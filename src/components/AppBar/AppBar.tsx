@@ -1,16 +1,15 @@
-import styled from '@emotion/styled'
-import { CloseIcon, IconButton, SearchIcon } from '@acid-info/lsd-react'
-import { LogosIcon } from '../Icons/LogosIcon'
-import { SunIcon } from '../Icons/SunIcon'
-import { MoonIcon } from '../Icons/MoonIcon'
-import { uiConfigs } from '@/configs/ui.configs'
-import Link from 'next/link'
-import styles from '@/components/Searchbar/Search.module.css'
-import React, { useEffect, useState } from 'react'
 import { Searchbar } from '@/components/Searchbar'
-import { useScrollDirection } from '@/utils/ui.utils'
-import { useRouter } from 'next/router'
+import { uiConfigs } from '@/configs/ui.configs'
 import { useSearchBarContext } from '@/context/searchbar.context'
+import { useScrollDirection } from '@/utils/ui.utils'
+import { IconButton, SearchIcon } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { LogosIcon } from '../Icons/LogosIcon'
+import { MoonIcon } from '../Icons/MoonIcon'
+import { SunIcon } from '../Icons/SunIcon'
 
 interface AppBarProps {
   isDark: boolean
@@ -58,11 +57,8 @@ export default function AppBar({
         </LogosIconContainer>
         <Icons>
           <IconButton size="small" onClick={() => toggle()}>
-            {isDark ? (
-              <SunIcon color="primary" />
-            ) : (
-              <MoonIcon color="primary" />
-            )}
+            <SunIcon color="primary" className="light-mode-hidden" />
+            <MoonIcon color="primary" className="dark-mode-hidden" />
           </IconButton>
           <IconButton
             className={'searchIcon searchIconHome'}

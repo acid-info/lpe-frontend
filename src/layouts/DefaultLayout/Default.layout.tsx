@@ -1,18 +1,15 @@
-import { AppBar } from '../../components/AppBar'
-import useIsDarkState from '@/states/isDarkState/isDarkState'
-import { PropsWithChildren } from 'react'
-import { Hero } from '@/components/Hero'
-import { NavbarFiller } from '@/components/AppBar/NavbarFiller'
-import { Searchbar } from '@/components/Searchbar'
 import { Footer } from '@/components/Footer'
+import { Hero } from '@/components/Hero'
 import { Main } from '@/components/Main'
+import { Searchbar } from '@/components/Searchbar'
 import { uiConfigs } from '@/configs/ui.configs'
-import { useRouter } from 'next/router'
-import { defaultThemes } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { PropsWithChildren } from 'react'
+import { AppBar } from '../../components/AppBar'
+import { useThemeState } from '../../states/themeState'
 
 export default function DefaultLayout(props: PropsWithChildren<any>) {
-  const isDarkState = useIsDarkState()
+  const themeState = useThemeState()
 
   return (
     <>
@@ -23,7 +20,10 @@ export default function DefaultLayout(props: PropsWithChildren<any>) {
         }}
       >
         <div>
-          <AppBar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
+          <AppBar
+            isDark={themeState.mode.get() === 'dark'}
+            toggle={themeState.toggleMode}
+          />
           <Hero />
         </div>
         <Searchbar withFilterTags={false} beSticky={true} />

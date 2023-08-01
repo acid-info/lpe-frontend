@@ -1,8 +1,5 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import React from 'react'
-import { Collapse } from '@/components/Collapse'
-import useIsDarkState from '@/states/isDarkState/isDarkState'
 
 type Props = {
   summary: string

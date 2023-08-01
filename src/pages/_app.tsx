@@ -1,14 +1,13 @@
-import useIsDarkState from '@/states/isDarkState/isDarkState'
-import { defaultThemes, ThemeProvider } from '@acid-info/lsd-react'
+import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
+import { uiConfigs } from '@/configs/ui.configs'
+import { SearchBarProvider } from '@/context/searchbar.context'
+import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { css, Global } from '@emotion/react'
+import { NextComponentType, NextPageContext } from 'next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { uiConfigs } from '@/configs/ui.configs'
-import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { ReactNode } from 'react'
-import { NextComponentType, NextPageContext } from 'next'
-import { SearchBarProvider } from '@/context/searchbar.context'
-import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
+import { LSDThemeProvider } from '../containers/LSDThemeProvider'
 
 type NextLayoutComponentType<P = {}> = NextComponentType<
   NextPageContext,
@@ -23,14 +22,12 @@ type AppLayoutProps<P = {}> = AppProps & {
 }
 
 export default function App({ Component, pageProps }: AppLayoutProps) {
-  const isDark = useIsDarkState().get()
-
   const getLayout =
     Component.getLayout ||
     ((page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>)
 
   return (
-    <ThemeProvider theme={isDark ? defaultThemes.dark : defaultThemes.light}>
+    <LSDThemeProvider>
       <Head>
         <title>Logos Press Engine</title>
         <meta
@@ -79,12 +76,24 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             opacity: 0;
             z-index: -1;
           }
+
+          [data-theme='light'] {
+            .light-mode-hidden {
+              display: none !important;
+            }
+          }
+
+          [data-theme='dark'] {
+            .dark-mode-hidden {
+              display: none !important;
+            }
+          }
         `}
       />
       <ProgressBar />
       <SearchBarProvider>
         {getLayout(<Component {...pageProps} />)}
       </SearchBarProvider>
-    </ThemeProvider>
+    </LSDThemeProvider>
   )
 }

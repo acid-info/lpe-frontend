@@ -1,18 +1,22 @@
-import useIsDarkState from '@/states/isDarkState/isDarkState'
-import { PropsWithChildren } from 'react'
-import styles from './Search.layout.module.css'
+import { AppBar } from '@/components/AppBar'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
-import { AppBar } from '@/components/AppBar'
-import styled from '@emotion/styled'
 import { uiConfigs } from '@/configs/ui.configs'
+import styled from '@emotion/styled'
+import { PropsWithChildren } from 'react'
+import { useThemeState } from '../../states/themeState'
+import styles from './Search.layout.module.css'
 
 export default function SearchLayout(props: PropsWithChildren<any>) {
-  const isDarkState = useIsDarkState()
+  const themeState = useThemeState()
+
   return (
     <>
       <header className={styles.header}>
-        <AppBar isDark={isDarkState.get()} toggle={isDarkState.toggle} />
+        <AppBar
+          isDark={themeState.mode.get() === 'dark'}
+          toggle={themeState.toggleMode}
+        />
       </header>
       <MainContainer className={'search_page'}>{props.children}</MainContainer>
       <Footer />
