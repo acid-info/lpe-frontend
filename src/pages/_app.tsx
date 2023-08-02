@@ -8,6 +8,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ReactNode } from 'react'
 import { LSDThemeProvider } from '../containers/LSDThemeProvider'
+import { GlobalAudioPlayer } from '@/components/GlobalAudioPlayer'
 
 type NextLayoutComponentType<P = {}> = NextComponentType<
   NextPageContext,
@@ -94,6 +95,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
       <SearchBarProvider>
         {getLayout(<Component {...pageProps} />)}
       </SearchBarProvider>
+      <GlobalAudioPlayer />
     </LSDThemeProvider>
   )
 }
