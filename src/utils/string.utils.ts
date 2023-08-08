@@ -53,3 +53,15 @@ export function convertSecToMinAndSec(totalSeconds: number) {
 
   return `${formattedMinutes}:${formattedSeconds}`
 }
+
+export function extractUUIDFromEpisode(url: string) {
+  const regex = /([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/
+  const match = url.match(regex)
+  return match ? match[1] : null
+}
+
+export function convertToIframe(url: string) {
+  if (!url) return ''
+
+  return `<iframe height="200px" width="100%" frameborder="no" scrolling="no" seamless src="${url}"></iframe>`
+}

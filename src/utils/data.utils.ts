@@ -7,7 +7,7 @@ import {
 } from '@/lib/unbody/unbody.types'
 import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { isAuthorsParagraph } from './html.utils'
-import { similarity } from './string.utils'
+import { extractUUIDFromEpisode, similarity } from './string.utils'
 import { ArticleBlocksOrders } from '@/configs/data.configs'
 
 function hasClassName(inputString: string, className: string) {
@@ -98,4 +98,26 @@ export const shuffle = (array: any[]) => {
   }
 
   return array
+}
+
+export const getAudioSourceFromSimplecastPlayer = async (url: string) => {
+  const myHeaders = new Headers()
+  myHeaders.append(
+    'Authorization',
+    'Bearer eyJhcGlfa2V5IjoiMzg3OTdhY2Y5N2NmZjgzZjQxNGI5ODNiN2E2MjY3NmQifQ==',
+  )
+
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+  }
+
+  const result = await fetch(
+    `https://api.simplecast.com/episodes/${url}`,
+    requestOptions,
+  )
+
+  const data = await result.json()
+  console.log(data)
+  return data
 }

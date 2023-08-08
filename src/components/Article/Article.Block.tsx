@@ -13,6 +13,8 @@ import { HeadingElementsRef } from '@/utils/ui.utils'
 import UnbodyDocumentTypeNames = UnbodyGraphQl.UnbodyDocumentTypeNames
 import { ArticleHeading } from '@/components/Article/Article.Heading'
 import ReactPlayer from 'react-player'
+import { getAudioSourceFromSimplecastPlayer } from '@/utils/data.utils'
+import { convertToIframe, extractUUIDFromEpisode } from '@/utils/string.utils'
 
 export const RenderArticleBlock = ({
   block,
@@ -51,21 +53,39 @@ export const RenderArticleBlock = ({
           const isIframe = isIframeRegex.test(block.text)
 
           const isYoutubeRegex =
-            /https?:\/\/(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]{11})/
+            /^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.?be)\/.+$/
 
           const isYoutube = isYoutubeRegex.test(block.text)
           const youtubeLink = block.text.match(isYoutubeRegex) ?? []
 
-          const isSimplecastRegex = /https?:\/\/.*cdn\.simplecast\.com\/.*/
+          const isSimplecastRegex =
+            /^https?:\/\/([a-zA-Z0-9-]+\.)*simplecast\.com\/[^?\s]+(\?[\s\S]*)?$/
+
           const isSimplecast = isSimplecastRegex.test(block.text)
           const simplecastLink = block.text.match(isSimplecastRegex) ?? []
+
+          // const episodeId = extractUUIDFromEpisode(simplecastLink[0] ?? '')
+
+          // let audioSrc = ''
+
+          // if (isSimplecast) {
+          //   fetch(
+          //     `https://api.simplecast.com/episodes/audio/bc313c16-82e9-439a-8e0c-af59833d22d7`,
+          //   )
+          //     .then((response) => response.json())
+          //     .then((data) => console.log(data))
+          // }
 
           return isIframe ? (
             <IframeContainer dangerouslySetInnerHTML={{ __html: block.text }} />
           ) : isYoutube ? (
             <ReactPlayer url={youtubeLink[0]} />
           ) : isSimplecast ? (
-            <ReactPlayer height={100} controls url={simplecastLink[0]} />
+            <IframeContainer
+              dangerouslySetInnerHTML={{
+                __html: convertToIframe(simplecastLink[0] ?? ''),
+              }}
+            />
           ) : (
             <Paragraph
               variant="body1"
