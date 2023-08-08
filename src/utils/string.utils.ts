@@ -41,3 +41,15 @@ export const calcReadingTime = (text: string): number => {
   const numberOfWords = text.split(/\s/g).length
   return Math.ceil(numberOfWords / wordsPerMinute)
 }
+
+export function convertSecToMinAndSec(totalSeconds: number) {
+  // Convert seconds to minutes and seconds
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = Math.floor(totalSeconds % 60)
+
+  // Ensure two digit format
+  const formattedMinutes = String(minutes).padStart(2, '0')
+  const formattedSeconds = String(seconds).padStart(2, '0')
+
+  return `${formattedMinutes}:${formattedSeconds}`
+}

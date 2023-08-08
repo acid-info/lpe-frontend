@@ -4,11 +4,15 @@ import { useRef, useState } from 'react'
 import { PlayIcon } from '../Icons/PlayIcon'
 import { PauseIcon } from '../Icons/PauseIcon'
 import { VolumeIcon } from '../Icons/VolumeIcon'
+import styles from './GlobalAudioPlayer.module.css'
+import { convertSecToMinAndSec } from '@/utils/string.utils'
+import { Typography } from '@acid-info/lsd-react'
 
 type StateProps = {
   url: string | null
   pip: boolean
   playing: boolean
+  playedSeconds: number
   controls: boolean
   light: boolean
   volume: number
@@ -30,6 +34,7 @@ export default function GlobalAudioPlayer() {
     url: TEMP_URL,
     pip: false,
     playing: false,
+    playedSeconds: 0,
     controls: false,
     light: false,
     volume: 0.8,
@@ -107,19 +112,29 @@ export default function GlobalAudioPlayer() {
     setState((prev) => ({ ...prev, playbackRate: parseFloat(e.target.value) }))
   }
 
-  // const handleProgress = (newState: StateProps) => {
-  //   if (!state.seeking) {
-  //     setState((prev) => ({ ...prev, ...newState }))
-  //   }
-  // }
+  const handleProgress = (newState: { playedSeconds: number }) => {
+    setState((prev) => ({ ...prev, playedSeconds: newState.playedSeconds }))
+  }
 
   return (
     <Container>
       <AudioPlayer>
         <Buttons>
-          <PlayPause onClick={handlePlayPause}>
-            {state.playing ? <PauseIcon /> : <PlayIcon />}
-          </PlayPause>
+          <Row>
+            <PlayPause onClick={handlePlayPause}>
+              {state.playing ? <PauseIcon /> : <PlayIcon />}
+            </PlayPause>
+            <TimeContainer>
+              <Time variant="body3">
+                {convertSecToMinAndSec(state.playedSeconds)}
+              </Time>
+              <Typography variant="body3">/</Typography>
+              <Time variant="body3">
+                {convertSecToMinAndSec(state.duration)}
+              </Time>
+            </TimeContainer>
+          </Row>
+
           <VolumeContainer onClick={() => setShowVolume((prev) => !prev)}>
             {showVolume && (
               <VolumeGauge>
@@ -139,9 +154,8 @@ export default function GlobalAudioPlayer() {
 
         {/* <button onClick={handleStop}>Stop</button> */}
 
-        <Seek>
+        <Seek className={styles.audioPlayer}>
           <input
-            className="audio-player"
             type="range"
             min={0}
             max={0.999999}
@@ -156,6 +170,7 @@ export default function GlobalAudioPlayer() {
 
       <ReactPlayer
         ref={ref}
+        style={{ display: 'none' }}
         url={state.url ?? TEMP_URL}
         width="100%"
         height="100%"
@@ -177,8 +192,9 @@ export default function GlobalAudioPlayer() {
         onEnded={handleEnded}
         onError={(e) => console.log('onError', e)}
         onDuration={handleDuration}
-        // onProgress={handleProgress}
+        onProgress={handleProgress}
       />
+      <RightMenu></RightMenu>
     </Container>
   )
 }
@@ -195,6 +211,7 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   border-top: 1px solid rgb(var(--lsd-border-primary));
+  box-sizing: border-box;
 `
 
 const Buttons = styled.div`
@@ -224,8 +241,12 @@ const VolumeGauge = styled.div`
 const AudioPlayer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  gap: 8px;
+  width: 60%;
+`
+
+const RightMenu = styled.div`
+  width: 40%;
 `
 
 const PlayPause = styled.button`
@@ -234,4 +255,19 @@ const PlayPause = styled.button`
   justify-content: center;
   border: none;
   background: none;
+  margin-right: 8px;
+`
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  white-space: pre-wrap;
+`
+
+const TimeContainer = styled(Row)`
+  gap: 8px;
+`
+
+const Time = styled(Typography)`
+  width: 32px;
 `

@@ -13,7 +13,6 @@ import { HeadingElementsRef } from '@/utils/ui.utils'
 import UnbodyDocumentTypeNames = UnbodyGraphQl.UnbodyDocumentTypeNames
 import { ArticleHeading } from '@/components/Article/Article.Heading'
 import ReactPlayer from 'react-player'
-import { GlobalAudioPlayer } from '../GlobalAudioPlayer'
 
 export const RenderArticleBlock = ({
   block,
@@ -53,6 +52,7 @@ export const RenderArticleBlock = ({
 
           const isYoutubeRegex =
             /https?:\/\/(?:www\.)?youtu\.be\/([a-zA-Z0-9_-]{11})/
+
           const isYoutube = isYoutubeRegex.test(block.text)
           const youtubeLink = block.text.match(isYoutubeRegex) ?? []
 
