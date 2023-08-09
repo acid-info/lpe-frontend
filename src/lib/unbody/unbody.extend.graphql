@@ -1,0 +1,30 @@
+type TocItem {
+  level: Int!
+  tag: String!
+  href: String!
+  title: String!
+  blockIndex: Int!
+}
+
+type Mention {
+  name: String!
+  emailAddress: String!
+}
+
+type Footnote {
+  index: Int!
+  id: String!
+  refId: String!
+  refValue: String!
+  valueHTML: String!
+  valueText: String!
+}
+
+extend type GoogleDoc {
+  mentionsObj: [Mention]!
+  tocObj: [TocItem]!
+}
+
+extend type TextBlock {
+  footnotesObj: [Footnote]
+}

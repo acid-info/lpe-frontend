@@ -1,27 +1,27 @@
-import Link from 'next/link'
-import styled from '@emotion/styled'
-
 import { SearchResultItem } from '@/types/data.types'
-import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
-
+import styled from '@emotion/styled'
+import Link from 'next/link'
+import { LPE } from '../../types/lpe.types'
 import { GridItem } from '../Grid/Grid'
-import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
-import ContentBlockBody from './ContentBlock.Body'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
+import ContentBlockBody from './ContentBlock.Body'
+import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 
-type Props = Omit<SearchResultItem<UnbodyImageBlock>, 'score'>
+type Props = Omit<SearchResultItem<LPE.Article.ImageBlock>, 'score'>
 
 const ImageBlock = ({ doc }: Props) => {
   return (
     <CustomGridItem className="w-2">
       {/* TODO: order not working for images */}
       <Container>
-        <Link href={`/article/${doc.document[0].slug}#p-${doc.order}`}>
+        <Link href={`/article/${doc.document?.slug}#p-${doc.order}`}>
           <ResponsiveImage data={doc} />
         </Link>
         <ContentBlockHeader
           type={BlockType.IMAGE}
-          date={doc?.document[0].modifiedAt}
+          date={
+            doc.document?.modifiedAt ? new Date(doc.document?.modifiedAt) : null
+          }
         />
         <ContentBlockBody data={doc} />
       </Container>

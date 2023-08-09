@@ -1,34 +1,42 @@
-import { getBodyBlocks } from '@/utils/data.utils'
-import { RenderArticleBlock } from './Article.Block'
-import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
-import { useIntersectionObserver } from '@/utils/ui.utils'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { useArticleContext } from '@/context/article.context'
 import { useSearchBarContext } from '@/context/searchbar.context'
+import { useIntersectionObserver } from '@/utils/ui.utils'
+import { useMemo } from 'react'
+import { SearchResultsItemTypes } from '../../types/data.types'
+import { LPE } from '../../types/lpe.types'
+import { RenderArticleBlock } from './Article.Block'
 
 type Props = {
-  data: GoogleDocEnhanced
+  data: LPE.Article.Data
 }
 
 const ArticleBlocks = ({ data }: Props) => {
   const { resultsNumber } = useSearchBarContext()
   const { data: searchResultBlocks = [] } = useArticleContext()
-  const ids = searchResultBlocks?.map((block) => block.doc._additional.id)
+  const ids = searchResultBlocks?.map(
+    (block) => (block as SearchResultsItemTypes).doc.id,
+  )
   const { setTocId, tocId } = useArticleContainerContext()
   const headingElementsRef = useIntersectionObserver(setTocId)
 
+  const blocks = useMemo(
+    () => data.content.filter((b) => b.labels.length === 0),
+    [data.content],
+  )
+
   const renderBlocks =
     resultsNumber !== null
-      ? data.blocks
-          .filter((block) => ids?.includes(block._additional.id))
+      ? blocks
+          .filter((block) => ids?.includes(block.id))
           .sort((a, b) => {
-            const aIndex = ids?.indexOf(a._additional.id)
-            const bIndex = ids?.indexOf(b._additional.id)
+            const aIndex = ids?.indexOf(a.id)
+            const bIndex = ids?.indexOf(b.id)
             return aIndex! - bIndex!
           })
-      : getBodyBlocks(data)
+      : blocks
 
-  return data.blocks.length ? (
+  return renderBlocks.length ? (
     <>
       {renderBlocks.map((block, idx) => (
         <RenderArticleBlock

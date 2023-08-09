@@ -1,16 +1,16 @@
-import { GetStaticPropsContext } from 'next'
-import { ArticleLayout } from '@/layouts/ArticleLayout'
-import { ReactNode } from 'react'
-import ArticleContainer from '@/containers/ArticleContainer'
-import api from '@/services/unbody.service'
-import { ArticlePostData } from '@/types/data.types'
 import { SEO } from '@/components/SEO'
+import ArticleContainer from '@/containers/ArticleContainer'
 import { ArticleProvider } from '@/context/article.context'
+import { ArticleLayout } from '@/layouts/ArticleLayout'
+
+import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
-import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+import { ReactNode } from 'react'
+import unbodyApi from '../../services/unbody/unbody.service'
+import { LPE } from '../../types/lpe.types'
 
 type ArticleProps = {
-  data: ArticlePostData
+  data: LPE.Article.Document
   errors: string | null
   why?: string
 }
@@ -23,21 +23,17 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
   if (!data) return null
   if (errors) return <div>{errors}</div>
 
-  const coverImage = data.article.blocks.find(
-    (b) => b.__typename === 'ImageBlock',
-  )
-
   return (
     <>
       <SEO
-        title={data.article.title}
-        description={data.article.summary}
-        image={coverImage as UnbodyImageBlock}
+        title={data.data.title}
+        description={data.data.summary}
+        image={data.data.coverImage}
         imageUrl={undefined}
         pagePath={`/article/${slug}`}
         tags={[
-          ...data.article.tags,
-          ...data.article.mentions.map((mention) => mention.name),
+          ...data.data.tags,
+          ...data.data.authors.map((author) => author.name),
         ]}
       />
       <ArticleContainer data={data} />
@@ -46,7 +42,8 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
 }
 
 export async function getStaticPaths() {
-  const { data: posts, errors } = await api.getAllArticlePostSlugs()
+  const { data: posts, errors } = await unbodyApi.getAllArticlePostSlugs()
+
   return {
     paths: errors
       ? []
@@ -65,27 +62,29 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
-  const { data: article, errors } = await api.getArticlePost(slug as string)
-  if (!article) {
+  const { data, errors } = await unbodyApi.getArticlePost(slug as string, true)
+
+  if (!data) {
     return {
       notFound: true,
       props: { why: 'no article' },
     }
   }
 
-  article.blocks.sort((a, b) => a.order - b.order)
-  const { data: relatedArticles } = await api.getRelatedArticles(
-    article._additional.id,
-  )
+  const { data: relatedArticles } = await unbodyApi.getRelatedArticles(data.id)
   const { data: articlesFromSameAuthors } =
-    await api.getArticlesFromSameAuthors(
+    await unbodyApi.getArticlesFromSameAuthors(
       slug as string,
-      article.mentions.map((mention) => mention.name),
+      data.authors.map((author) => author.name),
     )
 
   return {
     props: {
-      data: { article, relatedArticles, articlesFromSameAuthors },
+      data: {
+        data,
+        relatedArticles,
+        articlesFromSameAuthors,
+      },
       error: JSON.stringify(errors),
     },
   }

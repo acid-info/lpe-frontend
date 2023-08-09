@@ -1,8 +1,8 @@
-import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
 import { ArticleReference } from '@/components/ArticleReference'
 import { Collapse } from '@/components/Collapse'
+import { LPE } from '../../../types/lpe.types'
 
-const ArticleRelatedArticles = ({ data }: { data: GoogleDocEnhanced[] }) =>
+const ArticleRelatedArticles = ({ data }: { data: LPE.Article.Metadata[] }) =>
   data.length > 0 ? (
     <Collapse label="Related Articles">
       {data.map((article, idx) => (

@@ -1,24 +1,25 @@
-import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
+import { LPE } from '../../types/lpe.types'
 import { Authors } from '../Authors'
 import { AuthorsDirection } from '../Authors/Authors'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 type Props = {
-  data: GoogleDocEnhanced
+  data: LPE.Article.Metadata
 }
 
 export default function ArticleReference({
-  data: { title, modifiedAt, mentions, slug },
+  data: { title, modifiedAt, authors, slug },
   ...props
 }: Props) {
-  const localDate = new Date(modifiedAt).toLocaleString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
+  const localDate =
+    modifiedAt &&
+    new Date(modifiedAt).toLocaleString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
 
   return (
     <Container {...props}>
@@ -31,8 +32,8 @@ export default function ArticleReference({
         <Authors
           flexDirection={AuthorsDirection.ROW}
           gap={4}
-          mentions={mentions}
           email={false}
+          authors={authors}
         />
         <Typography variant="body3">•</Typography>
         <Typography variant="body3" genericFontFamily="sans-serif">

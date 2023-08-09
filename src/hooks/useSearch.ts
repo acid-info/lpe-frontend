@@ -1,18 +1,8 @@
-import {
-  UnbodyGoogleDoc,
-  UnbodyImageBlock,
-  UnbodyTextBlock,
-} from '@/lib/unbody/unbody.types'
 import searchApi from '@/services/search.service'
-import {
-  PostTypes,
-  SearchHook,
-  SearchHookDataPayload,
-  SearchResultItem,
-} from '@/types/data.types'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+import { PostTypes, SearchHook, SearchResultItem } from '@/types/data.types'
 
 import { useState } from 'react'
+import { LPE } from '../types/lpe.types'
 
 export const useSearchGeneric = <T>(
   initialData: SearchResultItem<T>[],
@@ -40,12 +30,10 @@ export const useSearchGeneric = <T>(
 }
 
 export const useArticleSearch = (
-  initialData: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[],
-): SearchHook<UnbodyImageBlock | UnbodyTextBlock> => {
+  initialData: SearchResultItem<LPE.Article.ContentBlock>[],
+): SearchHook<LPE.Article.ContentBlock> => {
   const [data, setData] =
-    useState<SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]>(
-      initialData,
-    )
+    useState<SearchResultItem<LPE.Article.ContentBlock>[]>(initialData)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -59,7 +47,7 @@ export const useArticleSearch = (
   }
 
   const reset = (
-    _initialData: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[],
+    _initialData: SearchResultItem<LPE.Article.ContentBlock>[],
   ) => {
     setData(_initialData)
     setLoading(false)

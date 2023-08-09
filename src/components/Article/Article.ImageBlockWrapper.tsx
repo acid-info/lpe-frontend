@@ -1,12 +1,11 @@
-import { UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import styled from '@emotion/styled'
-import React from 'react'
-import { PostImageRatio, PostImageRatioOptions } from '../Post/Post'
 import Image from 'next/image'
+import { LPE } from '../../types/lpe.types'
+import { PostImageRatio, PostImageRatioOptions } from '../Post/Post'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
 type Props = {
-  image: UnbodyImageBlock
+  image: LPE.Image.Document
   ratio: PostImageRatio
 }
 

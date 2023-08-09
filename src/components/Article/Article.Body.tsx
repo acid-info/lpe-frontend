@@ -1,19 +1,15 @@
 import styled from '@emotion/styled'
 
-import { ArticlePostData } from '@/types/data.types'
-import ArticleHeader from './Header/Article.Header'
-import ArticleFooter from './Footer/Article.Footer'
-import { MobileToc } from './Article.MobileToc'
-import ArticleBlocks from './Article.Blocks'
-import { useArticleContext } from '@/context/article.context'
 import { useSearchBarContext } from '@/context/searchbar.context'
-import { useEffect, useState } from 'react'
-import { TextBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import { Typography } from '@acid-info/lsd-react'
-import articleBlocks from './Article.Blocks'
+import { useEffect } from 'react'
+import { LPE } from '../../types/lpe.types'
+import ArticleBlocks from './Article.Blocks'
+import ArticleFooter from './Footer/Article.Footer'
+import ArticleHeader from './Header/Article.Header'
 
 interface Props {
-  data: ArticlePostData
+  data: LPE.Article.Document
 }
 
 export default function ArticleBody({ data }: Props) {
@@ -21,14 +17,14 @@ export default function ArticleBody({ data }: Props) {
 
   useEffect(() => {
     if (resultsNumber !== null) {
-      setResultsHelperText(data.article.title)
+      setResultsHelperText(data.data.title)
     }
-  }, [resultsNumber, data.article.title, setResultsHelperText])
+  }, [resultsNumber, data.data.title, setResultsHelperText])
 
   return (
     <ArticleContainer>
-      {resultsNumber === null && <ArticleHeader {...data.article} />}
-      <ArticleBlocks data={data.article} />
+      {resultsNumber === null && <ArticleHeader {...data.data} />}
+      <ArticleBlocks data={data.data} />
       {resultsNumber === 0 && (
         <Typography variant="body1">No results found</Typography>
       )}

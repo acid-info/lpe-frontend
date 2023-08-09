@@ -1,11 +1,11 @@
-import { useArticleSearch, useSearchGeneric } from '@/hooks/useSearch'
-import { UnbodyImageBlock, UnbodyTextBlock } from '@/lib/unbody/unbody.types'
-import { PostTypes, SearchHook } from '@/types/data.types'
+import { useArticleSearch } from '@/hooks/useSearch'
+import { SearchHook } from '@/types/data.types'
 import { useRouter } from 'next/router'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
+import { LPE } from '../types/lpe.types'
 import { useSearchBarContext } from './searchbar.context'
 
-type ArticleContext = SearchHook<UnbodyTextBlock | UnbodyImageBlock> & {
+type ArticleContext = SearchHook<LPE.Article.ContentBlock> & {
   onSearch: (query: string, filters: string[]) => void
   onReset: () => void
 }

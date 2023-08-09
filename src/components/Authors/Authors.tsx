@@ -1,7 +1,7 @@
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
-import Author from './Author'
-import styled from '@emotion/styled'
 import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import { LPE } from '../../types/lpe.types'
+import Author from './Author'
 
 export enum AuthorsDirection {
   COLUMN = 'column',
@@ -9,26 +9,26 @@ export enum AuthorsDirection {
 }
 
 const Authors = ({
-  mentions,
+  authors,
   email,
   gap = 12,
   flexDirection = AuthorsDirection.ROW,
 }: {
-  mentions: UnbodyGraphQl.Fragments.MentionItem[]
+  authors: LPE.Author.Document[]
   email: boolean
   gap?: number
   flexDirection?: AuthorsDirection
 }) => {
-  return mentions?.length > 0 ? (
+  return authors?.length > 0 ? (
     <AuthorsContainer gap={gap} flexDirection={flexDirection}>
-      {mentions.map((mention, index) =>
-        index < mentions.length - 1 ? (
-          <AuthorContainer gap={gap} key={mention.name}>
-            <Author mention={mention} email={email} />
+      {authors.map((author, index) =>
+        index < authors.length - 1 ? (
+          <AuthorContainer gap={gap} key={author.name}>
+            <Author author={author} email={email} />
             <Dot variant={'body2'}>•</Dot>
           </AuthorContainer>
         ) : (
-          <Author key={mention.name} mention={mention} email={email} />
+          <Author key={author.name} author={author} email={email} />
         ),
       )}
     </AuthorsContainer>

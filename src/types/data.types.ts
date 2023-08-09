@@ -1,24 +1,8 @@
-import {
-  GoogleDocEnhanced,
-  TextBlockEnhanced,
-  UnbodyGoogleDoc,
-  UnbodyImageBlock,
-  UnbodyTextBlock,
-} from '@/lib/unbody/unbody.types'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+import { LPE } from './lpe.types'
 
 export enum PostTypes {
   Article = 'article',
   Block = 'block',
-}
-
-export interface ArticlePostData {
-  article: GoogleDocEnhanced & {
-    toc: Array<UnbodyGraphQl.Fragments.TocItem>
-    blocks: Array<UnbodyImageBlock | TextBlockEnhanced>
-  }
-  relatedArticles: Array<GoogleDocEnhanced>
-  articlesFromSameAuthors: Array<GoogleDocEnhanced>
 }
 
 export type ApiResponse<T> = {
@@ -32,29 +16,29 @@ export type SearchResultItem<T> = {
 }
 
 export type GlobalSearchResponse = {
-  posts: ArticlePostData[]
-  blocks: Array<SearchResultItem<UnbodyTextBlock | UnbodyImageBlock>>
+  posts: LPE.Article.Data[]
+  blocks: Array<SearchResultItem<LPE.Article.ContentBlock>>
 }
 
 export type SearchHookDataPayload = {
-  articles: SearchResultItem<UnbodyGoogleDoc>[]
-  blocks: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>[]
+  articles: SearchResultItem<LPE.Article.Data>[]
+  blocks: SearchResultItem<LPE.Article.ContentBlock>[]
 }
 
 export type SearchResults = {
-  articles: SearchHook<UnbodyGoogleDoc>
-  blocks: SearchHook<UnbodyImageBlock | UnbodyTextBlock>
+  articles: SearchHook<LPE.Article.ContentBlock>
+  blocks: SearchHook<LPE.Article.ContentBlock>
   search: (
     query: string,
     tags: string[],
-    docType: UnbodyGraphQl.UnbodyDocumentTypeNames,
+    docType: any, // TODO: @refactor UnbodyGraphQl.UnbodyDocumentTypeNames
   ) => Promise<void>
   reset: (initialData: SearchHookDataPayload) => void
 }
 
 export type SearchResultsItemTypes =
-  | SearchResultItem<UnbodyGoogleDoc>
-  | SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>
+  | SearchResultItem<LPE.Article.Data>
+  | SearchResultItem<LPE.Article.ContentBlock>
 
 export type SearchHook<T> = {
   data: SearchResultItem<T>[]

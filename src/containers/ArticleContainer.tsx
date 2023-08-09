@@ -1,14 +1,13 @@
+import ArticleBody from '@/components/Article/Article.Body'
+import { Grid, GridItem } from '@/components/Grid/Grid'
 import { TableOfContents } from '@/components/TableOfContents'
+import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
-import ArticleBody from '@/components/Article/Article.Body'
-import { ArticlePostData } from '@/types/data.types'
-import { useArticleContext } from '@/context/article.context'
-import { Grid, GridItem } from '@/components/Grid/Grid'
+import { LPE } from '../types/lpe.types'
 
 interface Props {
-  data: ArticlePostData
+  data: LPE.Article.Document
 }
 
 const ArticleContainer = (props: Props) => {
@@ -19,7 +18,7 @@ const ArticleContainer = (props: Props) => {
     <ArticleContainerContext.Provider value={{ tocId, setTocId }}>
       <ArticleGrid>
         <ArticleTocContainer className={'w-3'}>
-          <TableOfContents contents={data.article.toc ?? []} />
+          <TableOfContents contents={data.data.toc ?? []} />
         </ArticleTocContainer>
         <Gap className={'w-1'} />
         <ArticleBodyContainer className={'w-8'}>

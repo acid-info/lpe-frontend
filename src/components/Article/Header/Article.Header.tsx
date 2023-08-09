@@ -1,62 +1,43 @@
-import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
-import { getArticleCover } from '@/utils/data.utils'
-import React, { useMemo } from 'react'
-import { ArticleImageBlockWrapper } from '../Article.ImageBlockWrapper'
-import { PostImageRatio } from '../../Post/Post'
-import ArticleStats from '../Article.Stats'
-import { Typography } from '@acid-info/lsd-react'
-import styled from '@emotion/styled'
-import ArticleSummary from './Article.Summary'
-import { calcReadingTime } from '@/utils/string.utils'
+import { ArticleHeading } from '@/components/Article/Article.Heading'
 import { Authors } from '@/components/Authors'
 import { Tags } from '@/components/Tags'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
-import { ArticleHeading } from '@/components/Article/Article.Heading'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { useIntersectionObserver } from '@/utils/ui.utils'
+import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import { LPE } from '../../../types/lpe.types'
+import { PostImageRatio } from '../../Post/Post'
+import { ArticleImageBlockWrapper } from '../Article.ImageBlockWrapper'
+import ArticleStats from '../Article.Stats'
+import ArticleSummary from './Article.Summary'
+
+export type ArticleHeaderProps = LPE.Article.Data
 
 const ArticleHeader = ({
   summary,
   subtitle,
-  mentions,
+  authors,
+  coverImage,
   tags,
   modifiedAt,
-  blocks,
-}: GoogleDocEnhanced) => {
+  readingTime,
+  content,
+}: ArticleHeaderProps) => {
   const { setTocId } = useArticleContainerContext()
   const headingElementsRef = useIntersectionObserver(setTocId)
 
-  const _thumbnail = useMemo(() => {
-    const coverImage = getArticleCover(blocks)
-    if (!coverImage) return null
-    return (
-      <ArticleImageBlockWrapper
-        ratio={PostImageRatio.LANDSCAPE}
-        image={coverImage}
-      />
-    )
-  }, [blocks])
-
-  const readingTime = useMemo(() => {
-    return calcReadingTime(
-      blocks
-        .map((block) => {
-          if (
-            block.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
-          ) {
-            return block.text
-          }
-          return ''
-        })
-        .join(' '),
-    )
-  }, [blocks])
-
   return (
     <ArticleHeaderContainer>
-      <ArticleStats dateStr={modifiedAt} readingLength={readingTime} />
+      <ArticleStats
+        date={modifiedAt ? new Date(modifiedAt) : null}
+        readingLength={readingTime}
+      />
       <ArticleTitle
-        block={blocks[0] as any}
+        block={
+          content.find((block) =>
+            block.labels.includes(LPE.Article.ContentBlockLabels.Title),
+          ) as LPE.Article.TextBlock
+        }
         typographyProps={{
           variant: 'h1',
           genericFontFamily: 'serif',
@@ -75,7 +56,7 @@ const ArticleHeader = ({
       )}
       <Tags tags={tags} className={'articleTags'} />
       <AuthorsContainer>
-        <Authors mentions={mentions} email={true} gap={12} />
+        <Authors authors={authors} email={true} gap={12} />
       </AuthorsContainer>
       {/*<MobileCollapseContainer>*/}
       {/*  {resultsNumber === null && <MobileToc toc={toc} />}*/}
@@ -86,7 +67,12 @@ const ArticleHeader = ({
         className={'mobileSummary'}
         showLabel={false}
       />
-      {_thumbnail}
+      {coverImage && (
+        <ArticleImageBlockWrapper
+          ratio={PostImageRatio.LANDSCAPE}
+          image={coverImage}
+        />
+      )}
       <ArticleSummary
         summary={summary}
         className={'desktopSummary'}

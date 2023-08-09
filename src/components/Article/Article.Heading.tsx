@@ -1,16 +1,16 @@
-import { TextBlockEnhanced, UnbodyTextBlock } from '@/lib/unbody/unbody.types'
-import { HeadingElementsRef } from '@/utils/ui.utils'
 import {
   extractClassFromFirstTag,
   extractIdFromFirstTag,
   extractInnerHtml,
 } from '@/utils/html.utils'
-import styled from '@emotion/styled'
+import { HeadingElementsRef } from '@/utils/ui.utils'
 import { Typography, TypographyProps } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 import { PropsWithChildren } from 'react'
+import { LPE } from '../../types/lpe.types'
 
 type Props = PropsWithChildren<{
-  block: TextBlockEnhanced | UnbodyTextBlock
+  block: LPE.Article.TextBlock
   headingElementsRef: HeadingElementsRef
   typographyProps?: TypographyProps
 }>

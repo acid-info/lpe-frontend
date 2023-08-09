@@ -1,16 +1,13 @@
-import Link from 'next/link'
-import styled from '@emotion/styled'
-
 import { SearchResultItem } from '@/types/data.types'
-import { UnbodyTextBlock } from '@/lib/unbody/unbody.types'
-
-import { GridItem } from '../Grid/Grid'
 import { Typography } from '@acid-info/lsd-react'
-import { PostClassType } from '../Post/Post'
-import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
+import styled from '@emotion/styled'
+import Link from 'next/link'
+import { LPE } from '../../types/lpe.types'
+import { GridItem } from '../Grid/Grid'
 import ContentBlockBody from './ContentBlock.Body'
+import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 
-type Props = Omit<SearchResultItem<UnbodyTextBlock>, 'score'>
+type Props = Omit<SearchResultItem<LPE.Article.TextBlock>, 'score'>
 
 const TextBlock = ({ doc }: Props) => {
   return (
@@ -18,7 +15,9 @@ const TextBlock = ({ doc }: Props) => {
       <Container>
         <ContentBlockHeader
           type={BlockType.TEXT}
-          date={doc?.document[0].modifiedAt}
+          date={
+            doc.document?.modifiedAt ? new Date(doc.document?.modifiedAt) : null
+          }
         />
         <Typography variant="body2" genericFontFamily="sans-serif">
           {doc.text}

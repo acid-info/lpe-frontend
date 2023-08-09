@@ -1,13 +1,12 @@
-import styled from '@emotion/styled'
-import { SearchHook, SearchResultItem } from '@/types/data.types'
-import { UnbodyImageBlock, UnbodyTextBlock } from '@/lib/unbody/unbody.types'
-import { Grid } from '../Grid/Grid'
-import { ImageBlock, TextBlock } from '../ContentBlock'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { SearchResultsSection } from '@/components/SearchResultsSection/SearchResultsSection'
+import { SearchHook, SearchResultItem } from '@/types/data.types'
+import styled from '@emotion/styled'
+import { LPE } from '../../types/lpe.types'
+import { ImageBlock, TextBlock } from '../ContentBlock'
+import { Grid } from '../Grid/Grid'
 
 type Props = {
-  data: SearchHook<UnbodyTextBlock | UnbodyImageBlock>
+  data: SearchHook<LPE.Article.ContentBlock>
 }
 export default function RelatedContent({ data }: Props) {
   return (
@@ -20,14 +19,14 @@ export default function RelatedContent({ data }: Props) {
         <Grid>
           {data.data.map(
             (
-              block: SearchResultItem<UnbodyImageBlock | UnbodyTextBlock>,
+              block: SearchResultItem<LPE.Article.ContentBlock>,
               idx: number,
             ) => {
-              if (!block.doc.document || !block.doc.document[0]) return null
-              switch (block.doc.__typename) {
-                case UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock:
+              if (!block.doc.document) return null
+              switch (block.doc.type) {
+                case 'text':
                   return <TextBlock key={`text-${idx}`} doc={block.doc} />
-                case UnbodyGraphQl.UnbodyDocumentTypeNames.ImageBlock: {
+                case 'image': {
                   return <ImageBlock key={`image-${idx}`} doc={block.doc} />
                 }
               }

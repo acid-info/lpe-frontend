@@ -1,24 +1,17 @@
-import React from 'react'
+import { Tags } from '@/components/Tags'
 import { Typography } from '@acid-info/lsd-react'
 import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import styled from '@emotion/styled'
-import Image, { ImageProps } from 'next/image'
-import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
-import { useMemo } from 'react'
-import {
-  UnbodyGoogleDoc,
-  UnbodyImageBlock,
-  UnbodyTextBlock,
-} from '@/lib/unbody/unbody.types'
+import Link from 'next/link'
+import React, { useMemo } from 'react'
+import { LPE } from '../../types/lpe.types'
 import { Authors } from '../Authors'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
-import { Tags } from '@/components/Tags'
+import { AuthorsDirection } from '../Authors/Authors'
+import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
 import {
   ResponsiveImage,
   ResponsiveImageProps,
 } from '../ResponsiveImage/ResponsiveImage'
-import Link from 'next/link'
-import { AuthorsDirection } from '../Authors/Authors'
 
 export enum PostImageRatio {
   PORTRAIT = 'portrait',
@@ -59,15 +52,13 @@ export type PostAppearanceProps = {
 
 export type PostDataProps = {
   slug: string
-  date: string
+  date: Date | null
   title: string
   description?: string
-  mentions: UnbodyGraphQl.Fragments.MentionItem[]
+  authors: LPE.Author.Document[]
   tags?: string[]
-  coverImage?: UnbodyImageBlock | null
+  coverImage?: LPE.Article.Data['coverImage'] | null
   summary?: string
-  blocks?: UnbodyTextBlock
-  toc?: Pick<UnbodyGoogleDoc, 'toc'>['toc']
 }
 
 export const PostImageRatioOptions = {
@@ -94,18 +85,16 @@ export default function Post({
   } = {},
   data: {
     coverImage = null,
-    date: dateStr = '',
+    date,
     title,
     description,
-    mentions,
+    authors,
     slug,
     tags = [],
   },
   isFeatured = false,
   ...props
 }: PostProps) {
-  const _date = useMemo(() => new Date(dateStr), [dateStr])
-
   const _title = useMemo(
     () => (
       <TitleLink href={`/article/${slug}`}>
@@ -188,18 +177,19 @@ export default function Post({
               </Typography>
               <Typography variant="body3">•</Typography>
               <Typography variant="body3" genericFontFamily="sans-serif">
-                {_date.toLocaleString('en-GB', {
-                  day: 'numeric',
-                  month: 'long', // TODO: Should be uppercase
-                  year: 'numeric',
-                })}
+                {date &&
+                  date.toLocaleString('en-GB', {
+                    day: 'numeric',
+                    month: 'long', // TODO: Should be uppercase
+                    year: 'numeric',
+                  })}
               </Typography>
             </Row>
             {_title}
           </HeaderContainer>
         </>
       )
-  }, [postType, classType, isFeatured, _date, _title])
+  }, [postType, classType, isFeatured, date, _title])
 
   return (
     <Container {...props}>
@@ -208,7 +198,7 @@ export default function Post({
       {postType === 'body' && _description}
       {classType === 'article' ? (
         <Authors
-          mentions={mentions}
+          authors={authors}
           email={false}
           flexDirection={AuthorsDirection.ROW}
           gap={8}

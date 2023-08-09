@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "codegen": "dotenv -e ./.env -c -- yarn graphql-code-generator --debug --verbose ./codegen.ts",
+    "codegen:watch": "dotenv -e ./.env -c -- yarn graphql-code-generator --debug --verbose --watch ./codegen.ts"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -22,6 +24,7 @@
   },
   "dependencies": {
     "@acid-info/lsd-react": "^0.1.0-alpha.17",
+    "@apollo/client": "^3.7.17",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@hookstate/core": "^4.0.1",
@@ -33,9 +36,11 @@
     "@vercel/og": "^0.5.4",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
+    "cross-fetch": "^4.0.0",
+    "dotenv": "^16.3.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
-    "graphql": "^16.6.0",
+    "graphql": "^16.7.1",
     "graphql-request": "^6.0.0",
     "next": "13.3.0",
     "nextjs-progressbar": "^0.0.16",
@@ -46,7 +51,14 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/client-preset": "4.1.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "@parcel/watcher": "^2.2.0",
     "@types/react-imgix": "^9.5.0",
+    "dotenv-cli": "^7.2.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
     "prettier": "^2.8.7"

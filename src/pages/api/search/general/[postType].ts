@@ -1,6 +1,6 @@
-import api from '@/services/unbody.service'
 import { PostTypes } from '@/types/data.types'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import unbodyApi from '../../../../services/unbody/unbody.service'
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,8 +22,8 @@ export default async function handler(
       : undefined
   const response =
     postType === PostTypes.Article
-      ? await api.searchArticles(q as string, tags)
-      : await api.serachBlocks(q as string, tags)
+      ? await unbodyApi.searchArticles(q as string, tags)
+      : await unbodyApi.searchBlocks({ q: q as string, tags })
 
   res.status(200).json(response)
 }

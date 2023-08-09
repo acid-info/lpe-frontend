@@ -1,31 +1,24 @@
+import { useSearchBarContext } from '@/context/searchbar.context'
 import { useSearchGeneric } from '@/hooks/useSearch'
-import {
-  UnbodyGoogleDoc,
-  UnbodyImageBlock,
-  UnbodyTextBlock,
-} from '@/lib/unbody/unbody.types'
-
-import unbodyApi from '@/services/unbody.service'
+import { SearchLayout } from '@/layouts/SearchLayout'
 import { PostTypes, SearchResultItem } from '@/types/data.types'
+import { shuffle } from '@/utils/data.utils'
 import {
   extractQueryFromQuery,
   extractTopicsFromQuery,
 } from '@/utils/search.utils'
 import { useRouter } from 'next/router'
-import { ReactNode, useEffect, useRef, useState } from 'react'
-import { SearchLayout } from '@/layouts/SearchLayout'
-import { RelatedArticles } from '@/components/RelatedArticles'
-import { RelatedContent } from '@/components/RelatedContent'
-import { Section } from '@/components/Section/Section'
-import api from '@/services/unbody.service'
-import { useSearchBarContext } from '@/context/searchbar.context'
-import { shuffle } from '@/utils/data.utils'
+import { ReactNode, useEffect, useState } from 'react'
+import { RelatedArticles } from '../components/RelatedArticles'
+import { RelatedContent } from '../components/RelatedContent'
 import SEO from '../components/SEO/SEO'
+import unbodyApi from '../services/unbody/unbody.service'
+import { LPE } from '../types/lpe.types'
 
 interface SearchPageProps {
-  articles: SearchResultItem<UnbodyGoogleDoc>[]
-  blocks: SearchResultItem<UnbodyTextBlock | UnbodyImageBlock>[]
   topics: string[]
+  articles: SearchResultItem<LPE.Article.Data>[]
+  blocks: SearchResultItem<LPE.Article.ContentBlock>[]
 }
 
 export default function SearchPage({
@@ -47,12 +40,12 @@ export default function SearchPage({
     query: { query = '', topics = [] },
   } = router
 
-  const articles = useSearchGeneric<UnbodyGoogleDoc>(
+  const articles = useSearchGeneric<LPE.Article.Data>(
     initialArticles,
     PostTypes.Article,
   )
 
-  const blocks = useSearchGeneric<UnbodyTextBlock | UnbodyImageBlock>(
+  const blocks = useSearchGeneric<LPE.Article.ContentBlock>(
     initialBlocks,
     PostTypes.Block,
   )
@@ -137,8 +130,8 @@ SearchPage.getLayout = function getLayout(page: ReactNode) {
 
 export async function getStaticProps() {
   const { data: articles = [] } = await unbodyApi.searchArticles()
-  const { data: blocks = [] } = await unbodyApi.serachBlocks()
-  const { data: topics, errors: topicErrors } = await api.getTopics()
+  const { data: blocks = [] } = await unbodyApi.searchBlocks()
+  const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
 
   return {
     props: {

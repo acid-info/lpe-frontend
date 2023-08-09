@@ -1,28 +1,23 @@
-import { ArticlePostData } from '@/types/data.types'
-import { useMemo } from 'react'
-import ArticleFootnotes from './Article.Footnotes'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import styled from '@emotion/styled'
+import { useMemo } from 'react'
+import { LPE } from '../../../types/lpe.types'
+import ArticleFootnotes from './Article.Footnotes'
 import FromSameAuthorsArticles from './Article.FromSameAuthorsArticles'
 import ArticleRelatedArticles from './Article.RelatedArticles'
 
-const ArticleFooter = ({ data }: { data: ArticlePostData }) => {
-  const { article, relatedArticles, articlesFromSameAuthors } = data
+const ArticleFooter = ({ data: post }: { data: LPE.Article.Document }) => {
+  const { data, relatedArticles, articlesFromSameAuthors } = post
 
   const footnotes = useMemo(() => {
-    return article.blocks.flatMap((b) =>
+    return data.content.flatMap((b) =>
       // @ts-ignore
-      b.__typename === UnbodyGraphQl.UnbodyDocumentTypeNames.TextBlock
-        ? b.footnotes
-        : [],
+      b.type === 'text' ? b.footnotes : [],
     )
-  }, [article])
+  }, [data])
 
   return (
     <ArticleFooterContainer>
-      <ArticleFootnotes
-        footnotes={footnotes as Array<UnbodyGraphQl.Fragments.FootnoteItem>}
-      />
+      <ArticleFootnotes footnotes={footnotes} />
       <ArticleRelatedArticles data={relatedArticles} />
       <FromSameAuthorsArticles data={articlesFromSameAuthors} />
     </ArticleFooterContainer>

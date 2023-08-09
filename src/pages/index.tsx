@@ -1,19 +1,16 @@
-import api from '@/services/unbody.service'
-
-import { PostDataProps } from '@/components/Post/Post'
+import { FeaturedPost } from '@/components/FeaturedPost'
 import { PostsList } from '@/components/PostList/PostList'
 import { Section } from '@/components/Section/Section'
-
-import { getArticleCover } from '@/utils/data.utils'
-import { FeaturedPost } from '@/components/FeaturedPost'
-import { PostListLayout } from '@/types/ui.types'
 import { useSearchBarContext } from '@/context/searchbar.context'
+import { PostListLayout } from '@/types/ui.types'
 import { useEffect } from 'react'
 import SEO from '../components/SEO/SEO'
+import unbodyApi from '../services/unbody/unbody.service'
+import { LPE } from '../types/lpe.types'
 
 type Props = {
-  posts: PostDataProps[]
-  featured: PostDataProps | null
+  posts: LPE.Article.Data[]
+  featured: LPE.Article.Data
   error: string | null
   tags: string[]
 }
@@ -47,36 +44,17 @@ export default function Home({ posts, featured, tags }: Props) {
 
 export const getStaticProps = async () => {
   const {
-    data: { posts, featured },
+    data: { featured, posts },
     errors,
-  } = await api.getHomepagePosts()
+  } = await unbodyApi.getHomepagePosts()
 
-  const { data: topics, errors: topicErrors } = await api.getTopics()
+  const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
+  await unbodyApi.getPodcastsInfo()
 
   return {
     props: {
-      featured: featured
-        ? {
-            slug: featured.slug,
-            date: featured.modifiedAt,
-            title: featured.title,
-            description: featured.subtitle,
-            mentions: featured.mentions,
-            tags: featured.tags,
-            coverImage: getArticleCover(featured.blocks),
-          }
-        : null,
-      posts: posts.map((post) => {
-        return {
-          slug: post.slug,
-          date: post.modifiedAt,
-          title: post.title,
-          description: post.subtitle, // TODO: summary is not available
-          mentions: post.mentions,
-          tags: post.tags,
-          coverImage: getArticleCover(post.blocks),
-        }
-      }),
+      featured,
+      posts,
       errors,
       tags: topics || [],
     },

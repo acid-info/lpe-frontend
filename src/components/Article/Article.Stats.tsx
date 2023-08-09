@@ -2,10 +2,10 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
 const ArticleStats = ({
-  dateStr,
+  date,
   readingLength,
 }: {
-  dateStr: string
+  date: Date | null
   readingLength: number
 }) => (
   <Row>
@@ -14,11 +14,12 @@ const ArticleStats = ({
     </Typography>
     <Typography variant="body3">•</Typography>
     <Typography variant="body3" genericFontFamily="sans-serif">
-      {new Date(dateStr).toLocaleString('en-GB', {
-        day: 'numeric',
-        month: 'long', // TODO: Should be uppercase
-        year: 'numeric',
-      })}
+      {date &&
+        date.toLocaleString('en-GB', {
+          day: 'numeric',
+          month: 'long', // TODO: Should be uppercase
+          year: 'numeric',
+        })}
     </Typography>
   </Row>
 )

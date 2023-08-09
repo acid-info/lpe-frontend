@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import Image, { ImageProps } from 'next/image'
-import { ImageBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
 import styled from '@emotion/styled'
+import Image, { ImageProps } from 'next/image'
+import { useState } from 'react'
+import { LPE } from '../../types/lpe.types'
 
 export type ResponsiveImageProps = {
   height?: number | string | null
@@ -11,7 +11,7 @@ export type ResponsiveImageProps = {
 }
 
 export type Props = {
-  data: UnbodyImageBlock | ImageBlockEnhanced
+  data: LPE.Image.Document
   alt?: string
 } & ResponsiveImageProps
 

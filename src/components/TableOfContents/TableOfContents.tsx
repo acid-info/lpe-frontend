@@ -1,16 +1,16 @@
 import { uiConfigs } from '@/configs/ui.configs'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
+import { useSearchBarContext } from '@/context/searchbar.context'
 import { useSticky } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { useSearchBarContext } from '@/context/searchbar.context'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+import { LPE } from '../../types/lpe.types'
 
 type Props = {
-  contents?: UnbodyGraphQl.Fragments.TocItem[]
+  contents?: LPE.Article.TocItem[]
 }
 
 export default function TableOfContents({ contents, ...props }: Props) {

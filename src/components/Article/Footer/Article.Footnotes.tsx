@@ -1,12 +1,12 @@
 import { Collapse } from '@/components/Collapse'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { LPE } from '../../../types/lpe.types'
 
 const ArticleFootnotes = ({
   footnotes,
 }: {
-  footnotes: UnbodyGraphQl.Fragments.FootnoteItem[]
+  footnotes: LPE.Article.Footnotes
 }) =>
   footnotes.length > 0 ? (
     <Collapse label="Footenotes">

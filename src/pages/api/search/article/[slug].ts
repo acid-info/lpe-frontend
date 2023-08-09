@@ -1,6 +1,5 @@
-import api from '@/services/unbody.service'
-import { PostTypes } from '@/types/data.types'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import unbodyApi from '../../../../services/unbody/unbody.service'
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,11 +20,11 @@ export default async function handler(
           .filter((t) => t.length > 0)
       : undefined
 
-  const response = await api.searchBlockInArticle(
-    q as string,
+  const response = await unbodyApi.searchBlocks({
+    q: q as string,
     tags,
-    true,
-    slug as string,
-  )
+    published: true,
+    articleSlug: slug as string,
+  })
   res.status(200).json(response)
 }

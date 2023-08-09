@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
-import { Grid, GridItem } from '../Grid/Grid'
-import styled from '@emotion/styled'
-import Post, { PostDataProps } from '../Post/Post'
-import { Button, Typography } from '@acid-info/lsd-react'
 import { PostListLayout } from '@/types/ui.types'
+import { Button, Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import { useEffect, useState } from 'react'
+import { LPE } from '../../types/lpe.types'
+import { Grid, GridItem } from '../Grid/Grid'
+import Post from '../Post/Post'
 
 type Props = {
-  posts: PostDataProps[]
+  posts: LPE.Article.Data[]
   pageSize?: number
   layout?: PostListLayout
   loading?: boolean
@@ -26,7 +27,7 @@ const getGridItemWidth = (index: number) => {
 
 export const PostsList = (props: Props) => {
   const { pageSize = 6 } = props
-  const [posts, setPosts] = useState<PostDataProps[]>(props.posts)
+  const [posts, setPosts] = useState<LPE.Article.Data[]>(props.posts)
   const [page, setPage] = useState(1)
 
   useEffect(() => {
@@ -56,7 +57,18 @@ export const PostsList = (props: Props) => {
               key={index}
             >
               <PostWrapper className={props.loading ? 'loading' : ''}>
-                <Post data={post} />
+                <Post
+                  data={{
+                    authors: post.authors,
+                    date: post.modifiedAt ? new Date(post.modifiedAt) : null,
+                    slug: post.slug,
+                    title: post.title,
+                    description: post.subtitle,
+                    coverImage: post.coverImage,
+                    summary: post.summary,
+                    tags: post.tags,
+                  }}
+                />
               </PostWrapper>
             </GridItem>
           ))

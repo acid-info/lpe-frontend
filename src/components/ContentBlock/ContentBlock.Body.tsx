@@ -1,8 +1,6 @@
-import { GoogleDocEnhanced } from '@/lib/unbody/unbody.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import { Authors } from '../Authors'
 
 type Props = {
   data: any

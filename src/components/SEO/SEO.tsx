@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { ImageBlockEnhanced, UnbodyImageBlock } from '@/lib/unbody/unbody.types'
+import { LPE } from '../../types/lpe.types'
 
 type Metadata = {
   title: string
@@ -9,7 +9,7 @@ type Metadata = {
   site_name?: string
   pageURL?: string
   imageUrl?: string
-  image?: UnbodyImageBlock | ImageBlockEnhanced
+  image?: LPE.Image.Document | null
   tags?: string[]
   pagePath?: string
 }

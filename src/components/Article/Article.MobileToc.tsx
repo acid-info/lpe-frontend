@@ -1,14 +1,13 @@
-import styled from '@emotion/styled'
-import React from 'react'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { Typography } from '@acid-info/lsd-react'
-import styles from './Article.module.css'
-import { Collapse } from '../Collapse'
+import styled from '@emotion/styled'
 import Link from 'next/link'
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
+import { LPE } from '../../types/lpe.types'
+import { Collapse } from '../Collapse'
+import styles from './Article.module.css'
 
 type Props = {
-  toc: UnbodyGraphQl.Fragments.TocItem[]
+  toc: LPE.Article.TocItem[]
 }
 
 export const MobileToc = ({ toc }: Props) => {

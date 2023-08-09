@@ -1,0 +1,6755 @@
+schema {
+  query: WeaviateObj
+}
+
+""""""
+union TextBlockDocumentObj = GoogleDoc | Beacon
+
+""""""
+input Txt2VecOpenAIAggregateGoogleCalendarEventMoveAwayFrom {
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateGoogleCalendarEventMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDoctitleObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDoctitleTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input GetObjectsAudioFileNearObjectInpObj {
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""An object containing the path and value of the grouped property"""
+type AggregateGoogleCalendarEventGroupedByObj {
+  """The path of the grouped property"""
+  path: [String]
+
+  """The value of the grouped property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockremoteIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockremoteIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsGoogleDocGroupInpObj {
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """"""
+  type: GetObjectsGoogleDocGroupInpObjTypeEnum
+}
+
+""""""
+enum GetObjectsGoogleCalendarEventSortInpObjTypeEnum {
+  """"""
+  asc
+
+  """"""
+  desc
+}
+
+"""An object allowing Aggregation of %ss on a local Weaviate"""
+type AggregateObjectsObj {
+  """"""
+  AudioFile(
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: AggregateObjectsAudioFileWhereInpObj
+
+    """"""
+    nearObject: AggregateObjectsAudioFileNearObjectInpObj
+
+    """"""
+    hybrid: AggregateObjectsAudioFileHybridInpObj
+
+    """"""
+    nearText: Txt2VecOpenAIAggregateAudioFileNearTextInpObj
+
+    """"""
+    ask: QnATransformersAggregateAudioFileAskInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """Specify which properties to group by"""
+    groupBy: [String]
+
+    """"""
+    nearVector: AggregateObjectsAudioFileNearVectorInpObj
+
+    """Show the first x results (pagination option)"""
+    objectLimit: Int
+  ): [AggregateAudioFile]
+
+  """"""
+  GoogleCalendarEvent(
+    """"""
+    nearVector: AggregateObjectsGoogleCalendarEventNearVectorInpObj
+
+    """"""
+    hybrid: AggregateObjectsGoogleCalendarEventHybridInpObj
+
+    """"""
+    nearText: Txt2VecOpenAIAggregateGoogleCalendarEventNearTextInpObj
+
+    """"""
+    ask: QnATransformersAggregateGoogleCalendarEventAskInpObj
+
+    """Specify which properties to group by"""
+    groupBy: [String]
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: AggregateObjectsGoogleCalendarEventWhereInpObj
+
+    """"""
+    nearObject: AggregateObjectsGoogleCalendarEventNearObjectInpObj
+
+    """Show the first x results (pagination option)"""
+    objectLimit: Int
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEvent]
+
+  """"""
+  GoogleDoc(
+    """"""
+    ask: QnATransformersAggregateGoogleDocAskInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: AggregateObjectsGoogleDocWhereInpObj
+
+    """"""
+    nearVector: AggregateObjectsGoogleDocNearVectorInpObj
+
+    """"""
+    nearObject: AggregateObjectsGoogleDocNearObjectInpObj
+
+    """Specify which properties to group by"""
+    groupBy: [String]
+
+    """Show the first x results (pagination option)"""
+    objectLimit: Int
+
+    """"""
+    hybrid: AggregateObjectsGoogleDocHybridInpObj
+
+    """"""
+    nearText: Txt2VecOpenAIAggregateGoogleDocNearTextInpObj
+  ): [AggregateGoogleDoc]
+
+  """"""
+  ImageBlock(
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: AggregateObjectsImageBlockWhereInpObj
+
+    """"""
+    nearVector: AggregateObjectsImageBlockNearVectorInpObj
+
+    """"""
+    nearObject: AggregateObjectsImageBlockNearObjectInpObj
+
+    """"""
+    nearText: Txt2VecOpenAIAggregateImageBlockNearTextInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """Specify which properties to group by"""
+    groupBy: [String]
+
+    """Show the first x results (pagination option)"""
+    objectLimit: Int
+
+    """"""
+    hybrid: AggregateObjectsImageBlockHybridInpObj
+
+    """"""
+    ask: QnATransformersAggregateImageBlockAskInpObj
+  ): [AggregateImageBlock]
+
+  """"""
+  TextBlock(
+    """"""
+    hybrid: AggregateObjectsTextBlockHybridInpObj
+
+    """"""
+    ask: QnATransformersAggregateTextBlockAskInpObj
+
+    """Specify which properties to group by"""
+    groupBy: [String]
+
+    """"""
+    nearVector: AggregateObjectsTextBlockNearVectorInpObj
+
+    """"""
+    nearObject: AggregateObjectsTextBlockNearObjectInpObj
+
+    """Show the first x results (pagination option)"""
+    objectLimit: Int
+
+    """"""
+    nearText: Txt2VecOpenAIAggregateTextBlockNearTextInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: AggregateObjectsTextBlockWhereInpObj
+  ): [AggregateTextBlock]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventremoteIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventremoteIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input AggregateObjectsImageBlockWhereInpObj {
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsImageBlockWhereGeoRangeInpObj
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsImageBlockWhereOperatorEnum
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsImageBlockWhereOperandsInpObj]
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlockclassNamesObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateTextBlockclassNamesTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateAudioFileextTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocsubtitleTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsTextBlockMoveAwayFrom {
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsTextBlockMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+}
+
+""""""
+input AggregateObjectsGoogleCalendarEventWhereGeoRangeInpObj {
+  """The distance from the point specified via geoCoordinates."""
+  distance: AggregateObjectsGoogleCalendarEventWhereGeoRangeDistanceInpObj!
+
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: AggregateObjectsGoogleCalendarEventWhereGeoRangeGeoCoordinatesInpObj!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventcreatorSelfObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  The percentage of false values for this boolean property in the dataset
+  """
+  percentageFalse: Float
+
+  """The percentage of true values for this boolean property in the dataset"""
+  percentageTrue: Float
+
+  """How often this boolean property's value is false in the dataset"""
+  totalFalse: Int
+
+  """How often this boolean property's value is true in the dataset"""
+  totalTrue: Int
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateTextBlockMoveToMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocmentionsObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocmentionsTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type GoogleDoc {
+  """"""
+  _additional: GoogleDocAdditional
+
+  """"""
+  blocks: [GoogleDocBlocksObj]
+
+  """"""
+  createdAt: String
+
+  """"""
+  html: String
+
+  """"""
+  mentions: String
+
+  """"""
+  mimeType: String
+
+  """"""
+  modifiedAt: String
+
+  """"""
+  originalName: String
+
+  """"""
+  path: [String]
+
+  """"""
+  pathString: String
+
+  """"""
+  remoteId: String
+
+  """"""
+  size: Int
+
+  """"""
+  slug: String
+
+  """"""
+  sourceId: String
+
+  """"""
+  subtitle: String
+
+  """"""
+  summary: String
+
+  """"""
+  tags: [String]
+
+  """"""
+  text: String
+
+  """"""
+  title: String
+
+  """"""
+  toc: String
+}
+
+""""""
+type GoogleDocAdditional {
+  """"""
+  answer: GoogleDocAdditionalAnswer
+
+  """"""
+  certainty: Float
+
+  """"""
+  classification: GoogleDocAdditionalClassification
+
+  """"""
+  creationTimeUnix: String
+
+  """"""
+  distance: Float
+
+  """"""
+  explainScore: String
+
+  """"""
+  featureProjection(algorithm: String, dimensions: Int, learningRate: Int, iterations: Int, perplexity: Int): GoogleDocAdditionalFeatureProjection
+
+  """The UUID of a Object, assigned by its local Weaviate"""
+  id: String
+
+  """"""
+  lastUpdateTimeUnix: String
+
+  """"""
+  score: String
+
+  """"""
+  vector: [Float]
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventsourceIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input AggregateObjectsImageBlockWhereGeoRangeInpObj {
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: AggregateObjectsImageBlockWhereGeoRangeGeoCoordinatesInpObj!
+
+  """The distance from the point specified via geoCoordinates."""
+  distance: AggregateObjectsImageBlockWhereGeoRangeDistanceInpObj!
+}
+
+""""""
+input AggregateObjectsGoogleDocNearVectorInpObj {
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsImageBlockMoveToMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+""""""
+type Beacon {
+  """"""
+  beacon: String
+}
+
+""""""
+type AudioFile {
+  """"""
+  _additional: AudioFileAdditional
+
+  """"""
+  document: [AudioFileDocumentObj]
+
+  """"""
+  duration: Float
+
+  """"""
+  ext: String
+
+  """"""
+  mimeType: String
+
+  """"""
+  order: Int
+
+  """"""
+  originalName: String
+
+  """"""
+  remoteId: String
+
+  """"""
+  size: Int
+
+  """"""
+  sourceId: String
+
+  """"""
+  url: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateGoogleCalendarEventMoveAwayFromMovementObjectsInpObj {
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """id of an object"""
+  id: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventcreatorIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input Txt2VecOpenAIAggregateImageBlockMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateImageBlockMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockorderObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input AggregateObjectsTextBlockNearObjectInpObj {
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateAudioFileMoveAwayFromMovementObjectsInpObj {
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """id of an object"""
+  id: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocsourceIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+type GoogleDocAdditionalAnswer {
+  """"""
+  endPosition: Int
+
+  """"""
+  hasAnswer: Boolean
+
+  """"""
+  property: String
+
+  """"""
+  result: String
+
+  """"""
+  startPosition: Int
+}
+
+""""""
+type GoogleCalendarEventAdditionalAnswer {
+  """"""
+  endPosition: Int
+
+  """"""
+  hasAnswer: Boolean
+
+  """"""
+  property: String
+
+  """"""
+  result: String
+
+  """"""
+  startPosition: Int
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsAudioFileMoveToMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventlocationObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventlocationTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocslugTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsTextBlockGroupInpObj {
+  """"""
+  type: GetObjectsTextBlockGroupInpObjTypeEnum
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+""""""
+input GetObjectsAudioFileWhereGeoRangeInpObj {
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: GetObjectsAudioFileWhereGeoRangeGeoCoordinatesInpObj!
+
+  """The distance from the point specified via geoCoordinates."""
+  distance: GetObjectsAudioFileWhereGeoRangeDistanceInpObj!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventdescriptionTextObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventdescriptionTextTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIAggregateImageBlockNearTextInpObj {
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIAggregateImageBlockMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIAggregateImageBlockMoveAwayFrom
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateTextBlocktagNameTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocsourceIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocsourceIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""Hybrid search"""
+input GetObjectsAudioFileHybridInpObj {
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+
+  """Vector search"""
+  vector: [Float]
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIGetObjectsGoogleCalendarEventNearTextInpObj {
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveAwayFrom
+
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventrecurrenceTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input AggregateObjectsGoogleDocWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+""""""
+type AggregateGoogleDoc {
+  """
+  Aggregate this property"blocks"
+  """
+  blocks: AggregateGoogleDocblocksObj
+
+  """
+  Aggregate this property"createdAt"
+  """
+  createdAt: AggregateGoogleDoccreatedAtObj
+
+  """Indicates the group of returned data"""
+  groupedBy: AggregateGoogleDocGroupedByObj
+
+  """
+  Aggregate this property"html"
+  """
+  html: AggregateGoogleDochtmlObj
+
+  """
+  Aggregate this property"mentions"
+  """
+  mentions: AggregateGoogleDocmentionsObj
+
+  """
+  An object used to Get Meta information about Objects on a local Weaviate
+  """
+  meta: AggregateGoogleDocMetaObject
+
+  """
+  Aggregate this property"mimeType"
+  """
+  mimeType: AggregateGoogleDocmimeTypeObj
+
+  """
+  Aggregate this property"modifiedAt"
+  """
+  modifiedAt: AggregateGoogleDocmodifiedAtObj
+
+  """
+  Aggregate this property"originalName"
+  """
+  originalName: AggregateGoogleDocoriginalNameObj
+
+  """
+  Aggregate this property"path"
+  """
+  path: AggregateGoogleDocpathObj
+
+  """
+  Aggregate this property"pathString"
+  """
+  pathString: AggregateGoogleDocpathStringObj
+
+  """
+  Aggregate this property"remoteId"
+  """
+  remoteId: AggregateGoogleDocremoteIdObj
+
+  """
+  Aggregate this property"size"
+  """
+  size: AggregateGoogleDocsizeObj
+
+  """
+  Aggregate this property"slug"
+  """
+  slug: AggregateGoogleDocslugObj
+
+  """
+  Aggregate this property"sourceId"
+  """
+  sourceId: AggregateGoogleDocsourceIdObj
+
+  """
+  Aggregate this property"subtitle"
+  """
+  subtitle: AggregateGoogleDocsubtitleObj
+
+  """
+  Aggregate this property"summary"
+  """
+  summary: AggregateGoogleDocsummaryObj
+
+  """
+  Aggregate this property"tags"
+  """
+  tags: AggregateGoogleDoctagsObj
+
+  """
+  Aggregate this property"text"
+  """
+  text: AggregateGoogleDoctextObj
+
+  """
+  Aggregate this property"title"
+  """
+  title: AggregateGoogleDoctitleObj
+
+  """
+  Aggregate this property"toc"
+  """
+  toc: AggregateGoogleDoctocObj
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocpathTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocpathStringTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+union AudioFileDocumentObj = GoogleDoc | GoogleCalendarEvent | Beacon
+
+""""""
+input GetObjectsTextBlockWhereGeoRangeInpObj {
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: GetObjectsTextBlockWhereGeoRangeGeoCoordinatesInpObj!
+
+  """The distance from the point specified via geoCoordinates."""
+  distance: GetObjectsTextBlockWhereGeoRangeDistanceInpObj!
+}
+
+""""""
+input GetObjectsGoogleDocWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+""""""
+input AggregateObjectsGoogleCalendarEventNearVectorInpObj {
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateImageBlockMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockextTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockoriginalNameTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFilesourceIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateAudioFilesourceIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocpathObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocpathTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type GoogleDocAdditionalFeatureProjection {
+  """"""
+  vector: [Float]
+}
+
+""""""
+type GoogleDocAdditionalClassification {
+  """"""
+  basedOn: [String]
+
+  """"""
+  classifiedFields: [String]
+
+  """"""
+  completed: String
+
+  """"""
+  id: String
+
+  """"""
+  scope: [String]
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersGetObjectsGoogleDocAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventorganizerIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockurlObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockurlTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing the path and value of the grouped property"""
+type AggregateGoogleDocGroupedByObj {
+  """The path of the grouped property"""
+  path: [String]
+
+  """The value of the grouped property"""
+  value: String
+}
+
+""""""
+enum GetObjectsTextBlockGroupInpObjTypeEnum {
+  """"""
+  closest
+
+  """"""
+  merge
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIGetObjectsAudioFileNearTextInpObj {
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIGetObjectsAudioFileMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIGetObjectsAudioFileMoveAwayFrom
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsAudioFileWhereInpObj {
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsAudioFileWhereOperandsInpObj]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsAudioFileWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsAudioFileWhereOperatorEnum
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersAggregateImageBlockAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersAggregateTextBlockAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+""""""
+type AggregateTextBlockMetaObject {
+  """"""
+  count: Int
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlocktextObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateTextBlocktextTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocpathStringObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocpathStringTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum AggregateObjectsGoogleCalendarEventWhereOperatorEnum {
+  """"""
+  Or
+
+  """"""
+  Not
+
+  """"""
+  NotEqual
+
+  """"""
+  GreaterThan
+
+  """"""
+  IsNull
+
+  """"""
+  LessThanEqual
+
+  """"""
+  WithinGeoRange
+
+  """"""
+  And
+
+  """"""
+  Like
+
+  """"""
+  Equal
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  LessThan
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsImageBlockMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventstatusTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFileremoteIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateAudioFileremoteIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFileextObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateAudioFileextTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input AggregateObjectsGoogleDocWhereInpObj {
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsGoogleDocWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsGoogleDocWhereOperatorEnum
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsGoogleDocWhereOperandsInpObj]
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsGoogleDocMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsGoogleDocMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+""""""
+input GetObjectsGoogleDocNearVectorInpObj {
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+}
+
+""""""
+input AggregateObjectsImageBlockWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum AggregateObjectsTextBlockWhereOperatorEnum {
+  """"""
+  Equal
+
+  """"""
+  NotEqual
+
+  """"""
+  GreaterThan
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  LessThanEqual
+
+  """"""
+  WithinGeoRange
+
+  """"""
+  IsNull
+
+  """"""
+  And
+
+  """"""
+  Like
+
+  """"""
+  Or
+
+  """"""
+  Not
+
+  """"""
+  LessThan
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlockdocumentObj {
+  """The classes that this object contains a reference to"""
+  pointingTo: [String] @deprecated(reason: "Experimental, the format will change")
+
+  """The datatype of this property"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input AggregateObjectsAudioFileWhereInpObj {
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsAudioFileWhereOperandsInpObj]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsAudioFileWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsAudioFileWhereOperatorEnum
+}
+
+""""""
+type TextBlock {
+  """"""
+  _additional: TextBlockAdditional
+
+  """"""
+  classNames: [String]
+
+  """"""
+  document: [TextBlockDocumentObj]
+
+  """"""
+  footnotes: String
+
+  """"""
+  html: String
+
+  """"""
+  order: Int
+
+  """"""
+  remoteId: String
+
+  """"""
+  sourceId: String
+
+  """"""
+  tagName: String
+
+  """"""
+  text: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventcreatorDisplayNameTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing the path and value of the grouped property"""
+type AggregateImageBlockGroupedByObj {
+  """The path of the grouped property"""
+  path: [String]
+
+  """The value of the grouped property"""
+  value: String
+}
+
+""""""
+input AggregateObjectsTextBlockWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+""""""
+input AggregateObjectsAudioFileWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFileorderObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDochtmlObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDochtmlTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type GoogleCalendarEventAdditionalClassification {
+  """"""
+  basedOn: [String]
+
+  """"""
+  classifiedFields: [String]
+
+  """"""
+  completed: String
+
+  """"""
+  id: String
+
+  """"""
+  scope: [String]
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input GetObjectsTextBlockWhereOperandsInpObj {
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsTextBlockWhereOperandsInpObj]
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsTextBlockWhereGeoRangeInpObj
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsTextBlockWhereOperatorEnum
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsAudioFileMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventrecurrenceObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventrecurrenceTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlocksourceIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlocksourceIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateTextBlockhtmlTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateTextBlockfootnotesTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum AggregateObjectsAudioFileWhereOperatorEnum {
+  """"""
+  GreaterThan
+
+  """"""
+  LessThan
+
+  """"""
+  LessThanEqual
+
+  """"""
+  WithinGeoRange
+
+  """"""
+  Like
+
+  """"""
+  Equal
+
+  """"""
+  Not
+
+  """"""
+  NotEqual
+
+  """"""
+  IsNull
+
+  """"""
+  And
+
+  """"""
+  Or
+
+  """"""
+  GreaterThanEqual
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDoccreatedAtObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+""""""
+union GoogleDocBlocksObj = ImageBlock | TextBlock | Beacon
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlocksizeObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockmimeTypeTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input GetObjectsImageBlockWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsImageBlockSortInpObj {
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """
+  Specify the sort order, either ascending (asc) which is default or descending (desc)
+  """
+  order: GetObjectsImageBlockSortInpObjTypeEnum
+}
+
+""""""
+input GetObjectsImageBlockNearObjectInpObj {
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsTextBlockWhereInpObj {
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsTextBlockWhereOperandsInpObj]
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsTextBlockWhereOperatorEnum
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsTextBlockWhereGeoRangeInpObj
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj {
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIGetObjectsGoogleDocMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIGetObjectsGoogleDocMoveAwayFrom
+
+  """"""
+  concepts: [String]!
+}
+
+""""""
+input AggregateObjectsImageBlockNearObjectInpObj {
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Concept identifier in the uuid format"""
+  id: String
+}
+
+""""""
+type AggregateAudioFileMetaObject {
+  """"""
+  count: Int
+}
+
+""""""
+enum GetObjectsTextBlockSortInpObjTypeEnum {
+  """"""
+  desc
+
+  """"""
+  asc
+}
+
+""""""
+input GetObjectsAudioFileNearVectorInpObj {
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+}
+
+""""""
+input GetObjectsAudioFileWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+""""""
+input GetObjectsGoogleCalendarEventWhereGeoRangeInpObj {
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: GetObjectsGoogleCalendarEventWhereGeoRangeGeoCoordinatesInpObj!
+
+  """The distance from the point specified via geoCoordinates."""
+  distance: GetObjectsGoogleCalendarEventWhereGeoRangeDistanceInpObj!
+}
+
+""""""
+input GetObjectsGoogleCalendarEventWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+}
+
+""""""
+enum GetObjectsGoogleCalendarEventGroupInpObjTypeEnum {
+  """"""
+  closest
+
+  """"""
+  merge
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateAudioFileMoveToMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum AggregateObjectsGoogleDocWhereOperatorEnum {
+  """"""
+  LessThan
+
+  """"""
+  Like
+
+  """"""
+  Equal
+
+  """"""
+  Not
+
+  """"""
+  GreaterThan
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  IsNull
+
+  """"""
+  And
+
+  """"""
+  Or
+
+  """"""
+  NotEqual
+
+  """"""
+  LessThanEqual
+
+  """"""
+  WithinGeoRange
+}
+
+"""Hybrid search"""
+input GetObjectsImageBlockHybridInpObj {
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+
+  """Vector search"""
+  vector: [Float]
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsTextBlockMoveToMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum GetObjectsAudioFileWhereOperatorEnum {
+  """"""
+  GreaterThan
+
+  """"""
+  LessThan
+
+  """"""
+  IsNull
+
+  """"""
+  Like
+
+  """"""
+  Or
+
+  """"""
+  NotEqual
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  LessThanEqual
+
+  """"""
+  WithinGeoRange
+
+  """"""
+  And
+
+  """"""
+  Equal
+
+  """"""
+  Not
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateTextBlockremoteIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object used to get %ss on a local Weaviate"""
+type GetObjectsObj {
+  """"""
+  AudioFile(
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """Show the results after the first x results (pagination option)"""
+    offset: Int
+
+    """"""
+    bm25: GetObjectsAudioFileBm25InpObj
+
+    """"""
+    nearText: Txt2VecOpenAIGetObjectsAudioFileNearTextInpObj
+
+    """"""
+    ask: QnATransformersGetObjectsAudioFileAskInpObj
+
+    """"""
+    hybrid: GetObjectsAudioFileHybridInpObj
+
+    """"""
+    sort: [GetObjectsAudioFileSortInpObj]
+
+    """"""
+    nearVector: GetObjectsAudioFileNearVectorInpObj
+
+    """"""
+    nearObject: GetObjectsAudioFileNearObjectInpObj
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: GetObjectsAudioFileWhereInpObj
+
+    """"""
+    group: GetObjectsAudioFileGroupInpObj
+  ): [AudioFile]
+
+  """"""
+  GoogleCalendarEvent(
+    """"""
+    ask: QnATransformersGetObjectsGoogleCalendarEventAskInpObj
+
+    """"""
+    hybrid: GetObjectsGoogleCalendarEventHybridInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """"""
+    nearVector: GetObjectsGoogleCalendarEventNearVectorInpObj
+
+    """"""
+    nearObject: GetObjectsGoogleCalendarEventNearObjectInpObj
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: GetObjectsGoogleCalendarEventWhereInpObj
+
+    """"""
+    nearText: Txt2VecOpenAIGetObjectsGoogleCalendarEventNearTextInpObj
+
+    """Show the results after the first x results (pagination option)"""
+    offset: Int
+
+    """"""
+    sort: [GetObjectsGoogleCalendarEventSortInpObj]
+
+    """"""
+    group: GetObjectsGoogleCalendarEventGroupInpObj
+
+    """"""
+    bm25: GetObjectsGoogleCalendarEventBm25InpObj
+  ): [GoogleCalendarEvent]
+
+  """"""
+  GoogleDoc(
+    """Show the results after the first x results (pagination option)"""
+    offset: Int
+
+    """"""
+    group: GetObjectsGoogleDocGroupInpObj
+
+    """"""
+    nearText: Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj
+
+    """"""
+    ask: QnATransformersGetObjectsGoogleDocAskInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """"""
+    nearVector: GetObjectsGoogleDocNearVectorInpObj
+
+    """"""
+    nearObject: GetObjectsGoogleDocNearObjectInpObj
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: GetObjectsGoogleDocWhereInpObj
+
+    """"""
+    bm25: GetObjectsGoogleDocBm25InpObj
+
+    """"""
+    hybrid: GetObjectsGoogleDocHybridInpObj
+
+    """"""
+    sort: [GetObjectsGoogleDocSortInpObj]
+  ): [GoogleDoc]
+
+  """"""
+  ImageBlock(
+    """"""
+    nearVector: GetObjectsImageBlockNearVectorInpObj
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: GetObjectsImageBlockWhereInpObj
+
+    """"""
+    ask: QnATransformersGetObjectsImageBlockAskInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """Show the results after the first x results (pagination option)"""
+    offset: Int
+
+    """"""
+    sort: [GetObjectsImageBlockSortInpObj]
+
+    """"""
+    nearObject: GetObjectsImageBlockNearObjectInpObj
+
+    """"""
+    group: GetObjectsImageBlockGroupInpObj
+
+    """"""
+    bm25: GetObjectsImageBlockBm25InpObj
+
+    """"""
+    nearText: Txt2VecOpenAIGetObjectsImageBlockNearTextInpObj
+
+    """"""
+    hybrid: GetObjectsImageBlockHybridInpObj
+  ): [ImageBlock]
+
+  """"""
+  TextBlock(
+    """"""
+    hybrid: GetObjectsTextBlockHybridInpObj
+
+    """Show the first x results (pagination option)"""
+    limit: Int
+
+    """"""
+    nearVector: GetObjectsTextBlockNearVectorInpObj
+
+    """"""
+    nearObject: GetObjectsTextBlockNearObjectInpObj
+
+    """
+    Filter options for a local Get query, used to convert the result to the specified filters
+    """
+    where: GetObjectsTextBlockWhereInpObj
+
+    """"""
+    nearText: Txt2VecOpenAIGetObjectsTextBlockNearTextInpObj
+
+    """Show the results after the first x results (pagination option)"""
+    offset: Int
+
+    """"""
+    sort: [GetObjectsTextBlockSortInpObj]
+
+    """"""
+    group: GetObjectsTextBlockGroupInpObj
+
+    """"""
+    bm25: GetObjectsTextBlockBm25InpObj
+
+    """"""
+    ask: QnATransformersGetObjectsTextBlockAskInpObj
+  ): [TextBlock]
+}
+
+""""""
+union ImageBlockDocumentObj = GoogleDoc | GoogleCalendarEvent | Beacon
+
+""""""
+input GetObjectsAudioFileBm25InpObj {
+  """The query to search for"""
+  query: String
+
+  """The properties to search in"""
+  properties: [String]
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIAggregateTextBlockNearTextInpObj {
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIAggregateTextBlockMoveAwayFrom
+
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIAggregateTextBlockMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+}
+
+"""An object containing the path and value of the grouped property"""
+type AggregateAudioFileGroupedByObj {
+  """The path of the grouped property"""
+  path: [String]
+
+  """The value of the grouped property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocsizeObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDoctextTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+type ImageBlockAdditionalClassification {
+  """"""
+  basedOn: [String]
+
+  """"""
+  classifiedFields: [String]
+
+  """"""
+  completed: String
+
+  """"""
+  id: String
+
+  """"""
+  scope: [String]
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsAudioFileSortInpObj {
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """
+  Specify the sort order, either ascending (asc) which is default or descending (desc)
+  """
+  order: GetObjectsAudioFileSortInpObjTypeEnum
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsGoogleCalendarEventSortInpObj {
+  """
+  Specify the sort order, either ascending (asc) which is default or descending (desc)
+  """
+  order: GetObjectsGoogleCalendarEventSortInpObjTypeEnum
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventorganizerEmailObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventorganizerEmailTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input AggregateObjectsAudioFileWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFiledurationObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsImageBlockMoveAwayFrom {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsImageBlockMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+""""""
+type GoogleCalendarEventAdditional {
+  """"""
+  answer: GoogleCalendarEventAdditionalAnswer
+
+  """"""
+  certainty: Float
+
+  """"""
+  classification: GoogleCalendarEventAdditionalClassification
+
+  """"""
+  creationTimeUnix: String
+
+  """"""
+  distance: Float
+
+  """"""
+  explainScore: String
+
+  """"""
+  featureProjection(algorithm: String, dimensions: Int, learningRate: Int, iterations: Int, perplexity: Int): GoogleCalendarEventAdditionalFeatureProjection
+
+  """The UUID of a Object, assigned by its local Weaviate"""
+  id: String
+
+  """"""
+  lastUpdateTimeUnix: String
+
+  """"""
+  score: String
+
+  """"""
+  vector: [Float]
+}
+
+""""""
+type AudioFileAdditionalFeatureProjection {
+  """"""
+  vector: [Float]
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsTextBlockSortInpObj {
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """
+  Specify the sort order, either ascending (asc) which is default or descending (desc)
+  """
+  order: GetObjectsTextBlockSortInpObjTypeEnum
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersGetObjectsTextBlockAskInpObj {
+  """Properties which contains text"""
+  properties: [String]
+
+  """Question to be answered"""
+  question: String!
+}
+
+""""""
+input GetObjectsGoogleDocBm25InpObj {
+  """The query to search for"""
+  query: String
+
+  """The properties to search in"""
+  properties: [String]
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input AggregateObjectsGoogleCalendarEventWhereOperandsInpObj {
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsGoogleCalendarEventWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsGoogleCalendarEventWhereOperatorEnum
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsGoogleCalendarEventWhereOperandsInpObj]
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateAudioFileoriginalNameTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""Hybrid search"""
+input AggregateObjectsGoogleDocHybridInpObj {
+  """Vector search"""
+  vector: [Float]
+
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocmimeTypeObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocmimeTypeTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersGetObjectsImageBlockAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum GetObjectsGoogleCalendarEventWhereOperatorEnum {
+  """"""
+  LessThanEqual
+
+  """"""
+  IsNull
+
+  """"""
+  Like
+
+  """"""
+  Equal
+
+  """"""
+  NotEqual
+
+  """"""
+  GreaterThan
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  LessThan
+
+  """"""
+  And
+
+  """"""
+  Or
+
+  """"""
+  Not
+
+  """"""
+  WithinGeoRange
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventorganizerDisplayNameTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDoctitleTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""Location of the root query"""
+type WeaviateObj {
+  """
+  Filter options for a local Aggregate query, used to convert the result to the specified filters
+  """
+  Aggregate: AggregateObjectsObj
+
+  """Get Objects on a local Weaviate"""
+  Get: GetObjectsObj
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input GetObjectsImageBlockWhereOperandsInpObj {
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsImageBlockWhereOperatorEnum
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsImageBlockWhereGeoRangeInpObj
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsImageBlockWhereOperandsInpObj]
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventtitleObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventtitleTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlockorderObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocoriginalNameObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocoriginalNameTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventcreatorIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventcreatorIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockpathTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlocksourceIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateTextBlocksourceIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFiledocumentObj {
+  """The classes that this object contains a reference to"""
+  pointingTo: [String] @deprecated(reason: "Experimental, the format will change")
+
+  """The datatype of this property"""
+  type: String
+}
+
+"""Hybrid search"""
+input GetObjectsTextBlockHybridInpObj {
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+
+  """Vector search"""
+  vector: [Float]
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventremoteIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventsourceIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventsourceIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input AggregateObjectsImageBlockWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum AggregateObjectsImageBlockWhereOperatorEnum {
+  """"""
+  WithinGeoRange
+
+  """"""
+  IsNull
+
+  """"""
+  GreaterThan
+
+  """"""
+  LessThan
+
+  """"""
+  LessThanEqual
+
+  """"""
+  Equal
+
+  """"""
+  Not
+
+  """"""
+  NotEqual
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  And
+
+  """"""
+  Like
+
+  """"""
+  Or
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlocktitleObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlocktitleTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type AggregateAudioFile {
+  """
+  Aggregate this property"document"
+  """
+  document: AggregateAudioFiledocumentObj
+
+  """
+  Aggregate this property"duration"
+  """
+  duration: AggregateAudioFiledurationObj
+
+  """
+  Aggregate this property"ext"
+  """
+  ext: AggregateAudioFileextObj
+
+  """Indicates the group of returned data"""
+  groupedBy: AggregateAudioFileGroupedByObj
+
+  """
+  An object used to Get Meta information about Objects on a local Weaviate
+  """
+  meta: AggregateAudioFileMetaObject
+
+  """
+  Aggregate this property"mimeType"
+  """
+  mimeType: AggregateAudioFilemimeTypeObj
+
+  """
+  Aggregate this property"order"
+  """
+  order: AggregateAudioFileorderObj
+
+  """
+  Aggregate this property"originalName"
+  """
+  originalName: AggregateAudioFileoriginalNameObj
+
+  """
+  Aggregate this property"remoteId"
+  """
+  remoteId: AggregateAudioFileremoteIdObj
+
+  """
+  Aggregate this property"size"
+  """
+  size: AggregateAudioFilesizeObj
+
+  """
+  Aggregate this property"sourceId"
+  """
+  sourceId: AggregateAudioFilesourceIdObj
+
+  """
+  Aggregate this property"url"
+  """
+  url: AggregateAudioFileurlObj
+}
+
+""""""
+input AggregateObjectsGoogleDocWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDoctocTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input GetObjectsImageBlockWhereGeoRangeInpObj {
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: GetObjectsImageBlockWhereGeoRangeGeoCoordinatesInpObj!
+
+  """The distance from the point specified via geoCoordinates."""
+  distance: GetObjectsImageBlockWhereGeoRangeDistanceInpObj!
+}
+
+""""""
+enum GetObjectsImageBlockGroupInpObjTypeEnum {
+  """"""
+  closest
+
+  """"""
+  merge
+}
+
+""""""
+input GetObjectsAudioFileWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+}
+
+""""""
+input GetObjectsGoogleCalendarEventNearVectorInpObj {
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsGoogleCalendarEventWhereInpObj {
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsGoogleCalendarEventWhereOperandsInpObj]
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsGoogleCalendarEventWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsGoogleCalendarEventWhereOperatorEnum
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+}
+
+""""""
+input AggregateObjectsTextBlockNearVectorInpObj {
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIAggregateAudioFileNearTextInpObj {
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIAggregateAudioFileMoveAwayFrom
+
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIAggregateAudioFileMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocsubtitleObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocsubtitleTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input GetObjectsImageBlockBm25InpObj {
+  """The query to search for"""
+  query: String
+
+  """The properties to search in"""
+  properties: [String]
+}
+
+""""""
+type TextBlockAdditionalFeatureProjection {
+  """"""
+  vector: [Float]
+}
+
+""""""
+input GetObjectsGoogleCalendarEventWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIAggregateGoogleCalendarEventNearTextInpObj {
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIAggregateGoogleCalendarEventMoveAwayFrom
+
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIAggregateGoogleCalendarEventMoveTo
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input AggregateObjectsImageBlockWhereOperandsInpObj {
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsImageBlockWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsImageBlockWhereOperatorEnum
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsImageBlockWhereOperandsInpObj]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocsummaryTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsGoogleDocMoveAwayFrom {
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsGoogleDocMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventorganizerIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventorganizerIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventsummaryTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocsummaryObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocsummaryTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsGoogleDocWhereInpObj {
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsGoogleDocWhereOperandsInpObj]
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsGoogleDocWhereOperatorEnum
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsGoogleDocWhereGeoRangeInpObj
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventcreatorEmailObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventcreatorEmailTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockwidthObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockcreatedAtObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+"""Hybrid search"""
+input AggregateObjectsTextBlockHybridInpObj {
+  """Vector search"""
+  vector: [Float]
+
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFileurlObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateAudioFileurlTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateGoogleDocMoveToMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsGoogleDocSortInpObj {
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """
+  Specify the sort order, either ascending (asc) which is default or descending (desc)
+  """
+  order: GetObjectsGoogleDocSortInpObjTypeEnum
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventlocationTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlocksourceIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+type AudioFileAdditionalClassification {
+  """"""
+  basedOn: [String]
+
+  """"""
+  classifiedFields: [String]
+
+  """"""
+  completed: String
+
+  """"""
+  id: String
+
+  """"""
+  scope: [String]
+}
+
+""""""
+input GetObjectsTextBlockNearObjectInpObj {
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventdescriptionHtmlObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventdescriptionHtmlTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateImageBlockMoveToMovementObjectsInpObj {
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """id of an object"""
+  id: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateAudioFilesourceIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocblocksObj {
+  """The classes that this object contains a reference to"""
+  pointingTo: [String] @deprecated(reason: "Experimental, the format will change")
+
+  """The datatype of this property"""
+  type: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsTextBlockMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventsummaryObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventsummaryTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlocktagNameObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateTextBlocktagNameTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+enum GetObjectsGoogleDocSortInpObjTypeEnum {
+  """"""
+  asc
+
+  """"""
+  desc
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventstartObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventsequenceObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateAudioFileurlTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersGetObjectsAudioFileAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveToMovementObjectsInpObj {
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """id of an object"""
+  id: String
+}
+
+""""""
+input AggregateObjectsImageBlockNearVectorInpObj {
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFilesizeObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsAudioFileGroupInpObj {
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """"""
+  type: GetObjectsAudioFileGroupInpObjTypeEnum
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsGoogleCalendarEventGroupInpObj {
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """"""
+  type: GetObjectsGoogleCalendarEventGroupInpObjTypeEnum
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersAggregateAudioFileAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFileoriginalNameObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateAudioFileoriginalNameTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIAggregateGoogleDocNearTextInpObj {
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIAggregateGoogleDocMoveAwayFrom
+
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIAggregateGoogleDocMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersGetObjectsGoogleCalendarEventAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocoriginalNameTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsTextBlockMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsTextBlockMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum GetObjectsImageBlockWhereOperatorEnum {
+  """"""
+  NotEqual
+
+  """"""
+  GreaterThan
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  LessThan
+
+  """"""
+  LessThanEqual
+
+  """"""
+  IsNull
+
+  """"""
+  And
+
+  """"""
+  Like
+
+  """"""
+  Or
+
+  """"""
+  Equal
+
+  """"""
+  Not
+
+  """"""
+  WithinGeoRange
+}
+
+""""""
+type AggregateGoogleCalendarEventMetaObject {
+  """"""
+  count: Int
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventhtmlLinkObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventhtmlLinkTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input Txt2VecOpenAIAggregateImageBlockMoveAwayFrom {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateImageBlockMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+""""""
+type AggregateImageBlock {
+  """
+  Aggregate this property"alt"
+  """
+  alt: AggregateImageBlockaltObj
+
+  """
+  Aggregate this property"createdAt"
+  """
+  createdAt: AggregateImageBlockcreatedAtObj
+
+  """
+  Aggregate this property"document"
+  """
+  document: AggregateImageBlockdocumentObj
+
+  """
+  Aggregate this property"ext"
+  """
+  ext: AggregateImageBlockextObj
+
+  """Indicates the group of returned data"""
+  groupedBy: AggregateImageBlockGroupedByObj
+
+  """
+  Aggregate this property"height"
+  """
+  height: AggregateImageBlockheightObj
+
+  """
+  An object used to Get Meta information about Objects on a local Weaviate
+  """
+  meta: AggregateImageBlockMetaObject
+
+  """
+  Aggregate this property"mimeType"
+  """
+  mimeType: AggregateImageBlockmimeTypeObj
+
+  """
+  Aggregate this property"modifiedAt"
+  """
+  modifiedAt: AggregateImageBlockmodifiedAtObj
+
+  """
+  Aggregate this property"order"
+  """
+  order: AggregateImageBlockorderObj
+
+  """
+  Aggregate this property"originalName"
+  """
+  originalName: AggregateImageBlockoriginalNameObj
+
+  """
+  Aggregate this property"path"
+  """
+  path: AggregateImageBlockpathObj
+
+  """
+  Aggregate this property"pathString"
+  """
+  pathString: AggregateImageBlockpathStringObj
+
+  """
+  Aggregate this property"remoteId"
+  """
+  remoteId: AggregateImageBlockremoteIdObj
+
+  """
+  Aggregate this property"size"
+  """
+  size: AggregateImageBlocksizeObj
+
+  """
+  Aggregate this property"sourceId"
+  """
+  sourceId: AggregateImageBlocksourceIdObj
+
+  """
+  Aggregate this property"title"
+  """
+  title: AggregateImageBlocktitleObj
+
+  """
+  Aggregate this property"url"
+  """
+  url: AggregateImageBlockurlObj
+
+  """
+  Aggregate this property"width"
+  """
+  width: AggregateImageBlockwidthObj
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockmodifiedAtObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockremoteIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateAudioFilemimeTypeTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input GetObjectsGoogleCalendarEventNearObjectInpObj {
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocmimeTypeTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input GetObjectsImageBlockNearVectorInpObj {
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsImageBlockGroupInpObj {
+  """"""
+  type: GetObjectsImageBlockGroupInpObjTypeEnum
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventorganizerEmailTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockpathStringTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateTextBlockclassNamesTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input AggregateObjectsGoogleDocWhereOperandsInpObj {
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsGoogleDocWhereGeoRangeInpObj
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsGoogleDocWhereOperandsInpObj]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsGoogleDocWhereOperatorEnum
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDoctagsObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDoctagsTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input GetObjectsImageBlockWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+}
+
+""""""
+input GetObjectsTextBlockWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+""""""
+input GetObjectsGoogleDocNearObjectInpObj {
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+""""""
+input GetObjectsGoogleDocWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+}
+
+""""""
+input AggregateObjectsGoogleCalendarEventWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventtitleTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input AggregateObjectsTextBlockWhereGeoRangeInpObj {
+  """The distance from the point specified via geoCoordinates."""
+  distance: AggregateObjectsTextBlockWhereGeoRangeDistanceInpObj!
+
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: AggregateObjectsTextBlockWhereGeoRangeGeoCoordinatesInpObj!
+}
+
+""""""
+input Txt2VecOpenAIAggregateGoogleDocMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateGoogleDocMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDoctextObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDoctextTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateGoogleCalendarEventMoveToMovementObjectsInpObj {
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """id of an object"""
+  id: String
+}
+
+""""""
+input AggregateObjectsTextBlockWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlockfootnotesObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateTextBlockfootnotesTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocslugObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocslugTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsAudioFileMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsAudioFileMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+""""""
+enum GetObjectsAudioFileSortInpObjTypeEnum {
+  """"""
+  asc
+
+  """"""
+  desc
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockaltTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input AggregateObjectsAudioFileWhereGeoRangeInpObj {
+  """The distance from the point specified via geoCoordinates."""
+  distance: AggregateObjectsAudioFileWhereGeoRangeDistanceInpObj!
+
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: AggregateObjectsAudioFileWhereGeoRangeGeoCoordinatesInpObj!
+}
+
+""""""
+enum GetObjectsAudioFileGroupInpObjTypeEnum {
+  """"""
+  closest
+
+  """"""
+  merge
+}
+
+"""Hybrid search"""
+input GetObjectsGoogleDocHybridInpObj {
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+
+  """Vector search"""
+  vector: [Float]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlockremoteIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateTextBlockremoteIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input AggregateObjectsAudioFileWhereOperandsInpObj {
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsAudioFileWhereOperatorEnum
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsAudioFileWhereGeoRangeInpObj
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsAudioFileWhereOperandsInpObj]
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateGoogleDocMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDoctagsTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+type TextBlockAdditionalAnswer {
+  """"""
+  endPosition: Int
+
+  """"""
+  hasAnswer: Boolean
+
+  """"""
+  property: String
+
+  """"""
+  result: String
+
+  """"""
+  startPosition: Int
+}
+
+""""""
+input GetObjectsTextBlockNearVectorInpObj {
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIGetObjectsTextBlockNearTextInpObj {
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIGetObjectsTextBlockMoveTo
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIGetObjectsTextBlockMoveAwayFrom
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveAwayFrom {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventdescriptionHtmlTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventcreatorDisplayNameObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventcreatorDisplayNameTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockpathStringObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockpathStringTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input AggregateObjectsAudioFileNearVectorInpObj {
+  """Target vector to be used in kNN search"""
+  vector: [Float]!
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+""""""
+union GoogleCalendarEventAttachmentsObj = ImageBlock | AudioFile | Beacon
+
+""""""
+input AggregateObjectsGoogleCalendarEventNearObjectInpObj {
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventendObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+""""""
+type AggregateTextBlock {
+  """
+  Aggregate this property"classNames"
+  """
+  classNames: AggregateTextBlockclassNamesObj
+
+  """
+  Aggregate this property"document"
+  """
+  document: AggregateTextBlockdocumentObj
+
+  """
+  Aggregate this property"footnotes"
+  """
+  footnotes: AggregateTextBlockfootnotesObj
+
+  """Indicates the group of returned data"""
+  groupedBy: AggregateTextBlockGroupedByObj
+
+  """
+  Aggregate this property"html"
+  """
+  html: AggregateTextBlockhtmlObj
+
+  """
+  An object used to Get Meta information about Objects on a local Weaviate
+  """
+  meta: AggregateTextBlockMetaObject
+
+  """
+  Aggregate this property"order"
+  """
+  order: AggregateTextBlockorderObj
+
+  """
+  Aggregate this property"remoteId"
+  """
+  remoteId: AggregateTextBlockremoteIdObj
+
+  """
+  Aggregate this property"sourceId"
+  """
+  sourceId: AggregateTextBlocksourceIdObj
+
+  """
+  Aggregate this property"tagName"
+  """
+  tagName: AggregateTextBlocktagNameObj
+
+  """
+  Aggregate this property"text"
+  """
+  text: AggregateTextBlocktextObj
+}
+
+""""""
+type ImageBlock {
+  """"""
+  _additional: ImageBlockAdditional
+
+  """"""
+  alt: String
+
+  """"""
+  createdAt: String
+
+  """"""
+  document: [ImageBlockDocumentObj]
+
+  """"""
+  ext: String
+
+  """"""
+  height: Int
+
+  """"""
+  mimeType: String
+
+  """"""
+  modifiedAt: String
+
+  """"""
+  order: Int
+
+  """"""
+  originalName: String
+
+  """"""
+  path: [String]
+
+  """"""
+  pathString: String
+
+  """"""
+  remoteId: String
+
+  """"""
+  size: Int
+
+  """"""
+  sourceId: String
+
+  """"""
+  title: String
+
+  """"""
+  url: String
+
+  """"""
+  width: Int
+}
+
+""""""
+type GoogleCalendarEventAdditionalFeatureProjection {
+  """"""
+  vector: [Float]
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum GetObjectsTextBlockWhereOperatorEnum {
+  """"""
+  Not
+
+  """"""
+  NotEqual
+
+  """"""
+  GreaterThan
+
+  """"""
+  LessThanEqual
+
+  """"""
+  IsNull
+
+  """"""
+  And
+
+  """"""
+  Like
+
+  """"""
+  Or
+
+  """"""
+  Equal
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  LessThan
+
+  """"""
+  WithinGeoRange
+}
+
+""""""
+input GetObjectsTextBlockBm25InpObj {
+  """The query to search for"""
+  query: String
+
+  """The properties to search in"""
+  properties: [String]
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventdescriptionTextTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockpathObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockpathTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type AggregateImageBlockMetaObject {
+  """"""
+  count: Int
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlockurlTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateAudioFilemimeTypeObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateAudioFilemimeTypeTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type ImageBlockAdditionalAnswer {
+  """"""
+  endPosition: Int
+
+  """"""
+  hasAnswer: Boolean
+
+  """"""
+  property: String
+
+  """"""
+  result: String
+
+  """"""
+  startPosition: Int
+}
+
+""""""
+type TextBlockAdditional {
+  """"""
+  answer: TextBlockAdditionalAnswer
+
+  """"""
+  certainty: Float
+
+  """"""
+  classification: TextBlockAdditionalClassification
+
+  """"""
+  creationTimeUnix: String
+
+  """"""
+  distance: Float
+
+  """"""
+  explainScore: String
+
+  """"""
+  featureProjection(algorithm: String, dimensions: Int, learningRate: Int, iterations: Int, perplexity: Int): TextBlockAdditionalFeatureProjection
+
+  """The UUID of a Object, assigned by its local Weaviate"""
+  id: String
+
+  """"""
+  lastUpdateTimeUnix: String
+
+  """"""
+  score: String
+
+  """"""
+  vector: [Float]
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input GetObjectsGoogleCalendarEventWhereOperandsInpObj {
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsGoogleCalendarEventWhereOperandsInpObj]
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsGoogleCalendarEventWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsGoogleCalendarEventWhereOperatorEnum
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockaltObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockaltTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockdocumentObj {
+  """The classes that this object contains a reference to"""
+  pointingTo: [String] @deprecated(reason: "Experimental, the format will change")
+
+  """The datatype of this property"""
+  type: String
+}
+
+""""""
+input Txt2VecOpenAIAggregateTextBlockMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateTextBlockMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+""""""
+input AggregateObjectsAudioFileNearObjectInpObj {
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+""""""
+input Txt2VecOpenAIAggregateAudioFileMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateAudioFileMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocremoteIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+enum GetObjectsGoogleDocGroupInpObjTypeEnum {
+  """"""
+  closest
+
+  """"""
+  merge
+}
+
+""""""
+input GetObjectsGoogleDocWhereGeoRangeInpObj {
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: GetObjectsGoogleDocWhereGeoRangeGeoCoordinatesInpObj!
+
+  """The distance from the point specified via geoCoordinates."""
+  distance: GetObjectsGoogleDocWhereGeoRangeDistanceInpObj!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockheightObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: Float
+
+  """Aggregate on the mean of numeric property values"""
+  mean: Float
+
+  """Aggregate on the median of numeric property values"""
+  median: Float
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: Float
+
+  """Aggregate on the mode of numeric property values"""
+  mode: Float
+
+  """Aggregate on the sum of numeric property values"""
+  sum: Float
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockmimeTypeObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockmimeTypeTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing the path and value of the grouped property"""
+type AggregateTextBlockGroupedByObj {
+  """The path of the grouped property"""
+  path: [String]
+
+  """The value of the grouped property"""
+  value: String
+}
+
+""""""
+input Txt2VecOpenAIAggregateAudioFileMoveAwayFrom {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateAudioFileMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+""""""
+enum GetObjectsImageBlockSortInpObjTypeEnum {
+  """"""
+  desc
+
+  """"""
+  asc
+}
+
+""""""
+input GetObjectsTextBlockWhereGeoRangeGeoCoordinatesInpObj {
+  """
+  The longitude (in decimal format) of the geoCoordinates to search around.
+  """
+  longitude: Float!
+
+  """
+  The latitude (in decimal format) of the geoCoordinates to search around.
+  """
+  latitude: Float!
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsGoogleDocMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsGoogleCalendarEventMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersAggregateGoogleCalendarEventAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+""""""
+input AggregateObjectsGoogleCalendarEventWhereGeoRangeDistanceInpObj {
+  """The maximum distance from the point specified geoCoordinates."""
+  max: Float!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventorganizerDisplayNameObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventorganizerDisplayNameTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventcreatedAtObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventstatusObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleCalendarEventstatusTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIAggregateTextBlockMoveAwayFromMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""Hybrid search"""
+input AggregateObjectsAudioFileHybridInpObj {
+  """Vector search"""
+  vector: [Float]
+
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input QnATransformersAggregateGoogleDocAskInpObj {
+  """Question to be answered"""
+  question: String!
+
+  """Properties which contains text"""
+  properties: [String]
+}
+
+""""""
+type AggregateGoogleDocMetaObject {
+  """"""
+  count: Int
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input GetObjectsImageBlockWhereInpObj {
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsImageBlockWhereOperatorEnum
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsImageBlockWhereGeoRangeInpObj
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsImageBlockWhereOperandsInpObj]
+}
+
+""""""
+type ImageBlockAdditionalFeatureProjection {
+  """"""
+  vector: [Float]
+}
+
+""""""
+type TextBlockAdditionalClassification {
+  """"""
+  basedOn: [String]
+
+  """"""
+  classifiedFields: [String]
+
+  """"""
+  completed: String
+
+  """"""
+  id: String
+
+  """"""
+  scope: [String]
+}
+
+""""""
+input GetObjectsGoogleCalendarEventBm25InpObj {
+  """The properties to search in"""
+  properties: [String]
+
+  """The query to search for"""
+  query: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventorganizerSelfObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  The percentage of false values for this boolean property in the dataset
+  """
+  percentageFalse: Float
+
+  """The percentage of true values for this boolean property in the dataset"""
+  percentageTrue: Float
+
+  """How often this boolean property's value is false in the dataset"""
+  totalFalse: Int
+
+  """How often this boolean property's value is true in the dataset"""
+  totalTrue: Int
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input AggregateObjectsTextBlockWhereInpObj {
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsTextBlockWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsTextBlockWhereOperatorEnum
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsTextBlockWhereOperandsInpObj]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocmodifiedAtObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateTextBlockhtmlObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateTextBlockhtmlTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type ImageBlockAdditional {
+  """"""
+  answer: ImageBlockAdditionalAnswer
+
+  """"""
+  certainty: Float
+
+  """"""
+  classification: ImageBlockAdditionalClassification
+
+  """"""
+  creationTimeUnix: String
+
+  """"""
+  distance: Float
+
+  """"""
+  explainScore: String
+
+  """"""
+  featureProjection(perplexity: Int, algorithm: String, dimensions: Int, learningRate: Int, iterations: Int): ImageBlockAdditionalFeatureProjection
+
+  """The UUID of a Object, assigned by its local Weaviate"""
+  id: String
+
+  """"""
+  lastUpdateTimeUnix: String
+
+  """"""
+  score: String
+
+  """"""
+  vector: [Float]
+}
+
+""""""
+type AudioFileAdditional {
+  """"""
+  answer: AudioFileAdditionalAnswer
+
+  """"""
+  certainty: Float
+
+  """"""
+  classification: AudioFileAdditionalClassification
+
+  """"""
+  creationTimeUnix: String
+
+  """"""
+  distance: Float
+
+  """"""
+  explainScore: String
+
+  """"""
+  featureProjection(iterations: Int, perplexity: Int, algorithm: String, dimensions: Int, learningRate: Int): AudioFileAdditionalFeatureProjection
+
+  """The UUID of a Object, assigned by its local Weaviate"""
+  id: String
+
+  """"""
+  lastUpdateTimeUnix: String
+
+  """"""
+  score: String
+
+  """"""
+  vector: [Float]
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input GetObjectsGoogleDocWhereOperandsInpObj {
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsGoogleDocWhereGeoRangeInpObj
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsGoogleDocWhereOperandsInpObj]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsGoogleDocWhereOperatorEnum
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateImageBlocktitleTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input Txt2VecOpenAIAggregateTextBlockMoveAwayFrom {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateTextBlockMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input AggregateObjectsTextBlockWhereOperandsInpObj {
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsTextBlockWhereOperandsInpObj]
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsTextBlockWhereGeoRangeInpObj
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsTextBlockWhereOperatorEnum
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsAudioFileMoveAwayFrom {
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsAudioFileMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+}
+
+""""""
+input Txt2VecOpenAIAggregateGoogleCalendarEventMoveTo {
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateGoogleCalendarEventMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventcreatorEmailTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleCalendarEventhtmlLinkTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input AggregateObjectsGoogleDocWhereGeoRangeInpObj {
+  """The geoCoordinates that form the center point of the search."""
+  geoCoordinates: AggregateObjectsGoogleDocWhereGeoRangeGeoCoordinatesInpObj!
+
+  """The distance from the point specified via geoCoordinates."""
+  distance: AggregateObjectsGoogleDocWhereGeoRangeDistanceInpObj!
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockoriginalNameObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockoriginalNameTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+input AggregateObjectsGoogleDocNearObjectInpObj {
+  """Concept identifier in the uuid format"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDocmentionsTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+input Txt2VecOpenAIGetObjectsImageBlockMoveTo {
+  """objects"""
+  objects: [Txt2VecOpenAIGetObjectsImageBlockMoveToMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDoctocObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDoctocTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing the Operators that can be applied to a 'where' filter
+"""
+enum GetObjectsGoogleDocWhereOperatorEnum {
+  """"""
+  Equal
+
+  """"""
+  Not
+
+  """"""
+  IsNull
+
+  """"""
+  And
+
+  """"""
+  Or
+
+  """"""
+  GreaterThan
+
+  """"""
+  GreaterThanEqual
+
+  """"""
+  LessThan
+
+  """"""
+  LessThanEqual
+
+  """"""
+  WithinGeoRange
+
+  """"""
+  Like
+
+  """"""
+  NotEqual
+}
+
+"""Hybrid search"""
+input AggregateObjectsGoogleCalendarEventHybridInpObj {
+  """Search weight"""
+  alpha: Float
+
+  """Vector search"""
+  vector: [Float]
+
+  """Query string"""
+  query: String
+}
+
+"""Hybrid search"""
+input AggregateObjectsImageBlockHybridInpObj {
+  """Vector search"""
+  vector: [Float]
+
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateImageBlockextObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateImageBlockextTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateGoogleDochtmlTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input Txt2VecOpenAIGetObjectsImageBlockNearTextInpObj {
+  """
+  Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite).
+  """
+  certainty: Float
+
+  """
+  The required degree of similarity between an object's characteristics and the provided filter values
+  """
+  distance: Float
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveAwayFrom: Txt2VecOpenAIGetObjectsImageBlockMoveAwayFrom
+
+  """"""
+  concepts: [String]!
+
+  """
+  Move your search term closer to or further away from another vector described by keywords
+  """
+  moveTo: Txt2VecOpenAIGetObjectsImageBlockMoveTo
+}
+
+"""
+An object containing the Operands that can be applied to a 'where' filter
+"""
+input GetObjectsAudioFileWhereOperandsInpObj {
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [GetObjectsAudioFileWhereOperandsInpObj]
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: GetObjectsAudioFileWhereOperatorEnum
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: GetObjectsAudioFileWhereGeoRangeInpObj
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+}
+
+"""Movement Object"""
+input Txt2VecOpenAIGetObjectsGoogleDocMoveToMovementObjectsInpObj {
+  """id of an object"""
+  id: String
+
+  """
+  Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id
+  """
+  beacon: String
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventupdatedAtObj {
+  """Aggregate on the total amount of found property values"""
+  count: Int
+
+  """Aggregate on the maximum of numeric property values"""
+  maximum: String
+
+  """Aggregate on the median of numeric property values"""
+  median: String
+
+  """Aggregate on the minimum of numeric property values"""
+  minimum: String
+
+  """Aggregate on the mode of numeric property values"""
+  mode: String
+}
+
+""""""
+input Txt2VecOpenAIAggregateGoogleDocMoveAwayFrom {
+  """objects"""
+  objects: [Txt2VecOpenAIAggregateGoogleDocMoveAwayFromMovementObjectsInpObj]
+
+  """
+  The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible
+  """
+  force: Float!
+
+  """
+  Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"]
+  """
+  concepts: [String]
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleDocremoteIdObj {
+  """The total amount of found instances for this property"""
+  count: Int
+
+  """
+  An object containing data about the most frequently occurring values for this property
+  """
+  topOccurrences(
+    """Show the first x results (pagination option)"""
+    limit: Int
+  ): [AggregateGoogleDocremoteIdTopOccurrencesObj]
+
+  """Aggregate on the total amount of found property values"""
+  type: String
+}
+
+""""""
+type GoogleCalendarEvent {
+  """"""
+  _additional: GoogleCalendarEventAdditional
+
+  """"""
+  attachments: [GoogleCalendarEventAttachmentsObj]
+
+  """"""
+  createdAt: String
+
+  """"""
+  creatorDisplayName: String
+
+  """"""
+  creatorEmail: String
+
+  """"""
+  creatorId: String
+
+  """"""
+  creatorSelf: Boolean
+
+  """"""
+  descriptionHtml: String
+
+  """"""
+  descriptionText: String
+
+  """"""
+  end: String
+
+  """"""
+  htmlLink: String
+
+  """"""
+  location: String
+
+  """"""
+  organizerDisplayName: String
+
+  """"""
+  organizerEmail: String
+
+  """"""
+  organizerId: String
+
+  """"""
+  organizerSelf: Boolean
+
+  """"""
+  recurrence: [String]
+
+  """"""
+  remoteId: String
+
+  """"""
+  sequence: Int
+
+  """"""
+  sourceId: String
+
+  """"""
+  start: String
+
+  """"""
+  status: String
+
+  """"""
+  summary: String
+
+  """"""
+  title: String
+
+  """"""
+  updatedAt: String
+}
+
+""""""
+type AudioFileAdditionalAnswer {
+  """"""
+  endPosition: Int
+
+  """"""
+  hasAnswer: Boolean
+
+  """"""
+  property: String
+
+  """"""
+  result: String
+
+  """"""
+  startPosition: Int
+}
+
+"""Hybrid search"""
+input GetObjectsGoogleCalendarEventHybridInpObj {
+  """Vector search"""
+  vector: [Float]
+
+  """Query string"""
+  query: String
+
+  """Search weight"""
+  alpha: Float
+}
+
+"""
+An object containing filter options for a local Get query, used to convert the result to the specified filters
+"""
+input AggregateObjectsGoogleCalendarEventWhereInpObj {
+  """
+  Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point.
+  """
+  valueGeoRange: AggregateObjectsGoogleCalendarEventWhereGeoRangeInpObj
+
+  """
+  Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object)
+  """
+  path: [String]
+
+  """Specify a String value that the target property will be compared to"""
+  valueDate: String
+
+  """Specify an Integer value that the target property will be compared to"""
+  valueInt: Int
+
+  """Specify a Boolean value that the target property will be compared to"""
+  valueBoolean: Boolean
+
+  """Specify a String value that the target property will be compared to"""
+  valueString: String
+
+  """Specify a Text value that the target property will be compared to"""
+  valueText: String
+
+  """Contains the Operands that can be applied to a 'where' filter"""
+  operands: [AggregateObjectsGoogleCalendarEventWhereOperandsInpObj]
+
+  """Contains the Operators that can be applied to a 'where' filter"""
+  operator: AggregateObjectsGoogleCalendarEventWhereOperatorEnum
+
+  """Specify a Float value that the target property will be compared to"""
+  valueNumber: Float
+}
+
+"""An object containing Aggregation information about this property"""
+type AggregateGoogleCalendarEventattachmentsObj {
+  """The classes that this object contains a reference to"""
+  pointingTo: [String] @deprecated(reason: "Experimental, the format will change")
+
+  """The datatype of this property"""
+  type: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateTextBlocksourceIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+""""""
+type AggregateGoogleCalendarEvent {
+  """
+  Aggregate this property"attachments"
+  """
+  attachments: AggregateGoogleCalendarEventattachmentsObj
+
+  """
+  Aggregate this property"createdAt"
+  """
+  createdAt: AggregateGoogleCalendarEventcreatedAtObj
+
+  """
+  Aggregate this property"creatorDisplayName"
+  """
+  creatorDisplayName: AggregateGoogleCalendarEventcreatorDisplayNameObj
+
+  """
+  Aggregate this property"creatorEmail"
+  """
+  creatorEmail: AggregateGoogleCalendarEventcreatorEmailObj
+
+  """
+  Aggregate this property"creatorId"
+  """
+  creatorId: AggregateGoogleCalendarEventcreatorIdObj
+
+  """
+  Aggregate this property"creatorSelf"
+  """
+  creatorSelf: AggregateGoogleCalendarEventcreatorSelfObj
+
+  """
+  Aggregate this property"descriptionHtml"
+  """
+  descriptionHtml: AggregateGoogleCalendarEventdescriptionHtmlObj
+
+  """
+  Aggregate this property"descriptionText"
+  """
+  descriptionText: AggregateGoogleCalendarEventdescriptionTextObj
+
+  """
+  Aggregate this property"end"
+  """
+  end: AggregateGoogleCalendarEventendObj
+
+  """Indicates the group of returned data"""
+  groupedBy: AggregateGoogleCalendarEventGroupedByObj
+
+  """
+  Aggregate this property"htmlLink"
+  """
+  htmlLink: AggregateGoogleCalendarEventhtmlLinkObj
+
+  """
+  Aggregate this property"location"
+  """
+  location: AggregateGoogleCalendarEventlocationObj
+
+  """
+  An object used to Get Meta information about Objects on a local Weaviate
+  """
+  meta: AggregateGoogleCalendarEventMetaObject
+
+  """
+  Aggregate this property"organizerDisplayName"
+  """
+  organizerDisplayName: AggregateGoogleCalendarEventorganizerDisplayNameObj
+
+  """
+  Aggregate this property"organizerEmail"
+  """
+  organizerEmail: AggregateGoogleCalendarEventorganizerEmailObj
+
+  """
+  Aggregate this property"organizerId"
+  """
+  organizerId: AggregateGoogleCalendarEventorganizerIdObj
+
+  """
+  Aggregate this property"organizerSelf"
+  """
+  organizerSelf: AggregateGoogleCalendarEventorganizerSelfObj
+
+  """
+  Aggregate this property"recurrence"
+  """
+  recurrence: AggregateGoogleCalendarEventrecurrenceObj
+
+  """
+  Aggregate this property"remoteId"
+  """
+  remoteId: AggregateGoogleCalendarEventremoteIdObj
+
+  """
+  Aggregate this property"sequence"
+  """
+  sequence: AggregateGoogleCalendarEventsequenceObj
+
+  """
+  Aggregate this property"sourceId"
+  """
+  sourceId: AggregateGoogleCalendarEventsourceIdObj
+
+  """
+  Aggregate this property"start"
+  """
+  start: AggregateGoogleCalendarEventstartObj
+
+  """
+  Aggregate this property"status"
+  """
+  status: AggregateGoogleCalendarEventstatusObj
+
+  """
+  Aggregate this property"summary"
+  """
+  summary: AggregateGoogleCalendarEventsummaryObj
+
+  """
+  Aggregate this property"title"
+  """
+  title: AggregateGoogleCalendarEventtitleObj
+
+  """
+  Aggregate this property"updatedAt"
+  """
+  updatedAt: AggregateGoogleCalendarEventupdatedAtObj
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateTextBlocktextTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}
+
+"""
+An object containing data about the most frequently occurring values for this property
+"""
+type AggregateAudioFileremoteIdTopOccurrencesObj {
+  """How often the most frequently occurring value for this property occurs"""
+  occurs: Int
+
+  """The most frequently occurring value for this property"""
+  value: String
+}

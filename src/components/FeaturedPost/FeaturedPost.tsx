@@ -1,20 +1,28 @@
-import { Grid, GridItem } from '../Grid/Grid'
 import styled from '@emotion/styled'
-import Post, { PostDataProps, PostSize } from '../Post/Post'
-import useWindowSize from '@/utils/ui.utils'
+import { LPE } from '../../types/lpe.types'
+import { Grid, GridItem } from '../Grid/Grid'
+import Post, { PostSize } from '../Post/Post'
 
 type Props = {
-  post: PostDataProps
+  post: LPE.Article.Data
 }
 
 const FeaturedPost = ({ post }: Props) => {
-  // const { width } = useWindowSize()
   return (
     <CustomGrid>
       <GridItem className="w-16">
         <PostWrapper>
           <Post
-            data={post}
+            data={{
+              authors: post.authors,
+              date: post.modifiedAt ? new Date(post.modifiedAt) : null,
+              slug: post.slug,
+              title: post.title,
+              coverImage: post.coverImage,
+              description: post.subtitle,
+              summary: post.summary,
+              tags: post.tags,
+            }}
             appearance={{
               size: PostSize.LARGE,
               imagePropsArray: [

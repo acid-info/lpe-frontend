@@ -8,7 +8,7 @@ export enum BlockType {
 
 type Props = {
   type: BlockType
-  date: string
+  date: Date | null
 }
 
 const ContentBlockHeader = ({ type, date }: Props) => {
@@ -19,11 +19,12 @@ const ContentBlockHeader = ({ type, date }: Props) => {
       </Typography>
       <Typography variant="body3">•</Typography>
       <Typography variant="body3" genericFontFamily="sans-serif">
-        {new Date(date).toLocaleString('en-GB', {
-          day: 'numeric',
-          month: 'long',
-          year: 'numeric',
-        })}
+        {date &&
+          date.toLocaleString('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          })}
       </Typography>
     </ContentBlockInfo>
   )

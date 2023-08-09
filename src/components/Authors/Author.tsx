@@ -1,27 +1,27 @@
-import { UnbodyGraphQl } from '@/lib/unbody/unbody-content.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { LPE } from '../../types/lpe.types'
 
 const Author = ({
-  mention,
+  author,
   email,
 }: {
-  mention: UnbodyGraphQl.Fragments.MentionItem
+  author: LPE.Author.Document
   email: boolean
   gap?: number
 }) => (
-  <AuthorInfo key={mention.name}>
+  <AuthorInfo key={author.name}>
     <Typography variant="body3" component="p" genericFontFamily="sans-serif">
-      {mention.name}
+      {author.name}
     </Typography>
     {email && (
       <Typography
-        href={`mailto:${mention.emailAddress}`}
+        href={`mailto:${author.emailAddress}`}
         variant="body3"
         component="a"
         genericFontFamily="sans-serif"
       >
-        {mention.emailAddress}
+        {author.emailAddress}
       </Typography>
     )}
   </AuthorInfo>

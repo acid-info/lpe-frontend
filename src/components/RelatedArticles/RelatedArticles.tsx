@@ -1,12 +1,11 @@
-import { getArticleCover } from '@/utils/data.utils'
-import styled from '@emotion/styled'
-import { PostsList } from '../PostList/PostList'
-import { SearchHook } from '@/types/data.types'
-import { UnbodyGoogleDoc } from '@/lib/unbody/unbody.types'
 import { SearchResultsSection } from '@/components/SearchResultsSection/SearchResultsSection'
+import { SearchHook } from '@/types/data.types'
+import styled from '@emotion/styled'
+import { LPE } from '../../types/lpe.types'
+import { PostsList } from '../PostList/PostList'
 
 type Props = {
-  data: SearchHook<UnbodyGoogleDoc>
+  data: SearchHook<LPE.Article.Data>
 }
 
 export default function RelatedArticles({ data }: Props) {
@@ -20,15 +19,7 @@ export default function RelatedArticles({ data }: Props) {
       >
         {
           <PostsList
-            posts={data.data.map((article) => ({
-              slug: article.doc.slug,
-              date: article.doc.modifiedAt,
-              title: article.doc.title,
-              description: article.doc.subtitle, // TODO: summary is not available
-              mentions: article.doc.mentions,
-              tags: article.doc.tags,
-              coverImage: getArticleCover(article.doc.blocks),
-            }))}
+            posts={data.data.map((item) => item.doc)}
             pageSize={
               typeof window !== 'undefined' && window.innerWidth < 768 ? 2 : 4
             }
