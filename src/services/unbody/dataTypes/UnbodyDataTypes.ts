@@ -62,7 +62,7 @@ export class UnbodyDataTypes {
     return dataTypes
   }
 
-  transform = async <T = any, O = any>(
+  transform = async <O = any, T = any>(
     pipeline: UnbodyDataTypeConfig[],
     data: T,
     root?: any,
@@ -78,11 +78,11 @@ export class UnbodyDataTypes {
     return obj as O | Promise<O>
   }
 
-  transformMany = async <T = any, O = any>(
+  transformMany = async <O = any, T = any>(
     pipeline: UnbodyDataTypeConfig[],
     data: T[],
     root?: any,
   ): Promise<O[]> => {
-    return Promise.all(data.map((d) => this.transform<T, O>(pipeline, d, root)))
+    return Promise.all(data.map((d) => this.transform<O, T>(pipeline, d, root)))
   }
 }

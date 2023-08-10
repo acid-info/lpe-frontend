@@ -25,7 +25,7 @@ const articleDocument = unbodyDataTypes.get({
 const articleSearchResultItem = unbodyDataTypes.get({
   classes: ['article', 'search'],
 })!
-const podcastInfoDocument = unbodyDataTypes.get({
+const podcastShowDocument = unbodyDataTypes.get({
   classes: ['podcast', 'document'],
   objectType: 'GoogleDoc',
 })!
@@ -99,10 +99,14 @@ export class UnbodyService {
       const docs = data.Get?.GoogleDoc || []
       const [doc] = docs
 
-      return this.handleResponse(
-        (doc && (await unbodyDataTypes.transform(articleDocument, doc))) ||
-          null,
-      )
+      const result = doc
+        ? await unbodyDataTypes.transform<LPE.Article.Data>(
+            articleDocument,
+            doc,
+          )
+        : null
+
+      return this.handleResponse(result)
     } catch (error) {
       return this.handleResponse(null, error)
     }
@@ -130,8 +134,9 @@ export class UnbodyService {
 
       return this.handleResponse({
         featured: (await this.getFeaturedPost())?.data,
-        posts: await Promise.all(
-          docs.map((doc) => unbodyDataTypes.transform(articleDocument, doc)),
+        posts: await unbodyDataTypes.transformMany<LPE.Article.Data>(
+          articleDocument,
+          docs,
         ),
       })
     } catch (error) {
@@ -194,7 +199,10 @@ export class UnbodyService {
 
       return doc
         ? this.handleResponse(
-            await unbodyDataTypes.transform(articleDocument, doc),
+            await unbodyDataTypes.transform<LPE.Article.Data>(
+              articleDocument,
+              doc,
+            ),
           )
         : this.handleResponse(null, 'No data')
     } catch (error) {
@@ -258,8 +266,9 @@ export class UnbodyService {
         return this.handleResponse([], 'No data for same authors')
 
       return this.handleResponse(
-        await Promise.all(
-          docs.map((doc) => unbodyDataTypes.transform(articleDocument, doc)),
+        await unbodyDataTypes.transformMany<LPE.Article.Metadata>(
+          articleDocument,
+          docs,
         ),
       )
     } catch (error) {
@@ -325,18 +334,13 @@ export class UnbodyService {
         },
       })
 
-      const blocks = (
-        await Promise.all(
-          [...(ImageBlock || []), ...(TextBlock || [])].map((block) =>
-            unbodyDataTypes.transform<any, SearchResultItem<LPE.Article.Data>>(
-              articleSearchResultItem,
-              block,
-            ),
-          ),
-        )
-      ).sort((a, b) => b.score - a.score)
+      const blocks = await unbodyDataTypes.transformMany<
+        SearchResultItem<LPE.Article.ContentBlock>
+      >(articleSearchResultItem, [...(ImageBlock || []), ...(TextBlock || [])])
 
-      return this.handleResponse(blocks)
+      const result = blocks.sort((a, b) => b.score - a.score)
+
+      return this.handleResponse(result)
     } catch (error) {
       return this.handleResponse([], error)
     }
@@ -378,11 +382,12 @@ export class UnbodyService {
 
       if (!data) return this.handleResponse([], 'No data')
 
-      const docs = data.Get.GoogleDoc.map((doc) =>
-        unbodyDataTypes.transform(articleSearchResultItem, doc),
+      const result = await unbodyDataTypes.transformMany<LPE.Article.Data>(
+        articleSearchResultItem,
+        data.Get.GoogleDoc || [],
       )
 
-      return this.handleResponse(docs)
+      return this.handleResponse(result)
     } catch (error) {
       return this.handleResponse(null, error)
     }
@@ -405,7 +410,7 @@ export class UnbodyService {
     }
   }
 
-  getPodcastsInfo = async (): Promise<ApiResponse<LPE.Podcast.Info[]>> => {
+  getPodcastShows = async (): Promise<ApiResponse<LPE.Podcast.Show[]>> => {
     try {
       const { data } = await this.client.query({
         query: GetArticlePostQueryDocument,
@@ -419,10 +424,11 @@ export class UnbodyService {
       })
 
       const docs = data.Get.GoogleDoc
-      const result = await unbodyDataTypes.transformMany(
-        podcastInfoDocument,
+      const result = await unbodyDataTypes.transformMany<LPE.Podcast.Show>(
+        podcastShowDocument,
         docs,
       )
+
       console.log(JSON.stringify(result))
 
       return this.handleResponse([])

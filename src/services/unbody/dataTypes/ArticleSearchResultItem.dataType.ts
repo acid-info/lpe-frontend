@@ -43,7 +43,7 @@ export const ArticleSearchResultItemDataType: UnbodyDataTypeConfig<
         ),
       }
 
-    const document = helpers.dataTypes.transform(
+    const document = await helpers.dataTypes.transform(
       [helpers.dataTypes.getOne({ key: 'ArticleDocument' })!],
       'document' in data && data.document?.[0],
     )

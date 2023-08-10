@@ -25,14 +25,12 @@ export const ArticleDataType: UnbodyDataTypeConfig<
       classes: 'article',
     })
 
-    const blocks = await helpers.dataTypes.transformMany<
-      any,
-      LPE.Article.ContentBlock
-    >(
-      [...textBlock, ...imageBlock],
-      [...(data.blocks || [])].sort((a, b) => a.order - b.order),
-      data,
-    )
+    const blocks =
+      await helpers.dataTypes.transformMany<LPE.Article.ContentBlock>(
+        [...textBlock, ...imageBlock],
+        [...(data.blocks || [])].sort((a, b) => a.order - b.order),
+        data,
+      )
 
     const readingTime = calcReadingTime(
       (data.blocks || [])

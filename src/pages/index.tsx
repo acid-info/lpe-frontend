@@ -49,7 +49,6 @@ export const getStaticProps = async () => {
   } = await unbodyApi.getHomepagePosts()
 
   const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
-  await unbodyApi.getPodcastsInfo()
 
   return {
     props: {

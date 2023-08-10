@@ -17,7 +17,7 @@ export namespace LPE {
     }
   }
 
-  export namespace Article {
+  export namespace Post {
     export type Footnote = {
       index: number
       id: string
@@ -55,28 +55,40 @@ export namespace LPE {
     export type ContentBlockLabel =
       (typeof ContentBlockLabels)[keyof typeof ContentBlockLabels]
 
-    export type ContentBlockCommon = {
+    export type ContentBlockCommon<D = any> = {
       id: string
       order: number
       labels: ContentBlockLabel[]
-      document?: Partial<Article.Metadata>
+      document?: D
     }
 
-    export type TextBlock = ContentBlockCommon & {
+    export type TextBlock<D = any> = ContentBlockCommon<D> & {
       text: string
       html: string
       tagName: string
       classNames: string[]
       type: Extract<ContentBlockType, 'text'>
-      footnotes: Article.Footnotes
+      footnotes: Post.Footnotes
     }
 
-    export type ImageBlock = ContentBlockCommon &
+    export type ImageBlock<D = any> = ContentBlockCommon<D> &
       Image.Document & {
         type: Extract<ContentBlockType, 'image'>
       }
 
-    export type ContentBlock = TextBlock | ImageBlock
+    export type ContentBlock<D = any> = TextBlock<D> | ImageBlock<D>
+  }
+
+  export namespace Article {
+    export type Toc = Post.Toc
+    export type TocItem = Post.TocItem
+    export type TextBlock = Post.TextBlock<Metadata>
+    export type ImageBlock = Post.ImageBlock<Metadata>
+    export type ContentBlock = Post.ContentBlock<Metadata>
+    export type Footnote = Post.Footnote
+    export type Footnotes = Post.Footnotes
+    export const ContentBlockLabels = Post.ContentBlockLabels
+    export type ContentBlockLabel = Post.ContentBlockLabel
 
     export type Metadata = {
       id: string
@@ -92,7 +104,7 @@ export namespace LPE {
     }
 
     export type Data = Article.Metadata & {
-      toc: Article.Toc
+      toc: Post.Toc
       readingTime: number
       coverImage: Image.Document | null
       content: Array<Article.ContentBlock>
@@ -106,28 +118,43 @@ export namespace LPE {
   }
 
   export namespace Podcast {
-    export type Info = {
+    export type Show = {
       id: string
       slug: string
       title: string
       description: string
-      coverImage: Image.Document | null
+      logo: Image.Document
+      hosts: Author.Document[]
+      episodes?: Omit<Podcast.Document, 'show'>[]
+    }
+
+    export type Metadata = {
+      id: string
+      slug: string
+      title: string
+      tags: string[]
+      summary: string
+      publishedAt: string
+      episodeNumber: number
     }
 
     export type TranscriptionItem = {
       text: string
-      start: number
-      end: number
-      speaker: string
+      start?: number
+      end?: number
+      speaker?: string
     }
 
-    export type EpisodeExtra = {
-      info: Partial<Podcast.Info>
+    export type Content = {
+      coverImage?: Post.ImageBlock
       transcription: TranscriptionItem[]
+      references?: Post.TextBlock[]
+      credits?: Post.TextBlock[]
     }
 
-    export type Episode = Article.Data & EpisodeExtra
-
-    export type Document = Info & { episodes: Podcast.Episode[] }
+    export type Document = Metadata &
+      Content & {
+        show: Show
+      }
   }
 }

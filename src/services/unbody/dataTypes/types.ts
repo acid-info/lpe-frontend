@@ -39,7 +39,8 @@ export const UnbodyDataTypeKeys = {
   ArticleTextBlock: 'ArticleTextBlock',
   ArticleImageBlock: 'ArticleImageBlock',
   ArticleSearchResultItem: 'ArticleSearchResultItem',
-  PodcastInfoDocument: 'PodcastInfoDocument',
+  PodcastShowDocument: 'PodcastShowDocument',
+  PodcastEpisodeDocument: 'PodcastEpisodeDocument',
 } as const
 
 export type UnbodyDataTypeKey =
@@ -48,6 +49,8 @@ export type UnbodyDataTypeKey =
 export const UnbodyDataTypeClasses = {
   Article: 'article',
   Podcast: 'podcast',
+  Show: 'show',
+  Episode: 'episode',
   Document: 'document',
   Search: 'search',
 } as const

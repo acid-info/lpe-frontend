@@ -2,14 +2,14 @@ import { LPE } from '../../../types/lpe.types'
 import { UnbodyResGoogleDocData } from '../unbody.types'
 import { UnbodyDataTypeConfig } from './types'
 
-export const PodcastInfoDataType: UnbodyDataTypeConfig<
+export const PodcastShowDataType: UnbodyDataTypeConfig<
   LPE.Article.Data,
-  LPE.Podcast.Info,
+  LPE.Podcast.Show,
   UnbodyResGoogleDocData
 > = {
-  key: 'PodcastInfoDocument',
+  key: 'PodcastShowDocument',
   objectType: 'GoogleDoc',
-  classes: ['podcast', 'document'],
+  classes: ['podcast', 'show', 'document'],
 
   isMatch: (helpers, data, original) =>
     original
