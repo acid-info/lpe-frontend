@@ -24,3 +24,25 @@ export const shuffle = (array: any[]) => {
 }
 
 export const unique = (arr: any[]) => Array.from(new Set(arr))
+
+export const getAudioSourceFromSimplecastPlayer = async (url: string) => {
+  const myHeaders = new Headers()
+  myHeaders.append(
+    'Authorization',
+    'Bearer eyJhcGlfa2V5IjoiMzg3OTdhY2Y5N2NmZjgzZjQxNGI5ODNiN2E2MjY3NmQifQ==',
+  )
+
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+  }
+
+  const result = await fetch(
+    `https://api.simplecast.com/episodes/${url}`,
+    requestOptions,
+  )
+
+  const data = await result.json()
+  console.log(data)
+  return data
+}
