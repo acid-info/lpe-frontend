@@ -30,12 +30,7 @@ export class UnbodyHelpers {
               {
                 path,
                 operator: 'Like',
-                valueString: '*/published/*',
-              },
-              {
-                path,
-                operator: 'Like',
-                valueString: '*/highlighted/*',
+                valueString: '/Articles/published/*',
               },
             ]
           : [],

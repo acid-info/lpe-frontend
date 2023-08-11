@@ -409,33 +409,6 @@ export class UnbodyService {
       return this.handleResponse([], error)
     }
   }
-
-  getPodcastShows = async (): Promise<ApiResponse<LPE.Podcast.Show[]>> => {
-    try {
-      const { data } = await this.client.query({
-        query: GetArticlePostQueryDocument,
-        variables: {
-          filter: {
-            operator: 'Like',
-            path: ['pathString'],
-            valueString: '*/Podcasts/*/index',
-          },
-        },
-      })
-
-      const docs = data.Get.GoogleDoc
-      const result = await unbodyDataTypes.transformMany<LPE.Podcast.Show>(
-        podcastShowDocument,
-        docs,
-      )
-
-      console.log(JSON.stringify(result))
-
-      return this.handleResponse([])
-    } catch (error) {
-      return this.handleResponse([], error)
-    }
-  }
 }
 
 const unbodyApi = new UnbodyService(
