@@ -11,9 +11,9 @@ export namespace LPE {
   export namespace Author {
     export type Document = {
       name: string
+      url?: string
       emailAddress?: string
       image?: Image.Document
-      url?: string
     }
   }
 
@@ -39,7 +39,13 @@ export namespace LPE {
 
     export type Toc = TocItem[]
 
-    export type ContentBlockType = 'image' | 'text'
+    export const ContentBlockTypes = {
+      Image: 'image',
+      Text: 'text',
+    } as const
+
+    export type ContentBlockType =
+      (typeof ContentBlockTypes)[keyof typeof ContentBlockTypes]
 
     export const ContentBlockLabels = {
       Title: 'title',
@@ -77,6 +83,21 @@ export namespace LPE {
       }
 
     export type ContentBlock<D = any> = TextBlock<D> | ImageBlock<D>
+
+    export type SearchResultItemData = {
+      id: string
+      url: string
+      slug: string
+      date: string
+      title: string
+      tags: string
+      description: string
+      priority: 1 | 2 | 3
+      authors: Author.Document[]
+      coverImage?: Post.ImageBlock
+
+      type: 'article' | 'podcast'
+    }
   }
 
   export namespace Article {
@@ -134,6 +155,7 @@ export namespace LPE {
       title: string
       tags: string[]
       summary: string
+      authors: Author.Document[]
       publishedAt: string
       episodeNumber: number
     }
