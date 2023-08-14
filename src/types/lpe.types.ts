@@ -1,4 +1,13 @@
+import { DictValues } from '../utils/type.utils'
+
 export namespace LPE {
+  export const PostTypes = {
+    Podcast: 'podcast',
+    Article: 'article',
+  } as const
+
+  export type PostType = DictValues<typeof PostTypes>
+
   export namespace Image {
     export type Document = {
       url: string
@@ -11,9 +20,7 @@ export namespace LPE {
   export namespace Author {
     export type Document = {
       name: string
-      url?: string
       emailAddress?: string
-      image?: Image.Document
     }
   }
 
@@ -44,8 +51,7 @@ export namespace LPE {
       Text: 'text',
     } as const
 
-    export type ContentBlockType =
-      (typeof ContentBlockTypes)[keyof typeof ContentBlockTypes]
+    export type ContentBlockType = DictValues<typeof ContentBlockTypes>
 
     export const ContentBlockLabels = {
       Title: 'title',
@@ -58,8 +64,7 @@ export namespace LPE {
       CoverImage: 'cover_image',
     } as const
 
-    export type ContentBlockLabel =
-      (typeof ContentBlockLabels)[keyof typeof ContentBlockLabels]
+    export type ContentBlockLabel = DictValues<typeof ContentBlockLabels>
 
     export type ContentBlockCommon<D = any> = {
       id: string
@@ -84,20 +89,13 @@ export namespace LPE {
 
     export type ContentBlock<D = any> = TextBlock<D> | ImageBlock<D>
 
-    export type SearchResultItemData = {
-      id: string
-      url: string
-      slug: string
-      date: string
-      title: string
-      tags: string
-      description: string
-      priority: 1 | 2 | 3
-      authors: Author.Document[]
-      coverImage?: Post.ImageBlock
-
-      type: 'article' | 'podcast'
-    }
+    export type SearchResultItemData =
+      | ({
+          type: typeof PostTypes.Article
+        } & Article.Metadata)
+      | ({
+          type: typeof PostTypes.Podcast
+        } & Required<Podcast.Document>)
   }
 
   export namespace Article {
@@ -142,11 +140,26 @@ export namespace LPE {
     export type Show = {
       id: string
       slug: string
+      url: string
       title: string
       description: string
       logo: Image.Document
       hosts: Author.Document[]
+      numberOfEpisodes: number
       episodes?: Omit<Podcast.Document, 'show'>[]
+    }
+
+    export const ChannelNames = {
+      ApplePodcasts: 'apple_podcasts',
+      GooglePodcasts: 'google_podcasts',
+      Spotify: 'spotify',
+    } as const
+
+    export type ChannelName = DictValues<typeof ChannelNames>
+
+    export type Channel = {
+      name: ChannelName
+      url: string
     }
 
     export type Metadata = {
@@ -154,29 +167,27 @@ export namespace LPE {
       slug: string
       title: string
       tags: string[]
-      summary: string
+      description: string
       authors: Author.Document[]
       publishedAt: string
       episodeNumber: number
+      coverImage?: Post.ImageBlock
+      show?: Show
     }
 
     export type TranscriptionItem = {
-      text: string
+      html: string
       start?: number
       end?: number
       speaker?: string
     }
 
     export type Content = {
-      coverImage?: Post.ImageBlock
-      transcription: TranscriptionItem[]
-      references?: Post.TextBlock[]
+      channels: Channel[]
       credits?: Post.TextBlock[]
+      transcription: TranscriptionItem[]
     }
 
-    export type Document = Metadata &
-      Content & {
-        show: Show
-      }
+    export type Document = Metadata & Content
   }
 }
