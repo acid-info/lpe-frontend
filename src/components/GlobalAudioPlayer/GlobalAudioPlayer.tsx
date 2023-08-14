@@ -1,12 +1,14 @@
 import ReactPlayer from 'react-player'
 import styled from '@emotion/styled'
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { PlayIcon } from '../Icons/PlayIcon'
 import { PauseIcon } from '../Icons/PauseIcon'
 import { VolumeIcon } from '../Icons/VolumeIcon'
 import styles from './GlobalAudioPlayer.module.css'
 import { convertSecToMinAndSec } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
+import { getAudioSourceFromEpisode } from '@/utils/data.utils'
+import Image from 'next/image'
 
 type StateProps = {
   url: string | null
@@ -25,13 +27,48 @@ type StateProps = {
   seeking: boolean
 }
 
-const TEMP_URL =
-  'https://cdn.simplecast.com/audio/b54c0885-7c72-415d-b032-7d294b78d785/episodes/30d4e2f5-4434-419c-8fc1-a76e4b367e20/audio/3c8eb229-3f34-45a4-84f1-ce1d6bd65922/default_tc.mp3'
+// Hasing it out episodes: https://api.simplecast.com/podcasts/b54c0885-7c72-415d-b032-7d294b78d785/episodes?preview=true
+const TEMP_EPISODE_ID = '30d4e2f5-4434-419c-8fc1-a76e4b367e20'
 
-export default function GlobalAudioPlayer() {
+type Props = {
+  episodeId: string
+}
+
+type EpisodeProps = {
+  title: string
+  podcast: string
+  url: string
+  thumbnail: string
+}
+
+export default function GlobalAudioPlayer({ episodeId }: Props) {
   const ref = useRef<ReactPlayer>(null)
+  const [episode, setEpisode] = useState<EpisodeProps>({
+    title: '',
+    podcast: '',
+    url: '',
+    thumbnail: '',
+  })
+
+  useMemo(() => {
+    const getAudioSource = async () => {
+      const response = await getAudioSourceFromEpisode(
+        episodeId || TEMP_EPISODE_ID,
+      )
+
+      setEpisode({
+        title: response.title,
+        podcast: response.podcast.title,
+        url: response.ad_free_audio_file_url,
+        thumbnail: response.image_url,
+      })
+    }
+
+    getAudioSource()
+  }, [episodeId])
+
   const [state, setState] = useState<StateProps>({
-    url: TEMP_URL,
+    url: episode.url,
     pip: false,
     playing: false,
     playedSeconds: 0,
@@ -46,6 +83,7 @@ export default function GlobalAudioPlayer() {
     loop: false,
     seeking: false,
   })
+
   const [showVolume, setShowVolume] = useState(false)
 
   // const handleLoad = (url: string) => {
@@ -171,7 +209,7 @@ export default function GlobalAudioPlayer() {
       <ReactPlayer
         ref={ref}
         style={{ display: 'none' }}
-        url={state.url ?? TEMP_URL}
+        url={episode.url}
         width="100%"
         height="100%"
         pip={state.pip}
@@ -194,7 +232,19 @@ export default function GlobalAudioPlayer() {
         onDuration={handleDuration}
         onProgress={handleProgress}
       />
-      <RightMenu></RightMenu>
+
+      <RightMenu>
+        <Image
+          src={episode.thumbnail}
+          alt={episode.thumbnail}
+          width={86}
+          height={48}
+        />
+        <EpisodeData>
+          <Typography variant="body2">{episode.title}</Typography>
+          <Typography variant="body3">{episode.podcast}</Typography>
+        </EpisodeData>
+      </RightMenu>
     </Container>
   )
 }
@@ -246,7 +296,12 @@ const AudioPlayer = styled.div`
 `
 
 const RightMenu = styled.div`
+  display: flex;
   width: 40%;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 32px;
+  gap: 16px;
 `
 
 const PlayPause = styled.button`
@@ -270,4 +325,10 @@ const TimeContainer = styled(Row)`
 
 const Time = styled(Typography)`
   width: 32px;
+`
+
+const EpisodeData = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `

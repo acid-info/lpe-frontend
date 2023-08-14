@@ -25,7 +25,7 @@ export const shuffle = (array: any[]) => {
 
 export const unique = (arr: any[]) => Array.from(new Set(arr))
 
-export const getAudioSourceFromSimplecastPlayer = async (url: string) => {
+export const getAudioSourceFromEpisode = async (episodId: string) => {
   const myHeaders = new Headers()
   myHeaders.append(
     'Authorization',
@@ -38,11 +38,10 @@ export const getAudioSourceFromSimplecastPlayer = async (url: string) => {
   }
 
   const result = await fetch(
-    `https://api.simplecast.com/episodes/${url}`,
+    `https://api.simplecast.com/episodes/${episodId}`,
     requestOptions,
   )
 
   const data = await result.json()
-  console.log(data)
   return data
 }

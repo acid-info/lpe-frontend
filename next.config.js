@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['images.cdn.unbody.io'],
+        domains: ['images.cdn.unbody.io', 'image.simplecastcdn.com'],
         // loader: 'imgix',
         // path: 'https://images.cdn.unbody.io',
     }
