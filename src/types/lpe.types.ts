@@ -117,6 +117,8 @@ export namespace LPE {
       subtitle: string
       authors: Author.Document[]
       tags: string[]
+      featured?: boolean
+      highlighted?: boolean
 
       createdAt: string | null
       modifiedAt: string | null
@@ -153,6 +155,7 @@ export namespace LPE {
       ApplePodcasts: 'apple_podcasts',
       GooglePodcasts: 'google_podcasts',
       Spotify: 'spotify',
+      Youtube: 'youtube',
     } as const
 
     export type ChannelName = DictValues<typeof ChannelNames>
@@ -171,6 +174,8 @@ export namespace LPE {
       authors: Author.Document[]
       publishedAt: string
       episodeNumber: number
+      featured?: boolean
+      highlighted?: boolean
       coverImage?: Post.ImageBlock
       show?: Show
     }
