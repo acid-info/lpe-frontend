@@ -1,45 +1,56 @@
 import { SEO } from '@/components/SEO'
 import { GetStaticPropsContext } from 'next'
-import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { LPE } from '../../types/lpe.types'
-import EpisodeLayout from '@/layouts/EpisodeLayout/Episode.layout'
+import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
+import PodcastsContainer from '@/containers/PodcastsContainer'
+
+import TEMP_DATA from './podcasts-temp-data.json'
 
 type PodcastsProps = {
-  data: LPE.Podcast.Document
+  shows: LPE.Podcast.Show[]
+  latestEpisodes: LPE.Podcast.Document[]
   errors: string | null
 }
 
-const PodcastShowPage = ({ data, errors }: PodcastsProps) => {
-  if (!data) return null
+const PodcastShowPage = ({ shows, latestEpisodes, errors }: PodcastsProps) => {
+  if (!shows) return null
   if (errors) return <div>{errors}</div>
 
   return (
     <>
       <SEO
-        title={data.title}
-        description={data.description}
-        image={data.coverImage}
+        title={'Logos Podcasts'}
+        description={'Description'}
         imageUrl={undefined}
         pagePath={`/podcasts`}
-        tags={[...data.tags]}
+        tags={[]}
       />
-      <div style={{ marginTop: '200px' }}>Podcasts Page WIP</div>
+      <PodcastsContainer shows={shows} latestEpisodes={latestEpisodes} />
     </>
   )
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const { shows, latestEpisodes } = TEMP_DATA
+
+  if (!shows) {
+    return {
+      notFound: true,
+      props: { why: 'no article' },
+    }
+  }
+
   return {
     props: {
-      data: { tags: ['Social', 'Political'] },
-      error: null,
+      shows,
+      latestEpisodes,
     },
   }
 }
 
 PodcastShowPage.getLayout = function getLayout(page: ReactNode) {
-  return <EpisodeLayout>{page}</EpisodeLayout>
+  return <PodcastsLayout>{page}</PodcastsLayout>
 }
 
 export default PodcastShowPage

@@ -3,7 +3,7 @@ import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { LPE } from '../../../types/lpe.types'
-import EpisodeLayout from '@/layouts/EpisodeLayout/Episode.layout'
+import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 
 type PodcastShowProps = {
   data: LPE.Podcast.Document
@@ -26,7 +26,7 @@ const PodcastShowPage = ({ data, errors }: PodcastShowProps) => {
         image={data.coverImage}
         imageUrl={undefined}
         pagePath={`/podcasts/${showSlug}`}
-        tags={[...data.tags]}
+        tags={[...data?.tags]}
       />
       <div style={{ marginTop: '200px' }}>Single Podcasts Page WIP</div>
     </>
@@ -60,7 +60,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 }
 
 PodcastShowPage.getLayout = function getLayout(page: ReactNode) {
-  return <EpisodeLayout>{page}</EpisodeLayout>
+  return <PodcastsLayout>{page}</PodcastsLayout>
 }
 
 export default PodcastShowPage
