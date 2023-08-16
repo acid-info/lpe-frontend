@@ -195,12 +195,11 @@ export default function GlobalAudioPlayer() {
         onDuration={handleDuration}
         onProgress={handleProgress}
       />
-
       <RightMenu>
         <Image
           src={episode.thumbnail}
           alt={episode.thumbnail}
-          width={86}
+          width={48}
           height={48}
         />
         <EpisodeData>
