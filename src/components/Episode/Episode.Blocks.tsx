@@ -30,7 +30,7 @@ const EpisodeBlocks = ({ data }: Props) => {
 }
 
 const ShowButton = styled(Button)`
-  margin-top: 24px;
+  margin-top: calc(var(--lsd-body2-lineHeight) * -1);
 `
 
 export default EpisodeBlocks

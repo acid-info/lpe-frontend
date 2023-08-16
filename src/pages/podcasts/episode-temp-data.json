@@ -105,16 +105,16 @@
     ],
     "transcription": [
       {
-        "html": "<p class=\"c1\"><span class=\"c0\">You ready to get into it?</span></p>"
+        "html": "<p class=\"c1\"><span class=\"c0\">You ready to get into it?</span></p>", "start": 1, "end": 3, "speaker": "John" 
       },
       {
-        "html": "<p class=\"c1\"><span class=\"c0\">Everybody. Welcome back. Bringing you another amazing interview, hashing it out, interview, doing it the way we love. I'm here solo dolo today. Well, not so well, though. I'm interviewing someone, but as far as hosts go, I'm so low on this one. Today we're going to talk a little bit about centralized messaging.</span></p>"
+        "html": "<p class=\"c1\"><span class=\"c0\">Everybody. Welcome back. Bringing you another amazing interview, hashing it out, interview, doing it the way we love. I'm here solo dolo today. Well, not so well, though. I'm interviewing someone, but as far as hosts go, I'm so low on this one. Today we're going to talk a little bit about centralized messaging.</span></p>", "start": 3, "end": 6, "speaker": "Doe" 
       },
       {
-        "html": "<p class=\"c1\"><span class=\"c0\">And I'm joined with Franck Royer, and he wanted it now. He’s a Waku guy. So we're going to call him Waku guy. Before we do that, Franck, because you introduce yourself. To the audience.. So I'll try not to just dive straight into Waku, but I feel like that's the only way to do it, right?</span></p>"
+        "html": "<p class=\"c1\"><span class=\"c0\">And I'm joined with Franck Royer, and he wanted it now. He’s a Waku guy. So we're going to call him Waku guy. Before we do that, Franck, because you introduce yourself. To the audience.. So I'll try not to just dive straight into Waku, but I feel like that's the only way to do it, right?</span></p>",  "start": 6, "end": 72, "speaker": "John" 
       },
       {
-        "html": "<p class=\"c1\"><span class=\"c0\">So for those unfamiliar with what Waku is, could you give us like a  quick brief message, like a brief overview of Waku and then we're going to try to peel away the layers and get a little bit deeper. All right. I like that. So it's a if this were to have trouble with an ephemeral communication network.</span></p>"
+        "html": "<p class=\"c1\"><span class=\"c0\">So for those unfamiliar with what Waku is, could you give us like a  quick brief message, like a brief overview of Waku and then we're going to try to peel away the layers and get a little bit deeper. All right. I like that. So it's a if this were to have trouble with an ephemeral communication network.</span></p>",  "start": 72, "end": 80, "speaker": "John" 
       },
       {
         "html": "<p class=\"c1\"><span class=\"c0\">Okay. So I do know that there's a lot of projects working on decentralized messaging. But when you say decentralized messaging, I don't think a lot of people quite understand what it is and why it's needed. So I guess we could start there. Like what is the centralized messaging in comparison to what people are used to? And then we'll go to the tail end of that question and so yeah.</span></p>"

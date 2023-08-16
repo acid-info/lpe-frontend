@@ -8,12 +8,16 @@ const EpisodeTranscript = ({ data }: { data: LPE.Podcast.Document }) => {
   return (
     <>
       <EpisodeDivider />
-      <Typography component="h6" variant="h6">
+      <Title component="h6" variant="h6">
         Transcript
-      </Typography>
+      </Title>
       <EpisodeBlocks data={data} />
     </>
   )
 }
+
+const Title = styled(Typography)`
+  margin-bottom: 8px;
+`
 
 export default EpisodeTranscript
