@@ -11,9 +11,7 @@ import { getAudioSourceFromEpisode } from '@/utils/data.utils'
 import Image from 'next/image'
 import { playerState } from './globalAudioPlayer.state'
 import { useHookstate } from '@hookstate/core'
-
-// Hasing it out episodes: https://api.simplecast.com/podcasts/b54c0885-7c72-415d-b032-7d294b78d785/episodes?preview=true
-const TEMP_EPISODE_ID = '30d4e2f5-4434-419c-8fc1-a76e4b367e20'
+import { episodeState } from './episode.state'
 
 type EpisodeProps = {
   title: string
@@ -24,8 +22,8 @@ type EpisodeProps = {
 
 export default function GlobalAudioPlayer() {
   const state = useHookstate(playerState)
+  const epState = useHookstate(episodeState)
 
-  const episodeId = ''
   const ref = useRef<ReactPlayer>(null)
   const [episode, setEpisode] = useState<EpisodeProps>({
     title: '',
@@ -36,7 +34,7 @@ export default function GlobalAudioPlayer() {
 
   useMemo(() => {
     const getAudioSource = async () => {
-      const response = await getAudioSourceFromEpisode(TEMP_EPISODE_ID)
+      const response = await getAudioSourceFromEpisode(epState.value.episodeId)
 
       setEpisode({
         title: response.title,
@@ -47,7 +45,7 @@ export default function GlobalAudioPlayer() {
     }
 
     getAudioSource()
-  }, [episodeId])
+  }, [epState])
 
   const [showVolume, setShowVolume] = useState(false)
 

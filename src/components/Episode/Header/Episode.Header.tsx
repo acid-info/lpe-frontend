@@ -7,6 +7,7 @@ import { default as Stats } from '@/components/Article/Article.Stats'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import { useHookstate } from '@hookstate/core'
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
+import EpisodeChannels from './Episode.Channels'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   url: string
@@ -18,6 +19,7 @@ const EpisodeHeader = ({
   description,
   publishedAt,
   tags,
+  channels,
   url,
   readingTime,
 }: EpisodeHeaderProps) => {
@@ -55,6 +57,7 @@ const EpisodeHeader = ({
         Network State Podcast
       </PodcastName>
       {tags && <Tags tags={tags} />}
+      {channels && <EpisodeChannels channels={channels} />}
       {description && (
         <EpisodeSubtitle
           variant="h6"

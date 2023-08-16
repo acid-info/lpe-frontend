@@ -1,277 +1,269 @@
 {
-    "data": {
-        "id": "b415119a-6550-5577-b850-eaa61684edeb",
-        "slug": "title-that-will-become-slug",
-        "title": "Title of the Episode; a nice and eye catching title",
-        "authors": [
-            {
-                "name": "@testperson",
-                "emailAddress": "test@domain.com"
-            }
-        ],
-        "description": "Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.",
-        "publishedAt": "2023-07-11T20:30:00.000Z",
-        "episodeNumber": 1,
-        "tags": ["Tools", "Cyber Punk", "Docs"],
-        "credits": [
-            {
-                "id": "6bd84ceb-1f22-41f4-a229-306356306da7",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">Episode hosts - Annie McEwen and Molly Webster</span></p>",
-                "text": "Episode hosts - Annie McEwen and Molly Webster",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 9,
-                "tagName": "p",
-                "labels": []
-            },
-            {
-                "id": "97c48663-da36-4c11-be41-b3a507aa2e21",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">Produced by - Annie McEwen and Becca Bressler </span></p>",
-                "text": "Produced by - Annie McEwen and Becca Bressler ",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 10,
-                "tagName": "p",
-                "labels": []
-            },
-            {
-                "id": "c481e411-165f-4fb0-a5da-e73b05f1b7b7",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">With help from - Matt Kielty</span></p>",
-                "text": "With help from - Matt Kielty",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 11,
-                "tagName": "p",
-                "labels": []
-            },
-            {
-                "id": "ef86751f-06d3-4468-a2aa-a97dd378438d",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">Original music and sound design contributed by - Jeremy Bloom, Annie McEwen, Matt Kielty</span></p>",
-                "text": "Original music and sound design contributed by - Jeremy Bloom, Annie McEwen, Matt Kielty",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 12,
-                "tagName": "p",
-                "labels": []
-            },
-            {
-                "id": "d42cfb64-3b8a-4b82-b7db-d80b3346f441",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">Mixing by - Jeremy Bloom</span></p>",
-                "text": "Mixing by - Jeremy Bloom",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 13,
-                "tagName": "p",
-                "labels": []
-            },
-            {
-                "id": "82fb6107-bde7-43bf-921b-f310d62c9280",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">With dialogue mixing by - Arianne Wack </span></p>",
-                "text": "With dialogue mixing by - Arianne Wack ",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 14,
-                "tagName": "p",
-                "labels": []
-            },
-            {
-                "id": "bc6bd5f9-a50a-48be-bf2a-fb600a611f99",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">Fact-checking by - Diane Kelly</span></p>",
-                "text": "Fact-checking by - Diane Kelly",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 15,
-                "tagName": "p",
-                "labels": []
-            },
-            {
-                "id": "81b77086-18a6-41a4-8938-888958d53aef",
-                "type": "text",
-                "html": "<p class=\"c1\"><span class=\"c0\">And edited by - Alex Neason</span></p>",
-                "text": "And edited by - Alex Neason",
-                "classNames": [
-                    "c1"
-                ],
-                "footnotes": [],
-                "order": 16,
-                "tagName": "p",
-                "labels": []
-            }
-        ],
-        "transcription": [
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">You ready to get into it?</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Everybody. Welcome back. Bringing you another amazing interview, hashing it out, interview, doing it the way we love. I'm here solo dolo today. Well, not so well, though. I'm interviewing someone, but as far as hosts go, I'm so low on this one. Today we're going to talk a little bit about centralized messaging.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">And I'm joined with Franck Royer, and he wanted it now. He’s a Waku guy. So we're going to call him Waku guy. Before we do that, Franck, because you introduce yourself. To the audience.. So I'll try not to just dive straight into Waku, but I feel like that's the only way to do it, right?</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So for those unfamiliar with what Waku is, could you give us like a  quick brief message, like a brief overview of Waku and then we're going to try to peel away the layers and get a little bit deeper. All right. I like that. So it's a if this were to have trouble with an ephemeral communication network.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Okay. So I do know that there's a lot of projects working on decentralized messaging. But when you say decentralized messaging, I don't think a lot of people quite understand what it is and why it's needed. So I guess we could start there. Like what is the centralized messaging in comparison to what people are used to? And then we'll go to the tail end of that question and so yeah.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Mm hmm. So that's the biggest part about it is just removing what we're saying, the centralize or removing the server, its user got it. Many, not many servers, but many different failure points. And then you can't just boot people off, right? If they want a message, they can message. Okay, that's good. Now, I guess moving it to logos, right?</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">We've mentioned logo several times before on the podcast and guess what? Audience We're going to continue to mention logos because it's what we do. But Wakue was considered one of the foundational projects or logos was that hmm, yeah. Okay. So why is secure ephemeral messaging like so foundational to these decentralized applications? Right? Like, why is this needed? Like, it's absolutely needed.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Oh, we can I was going to ask you that would go straight into some use cases. Let's give us some examples.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">All right. So we're back for round two of the Franck interview. I've been saying your name wrong for what appears to be years now. I mean, I've been saying it right as an American, but from way back for round two, I wanted to get a piece of the interview because for those who don't know, I also am peripherally a part of Waku.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">And we're actually all are in some way, shape or form. And I have additional context or questions that I'd like to kind of dive into in this. And I think in the first interview, we got a really good foundation as to why Waku exists, what is decentralized messaging, how it fits into the ecosystem and kind of what's wrong with the Internet as it is today.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">But I wanted to dive further into some of the details on how it works and maybe some of the tradeoffs as you build up from like Waku Relay into the different protocols that are available that are built on top of Waku relay. So to start, can you give me like the concept of a gossip network, Like what is a gossip network and how are messages passed around this?</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So we should probably address the cat in the room here. Jesse has decided that he is now an anon person and would be doing all videos with some virtual avatar and a process of doing that. He's also put up a graphic of a gossip network here, which is basically, if I were to repeat that back to you, a well-connected group of nodes that everyone's connected to all people, you connect to a specific number of people.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So you have a select number of neighbors for gossip sub that is six people. So every person tries to maintain six connections and then when a message gets passed, it passes to it's it passes that message to all of its six neighbors, so on and so forth, until basically the entire network has been saturated with that message. Right.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So that allows some redundancy and some sensors like some censorship resistance, some some resiliency in the network. So if one person goes out, the message still gets routed and saturates the network. And I think that was an important distinction that needs to be made here, is that like Wendy was asking a question in the previous episode, I'm not sure if it'll make it into the air.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">It was, I'm sending a message to someone, right? And that's not necessarily what we're doing with Gossip Sub or Whacko. I'm broadcasting a message and someone knows where to listen. I think that's an important distinction to make and add to that more generally speaking, that the tradeoff you're making here is bandwidth consumption or redundancy and computation, like how much work it takes to propagate a message.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">And I'll fast that message gets propagated. So if you look at it from each extreme right, if you just start with one, each person maintains one connection in the network, right? That means that you have a very inefficient network in terms of how message gets propagated across right? Because if everyone relays a message, then you basically have to wrap that message to every single person with the in number of hops in being the size of the network.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Right. But there's no redundancy. So basically everyone gets that message once. But if we do the opposite of that and everyone is connected to everyone else, that's a fully connected mesh or fully connected network, then everyone receives that message in a number of times. Basically, they just keep just you just redundantly keep receiving it, but you get it really, really fast.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">And so there's a tradeoff somewhere in the middle of like how many how do we maintain the minimum out of connections and message redundancy while maximize what while minimizing the latency, the time it takes to completely saturate the network with that as it's right? And so you're looking for somewhere in the middle so that you get this sense of sender receiver anonymity while also still having some reasonable like latency and bandwidth consumption associated with sending a message.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">And so based on those simulations that protocol labs have done, six was a good way. It was a good number. It was the best number they found for Gossip sub, and that's what Waku was built on for gossip. So so now we can assume, you know, we have this, this gossip sub network right. That is what is, what is the difference between the P2P gossip sub and what Waku provides?</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Why don't people just use the peer to peer gossip So like, why would they why would they want to use Waku at least like, well, we're going to start with just relay, right? Relay is the kind of foundational protocol for how Waku works. What does that add on top of a gossip sub network? Get them getting. Yeah, there's there's a little subtlety there right.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So like if a if a light client or mobile phone. Right. Can't handle the main network and it wants to try and ask a node for a specific set of messages, there's some level of obfuscating what those messages are right need so they can use bloom Filters are typically the way of doing this, saying I'm I'm looking for messages that look like A, B and C, and the more detailed you are, the more accurate exactly what the more narrowed down the messages you're looking for.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">If you're really broad, you can say, give me all the messages that have the word two in them. Or like, you know, something that allows for the node to answer that while not exposing the details of the message to they can't read them, they're just setting encrypted messages. But like there is some level of privacy loss if you're asking for a group of messages because you just said it gives you the IP and whatever whatever you've asked for, they can make that connection.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So if you're routing as a full node and doing full relay and parsing things on, then you've, you've, you've, you, you're not giving me that information. Whenever you ask for whatever messages you're listening to. And that's a layer of good. Now it's a that's a developer choice. So the people who build the applications kind of choose how these content topics could be used.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">And eventually we'll have one of the things we're currently working on in doing research and within VAC is kind of automating this sharding or automating the way in which people belong to specific content topic as the network scales out so that you maintain this level of reasonable anonymity or anonymity anonymity while keeping the resources required to do messages low Codex as it stands today and like this is part of ongoing research, is how do we scale walk properly?</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Because if you if you can you can misuse these kind of content topics pretty pretty bad. So if you spam the network with a bunch of pictures, then everyone passes things on, it degrades the quality of the network, right? But like, there's ways of like status now currently uses, sends pictures and so on and prior profile settings and a bunch of other things across a crosswalk which are in some cases larger than one megabyte.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So there's a bunch of kind of efficiency tweaks you can do to keep specific media sensible via Waco and, and not like mitigating things whether that you have like this kind of media content shard. So like you just you propagate media through a different part of the network and that's this distinction I think is worth making that developers who are thinking about using Waku should should consider when they're thinking about how to use walk, who is used different.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">If you think about a gossip tub topic that's ostensibly a network, that's the entire network. And then if you think about content topics, those are basically contents, right? Those are conversations that are being happened. And so what you're trying to do is strategically use content topics so that you're listening and propagating things you want to do to various people so you can be kind of selective on where you send things and who should be listening to it.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">So you're not so not everyone is listening to everything or propagating everything. People are able to kind of pick and choose what they to pay attention to and contribute to when they're when they're contributing to the network. Right? If at some point we can maybe get into like as a if I run a if I run a node, I'm only propagating messages associated with these things because that's what I care about.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">That's what I'm trying to support from the network. And so you have a network of nodes that are just doing the work that they think is important while not being inundated with all of the work of the entire network, which allows kind of this large, amorphous network to scale autonomously.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Jesse Yeah, I think that's perfect. And also like Jesse, that's a good analogy for how status plans to use Waku and it's also highlights this kind of optionality that developers have to leverage different classes of topics and content topics to efficiently serve their their users in the way they want to and hopefully pass on those options to them to do things the way they want to.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Like what you just described was status users getting to choose quite a bit of options, not only and potentially who relays messages and the latency versus privacy aspect of it, but also options for incentivization within their own community as well. So we're like by providing options to developers, they're able to choose a lot of pass those options on to their users to then let them do what they want to do.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">And I think that's an important aspect of this. They're not pigeonholing people into a specific set of things. We're passing on a lot of options, though. The last point of this that I think we haven't gotten to. One of the protocols built on top of relay is the store protocol. Can you kind of dive into what that is and why it exists?</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Jesse Just jumping in…</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">This is a reasonable place to wrap, I think. What's the what do you want people to do? Like if people listening to you, how do they learn more? What do you want it to go? How do they contribute it? Let it run a walk through node Like what are they like? How do they figure more out</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Thanks, Frank.</span></p>"
-            },
-            {
-                "html": "<p class=\"c1\"><span class=\"c0\">Frank My bad.</span></p>"
-            }
-        ],
-        "channels": [
-            {
-                "name": "youtube",
-                "url": "https://www.youtube.com/watch?v=vmx_oOb2On0"
-            },
-            {
-                "name": "youtube",
-                "url": "https://www.youtube.com/watch?v=vmx_oOb2On0"
-            }
-        ],
-        "coverImage": {
-            "id": "08bd8535-d7b5-459e-85a0-183feb502e08",
-            "type": "image",
-            "alt": "",
-            "url": "https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png",
-            "height": 1223,
-            "order": 7,
-            "width": 1999,
-            "labels": []
-        },
-        "show": {
-            "id": "426d4e4a-98db-5ba2-a9e6-a9d989a34022",
-            "slug": "hashing-it-out",
-            "title": "Hashing It Out",
-            "numberOfEpisodes": 1,
-            "hosts": [
-                {
-                    "name": "Host",
-                    "emailAddress": "host@gmail.com"
-                }
-            ],
-            "url": "/podcasts/hashing-it-out",
-            "description": "",
-            "logo": {
-                "alt": "",
-                "url": "https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/d4ecc97f-bcef-411d-b31a-639261623b25_image1.png",
-                "width": 1999,
-                "height": 1123
-            },
-            "episodes": []
-        },
-        "featured": false,
-        "highlighted": false
+  "data": {
+    "id": "b415119a-6550-5577-b850-eaa61684edeb",
+    "slug": "title-that-will-become-slug",
+    "title": "Title of the Episode; a nice and eye catching title",
+    "authors": [
+      {
+        "name": "@testperson",
+        "emailAddress": "test@domain.com"
+      }
+    ],
+    "description": "Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.",
+    "publishedAt": "2023-07-11T20:30:00.000Z",
+    "episodeNumber": 1,
+    "tags": ["Tools", "Cyber Punk", "Docs"],
+    "credits": [
+      {
+        "id": "6bd84ceb-1f22-41f4-a229-306356306da7",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">Episode hosts - Annie McEwen and Molly Webster</span></p>",
+        "text": "Episode hosts - Annie McEwen and Molly Webster",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 9,
+        "tagName": "p",
+        "labels": []
+      },
+      {
+        "id": "97c48663-da36-4c11-be41-b3a507aa2e21",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">Produced by - Annie McEwen and Becca Bressler </span></p>",
+        "text": "Produced by - Annie McEwen and Becca Bressler ",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 10,
+        "tagName": "p",
+        "labels": []
+      },
+      {
+        "id": "c481e411-165f-4fb0-a5da-e73b05f1b7b7",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">With help from - Matt Kielty</span></p>",
+        "text": "With help from - Matt Kielty",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 11,
+        "tagName": "p",
+        "labels": []
+      },
+      {
+        "id": "ef86751f-06d3-4468-a2aa-a97dd378438d",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">Original music and sound design contributed by - Jeremy Bloom, Annie McEwen, Matt Kielty</span></p>",
+        "text": "Original music and sound design contributed by - Jeremy Bloom, Annie McEwen, Matt Kielty",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 12,
+        "tagName": "p",
+        "labels": []
+      },
+      {
+        "id": "d42cfb64-3b8a-4b82-b7db-d80b3346f441",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">Mixing by - Jeremy Bloom</span></p>",
+        "text": "Mixing by - Jeremy Bloom",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 13,
+        "tagName": "p",
+        "labels": []
+      },
+      {
+        "id": "82fb6107-bde7-43bf-921b-f310d62c9280",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">With dialogue mixing by - Arianne Wack </span></p>",
+        "text": "With dialogue mixing by - Arianne Wack ",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 14,
+        "tagName": "p",
+        "labels": []
+      },
+      {
+        "id": "bc6bd5f9-a50a-48be-bf2a-fb600a611f99",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">Fact-checking by - Diane Kelly</span></p>",
+        "text": "Fact-checking by - Diane Kelly",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 15,
+        "tagName": "p",
+        "labels": []
+      },
+      {
+        "id": "81b77086-18a6-41a4-8938-888958d53aef",
+        "type": "text",
+        "html": "<p class=\"c1\"><span class=\"c0\">And edited by - Alex Neason</span></p>",
+        "text": "And edited by - Alex Neason",
+        "classNames": ["c1"],
+        "footnotes": [],
+        "order": 16,
+        "tagName": "p",
+        "labels": []
+      }
+    ],
+    "transcription": [
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">You ready to get into it?</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Everybody. Welcome back. Bringing you another amazing interview, hashing it out, interview, doing it the way we love. I'm here solo dolo today. Well, not so well, though. I'm interviewing someone, but as far as hosts go, I'm so low on this one. Today we're going to talk a little bit about centralized messaging.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">And I'm joined with Franck Royer, and he wanted it now. He’s a Waku guy. So we're going to call him Waku guy. Before we do that, Franck, because you introduce yourself. To the audience.. So I'll try not to just dive straight into Waku, but I feel like that's the only way to do it, right?</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So for those unfamiliar with what Waku is, could you give us like a  quick brief message, like a brief overview of Waku and then we're going to try to peel away the layers and get a little bit deeper. All right. I like that. So it's a if this were to have trouble with an ephemeral communication network.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Okay. So I do know that there's a lot of projects working on decentralized messaging. But when you say decentralized messaging, I don't think a lot of people quite understand what it is and why it's needed. So I guess we could start there. Like what is the centralized messaging in comparison to what people are used to? And then we'll go to the tail end of that question and so yeah.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Mm hmm. So that's the biggest part about it is just removing what we're saying, the centralize or removing the server, its user got it. Many, not many servers, but many different failure points. And then you can't just boot people off, right? If they want a message, they can message. Okay, that's good. Now, I guess moving it to logos, right?</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">We've mentioned logo several times before on the podcast and guess what? Audience We're going to continue to mention logos because it's what we do. But Wakue was considered one of the foundational projects or logos was that hmm, yeah. Okay. So why is secure ephemeral messaging like so foundational to these decentralized applications? Right? Like, why is this needed? Like, it's absolutely needed.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Oh, we can I was going to ask you that would go straight into some use cases. Let's give us some examples.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">All right. So we're back for round two of the Franck interview. I've been saying your name wrong for what appears to be years now. I mean, I've been saying it right as an American, but from way back for round two, I wanted to get a piece of the interview because for those who don't know, I also am peripherally a part of Waku.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">And we're actually all are in some way, shape or form. And I have additional context or questions that I'd like to kind of dive into in this. And I think in the first interview, we got a really good foundation as to why Waku exists, what is decentralized messaging, how it fits into the ecosystem and kind of what's wrong with the Internet as it is today.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">But I wanted to dive further into some of the details on how it works and maybe some of the tradeoffs as you build up from like Waku Relay into the different protocols that are available that are built on top of Waku relay. So to start, can you give me like the concept of a gossip network, Like what is a gossip network and how are messages passed around this?</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So we should probably address the cat in the room here. Jesse has decided that he is now an anon person and would be doing all videos with some virtual avatar and a process of doing that. He's also put up a graphic of a gossip network here, which is basically, if I were to repeat that back to you, a well-connected group of nodes that everyone's connected to all people, you connect to a specific number of people.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So you have a select number of neighbors for gossip sub that is six people. So every person tries to maintain six connections and then when a message gets passed, it passes to it's it passes that message to all of its six neighbors, so on and so forth, until basically the entire network has been saturated with that message. Right.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So that allows some redundancy and some sensors like some censorship resistance, some some resiliency in the network. So if one person goes out, the message still gets routed and saturates the network. And I think that was an important distinction that needs to be made here, is that like Wendy was asking a question in the previous episode, I'm not sure if it'll make it into the air.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">It was, I'm sending a message to someone, right? And that's not necessarily what we're doing with Gossip Sub or Whacko. I'm broadcasting a message and someone knows where to listen. I think that's an important distinction to make and add to that more generally speaking, that the tradeoff you're making here is bandwidth consumption or redundancy and computation, like how much work it takes to propagate a message.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">And I'll fast that message gets propagated. So if you look at it from each extreme right, if you just start with one, each person maintains one connection in the network, right? That means that you have a very inefficient network in terms of how message gets propagated across right? Because if everyone relays a message, then you basically have to wrap that message to every single person with the in number of hops in being the size of the network.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Right. But there's no redundancy. So basically everyone gets that message once. But if we do the opposite of that and everyone is connected to everyone else, that's a fully connected mesh or fully connected network, then everyone receives that message in a number of times. Basically, they just keep just you just redundantly keep receiving it, but you get it really, really fast.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">And so there's a tradeoff somewhere in the middle of like how many how do we maintain the minimum out of connections and message redundancy while maximize what while minimizing the latency, the time it takes to completely saturate the network with that as it's right? And so you're looking for somewhere in the middle so that you get this sense of sender receiver anonymity while also still having some reasonable like latency and bandwidth consumption associated with sending a message.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">And so based on those simulations that protocol labs have done, six was a good way. It was a good number. It was the best number they found for Gossip sub, and that's what Waku was built on for gossip. So so now we can assume, you know, we have this, this gossip sub network right. That is what is, what is the difference between the P2P gossip sub and what Waku provides?</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Why don't people just use the peer to peer gossip So like, why would they why would they want to use Waku at least like, well, we're going to start with just relay, right? Relay is the kind of foundational protocol for how Waku works. What does that add on top of a gossip sub network? Get them getting. Yeah, there's there's a little subtlety there right.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So like if a if a light client or mobile phone. Right. Can't handle the main network and it wants to try and ask a node for a specific set of messages, there's some level of obfuscating what those messages are right need so they can use bloom Filters are typically the way of doing this, saying I'm I'm looking for messages that look like A, B and C, and the more detailed you are, the more accurate exactly what the more narrowed down the messages you're looking for.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">If you're really broad, you can say, give me all the messages that have the word two in them. Or like, you know, something that allows for the node to answer that while not exposing the details of the message to they can't read them, they're just setting encrypted messages. But like there is some level of privacy loss if you're asking for a group of messages because you just said it gives you the IP and whatever whatever you've asked for, they can make that connection.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So if you're routing as a full node and doing full relay and parsing things on, then you've, you've, you've, you, you're not giving me that information. Whenever you ask for whatever messages you're listening to. And that's a layer of good. Now it's a that's a developer choice. So the people who build the applications kind of choose how these content topics could be used.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">And eventually we'll have one of the things we're currently working on in doing research and within VAC is kind of automating this sharding or automating the way in which people belong to specific content topic as the network scales out so that you maintain this level of reasonable anonymity or anonymity anonymity while keeping the resources required to do messages low Codex as it stands today and like this is part of ongoing research, is how do we scale walk properly?</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Because if you if you can you can misuse these kind of content topics pretty pretty bad. So if you spam the network with a bunch of pictures, then everyone passes things on, it degrades the quality of the network, right? But like, there's ways of like status now currently uses, sends pictures and so on and prior profile settings and a bunch of other things across a crosswalk which are in some cases larger than one megabyte.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So there's a bunch of kind of efficiency tweaks you can do to keep specific media sensible via Waco and, and not like mitigating things whether that you have like this kind of media content shard. So like you just you propagate media through a different part of the network and that's this distinction I think is worth making that developers who are thinking about using Waku should should consider when they're thinking about how to use walk, who is used different.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">If you think about a gossip tub topic that's ostensibly a network, that's the entire network. And then if you think about content topics, those are basically contents, right? Those are conversations that are being happened. And so what you're trying to do is strategically use content topics so that you're listening and propagating things you want to do to various people so you can be kind of selective on where you send things and who should be listening to it.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">So you're not so not everyone is listening to everything or propagating everything. People are able to kind of pick and choose what they to pay attention to and contribute to when they're when they're contributing to the network. Right? If at some point we can maybe get into like as a if I run a if I run a node, I'm only propagating messages associated with these things because that's what I care about.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">That's what I'm trying to support from the network. And so you have a network of nodes that are just doing the work that they think is important while not being inundated with all of the work of the entire network, which allows kind of this large, amorphous network to scale autonomously.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Jesse Yeah, I think that's perfect. And also like Jesse, that's a good analogy for how status plans to use Waku and it's also highlights this kind of optionality that developers have to leverage different classes of topics and content topics to efficiently serve their their users in the way they want to and hopefully pass on those options to them to do things the way they want to.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Like what you just described was status users getting to choose quite a bit of options, not only and potentially who relays messages and the latency versus privacy aspect of it, but also options for incentivization within their own community as well. So we're like by providing options to developers, they're able to choose a lot of pass those options on to their users to then let them do what they want to do.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">And I think that's an important aspect of this. They're not pigeonholing people into a specific set of things. We're passing on a lot of options, though. The last point of this that I think we haven't gotten to. One of the protocols built on top of relay is the store protocol. Can you kind of dive into what that is and why it exists?</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Jesse Just jumping in…</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">This is a reasonable place to wrap, I think. What's the what do you want people to do? Like if people listening to you, how do they learn more? What do you want it to go? How do they contribute it? Let it run a walk through node Like what are they like? How do they figure more out</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Thanks, Frank.</span></p>"
+      },
+      {
+        "html": "<p class=\"c1\"><span class=\"c0\">Frank My bad.</span></p>"
+      }
+    ],
+    "channels": [
+      {
+        "name": "youtube",
+        "url": "https://www.youtube.com/watch?v=vmx_oOb2On0"
+      },
+      {
+        "name": "apple_podcasts",
+        "url": "https://podcasts.apple.com/us/podcast/franck-royer-decentralized-messaging/id1376906132?i=1000618673846"
+      },
+      {
+        "name": "spotify",
+        "url": "https://open.spotify.com/show/3WkYBYaZ4W1Z8gzBlOvr7y"
+      },
+      {
+        "name": "google_podcasts",
+        "url": "https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5zaW1wbGVjYXN0LmNvbS9xd0d2bGoyag/episode/OGQ5ZmE0NzgtMGUxNy00YWIzLTk1NzgtYTNiYTEyMjMwY2Jm?sa=X&ved=0CAUQkfYCahcKEwiwz7SVoeGAAxUAAAAAHQAAAAAQNQ"
+      }
+    ],
+    "coverImage": {
+      "id": "08bd8535-d7b5-459e-85a0-183feb502e08",
+      "type": "image",
+      "alt": "",
+      "url": "https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png",
+      "height": 1223,
+      "order": 7,
+      "width": 1999,
+      "labels": []
     },
-    "errors": null
+    "show": {
+      "id": "426d4e4a-98db-5ba2-a9e6-a9d989a34022",
+      "slug": "hashing-it-out",
+      "title": "Hashing It Out",
+      "numberOfEpisodes": 1,
+      "hosts": [
+        {
+          "name": "Host",
+          "emailAddress": "host@gmail.com"
+        }
+      ],
+      "url": "/podcasts/hashing-it-out",
+      "description": "",
+      "logo": {
+        "alt": "",
+        "url": "https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/d4ecc97f-bcef-411d-b31a-639261623b25_image1.png",
+        "width": 1999,
+        "height": 1123
+      },
+      "episodes": []
+    },
+    "featured": false,
+    "highlighted": false
+  },
+  "errors": null
 }
