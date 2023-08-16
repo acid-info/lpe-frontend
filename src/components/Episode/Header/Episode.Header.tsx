@@ -5,6 +5,8 @@ import { LPE } from '../../../types/lpe.types'
 import ReactPlayer from 'react-player'
 import { default as Stats } from '@/components/Article/Article.Stats'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
+import { useHookstate } from '@hookstate/core'
+import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   url: string
@@ -20,15 +22,28 @@ const EpisodeHeader = ({
   readingTime,
 }: EpisodeHeaderProps) => {
   const date = new Date(publishedAt)
+  const state = useHookstate(playerState)
 
   return (
     <EpisodeHeaderContainer>
       <PlayerContainer>
         <ReactPlayer
           url={url}
-          forceVideo={true}
-          controls={true}
-          onProgress={(data) => console.log(data)}
+          muted={state.value.isEnabled ? true : false}
+          onProgress={(newState: { playedSeconds: number }) => {
+            state.set((prev) => ({
+              ...prev,
+              playedSeconds: newState.playedSeconds,
+            }))
+          }}
+          onPlay={() =>
+            state.set((prev) => ({
+              ...prev,
+              playing: true,
+              isEnabled: true,
+            }))
+          }
+          onPause={() => state.set((prev) => ({ ...prev, playing: false }))}
         />
       </PlayerContainer>
       <Stats date={date} readingLength={readingTime} />
