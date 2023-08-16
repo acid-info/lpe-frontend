@@ -9,9 +9,13 @@ interface Props {
 }
 
 export default function EpisodeBody({ data }: Props) {
+  const youtube = data?.channels.find(
+    (channel) => channel?.name === LPE.Podcast.ChannelNames.Youtube,
+  )
+
   return (
     <EpisodeContainer>
-      <EpisodeHeader {...data} url={data.channels[0].url} />
+      <EpisodeHeader {...data} url={youtube?.url as string} />
       <EpisodeTranscript data={data} />
       <EpisodeFooter data={data} />
     </EpisodeContainer>

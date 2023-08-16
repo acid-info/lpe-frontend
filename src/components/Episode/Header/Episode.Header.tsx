@@ -1,9 +1,10 @@
-import { Authors } from '@/components/Authors'
 import { Tags } from '@/components/Tags'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../../types/lpe.types'
 import ReactPlayer from 'react-player'
+import { default as Stats } from '@/components/Article/Article.Stats'
+import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & { url: string }
 
@@ -11,28 +12,26 @@ const EpisodeHeader = ({
   title,
   description,
   publishedAt,
-  authors,
   tags,
   url,
 }: EpisodeHeaderProps) => {
-  const date = publishedAt ? new Date(publishedAt) : null
+  const date = new Date(publishedAt)
   return (
     <EpisodeHeaderContainer>
-      <ReactPlayer url={url} forceVideo={true} controls={true} />
-      <Typography>
-        {date &&
-          date.toLocaleString('en-GB', {
-            day: 'numeric',
-            month: 'long', // TODO: Should be uppercase
-            year: 'numeric',
-          })}
-      </Typography>
+      <PlayerContainer>
+        <ReactPlayer url={url} forceVideo={true} controls={true} />
+      </PlayerContainer>
+      <Stats date={date} readingLength={6} />
       <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
+      <PodcastName>
+        <LogosCircleIcon width={24} height={24} />
+        Network State Podcast
+      </PodcastName>
       {description && (
         <EpisodeSubtitle
-          variant="body1"
+          variant="h6"
           genericFontFamily="sans-serif"
           component="div"
         >
@@ -40,39 +39,13 @@ const EpisodeHeader = ({
         </EpisodeSubtitle>
       )}
       {tags && <Tags tags={tags} />}
-      <AuthorsContainer>
-        <Authors authors={authors} email={true} gap={12} />
-      </AuthorsContainer>
     </EpisodeHeaderContainer>
   )
 }
 
 const EpisodeHeaderContainer = styled.header`
-  .mobileSummary {
-    display: none;
-  }
-
-  .desktopSummary {
-    display: block;
-  }
-
-  @media (max-width: 768px) {
-    .mobileSummary {
-      display: block;
-      p {
-        font-size: var(--lsd-body3-fontSize);
-        line-height: var(--lsd-body3-lineHeight);
-        margin-bottom: 24px;
-      }
-      hr {
-        display: none;
-      }
-    }
-
-    .desktopSummary {
-      display: none;
-    }
-  }
+  display: flex;
+  flex-direction: column;
 `
 
 const CustomTypography = styled(Typography)`
@@ -96,19 +69,15 @@ const EpisodeSubtitle = styled(CustomTypography)`
   }
 `
 
-const AuthorsContainer = styled.div`
-  //margin-block: 24px;
-  margin-top: 24px;
+const PodcastName = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+`
+
+const PlayerContainer = styled.div`
   margin-bottom: 32px;
-
-  @media (max-width: 768px) {
-    margin-top: 16px;
-    margin-bottom: 24px;
-
-    a[href^='mailto:'] {
-      display: none;
-    }
-  }
 `
 
 export default EpisodeHeader

@@ -12,10 +12,11 @@ const EpisodeContainer = (props: Props) => {
 
   return (
     <EpisodeGrid>
-      <Gap className={'w-1'} />
+      <Gap className={'w-4'} />
       <EpisodeBodyContainer className={'w-8'}>
         <EpisodeBody data={data} />
       </EpisodeBodyContainer>
+      <Gap className={'w-4'} />
     </EpisodeGrid>
   )
 }

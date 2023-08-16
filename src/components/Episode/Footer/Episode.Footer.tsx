@@ -1,17 +1,50 @@
 import styled from '@emotion/styled'
 import { LPE } from '../../../types/lpe.types'
 import EpisodeCredits from './Episode.Credits'
+import EpisodeMoreEpisodes from './Episode.MoreEpisodes'
+
+const TEMP_MORE_EPISODES = [
+  {
+    id: 1,
+    thumbnail:
+      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
+    publishedAt: '2023-07-11T20:30:00.000Z',
+    title: 'Title 1',
+  },
+  {
+    id: 2,
+    thumbnail:
+      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
+    publishedAt: '2023-07-12T20:30:00.000Z',
+    title: 'Title 2',
+  },
+  {
+    id: 3,
+    thumbnail:
+      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
+    publishedAt: '2023-07-13T20:30:00.000Z',
+    title: 'Title 3',
+  },
+  {
+    id: 4,
+    thumbnail:
+      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
+    publishedAt: '2023-07-14T20:30:00.000Z',
+    title: 'Title 4',
+  },
+]
 
 const EpisodeFooter = ({ data }: { data: LPE.Podcast.Document }) => {
   return (
     <EpisodeFooterContainer>
       <EpisodeCredits credits={data.credits} />
+      <EpisodeMoreEpisodes episodes={TEMP_MORE_EPISODES} />
     </EpisodeFooterContainer>
   )
 }
 
 const EpisodeFooterContainer = styled.div`
-  margin-top: 16px;
+  margin-top: 56px;
 
   & > div:not(:first-child) > div > button,
   & > div:not(:first-child) > div {

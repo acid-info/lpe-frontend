@@ -1,11 +1,14 @@
+import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import EpisodeBlocks from './Episode.Blocks'
 import { Typography } from '@acid-info/lsd-react'
+import EpisodeDivider from './Episode.Divider'
 
 const EpisodeTranscript = ({ data }: { data: LPE.Podcast.Document }) => {
   return (
     <>
-      <Typography component="h2" variant="h2">
+      <EpisodeDivider />
+      <Typography component="h6" variant="h6">
         Transcript
       </Typography>
       <EpisodeBlocks data={data} />
