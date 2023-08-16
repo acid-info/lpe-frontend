@@ -4,7 +4,8 @@ import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { LPE } from '../../types/lpe.types'
 import { Grid, GridItem } from '../Grid/Grid'
-import Post from '../Post/Post'
+import { PostCard } from '@/components/PostCard'
+import PostTypes = LPE.PostTypes
 
 type Props = {
   posts: LPE.Article.Data[]
@@ -57,17 +58,17 @@ export const PostsList = (props: Props) => {
               key={index}
             >
               <PostWrapper className={props.loading ? 'loading' : ''}>
-                <Post
+                <PostCard
                   data={{
                     authors: post.authors,
                     date: post.modifiedAt ? new Date(post.modifiedAt) : null,
                     slug: post.slug,
                     title: post.title,
-                    description: post.subtitle,
+                    subtitle: post.subtitle,
                     coverImage: post.coverImage,
-                    summary: post.summary,
                     tags: post.tags,
                   }}
+                  contentType={PostTypes.Article}
                 />
               </PostWrapper>
             </GridItem>
