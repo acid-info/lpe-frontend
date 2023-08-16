@@ -174,6 +174,7 @@ export namespace LPE {
       authors: Author.Document[]
       publishedAt: string
       episodeNumber: number
+      showId?: string
       featured?: boolean
       highlighted?: boolean
       coverImage?: Post.ImageBlock
