@@ -3,29 +3,32 @@ import styled from '@emotion/styled'
 import { LPE } from '../../../types/lpe.types'
 import { useState } from 'react'
 
-const EpisodeCredits = ({
-  credits,
+const EpisodeFootnotes = ({
+  footnotes,
 }: {
-  credits: LPE.Podcast.Document['credits']
+  footnotes: LPE.Article.Footnotes
 }) => {
   const [open, setOpen] = useState(true)
 
-  return credits && credits?.length > 0 ? (
+  return footnotes.length > 0 ? (
     <Container>
       <Collapse
-        label="Credits"
+        label="References"
         open={open}
         onChange={() => setOpen((prev) => !prev)}
       >
-        {credits?.map((credit, idx) => (
+        {footnotes.map((footnote, idx) => (
           <Reference key={idx}>
             <Typography
-              component="p"
+              component="a"
               variant="body3"
-              id={credit.id.replace('#', '')}
+              href={`#${footnote.refId}`}
+              target="_blank"
+              id={footnote.id.replace('#', '')}
             >
-              {credit.text}
+              {footnote.refValue}
             </Typography>
+            <P dangerouslySetInnerHTML={{ __html: footnote.valueHTML }} />
           </Reference>
         ))}
       </Collapse>
@@ -43,8 +46,13 @@ const Container = styled.div`
 
 const Reference = styled.div`
   display: flex;
+  align-items: center;
   padding: 8px 14px;
   gap: 8px;
 `
 
-export default EpisodeCredits
+const P = styled.p`
+  font-size: var(--lsd-body3-fontSize);
+`
+
+export default EpisodeFootnotes

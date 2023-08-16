@@ -15,7 +15,6 @@ const MoreEpisodesCard = ({ thumbnail, title, publishedAt }: Props) => {
       <ImageContainer>
         <Image src={thumbnail} fill alt={thumbnail} />
       </ImageContainer>
-
       <Row>
         <Typography variant="body3" genericFontFamily="sans-serif">
           PODCAST
@@ -30,8 +29,9 @@ const MoreEpisodesCard = ({ thumbnail, title, publishedAt }: Props) => {
             })}
         </Typography>
       </Row>
-
-      <Typography>{title}</Typography>
+      <Typography variant="h6" genericFontFamily="serif">
+        {title}
+      </Typography>
     </Container>
   )
 }
@@ -40,7 +40,6 @@ const Container = styled.div`
   margin-block: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   width: 48%;
 `
 
@@ -48,6 +47,7 @@ const ImageContainer = styled.div`
   width: 100%;
   height: 190px;
   position: relative;
+  margin-bottom: 16px;
 `
 
 const Row = styled.div`
@@ -55,6 +55,7 @@ const Row = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 8px;
+  margin-bottom: 8px;
 `
 
 export default MoreEpisodesCard

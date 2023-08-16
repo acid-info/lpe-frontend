@@ -20,7 +20,16 @@
         "html": "<p class=\"c1\"><span class=\"c0\">Episode hosts - Annie McEwen and Molly Webster</span></p>",
         "text": "Episode hosts - Annie McEwen and Molly Webster",
         "classNames": ["c1"],
-        "footnotes": [],
+        "footnotes": [
+          {
+              "index": 1,
+              "id": "#ftnt1",
+              "refId": "ftnt_ref1",
+              "refValue": "[1]",
+              "valueHTML": "<span class=\"c10 c19\">footnote 1</span>",
+              "valueText": "footnote 1"
+          }
+      ],
         "order": 9,
         "tagName": "p",
         "labels": []
@@ -31,7 +40,16 @@
         "html": "<p class=\"c1\"><span class=\"c0\">Produced by - Annie McEwen and Becca Bressler </span></p>",
         "text": "Produced by - Annie McEwen and Becca Bressler ",
         "classNames": ["c1"],
-        "footnotes": [],
+        "footnotes": [
+          {
+              "index": 2,
+              "id": "#ftnt1",
+              "refId": "ftnt_ref1",
+              "refValue": "[2]",
+              "valueHTML": "<span class=\"c10 c19\">footnote 2</span>",
+              "valueText": "footnote 2"
+          }
+      ],
         "order": 10,
         "tagName": "p",
         "labels": []
