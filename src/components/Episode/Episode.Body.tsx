@@ -3,6 +3,8 @@ import { LPE } from '../../types/lpe.types'
 import EpisodeFooter from './Footer/Episode.Footer'
 import EpisodeHeader from './Header/Episode.Header'
 import EpisodeTranscript from './Episode.Transcript'
+import { calcReadingTime } from '@/utils/string.utils'
+import { extractContentFromHTML } from '@/utils/html.utils'
 
 interface Props {
   data: LPE.Podcast.Document
@@ -13,9 +15,18 @@ export default function EpisodeBody({ data }: Props) {
     (channel) => channel?.name === LPE.Podcast.ChannelNames.Youtube,
   )
 
+  const trascriptionString = (data.transcription || [])
+    .map((block) => extractContentFromHTML(block.html))
+    .join(' ')
+  const readingTime = calcReadingTime(trascriptionString)
+
   return (
     <EpisodeContainer>
-      <EpisodeHeader {...data} url={youtube?.url as string} />
+      <EpisodeHeader
+        {...data}
+        url={youtube?.url as string}
+        readingTime={readingTime}
+      />
       <EpisodeTranscript data={data} />
       <EpisodeFooter data={data} />
     </EpisodeContainer>

@@ -6,7 +6,10 @@ import ReactPlayer from 'react-player'
 import { default as Stats } from '@/components/Article/Article.Stats'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 
-export type EpisodeHeaderProps = LPE.Podcast.Document & { url: string }
+export type EpisodeHeaderProps = LPE.Podcast.Document & {
+  url: string
+  readingTime: number
+}
 
 const EpisodeHeader = ({
   title,
@@ -14,14 +17,21 @@ const EpisodeHeader = ({
   publishedAt,
   tags,
   url,
+  readingTime,
 }: EpisodeHeaderProps) => {
   const date = new Date(publishedAt)
+
   return (
     <EpisodeHeaderContainer>
       <PlayerContainer>
-        <ReactPlayer url={url} forceVideo={true} controls={true} />
+        <ReactPlayer
+          url={url}
+          forceVideo={true}
+          controls={true}
+          onProgress={(data) => console.log(data)}
+        />
       </PlayerContainer>
-      <Stats date={date} readingLength={6} />
+      <Stats date={date} readingLength={readingTime} />
       <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
@@ -29,6 +39,7 @@ const EpisodeHeader = ({
         <LogosCircleIcon width={24} height={24} />
         Network State Podcast
       </PodcastName>
+      {tags && <Tags tags={tags} />}
       {description && (
         <EpisodeSubtitle
           variant="h6"
@@ -38,7 +49,6 @@ const EpisodeHeader = ({
           {description}
         </EpisodeSubtitle>
       )}
-      {tags && <Tags tags={tags} />}
     </EpisodeHeaderContainer>
   )
 }
@@ -46,6 +56,10 @@ const EpisodeHeader = ({
 const EpisodeHeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding-top: 32px;
+  }
 `
 
 const CustomTypography = styled(Typography)`
@@ -62,7 +76,7 @@ const EpisodeTitle = styled(Typography)`
 `
 
 const EpisodeSubtitle = styled(CustomTypography)`
-  margin-bottom: 16px;
+  margin-top: 32px;
 
   @media (max-width: 768px) {
     font-size: var(--lsd-subtitle1-fontSize);
@@ -76,8 +90,24 @@ const PodcastName = styled.div`
   margin-bottom: 20px;
 `
 
+// 16:9 responsive aspect ratio
 const PlayerContainer = styled.div`
   margin-bottom: 32px;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 `
 
 export default EpisodeHeader

@@ -3,7 +3,6 @@ import {
   extractIdFromFirstTag,
   extractInnerHtml,
 } from '@/utils/html.utils'
-import { HeadingElementsRef } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'

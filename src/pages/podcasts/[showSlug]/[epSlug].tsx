@@ -3,11 +3,11 @@ import EpisodeContainer from '@/containers/EpisodeContainer'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
-import { LPE } from '../../types/lpe.types'
+import { LPE } from '../../../types/lpe.types'
 import EpisodeLayout from '@/layouts/EpisodeLayout/Episode.layout'
 import { EpisodeProvider } from '@/context/episode.context'
 
-import TEMP_DATA from './episode-temp-data.json'
+import TEMP_DATA from '../episode-temp-data.json'
 
 type EpisodeProps = {
   data: LPE.Podcast.Document
@@ -16,7 +16,7 @@ type EpisodeProps = {
 
 const EpisodePage = ({ data, errors }: EpisodeProps) => {
   const {
-    query: { slug },
+    query: { showSlug, epSlug },
   } = useRouter()
 
   if (!data) return null
@@ -29,7 +29,7 @@ const EpisodePage = ({ data, errors }: EpisodeProps) => {
         description={data.description}
         image={data.coverImage}
         imageUrl={undefined}
-        pagePath={`/episode/${slug}`}
+        pagePath={`/podcasts/${showSlug}/${epSlug}`}
         tags={[...data.tags, ...data.authors.map((author) => author.name)]}
       />
       <EpisodeContainer data={data} />
@@ -38,16 +38,17 @@ const EpisodePage = ({ data, errors }: EpisodeProps) => {
 }
 
 export async function getStaticPaths() {
+  // TODO : dynamic paths
   return {
-    paths: [{ params: { slug: `test` } }],
+    paths: [{ params: { showSlug: `hasing-it-out`, epSlug: `test` } }],
     fallback: true,
   }
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { slug } = params!
+  const { epSlug } = params!
 
-  if (!slug) {
+  if (!epSlug) {
     return {
       notFound: true,
       props: { why: 'no slug' },

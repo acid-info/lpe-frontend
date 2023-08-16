@@ -12,7 +12,7 @@
         "description": "Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.",
         "publishedAt": "2023-07-11T20:30:00.000Z",
         "episodeNumber": 1,
-        "tags": [],
+        "tags": ["Tools", "Cyber Punk", "Docs"],
         "credits": [
             {
                 "id": "6bd84ceb-1f22-41f4-a229-306356306da7",
@@ -230,6 +230,10 @@
             }
         ],
         "channels": [
+            {
+                "name": "youtube",
+                "url": "https://www.youtube.com/watch?v=vmx_oOb2On0"
+            },
             {
                 "name": "youtube",
                 "url": "https://www.youtube.com/watch?v=vmx_oOb2On0"
