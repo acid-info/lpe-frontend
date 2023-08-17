@@ -3,14 +3,14 @@ import styled from '@emotion/styled'
 
 const ArticleStats = ({
   date,
-  readingLength,
+  duration,
 }: {
   date: Date | null
-  readingLength: number
+  duration: number
 }) => (
   <Row>
     <Typography variant="body3" genericFontFamily="sans-serif">
-      {readingLength} minutes read
+      {duration ? duration : ' '} minutes
     </Typography>
     <Typography variant="body3">•</Typography>
     <Typography variant="body3" genericFontFamily="sans-serif">

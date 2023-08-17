@@ -11,7 +11,7 @@ import EpisodeChannels from './Episode.Channels'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   url: string
-  readingTime: number
+  duration: number
 }
 
 const EpisodeHeader = ({
@@ -21,7 +21,7 @@ const EpisodeHeader = ({
   tags,
   channels,
   url,
-  readingTime,
+  duration,
 }: EpisodeHeaderProps) => {
   const date = new Date(publishedAt)
   const state = useHookstate(playerState)
@@ -46,9 +46,12 @@ const EpisodeHeader = ({
             }))
           }
           onPause={() => state.set((prev) => ({ ...prev, playing: false }))}
+          onDuration={(duration) =>
+            state.set((prev) => ({ ...prev, duration }))
+          }
         />
       </PlayerContainer>
-      <Stats date={date} readingLength={readingTime} />
+      <Stats date={date} duration={duration} />
       <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
