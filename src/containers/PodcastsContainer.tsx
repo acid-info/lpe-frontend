@@ -4,10 +4,10 @@ import { LPE } from '../types/lpe.types'
 import PodcastsList from '@/components/Podcasts/Podcasts.List'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
 import { Button, Typography } from '@acid-info/lsd-react'
-import { PodcastType } from '@/components/Post/Post'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import Link from 'next/link'
 import { HashingItOutIcon } from '@/components/Icons/HashingItOutIcon'
+import { PodcastType } from '@/components/PostCard/PostCard'
 
 interface Props {
   shows: LPE.Podcast.Show[]
@@ -16,6 +16,7 @@ interface Props {
 
 const PodcastsContainer = (props: Props) => {
   const { shows, latestEpisodes } = props
+  const podcast = 'network-state' // TODO : get from API
 
   const networkState =
     shows.find((show) => show.slug === PodcastType.NETWORK_STATE) ?? shows[0]
@@ -32,7 +33,7 @@ const PodcastsContainer = (props: Props) => {
           <EpisodesList
             header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
             episodes={latestEpisodes}
-            podcastType={PodcastType.LATEST}
+            podcast={podcast as PodcastType}
           />
         </Section>
 
@@ -57,7 +58,7 @@ const PodcastsContainer = (props: Props) => {
               </EpisodeListHeader>
             }
             episodes={latestEpisodes.slice(0, 4)}
-            podcastType={PodcastType.NETWORK_STATE}
+            podcast={PodcastType.NETWORK_STATE}
           />
         </Section>
 
@@ -82,7 +83,7 @@ const PodcastsContainer = (props: Props) => {
               </EpisodeListHeader>
             }
             episodes={latestEpisodes.slice(0, 4)}
-            podcastType={PodcastType.HASHING_IT_OUT}
+            podcast={PodcastType.HASHING_IT_OUT}
           />
         </Section>
       </PodcastsBodyContainer>

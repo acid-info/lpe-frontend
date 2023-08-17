@@ -1,11 +1,10 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
 import styled from '@emotion/styled'
 import { LPE } from '../types/lpe.types'
-import PodcastsList from '@/components/Podcasts/Podcasts.List'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
 import { Typography } from '@acid-info/lsd-react'
-import { PodcastType } from '@/components/Post/Post'
 import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
+import { PodcastType } from '@/components/PostCard/PostCard'
 
 interface Props {
   show: LPE.Podcast.Show
@@ -22,7 +21,7 @@ const PodcastShowContainer = (props: Props) => {
         <EpisodesList
           header={<Typography variant="body2">Latest Episodes</Typography>}
           episodes={latestEpisodes}
-          podcastType={PodcastType.LATEST}
+          podcast={PodcastType.NETWORK_STATE}
         />
       </PodcastsBodyContainer>
     </PodcastsGrid>

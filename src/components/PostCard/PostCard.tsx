@@ -21,6 +21,11 @@ export type PostAppearanceProps = {
   imageProps?: ResponsiveImageProps
 }
 
+export enum PodcastType {
+  NETWORK_STATE = 'network-state',
+  HASHING_IT_OUT = 'hashing-it-out',
+}
+
 export type PostDataProps = {
   slug: string
   date: Date | null
@@ -58,19 +63,24 @@ export const PostCard = (_props: PostCardProps) => {
     ...props
   } = _props
 
+  const link =
+    contentType === LPE.PostTypes.Article
+      ? `/article/${slug}`
+      : `/podcasts/${slug}`
+
   return (
     <Container {...props}>
       {coverImage && (
         <PostCardCover
           imageProps={imageProps}
           imageData={coverImage}
-          link={`/article/${slug}`}
+          link={link}
         />
       )}
 
       <PostCardLabel contentType={contentType} date={date} />
 
-      <TitleLink href={`/article/${slug}`}>
+      <TitleLink href={link}>
         <Title genericFontFamily="serif" component="h3">
           {title}
         </Title>
@@ -90,6 +100,7 @@ export const PostCard = (_props: PostCardProps) => {
           gap={8}
         />
       )}
+
       {podcastShowDetails && <PostCardShowDetails {...podcastShowDetails} />}
       {tags.length > 0 && <Tags tags={tags} />}
     </Container>

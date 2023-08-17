@@ -1,63 +1,62 @@
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
-import { Post } from '../Post'
-import { PodcastType, PostClassType, PostSize } from '../Post/Post'
+import { PodcastType, PostCard } from '@/components/PostCard/PostCard'
 
 interface Props {
   header?: React.ReactNode
   episodes: LPE.Podcast.Document[]
-  podcastType: PodcastType
+  podcast: PodcastType
 }
 
-export default function EpisodesList({ header, episodes, podcastType }: Props) {
-  const firstRow = podcastType === PodcastType.LATEST ? 2 : 4
-  const size =
-    podcastType === PodcastType.LATEST ? PostSize.LARGE : PostSize.SMALL
-
+export default function EpisodesList({ header, episodes, podcast }: Props) {
   return (
     <EpisodeListContainer>
       {header}
       <EpisodesContainer>
-        {episodes.slice(0, firstRow).map((episode) => (
-          <Post
+        {/* Featured */}
+        {episodes.slice(0, 2).map((episode) => (
+          <PostCard
             key={episode.id}
-            appearance={{
-              size: size,
-              classType: PostClassType.PODCAST,
-            }}
+            contentType={LPE.PostTypes.Podcast}
             data={{
               authors: episode.authors,
               date: episode.publishedAt ? new Date(episode.publishedAt) : null,
-              slug: episode.slug,
+              slug: `${podcast}/${episode.slug}`,
               title: episode.title,
-              description: episode.description,
               coverImage: episode.coverImage,
               tags: episode.tags,
-              podcast: podcastType, // TODO - get this from the episode
+              podcastShowDetails: {
+                title: episode.title,
+                slug: `${podcast}/${episode.slug}`,
+                episodeNumber: episode.episodeNumber,
+                podcast: podcast,
+              },
             }}
           />
         ))}
       </EpisodesContainer>
-      {podcastType === PodcastType.LATEST && episodes.length > 2 && (
+      {episodes.length > 2 && (
         <EpisodesContainer>
           {episodes.slice(2, 6).map((episode) => (
             <PostContainer key={episode.id}>
-              <Post
-                appearance={{
-                  classType: PostClassType.PODCAST,
-                  size: PostSize.SMALL,
-                }}
+              <PostCard
+                key={episode.id}
+                contentType={LPE.PostTypes.Podcast}
                 data={{
                   authors: episode.authors,
                   date: episode.publishedAt
                     ? new Date(episode.publishedAt)
                     : null,
-                  slug: episode.slug,
+                  slug: `${podcast}/${episode.slug}`,
                   title: episode.title,
-                  description: episode.description,
                   coverImage: episode.coverImage,
                   tags: episode.tags,
-                  podcast: podcastType, // TODO - get this from the episode
+                  podcastShowDetails: {
+                    title: episode.title,
+                    slug: `${podcast}/${episode.slug}`,
+                    episodeNumber: episode.episodeNumber,
+                    podcast: podcast,
+                  },
                 }}
               />
             </PostContainer>
