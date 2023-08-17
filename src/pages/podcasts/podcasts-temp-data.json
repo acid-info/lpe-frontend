@@ -4,7 +4,7 @@
       "id": "bc31271b-86d7-5131-ad26-46df2dd17281",
       "slug": "network-state",
       "title": "State of Network",
-      "numberOfEpisodes": 0,
+      "numberOfEpisodes": 12,
       "hosts": [
         {
           "name": "Corey Petty",
@@ -61,7 +61,7 @@
           ],
           "description": "Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode. Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.Here we can have a summary of the podcast episode.",
           "publishedAt": "2023-07-11T20:30:00.000Z",
-          "episodeNumber": 1,
+          "episodeNumber": 10,
           "tags": ["tag1", "tag_two", "tag_three_how_to_handle_space"],
           "credits": [],
           "transcription": [],
