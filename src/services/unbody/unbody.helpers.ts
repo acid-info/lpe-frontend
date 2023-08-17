@@ -30,9 +30,6 @@ export class UnbodyHelpers {
       const exclude: string[] = []
 
       for (const p of input) {
-        if (p.includes('|')) {
-          console.log(p.split('|'))
-        }
         if (p.startsWith('!')) exclude.push(p.slice(1))
         else if (p.includes('|'))
           or.push(...p.split('|').filter((s) => s.length > 0))

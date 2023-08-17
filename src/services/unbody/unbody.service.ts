@@ -292,7 +292,6 @@ export class UnbodyService {
           },
         },
       })
-      console.log(docs.length)
 
       return unbodyDataTypes.transformMany<LPE.Article.Data>(
         articleDocument,
