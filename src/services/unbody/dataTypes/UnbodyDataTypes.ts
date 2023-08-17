@@ -66,12 +66,13 @@ export class UnbodyDataTypes {
     pipeline: UnbodyDataTypeConfig[],
     data: T,
     root?: any,
+    context?: any,
   ): Promise<O> => {
     let obj = data
 
     for (const dataType of pipeline) {
-      if (dataType.isMatch(this.helpers, obj, data, root)) {
-        obj = await dataType.transform(this.helpers, obj, data, root)
+      if (dataType.isMatch(this.helpers, obj, data, root, context)) {
+        obj = await dataType.transform(this.helpers, obj, data, root, context)
       }
     }
 
@@ -82,7 +83,10 @@ export class UnbodyDataTypes {
     pipeline: UnbodyDataTypeConfig[],
     data: T[],
     root?: any,
+    context?: any,
   ): Promise<O[]> => {
-    return Promise.all(data.map((d) => this.transform<O, T>(pipeline, d, root)))
+    return Promise.all(
+      data.map((d) => this.transform<O, T>(pipeline, d, root, context)),
+    )
   }
 }

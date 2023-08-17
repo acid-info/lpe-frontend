@@ -5,7 +5,12 @@ import { UnbodyDataTypeConfig } from './types'
 export const PodcastShowDataType: UnbodyDataTypeConfig<
   LPE.Article.Data,
   LPE.Podcast.Show,
-  UnbodyResGoogleDocData
+  UnbodyResGoogleDocData,
+  any,
+  | {
+      numberOfEpisodes: number
+    }
+  | undefined
 > = {
   key: 'PodcastShowDocument',
   objectType: 'GoogleDoc',
@@ -15,11 +20,12 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
     original
       ? original.pathString.includes('/Podcasts/') && original.slug === 'index'
       : false,
-  transform: async (helpers, data, original) => {
+
+  transform: async (helpers, data, original, root, context) => {
     if (!original) return data as any
 
-    const description = data.content.find((block) =>
-      block.labels.includes(LPE.Article.ContentBlockLabels.Subtitle),
+    const description = data.content.find(
+      (block) => block.labels.length === 0 && block.type === 'text',
     )
 
     const image = data.content.find(
@@ -30,8 +36,11 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
       id: data.id,
       slug: original.path[2],
       title: data.title,
+      numberOfEpisodes: context?.numberOfEpisodes || 0,
+      hosts: data.authors,
+      url: `/podcasts/${original.path[2]}`,
       description: (description?.type === 'text' && description.html) || '',
-      coverImage: image
+      logo: image
         ? {
             alt: image.alt,
             url: image.url,
@@ -39,6 +48,7 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
             height: image.height,
           }
         : {},
+      episodes: [],
     }
   },
 }

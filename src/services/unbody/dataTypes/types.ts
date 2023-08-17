@@ -5,7 +5,13 @@ import {
 } from '../../../lib/unbody/unbody.generated'
 import { UnbodyDataTypes } from './UnbodyDataTypes'
 
-export type UnbodyDataTypeConfig<D = any, T = any, O = any, R = any> = {
+export type UnbodyDataTypeConfig<
+  D = any,
+  T = any,
+  O = any,
+  R = any,
+  C = any,
+> = {
   key: UnbodyDataTypeKey
   classes: UnbodyDataTypeClass[]
   objectType:
@@ -17,14 +23,16 @@ export type UnbodyDataTypeConfig<D = any, T = any, O = any, R = any> = {
     helpers: UnbodyDataTypeConfigHelpers,
     object: D,
     original: O,
-    root?: R,
+    root: R | undefined,
+    context: C,
   ) => boolean
 
   transform: (
     helpers: UnbodyDataTypeConfigHelpers,
     object: D,
     original: O,
-    root?: R,
+    root: R | undefined,
+    context: C,
   ) => T | Promise<T>
 }
 

@@ -16,7 +16,8 @@ export const ArticleImageBlockDataType: UnbodyDataTypeConfig<
   objectType: 'ImageBlock',
   classes: ['article'],
 
-  isMatch: (helpers, data, original, root) => data.type === 'image',
+  isMatch: (helpers, data, original, root) =>
+    data.type === 'image' && (root?.path || []).includes('Articles'),
 
   transform: (helpers, data, original, root) => {
     if (!root) return data

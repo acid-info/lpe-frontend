@@ -1,5 +1,100 @@
 import { gql } from '@apollo/client'
 
+export const COUNT_DOCUMENTS_QUERY = gql`
+  query CountDocuments($filter: AggregateObjectsGoogleDocWhereInpObj) {
+    Aggregate {
+      GoogleDoc(where: $filter) {
+        meta {
+          count
+        }
+      }
+    }
+  }
+`
+export const GET_POSTS_QUERY = gql`
+  query GetPosts(
+    $filter: GetObjectsGoogleDocWhereInpObj
+    $sort: [GetObjectsGoogleDocSortInpObj]
+    $nearText: Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj
+    $nearObject: GetObjectsGoogleDocNearObjectInpObj
+    $skip: Int = 0
+    $limit: Int = 10
+    $toc: Boolean = false
+    $mentions: Boolean = false
+    $textBlocks: Boolean = false
+    $imageBlocks: Boolean = false
+  ) {
+    Get {
+      GoogleDoc(
+        where: $filter
+        nearText: $nearText
+        nearObject: $nearObject
+        sort: $sort
+        offset: $skip
+        limit: $limit
+      ) {
+        _additional {
+          id
+        }
+        title
+        summary
+        slug
+        tags
+        path
+        createdAt
+        modifiedAt
+        pathString
+        mentions @include(if: $mentions)
+        mentionsObj @client(always: true) @include(if: $mentions) {
+          name
+          emailAddress
+        }
+        toc @include(if: $toc)
+        tocObj @client(always: true) @include(if: $toc) {
+          level
+          tag
+          href
+          title
+          blockIndex
+        }
+        blocks {
+          ... on ImageBlock @include(if: $imageBlocks) {
+            url
+            alt
+            order
+            width
+            height
+            __typename
+            _additional {
+              id
+            }
+          }
+          ... on TextBlock @include(if: $textBlocks) {
+            footnotes
+            footnotesObj @client(always: true) {
+              index
+              id
+              refId
+              refValue
+              valueHTML
+              valueText
+            }
+            html
+            order
+            text
+            tagName
+            classNames
+            __typename
+            _additional {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 export const GET_ARTICLE_POST_QUERY = gql`
   query GetArticlePostQuery($filter: GetObjectsGoogleDocWhereInpObj) {
     Get {

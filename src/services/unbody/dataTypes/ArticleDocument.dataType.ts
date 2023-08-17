@@ -9,7 +9,7 @@ export const ArticleDataType: UnbodyDataTypeConfig<
 > = {
   key: 'ArticleDocument',
   objectType: 'GoogleDoc',
-  classes: ['article', 'podcast', 'document'],
+  classes: ['article', 'podcast', 'show', 'episode', 'document'],
 
   isMatch: (helpers, data) =>
     data.pathString.includes('/Articles/') ||
@@ -18,11 +18,9 @@ export const ArticleDataType: UnbodyDataTypeConfig<
   transform: async (helpers, data) => {
     const textBlock = helpers.dataTypes.get({
       objectType: 'TextBlock',
-      classes: 'article',
     })
     const imageBlock = helpers.dataTypes.get({
       objectType: 'ImageBlock',
-      classes: 'article',
     })
 
     const blocks =
@@ -58,6 +56,9 @@ export const ArticleDataType: UnbodyDataTypeConfig<
         ) as LPE.Article.ImageBlock) || null,
       readingTime,
       toc: data.tocObj ?? [],
+      featured: data.path.includes('featured'),
+      highlighted: data.path.includes('highlighted'),
+      type: LPE.PostTypes.Article,
     }
   },
 }

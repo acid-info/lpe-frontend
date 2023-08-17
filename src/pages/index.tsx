@@ -44,7 +44,7 @@ export default function Home({ posts, featured, tags }: Props) {
 
 export const getStaticProps = async () => {
   const {
-    data: { featured, posts },
+    data: { posts, highlighted },
     errors,
   } = await unbodyApi.getHomepagePosts()
 
@@ -52,9 +52,9 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      featured,
       posts,
       errors,
+      featured: highlighted,
       tags: topics || [],
     },
   }
