@@ -89,13 +89,7 @@ export namespace LPE {
 
     export type ContentBlock<D = any> = TextBlock<D> | ImageBlock<D>
 
-    export type SearchResultItemData =
-      | ({
-          type: typeof PostTypes.Article
-        } & Article.Metadata)
-      | ({
-          type: typeof PostTypes.Podcast
-        } & Required<Podcast.Document>)
+    export type Document = LPE.Article.Data | LPE.Podcast.Document
   }
 
   export namespace Article {
@@ -122,6 +116,7 @@ export namespace LPE {
 
       createdAt: string | null
       modifiedAt: string | null
+      type: typeof LPE.PostTypes.Article
     }
 
     export type Data = Article.Metadata & {
@@ -179,6 +174,7 @@ export namespace LPE {
       highlighted?: boolean
       coverImage?: Post.ImageBlock
       show?: Show
+      type: typeof LPE.PostTypes.Podcast
     }
 
     export type TranscriptionItem = {
