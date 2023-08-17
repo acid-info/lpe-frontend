@@ -1,7 +1,10 @@
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import { LPE } from '../../types/lpe.types'
-import { PostImageRatio, PostImageRatioOptions } from '../Post/Post'
+import {
+  PostImageRatio,
+  PostImageRatioOptions,
+} from '@/components/PostCard/PostCard'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
 type Props = {

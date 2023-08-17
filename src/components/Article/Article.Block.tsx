@@ -10,7 +10,7 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'
 import { LPE } from '../../types/lpe.types'
-import { PostImageRatio } from '../Post/Post'
+import { PostImageRatio } from '@/components/PostCard/PostCard'
 import { ArticleImageBlockWrapper } from './Article.ImageBlockWrapper'
 
 export const RenderArticleBlock = ({
