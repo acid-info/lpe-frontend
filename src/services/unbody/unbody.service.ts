@@ -360,9 +360,11 @@ export class UnbodyService {
 
   getPodcastShows = async ({
     showSlug,
+    episodesLimit = 12,
     populateEpisodes = false,
   }: {
     showSlug?: string
+    episodesLimit?: number
     populateEpisodes?: boolean
   }) =>
     this.handleRequest<LPE.Podcast.Show[]>(async () => {
@@ -398,7 +400,7 @@ export class UnbodyService {
             ? await this.getPodcastEpisodes({
                 showSlug: show.slug,
                 page: 1,
-                limit: 4,
+                limit: episodesLimit,
                 highlighted: 'include',
               }).then((res) => res.data)
             : [],
@@ -413,15 +415,18 @@ export class UnbodyService {
 
   getPodcastShow = async ({
     showSlug,
+    episodesLimit = 10,
     populateEpisodes = false,
   }: {
     showSlug: string
+    episodesLimit?: number
     populateEpisodes?: boolean
   }) =>
     this.handleRequest<LPE.Podcast.Show | null>(
       async () =>
         this.getPodcastShows({
           showSlug,
+          episodesLimit,
           populateEpisodes,
         }).then((res) => res.data[0]),
       null,

@@ -111,7 +111,6 @@ export namespace LPE {
       subtitle: string
       authors: Author.Document[]
       tags: string[]
-      featured?: boolean
       highlighted?: boolean
 
       createdAt: string | null
@@ -170,7 +169,6 @@ export namespace LPE {
       publishedAt: string
       episodeNumber: number
       showId?: string
-      featured?: boolean
       highlighted?: boolean
       coverImage?: Post.ImageBlock
       show?: Show

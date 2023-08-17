@@ -5,6 +5,7 @@ import { useSearchBarContext } from '@/context/searchbar.context'
 import { PostListLayout } from '@/types/ui.types'
 import { useEffect } from 'react'
 import SEO from '../components/SEO/SEO'
+import { api } from '../services/api.service'
 import unbodyApi from '../services/unbody/unbody.service'
 import { LPE } from '../types/lpe.types'
 
@@ -21,6 +22,12 @@ export default function Home({ posts, featured, tags }: Props) {
   useEffect(() => {
     setTags(tags)
   }, [setTags, tags])
+
+  useEffect(() => {
+    api
+      .getLatestEpisodes({ showSlug: 'hashing-it-out', page: 1, limit: 1 })
+      .then((res) => console.log(res))
+  }, [])
 
   return (
     <>

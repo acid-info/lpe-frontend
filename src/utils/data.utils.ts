@@ -45,3 +45,24 @@ export const getAudioSourceFromEpisode = async (episodId: string) => {
   const data = await result.json()
   return data
 }
+
+export const parseInt = (
+  inp: any,
+  defaultValue?: number,
+): number | undefined => {
+  if (Array.isArray(inp))
+    return (
+      inp
+        .map((value) => parseInt(value))
+        .find((value) => typeof value === 'number') ?? defaultValue
+    )
+
+  let val = inp
+  if (typeof val === 'number') return val
+  if (typeof val === 'string') {
+    val = Number.parseInt(val, 10)
+    return Number.isNaN(val) ? defaultValue : val
+  }
+
+  return defaultValue
+}
