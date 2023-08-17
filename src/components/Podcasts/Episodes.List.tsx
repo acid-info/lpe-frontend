@@ -72,7 +72,6 @@ const EpisodeListContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgb(var(--lsd-border-primary));
-  margin-top: 140px;
   padding-top: 16px;
 `
 

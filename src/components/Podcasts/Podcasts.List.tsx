@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import { Button, Typography } from '@acid-info/lsd-react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
 import { HashingItOutIcon } from '../Icons/HashingItOutIcon'
 
@@ -44,9 +43,6 @@ export default function PodcastsList({ shows }: Props) {
 const PodcastsContainer = styled.article`
   display: flex;
   gap: 16px;
-
-  @media (min-width: 768px) and (max-width: 1200px) {
-  }
 `
 
 const PodcastCard = styled.div`

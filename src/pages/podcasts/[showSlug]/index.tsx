@@ -5,30 +5,37 @@ import { ReactNode } from 'react'
 import { LPE } from '../../../types/lpe.types'
 import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 
-type PodcastShowProps = {
-  data: LPE.Podcast.Document
+import TEMP_DATA from '../podcasts-temp-data.json'
+import PodcastShowContainer from '@/containers/PodcastShowContainer'
+
+interface PodcastShowProps {
+  show: LPE.Podcast.Show
+  latestEpisodes: LPE.Podcast.Document[]
   errors: string | null
 }
 
-const PodcastShowPage = ({ data, errors }: PodcastShowProps) => {
+const PodcastShowPage = ({
+  show,
+  latestEpisodes,
+  errors,
+}: PodcastShowProps) => {
   const {
     query: { showSlug },
   } = useRouter()
 
-  if (!data) return null
+  if (!show) return null
   if (errors) return <div>{errors}</div>
 
   return (
     <>
       <SEO
-        title={data.title}
-        description={data.description}
-        image={data.coverImage}
+        title={show.title}
+        description={show.description}
         imageUrl={undefined}
         pagePath={`/podcasts/${showSlug}`}
-        tags={[...data?.tags]}
+        tags={[]}
       />
-      <div style={{ marginTop: '200px' }}>Single Podcasts Page WIP</div>
+      <PodcastShowContainer show={show} latestEpisodes={latestEpisodes} />
     </>
   )
 }
@@ -42,6 +49,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const { shows, latestEpisodes } = TEMP_DATA
   const { showSlug } = params!
 
   if (!showSlug) {
@@ -53,7 +61,8 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 
   return {
     props: {
-      data: { tags: ['Social', 'Political'] },
+      show: shows[0],
+      latestEpisodes,
       error: null,
     },
   }

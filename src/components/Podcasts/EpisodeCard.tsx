@@ -1,12 +1,8 @@
-import { Tags } from '@/components/Tags'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import React, { useMemo } from 'react'
 import { LPE } from '../../types/lpe.types'
-import { Authors } from '../Authors'
-import { AuthorsDirection } from '../Authors/Authors'
-import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
 export enum Size {

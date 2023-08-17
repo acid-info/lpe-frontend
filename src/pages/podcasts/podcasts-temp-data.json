@@ -7,7 +7,15 @@
       "numberOfEpisodes": 0,
       "hosts": [
         {
-          "name": "Host",
+          "name": "Corey Petty",
+          "emailAddress": "host@gmail.com"
+        },
+        {
+          "name": "Jessie Santiag",
+          "emailAddress": "host@gmail.com"
+        },
+        {
+          "name": "Demetrick Ferguson",
           "emailAddress": "host@gmail.com"
         }
       ],

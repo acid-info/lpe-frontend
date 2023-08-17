@@ -18,23 +18,30 @@ const PodcastsContainer = (props: Props) => {
     <PodcastsGrid>
       <PodcastsBodyContainer className={'w-16'}>
         <PodcastsList shows={shows} />
-        <EpisodesList
-          header={<Typography variant="body2">Latest Episodes</Typography>}
-          episodes={latestEpisodes}
-          podcastType={PodcastType.LATEST}
-        />
 
-        <EpisodesList
-          header={<Typography variant="body2">State of Network</Typography>}
-          episodes={latestEpisodes.slice(0, 4)}
-          podcastType={PodcastType.NETWORK_STATE}
-        />
+        <Section>
+          <EpisodesList
+            header={<Typography variant="body2">Latest Episodes</Typography>}
+            episodes={latestEpisodes}
+            podcastType={PodcastType.LATEST}
+          />
+        </Section>
 
-        <EpisodesList
-          header={<Typography variant="body2">Hashing It Out</Typography>}
-          episodes={latestEpisodes.slice(0, 4)}
-          podcastType={PodcastType.HASHING_IT_OUT}
-        />
+        <Section>
+          <EpisodesList
+            header={<Typography variant="body2">State of Network</Typography>}
+            episodes={latestEpisodes.slice(0, 4)}
+            podcastType={PodcastType.NETWORK_STATE}
+          />
+        </Section>
+
+        <Section>
+          <EpisodesList
+            header={<Typography variant="body2">Hashing It Out</Typography>}
+            episodes={latestEpisodes.slice(0, 4)}
+            podcastType={PodcastType.HASHING_IT_OUT}
+          />
+        </Section>
       </PodcastsBodyContainer>
     </PodcastsGrid>
   )
@@ -50,6 +57,10 @@ const PodcastsGrid = styled(Grid)`
   width: 100%;
   @media (min-width: 768px) and (max-width: 1200px) {
   }
+`
+
+const Section = styled.div`
+  margin-top: 140px;
 `
 
 export default PodcastsContainer
