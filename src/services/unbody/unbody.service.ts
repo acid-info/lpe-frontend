@@ -499,6 +499,15 @@ export class UnbodyService {
                     } as GetObjectsGoogleDocWhereInpObj,
                   ]
                 : []),
+              ...(nearObject
+                ? [
+                    {
+                      path: ['id'],
+                      operator: 'NotEqual',
+                      valueString: nearObject,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
               ...(filter ? [filter] : []),
             ],
           },
