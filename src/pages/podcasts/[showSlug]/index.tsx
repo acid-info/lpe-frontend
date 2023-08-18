@@ -5,18 +5,20 @@ import { ReactNode } from 'react'
 import { LPE } from '../../../types/lpe.types'
 import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 
-import TEMP_DATA from '../podcasts-temp-data.json'
 import PodcastShowContainer from '@/containers/PodcastShowContainer'
+import unbodyApi from '@/services/unbody/unbody.service'
 
 interface PodcastShowProps {
   show: LPE.Podcast.Show
   latestEpisodes: LPE.Podcast.Document[]
+  highlightedEpisodes: LPE.Podcast.Document[]
   errors: string | null
 }
 
 const PodcastShowPage = ({
   show,
   latestEpisodes,
+  highlightedEpisodes,
   errors,
 }: PodcastShowProps) => {
   const {
@@ -35,7 +37,11 @@ const PodcastShowPage = ({
         pagePath={`/podcasts/${showSlug}`}
         tags={[]}
       />
-      <PodcastShowContainer show={show} latestEpisodes={latestEpisodes} />
+      <PodcastShowContainer
+        show={show}
+        latestEpisodes={latestEpisodes}
+        highlightedEpisodes={highlightedEpisodes}
+      />
     </>
   )
 }
@@ -49,7 +55,6 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { shows, latestEpisodes } = TEMP_DATA
   const { showSlug } = params!
 
   if (!showSlug) {
@@ -59,11 +64,43 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
+  const { data: showData, errors: podcastShowDataErrors } =
+    await unbodyApi.getPodcastShow({
+      showSlug: showSlug as string,
+    })
+
+  const { data: latestEpisodesData, errors: latestEpisodesErros } =
+    await unbodyApi.getLatestEpisodes({
+      showSlug: showSlug as string,
+      page: 1,
+      limit: 12,
+    })
+
+  const { data: highlightedEpisodesData, errors: highlightedEpisodesErrors } =
+    await unbodyApi.getHighlightedEpisodes({
+      showSlug: showSlug as string,
+      page: 1,
+      limit: 9,
+    })
+
+  // TODO : handle undefined values in JSON
+  const show = JSON.parse(JSON.stringify(showData).replace(/null/g, '""'))
+
+  // TODO : handle undefined values in JSON
+  const latestEpisodes = JSON.parse(
+    JSON.stringify(latestEpisodesData).replace(/null/g, '""'),
+  )
+
+  // TODO : handle undefined values in JSON
+  const highlightedEpisodes = JSON.parse(
+    JSON.stringify(highlightedEpisodesData).replace(/null/g, '""'),
+  )
+
   return {
     props: {
-      show: shows[0],
+      show,
       latestEpisodes,
-      error: null,
+      highlightedEpisodes,
     },
   }
 }

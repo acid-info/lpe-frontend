@@ -55,10 +55,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
+  // TODO : handle undefined values in JSON
   const podcastShows = JSON.parse(
     JSON.stringify(podcastShowsData).replace(/null/g, '""'),
   )
 
+  // TODO : handle undefined values in JSON
   const highlightedEpisodes = JSON.parse(
     JSON.stringify(highlightedEpisodesData).replace(/null/g, '""'),
   )

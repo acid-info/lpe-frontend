@@ -5,23 +5,29 @@ import EpisodesList from '@/components/Podcasts/Episodes.List'
 import { Typography } from '@acid-info/lsd-react'
 import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
 import { PodcastType } from '@/components/PostCard/PostCard'
+import PodcastSection from '@/components/Podcasts/Podcast.Section'
 
 interface Props {
   show: LPE.Podcast.Show
   latestEpisodes: LPE.Podcast.Document[]
+  highlightedEpisodes: LPE.Podcast.Document[]
 }
 
 const PodcastShowContainer = (props: Props) => {
-  const { show, latestEpisodes } = props
+  const { show, latestEpisodes, highlightedEpisodes } = props
 
   return (
     <PodcastsGrid>
       <PodcastsBodyContainer className={'w-16'}>
         <PodcastShowCard show={show} />
-        <EpisodesList
-          header={<Typography variant="body2">Latest Episodes</Typography>}
-          episodes={latestEpisodes}
-        />
+        <PodcastSection>
+          <EpisodesList
+            header={<Typography variant="body2">All episodes</Typography>}
+            episodes={highlightedEpisodes}
+          />
+        </PodcastSection>
+
+        <EpisodesList episodes={latestEpisodes} divider={true} />
       </PodcastsBodyContainer>
     </PodcastsGrid>
   )

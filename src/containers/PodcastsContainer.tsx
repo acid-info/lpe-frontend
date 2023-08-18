@@ -6,6 +6,7 @@ import EpisodesList from '@/components/Podcasts/Episodes.List'
 import { Button, Typography } from '@acid-info/lsd-react'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import Link from 'next/link'
+import PodcastSection from '@/components/Podcasts/Podcast.Section'
 
 interface Props {
   shows: LPE.Podcast.Show[]
@@ -20,15 +21,15 @@ const PodcastsContainer = (props: Props) => {
       <PodcastsBodyContainer className={'w-16'}>
         <PodcastsLists shows={shows} />
 
-        <Section>
+        <PodcastSection>
           <EpisodesList
             header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
             episodes={highlightedEpisodes}
           />
-        </Section>
+        </PodcastSection>
 
         {shows.map((show) => (
-          <Section key={show.id}>
+          <PodcastSection key={show.id}>
             <EpisodesList
               header={
                 <EpisodeListHeader>
@@ -49,7 +50,7 @@ const PodcastsContainer = (props: Props) => {
               episodes={show.episodes as LPE.Podcast.Document[]}
               show={show}
             />
-          </Section>
+          </PodcastSection>
         ))}
       </PodcastsBodyContainer>
     </PodcastsGrid>
@@ -66,10 +67,6 @@ const PodcastsGrid = styled(Grid)`
   width: 100%;
   @media (min-width: 768px) and (max-width: 1200px) {
   }
-`
-
-const Section = styled.div`
-  margin-top: 140px;
 `
 
 const EpisodeListHeader = styled.div`
