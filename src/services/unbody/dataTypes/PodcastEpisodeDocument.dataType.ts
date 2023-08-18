@@ -47,38 +47,49 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
     const channels: LPE.Podcast.Content['channels'] = []
     const credits: LPE.Podcast.Content['credits'] = []
     const transcription: LPE.Podcast.Content['transcription'] = []
+    const timestamps: LPE.Podcast.Content['timestamps'] = []
 
     if (context?.parseContent) {
+      const sections = findSections(
+        ['Credits', 'Timestamps', 'Transcription'],
+        data.content,
+      )
+
       const textBlocks = data.content.filter(
         (block) => block.type === 'text',
       ) as LPE.Post.TextBlock[]
 
-      const creditsIndex = textBlocks.findIndex(
-        (block) => (block.text || '') === '[Credits]',
-      )
+      sections.forEach((section) => {
+        switch (section.name) {
+          case 'Credits': {
+            credits.push(
+              ...(section.blocks.filter(
+                (block) => block.type === 'text',
+              ) as LPE.Post.TextBlock[]),
+            )
 
-      const transcriptionIndex = textBlocks.findIndex(
-        (block) => (block.text || '') === '[Transcription]',
-      )
+            break
+          }
 
-      if (creditsIndex > -1) {
-        textBlocks
-          .slice(
-            creditsIndex + 1,
-            transcriptionIndex > -1 ? transcriptionIndex : textBlocks.length,
-          )
-          .forEach((block) => {
-            credits.push(block)
-          })
-      }
+          case 'Timestamps': {
+            const blocks = section.blocks.filter((block) => {
+              if (block.type === 'image') return false
+              if ((block.html || '').match(`<a href="#ftnt_ref`)?.length)
+                return false
 
-      if (transcriptionIndex > -1) {
-        textBlocks.slice(transcriptionIndex + 1).forEach((block) =>
-          transcription.push({
-            html: block.html,
-          }),
-        )
-      }
+              return true
+            }) as LPE.Post.TextBlock[]
+
+            timestamps.push(...blocks)
+
+            break
+          }
+
+          case 'Transcriptions': {
+            break
+          }
+        }
+      })
 
       channels.push(...(await getDistributionChannels(textBlocks)))
     }
@@ -93,6 +104,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
       episodeNumber,
       tags: data.tags,
       credits,
+      timestamps,
       transcription,
       channels,
       ...(show ? { show } : {}),
@@ -191,4 +203,49 @@ const getDistributionChannels = async (blocks: LPE.Post.TextBlock[]) => {
   }
 
   return channels
+}
+
+const findSections = (
+  names: string[],
+  blocks: LPE.Post.ContentBlock[],
+): {
+  name: string
+  start: number
+  end: number
+  blocks: LPE.Post.ContentBlock[]
+}[] => {
+  let sections: {
+    name: string
+    start: number
+    end: number
+    blocks: LPE.Post.ContentBlock[]
+  }[] = names.map((name) => ({ name, start: -1, end: -1, blocks: [] }))
+
+  blocks.forEach((block, index) => {
+    const { type, ...rest } = block
+    if (block.type === 'text') {
+      const sectionIndex = sections.findIndex(
+        ({ name }) => block.text.trim() === `[${name}]`,
+      )
+
+      if (sectionIndex === -1) return
+
+      const section = sections[sectionIndex]
+      section.start = index
+    }
+  })
+
+  sections = [...sections]
+    .sort((a, b) => (a.start < b.start ? -1 : 1))
+    .filter((section) => section.start > -1)
+
+  for (let i = 0; i < sections.length; i++) {
+    const section = sections[i]
+    const nextSection = sections[i + 1]
+    section.end = nextSection ? nextSection.start - 1 : blocks.length - 1
+
+    section.blocks = blocks.slice(section.start + 1, section.end + 1)
+  }
+
+  return sections
 }
