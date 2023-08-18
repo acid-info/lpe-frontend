@@ -519,12 +519,14 @@ export class UnbodyService {
         shows = [...data]
       }
 
-      return unbodyDataTypes.transformMany<LPE.Podcast.Document>(
-        podcastEpisodeDocument,
-        docs,
-        undefined,
-        { shows, parseContent },
-      )
+      return unbodyDataTypes
+        .transformMany<LPE.Podcast.Document>(
+          podcastEpisodeDocument,
+          docs,
+          undefined,
+          { shows, parseContent },
+        )
+        .then((res) => res.filter((obj) => obj && obj.type === 'podcast'))
     }, [])
 
   getPodcastEpisode = ({

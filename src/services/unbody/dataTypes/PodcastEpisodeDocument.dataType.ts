@@ -22,7 +22,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
   isMatch: (helpers, data, original) =>
     original
       ? original.pathString.includes('/Podcasts/') &&
-        original.slug.startsWith('ep')
+        /^ep\d+-\d{8}-.*/.test(original.slug)
       : false,
 
   transform: async (helpers, data, original, root, context) => {
@@ -97,7 +97,6 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
       coverImage,
       show,
       showId: show?.id,
-      featured: data.featured,
       highlighted: data.highlighted,
       type: LPE.PostTypes.Podcast,
     }
