@@ -1,16 +1,16 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
-const ArticleStats = ({
+const EpisodeStats = ({
   date,
-  readingLength,
+  duration,
 }: {
   date: Date | null
-  readingLength: number
+  duration: number
 }) => (
   <Row>
     <Typography variant="body3" genericFontFamily="sans-serif">
-      {readingLength} minutes read
+      {duration ? duration : ' '} minutes
     </Typography>
     <Typography variant="body3">•</Typography>
     <Typography variant="body3" genericFontFamily="sans-serif">
@@ -32,4 +32,4 @@ const Row = styled.div`
   margin-bottom: 12px;
 `
 
-export default ArticleStats
+export default EpisodeStats

@@ -3,12 +3,12 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../../types/lpe.types'
 import ReactPlayer from 'react-player'
-import { default as Stats } from '@/components/Article/Article.Stats'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import { useHookstate } from '@hookstate/core'
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
 import EpisodeChannels from './Episode.Channels'
 import { useEffect, useRef } from 'react'
+import EpisodeStats from '../Episode.Stats'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   url: string
@@ -85,7 +85,7 @@ const EpisodeHeader = ({
           }
         />
       </PlayerContainer>
-      <Stats date={date} duration={duration} />
+      <EpisodeStats date={date} duration={duration} />
       <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
