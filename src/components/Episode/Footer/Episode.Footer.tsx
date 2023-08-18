@@ -23,12 +23,14 @@ const EpisodeFooter = ({ episode, relatedEpisodes }: Props) => {
 
   return (
     <EpisodeFooterContainer>
-      {footnotes?.length && <EpisodeFootnotes footnotes={footnotes} />}
-      {episode?.credits?.length && <EpisodeCredits credits={episode.credits} />}
-      <RelatedEpisodes
-        podcastSlug={episode.show?.slug as string}
-        relatedEpisodes={relatedEpisodes}
-      />
+      {!!footnotes && <EpisodeFootnotes footnotes={footnotes} />}
+      {!!episode?.credits && <EpisodeCredits credits={episode.credits} />}
+      {!!relatedEpisodes && (
+        <RelatedEpisodes
+          podcastSlug={episode.show?.slug as string}
+          relatedEpisodes={relatedEpisodes}
+        />
+      )}
     </EpisodeFooterContainer>
   )
 }

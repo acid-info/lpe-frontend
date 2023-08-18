@@ -66,7 +66,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   }
 
   // TODO : error handling
-  const { data: episodeData, errors: episodeErros } =
+  const { data: episode, errors: episodeErros } =
     await unbodyApi.getPodcastEpisode({
       showSlug: showSlug as string,
       slug: epSlug as string,
@@ -74,26 +74,18 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     })
 
   // TODO : error handlings
-  const { data: relatedEpisodesData, errors: relatedEpisodesErros } =
+  const { data: relatedEpisodes, errors: relatedEpisodesErros } =
     await unbodyApi.getRelatedEpisodes({
       showSlug: showSlug as string,
-      id: episodeData?.id as string,
+      id: episode?.id as string,
     })
 
-  if (!episodeData) {
+  if (!episode) {
     return {
       notFound: true,
       props: { why: 'no article' },
     }
   }
-
-  // TODO : handle undefined values in JSON
-  const episode = JSON.parse(JSON.stringify(episodeData).replace(/null/g, '""'))
-
-  // TODO : handle undefined values in JSON
-  const relatedEpisodes = JSON.parse(
-    JSON.stringify(relatedEpisodesData).replace(/null/g, '""'),
-  )
 
   return {
     props: {

@@ -41,29 +41,19 @@ const PodcastShowPage = ({
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   // TODO : error handling
-  const { data: podcastShowsData, errors: podcastShowsErrors } =
+  const { data: podcastShows, errors: podcastShowsErrors } =
     await unbodyApi.getPodcastShows({ populateEpisodes: true })
 
   // TODO : error handling
-  const { data: highlightedEpisodesData, errors: highlightedEpisodesErrors } =
+  const { data: highlightedEpisodes, errors: highlightedEpisodesErrors } =
     await unbodyApi.getHighlightedEpisodes({})
 
-  if (!podcastShowsData) {
+  if (!podcastShows) {
     return {
       notFound: true,
       props: { why: 'no podcasts' },
     }
   }
-
-  // TODO : handle undefined values in JSON
-  const podcastShows = JSON.parse(
-    JSON.stringify(podcastShowsData).replace(/null/g, '""'),
-  )
-
-  // TODO : handle undefined values in JSON
-  const highlightedEpisodes = JSON.parse(
-    JSON.stringify(highlightedEpisodesData).replace(/null/g, '""'),
-  )
 
   return {
     props: {

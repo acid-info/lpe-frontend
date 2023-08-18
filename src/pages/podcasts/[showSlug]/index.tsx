@@ -65,13 +65,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   }
 
   // TODO : error handling
-  const { data: showData, errors: podcastShowDataErrors } =
+  const { data: show, errors: podcastShowDataErrors } =
     await unbodyApi.getPodcastShow({
       showSlug: showSlug as string,
     })
 
   // TODO : error handling
-  const { data: latestEpisodesData, errors: latestEpisodesErros } =
+  const { data: latestEpisodes, errors: latestEpisodesErros } =
     await unbodyApi.getLatestEpisodes({
       showSlug: showSlug as string,
       page: 1,
@@ -79,25 +79,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     })
 
   // TODO : error handling
-  const { data: highlightedEpisodesData, errors: highlightedEpisodesErrors } =
+  const { data: highlightedEpisodes, errors: highlightedEpisodesErrors } =
     await unbodyApi.getHighlightedEpisodes({
       showSlug: showSlug as string,
       page: 1,
       limit: 9,
     })
-
-  // TODO : handle undefined values in JSON
-  const show = JSON.parse(JSON.stringify(showData).replace(/null/g, '""'))
-
-  // TODO : handle undefined values in JSON
-  const latestEpisodes = JSON.parse(
-    JSON.stringify(latestEpisodesData).replace(/null/g, '""'),
-  )
-
-  // TODO : handle undefined values in JSON
-  const highlightedEpisodes = JSON.parse(
-    JSON.stringify(highlightedEpisodesData).replace(/null/g, '""'),
-  )
 
   return {
     props: {
