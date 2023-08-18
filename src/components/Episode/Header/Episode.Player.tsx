@@ -16,6 +16,11 @@ const EpisodePlayer = ({ url }: EpisodePlayerProps) => {
   const state = useHookstate(playerState)
   const epState = useHookstate(episodeState)
 
+  const isYoutubeRegex =
+    /(?:\/(?:embed|v|e)\/|\/watch\?v=|\/v\/|https?:\/\/(?:www\.)?youtu\.be\/)([^?&]+)/
+
+  const youtubeLink = url.match(isYoutubeRegex) ?? []
+
   const playerContainerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<ReactPlayer>(null)
 
@@ -71,6 +76,13 @@ const EpisodePlayer = ({ url }: EpisodePlayerProps) => {
       state.set((prev) => ({
         ...prev,
         url,
+      }))
+
+      const thumbnail = `https://img.youtube.com/vi/${youtubeLink[1]}/0.jpg`
+
+      epState.set((prev) => ({
+        ...prev,
+        thumbnail: thumbnail,
       }))
     }
   }, [])

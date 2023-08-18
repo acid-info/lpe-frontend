@@ -183,12 +183,15 @@ export default function GlobalAudioPlayer() {
         onProgress={handleProgress}
       />
       <RightMenu>
-        <Image
-          src={epState.value.thumbnail}
-          alt={epState.value.thumbnail}
-          width={48}
-          height={48}
-        />
+        {!!epState.value.thumbnail && (
+          <Image
+            src={epState.value.thumbnail}
+            alt={epState.value.thumbnail}
+            width={48}
+            height={48}
+          />
+        )}
+
         <EpisodeData>
           <Typography variant="body2">{epState.value.title}</Typography>
           <Typography variant="body3">{epState.value.podcast}</Typography>
