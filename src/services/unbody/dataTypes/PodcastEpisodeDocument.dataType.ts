@@ -47,15 +47,23 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
     const channels: LPE.Podcast.Content['channels'] = []
     const credits: LPE.Podcast.Content['credits'] = []
     const transcription: LPE.Podcast.Content['transcription'] = []
-    const timestamps: LPE.Podcast.Content['timestamps'] = []
+    const content: LPE.Podcast.Content['content'] = []
+
+    const allBlocks = data.content.filter((block) => {
+      if (
+        ((block.type === 'text' && block.html) || '').match(
+          `<a href="#ftnt_ref`,
+        )?.length
+      )
+        return false
+
+      return true
+    })
 
     if (context?.parseContent) {
-      const sections = findSections(
-        ['Credits', 'Timestamps', 'Transcription'],
-        data.content,
-      )
+      const sections = findSections(['Credits', 'Content'], allBlocks)
 
-      const textBlocks = data.content.filter(
+      const textBlocks = allBlocks.filter(
         (block) => block.type === 'text',
       ) as LPE.Post.TextBlock[]
 
@@ -71,16 +79,8 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
             break
           }
 
-          case 'Timestamps': {
-            const blocks = section.blocks.filter((block) => {
-              if (block.type === 'image') return false
-              if ((block.html || '').match(`<a href="#ftnt_ref`)?.length)
-                return false
-
-              return true
-            }) as LPE.Post.TextBlock[]
-
-            timestamps.push(...blocks)
+          case 'Content': {
+            content.push(...section.blocks)
 
             break
           }
@@ -104,7 +104,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
       episodeNumber,
       tags: data.tags,
       credits,
-      timestamps,
+      content,
       transcription,
       channels,
       ...(show ? { show } : {}),

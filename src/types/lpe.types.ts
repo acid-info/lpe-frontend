@@ -197,7 +197,7 @@ export namespace LPE {
     export type Content = {
       channels: Channel[]
       credits: Post.TextBlock[]
-      timestamps: Post.TextBlock[]
+      content: Post.ContentBlock[]
       transcription: TranscriptionItem[]
     }
 
