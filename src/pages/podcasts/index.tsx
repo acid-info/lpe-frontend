@@ -6,14 +6,19 @@ import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 import PodcastsContainer from '@/containers/PodcastsContainer'
 
 import TEMP_DATA from './podcasts-temp-data.json'
+import unbodyApi from '@/services/unbody/unbody.service'
 
 type PodcastsProps = {
   shows: LPE.Podcast.Show[]
-  latestEpisodes: LPE.Podcast.Document[]
+  highlightedEpisodes: LPE.Podcast.Document[]
   errors: string | null
 }
 
-const PodcastShowPage = ({ shows, latestEpisodes, errors }: PodcastsProps) => {
+const PodcastShowPage = ({
+  shows,
+  highlightedEpisodes,
+  errors,
+}: PodcastsProps) => {
   if (!shows) return null
   if (errors) return <div>{errors}</div>
 
@@ -26,25 +31,43 @@ const PodcastShowPage = ({ shows, latestEpisodes, errors }: PodcastsProps) => {
         pagePath={`/podcasts`}
         tags={[]}
       />
-      <PodcastsContainer shows={shows} latestEpisodes={latestEpisodes} />
+      <PodcastsContainer
+        shows={shows}
+        highlightedEpisodes={highlightedEpisodes}
+      />
     </>
   )
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { shows, latestEpisodes } = TEMP_DATA
+  // TODO : error handling
+  const { data: podcastShowsData, errors: podcastShowsErrors } =
+    await unbodyApi.getPodcastShows({ populateEpisodes: true })
 
-  if (!shows) {
+  // TODO : error handling
+  const { data: highlightedEpisodesData, errors: highlightedEpisodesErrors } =
+    await unbodyApi.getHighlightedEpisodes({})
+
+  if (!podcastShowsData) {
     return {
       notFound: true,
-      props: { why: 'no article' },
+      props: { why: 'no podcasts' },
     }
   }
 
+  const podcastShows = JSON.parse(
+    JSON.stringify(podcastShowsData).replace(/null/g, '""'),
+  )
+
+  const highlightedEpisodes = JSON.parse(
+    JSON.stringify(highlightedEpisodesData).replace(/null/g, '""'),
+  )
+
   return {
     props: {
-      shows,
-      latestEpisodes,
+      shows: podcastShows,
+      highlightedEpisodes,
+      // errors,
     },
   }
 }

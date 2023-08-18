@@ -21,7 +21,6 @@ const PodcastShowContainer = (props: Props) => {
         <EpisodesList
           header={<Typography variant="body2">Latest Episodes</Typography>}
           episodes={latestEpisodes}
-          podcast={PodcastType.NETWORK_STATE}
         />
       </PodcastsBodyContainer>
     </PodcastsGrid>

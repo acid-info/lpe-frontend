@@ -1,91 +1,56 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
 import styled from '@emotion/styled'
 import { LPE } from '../types/lpe.types'
-import PodcastsList from '@/components/Podcasts/Podcasts.List'
+import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
 import { Button, Typography } from '@acid-info/lsd-react'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import Link from 'next/link'
-import { HashingItOutIcon } from '@/components/Icons/HashingItOutIcon'
-import { PodcastType } from '@/components/PostCard/PostCard'
 
 interface Props {
   shows: LPE.Podcast.Show[]
-  latestEpisodes: LPE.Podcast.Document[]
+  highlightedEpisodes: LPE.Podcast.Document[]
 }
 
 const PodcastsContainer = (props: Props) => {
-  const { shows, latestEpisodes } = props
-  const podcast = 'network-state' // TODO : get from API
-
-  const networkState =
-    shows.find((show) => show.slug === PodcastType.NETWORK_STATE) ?? shows[0]
-
-  const hashingItOut =
-    shows.find((show) => show.slug === PodcastType.HASHING_IT_OUT) ?? shows[1]
+  const { shows, highlightedEpisodes } = props
 
   return (
     <PodcastsGrid>
       <PodcastsBodyContainer className={'w-16'}>
-        <PodcastsList shows={shows} />
+        <PodcastsLists shows={shows} />
 
         <Section>
           <EpisodesList
             header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
-            episodes={latestEpisodes}
-            podcast={podcast as PodcastType}
+            episodes={highlightedEpisodes}
           />
         </Section>
 
-        <Section>
-          <EpisodesList
-            header={
-              <EpisodeListHeader>
-                <Show>
-                  <LogosCircleIcon width={38} height={38} />
-                  <PodcastInfo>
-                    <Typography variant="body1">
-                      {networkState.title}
-                    </Typography>
-                    <Typography variant="body3">
-                      {networkState.numberOfEpisodes} EP
-                    </Typography>
-                  </PodcastInfo>
-                </Show>
-                <Link href={`/podcasts/${networkState.slug}`}>
-                  <Button size="small">See all episodes</Button>
-                </Link>
-              </EpisodeListHeader>
-            }
-            episodes={latestEpisodes.slice(0, 4)}
-            podcast={PodcastType.NETWORK_STATE}
-          />
-        </Section>
-
-        <Section>
-          <EpisodesList
-            header={
-              <EpisodeListHeader>
-                <Show>
-                  <HashingItOutIcon width={38} height={38} />
-                  <PodcastInfo>
-                    <Typography variant="body1">
-                      {hashingItOut.title}
-                    </Typography>
-                    <Typography variant="body3">
-                      {hashingItOut.numberOfEpisodes} EP
-                    </Typography>
-                  </PodcastInfo>
-                </Show>
-                <Link href={`/podcasts/${hashingItOut.slug}`}>
-                  <Button size="small">See all episodes</Button>
-                </Link>
-              </EpisodeListHeader>
-            }
-            episodes={latestEpisodes.slice(0, 4)}
-            podcast={PodcastType.HASHING_IT_OUT}
-          />
-        </Section>
+        {shows.map((show) => (
+          <Section key={show.id}>
+            <EpisodesList
+              header={
+                <EpisodeListHeader>
+                  <Show>
+                    <LogosCircleIcon width={38} height={38} />
+                    <PodcastInfo>
+                      <Typography variant="body1">{show.title}</Typography>
+                      <Typography variant="body3">
+                        {show.numberOfEpisodes} EP
+                      </Typography>
+                    </PodcastInfo>
+                  </Show>
+                  <Link href={`/podcasts/${show.slug}`}>
+                    <Button size="small">See all episodes</Button>
+                  </Link>
+                </EpisodeListHeader>
+              }
+              episodes={show.episodes as LPE.Podcast.Document[]}
+              show={show}
+            />
+          </Section>
+        ))}
       </PodcastsBodyContainer>
     </PodcastsGrid>
   )

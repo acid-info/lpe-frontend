@@ -2,29 +2,28 @@ import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import { Button, Typography } from '@acid-info/lsd-react'
 import Link from 'next/link'
-import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
-import { HashingItOutIcon } from '../Icons/HashingItOutIcon'
+import PodcastHost from './Podcast.Host'
+import Image from 'next/image'
 
 interface Props {
   shows: LPE.Podcast.Show[]
 }
 
-export default function PodcastsList({ shows }: Props) {
+export default function PodcastsLists({ shows }: Props) {
   return (
-    <PodcastsContainer>
+    <PodcastListsContainer>
       {shows &&
         shows.map((show) => (
           <PodcastCard key={show.id}>
-            {show.slug === 'network-state' ? (
-              <LogosCircleIcon width={56} height={56} />
-            ) : (
-              <HashingItOutIcon width={56} height={56} />
-            )}
+            <Image
+              src={show.logo.url}
+              width={56}
+              height={56}
+              alt={show.logo.alt}
+            />
             <Typography variant="h3">{show.title}</Typography>
             <Row>
-              <Typography variant="body2">
-                Hosted by: {show.hosts[0].name}
-              </Typography>
+              <PodcastHost show={show} />
               <Typography variant="body2">•</Typography>
               <Typography variant="body2">
                 {show.numberOfEpisodes} EP
@@ -36,11 +35,11 @@ export default function PodcastsList({ shows }: Props) {
             </Link>
           </PodcastCard>
         ))}
-    </PodcastsContainer>
+    </PodcastListsContainer>
   )
 }
 
-const PodcastsContainer = styled.article`
+const PodcastListsContainer = styled.div`
   display: flex;
   gap: 16px;
 `
