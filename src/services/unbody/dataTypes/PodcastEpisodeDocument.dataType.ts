@@ -1,5 +1,6 @@
 import parseDate from 'date-fns/parse'
 import { LPE } from '../../../types/lpe.types'
+import { settle } from '../../../utils/promise.utils'
 import { simplecastApi } from '../../simplecast.service'
 import { UnbodyResGoogleDocData } from '../unbody.types'
 import { UnbodyDataTypeConfig } from './types'
@@ -79,7 +80,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
         )
       }
 
-      channels.push(...(await getDistributionChannels(textBlocks, 'content')))
+      channels.push(...(await getDistributionChannels(textBlocks)))
     }
 
     return {
@@ -103,10 +104,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
   },
 }
 
-const getDistributionChannels = async (
-  blocks: LPE.Post.TextBlock[],
-  source: 'content' | 'simplecast',
-) => {
+const getDistributionChannels = async (blocks: LPE.Post.TextBlock[]) => {
   const channels: LPE.Podcast.Channel[] = []
 
   {
@@ -128,75 +126,69 @@ const getDistributionChannels = async (
     }
   }
 
-  if (source === 'simplecast') {
-    channels.push(...(await getSimplecastDistributionChannels(blocks)))
-  } else if (source === 'content') {
-    const linkBlocks = blocks.filter((block) =>
-      /^(https):\/\/[^ "]+$/.test(block.text),
-    )
-    linkBlocks.forEach((block) => {
-      const { text } = block
-      const url = text
+  const linkBlocks = blocks.filter((block) =>
+    /^(https):\/\/[^ "]+$/.test(block.text),
+  )
 
-      const name = [
-        [/spotify\.com/i, LPE.Podcast.ChannelNames.Spotify],
-        [/podcasts\.google\.com/i, LPE.Podcast.ChannelNames.GooglePodcasts],
-        [/podcasts\.apple\.com/i, LPE.Podcast.ChannelNames.ApplePodcasts],
-      ].find(
-        ([reg, name]) => url.match(reg)?.length,
-      )?.[1] as LPE.Podcast.ChannelName
+  for (const block of linkBlocks) {
+    const { text } = block
+    const url = text
 
-      if (!name) return
+    const name = [
+      [/spotify\.com/i, LPE.Podcast.ChannelNames.Spotify],
+      [/podcasts\.google\.com/i, LPE.Podcast.ChannelNames.GooglePodcasts],
+      [/podcasts\.apple\.com/i, LPE.Podcast.ChannelNames.ApplePodcasts],
+      [/simplecast\.com/i, LPE.Podcast.ChannelNames.Simplecast],
+    ].find(
+      ([reg, name]) => url.match(reg)?.length,
+    )?.[1] as LPE.Podcast.ChannelName
 
-      if (name)
+    if (!name) continue
+
+    switch (name) {
+      case LPE.Podcast.ChannelNames.Simplecast: {
+        if (!simplecastApi.isValidPlayerUrl(url)) {
+          console.error('invalid Simplecast player url!')
+          continue
+        }
+
+        const episodeId = simplecastApi.extractEpisodeIdFromUrl(url)
+        if (!episodeId) {
+          console.error('invalid Simplecast player url!')
+          continue
+        }
+
+        const [res, err] = await settle(() =>
+          simplecastApi.getEpisode({ id: episodeId }),
+        )
+
+        if (err) {
+          console.error('failed to fetch Simplecast episode ', url)
+          console.error(err)
+          continue
+        }
+
+        const data: LPE.Podcast.SimplecastChannelData = {
+          duration: res.duration,
+          audioFileUrl: res.ad_free_audio_file_url ?? res.audio_file?.url,
+        }
+
+        channels.push({
+          name,
+          url,
+          data,
+        })
+
+        break
+      }
+      default: {
         channels.push({
           name,
           url,
         })
-    })
+      }
+    }
   }
 
   return channels
-}
-
-const getSimplecastDistributionChannels = async (
-  blocks: LPE.Post.TextBlock[],
-) => {
-  const channels: LPE.Podcast.Channel[] = []
-
-  const simplecastUrl = blocks.find((block) =>
-    simplecastApi.isValidPlayerUrl(block.text),
-  )?.text
-
-  const episodeId =
-    simplecastUrl && simplecastApi.extractEpisodeIdFromUrl(simplecastUrl)
-
-  if (episodeId) {
-    const distributionChannels = await simplecastApi.getDistributionChannels({
-      episodeId,
-    })
-
-    distributionChannels.forEach((channel) => {
-      const name = channel?.distribution_channel?.name || ''
-
-      const channelName = [
-        [/google\s*podcasts/i, LPE.Podcast.ChannelNames.GooglePodcasts],
-        [/apple\s*podcasts/i, LPE.Podcast.ChannelNames.ApplePodcasts],
-        [/spotify/i, LPE.Podcast.ChannelNames.Spotify],
-      ].find(([regex]) =>
-        (regex as RegExp).test(name),
-      )?.[1] as LPE.Podcast.ChannelName
-
-      if (!channelName) return
-
-      channels.push({
-        name: channelName,
-        url: channel.url,
-      })
-    })
-
-    return channels
-  }
-
-  return []
 }

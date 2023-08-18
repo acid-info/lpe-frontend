@@ -32,8 +32,10 @@ export namespace Simplecast {
     slug: string
     href: string
     podcast: Podcast
-    audio: {
-      href: string
+    ad_free_audio_file_url: string
+    audio_file: {
+      url: string
+      size: number
     }
   }
 }

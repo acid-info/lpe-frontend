@@ -150,14 +150,26 @@ export namespace LPE {
       GooglePodcasts: 'google_podcasts',
       Spotify: 'spotify',
       Youtube: 'youtube',
+      Simplecast: 'simplecast',
     } as const
 
     export type ChannelName = DictValues<typeof ChannelNames>
 
-    export type Channel = {
-      name: ChannelName
-      url: string
+    export type SimplecastChannelData = {
+      duration: number
+      audioFileUrl: string
     }
+
+    export type Channel =
+      | {
+          name: ChannelName
+          url: string
+        }
+      | {
+          name: typeof ChannelNames.Simplecast
+          url: string
+          data: SimplecastChannelData
+        }
 
     export type Metadata = {
       id: string
