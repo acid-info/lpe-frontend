@@ -4,14 +4,14 @@ import EpisodeBlocks from './Episode.Blocks'
 import { Typography } from '@acid-info/lsd-react'
 import EpisodeDivider from './Episode.Divider'
 
-const EpisodeTranscript = ({ data }: { data: LPE.Podcast.Document }) => {
+const EpisodeTranscript = ({ episode }: { episode: LPE.Podcast.Document }) => {
   return (
     <>
       <EpisodeDivider />
       <Title component="h6" variant="h6">
         Transcript
       </Title>
-      <EpisodeBlocks data={data} />
+      <EpisodeBlocks data={episode} />
     </>
   )
 }

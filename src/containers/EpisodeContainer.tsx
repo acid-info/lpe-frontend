@@ -4,17 +4,18 @@ import styled from '@emotion/styled'
 import { LPE } from '../types/lpe.types'
 
 interface Props {
-  data: LPE.Podcast.Document
+  episode: LPE.Podcast.Document
+  relatedEpisodes: LPE.Podcast.Document[]
 }
 
 const EpisodeContainer = (props: Props) => {
-  const { data } = props
+  const { episode, relatedEpisodes } = props
 
   return (
     <EpisodeGrid>
       <Gap className={'w-4'} />
       <EpisodeBodyContainer className={'w-8'}>
-        <EpisodeBody data={data} />
+        <EpisodeBody episode={episode} relatedEpisodes={relatedEpisodes} />
       </EpisodeBodyContainer>
       <Gap className={'w-4'} />
     </EpisodeGrid>

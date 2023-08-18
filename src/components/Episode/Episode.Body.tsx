@@ -7,11 +7,12 @@ import { playerState } from '../GlobalAudioPlayer/globalAudioPlayer.state'
 import { useHookstate } from '@hookstate/core'
 
 interface Props {
-  data: LPE.Podcast.Document
+  episode: LPE.Podcast.Document
+  relatedEpisodes: LPE.Podcast.Document[]
 }
 
-export default function EpisodeBody({ data }: Props) {
-  const youtube = data?.channels.find(
+export default function EpisodeBody({ episode, relatedEpisodes }: Props) {
+  const youtube = episode?.channels.find(
     (channel) => channel?.name === LPE.Podcast.ChannelNames.Youtube,
   )
 
@@ -21,12 +22,12 @@ export default function EpisodeBody({ data }: Props) {
   return (
     <EpisodeContainer>
       <EpisodeHeader
-        {...data}
+        {...episode}
         url={youtube?.url as string}
         duration={duration}
       />
-      <EpisodeTranscript data={data} />
-      <EpisodeFooter data={data} />
+      <EpisodeTranscript episode={episode} />
+      <EpisodeFooter episode={episode} relatedEpisodes={relatedEpisodes} />
     </EpisodeContainer>
   )
 }

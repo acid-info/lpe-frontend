@@ -2,8 +2,14 @@ import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import MoreEpisodesCard from './Episode.MoreEpisodesCard'
 import { useState } from 'react'
+import { LPE } from '@/types/lpe.types'
 
-const RelatedEpisodes = ({ relatedEpisodes }: any) => {
+type props = {
+  podcastSlug: string
+  relatedEpisodes: LPE.Podcast.Document[]
+}
+
+const RelatedEpisodes = ({ podcastSlug, relatedEpisodes }: props) => {
   const [showMore, setShowMore] = useState(false)
 
   return (
@@ -14,9 +20,10 @@ const RelatedEpisodes = ({ relatedEpisodes }: any) => {
           ? relatedEpisodes.map((episode: any, idx: number) => (
               <MoreEpisodesCard
                 key={'related-episode' + idx}
-                thumbnail={episode.thumbnail}
+                coverImage={episode.coverImage}
                 title={episode.title}
                 publishedAt={episode.publishedAt}
+                slug={`${podcastSlug}/${episode.slug}`}
               />
             ))
           : relatedEpisodes && !showMore
@@ -25,9 +32,10 @@ const RelatedEpisodes = ({ relatedEpisodes }: any) => {
               .map((episode: any, idx: number) => (
                 <MoreEpisodesCard
                   key={'related-episode' + idx}
-                  thumbnail={episode.thumbnail}
+                  coverImage={episode.coverImage}
                   title={episode.title}
                   publishedAt={episode.publishedAt}
+                  slug={`${podcastSlug}/${episode.slug}`}
                 />
               ))
           : null}

@@ -64,11 +64,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
+  // TODO : error handling
   const { data: showData, errors: podcastShowDataErrors } =
     await unbodyApi.getPodcastShow({
       showSlug: showSlug as string,
     })
 
+  // TODO : error handling
   const { data: latestEpisodesData, errors: latestEpisodesErros } =
     await unbodyApi.getLatestEpisodes({
       showSlug: showSlug as string,
@@ -76,6 +78,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       limit: 12,
     })
 
+  // TODO : error handling
   const { data: highlightedEpisodesData, errors: highlightedEpisodesErrors } =
     await unbodyApi.getHighlightedEpisodes({
       showSlug: showSlug as string,

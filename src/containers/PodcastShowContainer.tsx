@@ -20,14 +20,16 @@ const PodcastShowContainer = (props: Props) => {
     <PodcastsGrid>
       <PodcastsBodyContainer className={'w-16'}>
         <PodcastShowCard show={show} />
+
         <PodcastSection>
           <EpisodesList
             header={<Typography variant="body2">All episodes</Typography>}
             episodes={highlightedEpisodes}
+            show={show}
           />
         </PodcastSection>
 
-        <EpisodesList episodes={latestEpisodes} divider={true} />
+        <EpisodesList episodes={latestEpisodes} divider={true} show={show} />
       </PodcastsBodyContainer>
     </PodcastsGrid>
   )

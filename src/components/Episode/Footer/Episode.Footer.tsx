@@ -5,67 +5,30 @@ import RelatedEpisodes from './Episode.RelatedEpisodes'
 import { useMemo } from 'react'
 import EpisodeFootnotes from './Episode.Footnotes'
 
-const TEMP_MORE_EPISODES = [
-  {
-    id: 1,
-    thumbnail:
-      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
-    publishedAt: '2023-07-11T20:30:00.000Z',
-    title: 'Title 1',
-  },
-  {
-    id: 2,
-    thumbnail:
-      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
-    publishedAt: '2023-07-12T20:30:00.000Z',
-    title: 'Title 2',
-  },
-  {
-    id: 3,
-    thumbnail:
-      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
-    publishedAt: '2023-07-13T20:30:00.000Z',
-    title: 'Title 3',
-  },
-  {
-    id: 4,
-    thumbnail:
-      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
-    publishedAt: '2023-07-14T20:30:00.000Z',
-    title: 'Title 4',
-  },
-  {
-    id: 5,
-    thumbnail:
-      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
-    publishedAt: '2023-07-14T20:30:00.000Z',
-    title: 'Title 5',
-  },
-  {
-    id: 6,
-    thumbnail:
-      'https://images.cdn.unbody.io/00f8908f-9dff-456e-9640-13defd9ae433/image/a04e5542-d027-44d5-b914-bd4cadf17d25_image1.png',
-    publishedAt: '2023-07-14T20:30:00.000Z',
-    title: 'Title 6',
-  },
-]
+type Props = {
+  episode: LPE.Podcast.Document
+  relatedEpisodes: LPE.Podcast.Document[]
+}
 
-const EpisodeFooter = ({ data }: { data: LPE.Podcast.Document }) => {
+const EpisodeFooter = ({ episode, relatedEpisodes }: Props) => {
   const footnotes = useMemo(() => {
     return (
-      data.credits &&
-      data.credits
+      episode.credits &&
+      episode.credits
         .filter((b) => b.footnotes.length)
         .map((b) => b.footnotes)
         .flat()
     )
-  }, [data])
+  }, [episode])
 
   return (
     <EpisodeFooterContainer>
       {footnotes?.length && <EpisodeFootnotes footnotes={footnotes} />}
-      {data?.credits?.length && <EpisodeCredits credits={data.credits} />}
-      <RelatedEpisodes relatedEpisodes={TEMP_MORE_EPISODES} />
+      {episode?.credits?.length && <EpisodeCredits credits={episode.credits} />}
+      <RelatedEpisodes
+        podcastSlug={episode.show?.slug as string}
+        relatedEpisodes={relatedEpisodes}
+      />
     </EpisodeFooterContainer>
   )
 }

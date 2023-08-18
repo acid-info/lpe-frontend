@@ -1,20 +1,29 @@
+import { LPE } from '@/types/lpe.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {
-  thumbnail: string
+  coverImage: LPE.Image.Document
   title: string
   publishedAt: string
+  slug: string
 }
 
-const MoreEpisodesCard = ({ thumbnail, title, publishedAt }: Props) => {
+const MoreEpisodesCard = ({ coverImage, title, publishedAt, slug }: Props) => {
   const date = new Date(publishedAt)
+
   return (
     <Container>
-      <ImageContainer>
-        <Image src={thumbnail} fill alt={thumbnail} />
-      </ImageContainer>
+      {coverImage?.url && (
+        <CustomLink href={`/podcasts/${slug}`}>
+          <ImageContainer>
+            <Image src={coverImage.url} fill alt={coverImage.alt} />
+          </ImageContainer>
+        </CustomLink>
+      )}
+
       <Row>
         <Typography variant="body3" genericFontFamily="sans-serif">
           PODCAST
@@ -29,9 +38,11 @@ const MoreEpisodesCard = ({ thumbnail, title, publishedAt }: Props) => {
             })}
         </Typography>
       </Row>
-      <Typography variant="h6" genericFontFamily="serif">
-        {title}
-      </Typography>
+      <CustomLink href={`/podcasts/${slug}`}>
+        <Typography variant="h6" genericFontFamily="serif">
+          {title}
+        </Typography>
+      </CustomLink>
     </Container>
   )
 }
@@ -56,6 +67,10 @@ const Row = styled.div`
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
+`
+
+const CustomLink = styled(Link)`
+  text-decoration: none;
 `
 
 export default MoreEpisodesCard
