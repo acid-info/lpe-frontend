@@ -1,8 +1,8 @@
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import MoreEpisodesCard from './Episode.MoreEpisodesCard'
 import { useState } from 'react'
 import { LPE } from '@/types/lpe.types'
+import { PostCard } from '@/components/PostCard'
 
 type props = {
   podcastSlug: string
@@ -18,26 +18,54 @@ const RelatedEpisodes = ({ podcastSlug, relatedEpisodes }: props) => {
       <EpisodeCards>
         {relatedEpisodes && showMore
           ? relatedEpisodes.map((episode: any, idx: number) => (
-              <MoreEpisodesCard
+              <PostCard
                 key={'related-episode' + idx}
-                coverImage={episode.coverImage}
-                title={episode.title}
-                publishedAt={episode.publishedAt}
-                slug={`${podcastSlug}/${episode.slug}`}
+                contentType={LPE.PostTypes.Podcast}
+                data={{
+                  authors: episode.authors,
+                  date: episode.publishedAt
+                    ? new Date(episode.publishedAt)
+                    : null,
+                  slug: episode.show?.slug
+                    ? `${episode.show?.slug}/${episode.slug}`
+                    : `${podcastSlug}/${episode.slug}`,
+                  title: episode.title,
+                  coverImage: episode.coverImage,
+                  tags: episode.tags,
+                  podcastShowDetails: {
+                    title: episode.title,
+                    slug: `${episode.show?.slug}`,
+                    episodeNumber: episode.episodeNumber,
+                    podcast: episode.show as LPE.Podcast.Show,
+                  },
+                }}
               />
             ))
           : relatedEpisodes && !showMore
-          ? relatedEpisodes
-              .slice(0, 4)
-              .map((episode: any, idx: number) => (
-                <MoreEpisodesCard
-                  key={'related-episode' + idx}
-                  coverImage={episode.coverImage}
-                  title={episode.title}
-                  publishedAt={episode.publishedAt}
-                  slug={`${podcastSlug}/${episode.slug}`}
-                />
-              ))
+          ? relatedEpisodes.slice(0, 4).map((episode: any, idx: number) => (
+              <PostCard
+                key={'related-episode' + idx}
+                contentType={LPE.PostTypes.Podcast}
+                data={{
+                  authors: episode.authors,
+                  date: episode.publishedAt
+                    ? new Date(episode.publishedAt)
+                    : null,
+                  slug: episode.show?.slug
+                    ? `${episode.show?.slug}/${episode.slug}`
+                    : `${podcastSlug}/${episode.slug}`,
+                  title: episode.title,
+                  coverImage: episode.coverImage,
+                  tags: episode.tags,
+                  podcastShowDetails: {
+                    title: episode.title,
+                    slug: `${episode.show?.slug}`,
+                    episodeNumber: episode.episodeNumber,
+                    podcast: episode.show as LPE.Podcast.Show,
+                  },
+                }}
+              />
+            ))
           : null}
       </EpisodeCards>
       <ShowButton onClick={() => setShowMore(!showMore)}>
