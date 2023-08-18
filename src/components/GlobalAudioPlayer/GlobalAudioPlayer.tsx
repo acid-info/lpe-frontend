@@ -25,6 +25,7 @@ export default function GlobalAudioPlayer() {
   const epState = useHookstate(episodeState)
 
   const ref = useRef<ReactPlayer>(null)
+
   const [episode, setEpisode] = useState<EpisodeProps>({
     title: '',
     podcast: '',
@@ -54,7 +55,12 @@ export default function GlobalAudioPlayer() {
   // }
 
   const handlePlay = () => {
-    state.set((prev) => ({ ...prev, playing: true }))
+    ref.current?.seekTo(state.value.playedSeconds, 'seconds')
+    state.set((prev) => ({
+      ...prev,
+      playing: true,
+      playedSeconds: state.value.playedSeconds,
+    }))
   }
 
   const handlePlayPause = () => {
@@ -85,9 +91,7 @@ export default function GlobalAudioPlayer() {
     state.set((prev) => ({ ...prev, playing: false }))
   }
 
-  const handleSeekMouseDown = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
+  const handleSeekMouseDown = () => {
     state.set((prev) => ({ ...prev, seeking: true }))
   }
 
@@ -113,12 +117,21 @@ export default function GlobalAudioPlayer() {
     state.set((prev) => ({ ...prev, playbackRate: parseFloat(e.target.value) }))
   }
 
-  const handleProgress = (newState: { playedSeconds: number }) => {
-    state.set((prev) => ({ ...prev, playedSeconds: newState.playedSeconds }))
+  const handleProgress = (newState: {
+    playedSeconds: number
+    played: number
+    loaded: number
+  }) => {
+    state.set((prev) => ({
+      ...prev,
+      playedSeconds: newState.playedSeconds,
+      played: newState.played,
+      loaded: newState.loaded,
+    }))
   }
 
-  return state.value.isEnabled ? (
-    <Container>
+  return (
+    <Container visible={state.value.isEnabled}>
       <AudioPlayer>
         <Buttons>
           <Row>
@@ -182,7 +195,7 @@ export default function GlobalAudioPlayer() {
         loop={state.value.loop}
         playbackRate={state.value.playbackRate}
         volume={state.value.volume}
-        muted={state.value.muted}
+        muted={state.value.isEnabled ? false : true}
         onReady={() => console.log('onReady')}
         onStart={() => console.log('onStart')}
         onPlay={handlePlay}
@@ -208,10 +221,10 @@ export default function GlobalAudioPlayer() {
         </EpisodeData>
       </RightMenu>
     </Container>
-  ) : null
+  )
 }
 
-const Container = styled.div`
+const Container = styled.div<{ visible: boolean }>`
   width: 100vw;
   height: 80px;
   padding: 22px 16px;
@@ -224,6 +237,7 @@ const Container = styled.div`
   left: 0;
   border-top: 1px solid rgb(var(--lsd-border-primary));
   box-sizing: border-box;
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
 `
 
 const Buttons = styled.div`
