@@ -1,52 +1,22 @@
 import ReactPlayer from 'react-player'
 import styled from '@emotion/styled'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PlayIcon } from '../Icons/PlayIcon'
 import { PauseIcon } from '../Icons/PauseIcon'
 import { VolumeIcon } from '../Icons/VolumeIcon'
 import styles from './GlobalAudioPlayer.module.css'
 import { convertSecToMinAndSec } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
-import { getAudioSourceFromEpisode } from '@/utils/data.utils'
 import Image from 'next/image'
 import { playerState } from './globalAudioPlayer.state'
 import { useHookstate } from '@hookstate/core'
 import { episodeState } from './episode.state'
 
-type EpisodeProps = {
-  title: string
-  podcast: string
-  url: string
-  thumbnail: string
-}
-
 export default function GlobalAudioPlayer() {
   const state = useHookstate(playerState)
   const epState = useHookstate(episodeState)
 
-  const ref = useRef<ReactPlayer>(null)
-
-  const [episode, setEpisode] = useState<EpisodeProps>({
-    title: '',
-    podcast: '',
-    url: '',
-    thumbnail: '',
-  })
-
-  useMemo(() => {
-    const getAudioSource = async () => {
-      const response = await getAudioSourceFromEpisode(epState.value.episodeId)
-
-      setEpisode({
-        title: response.title,
-        podcast: response.podcast.title,
-        url: response.ad_free_audio_file_url,
-        thumbnail: response.image_url,
-      })
-    }
-
-    getAudioSource()
-  }, [epState])
+  const globalPlayerRef = useRef<ReactPlayer>(null)
 
   const [showVolume, setShowVolume] = useState(false)
 
@@ -55,16 +25,10 @@ export default function GlobalAudioPlayer() {
   // }
 
   const handlePlay = () => {
-    ref.current?.seekTo(state.value.playedSeconds, 'seconds')
     state.set((prev) => ({
       ...prev,
       playing: true,
-      playedSeconds: state.value.playedSeconds,
     }))
-  }
-
-  const handlePlayPause = () => {
-    state.set((prev) => ({ ...prev, playing: !state.value.playing }))
   }
 
   // const handleStop = () => {
@@ -96,7 +60,8 @@ export default function GlobalAudioPlayer() {
   }
 
   const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    state.set((prev) => ({ ...prev, played: parseFloat(e.target.value) }))
+    const played = parseFloat(e.target.value)
+    state.set((prev) => ({ ...prev, played: played }))
   }
 
   const handleSeekMouseUp = (
@@ -104,7 +69,7 @@ export default function GlobalAudioPlayer() {
   ) => {
     state.set((prev) => ({ ...prev, seeking: false }))
     const target = e.target as HTMLInputElement
-    ref.current?.seekTo(parseFloat(target?.value))
+    globalPlayerRef.current?.seekTo(parseFloat(target?.value))
   }
 
   const handleDuration = (duration: number) => {
@@ -122,20 +87,28 @@ export default function GlobalAudioPlayer() {
     played: number
     loaded: number
   }) => {
-    state.set((prev) => ({
-      ...prev,
-      playedSeconds: newState.playedSeconds,
-      played: newState.played,
-      loaded: newState.loaded,
-    }))
+    if (state.value.isEnabled) {
+      state.set((prev) => ({
+        ...prev,
+        playedSeconds: newState.playedSeconds,
+        played: newState.played,
+        loaded: newState.loaded,
+      }))
+    }
   }
+
+  useEffect(() => {
+    if (state.value.isEnabled) {
+      globalPlayerRef.current?.seekTo(state.value.played)
+    }
+  }, [state.value.isEnabled])
 
   return (
     <Container visible={state.value.isEnabled}>
       <AudioPlayer>
         <Buttons>
           <Row>
-            <PlayPause onClick={handlePlayPause}>
+            <PlayPause onClick={state.value.playing ? handlePause : handlePlay}>
               {state.value.playing ? <PauseIcon /> : <PlayIcon />}
             </PlayPause>
             <TimeContainer>
@@ -183,9 +156,10 @@ export default function GlobalAudioPlayer() {
       </AudioPlayer>
 
       <ReactPlayer
-        ref={ref}
+        forceAudio
+        ref={globalPlayerRef}
         style={{ display: 'none' }}
-        url={episode.url}
+        url={state.value.url as string}
         width="100%"
         height="100%"
         pip={state.value.pip}
@@ -210,14 +184,14 @@ export default function GlobalAudioPlayer() {
       />
       <RightMenu>
         <Image
-          src={episode.thumbnail}
-          alt={episode.thumbnail}
+          src={epState.value.thumbnail}
+          alt={epState.value.thumbnail}
           width={48}
           height={48}
         />
         <EpisodeData>
-          <Typography variant="body2">{episode.title}</Typography>
-          <Typography variant="body3">{episode.podcast}</Typography>
+          <Typography variant="body2">{epState.value.title}</Typography>
+          <Typography variant="body3">{epState.value.podcast}</Typography>
         </EpisodeData>
       </RightMenu>
     </Container>

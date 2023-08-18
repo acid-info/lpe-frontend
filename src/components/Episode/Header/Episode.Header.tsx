@@ -2,13 +2,10 @@ import { Tags } from '@/components/Tags'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../../types/lpe.types'
-import ReactPlayer from 'react-player'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
-import { useHookstate } from '@hookstate/core'
-import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
 import EpisodeChannels from './Episode.Channels'
-import { useEffect, useRef } from 'react'
 import EpisodeStats from '../Episode.Stats'
+import EpisodePlayer from './Episode.Player'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   url: string
@@ -16,75 +13,19 @@ export type EpisodeHeaderProps = LPE.Podcast.Document & {
 }
 
 const EpisodeHeader = ({
+  url,
   title,
   description,
   publishedAt,
   tags,
   channels,
-  url,
   duration,
 }: EpisodeHeaderProps) => {
   const date = new Date(publishedAt)
-  const state = useHookstate(playerState)
-
-  const playerContainerRef = useRef<HTMLDivElement>(null)
-  const playerRef = useRef<ReactPlayer>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        state.set((prev) => ({
-          ...prev,
-          isEnabled: false,
-        }))
-      } else {
-        const offset = 0.5 // offset for episode player
-        playerRef.current?.seekTo(state.value.playedSeconds + offset, 'seconds')
-        state.set((prev) => ({
-          ...prev,
-          playedSeconds: state.value.playedSeconds + offset,
-          isEnabled: true,
-        }))
-      }
-    })
-    observer.observe(playerContainerRef.current as any)
-
-    return () => {
-      observer.disconnect()
-      state.set((prev) => ({
-        ...prev,
-        isEnabled: true,
-      }))
-    }
-  }, [])
 
   return (
     <EpisodeHeaderContainer>
-      <PlayerContainer ref={playerContainerRef}>
-        <ReactPlayer
-          ref={playerRef}
-          url={url}
-          controls={true}
-          playing={state.value.playing}
-          volume={state.value.volume}
-          muted={state.value.isEnabled ? true : false}
-          onProgress={(newState) => {
-            state.set((prev) => ({
-              ...prev,
-              playedSeconds: newState.playedSeconds,
-              played: newState.played,
-              loaded: newState.loaded,
-            }))
-          }}
-          onPlay={() => {
-            state.set((prev) => ({ ...prev, playing: true }))
-          }}
-          onPause={() => state.set((prev) => ({ ...prev, playing: false }))}
-          onDuration={(duration) =>
-            state.set((prev) => ({ ...prev, duration }))
-          }
-        />
-      </PlayerContainer>
+      <EpisodePlayer url={url} />
       <EpisodeStats date={date} duration={duration} />
       <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
         {title}
