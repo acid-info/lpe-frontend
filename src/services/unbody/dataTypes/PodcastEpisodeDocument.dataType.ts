@@ -94,9 +94,9 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
       credits,
       transcription,
       channels,
-      coverImage,
-      show,
-      showId: show?.id,
+      ...(show ? { show } : {}),
+      ...(show ? { showId: show.id } : {}),
+      ...(coverImage ? { coverImage } : {}),
       highlighted: data.highlighted,
       type: LPE.PostTypes.Podcast,
     }
