@@ -8,7 +8,7 @@ const Tags = ({ tags, className }: { tags: string[]; className?: string }) => {
   const { query } = router
   const { topics } = query
 
-  return tags.length > 0 ? (
+  return tags?.length > 0 ? (
     <TagsContainer className={className}>
       {tags.map((tag, idx) => (
         <Link key={`tag-${idx}`} href={`/search?topics=${tag}`}>

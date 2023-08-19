@@ -1,88 +1,22 @@
 import ReactPlayer from 'react-player'
 import styled from '@emotion/styled'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { PlayIcon } from '../Icons/PlayIcon'
 import { PauseIcon } from '../Icons/PauseIcon'
 import { VolumeIcon } from '../Icons/VolumeIcon'
 import styles from './GlobalAudioPlayer.module.css'
 import { convertSecToMinAndSec } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
-import { getAudioSourceFromEpisode } from '@/utils/data.utils'
 import Image from 'next/image'
+import { playerState } from './globalAudioPlayer.state'
+import { useHookstate } from '@hookstate/core'
+import { episodeState } from './episode.state'
 
-type StateProps = {
-  url: string | null
-  pip: boolean
-  playing: boolean
-  playedSeconds: number
-  controls: boolean
-  light: boolean
-  volume: number
-  muted: boolean
-  played: number
-  loaded: number
-  duration: number
-  playbackRate: number
-  loop: boolean
-  seeking: boolean
-}
+export default function GlobalAudioPlayer() {
+  const state = useHookstate(playerState)
+  const epState = useHookstate(episodeState)
 
-// Hasing it out episodes: https://api.simplecast.com/podcasts/b54c0885-7c72-415d-b032-7d294b78d785/episodes?preview=true
-const TEMP_EPISODE_ID = '30d4e2f5-4434-419c-8fc1-a76e4b367e20'
-
-type Props = {
-  episodeId: string
-}
-
-type EpisodeProps = {
-  title: string
-  podcast: string
-  url: string
-  thumbnail: string
-}
-
-export default function GlobalAudioPlayer({ episodeId }: Props) {
-  const ref = useRef<ReactPlayer>(null)
-  const [episode, setEpisode] = useState<EpisodeProps>({
-    title: '',
-    podcast: '',
-    url: '',
-    thumbnail: '',
-  })
-
-  useMemo(() => {
-    const getAudioSource = async () => {
-      const response = await getAudioSourceFromEpisode(
-        episodeId || TEMP_EPISODE_ID,
-      )
-
-      setEpisode({
-        title: response.title,
-        podcast: response.podcast.title,
-        url: response.ad_free_audio_file_url,
-        thumbnail: response.image_url,
-      })
-    }
-
-    getAudioSource()
-  }, [episodeId])
-
-  const [state, setState] = useState<StateProps>({
-    url: episode.url,
-    pip: false,
-    playing: false,
-    playedSeconds: 0,
-    controls: false,
-    light: false,
-    volume: 0.8,
-    muted: false,
-    played: 0,
-    loaded: 0,
-    duration: 0,
-    playbackRate: 1.0,
-    loop: false,
-    seeking: false,
-  })
+  const globalPlayerRef = useRef<ReactPlayer>(null)
 
   const [showVolume, setShowVolume] = useState(false)
 
@@ -91,11 +25,10 @@ export default function GlobalAudioPlayer({ episodeId }: Props) {
   // }
 
   const handlePlay = () => {
-    setState((prev) => ({ ...prev, playing: true }))
-  }
-
-  const handlePlayPause = () => {
-    setState((prev) => ({ ...prev, playing: !state.playing }))
+    state.set((prev) => ({
+      ...prev,
+      playing: true,
+    }))
   }
 
   // const handleStop = () => {
@@ -103,11 +36,11 @@ export default function GlobalAudioPlayer({ episodeId }: Props) {
   // }
 
   const handleEnded = () => {
-    setState((prev) => ({ ...prev, playing: prev.loop }))
+    state.set((prev) => ({ ...prev, playing: prev.loop }))
   }
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState((prev) => ({ ...prev, volume: parseFloat(e.target.value) }))
+    state.set((prev) => ({ ...prev, volume: parseFloat(e.target.value) }))
   }
 
   // const handleToggleMuted = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,56 +52,72 @@ export default function GlobalAudioPlayer({ episodeId }: Props) {
   // }
 
   const handlePause = () => {
-    setState((prev) => ({ ...prev, playing: false }))
+    state.set((prev) => ({ ...prev, playing: false }))
   }
 
-  const handleSeekMouseDown = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
-    setState((prev) => ({ ...prev, seeking: true }))
+  const handleSeekMouseDown = () => {
+    state.set((prev) => ({ ...prev, seeking: true }))
   }
 
   const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState((prev) => ({ ...prev, played: parseFloat(e.target.value) }))
+    const played = parseFloat(e.target.value)
+    state.set((prev) => ({ ...prev, played: played }))
   }
 
   const handleSeekMouseUp = (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>,
   ) => {
-    setState((prev) => ({ ...prev, seeking: false }))
+    state.set((prev) => ({ ...prev, seeking: false }))
     const target = e.target as HTMLInputElement
-    ref.current?.seekTo(parseFloat(target?.value))
+    globalPlayerRef.current?.seekTo(parseFloat(target?.value))
   }
 
   const handleDuration = (duration: number) => {
-    setState((prev) => ({ ...prev, duration }))
+    state.set((prev) => ({ ...prev, duration }))
   }
 
   const handleOnPlaybackRateChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setState((prev) => ({ ...prev, playbackRate: parseFloat(e.target.value) }))
+    state.set((prev) => ({ ...prev, playbackRate: parseFloat(e.target.value) }))
   }
 
-  const handleProgress = (newState: { playedSeconds: number }) => {
-    setState((prev) => ({ ...prev, playedSeconds: newState.playedSeconds }))
+  const handleProgress = (newState: {
+    playedSeconds: number
+    played: number
+    loaded: number
+  }) => {
+    if (state.value.isEnabled) {
+      state.set((prev) => ({
+        ...prev,
+        playedSeconds: newState.playedSeconds,
+        played: newState.played,
+        loaded: newState.loaded,
+      }))
+    }
   }
+
+  useEffect(() => {
+    if (state.value.isEnabled) {
+      globalPlayerRef.current?.seekTo(state.value.played)
+    }
+  }, [state.value.isEnabled])
 
   return (
-    <Container>
+    <Container visible={state.value.isEnabled}>
       <AudioPlayer>
         <Buttons>
           <Row>
-            <PlayPause onClick={handlePlayPause}>
-              {state.playing ? <PauseIcon /> : <PlayIcon />}
+            <PlayPause onClick={state.value.playing ? handlePause : handlePlay}>
+              {state.value.playing ? <PauseIcon /> : <PlayIcon />}
             </PlayPause>
             <TimeContainer>
               <Time variant="body3">
-                {convertSecToMinAndSec(state.playedSeconds)}
+                {convertSecToMinAndSec(state.value.playedSeconds)}
               </Time>
               <Typography variant="body3">/</Typography>
               <Time variant="body3">
-                {convertSecToMinAndSec(state.duration)}
+                {convertSecToMinAndSec(state.value.duration)}
               </Time>
             </TimeContainer>
           </Row>
@@ -181,7 +130,7 @@ export default function GlobalAudioPlayer({ episodeId }: Props) {
                   min={0}
                   max={1}
                   step="any"
-                  value={state.volume}
+                  value={state.value.volume}
                   onChange={handleVolumeChange}
                 />
               </VolumeGauge>
@@ -198,7 +147,7 @@ export default function GlobalAudioPlayer({ episodeId }: Props) {
             min={0}
             max={0.999999}
             step="any"
-            value={state.played}
+            value={state.value.played}
             onMouseDown={handleSeekMouseDown}
             onChange={handleSeekChange}
             onMouseUp={handleSeekMouseUp}
@@ -207,19 +156,20 @@ export default function GlobalAudioPlayer({ episodeId }: Props) {
       </AudioPlayer>
 
       <ReactPlayer
-        ref={ref}
+        forceAudio
+        ref={globalPlayerRef}
         style={{ display: 'none' }}
-        url={episode.url}
+        url={state.value.url as string}
         width="100%"
         height="100%"
-        pip={state.pip}
-        playing={state.playing}
-        controls={state.controls}
-        light={state.light}
-        loop={state.loop}
-        playbackRate={state.playbackRate}
-        volume={state.volume}
-        muted={state.muted}
+        pip={state.value.pip}
+        playing={state.value.playing}
+        controls={state.value.controls}
+        light={state.value.light}
+        loop={state.value.loop}
+        playbackRate={state.value.playbackRate}
+        volume={state.value.volume}
+        muted={state.value.isEnabled ? false : true}
         onReady={() => console.log('onReady')}
         onStart={() => console.log('onStart')}
         onPlay={handlePlay}
@@ -232,24 +182,26 @@ export default function GlobalAudioPlayer({ episodeId }: Props) {
         onDuration={handleDuration}
         onProgress={handleProgress}
       />
-
       <RightMenu>
-        <Image
-          src={episode.thumbnail}
-          alt={episode.thumbnail}
-          width={86}
-          height={48}
-        />
+        {!!epState.value.thumbnail && (
+          <Image
+            src={epState.value.thumbnail}
+            alt={epState.value.thumbnail}
+            width={48}
+            height={48}
+          />
+        )}
+
         <EpisodeData>
-          <Typography variant="body2">{episode.title}</Typography>
-          <Typography variant="body3">{episode.podcast}</Typography>
+          <Typography variant="body2">{epState.value.title}</Typography>
+          <Typography variant="body3">{epState.value.podcast}</Typography>
         </EpisodeData>
       </RightMenu>
     </Container>
   )
 }
 
-const Container = styled.div`
+const Container = styled.div<{ visible: boolean }>`
   width: 100vw;
   height: 80px;
   padding: 22px 16px;
@@ -262,6 +214,7 @@ const Container = styled.div`
   left: 0;
   border-top: 1px solid rgb(var(--lsd-border-primary));
   box-sizing: border-box;
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
 `
 
 const Buttons = styled.div`

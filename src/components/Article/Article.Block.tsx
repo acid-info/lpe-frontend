@@ -10,7 +10,6 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'
 import { LPE } from '../../types/lpe.types'
-import { PostImageRatio } from '@/components/PostCard/PostCard'
 import { ArticleImageBlockWrapper } from './Article.ImageBlockWrapper'
 
 export const RenderArticleBlock = ({
@@ -24,12 +23,7 @@ export const RenderArticleBlock = ({
 }) => {
   switch (block.type) {
     case 'image':
-      return (
-        <ArticleImageBlockWrapper
-          ratio={PostImageRatio.LANDSCAPE}
-          image={block}
-        />
-      )
+      return <ArticleImageBlockWrapper image={block} />
     case 'text':
       switch (block.tagName) {
         case 'h1':
@@ -60,18 +54,6 @@ export const RenderArticleBlock = ({
 
           const isSimplecast = isSimplecastRegex.test(block.text)
           const simplecastLink = block.text.match(isSimplecastRegex) ?? []
-
-          // const episodeId = extractUUIDFromEpisode(simplecastLink[0] ?? '')
-
-          // let audioSrc = ''
-
-          // if (isSimplecast) {
-          //   fetch(
-          //     `https://api.simplecast.com/episodes/audio/bc313c16-82e9-439a-8e0c-af59833d22d7`,
-          //   )
-          //     .then((response) => response.json())
-          //     .then((data) => console.log(data))
-          // }
 
           return isIframe ? (
             <IframeContainer dangerouslySetInnerHTML={{ __html: block.text }} />

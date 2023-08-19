@@ -12,7 +12,7 @@ export const PlayIcon = LsdIcon(
     >
       <path
         d="M6.6665 15.8346V4.16797L15.8332 10.0013L6.6665 15.8346Z"
-        fill="black"
+        fill={props.fill || 'black'}
       />
     </svg>
   ),
