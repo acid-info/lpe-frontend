@@ -10,7 +10,8 @@ type Props = {
 
 const EpisodeBlocks = ({ data }: Props) => {
   const [showMore, setShowMore] = useState(false)
-  const blocks = data?.transcription
+
+  const blocks = data?.content as LPE.Post.TextBlock[]
 
   return blocks?.length && showMore ? (
     <>

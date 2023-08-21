@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { useState } from 'react'
 import { LPE } from '@/types/lpe.types'
 import { PostCard } from '@/components/PostCard'
+import { Grid, GridItem } from '@/components/Grid/Grid'
 
 type props = {
   podcastSlug: string
@@ -25,26 +26,29 @@ const RelatedEpisodes = ({ podcastSlug, relatedEpisodes }: props) => {
       <Typography>More Episodes</Typography>
       <EpisodeCards>
         {relatedEpisodes.slice(0, showIndex).map((episode, idx: number) => (
-          <PostCard
-            key={'related-episode' + idx}
-            contentType={LPE.PostTypes.Podcast}
-            data={{
-              authors: episode.authors,
-              date: episode.publishedAt ? new Date(episode.publishedAt) : null,
-              slug: episode.show?.slug
-                ? `${episode.show?.slug}/${episode.slug}`
-                : `${podcastSlug}/${episode.slug}`,
-              title: episode.title,
-              coverImage: episode.coverImage,
-              tags: episode.tags,
-              podcastShowDetails: {
+          <PostCardContainer className="w-8" key={'related-episode' + idx}>
+            <PostCard
+              contentType={LPE.PostTypes.Podcast}
+              data={{
+                authors: episode.authors,
+                date: episode.publishedAt
+                  ? new Date(episode.publishedAt)
+                  : null,
+                slug: episode.show?.slug
+                  ? `${episode.show?.slug}/${episode.slug}`
+                  : `${podcastSlug}/${episode.slug}`,
                 title: episode.title,
-                slug: `${episode.show?.slug}`,
-                episodeNumber: episode.episodeNumber,
-                podcast: episode.show as LPE.Podcast.Show,
-              },
-            }}
-          />
+                coverImage: episode.coverImage,
+                tags: episode.tags,
+                podcastShowDetails: {
+                  title: episode.title,
+                  slug: `${episode.show?.slug}`,
+                  episodeNumber: episode.episodeNumber,
+                  podcast: episode.show as LPE.Podcast.Show,
+                },
+              }}
+            />
+          </PostCardContainer>
         ))}
       </EpisodeCards>
       {relatedEpisodes?.length > 4 && (
@@ -64,16 +68,17 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-const EpisodeCards = styled.div`
-  display: flex;
-  flex-direction: row;
+const EpisodeCards = styled(Grid)`
   gap: 0 16px;
-  flex-wrap: wrap;
 `
 
 const ShowButton = styled(Button)`
   height: 40px;
   margin-top: 24px;
+`
+
+const PostCardContainer = styled(GridItem)`
+  padding-top: 24px;
 `
 
 export default RelatedEpisodes

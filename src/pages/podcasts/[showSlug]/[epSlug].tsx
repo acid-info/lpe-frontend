@@ -42,16 +42,25 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
 }
 
 export async function getStaticPaths() {
+  const { data } = await unbodyApi.getPodcastShows({ populateEpisodes: true })
+
+  const paths = data.flatMap((show) => {
+    return (
+      show?.episodes &&
+      show.episodes.map((episode) => {
+        return {
+          params: {
+            showSlug: show.slug,
+            epSlug: episode.slug,
+          },
+        }
+      })
+    )
+  })
+
   return {
-    paths: [
-      {
-        params: {
-          showSlug: `hasing-it-out`,
-          epSlug: `test-podcast-highlighted`,
-        },
-      },
-    ],
-    fallback: true,
+    paths: paths,
+    fallback: false,
   }
 }
 

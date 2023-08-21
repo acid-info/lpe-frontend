@@ -4,8 +4,6 @@ import { ReactNode } from 'react'
 import { LPE } from '../../types/lpe.types'
 import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 import PodcastsContainer from '@/containers/PodcastsContainer'
-
-import TEMP_DATA from './podcasts-temp-data.json'
 import unbodyApi from '@/services/unbody/unbody.service'
 
 type PodcastsProps = {

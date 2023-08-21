@@ -1,3 +1,4 @@
+import { LPE } from '@/types/lpe.types'
 import { hookstate } from '@hookstate/core'
 
 export type EpisodeState = {
@@ -5,7 +6,7 @@ export type EpisodeState = {
   title: string
   podcast: string
   url: string
-  thumbnail: string
+  coverImage: LPE.Post.ImageBlock | null
 }
 
 export const defaultEpisodeState: EpisodeState = {
@@ -13,7 +14,7 @@ export const defaultEpisodeState: EpisodeState = {
   title: '',
   podcast: '',
   url: '',
-  thumbnail: '',
+  coverImage: null,
 }
 
 export const episodeState =

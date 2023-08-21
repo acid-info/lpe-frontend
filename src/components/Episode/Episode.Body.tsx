@@ -15,17 +15,20 @@ export default function EpisodeBody({ episode, relatedEpisodes }: Props) {
   const youtube = episode?.channels.find(
     (channel) => channel?.name === LPE.Podcast.ChannelNames.Youtube,
   )
+  const simplecast = episode?.channels.find(
+    (channel) => channel?.name === LPE.Podcast.ChannelNames.Simplecast,
+  )
+
+  const channel = youtube ?? simplecast ?? null
 
   const state = useHookstate(playerState)
   const duration = Math.round(state.value.duration / 60)
 
   return (
     <EpisodeContainer>
-      <EpisodeHeader
-        {...episode}
-        url={youtube?.url as string}
-        duration={duration}
-      />
+      {!!channel && (
+        <EpisodeHeader {...episode} channel={channel} duration={duration} />
+      )}
       <EpisodeTranscript episode={episode} />
       <EpisodeFooter episode={episode} relatedEpisodes={relatedEpisodes} />
     </EpisodeContainer>

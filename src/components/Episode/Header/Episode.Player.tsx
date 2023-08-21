@@ -3,32 +3,40 @@ import ReactPlayer from 'react-player'
 import { useHookstate } from '@hookstate/core'
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
 import { useEffect, useRef } from 'react'
-import { extractUUIDFromEpisode } from '@/utils/string.utils'
-import { getAudioSourceFromEpisode } from '@/utils/data.utils'
 import { episodeState } from '@/components/GlobalAudioPlayer/episode.state'
 import SimplecastPlayer from './Episode.SimplecastPlayer'
+import { LPE } from '@/types/lpe.types'
 
 export type EpisodePlayerProps = {
-  url: string
+  channel: LPE.Podcast.Channel
+  coverImage: LPE.Podcast.Document['coverImage']
+  title: string
+  showTitle: string
 }
 
-const EpisodePlayer = ({ url }: EpisodePlayerProps) => {
+const EpisodePlayer = ({
+  channel,
+  coverImage,
+  title,
+  showTitle,
+}: EpisodePlayerProps) => {
   const state = useHookstate(playerState)
   const epState = useHookstate(episodeState)
 
-  const isYoutubeRegex =
-    /(?:\/(?:embed|v|e)\/|\/watch\?v=|\/v\/|https?:\/\/(?:www\.)?youtu\.be\/)([^?&]+)/
+  const isSimplecast = channel?.name === LPE.Podcast.ChannelNames.Simplecast
 
-  const youtubeLink = url.match(isYoutubeRegex) ?? []
+  const url =
+    channel?.name === LPE.Podcast.ChannelNames.Youtube
+      ? channel.url
+      : (
+          channel as Extract<
+            LPE.Podcast.Channel,
+            { name: typeof LPE.Podcast.ChannelNames.Simplecast }
+          >
+        ).data.audioFileUrl
 
   const playerContainerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<ReactPlayer>(null)
-
-  const isSimplecastRegex =
-    /^https?:\/\/([a-zA-Z0-9-]+\.)*simplecast\.com\/[^?\s]+(\?[\s\S]*)?$/
-
-  const isSimplecast = isSimplecastRegex.test(url)
-  const simplecastLink = url.match(isSimplecastRegex) ?? []
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -52,40 +60,19 @@ const EpisodePlayer = ({ url }: EpisodePlayerProps) => {
   }, [])
 
   useEffect(() => {
-    const episodeId = extractUUIDFromEpisode(simplecastLink[0] ?? '')
+    epState.set({
+      episodeId: 'aaa',
+      title: title,
+      podcast: showTitle,
+      url: url,
+      coverImage: coverImage ?? null,
+    })
 
-    if (isSimplecast) {
-      const getAudioSource = async () => {
-        const response = await getAudioSourceFromEpisode(episodeId as string)
-
-        epState.set({
-          episodeId: episodeId as string,
-          title: response.title,
-          podcast: response.podcast.title,
-          url: response.ad_free_audio_file_url,
-          thumbnail: response.image_url,
-        })
-
-        state.set((prev) => ({
-          ...prev,
-          url: response.ad_free_audio_file_url,
-        }))
-      }
-      getAudioSource()
-    } else {
-      state.set((prev) => ({
-        ...prev,
-        url,
-      }))
-
-      const thumbnail = `https://img.youtube.com/vi/${youtubeLink[1]}/0.jpg`
-
-      epState.set((prev) => ({
-        ...prev,
-        thumbnail: thumbnail,
-      }))
-    }
-  }, [])
+    state.set((prev) => ({
+      ...prev,
+      url: url,
+    }))
+  }, [url, title, showTitle, coverImage])
 
   useEffect(() => {
     if (!state.value.isEnabled) {
@@ -122,8 +109,9 @@ const EpisodePlayer = ({ url }: EpisodePlayerProps) => {
       {isSimplecast && (
         <SimplecastPlayer
           playerRef={playerRef}
-          title={epState.value.title as string}
-          thumbnail={epState.value.thumbnail as string}
+          coverImage={
+            epState.value.coverImage as LPE.Podcast.Document['coverImage']
+          }
           handlePlay={handlePlay}
           handlePause={handlePause}
         />

@@ -47,10 +47,19 @@ const PodcastShowPage = ({
 }
 
 export async function getStaticPaths() {
-  // TODO : dynamic paths
+  const { data } = await unbodyApi.getPodcastShows({ populateEpisodes: false })
+
+  const paths = data.map((show) => {
+    return {
+      params: {
+        showSlug: show.slug,
+      },
+    }
+  })
+
   return {
-    paths: [{ params: { showSlug: `hashing-it-out` } }],
-    fallback: true,
+    paths: paths,
+    fallback: false,
   }
 }
 
@@ -75,7 +84,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     await unbodyApi.getLatestEpisodes({
       showSlug: showSlug as string,
       page: 1,
-      limit: 12,
+      limit: 9,
     })
 
   // TODO : error handling
@@ -83,7 +92,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     await unbodyApi.getHighlightedEpisodes({
       showSlug: showSlug as string,
       page: 1,
-      limit: 9,
+      limit: 2,
     })
 
   return {
