@@ -1,3 +1,4 @@
+import { GlobalAudioPlayer } from '@/components/GlobalAudioPlayer'
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 import { uiConfigs } from '@/configs/ui.configs'
 import { SearchBarProvider } from '@/context/searchbar.context'
@@ -8,7 +9,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ReactNode } from 'react'
 import { LSDThemeProvider } from '../containers/LSDThemeProvider'
-import { GlobalAudioPlayer } from '@/components/GlobalAudioPlayer'
+import { useHydrated } from '../utils/useHydrated.util'
 
 type NextLayoutComponentType<P = {}> = NextComponentType<
   NextPageContext,
@@ -23,6 +24,8 @@ type AppLayoutProps<P = {}> = AppProps & {
 }
 
 export default function App({ Component, pageProps }: AppLayoutProps) {
+  const hydrated = useHydrated()
+
   const getLayout =
     Component.getLayout ||
     ((page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>)
@@ -95,7 +98,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
       <SearchBarProvider>
         {getLayout(<Component {...pageProps} />)}
       </SearchBarProvider>
-      <GlobalAudioPlayer />
+      {hydrated && <GlobalAudioPlayer />}
     </LSDThemeProvider>
   )
 }
