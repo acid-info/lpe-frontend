@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { NavbarLinks } from '@/components/AppBar/Navbar.Links'
+import { NavbarLinks } from '@/components/NavBar/Navbar.Links'
 import { NavLinksItems } from '@/configs/data.configs'
 import { uiConfigs } from '@/configs/ui.configs'
 import { FooterOrgPanel } from '@/components/Footer/Footer.OrgPanel'

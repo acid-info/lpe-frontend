@@ -13,17 +13,17 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { LogosIcon } from '../Icons/LogosIcon'
-import { MoonIcon } from '../Icons/MoonIcon'
-import { SunIcon } from '../Icons/SunIcon'
 import { useThemeState } from '@/states/themeState'
-import { NavbarLinks } from '@/components/AppBar/Navbar.Links'
+import { NavbarLinks } from '@/components/NavBar/Navbar.Links'
 import { NavLinksItems } from '@/configs/data.configs'
-import { NavbarMobileMenu } from '@/components/AppBar/Navbar.MobileMenu'
+import { NavbarMobileMenu } from '@/components/NavBar/Navbar.MobileMenu'
 import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch'
 
-interface AppBarProps {}
+export interface NavBarProps {
+  showLogoType?: boolean
+}
 
-export default function AppBar({}: AppBarProps) {
+export default function NavBar({ showLogoType = true }: NavBarProps) {
   const themeState = useThemeState()
   const { pathname } = useRouter()
   const isSearchPage = pathname === '/search'
@@ -44,9 +44,11 @@ export default function AppBar({}: AppBarProps) {
       <NavBarContainer>
         <LeftContainer href={'/'}>
           <LogosIcon color="primary" />
-          <PressLogoType variant={'h6'} genericFontFamily={'serif'}>
-            Press Engine
-          </PressLogoType>
+          {showLogoType && (
+            <PressLogoType variant={'h6'} genericFontFamily={'serif'}>
+              Press Engine
+            </PressLogoType>
+          )}
         </LeftContainer>
         <NavLinksContainer>
           <NavbarLinks links={NavLinksItems} />
