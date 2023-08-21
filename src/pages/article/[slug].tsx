@@ -71,7 +71,10 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
-  const { data: relatedArticles } = await unbodyApi.getRelatedArticles(data.id)
+  const { data: relatedArticles } = await unbodyApi.getRelatedArticles({
+    id: data.id,
+  })
+
   const { data: articlesFromSameAuthors } =
     await unbodyApi.getArticlesFromSameAuthors(
       slug as string,

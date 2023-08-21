@@ -6,7 +6,6 @@ import { useIntersectionObserver } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../../types/lpe.types'
-import { PostImageRatio } from '@/components/PostCard/PostCard'
 import { ArticleImageBlockWrapper } from '../Article.ImageBlockWrapper'
 import ArticleStats from '../Article.Stats'
 import ArticleSummary from './Article.Summary'
@@ -67,12 +66,7 @@ const ArticleHeader = ({
         className={'mobileSummary'}
         showLabel={false}
       />
-      {coverImage && (
-        <ArticleImageBlockWrapper
-          ratio={PostImageRatio.LANDSCAPE}
-          image={coverImage}
-        />
-      )}
+      {coverImage && <ArticleImageBlockWrapper image={coverImage} />}
       <ArticleSummary
         summary={summary}
         className={'desktopSummary'}
