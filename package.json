@@ -9,7 +9,9 @@
     "lint": "next lint",
     "prepare": "husky install",
     "codegen": "dotenv -e ./.env -c -- yarn graphql-code-generator --debug --verbose ./codegen.ts",
-    "codegen:watch": "dotenv -e ./.env -c -- yarn graphql-code-generator --debug --verbose --watch ./codegen.ts"
+    "codegen:watch": "dotenv -e ./.env -c -- yarn graphql-code-generator --debug --verbose --watch ./codegen.ts",
+    "codegenx": "dotenv -e ./.env -c -- yarn graphql-code-generator --debug --verbose ./codegen.ts",
+    "codegenx:watch": "dotenv -e ./.env -c -- yarn graphql-code-generator --debug --verbose ./codegen.ts"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

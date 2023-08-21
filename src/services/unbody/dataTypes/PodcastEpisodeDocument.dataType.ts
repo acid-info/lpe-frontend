@@ -61,7 +61,10 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
     })
 
     if (context?.parseContent) {
-      const sections = findSections(['Credits', 'Content'], allBlocks)
+      const sections = findSections(
+        ['Credits', 'Content', 'Timestamps', 'Transcription'],
+        allBlocks,
+      )
 
       const textBlocks = allBlocks.filter(
         (block) => block.type === 'text',
@@ -79,7 +82,9 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
             break
           }
 
-          case 'Content': {
+          case 'Content':
+          case 'Timestamps':
+          case 'Transcription': {
             content.push(...section.blocks)
 
             break
