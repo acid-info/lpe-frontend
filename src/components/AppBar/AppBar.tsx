@@ -2,7 +2,12 @@ import { Searchbar } from '@/components/Searchbar'
 import { uiConfigs } from '@/configs/ui.configs'
 import { useSearchBarContext } from '@/context/searchbar.context'
 import { useScrollDirection } from '@/utils/ui.utils'
-import { IconButton, SearchIcon } from '@acid-info/lsd-react'
+import {
+  IconButton,
+  MenuIcon,
+  SearchIcon,
+  Typography,
+} from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -10,199 +15,156 @@ import { useEffect, useState } from 'react'
 import { LogosIcon } from '../Icons/LogosIcon'
 import { MoonIcon } from '../Icons/MoonIcon'
 import { SunIcon } from '../Icons/SunIcon'
+import { useThemeState } from '@/states/themeState'
+import { NavbarLinks } from '@/components/AppBar/Navbar.Links'
+import { NavLinksItems } from '@/configs/data.configs'
+import { NavbarMobileMenu } from '@/components/AppBar/Navbar.MobileMenu'
+import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch'
 
-interface AppBarProps {
-  isDark: boolean
-  toggle: () => void
-  onSearch?: (query: string, tags: string[]) => void
-  onReset?: () => void
-}
+interface AppBarProps {}
 
-export default function AppBar({
-  isDark,
-  toggle,
-  onReset,
-  onSearch,
-}: AppBarProps) {
-  const { resultsNumber } = useSearchBarContext()
+export default function AppBar({}: AppBarProps) {
+  const themeState = useThemeState()
   const { pathname } = useRouter()
   const isSearchPage = pathname === '/search'
-
-  const [hideSearch, setHideSearch] = useState(
-    resultsNumber === null && !isSearchPage,
-  )
   const [hide, setHide] = useState(false)
   const scrollDirection = useScrollDirection()
-  const onSearchIconClick = () => {
-    setHideSearch(!hideSearch)
-  }
-
-  useEffect(() => {
-    if (scrollDirection) {
-      setHide(scrollDirection === 'down')
-      if (!hideSearch && resultsNumber === null) {
-        setHideSearch(scrollDirection === 'down')
-      }
-    }
-    setHideSearch(resultsNumber === null)
-  }, [scrollDirection, resultsNumber])
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const className = pathname.split('/')[1] + '_page'
 
+  const onSearchIconClick = () => {}
+
+  const toggleMobileMenu = () => {
+    setShowMobileMenu(!showMobileMenu)
+  }
+
   return (
     <Container className={`${hide ? 'hide' : ''} ${className}`}>
-      <NavBar>
-        <LogosIconContainer href={'/'}>
+      <NavBarContainer>
+        <LeftContainer href={'/'}>
           <LogosIcon color="primary" />
-        </LogosIconContainer>
-        <Icons>
-          <IconButton size="small" onClick={() => toggle()}>
-            <SunIcon color="primary" className="light-mode-hidden" />
-            <MoonIcon color="primary" className="dark-mode-hidden" />
-          </IconButton>
-          <IconButton
-            className={'searchIcon searchIconHome'}
-            size="small"
-            onClick={() => onSearchIconClick()}
-          >
-            <SearchIcon color="primary" />
-          </IconButton>
-        </Icons>
-      </NavBar>
-      <MobileSearchContainer
-        className={`searchBar ${hideSearch ? 'hide' : ''}`}
-      >
-        <Searchbar
-          className={'mobile'}
-          onSearch={onSearch}
-          onReset={onReset}
-          withFilterTags={isSearchPage}
-        />
-      </MobileSearchContainer>
+          <PressLogoType variant={'h6'} genericFontFamily={'serif'}>
+            Press Engine
+          </PressLogoType>
+        </LeftContainer>
+        <NavLinksContainer>
+          <NavbarLinks links={NavLinksItems} />
+        </NavLinksContainer>
+        <ControlsContainer>
+          <div className={'theme-switch'}>
+            <ThemeSwitch
+              toggle={themeState.toggleMode}
+              mode={themeState.get().mode}
+            />
+          </div>
+          <div className={'menu-button'}>
+            <IconButton size={'small'} onClick={toggleMobileMenu}>
+              <MenuIcon color={'primary'} />
+            </IconButton>
+          </div>
+          {/*<IconButton*/}
+          {/*    className={'searchIcon searchIconHome'}*/}
+          {/*    size="small"*/}
+          {/*    onClick={() => onSearchIconClick()}*/}
+          {/*>*/}
+          {/*    <SearchIcon color="primary"/>*/}
+          {/*</IconButton>*/}
+        </ControlsContainer>
+        {showMobileMenu && <NavbarMobileMenu />}
+      </NavBarContainer>
+      {/*<MobileSearchContainer*/}
+      {/*  className={`searchBar ${hideSearch ? 'hide' : ''}`}*/}
+      {/*>*/}
+      {/*  <Searchbar*/}
+      {/*    className={'mobile'}*/}
+      {/*    onSearch={onSearch}*/}
+      {/*    onReset={onReset}*/}
+      {/*    withFilterTags={isSearchPage}*/}
+      {/*  />*/}
+      {/*</MobileSearchContainer>*/}
     </Container>
   )
 }
 
-const Container = styled.div`
+const PressLogoType = styled(Typography)``
+
+const Container = styled.header`
   width: 100%;
-  transition: top 0.2s;
+  height: 44px;
+
   position: fixed;
   top: 0;
+  left: 0;
   z-index: 101;
-  left: calc(calc(100% - ${uiConfigs.maxContainerWidth}px) / 2);
 
-  &._page {
-    @media (min-width: 768px) {
-      .searchBar {
-        display: none;
-      }
-    }
-    .searchIconHome {
-      display: none;
-    }
-  }
+  background: rgb(var(--lsd-surface-primary));
+  transition: top 0.2s;
 
   &.article_page,
   &.search_page {
   }
-
-  @media (max-width: ${uiConfigs.maxContainerWidth}px) {
-    left: 16px;
-    width: calc(100% - 32px);
-  }
-
-  @media (max-width: 768px) {
-    left: 0;
-    width: 100%;
-    &.hide {
-      top: -44px;
-    }
-  }
-
-  > * {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 `
 
-const MobileSearchContainer = styled.div`
-  width: 100%;
-  transition: transform 0.3s ease-in-out;
-  z-index: 98;
-  transform: translateY(44px);
-
-  @media (max-width: 768px) {
-    display: block;
-    &.hide {
-      transform: translateY(0);
-    }
-  }
-`
-
-const NavBar = styled.nav`
+const NavBarContainer = styled.nav`
   display: flex;
   padding: 8px 0;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  position: relative;
+
   border-bottom: 1px solid rgb(var(--lsd-theme-primary));
-  //position: fixed;
+
+  margin: auto;
+
   top: 0;
-  width: 100%;
-  height: 44px;
+  width: calc(100% - 32px);
   max-width: ${uiConfigs.maxContainerWidth}px;
-  background: rgb(var(--lsd-surface-primary));
-  z-index: 100;
   box-sizing: border-box;
 
-  &:last-child {
-    margin-left: auto;
-  }
-
-  // to center-align logo
-  &:before {
-    content: 'D';
-    width: 54px;
-    margin: 1px auto 1px 1px;
-    visibility: hidden;
-  }
-
-  /* temporary breakpoint */
-  @media (max-width: 768px) {
-    padding: 8px;
-
-    &:before {
-      display: none;
-    }
+  > * {
+    display: flex;
+    align-items: center;
   }
 `
 
-const LogosIconContainer = styled(Link)`
-  display: flex;
-  align-items: center;
+const NavLinksContainer = styled.div`
+  flex: 1;
   justify-content: center;
-  cursor: pointer;
 
-  @media (max-width: 768px) {
-    margin-left: unset;
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+    display: none !important;
   }
 `
 
-const Icons = styled.div`
+const LeftContainer = styled(Link)`
+  flex: 0 0 auto;
+  text-decoration: none;
+  position: absolute;
+  left: 0;
   display: flex;
-  align-items: center;
-  margin-left: auto;
 
-  > *:last-of-type {
-    margin-left: -1px;
+  @media (max-width: 768px) {
+    position: relative;
+  }
+`
+
+const ControlsContainer = styled.div`
+  .theme-switch {
+    display: block;
   }
 
-  .searchIcon {
+  .menu-button {
     display: none;
   }
 
   @media (max-width: 768px) {
-    .searchIcon {
+    .theme-switch {
+      // hide theme switch
+      display: none;
+    }
+
+    .menu-button {
       display: block;
     }
   }

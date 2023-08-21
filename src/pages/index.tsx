@@ -8,6 +8,7 @@ import SEO from '../components/SEO/SEO'
 import { api } from '../services/api.service'
 import unbodyApi from '../services/unbody/unbody.service'
 import { LPE } from '../types/lpe.types'
+import { Hero } from '@/components/Hero'
 
 type Props = {
   posts: LPE.Article.Data[]
@@ -37,6 +38,7 @@ export default function Home({ posts, featured, tags }: Props) {
         }
         title={'Logos Press Engine'}
       />
+      <Hero />
       {featured && (
         <Section title={'Featured'}>
           <FeaturedPost post={featured} />

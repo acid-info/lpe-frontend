@@ -6,3 +6,9 @@ export const ArticleBlocksOrders = {
   mentions: 4,
   cover: 5,
 }
+
+export const NavLinksItems = [
+  { label: 'Articles', href: '/search?postType=article' },
+  { label: 'Podcasts', href: '/podcasts' },
+  { label: 'About', href: '/about' },
+]

@@ -9,33 +9,11 @@ import { AppBar } from '../../components/AppBar'
 import { useThemeState } from '../../states/themeState'
 
 export default function DefaultLayout(props: PropsWithChildren<any>) {
-  const themeState = useThemeState()
-
   return (
     <>
-      <HeaderContainer
-        style={{
-          textAlign: 'center',
-          marginBlock: `${uiConfigs.navbarRenderedHeight}px`,
-        }}
-      >
-        <div>
-          <AppBar
-            isDark={themeState.mode.get() === 'dark'}
-            toggle={themeState.toggleMode}
-          />
-          <Hero />
-        </div>
-        <Searchbar withFilterTags={false} beSticky={true} />
-      </HeaderContainer>
+      <AppBar />
       <Main>{props.children}</Main>
       <Footer />
     </>
   )
 }
-
-const HeaderContainer = styled.header`
-  @media (min-width: 776px) and (max-width: ${uiConfigs.maxContainerWidth}px) {
-    padding: 0 16px;
-  }
-`
