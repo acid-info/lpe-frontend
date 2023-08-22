@@ -144,7 +144,7 @@ const getDistributionChannels = async (blocks: LPE.Post.TextBlock[]) => {
   }
 
   const linkBlocks = blocks.filter((block) =>
-    /^(https):\/\/[^ "]+$/.test(block.text),
+    /^(https):\/\/[^ "]+$/.test((block.text || '').trim()),
   )
 
   for (const block of linkBlocks) {
