@@ -1,22 +1,23 @@
-import { Tag } from '@acid-info/lsd-react'
-import styled from '@emotion/styled'
 import { nope } from '@/utils/general.utils'
+import { Tag, TagProps } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 
 type FilterTagsProps = {
   tags: string[]
   selectedTags: string[]
+  size?: TagProps['size']
   onTagClick?: (tag: string) => void
 }
 
 export default function FilterTags(props: FilterTagsProps) {
-  const { tags = [], onTagClick = nope, selectedTags } = props
+  const { size = 'small', tags = [], onTagClick = nope, selectedTags } = props
 
   return (
     <Container>
       <Tags>
         {tags.map((tag, index) => (
           <Tag
-            size="small"
+            size={size}
             disabled={false}
             key={index}
             onClick={() => onTagClick(tag)}
@@ -39,6 +40,7 @@ const Tags = styled.div`
   gap: 8px;
   overflow-x: auto;
   padding-right: 14px;
+  flex-wrap: wrap;
 
   min-height: 24px;
 
@@ -55,13 +57,17 @@ const Tags = styled.div`
 
   > * {
     white-space: nowrap;
+    overflow: hidden;
+    max-width: 200px;
+
+    span {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
-  @media (max-width: 768px) {
-    > *:first-child {
-      margin-left: 16px;
-    }
-
-    padding-right: 16px;
+  @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
+    justify-content: center;
   }
 `

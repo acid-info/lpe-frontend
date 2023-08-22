@@ -9,14 +9,18 @@ import { IconButton, MenuIcon, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { NavbarState, useNavbarState } from '../../states/navbarState'
 import { LogosIcon } from '../Icons/LogosIcon'
 
 export interface NavBarProps {
-  showLogoType?: boolean
+  defaultState?: Partial<NavbarState>
 }
 
-export default function NavBar({ showLogoType = true }: NavBarProps) {
+export default function NavBar({
+  defaultState = { showTitle: true },
+}: NavBarProps) {
+  const state = useNavbarState(defaultState)
   const themeState = useThemeState()
   const { pathname } = useRouter()
   const isSearchPage = pathname === '/search'
@@ -32,14 +36,18 @@ export default function NavBar({ showLogoType = true }: NavBarProps) {
     setShowMobileMenu(!showMobileMenu)
   }
 
+  useEffect(() => {
+    defaultState && state.state.set((value) => ({ ...value, ...defaultState }))
+  }, [defaultState])
+
   return (
     <Container className={`${hide ? 'hide' : ''} ${className}`}>
       <NavBarContainer>
         <LeftContainer href={'/'}>
           <LogosIcon color="primary" />
-          {showLogoType && (
+          {state.showTitle.get() && (
             <PressLogoType variant={'h6'} genericFontFamily={'serif'}>
-              Press Engine
+              {state.title.get()}
             </PressLogoType>
           )}
         </LeftContainer>
