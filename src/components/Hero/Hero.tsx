@@ -1,7 +1,7 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { uiConfigs } from '@/configs/ui.configs'
-import { NavbarFiller } from '@/components/AppBar/NavbarFiller'
+import { NavbarFiller } from '@/components/NavBar/NavbarFiller'
 import { Searchbar } from '@/components/Searchbar'
 
 export default function Hero() {

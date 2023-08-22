@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import unbodyApi from '../../services/unbody/unbody.service'
 import { LPE } from '../../types/lpe.types'
+import { DefaultLayout } from '@/layouts/DefaultLayout'
 
 type ArticleProps = {
   data: LPE.Article.Document
@@ -71,7 +72,9 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
-  const { data: relatedArticles } = await unbodyApi.getRelatedArticles(data.id)
+  const { data: relatedArticles } = await unbodyApi.getRelatedArticles({
+    id: data.id,
+  })
   const { data: articlesFromSameAuthors } =
     await unbodyApi.getArticlesFromSameAuthors(
       slug as string,
@@ -90,12 +93,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   }
 }
 
-ArticlePage.getLayout = function getLayout(page: ReactNode) {
-  return (
-    <ArticleProvider>
-      <ArticleLayout>{page}</ArticleLayout>
-    </ArticleProvider>
-  )
-}
+// ArticlePage.getLayout = function getLayout(page: ReactNode) {
+//   return (
+//     <DefaultLayout>
+//       {page}
+//     </DefaultLayout>
+//   )
+// }
 
 export default ArticlePage

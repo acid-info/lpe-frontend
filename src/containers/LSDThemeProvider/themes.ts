@@ -37,7 +37,17 @@ export const useLSDTheme = () => {
 
   const themes = useMemo(() => {
     const options: CreateThemeProps = {
-      breakpoints: {},
+      breakpoints: {
+        sm: {
+          width: 768,
+        },
+        md: {
+          width: 1024,
+        },
+        lg: {
+          width: 1280,
+        },
+      },
       palette: {},
       typography: {},
       typographyGlobal: {

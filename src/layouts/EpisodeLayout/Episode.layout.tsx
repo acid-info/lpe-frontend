@@ -1,4 +1,4 @@
-import { AppBar } from '@/components/AppBar'
+import { AppBar } from '../../components/NavBar'
 import { Footer } from '@/components/Footer'
 import { Main } from '@/components/Main'
 import { useEpisodeContext } from '@/context/episode.context'
