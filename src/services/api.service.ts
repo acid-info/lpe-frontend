@@ -17,15 +17,15 @@ export class ApiService {
       })
 
   getLatestEpisodes = async ({
-    page = 1,
+    skip = 0,
     limit = 10,
     showSlug,
   }: {
-    page?: number
+    skip?: number
     limit?: number
     showSlug: string
   }): Promise<ApiResponse<LPE.Podcast.Document[]>> =>
-    fetch(`/api/podcasts/${showSlug}/episodes?page=${page}&limit=${limit}`)
+    fetch(`/api/podcasts/${showSlug}/episodes?skip=${skip}&limit=${limit}`)
       .then((res) => res.json())
       .catch((e) => {
         console.error(e)

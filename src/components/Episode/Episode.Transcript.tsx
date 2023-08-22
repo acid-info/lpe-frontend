@@ -8,9 +8,6 @@ const EpisodeTranscript = ({ episode }: { episode: LPE.Podcast.Document }) => {
   return (
     <>
       <EpisodeDivider />
-      <Title component="h6" variant="h6">
-        Transcript
-      </Title>
       <EpisodeBlocks data={episode} />
     </>
   )

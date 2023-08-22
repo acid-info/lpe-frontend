@@ -25,7 +25,10 @@ export default function PodcastShowCard({
       <ShowData>
         <Title variant="h3">{show.title}</Title>
         <PodcastHost show={show} />
-        <Description variant="body2">{show.description}</Description>
+        <Description
+          variant="body2"
+          dangerouslySetInnerHTML={{ __html: show.description }}
+        />
       </ShowData>
     </Container>
   )

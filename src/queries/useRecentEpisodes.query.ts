@@ -3,26 +3,30 @@ import { useMemo } from 'react'
 import { api } from '../services/api.service'
 import { LPE } from '../types/lpe.types'
 
-export const useRecentPosts = ({
+export const useRecentEpisodes = ({
   initialData = [],
   limit = 10,
+  showSlug,
 }: {
-  initialData?: LPE.Post.Document[]
+  initialData?: LPE.Podcast.Document[]
+  showSlug: string
   limit?: number
 }) => {
   const query = useInfiniteQuery(
-    ['latest-posts', initialData, limit],
+    ['recent-episodes', showSlug, initialData, limit],
     async ({ pageParam }) => {
       const firstPageLimit = initialData.length
       const _limit = pageParam === 1 ? firstPageLimit : limit
       const skip =
         pageParam === 1 ? 0 : (pageParam - 2) * limit + firstPageLimit
 
-      return api.getRecentPosts({ skip, limit: _limit }).then((res) => ({
-        page: pageParam,
-        posts: res.data,
-        hasMore: res.data.length !== 0,
-      }))
+      return api
+        .getLatestEpisodes({ skip, limit: _limit, showSlug })
+        .then((res) => ({
+          page: pageParam,
+          posts: res.data,
+          hasMore: res.data.length !== 0,
+        }))
     },
     {
       initialData: {

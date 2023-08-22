@@ -130,13 +130,11 @@ export class UnbodyService {
   private fetchAllEpisodes = async () => {
     const result: LPE.Podcast.Document[] = []
 
-    let page = 0
+    let skip = 0
     const limit = 50
     while (true) {
-      page++
-
       const { data } = await this.getPodcastEpisodes({
-        page,
+        skip,
         limit,
         highlighted: 'exclude',
         includeDrafts: false,
@@ -153,6 +151,8 @@ export class UnbodyService {
       )
 
       if (data.length === 0) break
+
+      skip += 50
     }
 
     return result
@@ -161,13 +161,11 @@ export class UnbodyService {
   private fetchAllArticles = async () => {
     const result: LPE.Article.Data[] = []
 
-    let page = 0
+    let skip = 0
     const limit = 50
     while (true) {
-      page++
-
       const { data } = await this.getArticles({
-        page,
+        skip,
         limit,
         highlighted: 'exclude',
         includeDrafts: false,
@@ -183,6 +181,7 @@ export class UnbodyService {
       )
 
       if (data.length === 0) break
+      skip += limit
     }
 
     return result
@@ -233,7 +232,7 @@ export class UnbodyService {
     }, 0)
 
   getArticles = ({
-    page = 1,
+    skip = 0,
     limit = 10,
     slug,
     toc = false,
@@ -244,7 +243,7 @@ export class UnbodyService {
     highlighted = 'include',
   }: {
     slug?: string
-    page?: number
+    skip?: number
     limit?: number
     toc?: boolean
     filter?: GetPostsQueryVariables['filter']
@@ -273,7 +272,7 @@ export class UnbodyService {
                 },
               }
             : {}),
-          ...this.helpers.args.page(page, limit),
+          ...this.helpers.args.page(skip, limit),
           filter: {
             operator: 'And',
             operands: [
@@ -327,7 +326,6 @@ export class UnbodyService {
       async () =>
         this.getArticles({
           limit: 1,
-          page: 1,
           slug,
           toc: true,
           includeDrafts,
@@ -339,15 +337,15 @@ export class UnbodyService {
     )
 
   getHighlightedArticles = ({
-    page = 1,
+    skip = 0,
     limit = 10,
   }: {
-    page?: number
+    skip?: number
     limit?: number
   }) =>
     this.getArticles({
       limit,
-      page,
+      skip,
       toc: true,
       highlighted: 'only',
       textBlocks: true,
@@ -356,16 +354,16 @@ export class UnbodyService {
 
   getRelatedArticles = ({
     id,
-    page = 1,
+    skip = 0,
     limit = 10,
   }: {
     id: string
-    page?: number
+    skip?: number
     limit?: number
   }) =>
     this.getArticles({
       limit,
-      page,
+      skip,
       toc: true,
       nearObject: id,
       textBlocks: true,
@@ -395,7 +393,7 @@ export class UnbodyService {
             'index',
             showSlug && showSlug,
           ]),
-          ...this.helpers.args.page(1, 50),
+          ...this.helpers.args.page(0, 50),
           imageBlocks: true,
           textBlocks: true,
           mentions: true,
@@ -414,7 +412,6 @@ export class UnbodyService {
           episodes: populateEpisodes
             ? await this.getPodcastEpisodes({
                 showSlug: show.slug,
-                page: 1,
                 limit: episodesLimit,
                 highlighted: 'include',
               }).then((res) => res.data)
@@ -448,8 +445,8 @@ export class UnbodyService {
     )
 
   getPodcastEpisodes = ({
-    page = 1,
     limit = 10,
+    skip = 0,
     slug,
     showSlug = '',
     toc = false,
@@ -463,7 +460,7 @@ export class UnbodyService {
   }: {
     slug?: string
     showSlug?: string
-    page?: number
+    skip?: number
     limit?: number
     toc?: boolean
     filter?: GetPostsQueryVariables['filter']
@@ -493,7 +490,7 @@ export class UnbodyService {
                 },
               }
             : {}),
-          ...this.helpers.args.page(page, limit),
+          ...this.helpers.args.page(skip, limit),
           filter: {
             operator: 'And',
             operands: [
@@ -570,7 +567,7 @@ export class UnbodyService {
       const { data } = await this.getPodcastEpisodes({
         slug,
         showSlug,
-        page: 1,
+        skip: 0,
         limit: 1,
         toc,
         textBlocks,
@@ -584,19 +581,19 @@ export class UnbodyService {
     }, null)
 
   getHighlightedEpisodes = ({
-    page = 1,
+    skip = 0,
     limit = 10,
     showSlug = '',
     textBlocks = false,
   }: {
-    page?: number
+    skip?: number
     limit?: number
     showSlug?: string
     textBlocks?: boolean
   }) =>
     this.handleRequest<LPE.Podcast.Document[]>(async () => {
       const { data } = await this.getPodcastEpisodes({
-        page,
+        skip,
         limit,
         showSlug,
         textBlocks,
@@ -611,7 +608,7 @@ export class UnbodyService {
 
   getRelatedEpisodes = ({
     id,
-    page = 1,
+    skip = 0,
     limit = 10,
     showSlug = '',
     toc = false,
@@ -620,7 +617,7 @@ export class UnbodyService {
   }: {
     id: string
     toc?: boolean
-    page?: number
+    skip?: number
     limit?: number
     showSlug?: string
     textBlocks?: boolean
@@ -629,7 +626,7 @@ export class UnbodyService {
   }) =>
     this.handleRequest<LPE.Podcast.Document[]>(async () => {
       const { data } = await this.getPodcastEpisodes({
-        page,
+        skip,
         limit,
         toc,
         showSlug,
@@ -646,15 +643,15 @@ export class UnbodyService {
 
   getLatestEpisodes = async ({
     showSlug,
-    page = 1,
+    skip = 0,
     limit = 10,
   }: {
     showSlug?: string
-    page?: number
+    skip?: number
     limit?: number
   }) =>
     this.getPodcastEpisodes({
-      page,
+      skip,
       limit,
       showSlug,
       highlighted: 'include',
@@ -691,7 +688,7 @@ export class UnbodyService {
         const { data } = await this.client.query({
           query: GetHomepagePostsDocument,
           variables: {
-            ...this.helpers.args.page(1, 10),
+            ...this.helpers.args.page(0, 10),
             filter: this.helpers.args.wherePublished(true),
           },
         })
@@ -715,14 +712,14 @@ export class UnbodyService {
     this.handleRequest<{ slug: string }[]>(async () => {
       const result: { slug: string }[] = []
 
-      let page = 1
+      let skip = 0
 
       while (true) {
         const res = await this.client.query({
           query: GetAllArticleSlugsDocument,
           variables: {
             filter: UnbodyHelpers.args.wherePublished(true),
-            ...this.helpers.args.page(page, 50),
+            ...this.helpers.args.page(skip, 50),
           },
         })
 
@@ -732,7 +729,7 @@ export class UnbodyService {
 
         result.push(...docs.map((doc) => ({ slug: doc!.slug! })))
 
-        page++
+        skip += 50
       }
 
       return result
@@ -783,7 +780,7 @@ export class UnbodyService {
               UnbodyHelpers.args.wherePublished(published),
             ],
           },
-          ...this.helpers.args.page(1, 10),
+          ...this.helpers.args.page(0, 10),
         },
       })
 
@@ -843,7 +840,7 @@ export class UnbodyService {
       } = await this.client.query({
         query: SearchBlocksDocument,
         variables: {
-          ...this.helpers.args.page(1, 20),
+          ...this.helpers.args.page(0, 20),
           imageFilter: filter,
           textFilter: filter,
           ...(nearText

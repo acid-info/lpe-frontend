@@ -31,7 +31,10 @@ export default function PodcastsLists({ shows }: Props) {
                   {show.numberOfEpisodes} EP
                 </Typography>
               </Row>
-              <Description variant="body2">{show.description}</Description>
+              <Description
+                variant="body2"
+                dangerouslySetInnerHTML={{ __html: show.description }}
+              />
               <Link href={`/podcasts/${show.slug}`}>
                 <Button>Go to the show page</Button>
               </Link>

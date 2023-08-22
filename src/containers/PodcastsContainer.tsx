@@ -1,12 +1,12 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import styled from '@emotion/styled'
-import { LPE } from '../types/lpe.types'
-import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
-import EpisodesList from '@/components/Podcasts/Episodes.List'
-import { Button, Typography } from '@acid-info/lsd-react'
 import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
-import Link from 'next/link'
+import EpisodesList from '@/components/Podcasts/Episodes.List'
 import PodcastSection from '@/components/Podcasts/Podcast.Section'
+import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
+import { Button, Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import Link from 'next/link'
+import { LPE } from '../types/lpe.types'
 
 interface Props {
   shows: LPE.Podcast.Show[]
@@ -23,13 +23,16 @@ const PodcastsContainer = (props: Props) => {
 
         <PodcastSection>
           <EpisodesList
-            header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
+            cols={2}
+            size="medium"
             episodes={highlightedEpisodes.slice(0, 2)}
-            isFeatured={true}
+            header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
           />
           <EpisodesList
+            cols={4}
+            size="small"
+            bordered
             episodes={highlightedEpisodes.slice(2)}
-            divider={true}
           />
         </PodcastSection>
 
@@ -52,8 +55,9 @@ const PodcastsContainer = (props: Props) => {
                   </Link>
                 </EpisodeListHeader>
               }
+              shows={[show]}
+              displayShow={false}
               episodes={show.episodes as LPE.Podcast.Document[]}
-              show={show}
             />
           </PodcastSection>
         ))}

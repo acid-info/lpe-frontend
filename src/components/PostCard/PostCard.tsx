@@ -39,6 +39,7 @@ export type PostCardProps = CommonProps &
     data: PostDataProps
     contentType: LPE.PostType
     size?: 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large'
+    displayPodcastShow?: boolean
   }
 
 export const PostCard = (_props: PostCardProps) => {
@@ -56,6 +57,7 @@ export const PostCard = (_props: PostCardProps) => {
     },
     size = 'small',
     contentType,
+    displayPodcastShow = true,
     ...props
   } = _props
 
@@ -118,7 +120,7 @@ export const PostCard = (_props: PostCardProps) => {
     />
   )
 
-  const showElement = podcastShowDetails && (
+  const showElement = displayPodcastShow && podcastShowDetails && (
     <PostCardShowDetails
       {...podcastShowDetails}
       size={size === 'large' ? 'medium' : 'small'}
@@ -160,7 +162,7 @@ export const PostCard = (_props: PostCardProps) => {
 PostCard.toData = (post: LPE.Post.Document, shows: LPE.Podcast.Show[] = []) => {
   const show =
     post.type === 'podcast'
-      ? post.show || shows.find((show) => show.id === post.showId)
+      ? post.show || shows.find((show) => show.id === post.showId) || shows[0]
       : undefined
 
   return {

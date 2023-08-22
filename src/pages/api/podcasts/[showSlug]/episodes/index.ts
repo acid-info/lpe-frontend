@@ -7,11 +7,11 @@ export default async function handler(
   res: NextApiResponse<any>,
 ) {
   const {
-    query: { page = 1, limit = 10, showSlug },
+    query: { skip = 0, limit = 10, showSlug },
   } = req
 
   const response = await unbodyApi.getLatestEpisodes({
-    page: parseInt(page, 1),
+    skip: parseInt(skip, 0),
     limit: parseInt(limit, 10),
     showSlug: Array.isArray(showSlug) ? showSlug[0] : showSlug,
   })

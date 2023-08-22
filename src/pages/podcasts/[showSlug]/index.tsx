@@ -1,9 +1,9 @@
 import { SEO } from '@/components/SEO'
+import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { LPE } from '../../../types/lpe.types'
-import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 
 import PodcastShowContainer from '@/containers/PodcastShowContainer'
 import unbodyApi from '@/services/unbody/unbody.service'
@@ -83,15 +83,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const { data: latestEpisodes, errors: latestEpisodesErros } =
     await unbodyApi.getLatestEpisodes({
       showSlug: showSlug as string,
-      page: 1,
-      limit: 9,
+      limit: 8,
     })
 
   // TODO : error handling
   const { data: highlightedEpisodes, errors: highlightedEpisodesErrors } =
     await unbodyApi.getHighlightedEpisodes({
       showSlug: showSlug as string,
-      page: 1,
       limit: 2,
     })
 

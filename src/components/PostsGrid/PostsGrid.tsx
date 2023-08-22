@@ -6,14 +6,18 @@ import { chunkArray } from '../../utils/array.utils'
 import { PostCard, PostCardProps } from '../PostCard'
 
 export type PostsGridProps = Partial<React.ComponentProps<typeof Container>> & {
+  shows?: LPE.Podcast.Show[]
   posts?: LPE.Post.Document[]
+  displayPodcastShow?: boolean
 }
 
 export const PostsGrid: React.FC<PostsGridProps> = ({
   cols = 4,
   size = 'small',
   posts = [],
+  shows = [],
   bordered = false,
+  displayPodcastShow = true,
   ...props
 }) => {
   const groups = useMemo(() => chunkArray(posts, cols), [posts, cols])
@@ -28,7 +32,8 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
                 size={size}
                 className="post-card"
                 contentType={post.type}
-                data={PostCard.toData(post)}
+                displayPodcastShow={displayPodcastShow}
+                data={PostCard.toData(post, shows)}
               />
             </div>
           ))}
@@ -50,7 +55,7 @@ const Container = styled.div<{
     > .row {
       display: grid;
       grid-template-columns: repeat(${props.cols}, 1fr);
-      gap: 0 32px;
+      gap: 0 16px;
 
       & > div {
         padding: 24px 0;

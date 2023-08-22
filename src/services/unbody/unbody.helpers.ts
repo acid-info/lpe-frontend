@@ -19,9 +19,9 @@ export class UnbodyHelpers {
   static args = {
     limit: (value: number): any => String(value),
     skip: (value: number): any => String(value),
-    page: (page: number, limit: number = 10) => ({
+    page: (skip: number, limit: number = 10) => ({
       limit: this.args.limit(limit),
-      skip: this.args.skip(Math.max(0, page - 1) * limit),
+      skip: this.args.skip(skip),
     }),
     wherePath: (path: Array<string | null | undefined | false>) => {
       const input = path.filter((p) => p && typeof p === 'string') as string[]

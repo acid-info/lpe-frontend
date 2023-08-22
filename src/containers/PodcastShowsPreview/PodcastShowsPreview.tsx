@@ -82,11 +82,15 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
             <div className="podcasts__show-episodes">
               <PostsGrid
                 posts={(show.episodes || []).slice(0, 2)}
+                displayPodcastShow={false}
+                shows={shows}
                 size="xsmall"
                 cols={2}
               />
               <PostsGrid
                 posts={(show.episodes || []).slice(2, 4)}
+                displayPodcastShow={false}
+                shows={shows}
                 size="xsmall"
                 cols={2}
               />

@@ -1,12 +1,11 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import styled from '@emotion/styled'
-import { LPE } from '../types/lpe.types'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
-import { Button, Typography } from '@acid-info/lsd-react'
-import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
 import PodcastSection from '@/components/Podcasts/Podcast.Section'
-import { api } from '@/services/api.service'
-import { useState } from 'react'
+import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
+import { Button, Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import { useRecentEpisodes } from '../queries/useRecentEpisodes.query'
+import { LPE } from '../types/lpe.types'
 
 interface Props {
   show: LPE.Podcast.Show
@@ -16,25 +15,12 @@ interface Props {
 
 const PodcastShowContainer = (props: Props) => {
   const { show, latestEpisodes, highlightedEpisodes } = props
-  const [latest, setLatest] = useState(latestEpisodes)
-  const [page, setPage] = useState(2)
-  const [showSeeMore, setShowSeeMore] = useState(true)
 
-  const handleLoadMore = async () => {
-    const response = await api.getLatestEpisodes({
-      page: page,
-      limit: 9,
-      showSlug: show.slug,
-    })
-
-    if (response.data.length === 0) {
-      setShowSeeMore(false)
-      return
-    }
-
-    setLatest((prev) => [...prev, ...response.data])
-    setPage((prev) => prev + 1)
-  }
+  const query = useRecentEpisodes({
+    limit: 8,
+    showSlug: show.slug,
+    initialData: latestEpisodes,
+  })
 
   return (
     <>
@@ -43,17 +29,26 @@ const PodcastShowContainer = (props: Props) => {
           <PodcastShowCard show={show} />
           <PodcastSection>
             <EpisodesList
-              header={<Typography variant="body2">All episodes</Typography>}
+              cols={2}
+              size="medium"
+              shows={[show]}
+              displayShow={false}
               episodes={highlightedEpisodes}
-              show={show}
-              isFeatured={true}
+              header={<Typography variant="body2">All episodes</Typography>}
             />
           </PodcastSection>
-          <EpisodesList episodes={latest} divider={true} show={show} />
+          <EpisodesList
+            cols={4}
+            bordered
+            size="small"
+            shows={[show]}
+            displayShow={false}
+            episodes={query.posts}
+          />
         </PodcastsBodyContainer>
       </PodcastsGrid>
-      {showSeeMore && (
-        <SeeMoreButton onClick={handleLoadMore}>
+      {query.hasNextPage && (
+        <SeeMoreButton onClick={() => query.fetchNextPage()}>
           See more episodes
         </SeeMoreButton>
       )}

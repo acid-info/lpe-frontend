@@ -28,25 +28,10 @@ const RelatedEpisodes = ({ podcastSlug, relatedEpisodes }: props) => {
         {relatedEpisodes.slice(0, showIndex).map((episode, idx: number) => (
           <PostCardContainer className="w-8" key={'related-episode' + idx}>
             <PostCard
+              size="xsmall"
+              displayPodcastShow={false}
               contentType={LPE.PostTypes.Podcast}
-              data={{
-                authors: episode.authors,
-                date: episode.publishedAt
-                  ? new Date(episode.publishedAt)
-                  : null,
-                slug: episode.show?.slug
-                  ? `${episode.show?.slug}/${episode.slug}`
-                  : `${podcastSlug}/${episode.slug}`,
-                title: episode.title,
-                coverImage: episode.coverImage,
-                tags: episode.tags,
-                podcastShowDetails: {
-                  title: episode.title,
-                  slug: `${episode.show?.slug}`,
-                  episodeNumber: episode.episodeNumber,
-                  podcast: episode.show as LPE.Podcast.Show,
-                },
-              }}
+              data={{ ...PostCard.toData(episode), tags: [] }}
             />
           </PostCardContainer>
         ))}
