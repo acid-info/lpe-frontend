@@ -22,11 +22,7 @@ const EpisodeContainer = (props: Props) => {
   )
 }
 
-const EpisodeBodyContainer = styled(GridItem)`
-  @media (min-width: 768px) and (max-width: 1200px) {
-    grid-column: span 10 !important;
-  }
-`
+const EpisodeBodyContainer = styled(GridItem)``
 
 const EpisodeGrid = styled(Grid)`
   width: 100%;

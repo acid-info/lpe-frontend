@@ -1,12 +1,14 @@
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import { PostCard } from '@/components/PostCard/PostCard'
+import { Grid, GridItem } from '../Grid/Grid'
 
 interface Props {
   header?: React.ReactNode
   episodes: LPE.Podcast.Document[]
   show?: LPE.Podcast.Show
   divider?: boolean
+  isFeatured?: boolean
 }
 
 export default function EpisodesList({
@@ -14,13 +16,18 @@ export default function EpisodesList({
   episodes,
   show,
   divider = false,
+  isFeatured = false,
 }: Props) {
   return (
     <EpisodeListContainer>
       {header}
       <EpisodesContainer>
-        {episodes.slice(0, 2).map((episode) => (
-          <PostCardContainer key={episode.id} divider={divider}>
+        {episodes.map((episode) => (
+          <PostCardContainer
+            key={episode.id}
+            divider={divider}
+            className={isFeatured ? 'w-8' : 'w-4'}
+          >
             <PostCard
               contentType={LPE.PostTypes.Podcast}
               data={{
@@ -55,13 +62,12 @@ const EpisodeListContainer = styled.div`
   padding-top: 16px;
 `
 
-const EpisodesContainer = styled.div`
-  display: flex;
-  gap: 16px;
+const EpisodesContainer = styled(Grid)`
+  gap: 36px 16px;
 `
 
-const PostCardContainer = styled.div<{ divider: boolean }>`
-  padding-top: 24px;
+const PostCardContainer = styled(GridItem)<{ divider: boolean }>`
+  padding-block: 24px;
   border-top: ${({ divider }) =>
     divider ? '1px solid rgb(var(--lsd-border-primary))' : 'none'};
 `

@@ -13,10 +13,10 @@ type Props = {
 const EpisodeFooter = ({ episode, relatedEpisodes }: Props) => {
   const footnotes = useMemo(() => {
     return (
-      episode.credits &&
-      episode.credits
-        .filter((b) => b.footnotes.length)
-        .map((b) => b.footnotes)
+      episode.content &&
+      episode.content
+        .filter((b) => (b as LPE.Post.TextBlock).footnotes.length)
+        .map((b) => (b as LPE.Post.TextBlock).footnotes)
         .flat()
     )
   }, [episode])

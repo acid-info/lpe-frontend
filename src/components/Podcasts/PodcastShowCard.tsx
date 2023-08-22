@@ -23,7 +23,7 @@ export default function PodcastShowCard({
     <Container {...props}>
       <LogosCircleIcon width={73} height={73} />
       <ShowData>
-        <Typography variant="h3">{show.title}</Typography>
+        <Title variant="h3">{show.title}</Title>
         <PodcastHost show={show} />
         <Description variant="body2">{show.description}</Description>
       </ShowData>
@@ -35,7 +35,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 68px;
+`
+
+const Title = styled(Typography)`
+  margin-bottom: 16px;
 `
 
 const ShowData = styled.div`

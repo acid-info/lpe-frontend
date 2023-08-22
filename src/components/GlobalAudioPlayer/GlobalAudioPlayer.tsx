@@ -183,10 +183,10 @@ export default function GlobalAudioPlayer() {
         onProgress={handleProgress}
       />
       <RightMenu>
-        {!!epState.value.thumbnail && (
+        {!!epState.value.coverImage && (
           <Image
-            src={epState.value.thumbnail}
-            alt={epState.value.thumbnail}
+            src={epState.value.coverImage.url}
+            alt={epState.value.coverImage.alt}
             width={48}
             height={48}
           />

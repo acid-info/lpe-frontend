@@ -2,6 +2,7 @@ import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.st
 import { PauseIcon } from '@/components/Icons/PauseIcon'
 import { PlayIcon } from '@/components/Icons/PlayIcon'
 import { VolumeIcon } from '@/components/Icons/VolumeIcon'
+import { LPE } from '@/types/lpe.types'
 import { convertSecToMinAndSec } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -11,16 +12,14 @@ import { useState } from 'react'
 
 export type SimplecastPlayerProps = {
   playerRef: React.RefObject<any>
-  title: string
-  thumbnail: string
+  coverImage: LPE.Podcast.Document['coverImage']
   handlePlay: (state: any) => void
   handlePause: (state: any) => void
 }
 
 const SimplecastPlayer = ({
   playerRef,
-  title,
-  thumbnail,
+  coverImage,
   handlePlay,
   handlePause,
 }: SimplecastPlayerProps) => {
@@ -52,9 +51,9 @@ const SimplecastPlayer = ({
 
   return (
     <Container>
-      {thumbnail && (
+      {coverImage && (
         <ImageContainer>
-          <Thumbnail src={thumbnail} alt={title} fill priority />
+          <Thumbnail src={coverImage.url} alt={coverImage.alt} fill priority />
         </ImageContainer>
       )}
       <Controls>
