@@ -1,11 +1,12 @@
-import { GetStaticProps, NextPage } from 'next'
+import { CustomNextPage, GetStaticProps } from 'next'
 import SEO from '../components/SEO/SEO'
 import { HomePage, HomePageProps } from '../containers/HomePage'
+import { DefaultLayout } from '../layouts/DefaultLayout'
 import unbodyApi from '../services/unbody/unbody.service'
 
 type PageProps = Pick<HomePageProps, 'data'>
 
-const Page: NextPage<PageProps> = (props) => {
+const Page: CustomNextPage<PageProps> = (props) => {
   return (
     <>
       <SEO
@@ -16,6 +17,17 @@ const Page: NextPage<PageProps> = (props) => {
       />
       <HomePage data={props.data} />
     </>
+  )
+}
+
+Page.getLayout = function getLayout(page: React.ReactNode) {
+  return (
+    <DefaultLayout
+      mainProps={{ spacing: false }}
+      navbarProps={{ defaultState: { showTitle: false } }}
+    >
+      {page}
+    </DefaultLayout>
   )
 }
 

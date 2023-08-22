@@ -1,13 +1,25 @@
-import styled from '@emotion/styled'
 import { uiConfigs } from '@/configs/ui.configs'
-import { PropsWithChildren } from 'react'
+import styled from '@emotion/styled'
 
-const Main = ({ children, ...props }: PropsWithChildren<any>) => {
-  return <Container {...props}>{children}</Container>
+export type MainProps = Partial<React.ComponentProps<typeof Container>> & {}
+
+export const Main = ({
+  spacing = 'default',
+  children,
+  ...props
+}: MainProps) => {
+  return (
+    <Container spacing={spacing} {...props}>
+      {children}
+    </Container>
+  )
 }
 
-const Container = styled.main`
-  margin-top: ${uiConfigs.postSectionMargin}px;
+const Container = styled.main<{
+  spacing: 'default' | false
+}>`
+  margin-top: ${({ spacing }) =>
+    spacing ? uiConfigs.postSectionMargin : uiConfigs.navbarRenderedHeight}px;
   margin-left: auto;
   margin-right: auto;
 
@@ -16,7 +28,10 @@ const Container = styled.main`
   }
 
   @media (max-width: 768px) {
-    margin-top: ${uiConfigs.postSectionMobileMargin}px;
+    margin-top: ${({ spacing }) =>
+      spacing
+        ? uiConfigs.postSectionMobileMargin
+        : uiConfigs.navbarRenderedHeight}px;
   }
 `
 

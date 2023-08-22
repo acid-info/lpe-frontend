@@ -1,4 +1,7 @@
 export const copyConfigs = {
+  navbar: {
+    title: 'Press Engine',
+  },
   search: {
     searchbarPlaceholders: {
       global: () => 'Search through the LPE posts...',

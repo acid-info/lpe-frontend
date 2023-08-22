@@ -34,7 +34,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <Root {...props}>
-      <Hero />
+      <Hero tags={tags} />
       <PostsGrid posts={group1[0]} cols={5} bordered size="xxsmall" />
       <PostsGrid
         posts={highlighted.slice(0, 1)}

@@ -1,19 +1,32 @@
-import styled from '@emotion/styled'
 import { FilterTags } from '@/components/FilterTags'
-import { useSearchBarContext } from '@/context/searchbar.context'
+import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
+import React from 'react'
 
-export const NavbarFiller = () => {
+export type NavbarFilter = Partial<
+  React.ComponentProps<typeof NavbarFillerContainer>
+> & {
+  tags?: string[]
+}
+
+export const NavbarFiller: React.FC<NavbarFilter> = ({
+  tags = [],
+  ...props
+}) => {
   const router = useRouter()
-  const { tags } = useSearchBarContext()
 
   const onTagClick = (tag: string) => {
     router.push(`/search?topics=${tag}`)
   }
 
   return (
-    <NavbarFillerContainer>
-      <FilterTags onTagClick={onTagClick} tags={tags} selectedTags={[]} />
+    <NavbarFillerContainer {...props}>
+      <FilterTags
+        size="large"
+        onTagClick={onTagClick}
+        tags={tags}
+        selectedTags={[]}
+      />
     </NavbarFillerContainer>
   )
 }
@@ -24,7 +37,6 @@ export const NavbarFillerContainer = styled.div`
   text-align: center;
   display: flex;
   justify-content: center;
-  margin-block: 24px;
 
   @media (max-width: 768px) {
     margin-block: 16px;
