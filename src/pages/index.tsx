@@ -1,34 +1,11 @@
-import { FeaturedPost } from '@/components/FeaturedPost'
-import { PostsList } from '@/components/PostList/PostList'
-import { Section } from '@/components/Section/Section'
-import { useSearchBarContext } from '@/context/searchbar.context'
-import { PostListLayout } from '@/types/ui.types'
-import { useEffect } from 'react'
+import { GetStaticProps, NextPage } from 'next'
 import SEO from '../components/SEO/SEO'
-import { api } from '../services/api.service'
+import { HomePage, HomePageProps } from '../containers/HomePage'
 import unbodyApi from '../services/unbody/unbody.service'
-import { LPE } from '../types/lpe.types'
 
-type Props = {
-  posts: LPE.Article.Data[]
-  featured: LPE.Article.Data
-  error: string | null
-  tags: string[]
-}
+type PageProps = Pick<HomePageProps, 'data'>
 
-export default function Home({ posts, featured, tags }: Props) {
-  const { setTags } = useSearchBarContext()
-
-  useEffect(() => {
-    setTags(tags)
-  }, [setTags, tags])
-
-  useEffect(() => {
-    api
-      .getLatestEpisodes({ showSlug: 'hashing-it-out', page: 1, limit: 1 })
-      .then((res) => console.log(res))
-  }, [])
-
+const Page: NextPage<PageProps> = (props) => {
   return (
     <>
       <SEO
@@ -37,32 +14,36 @@ export default function Home({ posts, featured, tags }: Props) {
         }
         title={'Logos Press Engine'}
       />
-      {featured && (
-        <Section title={'Featured'}>
-          <FeaturedPost post={featured} />
-        </Section>
-      )}
-      <Section title={'Latest posts'}>
-        <PostsList posts={posts} layout={PostListLayout.XXXX_XX} />
-      </Section>
+      <HomePage data={props.data} />
     </>
   )
 }
 
-export const getStaticProps = async () => {
-  const {
-    data: { posts, highlighted },
-    errors,
-  } = await unbodyApi.getHomepagePosts()
+export const getStaticProps: GetStaticProps<PageProps> = async () => {
+  const { data: tags = [] } = await unbodyApi.getTopics(true)
+  const { data: highlighted } = await unbodyApi.getHighlightedPosts()
+  const { data: latest = [] } = await unbodyApi.getRecentPosts({
+    skip: 0,
+    limit: 15,
+  })
 
-  const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
+  const { data: _shows = [] } = await unbodyApi.getPodcastShows({
+    populateEpisodes: true,
+    episodesLimit: 10,
+  })
+
+  const shows = [..._shows].sort((a, b) => (a.title > b.title ? -1 : 1))
 
   return {
     props: {
-      posts,
-      errors,
-      featured: highlighted,
-      tags: topics || [],
+      data: {
+        tags,
+        shows,
+        latest,
+        highlighted,
+      },
     },
   }
 }
+
+export default Page

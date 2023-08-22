@@ -11,13 +11,16 @@ export enum Size {
   LARGE = 'large',
 }
 
-interface Props {
+export type PodcastShowCardProps = React.ComponentProps<typeof Container> & {
   show: LPE.Podcast.Show
 }
 
-export default function PodcastShowCard({ show }: Props) {
+export default function PodcastShowCard({
+  show,
+  ...props
+}: PodcastShowCardProps) {
   return (
-    <Container>
+    <Container {...props}>
       <LogosCircleIcon width={73} height={73} />
       <ShowData>
         <Typography variant="h3">{show.title}</Typography>

@@ -59,7 +59,22 @@ export class UnbodyService {
   } = { posts: [] }
 
   constructor(private apiKey: string, private projectId: string) {
-    const cache = new InMemoryCache({})
+    const cache = new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            Get: {
+              merge(existing = {}, incoming) {
+                return {
+                  ...existing,
+                  ...incoming,
+                }
+              },
+            },
+          },
+        },
+      },
+    })
 
     this.client = new ApolloClient({
       uri: 'https://graphql.unbody.io',
@@ -382,7 +397,7 @@ export class UnbodyService {
           ]),
           ...this.helpers.args.page(1, 50),
           imageBlocks: true,
-          textBlocks: false,
+          textBlocks: true,
           mentions: true,
         },
       })
@@ -647,17 +662,16 @@ export class UnbodyService {
     })
 
   getRecentPosts = async ({
-    page = 1,
     limit = 10,
+    skip = 0,
   }: {
-    page?: number
     limit?: number
+    skip?: number
   }) =>
     this.handleRequest(async () => {
       const { posts } = await this.loadInitialData()
 
-      const startIndex = (page - 1) * limit
-      return posts.slice(startIndex, startIndex + limit)
+      return posts.slice(skip, skip + limit)
     }, [])
 
   getHighlightedPosts = async () =>

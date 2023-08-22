@@ -25,7 +25,8 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
     if (!original) return data as any
 
     const description = data.content.find(
-      (block) => block.labels.length === 0 && block.type === 'text',
+      (block) =>
+        block.labels.length === 0 && block.type === 'text' && block.order > 2,
     )
 
     const image = data.content.find(

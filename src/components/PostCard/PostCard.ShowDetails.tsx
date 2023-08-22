@@ -1,36 +1,45 @@
 import { LPE } from '@/types/lpe.types'
-import Link from 'next/link'
 import { Typography } from '@acid-info/lsd-react'
-import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
+import Link from 'next/link'
 
-export interface PostCardShowDetailsProps {
+export type PostCardShowDetailsProps = Partial<
+  React.ComponentProps<typeof CustomLink>
+> & {
   title: string
   slug: string
   episodeNumber: number
   logo?: LPE.Image.Document
   podcast: LPE.Podcast.Show
+  size?: 'small' | 'medium'
 }
 
 // TODO
-export const PostCardShowDetails = (props: PostCardShowDetailsProps) => {
-  const { slug, episodeNumber, podcast } = props
-
+export const PostCardShowDetails = ({
+  slug,
+  episodeNumber,
+  podcast,
+  size = 'medium',
+  ...props
+}: PostCardShowDetailsProps) => {
   return (
-    <CustomLink href={`/podcasts/${slug}`}>
+    <CustomLink {...props} href={`/podcasts/${slug}`}>
       <Container>
         {podcast && (
           <>
-            <Image
+            <Logo
               src={podcast?.logo?.url}
-              width={38}
-              height={38}
+              width={size === 'medium' ? 38 : 28}
+              height={size === 'medium' ? 38 : 28}
               alt={podcast.logo.alt}
             />
             <PodcastInfo>
               <Typography variant="body2">{podcast.title}</Typography>
-              <Typography variant="body3">{episodeNumber} EP</Typography>
+              {size !== 'small' && (
+                <Typography variant="body3">{episodeNumber} EP</Typography>
+              )}
             </PodcastInfo>
           </>
         )}
@@ -53,4 +62,8 @@ const PodcastInfo = styled.div`
 
 const CustomLink = styled(Link)`
   text-decoration: none;
+`
+
+const Logo = styled(Image)`
+  border-radius: 100%;
 `

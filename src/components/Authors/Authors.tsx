@@ -8,19 +8,22 @@ export enum AuthorsDirection {
   ROW = 'row',
 }
 
-const Authors = ({
-  authors,
-  email,
-  gap = 12,
-  flexDirection = AuthorsDirection.ROW,
-}: {
+export type AuthorsProps = React.ComponentProps<typeof AuthorsContainer> & {
   authors: LPE.Author.Document[]
   email: boolean
   gap?: number
   flexDirection?: AuthorsDirection
+}
+
+const Authors: React.FC<AuthorsProps> = ({
+  authors,
+  email,
+  gap = 12,
+  flexDirection = AuthorsDirection.ROW,
+  ...props
 }) => {
   return authors?.length > 0 ? (
-    <AuthorsContainer gap={gap} flexDirection={flexDirection}>
+    <AuthorsContainer gap={gap} flexDirection={flexDirection} {...props}>
       {authors.map((author, index) =>
         index < authors.length - 1 ? (
           <AuthorContainer gap={gap} key={author.name}>

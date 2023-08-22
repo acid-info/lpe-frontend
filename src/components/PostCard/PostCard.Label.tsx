@@ -4,14 +4,14 @@ import styled from '@emotion/styled'
 import { LPE } from '@/types/lpe.types'
 import PostType = LPE.PostType
 
-interface Props {
+export type Props = React.ComponentProps<typeof Container> & {
   contentType: PostType
   date: Date | null
 }
 
-export const PostCardLabel: FC<Props> = ({ contentType, date }) => {
+export const PostCardLabel: FC<Props> = ({ contentType, date, ...props }) => {
   return (
-    <Container>
+    <Container {...props}>
       <Typography variant="body3" genericFontFamily="sans-serif">
         {contentType.toUpperCase()}
       </Typography>
@@ -35,5 +35,4 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
 `

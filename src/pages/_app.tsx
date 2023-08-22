@@ -4,6 +4,7 @@ import { uiConfigs } from '@/configs/ui.configs'
 import { SearchBarProvider } from '@/context/searchbar.context'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { css, Global } from '@emotion/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NextComponentType, NextPageContext } from 'next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -22,6 +23,8 @@ type NextLayoutComponentType<P = {}> = NextComponentType<
 type AppLayoutProps<P = {}> = AppProps & {
   Component: NextLayoutComponentType
 }
+
+const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppLayoutProps) {
   const hydrated = useHydrated()
@@ -94,11 +97,13 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           }
         `}
       />
-      <ProgressBar />
-      <SearchBarProvider>
-        {getLayout(<Component {...pageProps} />)}
-      </SearchBarProvider>
-      {hydrated && <GlobalAudioPlayer />}
+      <QueryClientProvider client={queryClient}>
+        <ProgressBar />
+        <SearchBarProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </SearchBarProvider>
+        {hydrated && <GlobalAudioPlayer />}
+      </QueryClientProvider>
     </LSDThemeProvider>
   )
 }

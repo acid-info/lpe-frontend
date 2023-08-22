@@ -7,11 +7,11 @@ export default async function handler(
   res: NextApiResponse<any>,
 ) {
   const {
-    query: { page = 1, limit = 10 },
+    query: { skip = 0, limit = 10 },
   } = req
 
   const response = await unbodyApi.getRecentPosts({
-    page: parseInt(page, 1),
+    skip: parseInt(skip, 0),
     limit: parseInt(limit, 10),
   })
 

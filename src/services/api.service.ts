@@ -3,13 +3,13 @@ import { LPE } from '../types/lpe.types'
 
 export class ApiService {
   getRecentPosts = async ({
-    page = 1,
+    skip = 0,
     limit = 10,
   }: {
-    page?: number
+    skip?: number
     limit?: number
   }): Promise<ApiResponse<LPE.Post.Document[]>> =>
-    fetch(`/api/posts?page=${page}&limit=${limit}`)
+    fetch(`/api/posts?skip=${skip}&limit=${limit}`)
       .then((res) => res.json())
       .catch((e) => {
         console.error(e)
