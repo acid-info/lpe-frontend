@@ -1,6 +1,7 @@
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
+import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
 import { useRecentPosts } from '../../queries/useRecentPosts.query'
 import { LPE } from '../../types/lpe.types'
@@ -33,6 +34,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <Root {...props}>
+      <Hero />
       <PostsGrid posts={group1[0]} cols={5} bordered size="xxsmall" />
       <PostsGrid
         posts={highlighted.slice(0, 1)}

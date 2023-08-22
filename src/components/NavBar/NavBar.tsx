@@ -1,23 +1,16 @@
-import { Searchbar } from '@/components/Searchbar'
+import { NavbarLinks } from '@/components/NavBar/Navbar.Links'
+import { NavbarMobileMenu } from '@/components/NavBar/Navbar.MobileMenu'
+import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch'
+import { NavLinksItems } from '@/configs/data.configs'
 import { uiConfigs } from '@/configs/ui.configs'
-import { useSearchBarContext } from '@/context/searchbar.context'
+import { useThemeState } from '@/states/themeState'
 import { useScrollDirection } from '@/utils/ui.utils'
-import {
-  IconButton,
-  MenuIcon,
-  SearchIcon,
-  Typography,
-} from '@acid-info/lsd-react'
+import { IconButton, MenuIcon, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { LogosIcon } from '../Icons/LogosIcon'
-import { useThemeState } from '@/states/themeState'
-import { NavbarLinks } from '@/components/NavBar/Navbar.Links'
-import { NavLinksItems } from '@/configs/data.configs'
-import { NavbarMobileMenu } from '@/components/NavBar/Navbar.MobileMenu'
-import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch'
 
 export interface NavBarProps {
   showLogoType?: boolean
