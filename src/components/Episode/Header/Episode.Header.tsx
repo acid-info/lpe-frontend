@@ -6,6 +6,8 @@ import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import EpisodeChannels from './Episode.Channels'
 import EpisodeStats from '../Episode.Stats'
 import EpisodePlayer from './Episode.Player'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   channel: LPE.Podcast.Channel
@@ -37,10 +39,19 @@ const EpisodeHeader = ({
       <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
-      <PodcastName>
-        <LogosCircleIcon width={24} height={24} />
-        Network State Podcast
-      </PodcastName>
+      {show && (
+        <CustomLink href={`/podcasts/${show.slug}`}>
+          <Show>
+            <Image
+              src={show.logo.url}
+              alt={show.logo.alt}
+              width={24}
+              height={24}
+            />
+            <Typography variant="body2">{show?.title}</Typography>
+          </Show>
+        </CustomLink>
+      )}
       {tags && <Tags tags={tags} />}
       {channels && <EpisodeChannels channels={channels} />}
       {description && (
@@ -86,31 +97,16 @@ const EpisodeSubtitle = styled(CustomTypography)`
   }
 `
 
-const PodcastName = styled.div`
+const Show = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
+  text-decoration: none;
 `
 
-// 16:9 responsive aspect ratio
-const PlayerContainer = styled.div`
-  margin-bottom: 32px;
-  position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  height: 0;
-  overflow: hidden;
-
-  iframe,
-  object,
-  embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+const CustomLink = styled(Link)`
+  text-decoration: none;
 `
 
 export default EpisodeHeader
