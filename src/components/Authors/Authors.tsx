@@ -8,11 +8,11 @@ export enum AuthorsDirection {
   ROW = 'row',
 }
 
-export type AuthorsProps = React.ComponentProps<typeof AuthorsContainer> & {
+export type AuthorsProps = Partial<
+  React.ComponentProps<typeof AuthorsContainer>
+> & {
   authors: LPE.Author.Document[]
   email: boolean
-  gap?: number
-  flexDirection?: AuthorsDirection
 }
 
 const Authors: React.FC<AuthorsProps> = ({
@@ -39,8 +39,8 @@ const Authors: React.FC<AuthorsProps> = ({
 }
 
 const AuthorsContainer = styled.div<{
-  gap: number
-  flexDirection: AuthorsDirection
+  gap?: number
+  flexDirection?: AuthorsDirection
 }>`
   display: flex;
   flex-direction: ${({ flexDirection }) => flexDirection};
