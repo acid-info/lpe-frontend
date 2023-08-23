@@ -1,14 +1,9 @@
 import { SEO } from '@/components/SEO'
 import ArticleContainer from '@/containers/ArticleContainer'
-import { ArticleProvider } from '@/context/article.context'
-import { ArticleLayout } from '@/layouts/ArticleLayout'
-
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
 import unbodyApi from '../../services/unbody/unbody.service'
 import { LPE } from '../../types/lpe.types'
-import { DefaultLayout } from '@/layouts/DefaultLayout'
 
 type ArticleProps = {
   data: LPE.Article.Document
@@ -43,7 +38,12 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
 }
 
 export async function getStaticPaths() {
-  const { data: posts, errors } = await unbodyApi.getAllArticlePostSlugs()
+  const { data: posts, errors } = await unbodyApi.getArticles({
+    skip: 0,
+    limit: 50,
+    includeDrafts: false,
+    highlighted: 'include',
+  })
 
   return {
     paths: errors
@@ -63,7 +63,10 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
-  const { data, errors } = await unbodyApi.getArticlePost(slug as string, true)
+  const { data, errors } = await unbodyApi.getArticle({
+    parseContent: true,
+    slug: slug as string,
+  })
 
   if (!data) {
     return {
@@ -77,10 +80,13 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   })
 
   const { data: articlesFromSameAuthors } =
-    await unbodyApi.getArticlesFromSameAuthors(
-      slug as string,
-      data.authors.map((author) => author.name),
-    )
+    await unbodyApi.getArticlesFromSameAuthors({
+      slug: slug as string,
+      authors: data.authors.map((author) => author.name),
+      skip: 0,
+      limit: 10,
+      includeDrafts: false,
+    })
 
   return {
     props: {
@@ -93,13 +99,5 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     },
   }
 }
-
-// ArticlePage.getLayout = function getLayout(page: ReactNode) {
-//   return (
-//     <DefaultLayout>
-//       {page}
-//     </DefaultLayout>
-//   )
-// }
 
 export default ArticlePage

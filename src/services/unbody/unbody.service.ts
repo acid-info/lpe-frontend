@@ -679,112 +679,45 @@ export class UnbodyService {
       return [...articles, ...episodes].sort(sortPosts)
     }, [])
 
-  getHomepagePosts = async () =>
-    this.handleRequest<{
-      posts: LPE.Article.Data[]
-      highlighted: LPE.Article.Data | null
-    }>(
-      async () => {
-        const { data } = await this.client.query({
-          query: GetHomepagePostsDocument,
-          variables: {
-            ...this.helpers.args.page(0, 10),
-            filter: this.helpers.args.wherePublished(true),
-          },
-        })
-
-        if (!data) throw 'No data'
-
-        const docs = data.Get?.GoogleDoc || []
-
-        return {
-          highlighted: null,
-          posts: await unbodyDataTypes.transformMany<LPE.Article.Data>(
-            articleDocument,
-            docs,
-          ),
-        }
-      },
-      { highlighted: null, posts: [] },
-    )
-
-  getAllArticlePostSlugs = async () =>
-    this.handleRequest<{ slug: string }[]>(async () => {
-      const result: { slug: string }[] = []
-
-      let skip = 0
-
-      while (true) {
-        const res = await this.client.query({
-          query: GetAllArticleSlugsDocument,
-          variables: {
-            filter: UnbodyHelpers.args.wherePublished(true),
-            ...this.helpers.args.page(skip, 50),
-          },
-        })
-
-        const docs = res.data.Get?.GoogleDoc ?? []
-
-        if (docs.length === 0) break
-
-        result.push(...docs.map((doc) => ({ slug: doc!.slug! })))
-
-        skip += 50
-      }
-
-      return result
-    }, [])
-
-  getArticlePost = async (slug: string, published: boolean = true) =>
-    this.handleRequest<LPE.Article.Data | null>(async () => {
-      {
-        const res = await this.client.query({
-          query: GetArticlePostQueryDocument,
-          variables: {
-            filter: {
-              operator: 'And',
-              operands: [
-                UnbodyHelpers.args.wherePublished(published),
-                UnbodyHelpers.args.whereSlugIs(slug),
-              ],
-            },
-          },
-        })
-
-        const docs = res.data.Get?.GoogleDoc ?? []
-        const doc = docs[0]
-
-        if (!doc) throw 'No data'
-
-        return await unbodyDataTypes.transform<LPE.Article.Data>(
-          articleDocument,
-          doc,
-        )
-      }
-    }, null)
-
-  getArticlesFromSameAuthors = async (
-    slug: string,
-    authors: string[],
-    published: boolean = true,
-  ) =>
+  getArticlesFromSameAuthors = async ({
+    slug,
+    skip = 0,
+    limit = 10,
+    authors = [],
+    includeDrafts,
+  }: {
+    slug?: string
+    skip?: number
+    limit?: number
+    authors?: string[]
+    includeDrafts?: boolean
+  }) =>
     this.handleRequest<LPE.Article.Metadata[]>(async () => {
-      const res = await this.client.query({
-        query: GetArticlesFromSameAuthorsDocument,
-        variables: {
-          authors: authors.join(' '),
-          filter: {
-            operator: 'And',
-            operands: [
-              UnbodyHelpers.args.whereSlugIsNot(slug),
-              UnbodyHelpers.args.wherePublished(published),
-            ],
-          },
-          ...this.helpers.args.page(0, 10),
+      const { data: docs } = await this.getArticles({
+        includeDrafts,
+        parseContent: false,
+        highlighted: 'include',
+        ...this.helpers.args.page(skip, limit),
+        filter: {
+          operator: 'And',
+          operands: [
+            {
+              operator: 'Like',
+              path: ['mentions'],
+              valueText: authors.join(' '),
+            },
+            ...(slug
+              ? [
+                  {
+                    operator: 'NotEqual',
+                    valueString: slug,
+                    path: ['slug'],
+                  } as GetObjectsGoogleDocWhereInpObj,
+                ]
+              : []),
+          ],
         },
       })
-
-      const docs = res.data.Get?.GoogleDoc || []
 
       if (docs.length === 0) throw 'No data for same authors'
 
