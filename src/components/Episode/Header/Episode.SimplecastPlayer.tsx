@@ -80,6 +80,7 @@ const SimplecastPlayer = ({
               onMouseUp: handleSeekMouseUp,
               onMouseDown: handleSeekMouseDown,
             }}
+            allowFullScreen={true}
             color={'white'}
           />
         </Controls>

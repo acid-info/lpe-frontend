@@ -11,6 +11,7 @@ import {
   ControlsTimeTrackProps,
   TimeTrack,
 } from '@/components/LpePlayer/Controls/Controls.TimeTrack'
+import { FullscreenIcon } from '@/components/Icons/FullscreenIcon'
 
 export interface LpeAudioPlayerControlsProps {
   duration: number
@@ -21,7 +22,7 @@ export interface LpeAudioPlayerControlsProps {
   onPause: () => void
   onPlay: () => void
   onVolumeToggle: () => void
-
+  allowFullScreen?: boolean
   color?: string
 
   timeTrackProps: ControlsTimeTrackProps
@@ -38,6 +39,7 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
     onPlay,
     color = 'rgba(var(--lsd-surface-secondary), 1)',
     onVolumeToggle,
+    allowFullScreen = false,
     timeTrackProps: { onValueChange, onMouseDown, onMouseUp },
   } = props
 
@@ -46,7 +48,11 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
       <Buttons>
         <Row>
           <PlayPause onClick={playing ? onPause : onPlay}>
-            {playing ? <PauseIcon fill={color} /> : <PlayIcon fill={color} />}
+            {playing ? (
+              <PauseIcon width={24} height={24} fill={color} />
+            ) : (
+              <PlayIcon width={24} height={24} fill={color} />
+            )}
           </PlayPause>
           <TimeContainer color={color}>
             <Time variant="body3">{convertSecToMinAndSec(playedSeconds)}</Time>
@@ -54,9 +60,16 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
             <Time variant="body3">{convertSecToMinAndSec(duration)}</Time>
           </TimeContainer>
         </Row>
-        <VolumeContainer onClick={onVolumeToggle}>
-          {muted ? <MuteIcon fill={color} /> : <VolumeIcon fill={color} />}
-        </VolumeContainer>
+        <Row>
+          <VolumeContainer onClick={onVolumeToggle}>
+            {muted ? (
+              <MuteIcon width={24} height={24} fill={color} />
+            ) : (
+              <VolumeIcon width={24} height={24} fill={color} />
+            )}
+          </VolumeContainer>
+          <FullscreenIcon width={24} height={24} fill={color} />
+        </Row>
       </Buttons>
       <Seek className={styles.audioPlayer}>
         <TimeTrack
@@ -103,7 +116,6 @@ const PlayPause = styled.button`
   justify-content: center;
   border: none;
   background: none;
-  margin-right: 8px;
   padding: 0;
 `
 
@@ -111,6 +123,7 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   white-space: pre-wrap;
+  gap: 8px;
 `
 
 const TimeContainer = styled(Row)<{ color: string }>`
