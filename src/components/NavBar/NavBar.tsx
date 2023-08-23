@@ -17,9 +17,7 @@ export interface NavBarProps {
   defaultState?: Partial<NavbarState>
 }
 
-export default function NavBar({
-  defaultState = { showTitle: true },
-}: NavBarProps) {
+export default function NavBar({ defaultState }: NavBarProps) {
   const state = useNavbarState(defaultState)
   const themeState = useThemeState()
   const { pathname } = useRouter()
@@ -42,7 +40,7 @@ export default function NavBar({
 
   return (
     <Container className={`${hide ? 'hide' : ''} ${className}`}>
-      <NavBarContainer>
+      <NavBarContainer bordered={state.showTitle.get()}>
         <LeftContainer href={'/'}>
           <LogosIcon color="primary" />
           {state.showTitle.get() && (
@@ -109,14 +107,17 @@ const Container = styled.header`
   }
 `
 
-const NavBarContainer = styled.nav`
+const NavBarContainer = styled.nav<{
+  bordered?: boolean
+}>`
   display: flex;
   padding: 8px 0;
   align-items: center;
   justify-content: space-between;
   position: relative;
 
-  border-bottom: 1px solid rgb(var(--lsd-theme-primary));
+  border-bottom: ${(props) => (props.bordered ? '1px' : '0px')} solid
+    rgb(var(--lsd-theme-primary));
 
   margin: auto;
 
