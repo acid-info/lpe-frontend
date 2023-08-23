@@ -112,6 +112,21 @@ const EpisodePlayer = ({
     }
   }, [state.value.isEnabled])
 
+  useEffect(() => {
+    if (channel?.name === LPE.Podcast.ChannelNames.Youtube) {
+      window.addEventListener('message', function (event) {
+        if (event.origin == 'https://www.youtube.com') {
+          const data = JSON.parse(event.data)
+          const volume = data.info.volume
+
+          if (typeof volume !== 'undefined') {
+            state.set((prev) => ({ ...prev, volume: volume / 100 }))
+          }
+        }
+      })
+    }
+  }, [])
+
   const handleProgress = (newState: {
     playedSeconds: number
     played: number
@@ -174,6 +189,11 @@ const EpisodePlayer = ({
           onPlay={handlePlay}
           onPause={handlePause}
           onDuration={handleDuration}
+          config={{
+            youtube: {
+              playerVars: { enablejsapi: 1 },
+            },
+          }}
         />
       </PlayerContainer>
     </>
