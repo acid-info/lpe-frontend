@@ -48,7 +48,7 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
           <PlayPause onClick={playing ? onPause : onPlay}>
             {playing ? <PauseIcon fill={color} /> : <PlayIcon fill={color} />}
           </PlayPause>
-          <TimeContainer>
+          <TimeContainer color={color}>
             <Time variant="body3">{convertSecToMinAndSec(playedSeconds)}</Time>
             <Typography variant="body3">/</Typography>
             <Time variant="body3">{convertSecToMinAndSec(duration)}</Time>
@@ -71,7 +71,11 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
     </Container>
   )
 }
-const Container = styled.div``
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
 
 const Buttons = styled.div`
   display: flex;
@@ -100,6 +104,7 @@ const PlayPause = styled.button`
   border: none;
   background: none;
   margin-right: 8px;
+  padding: 0;
 `
 
 const Row = styled.div`
@@ -108,8 +113,12 @@ const Row = styled.div`
   white-space: pre-wrap;
 `
 
-const TimeContainer = styled(Row)`
+const TimeContainer = styled(Row)<{ color: string }>`
   gap: 8px;
+
+  span {
+    color: ${({ color }) => color || 'black'};
+  }
 `
 
 const Time = styled(Typography)`

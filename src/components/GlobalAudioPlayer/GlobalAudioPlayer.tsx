@@ -102,7 +102,10 @@ export default function GlobalAudioPlayer() {
       <LpeAudioPlayer
         controlProps={{
           onVolumeToggle: () =>
-            state.set((prev) => ({ ...prev, muted: !prev.muted })),
+            state.set((prev) => ({
+              ...prev,
+              muted: !prev.muted,
+            })),
           duration: state.value.duration,
           played: state.value.played,
           muted: state.value.muted,
@@ -132,7 +135,7 @@ export default function GlobalAudioPlayer() {
         loop={state.value.loop}
         playbackRate={state.value.playbackRate}
         volume={state.value.volume}
-        muted={state.value.isEnabled ? false : true}
+        muted={state.value.muted ? true : state.value.isEnabled ? false : true}
         onPlay={handlePlay}
         onPause={handlePause}
         onPlaybackRateChange={handleOnPlaybackRateChange}

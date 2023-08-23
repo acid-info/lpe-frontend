@@ -116,8 +116,8 @@ const EpisodePlayer = ({
     if (channel?.name === LPE.Podcast.ChannelNames.Youtube) {
       window.addEventListener('message', function (event) {
         if (event.origin == 'https://www.youtube.com') {
-          const data = JSON.parse(event.data)
-          const volume = data.info.volume
+          const data = JSON.parse(event?.data)
+          const volume = data?.info?.volume
 
           if (typeof volume !== 'undefined') {
             state.set((prev) => ({ ...prev, volume: volume / 100 }))
@@ -167,6 +167,7 @@ const EpisodePlayer = ({
       {isSimplecast && (
         <SimplecastPlayer
           playing={keepGlobalPlay ? false : state.value.playing}
+          playedSeconds={keepGlobalPlay ? 0 : state.value.playedSeconds}
           played={keepGlobalPlay ? 0 : state.value.played}
           playerRef={playerRef}
           coverImage={
@@ -184,7 +185,9 @@ const EpisodePlayer = ({
           playing={keepGlobalPlay ? false : state.value.playing}
           controls={isSimplecast ? false : true}
           volume={state.value.volume}
-          muted={state.value.isEnabled ? true : false}
+          muted={
+            state.value.isEnabled ? true : state.value.muted ? true : false
+          }
           onProgress={handleProgress}
           onPlay={handlePlay}
           onPause={handlePause}

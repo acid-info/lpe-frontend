@@ -9,6 +9,7 @@ import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 export type SimplecastPlayerProps = {
   playing: boolean
   played: number
+  playedSeconds: number
   playerRef: React.RefObject<any>
   coverImage: LPE.Podcast.Document['coverImage']
   handlePlay: () => void
@@ -18,6 +19,7 @@ export type SimplecastPlayerProps = {
 const SimplecastPlayer = ({
   playing,
   played,
+  playedSeconds,
   playerRef,
   coverImage,
   handlePlay,
@@ -61,14 +63,17 @@ const SimplecastPlayer = ({
         <Controls>
           <LpeAudioPlayerControls
             duration={state.value.duration}
-            playedSeconds={state.value.playedSeconds}
+            playedSeconds={playedSeconds}
             playing={playing}
             played={played}
             onPause={handlePause}
             onPlay={handlePlay}
             muted={state.value.muted}
             onVolumeToggle={() =>
-              state.set((prev) => ({ ...prev, muted: !prev.muted }))
+              state.set((prev) => ({
+                ...prev,
+                muted: !prev.muted,
+              }))
             }
             timeTrackProps={{
               onValueChange: handleSeekChange,
