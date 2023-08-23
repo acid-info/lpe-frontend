@@ -2,10 +2,7 @@ import { SEO } from '@/components/SEO'
 import EpisodeContainer from '@/containers/EpisodeContainer'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
 import { LPE } from '../../../types/lpe.types'
-import EpisodeLayout from '@/layouts/EpisodeLayout/Episode.layout'
-import { EpisodeProvider } from '@/context/episode.context'
 
 import unbodyApi from '@/services/unbody/unbody.service'
 
@@ -104,12 +101,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   }
 }
 
-EpisodePage.getLayout = function getLayout(page: ReactNode) {
-  return (
-    <EpisodeProvider>
-      <EpisodeLayout>{page}</EpisodeLayout>
-    </EpisodeProvider>
-  )
-}
+// EpisodePage.getLayout = function getLayout(page: ReactNode) {
+//   return (
+//     <EpisodeProvider>
+//       <EpisodeLayout>{page}</EpisodeLayout>
+//     </EpisodeProvider>
+//   )
+// }
 
 export default EpisodePage
