@@ -1,7 +1,6 @@
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
 import { PauseIcon } from '@/components/Icons/PauseIcon'
 import { PlayIcon } from '@/components/Icons/PlayIcon'
-import { VolumeIcon } from '@/components/Icons/VolumeIcon'
 import { LPE } from '@/types/lpe.types'
 import { convertSecToMinAndSec } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
@@ -9,12 +8,15 @@ import styled from '@emotion/styled'
 import { useHookstate } from '@hookstate/core'
 import Image from 'next/image'
 import { useState } from 'react'
+import { VolumeIcon } from '@/components/Icons/VolumeIcon'
+import { LpeAudioPlayerControls } from '@/components/LpePlayer/Controls/Controls'
+import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 
 export type SimplecastPlayerProps = {
   playerRef: React.RefObject<any>
   coverImage: LPE.Podcast.Document['coverImage']
-  handlePlay: (state: any) => void
-  handlePause: (state: any) => void
+  handlePlay: () => void
+  handlePause: () => void
 }
 
 const SimplecastPlayer = ({
@@ -26,11 +28,12 @@ const SimplecastPlayer = ({
   const [showVolume, setShowVolume] = useState(false)
   const state = useHookstate(playerState)
 
-  const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSeekChange = (v: number) => {
     state.set((prev) => ({
       ...prev,
-      played: parseFloat(e.target.value),
+      played: v,
     }))
+    playerRef.current?.seekTo(v)
   }
 
   const handleSeekMouseUp = (
@@ -38,7 +41,8 @@ const SimplecastPlayer = ({
   ) => {
     state.set((prev) => ({ ...prev, seeking: false }))
     const target = e.target as HTMLInputElement
-    playerRef.current?.seekTo(parseFloat(target?.value))
+    // disabling this line can cause the issue with 1second overlaps when swtiching between players
+    // playerRef.current?.seekTo(parseFloat(target?.value))
   }
 
   const handleSeekMouseDown = () => {
@@ -51,58 +55,32 @@ const SimplecastPlayer = ({
 
   return (
     <Container>
-      {coverImage && (
-        <ImageContainer>
-          <Thumbnail src={coverImage.url} alt={coverImage.alt} fill priority />
-        </ImageContainer>
-      )}
-      <Controls>
-        <Buttons>
-          <Row>
-            <PlayPause onClick={state.value.playing ? handlePause : handlePlay}>
-              {state.value.playing ? <PauseIcon /> : <PlayIcon />}
-            </PlayPause>
-            <TimeContainer>
-              <Time variant="body3">
-                {convertSecToMinAndSec(state.value.playedSeconds)}
-              </Time>
-              <Typography variant="body3">/</Typography>
-              <Time variant="body3">
-                {convertSecToMinAndSec(state.value.duration)}
-              </Time>
-            </TimeContainer>
-          </Row>
-
-          <VolumeContainer onClick={() => setShowVolume((prev) => !prev)}>
-            {showVolume && (
-              <VolumeGauge>
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step="any"
-                  value={state.value.volume}
-                  onChange={handleVolumeChange}
-                />
-              </VolumeGauge>
-            )}
-            <VolumeIcon />
-          </VolumeContainer>
-        </Buttons>
-
-        <Seek>
-          <SeekInput
-            type="range"
-            min={0}
-            max={0.999999}
-            step="any"
-            value={state.value.played}
-            onChange={handleSeekChange}
-            onMouseUp={handleSeekMouseUp}
-            onMouseDown={handleSeekMouseDown}
+      <ImageContainer>
+        {coverImage && <ResponsiveImage data={coverImage} />}
+      </ImageContainer>
+      <ControlsWrapper>
+        <Shade />
+        <Controls>
+          <LpeAudioPlayerControls
+            duration={state.value.duration}
+            playedSeconds={state.value.playedSeconds}
+            playing={state.value.playing}
+            played={state.value.played}
+            onPause={handlePause}
+            onPlay={handlePlay}
+            muted={state.value.muted}
+            onVolumeToggle={() =>
+              state.set((prev) => ({ ...prev, muted: !prev.muted }))
+            }
+            timeTrackProps={{
+              onValueChange: handleSeekChange,
+              onMouseUp: handleSeekMouseUp,
+              onMouseDown: handleSeekMouseDown,
+            }}
+            color={'white'}
           />
-        </Seek>
-      </Controls>
+        </Controls>
+      </ControlsWrapper>
     </Container>
   )
 }
@@ -110,76 +88,41 @@ const SimplecastPlayer = ({
 const Container = styled.div`
   position: relative;
   width: 100%;
-  height: 390px;
+  padding-top: 56%;
+  background: red;
+
+  > * {
+    position: absolute;
+  }
 `
 
 const ImageContainer = styled.div`
-  position: absolute;
   width: 100%;
-  height: 390px;
+  top: 0;
 `
 
-const Thumbnail = styled(Image)`
-  filter: grayscale(100%);
+const ControlsWrapper = styled.div`
+  bottom: 0;
+  width: 100%;
+
+  > * {
+    position: absolute;
+    bottom: -1px;
+  }
 `
 
 const Controls = styled.div`
-  display: flex;
-  width: calc(100% - 16px);
-  flex-direction: column;
-  padding: 8px;
-  position: absolute;
+  padding: 16px;
+  left: 0;
+  width: calc(100% - 32px);
+`
+
+const Shade = styled.div`
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
   bottom: 0;
-`
-
-const Buttons = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-
-const PlayPause = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: none;
-  margin-right: 8px;
-`
-
-const Seek = styled.div`
-  display: flex;
   width: 100%;
-`
-
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  white-space: pre-wrap;
-`
-
-const TimeContainer = styled(Row)`
-  gap: 8px;
-`
-
-const Time = styled(Typography)`
-  width: 32px;
-`
-
-const SeekInput = styled.input`
-  width: 100%;
-`
-
-const VolumeGauge = styled.div`
-  position: absolute;
-  top: -30px;
-`
-
-const VolumeContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  position: relative;
-  align-items: center;
+  height: 75px;
 `
 
 export default SimplecastPlayer

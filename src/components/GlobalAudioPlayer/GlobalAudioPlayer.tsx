@@ -1,16 +1,12 @@
 import ReactPlayer from 'react-player'
 import styled from '@emotion/styled'
-import { useEffect, useRef, useState } from 'react'
-import { PlayIcon } from '../Icons/PlayIcon'
-import { PauseIcon } from '../Icons/PauseIcon'
-import { VolumeIcon } from '../Icons/VolumeIcon'
-import styles from './GlobalAudioPlayer.module.css'
-import { convertSecToMinAndSec } from '@/utils/string.utils'
+import React, { useEffect, useRef, useState } from 'react'
 import { Typography } from '@acid-info/lsd-react'
 import Image from 'next/image'
 import { playerState } from './globalAudioPlayer.state'
 import { useHookstate } from '@hookstate/core'
 import { episodeState } from './episode.state'
+import { LpeAudioPlayer } from '@/components/LpePlayer/LpeAudioPlayer'
 
 export default function GlobalAudioPlayer() {
   const state = useHookstate(playerState)
@@ -59,18 +55,16 @@ export default function GlobalAudioPlayer() {
     state.set((prev) => ({ ...prev, seeking: true }))
   }
 
-  const handleSeekChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const played = parseFloat(e.target.value)
-    state.set((prev) => ({ ...prev, played: played }))
+  const handleSeekChange = (v: number) => {
+    state.set((prev) => ({ ...prev, played: v }))
+    globalPlayerRef.current?.seekTo(v)
   }
 
-  const handleSeekMouseUp = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
-    state.set((prev) => ({ ...prev, seeking: false }))
-    const target = e.target as HTMLInputElement
-    globalPlayerRef.current?.seekTo(parseFloat(target?.value))
-  }
+  const handleSeekMouseUp = () =>
+    // e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+    {
+      state.set((prev) => ({ ...prev, seeking: false }))
+    }
 
   const handleDuration = (duration: number) => {
     state.set((prev) => ({ ...prev, duration }))
@@ -105,56 +99,26 @@ export default function GlobalAudioPlayer() {
 
   return (
     <Container visible={state.value.isEnabled}>
-      <AudioPlayer>
-        <Buttons>
-          <Row>
-            <PlayPause onClick={state.value.playing ? handlePause : handlePlay}>
-              {state.value.playing ? <PauseIcon /> : <PlayIcon />}
-            </PlayPause>
-            <TimeContainer>
-              <Time variant="body3">
-                {convertSecToMinAndSec(state.value.playedSeconds)}
-              </Time>
-              <Typography variant="body3">/</Typography>
-              <Time variant="body3">
-                {convertSecToMinAndSec(state.value.duration)}
-              </Time>
-            </TimeContainer>
-          </Row>
-
-          <VolumeContainer onClick={() => setShowVolume((prev) => !prev)}>
-            {showVolume && (
-              <VolumeGauge>
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step="any"
-                  value={state.value.volume}
-                  onChange={handleVolumeChange}
-                />
-              </VolumeGauge>
-            )}
-            <VolumeIcon />
-          </VolumeContainer>
-        </Buttons>
-
-        {/* <button onClick={handleStop}>Stop</button> */}
-
-        <Seek className={styles.audioPlayer}>
-          <input
-            type="range"
-            min={0}
-            max={0.999999}
-            step="any"
-            value={state.value.played}
-            onMouseDown={handleSeekMouseDown}
-            onChange={handleSeekChange}
-            onMouseUp={handleSeekMouseUp}
-          />
-        </Seek>
-      </AudioPlayer>
-
+      <LpeAudioPlayer
+        controlProps={{
+          onVolumeToggle: () =>
+            state.set((prev) => ({ ...prev, muted: !prev.muted })),
+          duration: state.value.duration,
+          played: state.value.played,
+          muted: state.value.muted,
+          playedSeconds: state.value.playedSeconds,
+          onPause: handlePause,
+          onPlay: handlePlay,
+          playing: state.value.playing,
+          timeTrackProps: {
+            onValueChange: handleSeekChange,
+            onMouseDown: handleSeekMouseDown,
+            onMouseUp: handleSeekMouseUp,
+            alignTop: true,
+            showThumb: false,
+          },
+        }}
+      />
       <ReactPlayer
         forceAudio
         ref={globalPlayerRef}
@@ -191,7 +155,6 @@ export default function GlobalAudioPlayer() {
             height={48}
           />
         )}
-
         <EpisodeData>
           <Typography variant="body2">{epState.value.title}</Typography>
           <Typography variant="body3">{epState.value.podcast}</Typography>
@@ -215,37 +178,10 @@ const Container = styled.div<{ visible: boolean }>`
   border-top: 1px solid rgb(var(--lsd-border-primary));
   box-sizing: border-box;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
-`
 
-const Buttons = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`
-
-const VolumeContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  position: relative;
-  align-items: center;
-`
-
-const Seek = styled.div`
-  display: flex;
-  width: 100%;
-`
-
-const VolumeGauge = styled.div`
-  position: absolute;
-  top: -30px;
-`
-
-const AudioPlayer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 60%;
+  > :first-child {
+    width: 60%;
+  }
 `
 
 const RightMenu = styled.div`
@@ -255,29 +191,6 @@ const RightMenu = styled.div`
   justify-content: flex-end;
   margin-left: 32px;
   gap: 16px;
-`
-
-const PlayPause = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: none;
-  margin-right: 8px;
-`
-
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  white-space: pre-wrap;
-`
-
-const TimeContainer = styled(Row)`
-  gap: 8px;
-`
-
-const Time = styled(Typography)`
-  width: 32px;
 `
 
 const EpisodeData = styled.div`
