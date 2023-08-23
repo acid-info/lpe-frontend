@@ -2,7 +2,6 @@ import { LPE } from '@/types/lpe.types'
 import { hookstate } from '@hookstate/core'
 
 export type EpisodeState = {
-  episodeId: string
   title: string
   podcast: string
   url: string
@@ -10,7 +9,6 @@ export type EpisodeState = {
 }
 
 export const defaultEpisodeState: EpisodeState = {
-  episodeId: '',
   title: '',
   podcast: '',
   url: '',

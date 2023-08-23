@@ -126,7 +126,6 @@ export default function GlobalAudioPlayer() {
         url={state.value.url as string}
         width="100%"
         height="100%"
-        pip={state.value.pip}
         playing={state.value.playing}
         controls={state.value.controls}
         light={state.value.light}
@@ -134,17 +133,17 @@ export default function GlobalAudioPlayer() {
         playbackRate={state.value.playbackRate}
         volume={state.value.volume}
         muted={state.value.isEnabled ? false : true}
-        onReady={() => console.log('onReady')}
-        onStart={() => console.log('onStart')}
         onPlay={handlePlay}
         onPause={handlePause}
-        onBuffer={() => console.log('onBuffer')}
         onPlaybackRateChange={handleOnPlaybackRateChange}
-        onSeek={(e) => console.log('onSeek', e)}
         onEnded={handleEnded}
-        onError={(e) => console.log('onError', e)}
         onDuration={handleDuration}
         onProgress={handleProgress}
+        // onReady={() => console.log('onReady')}
+        // onStart={() => console.log('onStart')}
+        // onBuffer={() => console.log('onBuffer')}
+        // onSeek={(e) => console.log('onSeek', e)}
+        // onError={(e) => console.log('onError', e)}
       />
       <RightMenu>
         {!!epState.value.coverImage && (

@@ -2,10 +2,11 @@ import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'
 import { useHookstate } from '@hookstate/core'
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { episodeState } from '@/components/GlobalAudioPlayer/episode.state'
 import SimplecastPlayer from './Episode.SimplecastPlayer'
 import { LPE } from '@/types/lpe.types'
+import { useRouter } from 'next/router'
 
 export type EpisodePlayerProps = {
   channel: LPE.Podcast.Channel
@@ -20,8 +21,13 @@ const EpisodePlayer = ({
   title,
   showTitle,
 }: EpisodePlayerProps) => {
+  const router = useRouter()
+
   const state = useHookstate(playerState)
   const epState = useHookstate(episodeState)
+
+  const playerContainerRef = useRef<HTMLDivElement>(null)
+  const playerRef = useRef<ReactPlayer>(null)
 
   const isSimplecast = channel?.name === LPE.Podcast.ChannelNames.Simplecast
 
@@ -35,16 +41,32 @@ const EpisodePlayer = ({
           >
         ).data.audioFileUrl
 
-  const playerContainerRef = useRef<HTMLDivElement>(null)
-  const playerRef = useRef<ReactPlayer>(null)
+  const keepPlaying =
+    state.value.url !== url && state.value.isEnabled && state.value.playing
+
+  const [keepGlobalPlay, setKeepGlobalPlay] = useState(keepPlaying)
+
+  useEffect(() => {
+    if (keepPlaying) {
+      setKeepGlobalPlay(true)
+      playerRef.current?.seekTo(0)
+    }
+  }, [keepPlaying])
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        state.set((prev) => ({
-          ...prev,
-          isEnabled: false,
-        }))
+        if (keepPlaying) {
+          state.set((prev) => ({
+            ...prev,
+            isEnabled: true,
+          }))
+        } else {
+          state.set((prev) => ({
+            ...prev,
+            isEnabled: false,
+          }))
+        }
       } else {
         state.set((prev) => ({
           ...prev,
@@ -57,22 +79,32 @@ const EpisodePlayer = ({
     return () => {
       observer.disconnect()
     }
+  }, [keepGlobalPlay])
+
+  useEffect(() => {
+    const handleLeave = () => {
+      if (state.value.playing) {
+        state.set((prev) => ({
+          ...prev,
+          isEnabled: true,
+        }))
+      }
+    }
+    router.events.on('routeChangeStart', handleLeave)
+
+    return () => {
+      router.events.off('routeChangeStart', handleLeave)
+    }
   }, [])
 
   useEffect(() => {
     epState.set({
-      episodeId: 'aaa',
       title: title,
       podcast: showTitle,
-      url: url,
+      url: url as string,
       coverImage: coverImage ?? null,
     })
-
-    state.set((prev) => ({
-      ...prev,
-      url: url,
-    }))
-  }, [url, title, showTitle, coverImage])
+  }, [title, showTitle, coverImage])
 
   useEffect(() => {
     if (!state.value.isEnabled) {
@@ -96,7 +128,18 @@ const EpisodePlayer = ({
   }
 
   const handlePlay = () => {
-    state.set((prev) => ({ ...prev, playing: true }))
+    if (keepGlobalPlay) {
+      setKeepGlobalPlay(false)
+      state.set((prev) => ({
+        ...prev,
+        isEnabled: false,
+        played: 0,
+        url: url,
+        playing: true,
+      }))
+    } else {
+      state.set((prev) => ({ ...prev, url: url, playing: true }))
+    }
   }
 
   const handlePause = () => state.set((prev) => ({ ...prev, playing: false }))
@@ -108,6 +151,8 @@ const EpisodePlayer = ({
     <>
       {isSimplecast && (
         <SimplecastPlayer
+          playing={keepGlobalPlay ? false : state.value.playing}
+          played={keepGlobalPlay ? 0 : state.value.played}
           playerRef={playerRef}
           coverImage={
             epState.value.coverImage as LPE.Podcast.Document['coverImage']
@@ -120,8 +165,8 @@ const EpisodePlayer = ({
         <ReactPlayer
           forceAudio={isSimplecast ? true : false}
           ref={playerRef}
-          url={state.value.url as string}
-          playing={state.value.playing}
+          url={url as string}
+          playing={keepGlobalPlay ? false : state.value.playing}
           controls={isSimplecast ? false : true}
           volume={state.value.volume}
           muted={state.value.isEnabled ? true : false}

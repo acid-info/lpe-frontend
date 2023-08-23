@@ -1,18 +1,14 @@
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
-import { PauseIcon } from '@/components/Icons/PauseIcon'
-import { PlayIcon } from '@/components/Icons/PlayIcon'
 import { LPE } from '@/types/lpe.types'
-import { convertSecToMinAndSec } from '@/utils/string.utils'
-import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useHookstate } from '@hookstate/core'
-import Image from 'next/image'
 import { useState } from 'react'
-import { VolumeIcon } from '@/components/Icons/VolumeIcon'
 import { LpeAudioPlayerControls } from '@/components/LpePlayer/Controls/Controls'
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 
 export type SimplecastPlayerProps = {
+  playing: boolean
+  played: number
   playerRef: React.RefObject<any>
   coverImage: LPE.Podcast.Document['coverImage']
   handlePlay: () => void
@@ -20,6 +16,8 @@ export type SimplecastPlayerProps = {
 }
 
 const SimplecastPlayer = ({
+  playing,
+  played,
   playerRef,
   coverImage,
   handlePlay,
@@ -64,8 +62,8 @@ const SimplecastPlayer = ({
           <LpeAudioPlayerControls
             duration={state.value.duration}
             playedSeconds={state.value.playedSeconds}
-            playing={state.value.playing}
-            played={state.value.played}
+            playing={playing}
+            played={played}
             onPause={handlePause}
             onPlay={handlePlay}
             muted={state.value.muted}
