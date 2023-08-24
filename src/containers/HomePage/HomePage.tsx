@@ -5,6 +5,7 @@ import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
 import { useRecentPosts } from '../../queries/useRecentPosts.query'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { PodcastShowsPreview } from '../PodcastShowsPreview'
 
 export type HomePageProps = React.DetailedHTMLProps<
@@ -144,6 +145,18 @@ const Root = styled('div')`
 
     button {
       width: 340px;
+    }
+
+    ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+      button {
+        width: 236px;
+      }
+    }
+
+    ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+      button {
+        width: 100%;
+      }
     }
   }
 
