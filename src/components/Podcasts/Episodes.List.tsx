@@ -2,36 +2,38 @@ import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import { PostsGrid, PostsGridProps } from '../PostsGrid'
 
-interface Props {
+interface Props {}
+
+export type EpisodesListProps = Partial<
+  React.ComponentProps<typeof EpisodeListContainer>
+> & {
   header?: React.ReactNode
   episodes: LPE.Podcast.Document[]
   shows?: LPE.Podcast.Show[]
-  bordered?: boolean
-  size?: string
-  cols?: number
   displayShow?: boolean
-}
+} & Pick<PostsGridProps, 'pattern' | 'breakpoints' | 'bordered'>
 
 export default function EpisodesList({
   shows = [],
+  episodes = [],
+  pattern,
+  breakpoints,
+  bordered,
   header,
-  episodes,
-  bordered = false,
-  cols = 4,
-  size = 'small',
   displayShow = true,
-}: Props) {
+  ...props
+}: EpisodesListProps) {
   return (
-    <EpisodeListContainer>
+    <EpisodeListContainer {...props}>
       {header}
-      {/* <PostsGrid
+      <PostsGrid
         shows={shows}
         posts={episodes}
         bordered={bordered}
-        cols={cols}
-        size={size}
+        pattern={pattern}
+        breakpoints={breakpoints}
         displayPodcastShow={displayShow}
-      /> */}
+      />
     </EpisodeListContainer>
   )
 }
