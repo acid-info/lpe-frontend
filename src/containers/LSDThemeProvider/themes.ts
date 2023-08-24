@@ -47,6 +47,9 @@ export const useLSDTheme = () => {
         lg: {
           width: 1280,
         },
+        xl: {
+          width: 1440,
+        },
       },
       palette: {},
       typography: {},

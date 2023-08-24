@@ -23,16 +23,45 @@ const PodcastsContainer = (props: Props) => {
 
         <PodcastSection>
           <EpisodesList
-            cols={2}
-            size="medium"
             episodes={highlightedEpisodes.slice(0, 2)}
+            bordered="except-first-row"
             header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
+            pattern={[{ cols: 2, size: 'medium' }]}
+            breakpoints={[
+              {
+                breakpoint: 'xs',
+                pattern: [
+                  { cols: 1, size: 'small', rowBorder: 'except-first-row' },
+                ],
+              },
+              {
+                breakpoint: 'sm',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+              {
+                breakpoint: 'md',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+            ]}
           />
           <EpisodesList
-            cols={4}
-            size="small"
             bordered
             episodes={highlightedEpisodes.slice(2)}
+            pattern={[{ cols: 4, size: 'small' }]}
+            breakpoints={[
+              {
+                breakpoint: 'xs',
+                pattern: [{ cols: 1, size: 'small', rowBorder: false }],
+              },
+              {
+                breakpoint: 'sm',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+              {
+                breakpoint: 'md',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+            ]}
           />
         </PodcastSection>
 
@@ -56,8 +85,20 @@ const PodcastsContainer = (props: Props) => {
                 </EpisodeListHeader>
               }
               shows={[show]}
+              bordered="except-first-row"
               displayShow={false}
-              episodes={show.episodes as LPE.Podcast.Document[]}
+              episodes={(show.episodes as LPE.Podcast.Document[]).slice(0, 4)}
+              pattern={[{ cols: 4, size: 'small' }]}
+              breakpoints={[
+                {
+                  breakpoint: 'xs',
+                  pattern: [{ cols: 1, size: 'small' }],
+                },
+                {
+                  breakpoint: 'sm',
+                  pattern: [{ cols: 2, size: 'small' }],
+                },
+              ]}
             />
           </PodcastSection>
         ))}
