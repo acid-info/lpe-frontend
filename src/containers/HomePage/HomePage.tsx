@@ -34,7 +34,25 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <Root {...props}>
       <Hero tags={tags} />
-      <PostsGrid posts={group1} pattern={[{ cols: 5, size: 'xxsmall' }]} />
+      <PostsGrid
+        posts={group1}
+        horizontal
+        pattern={[{ cols: 5, size: 'xxsmall' }]}
+        breakpoints={[
+          {
+            breakpoint: 'xs',
+            pattern: [{ cols: 1.5, size: 'xxsmall', maxWidth: '192px' }],
+          },
+          {
+            breakpoint: 'sm',
+            pattern: [{ cols: 4, size: 'xxsmall' }],
+          },
+          {
+            breakpoint: 'md',
+            pattern: [{ cols: 4, size: 'xxsmall' }],
+          },
+        ]}
+      />
       <PostsGrid
         bordered
         posts={highlighted.slice(0, 1)}
