@@ -1,15 +1,13 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
 import PodcastSection from '@/components/Podcasts/Podcast.Section'
 import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
+import { uiConfigs } from '@/configs/ui.configs'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../types/lpe.types'
-import { uiConfigs } from '@/configs/ui.configs'
-import { useWindowSize } from 'react-use'
-import Image from 'next/image'
 
 interface Props {
   shows: LPE.Podcast.Show[]
@@ -19,9 +17,6 @@ interface Props {
 const PodcastsContainer = (props: Props) => {
   const { shows, highlightedEpisodes } = props
 
-  const { width } = useWindowSize()
-  const isMobile = width < 768 // TODO : use global breakpoint + use media query if cols is not needed
-
   return (
     <PodcastsGrid>
       <PodcastsBodyContainer className={'w-16'}>
@@ -29,16 +24,45 @@ const PodcastsContainer = (props: Props) => {
 
         <PodcastSection>
           <EpisodesList
-            cols={isMobile ? 1 : 2}
-            size="medium"
             episodes={highlightedEpisodes.slice(0, 2)}
+            bordered="except-first-row"
             header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
+            pattern={[{ cols: 2, size: 'medium' }]}
+            breakpoints={[
+              {
+                breakpoint: 'xs',
+                pattern: [
+                  { cols: 1, size: 'small', rowBorder: 'except-first-row' },
+                ],
+              },
+              {
+                breakpoint: 'sm',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+              {
+                breakpoint: 'md',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+            ]}
           />
           <EpisodesList
-            cols={isMobile ? 1 : 4}
-            size="small"
             bordered
             episodes={highlightedEpisodes.slice(2)}
+            pattern={[{ cols: 4, size: 'small' }]}
+            breakpoints={[
+              {
+                breakpoint: 'xs',
+                pattern: [{ cols: 1, size: 'small', rowBorder: false }],
+              },
+              {
+                breakpoint: 'sm',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+              {
+                breakpoint: 'md',
+                pattern: [{ cols: 2, size: 'small' }],
+              },
+            ]}
           />
         </PodcastSection>
 
@@ -66,10 +90,21 @@ const PodcastsContainer = (props: Props) => {
                   </Link>
                 </EpisodeListHeader>
               }
-              cols={isMobile ? 1 : 4}
               shows={[show]}
+              bordered="except-first-row"
               displayShow={false}
-              episodes={show.episodes as LPE.Podcast.Document[]}
+              episodes={(show.episodes as LPE.Podcast.Document[]).slice(0, 4)}
+              pattern={[{ cols: 4, size: 'small' }]}
+              breakpoints={[
+                {
+                  breakpoint: 'xs',
+                  pattern: [{ cols: 1, size: 'small' }],
+                },
+                {
+                  breakpoint: 'sm',
+                  pattern: [{ cols: 2, size: 'small' }],
+                },
+              ]}
             />
           </PodcastSection>
         ))}

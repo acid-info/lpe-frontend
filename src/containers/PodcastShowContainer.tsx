@@ -2,12 +2,11 @@ import { Grid, GridItem } from '@/components/Grid/Grid'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
 import PodcastSection from '@/components/Podcasts/Podcast.Section'
 import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
+import { uiConfigs } from '@/configs/ui.configs'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useRecentEpisodes } from '../queries/useRecentEpisodes.query'
 import { LPE } from '../types/lpe.types'
-import { uiConfigs } from '@/configs/ui.configs'
-import { useWindowSize } from 'react-use'
 
 interface Props {
   show: LPE.Podcast.Show
@@ -17,9 +16,6 @@ interface Props {
 
 const PodcastShowContainer = (props: Props) => {
   const { show, latestEpisodes, highlightedEpisodes } = props
-  const { width } = useWindowSize()
-
-  const isMobile = width < 768 // TODO : use global breakpoint + use media query if cols is not needed
 
   const query = useRecentEpisodes({
     limit: 8,
@@ -34,21 +30,58 @@ const PodcastShowContainer = (props: Props) => {
           <PodcastShowCard show={show} />
           <PodcastSection marginTop={64}>
             <EpisodesList
-              cols={isMobile ? 1 : 2}
-              size="medium"
               shows={[show]}
               displayShow={false}
               episodes={highlightedEpisodes}
               header={<Typography variant="body2">All episodes</Typography>}
+              bordered="except-first-row"
+              pattern={[
+                {
+                  cols: 2,
+                  size: 'medium',
+                },
+              ]}
+              breakpoints={[
+                {
+                  breakpoint: 'xs',
+                  pattern: [
+                    {
+                      cols: 1,
+                      size: 'small',
+                      rowBorder: 'except-first-row',
+                    },
+                  ],
+                },
+              ]}
             />
           </PodcastSection>
           <EpisodesList
-            cols={isMobile ? 1 : 4}
-            bordered
-            size="small"
             shows={[show]}
             displayShow={false}
             episodes={query.posts}
+            bordered={
+              highlightedEpisodes.length > 0 ? true : 'except-first-row'
+            }
+            pattern={[
+              {
+                cols: 4,
+                size: 'small',
+              },
+            ]}
+            breakpoints={[
+              {
+                breakpoint: 'xs',
+                pattern: [{ cols: 1, size: 'small' }],
+              },
+              {
+                breakpoint: 'sm',
+                pattern: [{ cols: 4, size: 'xsmall' }],
+              },
+              {
+                breakpoint: 'md',
+                pattern: [{ cols: 4, size: 'xsmall' }],
+              },
+            ]}
           />
         </PodcastsBodyContainer>
       </PodcastsGrid>

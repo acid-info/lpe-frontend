@@ -5,7 +5,7 @@ import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
 import { useRecentPosts } from '../../queries/useRecentPosts.query'
 import { LPE } from '../../types/lpe.types'
-import { chunkArray } from '../../utils/array.utils'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { PodcastShowsPreview } from '../PodcastShowsPreview'
 
 export type HomePageProps = React.DetailedHTMLProps<
@@ -28,29 +28,93 @@ export const HomePage: React.FC<HomePageProps> = ({
   const query = useRecentPosts({ initialData: latest, limit: 10 })
 
   const [group1, group2] = useMemo(
-    () => [[query.posts.slice(0, 5)], chunkArray(query.posts.slice(5), 4, 2)],
+    () => [query.posts.slice(0, 5), query.posts.slice(5)],
     [query.posts],
   )
 
   return (
     <Root {...props}>
       <Hero tags={tags} />
-      <PostsGrid posts={group1[0]} cols={5} bordered size="xxsmall" />
       <PostsGrid
-        posts={highlighted.slice(0, 1)}
-        cols={1}
-        bordered
-        size="large"
+        posts={group1}
+        horizontal
+        displayYear={false}
+        pattern={[{ cols: 5, size: 'xxsmall' }]}
+        breakpoints={[
+          {
+            breakpoint: 'xs',
+            pattern: [{ cols: 1.5, size: 'xxsmall', maxWidth: '192px' }],
+          },
+          {
+            breakpoint: 'sm',
+            pattern: [{ cols: 4, size: 'xxsmall' }],
+          },
+          {
+            breakpoint: 'md',
+            pattern: [{ cols: 4, size: 'xxsmall' }],
+          },
+        ]}
       />
-      {group2.map((group, index) => (
-        <PostsGrid
-          bordered
-          key={index}
-          posts={group}
-          cols={index % 2 !== 0 ? 2 : 4}
-          size={index % 2 !== 0 ? 'medium' : 'small'}
-        />
-      ))}
+      <PostsGrid
+        bordered
+        posts={highlighted.slice(0, 1)}
+        pattern={[{ cols: 1, size: 'large' }]}
+        breakpoints={[
+          {
+            breakpoint: 'xs',
+            pattern: [{ cols: 1, size: 'small' }],
+          },
+        ]}
+      />
+      <PostsGrid
+        pattern={[
+          { cols: 4, size: 'small' },
+          {
+            cols: 2,
+            size: 'medium',
+          },
+        ]}
+        breakpoints={[
+          {
+            breakpoint: 'xs',
+            pattern: [
+              {
+                cols: 1,
+                size: 'small',
+              },
+            ],
+          },
+          {
+            breakpoint: 'sm',
+            pattern: [
+              {
+                cols: 3,
+                size: 'small',
+              },
+              {
+                cols: 2,
+                size: 'medium',
+              },
+            ],
+          },
+          {
+            breakpoint: 'md',
+            pattern: [
+              {
+                cols: 3,
+                size: 'small',
+              },
+              {
+                cols: 2,
+                size: 'medium',
+              },
+            ],
+          },
+        ]}
+        posts={group2}
+        bordered
+      />
+
       {query.hasNextPage && (
         <div className="load-more">
           <Button
@@ -81,6 +145,18 @@ const Root = styled('div')`
 
     button {
       width: 340px;
+    }
+
+    ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+      button {
+        width: 236px;
+      }
+    }
+
+    ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+      button {
+        width: 100%;
+      }
     }
   }
 

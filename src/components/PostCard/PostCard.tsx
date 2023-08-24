@@ -1,21 +1,21 @@
-import { Tags } from '@/components/Tags'
-import { Typography } from '@acid-info/lsd-react'
-import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
-import styled from '@emotion/styled'
-import Link from 'next/link'
-import React from 'react'
-import { LPE } from '../../types/lpe.types'
-import { Authors } from '../Authors'
-import { AuthorsDirection } from '../Authors/Authors'
-
-import { ResponsiveImageProps } from '../ResponsiveImage/ResponsiveImage'
-
 import { PostCardCover } from '@/components/PostCard/PostCard.Cover'
 import {
   PostCardShowDetails,
   PostCardShowDetailsProps,
 } from '@/components/PostCard/PostCard.ShowDetails'
+import { Tags } from '@/components/Tags'
+import { Theme, Typography } from '@acid-info/lsd-react'
+import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import { css } from '@emotion/react'
+import styled from '@emotion/styled'
+import clsx from 'clsx'
+import Link from 'next/link'
+import React from 'react'
+import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
+import { Authors } from '../Authors'
+import { AuthorsDirection } from '../Authors/Authors'
+import { ResponsiveImageProps } from '../ResponsiveImage/ResponsiveImage'
 import { PostCardLabel } from './PostCard.Label'
 
 export type PostAppearanceProps = {
@@ -39,7 +39,9 @@ export type PostCardProps = CommonProps &
     data: PostDataProps
     contentType: LPE.PostType
     size?: 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large'
+    applySizeStyles?: boolean
     displayPodcastShow?: boolean
+    displayYear?: boolean
   }
 
 export const PostCard = (_props: PostCardProps) => {
@@ -57,7 +59,9 @@ export const PostCard = (_props: PostCardProps) => {
     },
     size = 'small',
     contentType,
+    applySizeStyles = true,
     displayPodcastShow = true,
+    displayYear = true,
     ...props
   } = _props
 
@@ -68,7 +72,7 @@ export const PostCard = (_props: PostCardProps) => {
 
   const coverImageElement = coverImage && (
     <PostCardCover
-      className="coverImage"
+      className="post-card__cover-image"
       href={link}
       imageProps={imageProps}
       imageData={coverImage}
@@ -76,24 +80,21 @@ export const PostCard = (_props: PostCardProps) => {
   )
 
   const labelElement = (
-    <PostCardLabel className="label" contentType={contentType} date={date} />
+    <PostCardLabel
+      className="post-card__label"
+      contentType={contentType}
+      displayYear={displayYear}
+      date={date}
+    />
   )
 
   const titleElement = (
-    <Link href={link} className="titleLink">
+    <Link href={link} className="post-card__title">
       <Typography
-        className="title"
-        genericFontFamily="serif"
+        variant={'h3'}
         component="h3"
-        variant={
-          size === 'xxsmall'
-            ? 'h6'
-            : size === 'xsmall'
-            ? 'body3'
-            : size === 'small'
-            ? 'h4'
-            : 'h2'
-        }
+        genericFontFamily="serif"
+        className="post-card__title-text"
       >
         {title}
       </Typography>
@@ -102,7 +103,7 @@ export const PostCard = (_props: PostCardProps) => {
 
   const subtitleElement = subtitle && (
     <Typography
-      className="subtitle"
+      className="post-card__subtitle"
       variant={'body1'}
       genericFontFamily="sans-serif"
     >
@@ -112,7 +113,7 @@ export const PostCard = (_props: PostCardProps) => {
 
   const authorsElement = authors && authors.length > 0 && (
     <Authors
-      className="authors"
+      className="post-card__authors"
       authors={authors}
       email={false}
       flexDirection={AuthorsDirection.ROW}
@@ -123,38 +124,30 @@ export const PostCard = (_props: PostCardProps) => {
   const showElement = displayPodcastShow && podcastShowDetails && (
     <PostCardShowDetails
       {...podcastShowDetails}
-      size={size === 'large' ? 'medium' : 'small'}
-      className="showDetails"
+      className="post-card__show-details"
+      applySizeStyles={false}
+      size={'small'}
     />
   )
 
-  const tagsElement = tags.length > 0 && <Tags className="tags" tags={tags} />
+  const tagsElement = tags.length > 0 && (
+    <Tags className="post-card__tags" tags={tags} />
+  )
 
   return (
-    <Container {...props} size={size}>
-      {size === 'large' ? (
-        <>
-          <div>
-            {labelElement}
-            {titleElement}
-            {subtitleElement}
-            {authorsElement}
-            {showElement}
-            {tagsElement}
-          </div>
-          <div>{coverImageElement}</div>
-        </>
-      ) : (
-        <>
-          {coverImageElement}
-          {labelElement}
-          {titleElement}
-          {subtitleElement}
-          {authorsElement}
-          {showElement}
-          {tagsElement}
-        </>
+    <Container
+      className={clsx(
+        'post-card',
+        applySizeStyles && applySizeStyles && `post-card--${size}`,
       )}
+    >
+      {coverImageElement}
+      {labelElement}
+      {titleElement}
+      {subtitleElement}
+      {showElement}
+      {authorsElement}
+      {tagsElement}
     </Container>
   )
 }
@@ -193,115 +186,239 @@ PostCard.toData = (post: LPE.Post.Document, shows: LPE.Podcast.Show[] = []) => {
   }
 }
 
+PostCard.styles = {
+  xxsmall: (theme: Theme) => css`
+    height: 100%;
+
+    .post-card__title-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      max-height: calc(2 * var(--lsd-h6-lineHeight));
+
+      ${lsdUtils.typography('h6')}
+    }
+
+    .post-card__subtitle {
+      display: none;
+    }
+
+    .post-card__cover-image {
+      display: none;
+    }
+
+    .post-card__tags {
+      display: none;
+    }
+
+    .post-card__authors,
+    .post-card__show-details {
+      flex-grow: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .post-card__show-details {
+      ${PostCardShowDetails.styles.small(theme)}
+    }
+
+    ${lsdUtils.breakpoint(theme, 'sm', 'exact')} {
+      .post-card__authors {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px 0;
+
+        > div {
+          > span {
+            display: none;
+          }
+        }
+      }
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('subtitle1', true)}
+        max-height: calc(2 * var(--lsd-subtitle1-lineHeight));
+      }
+    }
+  `,
+  xsmall: (theme: Theme) => css`
+    .post-card__title-text {
+      ${lsdUtils.typography('h6')}
+    }
+  `,
+  small: (theme: Theme) => css`
+    .post-card__title-text {
+      ${lsdUtils.typography('h4')}
+    }
+
+    .post-card__subtitle {
+      ${lsdUtils.typography('subtitle2')}
+    }
+
+    .post-card__show-details {
+      ${PostCardShowDetails.styles.large(theme)}
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h5')}
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-height: calc(3 * var(--lsd-h5-lineHeight));
+      }
+    }
+
+    ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+      .post-card__show-details {
+        ${PostCardShowDetails.styles.small(theme)}
+      }
+    }
+  `,
+  medium: (theme: Theme) => css`
+    .post-card__title-text {
+      ${lsdUtils.typography('h2')}
+    }
+
+    .post-card__subtitle {
+      ${lsdUtils.typography('subtitle2')}
+    }
+
+    .post-card__show-details {
+      ${PostCardShowDetails.styles.large(theme)}
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h3')}
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-height: calc(3 * var(--lsd-h3-lineHeight));
+      }
+    }
+  `,
+  large: (theme: Theme) => css`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'info image'
+      'info image'
+      'info image'
+      'info image'
+      'info image'
+      'info image'
+      '. image';
+    gap: 16px 105px;
+
+    .post-card__title-text {
+      ${lsdUtils.typography('h2')}
+    }
+
+    .postcard__subtitle {
+      ${lsdUtils.typography('subtitle2')}
+    }
+
+    .post-card__cover-image {
+      grid-area: image;
+    }
+
+    .post-card__label {
+      grid-area: info;
+      grid-row: auto;
+    }
+
+    .post-card__title {
+      grid-area: info;
+      grid-row: auto;
+    }
+
+    .post-card__authors,
+    .post-card__show-details {
+      grid-area: info;
+      grid-row: auto;
+    }
+
+    .post-card__tags {
+      grid-area: info;
+      grid-row: auto;
+    }
+
+    .post-card__show-details {
+      ${PostCardShowDetails.styles.large(theme)}
+    }
+
+    ${lsdUtils.breakpoint(theme, 'sm', 'exact')} {
+      gap: 16px 16px;
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'exact')} {
+      gap: 16px 100px;
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h3')}
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-height: calc(3 * var(--lsd-h3-lineHeight));
+      }
+    }
+
+    ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h5')}
+      }
+    }
+  `,
+}
+
 const Container = styled.div<Pick<PostCardProps, 'size'>>`
   display: flex;
   flex-direction: column;
   position: 'relative';
-  gap: 16px;
+  gap: 16px 0;
 
-  .label {
+  .post-card__label {
     margin-bottom: -8px;
   }
 
-  .titleLink {
+  .post-card__title {
     text-decoration: none;
     width: fit-content;
   }
 
-  .title,
-  .subtitle {
+  .post-card__title-text,
+  .post-card__subtitle {
     text-overflow: ellipsis;
     overflow: hidden;
     word-break: break-word;
   }
 
-  .title {
-    @media (max-width: 768px) {
-      font-size: 28px;
-      line-height: 36px;
-    }
+  &.post-card--xxsmall {
+    ${({ theme }) => PostCard.styles.xxsmall(theme)}
   }
 
-  .subtitle {
-    @media (max-width: 768px) {
-      font-size: 14px;
-      line-height: 20px;
-    }
+  &.post-card--xsmall {
+    ${({ theme }) => PostCard.styles.xsmall(theme)}
   }
 
-  ${({ size }) =>
-    size === 'xxsmall' &&
-    css`
-      .label {
-      }
+  &.post-card--small {
+    ${({ theme }) => PostCard.styles.small(theme)}
+  }
 
-      .title {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        max-height: calc(2 * var(--lsd-h6-lineHeight));
-      }
+  &.post-card--medium {
+    ${({ theme }) => PostCard.styles.medium(theme)}
+  }
 
-      .subtitle {
-        display: none;
-      }
-
-      .coverImage {
-        display: none;
-      }
-
-      .tags {
-        display: none;
-      }
-
-      .authors,
-      .showDetails {
-        flex-grow: 1;
-        display: flex;
-      }
-    `}
-
-  ${({ size }) =>
-    size === 'xsmall' &&
-    css`
-      .label {
-        margin-bottom: -px;
-      }
-
-      .title {
-      }
-
-      .subtitle {
-        display: none;
-      }
-
-      .coverImage {
-      }
-
-      .tags {
-        margin-top: 8px;
-      }
-
-      .authors,
-      .showDetails {
-      }
-    `}
-
-  ${({ size }) => size === 'small' && css``}
-
-  ${({ size }) => size === 'medium' && css``}
-
-  ${({ size }) =>
-    size === 'large' &&
-    css`
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-
-      > * {
-        display: flex;
-        flex-direction: column;
-        position: 'relative';
-        gap: 16px;
-      }
-    `}
+  &.post-card--large {
+    ${({ theme }) => PostCard.styles.large(theme)}
+  }
 `

@@ -7,9 +7,15 @@ import PostType = LPE.PostType
 export type Props = React.ComponentProps<typeof Container> & {
   contentType: PostType
   date: Date | null
+  displayYear?: boolean
 }
 
-export const PostCardLabel: FC<Props> = ({ contentType, date, ...props }) => {
+export const PostCardLabel: FC<Props> = ({
+  displayYear = true,
+  contentType,
+  date,
+  ...props
+}) => {
   return (
     <Container {...props}>
       <Typography variant="body3" genericFontFamily="sans-serif">
@@ -23,7 +29,11 @@ export const PostCardLabel: FC<Props> = ({ contentType, date, ...props }) => {
           date.toLocaleString('en-GB', {
             day: 'numeric',
             month: 'long', // TODO: Should be uppercase
-            year: 'numeric',
+            ...(displayYear
+              ? {
+                  year: 'numeric',
+                }
+              : {}),
           })}
       </Typography>
     </Container>
