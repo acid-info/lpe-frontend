@@ -7,6 +7,9 @@ import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { LPE } from '../types/lpe.types'
+import { uiConfigs } from '@/configs/ui.configs'
+import { useWindowSize } from 'react-use'
+import Image from 'next/image'
 
 interface Props {
   shows: LPE.Podcast.Show[]
@@ -16,6 +19,9 @@ interface Props {
 const PodcastsContainer = (props: Props) => {
   const { shows, highlightedEpisodes } = props
 
+  const { width } = useWindowSize()
+  const isMobile = width < 768 // TODO : use global breakpoint + use media query if cols is not needed
+
   return (
     <PodcastsGrid>
       <PodcastsBodyContainer className={'w-16'}>
@@ -23,13 +29,13 @@ const PodcastsContainer = (props: Props) => {
 
         <PodcastSection>
           <EpisodesList
-            cols={2}
+            cols={isMobile ? 1 : 2}
             size="medium"
             episodes={highlightedEpisodes.slice(0, 2)}
             header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
           />
           <EpisodesList
-            cols={4}
+            cols={isMobile ? 1 : 4}
             size="small"
             bordered
             episodes={highlightedEpisodes.slice(2)}
@@ -42,7 +48,12 @@ const PodcastsContainer = (props: Props) => {
               header={
                 <EpisodeListHeader>
                   <Show>
-                    <LogosCircleIcon width={38} height={38} />
+                    <Image
+                      src={show.logo.url}
+                      alt={show.logo.alt}
+                      width={38}
+                      height={38}
+                    />
                     <PodcastInfo>
                       <Typography variant="body1">{show.title}</Typography>
                       <Typography variant="body3">
@@ -55,6 +66,7 @@ const PodcastsContainer = (props: Props) => {
                   </Link>
                 </EpisodeListHeader>
               }
+              cols={isMobile ? 1 : 4}
               shows={[show]}
               displayShow={false}
               episodes={show.episodes as LPE.Podcast.Document[]}
@@ -70,7 +82,8 @@ const PodcastsBodyContainer = styled(GridItem)``
 
 const PodcastsGrid = styled(Grid)`
   width: 100%;
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (max-width: 768px) {
+    margin-top: ${uiConfigs.navbarRenderedHeight + 80}px;
   }
 `
 

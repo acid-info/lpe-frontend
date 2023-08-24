@@ -13,4 +13,9 @@ export default function PodcastSection({ children, marginTop = 140 }: Props) {
 const Section = styled.div<{ marginTop: number }>`
   margin-top: ${(props) => props.marginTop}px;
   border-top: 1px solid rgb(var(--lsd-border-primary));
+
+  @media (max-width: 768px) {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
 `
