@@ -1,9 +1,8 @@
+import { LPE } from '@/types/lpe.types'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { LPE } from '@/types/lpe.types'
-import { PostCard } from '@/components/PostCard'
-import { Grid, GridItem } from '@/components/Grid/Grid'
+import { PostsGrid } from '../../PostsGrid'
 
 type props = {
   podcastSlug: string
@@ -24,18 +23,25 @@ const RelatedEpisodes = ({ podcastSlug, relatedEpisodes }: props) => {
   return (
     <Container>
       <Typography>More Episodes</Typography>
-      <EpisodeCards>
-        {relatedEpisodes.slice(0, showIndex).map((episode, idx: number) => (
-          <PostCardContainer className="w-8" key={'related-episode' + idx}>
-            <PostCard
-              size="xsmall"
-              displayPodcastShow={false}
-              contentType={LPE.PostTypes.Podcast}
-              data={{ ...PostCard.toData(episode), tags: [] }}
-            />
-          </PostCardContainer>
-        ))}
-      </EpisodeCards>
+      <PostsGrid
+        displayPodcastShow={false}
+        posts={relatedEpisodes.slice(0, showIndex)}
+        pattern={[{ cols: 2, size: 'xsmall' }]}
+        breakpoints={[
+          {
+            breakpoint: 'xs',
+            pattern: [{ cols: 1, size: 'small' }],
+          },
+          {
+            breakpoint: 'sm',
+            pattern: [{ cols: 1, size: 'small' }],
+          },
+          {
+            breakpoint: 'md',
+            pattern: [{ cols: 2, size: 'small' }],
+          },
+        ]}
+      />
       {relatedEpisodes?.length > 4 && (
         <ShowButton onClick={toggleShowMore}>
           {showMore ? 'Show less' : 'Show more'}
@@ -53,17 +59,9 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-const EpisodeCards = styled(Grid)`
-  gap: 0 16px;
-`
-
 const ShowButton = styled(Button)`
   height: 40px;
   margin-top: 24px;
-`
-
-const PostCardContainer = styled(GridItem)`
-  padding-top: 24px;
 `
 
 export default RelatedEpisodes
