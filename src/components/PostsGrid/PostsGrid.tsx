@@ -127,6 +127,7 @@ const createGridStyles = ({
             grid-column: span ${cm / p.cols};
 
             .post-card {
+              --post-card-size: ${p.size};
               ${postCardStyles[p.size as string].styles}
             }
            }
@@ -163,7 +164,7 @@ const Container = styled.div<{
     ${lsdUtils
       .breakpoints(props.breakpoints.map((b) => b.breakpoint))
       .map((breakpoint) =>
-        lsdUtils.breakpoint(
+        lsdUtils.responsive(
           props.theme,
           breakpoint,
           'exact',
@@ -180,7 +181,7 @@ const Container = styled.div<{
 
   ${({ breakpoints = [], theme, postCardStyles }) => {
     return breakpoints.map((b) =>
-      lsdUtils.breakpoint(
+      lsdUtils.responsive(
         theme,
         b.breakpoint,
         'exact',
@@ -195,79 +196,3 @@ const Container = styled.div<{
     )
   }}
 `
-// ${b.size.map(
-//           ([originalSize, targetSize]) => `
-//           .post-card--${originalSize} {
-//             ${postCardStyles[targetSize as string]?.styles}
-//           }
-//         `,
-//         )}
-
-// @media (max-width: ${props.theme.breakpoints.sm.width - 1}px) {
-// }
-
-// @media (min-width: ${props.theme.breakpoints.sm.width}px) {
-//   ${props.pattern.sm && createGridStyles({ pattern: props.pattern.sm })}
-// }
-
-// @media (min-width: ${props.theme.breakpoints.md.width}px) {
-//   ${props.pattern.md && createGridStyles({ pattern: props.pattern.md })}
-// }
-
-// @media (min-width: ${props.theme.breakpoints.lg.width}px) {
-//   ${props.pattern.lg && createGridStyles({ pattern: props.pattern.lg })}
-// }
-
-// styled.div`
-//   ${(props) =>
-//     props.size === 'xxsmall' &&
-//     css`
-//       > .row {
-//         padding: 24px 0;
-//         gap: 0 32px;
-
-//         & > div {
-//           border-top: 0;
-//           padding: 0;
-//           position: relative;
-//         }
-
-//         & > div:not(:last-child)::after {
-//           content: ' ';
-//           height: 100%;
-//           width: 1px;
-//           background: rgb(var(--lsd-border-primary));
-//           position: absolute;
-//           top: 0;
-//           right: -16px;
-//           display: ${props.bordered ? 'block' : 'none'};
-//         }
-//       }
-//     `}
-
-//   ${(props) =>
-//     props.size === 'xsmall' &&
-//     css`
-//       > .row {
-//         gap: 0 16px;
-
-//         & > div {
-//           box-sizing: border-box;
-//           border-top: 0;
-//         }
-
-//         & > div:last-child {
-//         }
-//         & > div:not(:last-child) {
-//         }
-//       }
-//     `}
-
-//   ${(props) => props.size === 'small' && css``}
-
-//   ${(props) => props.size === 'medium' && css``}
-
-//   ${(props) => props.size === 'large' && css``} // @media (max-width: ${(
-//     props,
-//   ) => props.theme.breakpoints.sm.width})
-// `

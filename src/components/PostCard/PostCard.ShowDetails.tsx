@@ -23,12 +23,14 @@ export const PostCardShowDetails = ({
   episodeNumber,
   podcast,
   size = 'medium',
+  applySizeStyles = true,
   ...props
 }: PostCardShowDetailsProps) => {
   return (
     <CustomLink
       {...props}
       href={`/podcasts/${slug}`}
+      applySizeStyles={applySizeStyles}
       className={clsx('show-details', `show-details--${size}`, props.className)}
     >
       <div className="show-details__container">
@@ -65,7 +67,7 @@ PostCardShowDetails.styles = {
     }
 
     .show-details__episodes {
-      display: none;
+      display: none !important;
     }
 
     .show-details__logo {
@@ -103,6 +105,7 @@ type CustomLinkProps = {
   smSize?: Size
   mdSize?: Size
   lgSize?: Size
+  applySizeStyles?: boolean
 }
 
 const CustomLink = styled(Link)<CustomLinkProps>`
@@ -127,36 +130,47 @@ const CustomLink = styled(Link)<CustomLinkProps>`
   }
 
   &.show-details--small {
-    ${(props) => PostCardShowDetails.styles.small(props.theme)}
+    ${(props) =>
+      props.applySizeStyles && PostCardShowDetails.styles.small(props.theme)}
   }
 
   &.show-details--medium {
-    ${(props) => PostCardShowDetails.styles.medium(props.theme)}
+    ${(props) =>
+      props.applySizeStyles && PostCardShowDetails.styles.medium(props.theme)}
   }
 
   &.show-details--large {
-    ${(props) => PostCardShowDetails.styles.large(props.theme)}
+    ${(props) =>
+      props.applySizeStyles && PostCardShowDetails.styles.large(props.theme)}
   }
 
   &.show-details {
     @media (max-width: ${({ theme }) => theme.breakpoints.sm.width - 1}px) {
       ${(props) =>
-        props.xsSize && PostCardShowDetails.styles[props.xsSize](props.theme)}
+        props.xsSize &&
+        props.applySizeStyles &&
+        PostCardShowDetails.styles[props.xsSize](props.theme)}
     }
 
     @media (min-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
       ${(props) =>
-        props.smSize && PostCardShowDetails.styles[props.smSize](props.theme)}
+        props.smSize &&
+        props.applySizeStyles &&
+        PostCardShowDetails.styles[props.smSize](props.theme)}
     }
 
     @media (min-width: ${({ theme }) => theme.breakpoints.md.width}px) {
       ${(props) =>
-        props.mdSize && PostCardShowDetails.styles[props.mdSize](props.theme)}
+        props.mdSize &&
+        props.applySizeStyles &&
+        PostCardShowDetails.styles[props.mdSize](props.theme)}
     }
 
     @media (min-width: ${({ theme }) => theme.breakpoints.lg.width}px) {
       ${(props) =>
-        props.lgSize && PostCardShowDetails.styles[props.lgSize](props.theme)}
+        props.lgSize &&
+        props.applySizeStyles &&
+        PostCardShowDetails.styles[props.lgSize](props.theme)}
     }
   }
 `

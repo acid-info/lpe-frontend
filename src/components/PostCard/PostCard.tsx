@@ -122,6 +122,7 @@ export const PostCard = (_props: PostCardProps) => {
     <PostCardShowDetails
       {...podcastShowDetails}
       className="post-card__show-details"
+      applySizeStyles={false}
       size={'small'}
     />
   )
@@ -137,8 +138,8 @@ export const PostCard = (_props: PostCardProps) => {
         applySizeStyles && applySizeStyles && `post-card--${size}`,
       )}
     >
-      {labelElement}
       {coverImageElement}
+      {labelElement}
       {titleElement}
       {subtitleElement}
       {showElement}
@@ -213,7 +214,26 @@ PostCard.styles = {
       display: flex;
     }
 
-    @media (max-width: ${theme.breakpoints.lg.width - 1}px) {
+    .post-card__show-details {
+      ${PostCardShowDetails.styles.small(theme)}
+    }
+
+    ${lsdUtils.breakpoint(theme, 'sm', 'exact')} {
+      .post-card__authors {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px 0;
+
+        > div {
+          > span {
+            display: none;
+          }
+        }
+      }
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
       .post-card__title-text {
         ${lsdUtils.typography('subtitle1', true)}
         max-height: calc(2 * var(--lsd-subtitle1-lineHeight));
@@ -237,6 +257,23 @@ PostCard.styles = {
     .post-card__show-details {
       ${PostCardShowDetails.styles.large(theme)}
     }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h5')}
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-height: calc(3 * var(--lsd-h5-lineHeight));
+      }
+    }
+
+    ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+      .post-card__show-details {
+        ${PostCardShowDetails.styles.small(theme)}
+      }
+    }
   `,
   medium: (theme: Theme) => css`
     .post-card__title-text {
@@ -249,6 +286,17 @@ PostCard.styles = {
 
     .post-card__show-details {
       ${PostCardShowDetails.styles.large(theme)}
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h3')}
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-height: calc(3 * var(--lsd-h3-lineHeight));
+      }
     }
   `,
   large: (theme: Theme) => css`
@@ -299,6 +347,31 @@ PostCard.styles = {
 
     .post-card__show-details {
       ${PostCardShowDetails.styles.large(theme)}
+    }
+
+    ${lsdUtils.breakpoint(theme, 'sm', 'exact')} {
+      gap: 16px 16px;
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'exact')} {
+      gap: 16px 100px;
+    }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h3')}
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-height: calc(3 * var(--lsd-h3-lineHeight));
+      }
+    }
+
+    ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h5')}
+      }
     }
   `,
 }

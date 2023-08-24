@@ -4,7 +4,7 @@ import {
   TypographyVariants,
   THEME_BREAKPOINTS,
 } from '@acid-info/lsd-react'
-import { css } from '@emotion/react'
+import { css, SerializedStyles } from '@emotion/react'
 
 export class LsdUtils {
   breakpoints = (exclude: Breakpoints[] = []) =>
@@ -45,13 +45,20 @@ export class LsdUtils {
     } else if (func === 'down') media += `(max-width: ${max}px)`
     else media += `(min-width: ${min}px) and (max-width: ${max}px)`
 
-    return (styles: any) => {
-      return css`
-        ${media} {
-          ${styles}
-        }
-      `
-    }
+    return `${media}`
+  }
+
+  responsive = (
+    theme: Theme,
+    breakpoint: Breakpoints,
+    func: 'exact' | 'up' | 'down' = 'up',
+  ) => {
+    const media = lsdUtils.breakpoint(theme, breakpoint, func)
+    return (styles: SerializedStyles) => css`
+      ${media} {
+        ${styles}
+      }
+    `
   }
 }
 
