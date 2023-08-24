@@ -7,6 +7,10 @@ export const copyConfigs = {
       global: () => 'Search through the LPE posts...',
       article: () => `Search through the article or switch to `,
     },
+    views: {
+      default: 'List',
+      explore: 'Explore',
+    },
     filterTags: [
       'Privacy',
       'Security',
