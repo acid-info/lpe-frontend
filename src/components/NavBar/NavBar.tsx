@@ -130,6 +130,10 @@ const NavBarContainer = styled.nav<{
     display: flex;
     align-items: center;
   }
+
+  style {
+    display: none !important;
+  }
 `
 
 const NavLinksContainer = styled.div`
