@@ -212,6 +212,7 @@ PostCard.styles = {
     .post-card__show-details {
       flex-grow: 1;
       display: flex;
+      align-items: flex-end;
     }
 
     .post-card__show-details {
