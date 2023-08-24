@@ -11,7 +11,6 @@ import {
   ControlsTimeTrackProps,
   TimeTrack,
 } from '@/components/LpePlayer/Controls/Controls.TimeTrack'
-import { FullscreenIcon } from '@/components/Icons/FullscreenIcon'
 
 export interface LpeAudioPlayerControlsProps {
   duration: number
@@ -68,7 +67,6 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
               <VolumeIcon width={24} height={24} fill={color} />
             )}
           </VolumeContainer>
-          <FullscreenIcon width={24} height={24} fill={color} />
         </Row>
       </Buttons>
       <Seek className={styles.audioPlayer}>
