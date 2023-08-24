@@ -159,6 +159,7 @@ const createGridStyles = ({
         width: 100%;
         overflow: scroll;
         scroll-snap-type: x mandatory;
+        gap: 0 32px;
 
         /* Chrome, Safari and Opera */
         &::-webkit-scrollbar {
@@ -176,13 +177,26 @@ const createGridStyles = ({
               max-width: ${p.maxWidth ? p.maxWidth : 'unset'};
               flex-grow: 1 auto;
               flex-shrink: 0;
-              width: calc((100% - (${p.cols - 1} * 16px)) / ${p.cols});
-              flex-basis: calc((100% - (${p.cols - 1} * 16px)) / ${p.cols});
+              width: calc((100% - (${p.cols - 1} * 32px)) / ${p.cols});
+              flex-basis: calc((100% - (${p.cols - 1} * 32px)) / ${p.cols});
               scroll-snap-align: start !important;
+              position: relative;
 
               .post-card {
                 --post-card-size: ${p.size};
                 ${postCardStyles[p.size as string].styles}
+              }
+
+              &:not(:last-child) {
+                &::after {
+                  width: 1px;
+                  height: calc(100% - 48px);
+                  content: ' ';
+                  right: -16px;
+                  top: 24px;
+                  background: rgb(var(--lsd-border-primary));
+                  position: absolute;
+                }
               }
             `,
           )}
