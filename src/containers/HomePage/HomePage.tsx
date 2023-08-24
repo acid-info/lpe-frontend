@@ -37,6 +37,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <PostsGrid
         posts={group1}
         horizontal
+        displayYear={false}
         pattern={[{ cols: 5, size: 'xxsmall' }]}
         breakpoints={[
           {

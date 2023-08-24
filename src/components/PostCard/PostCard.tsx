@@ -41,6 +41,7 @@ export type PostCardProps = CommonProps &
     size?: 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large'
     applySizeStyles?: boolean
     displayPodcastShow?: boolean
+    displayYear?: boolean
   }
 
 export const PostCard = (_props: PostCardProps) => {
@@ -60,6 +61,7 @@ export const PostCard = (_props: PostCardProps) => {
     contentType,
     applySizeStyles = true,
     displayPodcastShow = true,
+    displayYear = true,
     ...props
   } = _props
 
@@ -81,6 +83,7 @@ export const PostCard = (_props: PostCardProps) => {
     <PostCardLabel
       className="post-card__label"
       contentType={contentType}
+      displayYear={displayYear}
       date={date}
     />
   )

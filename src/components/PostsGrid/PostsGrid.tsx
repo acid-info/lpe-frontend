@@ -13,6 +13,7 @@ export type PostsGridProps = Partial<React.ComponentProps<typeof Container>> & {
   shows?: LPE.Podcast.Show[]
   posts?: LPE.Post.Document[]
   displayPodcastShow?: boolean
+  displayYear?: boolean
 }
 
 export const PostsGrid: React.FC<PostsGridProps> = ({
@@ -23,6 +24,7 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
   bordered = false,
   horizontal = false,
   displayPodcastShow = true,
+  displayYear = true,
   ...props
 }) => {
   const theme = useTheme()
@@ -69,6 +71,7 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
               applySizeStyles={false}
               className="post-card"
               contentType={post.type}
+              displayYear={displayYear}
               displayPodcastShow={displayPodcastShow}
               data={PostCard.toData(post, shows)}
             />
