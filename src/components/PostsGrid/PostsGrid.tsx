@@ -86,7 +86,7 @@ type Pattern = {
   cols: number
   maxWidth?: string
   size: PostCardProps['size']
-  rowBorder?: boolean
+  rowBorder?: boolean | 'except-first-row'
 }
 type Breakpoint = {
   pattern: Pattern[]
@@ -99,6 +99,7 @@ const createGridStyles = ({
   postCardStyles,
   breakpoint = false,
   horizontal = false,
+  bordered = false,
 }: {
   theme: Theme
   postCardStyles: {
@@ -107,6 +108,7 @@ const createGridStyles = ({
   pattern: Pick<Pattern, 'cols' | 'size' | 'maxWidth' | 'rowBorder'>[]
   breakpoint?: boolean
   horizontal?: boolean
+  bordered: boolean | 'except-first-row'
 }) => {
   const grid = !horizontal
 
@@ -127,6 +129,12 @@ const createGridStyles = ({
         .map((i, index) => `${sum}n + ${start + index}`)
     })
 
+    const firstRow = new Array(pattern?.[0]?.cols ?? 0)
+      .fill(null)
+      .map((v, i) => i + 1)
+      .map((i) => `&:nth-child(${i})`)
+      .join(', ')
+
     return css`
       > .row {
         display: grid;
@@ -134,32 +142,72 @@ const createGridStyles = ({
         overflow: hidden;
 
         & > div {
-          ${pattern.map(
-            (p, i) => css`
-              ${selectors[i].map((s) => `&:nth-child(${s})`).join(', ')} {
+          ${bordered &&
+          css`
+            border-top: 1px solid rgb(var(--lsd-border-primary));
+          `}
+
+          ${bordered === 'except-first-row' &&
+          css`
+            ${firstRow} {
+              border-top: none;
+            }
+          `}
+
+          ${pattern.map((p, i) => {
+            const firstRow = new Array(p.cols)
+              .fill(null)
+              .map((v, i) => i + 1)
+              .map((i) => `&:nth-child(${i})`)
+              .join(', ')
+
+            const rowSelectors = selectors[i].map((s) => `&:nth-child(${s})`)
+            const firstSelector = rowSelectors[0]
+            const lastSelector = rowSelectors[rowSelectors.length - 1]
+
+            return css`
+              ${rowSelectors.join(', ')} {
                 grid-column: span ${cm / p.cols};
                 position: relative;
 
                 ${p.rowBorder &&
+                bordered &&
                 css`
-                  &::before {
-                    width: calc(100% + 16px);
-                    height: 1px;
-                    content: ' ';
-                    top: 0;
-                    left: 0px;
-                    position: absolute;
-                    background: rgb(var(--lsd-border-primary));
-                  }
+                  border-top: none;
                 `}
+
+                ${p.rowBorder &&
+                css`
+                  ${firstSelector} {
+                    &::before {
+                      width: calc(100% * ${p.cols} + 16px);
+                      height: 1px;
+                      content: ' ';
+                      top: 0;
+                      left: 0px;
+                      position: absolute;
+                      display: block;
+                      background: rgb(var(--lsd-border-primary));
+                    }
+                  }
+                `} 
+
+                ${p.rowBorder === 'except-first-row' &&
+                css`
+                  ${firstRow} {
+                    &::before {
+                      display: none !important;
+                    }
+                  }
+                `} 
 
                 .post-card {
                   --post-card-size: ${p.size};
                   ${postCardStyles[p.size as string].styles}
                 }
               }
-            `,
-          )}
+            `
+          })}
         }
       }
     `
@@ -223,7 +271,7 @@ const createGridStyles = ({
 }
 
 const Container = styled.div<{
-  bordered: boolean
+  bordered: boolean | 'except-first-row'
   horizontal?: boolean
   pattern: Pattern[]
   breakpoints: Breakpoint[]
@@ -241,8 +289,6 @@ const Container = styled.div<{
 
       & > div {
         padding: 24px 0;
-        border-top: ${props.bordered ? '1px' : '0'} solid
-          rgb(var(--lsd-border-primary));
       }
     }
 
@@ -260,12 +306,13 @@ const Container = styled.div<{
             pattern: props.pattern,
             postCardStyles: props.postCardStyles,
             breakpoint: true,
+            bordered: props.bordered,
           })}
         `),
       )}
   `}
 
-  ${({ breakpoints = [], theme, postCardStyles, horizontal }) => {
+  ${({ breakpoints = [], theme, postCardStyles, horizontal, bordered }) => {
     return breakpoints.map((b) =>
       lsdUtils.responsive(
         theme,
@@ -278,6 +325,7 @@ const Container = styled.div<{
           pattern: b.pattern,
           postCardStyles,
           breakpoint: true,
+          bordered,
         })}
       `),
     )
