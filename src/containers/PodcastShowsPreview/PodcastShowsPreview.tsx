@@ -97,6 +97,14 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
                     breakpoint: 'xs',
                     pattern: [{ cols: 1, size: 'small' }],
                   },
+                  {
+                    breakpoint: 'sm',
+                    pattern: [{ cols: 2, size: 'small' }],
+                  },
+                  {
+                    breakpoint: 'md',
+                    pattern: [{ cols: 2, size: 'small' }],
+                  },
                 ]}
               />
             </div>
@@ -183,7 +191,7 @@ const Root = styled('div')`
   }
 
   ${(props) =>
-    lsdUtils.breakpoint(
+    lsdUtils.responsive(
       props.theme,
       'xs',
       'exact',

@@ -53,14 +53,6 @@ export const HomePage: React.FC<HomePageProps> = ({
             cols: 2,
             size: 'medium',
           },
-          {
-            cols: 3,
-            size: 'small',
-          },
-          {
-            cols: 5,
-            size: 'medium',
-          },
         ]}
         breakpoints={[
           {
