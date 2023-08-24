@@ -65,3 +65,12 @@ export function convertToIframe(url: string) {
 
   return `<iframe height="200px" width="100%" frameborder="no" scrolling="no" seamless src="${url}"></iframe>`
 }
+
+export function parseText(text: string) {
+  return text.replace(/^\d{2}:\d{2}\s|\[\d+\]/g, '')
+}
+
+export function parseTimestamp(text: string) {
+  const time = text.match(/^\d{2}:\d{2}/g)
+  return time ? time[0] : ''
+}

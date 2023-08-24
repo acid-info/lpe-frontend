@@ -13,11 +13,11 @@ const EpisodeContainer = (props: Props) => {
 
   return (
     <EpisodeGrid>
-      <Gap className={'w-4'} />
+      <GridItem className={'w-4'} />
       <EpisodeBodyContainer className={'w-8'}>
         <EpisodeBody episode={episode} relatedEpisodes={relatedEpisodes} />
       </EpisodeBodyContainer>
-      <Gap className={'w-4'} />
+      <GridItem className={'w-4'} />
     </EpisodeGrid>
   )
 }
@@ -26,13 +26,9 @@ const EpisodeBodyContainer = styled(GridItem)``
 
 const EpisodeGrid = styled(Grid)`
   width: 100%;
-  @media (min-width: 768px) and (max-width: 1200px) {
-  }
-`
+  margin-top: -47px; // offset for uiConfig.postSectionMargin
 
-const Gap = styled(GridItem)`
-  @media (max-width: 550px) {
-    display: none;
+  @media (min-width: 768px) and (max-width: 1200px) {
   }
 `
 

@@ -69,10 +69,6 @@ const EpisodeHeader = ({
 const EpisodeHeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-    padding-top: 32px;
-  }
 `
 
 const CustomTypography = styled(Typography)`
@@ -85,6 +81,8 @@ const EpisodeTitle = styled(Typography)`
   margin-bottom: 16px;
   @media (max-width: 768px) {
     margin-bottom: 8px;
+    font-size: var(--lsd-h4-fontSize) !important;
+    line-height: var(--lsd-h4-lineHeight) !important;
   }
 `
 
@@ -92,7 +90,9 @@ const EpisodeSubtitle = styled(CustomTypography)`
   margin-top: 32px;
 
   @media (max-width: 768px) {
-    font-size: var(--lsd-subtitle1-fontSize);
+    font-size: var(--lsd-subtitle1-fontSize) !important;
+    line-height: var(--lsd-subtitle1-lineHeight) !important;
+    margin-top: 24px;
   }
 `
 

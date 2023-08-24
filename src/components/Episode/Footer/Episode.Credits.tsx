@@ -17,17 +17,19 @@ const EpisodeCredits = ({
         open={open}
         onChange={() => setOpen((prev) => !prev)}
       >
-        {credits?.map((credit, idx) => (
-          <Reference key={idx}>
-            <Typography
-              component="p"
-              variant="body3"
-              id={credit.id.replace('#', '')}
-            >
-              {credit.text}
-            </Typography>
-          </Reference>
-        ))}
+        <Credits>
+          {credits?.map((credit, idx) => (
+            <Credit key={idx}>
+              <Typography
+                component="p"
+                variant="body3"
+                id={credit.id.replace('#', '')}
+              >
+                {credit.text}
+              </Typography>
+            </Credit>
+          ))}
+        </Credits>
       </Collapse>
     </Container>
   ) : null
@@ -41,10 +43,18 @@ const Container = styled.div`
   }
 `
 
-const Reference = styled.div`
+const Credits = styled.div`
   display: flex;
-  padding: 8px 14px;
-  gap: 8px;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--lsd-body3-lineHeight);
+  padding: 12px 14px;
+`
+
+const Credit = styled.div`
+  display: flex;
+  flex-direction: flex;
+  align-items: center;
 `
 
 export default EpisodeCredits

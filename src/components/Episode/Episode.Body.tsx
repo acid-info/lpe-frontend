@@ -5,6 +5,7 @@ import EpisodeHeader from './Header/Episode.Header'
 import EpisodeTranscript from './Episode.Transcript'
 import { playerState } from '../GlobalAudioPlayer/globalAudioPlayer.state'
 import { useHookstate } from '@hookstate/core'
+import { uiConfigs } from '@/configs/ui.configs'
 
 interface Props {
   episode: LPE.Podcast.Document
@@ -39,9 +40,9 @@ const EpisodeContainer = styled.article`
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 16px;
-  max-width: 700px;
+  max-width: 696px;
 
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (max-width: 768px) {
+    margin-top: ${uiConfigs.navbarRenderedHeight - 16}px;
   }
 `

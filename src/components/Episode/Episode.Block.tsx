@@ -1,12 +1,12 @@
 import {
   extractClassFromFirstTag,
   extractIdFromFirstTag,
-  extractInnerHtml,
 } from '@/utils/html.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'
 import { LPE } from '../../types/lpe.types'
+import { parseText, parseTimestamp } from '@/utils/string.utils'
 
 export const RenderEpisodeBlock = ({
   block,
@@ -24,19 +24,24 @@ export const RenderEpisodeBlock = ({
     <ReactPlayer url={youtubeLink[0]} />
   ) : (
     <TranscriptionItem>
+      <Typography variant="body2">{parseTimestamp(block.text)}</Typography>
       <Transcript
         variant="body2"
         component={'p'}
         genericFontFamily="sans-serif"
         className={extractClassFromFirstTag(block.html) || ''}
         id={extractIdFromFirstTag(block.html) || `p-${block.id}`}
-        dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
-      />
+      >
+        {parseText(block.text)}
+      </Transcript>
     </TranscriptionItem>
   )
 }
 
 const TranscriptionItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--lsd-body2-lineHeight);
   margin-bottom: calc(var(--lsd-body2-lineHeight) * 2);
 `
 

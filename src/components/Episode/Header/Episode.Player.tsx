@@ -207,7 +207,7 @@ const PlayerContainer = styled.div<{ isAudio: boolean }>`
   margin-bottom: ${(props) => (props.isAudio ? '0' : '32px')};
   position: relative;
   padding-bottom: ${(props) => (props.isAudio ? '0' : '56.25%')};
-  padding-top: 30px;
+  padding-top: 32px;
   height: 0;
   overflow: hidden;
 
@@ -219,6 +219,10 @@ const PlayerContainer = styled.div<{ isAudio: boolean }>`
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 24px;
   }
 `
 
