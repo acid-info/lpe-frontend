@@ -1,114 +1,19 @@
-import { useSearchBarContext } from '@/context/searchbar.context'
-import { useSearchGeneric } from '@/hooks/useSearch'
-import { SearchLayout } from '@/layouts/SearchLayout'
-import { PostTypes, SearchResultItem } from '@/types/data.types'
-import { shuffle } from '@/utils/data.utils'
-import {
-  extractQueryFromQuery,
-  extractTopicsFromQuery,
-} from '@/utils/search.utils'
-import { useRouter } from 'next/router'
-import { ReactNode, useEffect, useState } from 'react'
-import { RelatedArticles } from '../components/RelatedArticles'
-import { RelatedContent } from '../components/RelatedContent'
 import SEO from '../components/SEO/SEO'
 import unbodyApi from '../services/unbody/unbody.service'
-import { LPE } from '../types/lpe.types'
+import { SearchBox } from '@/components/SearchBox'
 
 interface SearchPageProps {
   topics: string[]
-  articles: SearchResultItem<LPE.Article.Data>[]
-  blocks: SearchResultItem<LPE.Article.ContentBlock>[]
+  // articles: SearchResultItem<LPE.Article.Data>[]
+  // blocks: SearchResultItem<LPE.Article.ContentBlock>[]
 }
 
 export default function SearchPage({
-  articles: initialArticles = [],
-  blocks: initialBlocks = [],
   topics: allTopics = [],
 }: SearchPageProps) {
-  const { setResultsNumber, setResultsHelperText } = useSearchBarContext()
-
-  const { setTags } = useSearchBarContext()
-  const router = useRouter()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setTags(allTopics)
-  }, [setTags, allTopics])
-
-  const {
-    query: { query = '', topics = [] },
-  } = router
-
-  const articles = useSearchGeneric<LPE.Article.Data>(
-    initialArticles,
-    PostTypes.Article,
-  )
-
-  const blocks = useSearchGeneric<LPE.Article.ContentBlock>(
-    initialBlocks,
-    PostTypes.Block,
-  )
-
-  useEffect(() => {
-    setMounted(true)
-    return () => {
-      setMounted(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    const serchArgs = [
-      extractQueryFromQuery(router.query),
-      extractTopicsFromQuery(router.query),
-    ]
-
-    const hasQuery = router.query.query && router.query.query.length > 0
-    const hasTopics = router.query.topics && router.query.topics.length > 0
-
-    if (mounted && (hasQuery || hasTopics)) {
-      articles.search(...(serchArgs as [string, string[]]))
-      blocks.search(...(serchArgs as [string, string[]]))
-    } else {
-      articles.reset(initialArticles)
-      blocks.reset(initialBlocks)
-    }
-    // if we follow the eslint, we will have an infinite loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mounted, router.query])
-
-  useEffect(() => {
-    if (
-      articles.data.length + blocks.data.length <
-      initialArticles.length + initialBlocks.length
-    ) {
-      setResultsNumber(articles.data.length + blocks.data.length)
-    }
-    const tags = extractTopicsFromQuery(router.query)
-    setResultsHelperText(
-      [
-        ...(query.length > 0 ? [query] : []),
-        topics.length > 0
-          ? `<span class="tags">${tags
-              .map((t) => `<span>[${t}]</span>`)
-              .join('<span class="slash">/</span>')}</span>`
-          : '',
-      ].join(tags.length > 0 ? '<span class="dot">.</span>' : ''),
-    )
-
-    return () => {
-      setResultsNumber(null)
-      setResultsHelperText(null)
-    }
-  }, [
-    query,
-    router.query,
-    articles,
-    blocks,
-    setResultsHelperText,
-    setResultsNumber,
-    topics.length,
-  ])
+  const handleSearch = (query: string, tags: string[], types: string[]) => {
+    console.log('searching for', query, tags, types)
+  }
 
   return (
     <div style={{ minHeight: '80vh' }}>
@@ -118,25 +23,20 @@ export default function SearchPage({
         }
         title={'Logos Press Engine'}
       />
-      <RelatedArticles data={articles} />
-      <RelatedContent data={blocks} />
+      <SearchBox tags={allTopics} onSearch={handleSearch} resultsNumber={7} />
     </div>
   )
 }
 
-SearchPage.getLayout = function getLayout(page: ReactNode) {
-  return <SearchLayout>{page}</SearchLayout>
-}
-
 export async function getStaticProps() {
-  const { data: articles = [] } = await unbodyApi.searchArticles()
-  const { data: blocks = [] } = await unbodyApi.searchBlocks()
+  // const { data: articles = [] } = await unbodyApi.searchArticles()
+  // const { data: blocks = [] } = await unbodyApi.searchBlocks()
   const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
 
   return {
     props: {
-      articles,
-      blocks: shuffle(blocks),
+      // articles,
+      // blocks: shuffle(blocks),
       topics,
     },
   }
