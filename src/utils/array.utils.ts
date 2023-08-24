@@ -4,6 +4,8 @@ export const chunkArray = <T>(arr: T[], ...pattern: number[]): T[][] => {
   let index = 0
   let iteration = 0
 
+  if (pattern.length === 0) return [arr]
+
   while (index < arr.length) {
     const take = pattern[iteration % pattern.length]
     const elements = arr.slice(index, index + take)
