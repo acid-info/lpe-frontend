@@ -1,4 +1,5 @@
 import { ArrowDownIcon, Button, Typography } from '@acid-info/lsd-react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -6,6 +7,7 @@ import Link from 'next/link'
 import React from 'react'
 import { PostsGrid } from '../../components/PostsGrid'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 export type PodcastShowsPreviewProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -81,18 +83,21 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
 
             <div className="podcasts__show-episodes">
               <PostsGrid
-                posts={(show.episodes || []).slice(0, 2)}
+                posts={(show.episodes || []).slice(0, 4)}
                 displayPodcastShow={false}
                 shows={shows}
-                size="xsmall"
-                cols={2}
-              />
-              <PostsGrid
-                posts={(show.episodes || []).slice(2, 4)}
-                displayPodcastShow={false}
-                shows={shows}
-                size="xsmall"
-                cols={2}
+                pattern={[
+                  {
+                    cols: 2,
+                    size: 'xsmall',
+                  },
+                ]}
+                breakpoints={[
+                  {
+                    breakpoint: 'xs',
+                    pattern: [{ cols: 1, size: 'small' }],
+                  },
+                ]}
               />
             </div>
           </div>
@@ -176,4 +181,34 @@ const Root = styled('div')`
       }
     }
   }
+
+  ${(props) =>
+    lsdUtils.breakpoint(
+      props.theme,
+      'xs',
+      'exact',
+    )(css`
+      .podcasts__shows {
+        padding-top: 0;
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .podcasts__show {
+        border-right: none !important;
+        padding: 0 !important;
+
+        &:not(:first-child) {
+          border-top: 1px solid rgb(var(--lsd-border-primary));
+        }
+      }
+
+      .podcasts__show-card {
+        margin-top: 0;
+        padding: 24px 0px 16px 0px;
+      }
+
+      .podcasts__show-hosts {
+        margin-top: 80px;
+      }
+    `)}
 `

@@ -7,7 +7,7 @@ interface Props {
   episodes: LPE.Podcast.Document[]
   shows?: LPE.Podcast.Show[]
   bordered?: boolean
-  size?: PostsGridProps['size']
+  size?: string
   cols?: number
   displayShow?: boolean
 }
@@ -24,14 +24,14 @@ export default function EpisodesList({
   return (
     <EpisodeListContainer>
       {header}
-      <PostsGrid
+      {/* <PostsGrid
         shows={shows}
         posts={episodes}
         bordered={bordered}
         cols={cols}
         size={size}
         displayPodcastShow={displayShow}
-      />
+      /> */}
     </EpisodeListContainer>
   )
 }
