@@ -6,6 +6,8 @@ import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useRecentEpisodes } from '../queries/useRecentEpisodes.query'
 import { LPE } from '../types/lpe.types'
+import { uiConfigs } from '@/configs/ui.configs'
+import { useWindowSize } from 'react-use'
 
 interface Props {
   show: LPE.Podcast.Show
@@ -15,6 +17,9 @@ interface Props {
 
 const PodcastShowContainer = (props: Props) => {
   const { show, latestEpisodes, highlightedEpisodes } = props
+  const { width } = useWindowSize()
+
+  const isMobile = width < 768 // TODO : use global breakpoint + use media query if cols is not needed
 
   const query = useRecentEpisodes({
     limit: 8,
@@ -25,11 +30,11 @@ const PodcastShowContainer = (props: Props) => {
   return (
     <>
       <PodcastsGrid>
-        <PodcastsBodyContainer className={'w-16'}>
+        <PodcastsBodyContainer>
           <PodcastShowCard show={show} />
-          <PodcastSection>
+          <PodcastSection marginTop={64}>
             <EpisodesList
-              cols={2}
+              cols={isMobile ? 1 : 2}
               size="medium"
               shows={[show]}
               displayShow={false}
@@ -38,7 +43,7 @@ const PodcastShowContainer = (props: Props) => {
             />
           </PodcastSection>
           <EpisodesList
-            cols={4}
+            cols={isMobile ? 1 : 4}
             bordered
             size="small"
             shows={[show]}
@@ -56,19 +61,24 @@ const PodcastShowContainer = (props: Props) => {
   )
 }
 
-const PodcastsBodyContainer = styled(GridItem)``
+const PodcastsGrid = styled(Grid)`
+  width: 100%;
+  margin-top: -15px; // offset for postSectionMargin
+
+  @media (max-width: 768px) {
+    margin-top: ${uiConfigs.navbarRenderedHeight + 48}px;
+  }
+`
+
+const PodcastsBodyContainer = styled(GridItem)`
+  grid-column: span 16;
+`
 
 const SeeMoreButton = styled(Button)`
   display: block;
   width: 236px;
   height: 40px;
   margin: 24px auto;
-`
-
-const PodcastsGrid = styled(Grid)`
-  width: 100%;
-  @media (min-width: 768px) and (max-width: 1200px) {
-  }
 `
 
 export default PodcastShowContainer
