@@ -86,6 +86,7 @@ type Pattern = {
   cols: number
   maxWidth?: string
   size: PostCardProps['size']
+  rowBorder?: boolean
 }
 type Breakpoint = {
   pattern: Pattern[]
@@ -103,7 +104,7 @@ const createGridStyles = ({
   postCardStyles: {
     [name: string]: SerializedStyles
   }
-  pattern: Pick<Pattern, 'cols' | 'size' | 'maxWidth'>[]
+  pattern: Pick<Pattern, 'cols' | 'size' | 'maxWidth' | 'rowBorder'>[]
   breakpoint?: boolean
   horizontal?: boolean
 }) => {
@@ -130,12 +131,27 @@ const createGridStyles = ({
       > .row {
         display: grid;
         grid-template-columns: repeat(${cm}, 1fr);
+        overflow: hidden;
 
         & > div {
           ${pattern.map(
             (p, i) => css`
               ${selectors[i].map((s) => `&:nth-child(${s})`).join(', ')} {
                 grid-column: span ${cm / p.cols};
+                position: relative;
+
+                ${p.rowBorder &&
+                css`
+                  &::before {
+                    width: calc(100% + 16px);
+                    height: 1px;
+                    content: ' ';
+                    top: 0;
+                    left: 0px;
+                    position: absolute;
+                    background: rgb(var(--lsd-border-primary));
+                  }
+                `}
 
                 .post-card {
                   --post-card-size: ${p.size};

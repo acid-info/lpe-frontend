@@ -91,19 +91,30 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
                     cols: 2,
                     size: 'xsmall',
                   },
+                  {
+                    cols: 2,
+                    size: 'xsmall',
+                    rowBorder: true,
+                  },
                 ]}
                 breakpoints={[
                   {
                     breakpoint: 'xs',
-                    pattern: [{ cols: 1, size: 'small' }],
+                    pattern: [{ cols: 1, size: 'small', rowBorder: true }],
                   },
                   {
                     breakpoint: 'sm',
-                    pattern: [{ cols: 2, size: 'small' }],
+                    pattern: [
+                      { cols: 2, size: 'small' },
+                      { cols: 2, size: 'small', rowBorder: true },
+                    ],
                   },
                   {
                     breakpoint: 'md',
-                    pattern: [{ cols: 2, size: 'small' }],
+                    pattern: [
+                      { cols: 2, size: 'small' },
+                      { cols: 2, size: 'small', rowBorder: true },
+                    ],
                   },
                 ]}
               />
