@@ -21,6 +21,7 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
   pattern = [],
   breakpoints = [],
   bordered = false,
+  horizontal = false,
   displayPodcastShow = true,
   ...props
 }) => {
@@ -57,6 +58,7 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
       pattern={pattern}
       breakpoints={breakpoints}
       bordered={bordered}
+      horizontal={horizontal}
       postCardStyles={postCardStyles}
     >
       <div className="row">
@@ -79,6 +81,7 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
 
 type Pattern = {
   cols: number
+  maxWidth?: string
   size: PostCardProps['size']
 }
 type Breakpoint = {
@@ -91,55 +94,104 @@ const createGridStyles = ({
   pattern = [],
   postCardStyles,
   breakpoint = false,
+  horizontal = false,
 }: {
   theme: Theme
   postCardStyles: {
     [name: string]: SerializedStyles
   }
-  pattern: Pick<Pattern, 'cols' | 'size'>[]
+  pattern: Pick<Pattern, 'cols' | 'size' | 'maxWidth'>[]
   breakpoint?: boolean
+  horizontal?: boolean
 }) => {
-  const cm = pattern.map((p) => p.cols).reduce(lcm, 1)
-  const sum = Math.max(
-    1,
-    pattern.reduce((p, c) => p + c.cols, 0),
-  )
+  const grid = !horizontal
 
-  let selectorNumber = 0
-  const selectors = pattern.map((p) => {
-    const start = selectorNumber + 1
-    selectorNumber += p.cols
+  if (grid) {
+    const cm = pattern.map((p) => p.cols).reduce(lcm, 1)
+    const sum = Math.max(
+      1,
+      pattern.reduce((p, c) => p + c.cols, 0),
+    )
 
-    return new Array(p.cols)
-      .fill(null)
-      .map((i, index) => `${sum}n + ${start + index}`)
-  })
+    let selectorNumber = 0
+    const selectors = pattern.map((p) => {
+      const start = selectorNumber + 1
+      selectorNumber += p.cols
 
-  return css`
-    > .row {
-      display: grid;
-      grid-template-columns: repeat(${cm}, 1fr);
+      return new Array(p.cols)
+        .fill(null)
+        .map((i, index) => `${sum}n + ${start + index}`)
+    })
 
-      & > div {
-        ${pattern.map(
-          (p, i) => `
-          ${selectors[i].map((s) => `&:nth-child(${s})`).join(', ')} {
-            grid-column: span ${cm / p.cols};
+    return css`
+      > .row {
+        display: grid;
+        grid-template-columns: repeat(${cm}, 1fr);
 
-            .post-card {
-              --post-card-size: ${p.size};
-              ${postCardStyles[p.size as string].styles}
-            }
-           }
-        `,
-        )}
+        & > div {
+          ${pattern.map(
+            (p, i) => css`
+              ${selectors[i].map((s) => `&:nth-child(${s})`).join(', ')} {
+                grid-column: span ${cm / p.cols};
+
+                .post-card {
+                  --post-card-size: ${p.size};
+                  ${postCardStyles[p.size as string].styles}
+                }
+              }
+            `,
+          )}
+        }
       }
-    }
-  `
+    `
+  } else {
+    return css`
+      overflow: hidden;
+
+      > .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: unwrap;
+        justify-content: flex-start;
+        width: 100%;
+        overflow: scroll;
+        scroll-snap-type: x mandatory;
+
+        /* Chrome, Safari and Opera */
+        &::-webkit-scrollbar {
+          width: 0;
+          display: none;
+        }
+
+        /* Firefox, Edge and IE */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        & > div {
+          ${pattern.map(
+            (p, i) => css`
+              max-width: ${p.maxWidth ? p.maxWidth : 'unset'};
+              flex-grow: 1 auto;
+              flex-shrink: 0;
+              width: calc((100% - (${p.cols - 1} * 16px)) / ${p.cols});
+              flex-basis: calc((100% - (${p.cols - 1} * 16px)) / ${p.cols});
+              scroll-snap-align: start !important;
+
+              .post-card {
+                --post-card-size: ${p.size};
+                ${postCardStyles[p.size as string].styles}
+              }
+            `,
+          )}
+        }
+      }
+    `
+  }
 }
 
 const Container = styled.div<{
   bordered: boolean
+  horizontal?: boolean
   pattern: Pattern[]
   breakpoints: Breakpoint[]
   postCardStyles: {
@@ -171,6 +223,7 @@ const Container = styled.div<{
         )(css`
           ${createGridStyles({
             theme: props.theme,
+            horizontal: props.horizontal,
             pattern: props.pattern,
             postCardStyles: props.postCardStyles,
             breakpoint: true,
@@ -179,7 +232,7 @@ const Container = styled.div<{
       )}
   `}
 
-  ${({ breakpoints = [], theme, postCardStyles }) => {
+  ${({ breakpoints = [], theme, postCardStyles, horizontal }) => {
     return breakpoints.map((b) =>
       lsdUtils.responsive(
         theme,
@@ -188,6 +241,7 @@ const Container = styled.div<{
       )(css`
         ${createGridStyles({
           theme,
+          horizontal,
           pattern: b.pattern,
           postCardStyles,
           breakpoint: true,
