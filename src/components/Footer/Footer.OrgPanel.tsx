@@ -8,6 +8,7 @@ const FIRST_LINK_GRUOP = [
   { label: 'Terms & Conditions', href: 'https://logos.co/terms/' },
   { label: 'Work with us', href: 'https://jobs.status.im/' },
 ]
+
 export const FooterOrgPanel = () => {
   return (
     <Wrapper>
@@ -48,7 +49,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: baseline;
 
-  /* temporary breakpoint */
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -56,7 +56,7 @@ const Wrapper = styled.div`
 
 const OrgInfo = styled(FooterSection)`
   @media (max-width: 768px) {
-    margin-bottom: 76px;
+    margin-bottom: 72px;
   }
 `
 

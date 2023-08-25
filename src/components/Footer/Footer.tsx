@@ -1,4 +1,4 @@
-import { Button, Typography } from '@acid-info/lsd-react'
+import { Button } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { FooterOrgPanel } from '@/components/Footer/Footer.OrgPanel'
 import { FooterSectionContainer } from '@/components/Footer/Footer.Section'
@@ -27,5 +27,4 @@ const ScrollToTop = styled(Button)`
   width: fit-content;
   position: absolute;
   bottom: 16px;
-  left: 16px;
 `
