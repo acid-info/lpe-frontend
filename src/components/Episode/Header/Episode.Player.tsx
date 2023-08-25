@@ -68,10 +68,12 @@ const EpisodePlayer = ({
           }))
         }
       } else {
-        state.set((prev) => ({
-          ...prev,
-          isEnabled: true,
-        }))
+        if (state.value.playing) {
+          state.set((prev) => ({
+            ...prev,
+            isEnabled: true,
+          }))
+        }
       }
     })
     observer.observe(playerContainerRef.current as any)
