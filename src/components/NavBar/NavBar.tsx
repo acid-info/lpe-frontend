@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { NavbarState, useNavbarState } from '../../states/navbarState'
 import { LogosIcon } from '../Icons/LogosIcon'
+import { SocialMediaKit } from '@/components/NavBar/Navbar.SocialMediaKit'
 
 export interface NavBarProps {
   defaultState?: Partial<NavbarState>
@@ -53,6 +54,7 @@ export default function NavBar({ defaultState }: NavBarProps) {
           <NavbarLinks links={NavLinksItems} />
         </NavLinksContainer>
         <ControlsContainer>
+          <SocialMediaKit />
           <div className={'theme-switch'}>
             <ThemeSwitch
               toggle={themeState.toggleMode}
@@ -64,26 +66,9 @@ export default function NavBar({ defaultState }: NavBarProps) {
               <MenuIcon color={'primary'} />
             </IconButton>
           </div>
-          {/*<IconButton*/}
-          {/*    className={'searchIcon searchIconHome'}*/}
-          {/*    size="small"*/}
-          {/*    onClick={() => onSearchIconClick()}*/}
-          {/*>*/}
-          {/*    <SearchIcon color="primary"/>*/}
-          {/*</IconButton>*/}
         </ControlsContainer>
         {showMobileMenu && <NavbarMobileMenu />}
       </NavBarContainer>
-      {/*<MobileSearchContainer*/}
-      {/*  className={`searchBar ${hideSearch ? 'hide' : ''}`}*/}
-      {/*>*/}
-      {/*  <Searchbar*/}
-      {/*    className={'mobile'}*/}
-      {/*    onSearch={onSearch}*/}
-      {/*    onReset={onReset}*/}
-      {/*    withFilterTags={isSearchPage}*/}
-      {/*  />*/}
-      {/*</MobileSearchContainer>*/}
     </Container>
   )
 }
@@ -111,7 +96,7 @@ const NavBarContainer = styled.nav<{
   bordered?: boolean
 }>`
   display: flex;
-  padding: 8px 0;
+  padding: 16px 0;
   align-items: center;
   justify-content: space-between;
   position: relative;
@@ -158,6 +143,12 @@ const LeftContainer = styled(Link)`
 `
 
 const ControlsContainer = styled.div`
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
   .theme-switch {
     display: block;
   }
