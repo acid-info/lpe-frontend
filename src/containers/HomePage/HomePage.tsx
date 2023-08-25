@@ -35,7 +35,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <Root {...props}>
-      <Hero tags={tags} />
+      <Container>
+        <Hero tags={tags} />
+      </Container>
       <MostRecentContainer>
         <Container>
           <PostsGrid
