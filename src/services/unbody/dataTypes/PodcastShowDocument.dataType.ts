@@ -29,26 +29,22 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
         block.labels.length === 0 && block.type === 'text' && block.order > 2,
     )
 
-    const image = data.content.find(
-      (block) => block.type === 'image',
-    ) as LPE.Article.ImageBlock
+    const showSlug = original.path[2]
 
     return {
       id: data.id,
-      slug: original.path[2],
+      slug: showSlug,
       title: data.title,
       numberOfEpisodes: context?.numberOfEpisodes || 0,
       hosts: data.authors,
-      url: `/podcasts/${original.path[2]}`,
+      url: `/podcasts/${showSlug}`,
       description: (description?.type === 'text' && description.html) || '',
-      logo: image
-        ? {
-            alt: image.alt,
-            url: image.url,
-            width: image.width,
-            height: image.height,
-          }
-        : {},
+      logo: {
+        alt: data.title,
+        width: 24,
+        height: 24,
+        url: `/${showSlug}-logo.svg`,
+      },
       episodes: [],
     }
   },
