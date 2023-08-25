@@ -28,7 +28,7 @@ const PodcastShowContainer = (props: Props) => {
       <PodcastsGrid>
         <PodcastsBodyContainer>
           <PodcastShowCard show={show} />
-          <PodcastSection marginTop={64}>
+          <CustomPodcastSection marginTop={64}>
             <EpisodesList
               shows={[show]}
               displayShow={false}
@@ -54,7 +54,7 @@ const PodcastShowContainer = (props: Props) => {
                 },
               ]}
             />
-          </PodcastSection>
+          </CustomPodcastSection>
           <EpisodesList
             shows={[show]}
             displayShow={false}
@@ -112,6 +112,10 @@ const SeeMoreButton = styled(Button)`
   width: 236px;
   height: 40px;
   margin: 24px auto;
+`
+
+const CustomPodcastSection = styled(PodcastSection)`
+  margin-top: 48px !important;
 `
 
 export default PodcastShowContainer

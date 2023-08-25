@@ -68,7 +68,7 @@ const PodcastListsContainer = styled(Grid)`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 24px;
+    gap: 24px 16px;
   }
 `
 

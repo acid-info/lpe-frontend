@@ -6,8 +6,16 @@ interface Props {
   marginTop?: number
 }
 
-export default function PodcastSection({ children, marginTop = 140 }: Props) {
-  return <Section marginTop={marginTop}>{children}</Section>
+export default function PodcastSection({
+  children,
+  marginTop = 140,
+  ...props
+}: Props) {
+  return (
+    <Section marginTop={marginTop} {...props}>
+      {children}
+    </Section>
+  )
 }
 
 const Section = styled.div<{ marginTop: number }>`

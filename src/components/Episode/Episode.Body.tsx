@@ -43,6 +43,6 @@ const EpisodeContainer = styled.article`
   max-width: 696px;
 
   @media (max-width: 768px) {
-    margin-top: ${uiConfigs.navbarRenderedHeight - 16}px;
+    margin-top: 32px;
   }
 `
