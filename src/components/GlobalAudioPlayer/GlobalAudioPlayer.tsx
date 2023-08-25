@@ -102,7 +102,10 @@ export default function GlobalAudioPlayer() {
       <LpeAudioPlayer
         controlProps={{
           onVolumeToggle: () =>
-            state.set((prev) => ({ ...prev, muted: !prev.muted })),
+            state.set((prev) => ({
+              ...prev,
+              muted: !prev.muted,
+            })),
           duration: state.value.duration,
           played: state.value.played,
           muted: state.value.muted,
@@ -126,25 +129,24 @@ export default function GlobalAudioPlayer() {
         url={state.value.url as string}
         width="100%"
         height="100%"
-        pip={state.value.pip}
         playing={state.value.playing}
         controls={state.value.controls}
         light={state.value.light}
         loop={state.value.loop}
         playbackRate={state.value.playbackRate}
         volume={state.value.volume}
-        muted={state.value.isEnabled ? false : true}
-        onReady={() => console.log('onReady')}
-        onStart={() => console.log('onStart')}
+        muted={state.value.muted ? true : state.value.isEnabled ? false : true}
         onPlay={handlePlay}
         onPause={handlePause}
-        onBuffer={() => console.log('onBuffer')}
         onPlaybackRateChange={handleOnPlaybackRateChange}
-        onSeek={(e) => console.log('onSeek', e)}
         onEnded={handleEnded}
-        onError={(e) => console.log('onError', e)}
         onDuration={handleDuration}
         onProgress={handleProgress}
+        // onReady={() => console.log('onReady')}
+        // onStart={() => console.log('onStart')}
+        // onBuffer={() => console.log('onBuffer')}
+        // onSeek={(e) => console.log('onSeek', e)}
+        // onError={(e) => console.log('onError', e)}
       />
       <RightMenu>
         {!!epState.value.coverImage && (

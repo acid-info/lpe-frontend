@@ -16,21 +16,21 @@ const renderChannel = (channel: LPE.Podcast.Channel) => {
       return (
         <Channel href={channel.url} target="_blank">
           <SpotifyIcon width={16} height={16} />
-          <Typography variant="body2">Spotify</Typography>
+          <ChannelName variant="body2">Spotify</ChannelName>
         </Channel>
       )
     case LPE.Podcast.ChannelNames.ApplePodcasts:
       return (
         <Channel href={channel.url} target="_blank">
           <ApplePodcastsIcon width={16} height={16} />
-          <Typography variant="body2">Apple Podcasts</Typography>
+          <ChannelName variant="body2">Apple Podcasts</ChannelName>
         </Channel>
       )
     case LPE.Podcast.ChannelNames.GooglePodcasts:
       return (
         <Channel href={channel.url} target="_blank">
           <GooglePodcastsIcon width={16} height={16} />
-          <Typography variant="body2">Google Podcasts</Typography>
+          <ChannelName variant="body2">Google Podcasts</ChannelName>
         </Channel>
       )
     default:
@@ -53,7 +53,7 @@ const EpisodeChannelContainer = styled.header`
   margin-top: 32px;
 
   @media (max-width: 768px) {
-    padding-top: 32px;
+    margin-top: 24px;
   }
 `
 
@@ -62,6 +62,13 @@ const Channel = styled(Link)`
   align-items: center;
   gap: 8px;
   text-decoration: none;
+`
+
+const ChannelName = styled(Typography)`
+  @media (max-width: 768px) {
+    font-size: var(--lsd-body3-fontSize) !important;
+    line-height: var(--lsd-body3-lineHeight) !important;
+  }
 `
 
 export default EpisodeChannels

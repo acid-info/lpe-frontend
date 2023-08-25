@@ -1,6 +1,6 @@
 import { LsdIcon } from '@acid-info/lsd-react'
 
-export const VolumeIcon = LsdIcon(
+export const FullscreenIcon = LsdIcon(
   (props) => (
     <svg
       width="24"
@@ -10,14 +10,14 @@ export const VolumeIcon = LsdIcon(
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#clip0_2418_8612)">
+      <g clip-path="url(#clip0_2418_8608)">
         <path
-          d="M3 9.00001V15H7L12 20V4.00001L7 9.00001H3ZM16.5 12C16.5 10.23 15.48 8.71001 14 7.97001V16.02C15.48 15.29 16.5 13.77 16.5 12ZM14 3.23001V5.29001C16.89 6.15001 19 8.83001 19 12C19 15.17 16.89 17.85 14 18.71V20.77C18.01 19.86 21 16.28 21 12C21 7.72001 18.01 4.14001 14 3.23001Z"
+          d="M4 18C4 19.1 4.9 20 6 20H10V18H6V14H4V18ZM20 6C20 4.9 19.1 4 18 4H14V6H18V10H20V6ZM6 6H10V4H6C4.9 4 4 4.9 4 6V10H6V6ZM20 18V14H18V18H14V20H18C19.1 20 20 19.1 20 18Z"
           fill={props.fill || 'white'}
         />
       </g>
       <defs>
-        <clipPath id="clip0_2418_8612">
+        <clipPath id="clip0_2418_8608">
           <rect width="24" height="24" fill="white" />
         </clipPath>
       </defs>

@@ -2,10 +2,11 @@ import { Tags } from '@/components/Tags'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../../types/lpe.types'
-import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import EpisodeChannels from './Episode.Channels'
 import EpisodeStats from '../Episode.Stats'
 import EpisodePlayer from './Episode.Player'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   channel: LPE.Podcast.Channel
@@ -37,10 +38,19 @@ const EpisodeHeader = ({
       <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
-      <PodcastName>
-        <LogosCircleIcon width={24} height={24} />
-        Network State Podcast
-      </PodcastName>
+      {show && (
+        <CustomLink href={`/podcasts/${show.slug}`}>
+          <Show>
+            <Image
+              src={show.logo.url}
+              alt={show.logo.alt}
+              width={24}
+              height={24}
+            />
+            <Typography variant="body2">{show?.title}</Typography>
+          </Show>
+        </CustomLink>
+      )}
       {tags && <Tags tags={tags} />}
       {channels && <EpisodeChannels channels={channels} />}
       {description && (
@@ -59,10 +69,6 @@ const EpisodeHeader = ({
 const EpisodeHeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-    padding-top: 32px;
-  }
 `
 
 const CustomTypography = styled(Typography)`
@@ -75,6 +81,8 @@ const EpisodeTitle = styled(Typography)`
   margin-bottom: 16px;
   @media (max-width: 768px) {
     margin-bottom: 8px;
+    font-size: var(--lsd-h4-fontSize) !important;
+    line-height: var(--lsd-h4-lineHeight) !important;
   }
 `
 
@@ -82,35 +90,22 @@ const EpisodeSubtitle = styled(CustomTypography)`
   margin-top: 32px;
 
   @media (max-width: 768px) {
-    font-size: var(--lsd-subtitle1-fontSize);
+    font-size: var(--lsd-subtitle1-fontSize) !important;
+    line-height: var(--lsd-subtitle1-lineHeight) !important;
+    margin-top: 24px;
   }
 `
 
-const PodcastName = styled.div`
+const Show = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
+  text-decoration: none;
 `
 
-// 16:9 responsive aspect ratio
-const PlayerContainer = styled.div`
-  margin-bottom: 32px;
-  position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  height: 0;
-  overflow: hidden;
-
-  iframe,
-  object,
-  embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+const CustomLink = styled(Link)`
+  text-decoration: none;
 `
 
 export default EpisodeHeader

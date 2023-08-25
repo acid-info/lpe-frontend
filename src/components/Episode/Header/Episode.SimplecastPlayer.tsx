@@ -1,18 +1,15 @@
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
-import { PauseIcon } from '@/components/Icons/PauseIcon'
-import { PlayIcon } from '@/components/Icons/PlayIcon'
 import { LPE } from '@/types/lpe.types'
-import { convertSecToMinAndSec } from '@/utils/string.utils'
-import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useHookstate } from '@hookstate/core'
-import Image from 'next/image'
 import { useState } from 'react'
-import { VolumeIcon } from '@/components/Icons/VolumeIcon'
 import { LpeAudioPlayerControls } from '@/components/LpePlayer/Controls/Controls'
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 
 export type SimplecastPlayerProps = {
+  playing: boolean
+  played: number
+  playedSeconds: number
   playerRef: React.RefObject<any>
   coverImage: LPE.Podcast.Document['coverImage']
   handlePlay: () => void
@@ -20,6 +17,9 @@ export type SimplecastPlayerProps = {
 }
 
 const SimplecastPlayer = ({
+  playing,
+  played,
+  playedSeconds,
   playerRef,
   coverImage,
   handlePlay,
@@ -63,20 +63,24 @@ const SimplecastPlayer = ({
         <Controls>
           <LpeAudioPlayerControls
             duration={state.value.duration}
-            playedSeconds={state.value.playedSeconds}
-            playing={state.value.playing}
-            played={state.value.played}
+            playedSeconds={playedSeconds}
+            playing={playing}
+            played={played}
             onPause={handlePause}
             onPlay={handlePlay}
             muted={state.value.muted}
             onVolumeToggle={() =>
-              state.set((prev) => ({ ...prev, muted: !prev.muted }))
+              state.set((prev) => ({
+                ...prev,
+                muted: !prev.muted,
+              }))
             }
             timeTrackProps={{
               onValueChange: handleSeekChange,
               onMouseUp: handleSeekMouseUp,
               onMouseDown: handleSeekMouseDown,
             }}
+            allowFullScreen={true}
             color={'white'}
           />
         </Controls>

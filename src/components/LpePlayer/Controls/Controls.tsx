@@ -21,7 +21,7 @@ export interface LpeAudioPlayerControlsProps {
   onPause: () => void
   onPlay: () => void
   onVolumeToggle: () => void
-
+  allowFullScreen?: boolean
   color?: string
 
   timeTrackProps: ControlsTimeTrackProps
@@ -38,6 +38,7 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
     onPlay,
     color = 'rgba(var(--lsd-surface-secondary), 1)',
     onVolumeToggle,
+    allowFullScreen = false,
     timeTrackProps: { onValueChange, onMouseDown, onMouseUp },
   } = props
 
@@ -46,17 +47,27 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
       <Buttons>
         <Row>
           <PlayPause onClick={playing ? onPause : onPlay}>
-            {playing ? <PauseIcon fill={color} /> : <PlayIcon fill={color} />}
+            {playing ? (
+              <PauseIcon width={24} height={24} fill={color} />
+            ) : (
+              <PlayIcon width={24} height={24} fill={color} />
+            )}
           </PlayPause>
-          <TimeContainer>
+          <TimeContainer color={color}>
             <Time variant="body3">{convertSecToMinAndSec(playedSeconds)}</Time>
             <Typography variant="body3">/</Typography>
             <Time variant="body3">{convertSecToMinAndSec(duration)}</Time>
           </TimeContainer>
         </Row>
-        <VolumeContainer onClick={onVolumeToggle}>
-          {muted ? <MuteIcon fill={color} /> : <VolumeIcon fill={color} />}
-        </VolumeContainer>
+        <Row>
+          <VolumeContainer onClick={onVolumeToggle}>
+            {muted ? (
+              <MuteIcon width={24} height={24} fill={color} />
+            ) : (
+              <VolumeIcon width={24} height={24} fill={color} />
+            )}
+          </VolumeContainer>
+        </Row>
       </Buttons>
       <Seek className={styles.audioPlayer}>
         <TimeTrack
@@ -71,7 +82,11 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
     </Container>
   )
 }
-const Container = styled.div``
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
 
 const Buttons = styled.div`
   display: flex;
@@ -99,17 +114,22 @@ const PlayPause = styled.button`
   justify-content: center;
   border: none;
   background: none;
-  margin-right: 8px;
+  padding: 0;
 `
 
 const Row = styled.div`
   display: flex;
   align-items: center;
   white-space: pre-wrap;
+  gap: 8px;
 `
 
-const TimeContainer = styled(Row)`
+const TimeContainer = styled(Row)<{ color: string }>`
   gap: 8px;
+
+  span {
+    color: ${({ color }) => color || 'black'};
+  }
 `
 
 const Time = styled(Typography)`

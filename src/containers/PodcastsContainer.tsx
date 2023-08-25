@@ -1,10 +1,11 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import { LogosCircleIcon } from '@/components/Icons/LogosCircleIcon'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
 import PodcastSection from '@/components/Podcasts/Podcast.Section'
 import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
+import { uiConfigs } from '@/configs/ui.configs'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../types/lpe.types'
 
@@ -71,7 +72,12 @@ const PodcastsContainer = (props: Props) => {
               header={
                 <EpisodeListHeader>
                   <Show>
-                    <LogosCircleIcon width={38} height={38} />
+                    <Image
+                      src={show.logo.url}
+                      alt={show.logo.alt}
+                      width={38}
+                      height={38}
+                    />
                     <PodcastInfo>
                       <Typography variant="body1">{show.title}</Typography>
                       <Typography variant="body3">
@@ -111,7 +117,8 @@ const PodcastsBodyContainer = styled(GridItem)``
 
 const PodcastsGrid = styled(Grid)`
   width: 100%;
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (max-width: 768px) {
+    margin-top: ${uiConfigs.navbarRenderedHeight + 80}px;
   }
 `
 

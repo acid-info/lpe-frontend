@@ -2,6 +2,7 @@ import { Grid, GridItem } from '@/components/Grid/Grid'
 import EpisodesList from '@/components/Podcasts/Episodes.List'
 import PodcastSection from '@/components/Podcasts/Podcast.Section'
 import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
+import { uiConfigs } from '@/configs/ui.configs'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useRecentEpisodes } from '../queries/useRecentEpisodes.query'
@@ -25,9 +26,9 @@ const PodcastShowContainer = (props: Props) => {
   return (
     <>
       <PodcastsGrid>
-        <PodcastsBodyContainer className={'w-16'}>
+        <PodcastsBodyContainer>
           <PodcastShowCard show={show} />
-          <PodcastSection>
+          <PodcastSection marginTop={64}>
             <EpisodesList
               shows={[show]}
               displayShow={false}
@@ -93,19 +94,24 @@ const PodcastShowContainer = (props: Props) => {
   )
 }
 
-const PodcastsBodyContainer = styled(GridItem)``
+const PodcastsGrid = styled(Grid)`
+  width: 100%;
+  margin-top: -15px; // offset for postSectionMargin
+
+  @media (max-width: 768px) {
+    margin-top: ${uiConfigs.navbarRenderedHeight + 48}px;
+  }
+`
+
+const PodcastsBodyContainer = styled(GridItem)`
+  grid-column: span 16;
+`
 
 const SeeMoreButton = styled(Button)`
   display: block;
   width: 236px;
   height: 40px;
   margin: 24px auto;
-`
-
-const PodcastsGrid = styled(Grid)`
-  width: 100%;
-  @media (min-width: 768px) and (max-width: 1200px) {
-  }
 `
 
 export default PodcastShowContainer

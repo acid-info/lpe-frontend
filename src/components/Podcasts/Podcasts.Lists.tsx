@@ -1,8 +1,7 @@
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
-import { Button, Typography } from '@acid-info/lsd-react'
+import { ArrowDownIcon, Badge, Button, Typography } from '@acid-info/lsd-react'
 import Link from 'next/link'
-import PodcastHost from './Podcast.Host'
 import Image from 'next/image'
 import { Grid, GridItem } from '../Grid/Grid'
 
@@ -17,27 +16,46 @@ export default function PodcastsLists({ shows }: Props) {
         shows.map((show) => (
           <ShowCardContainer key={show.id} className="w-8">
             <ShowCard>
-              <Image
-                src={show.logo.url}
-                width={56}
-                height={56}
-                alt={show.logo.alt}
-              />
-              <Typography variant="h3">{show.title}</Typography>
-              <Row>
-                <PodcastHost show={show} />
-                <Typography variant="body2">•</Typography>
-                <Typography variant="body2">
-                  {show.numberOfEpisodes} EP
-                </Typography>
-              </Row>
-              <Description
-                variant="body2"
-                dangerouslySetInnerHTML={{ __html: show.description }}
-              />
-              <Link href={`/podcasts/${show.slug}`}>
-                <Button>Go to the show page</Button>
-              </Link>
+              <Top>
+                <ShowInfoContainer>
+                  <Image
+                    src={show.logo.url}
+                    width={38}
+                    height={38}
+                    alt={show.logo.alt}
+                  />
+                  <ShowInfo>
+                    <Typography variant="body2">{show.title}</Typography>
+                    <Typography variant="body3">
+                      {show.numberOfEpisodes} EP
+                    </Typography>
+                  </ShowInfo>
+                </ShowInfoContainer>
+                <ShowButtonLink href={`/podcasts/${show.slug}`}>
+                  <ShowButton>
+                    <ShowButtonText variant="body3">
+                      Podcast page
+                    </ShowButtonText>
+                    <ArrowDownIcon />
+                  </ShowButton>
+                </ShowButtonLink>
+              </Top>
+              <Bottom>
+                <Description
+                  dangerouslySetInnerHTML={{ __html: show.description }}
+                />
+                {/* @ts-ignore */}
+                {shows?.tags && (
+                  <BadgeContainer>
+                    {/* @ts-ignore */}
+                    {show.tags.map((tag) => (
+                      <Badge key={tag} size="small">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </BadgeContainer>
+                )}
+              </Bottom>
             </ShowCard>
           </ShowCardContainer>
         ))}
@@ -50,6 +68,7 @@ const PodcastListsContainer = styled(Grid)`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    gap: 24px;
   }
 `
 
@@ -62,12 +81,81 @@ const ShowCard = styled.div`
   border: 1px solid rgb(var(--lsd-text-primary));
 `
 
+const ShowInfoContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`
+
+const ShowInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`
+
 const Row = styled.div`
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
 `
 
+const Top = styled(Row)`
+  justify-content: space-between;
+`
+
+const Bottom = styled.div`
+  margin-top: 88px;
+
+  @media (max-width: 768px) {
+    margin-top: 64px;
+  }
+`
+
 const Description = styled(Typography)`
-  margin-bottom: 16px;
+  font-size: var(--lsd-h6-fontSize);
+
+  @media (max-width: 768px) {
+    font-size: var(--lsd-body1-fontSize);
+  }
+`
+
+const ShowButtonLink = styled(Link)`
+  text-decoration: none;
+`
+
+const ShowButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  padding: 6px 10px 6px 12px;
+  width: 122px;
+  height: 28px;
+  gap: 12px;
+
+  > span {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  svg {
+    transform: rotate(-90deg);
+  }
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+    padding: 7px;
+  }
+`
+
+const ShowButtonText = styled(Typography)`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+const BadgeContainer = styled.div`
+  margin-top: 24px;
+  display: flex;
+  gap: 8px;
 `
