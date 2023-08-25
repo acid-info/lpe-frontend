@@ -1,12 +1,13 @@
 import ReactPlayer from 'react-player'
 import styled from '@emotion/styled'
 import React, { useEffect, useRef, useState } from 'react'
-import { Typography } from '@acid-info/lsd-react'
+import { CloseIcon, Typography } from '@acid-info/lsd-react'
 import Image from 'next/image'
 import { playerState } from './globalAudioPlayer.state'
 import { useHookstate } from '@hookstate/core'
 import { episodeState } from './episode.state'
 import { LpeAudioPlayer } from '@/components/LpePlayer/LpeAudioPlayer'
+import { PlayerType } from '../LpePlayer/Controls/Controls'
 
 export default function GlobalAudioPlayer() {
   const state = useHookstate(playerState)
@@ -14,7 +15,7 @@ export default function GlobalAudioPlayer() {
 
   const globalPlayerRef = useRef<ReactPlayer>(null)
 
-  const [showVolume, setShowVolume] = useState(false)
+  // const [showVolume, setShowVolume] = useState(false)
 
   // const handleLoad = (url: string) => {
   //   setState((prev) => ({ ...prev, url, played: 0, loaded: 0, pip: false }))
@@ -120,6 +121,10 @@ export default function GlobalAudioPlayer() {
             alignTop: true,
             showThumb: false,
           },
+          metadata: {
+            title: epState.value.title,
+            podcast: epState.value.podcast,
+          },
         }}
       />
       <ReactPlayer
@@ -147,10 +152,11 @@ export default function GlobalAudioPlayer() {
         // onBuffer={() => console.log('onBuffer')}
         // onSeek={(e) => console.log('onSeek', e)}
         // onError={(e) => console.log('onError', e)}
+        playerType={PlayerType.GLOBAL}
       />
       <RightMenu>
         {!!epState.value.coverImage && (
-          <Image
+          <Thumbnail
             src={epState.value.coverImage.url}
             alt={epState.value.coverImage.alt}
             width={48}
@@ -161,6 +167,13 @@ export default function GlobalAudioPlayer() {
           <Typography variant="body2">{epState.value.title}</Typography>
           <Typography variant="body3">{epState.value.podcast}</Typography>
         </EpisodeData>
+        <CloseIconContainer>
+          <CloseIcon
+            width={16}
+            height={16}
+            onClick={() => state.set((prev) => ({ ...prev, isEnabled: false }))}
+          />
+        </CloseIconContainer>
       </RightMenu>
     </Container>
   )
@@ -184,6 +197,12 @@ const Container = styled.div<{ visible: boolean }>`
   > :first-child {
     width: 60%;
   }
+
+  @media (max-width: 768px) {
+    > :first-child {
+      width: 100%;
+    }
+  }
 `
 
 const RightMenu = styled.div`
@@ -192,11 +211,35 @@ const RightMenu = styled.div`
   align-items: center;
   justify-content: flex-end;
   margin-left: 32px;
-  gap: 16px;
+
+  @media (max-width: 768px) {
+    width: fit-content;
+    margin-left: auto;
+  }
 `
 
 const EpisodeData = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+`
+
+const Thumbnail = styled(Image)`
+  margin-right: 16px;
+
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+`
+
+const CloseIconContainer = styled.div`
+  margin-left: 43px;
+
+  @media (max-width: 768px) {
+    margin-left: 16px;
+  }
 `

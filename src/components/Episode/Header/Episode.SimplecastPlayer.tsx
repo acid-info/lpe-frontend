@@ -3,7 +3,10 @@ import { LPE } from '@/types/lpe.types'
 import styled from '@emotion/styled'
 import { useHookstate } from '@hookstate/core'
 import { useState } from 'react'
-import { LpeAudioPlayerControls } from '@/components/LpePlayer/Controls/Controls'
+import {
+  LpeAudioPlayerControls,
+  PlayerType,
+} from '@/components/LpePlayer/Controls/Controls'
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 
 export type SimplecastPlayerProps = {
@@ -82,6 +85,7 @@ const SimplecastPlayer = ({
             }}
             allowFullScreen={true}
             color={'white'}
+            playerType={PlayerType.SIMPLECAST}
           />
         </Controls>
       </ControlsWrapper>

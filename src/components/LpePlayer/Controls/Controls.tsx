@@ -12,6 +12,11 @@ import {
   TimeTrack,
 } from '@/components/LpePlayer/Controls/Controls.TimeTrack'
 
+export enum PlayerType {
+  GLOBAL = 'global',
+  SIMPLECAST = 'simplecast',
+}
+
 export interface LpeAudioPlayerControlsProps {
   duration: number
   playedSeconds: number
@@ -25,6 +30,8 @@ export interface LpeAudioPlayerControlsProps {
   color?: string
 
   timeTrackProps: ControlsTimeTrackProps
+  playerType?: PlayerType
+  metadata?: { title: string; podcast: string }
 }
 
 export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
@@ -40,7 +47,13 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
     onVolumeToggle,
     allowFullScreen = false,
     timeTrackProps: { onValueChange, onMouseDown, onMouseUp },
+    playerType = PlayerType.GLOBAL,
+    metadata,
   } = props
+
+  const iconSize = playerType === PlayerType.GLOBAL ? 16 : 24
+  const isLightMode =
+    playerType === PlayerType.GLOBAL && !!metadata?.title.length
 
   return (
     <Container>
@@ -48,26 +61,30 @@ export const LpeAudioPlayerControls = (props: LpeAudioPlayerControlsProps) => {
         <Row>
           <PlayPause onClick={playing ? onPause : onPlay}>
             {playing ? (
-              <PauseIcon width={24} height={24} fill={color} />
+              <PauseIcon width={iconSize} height={iconSize} fill={color} />
             ) : (
-              <PlayIcon width={24} height={24} fill={color} />
+              <PlayIcon width={iconSize} height={iconSize} fill={color} />
             )}
           </PlayPause>
-          <TimeContainer color={color}>
+          <Metadata>
+            <Title variant="body3">{props.metadata?.title}</Title>
+            <Podcast variant="body3">{props.metadata?.podcast}</Podcast>
+          </Metadata>
+          <TimeContainer isHidden={isLightMode} color={color}>
             <Time variant="body3">{convertSecToMinAndSec(playedSeconds)}</Time>
             <Typography variant="body3">/</Typography>
             <Time variant="body3">{convertSecToMinAndSec(duration)}</Time>
           </TimeContainer>
         </Row>
-        <Row>
+        <Volume isHidden={isLightMode}>
           <VolumeContainer onClick={onVolumeToggle}>
             {muted ? (
-              <MuteIcon width={24} height={24} fill={color} />
+              <MuteIcon width={iconSize} height={iconSize} fill={color} />
             ) : (
-              <VolumeIcon width={24} height={24} fill={color} />
+              <VolumeIcon width={iconSize} height={iconSize} fill={color} />
             )}
           </VolumeContainer>
-        </Row>
+        </Volume>
       </Buttons>
       <Seek className={styles.audioPlayer}>
         <TimeTrack
@@ -124,14 +141,45 @@ const Row = styled.div`
   gap: 8px;
 `
 
-const TimeContainer = styled(Row)<{ color: string }>`
+const TimeContainer = styled(Row)<{ color: string; isHidden: boolean }>`
   gap: 8px;
 
   span {
     color: ${({ color }) => color || 'black'};
   }
+
+  @media (max-width: 768px) {
+    display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
+  }
 `
 
 const Time = styled(Typography)`
   width: 32px;
+`
+
+const Metadata = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
+const Title = styled(Typography)`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+`
+
+const Podcast = styled(Typography)`
+  font-size: 10px;
+`
+
+const Volume = styled(Row)<{ isHidden: boolean }>`
+  @media (max-width: 768px) {
+    display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
+  }
 `
