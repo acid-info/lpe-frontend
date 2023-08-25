@@ -18,17 +18,23 @@ export const Main = ({
 const Container = styled.main<{
   spacing: 'default' | false
 }>`
-  margin-top: ${({ spacing }) =>
-    spacing ? uiConfigs.postSectionMargin : uiConfigs.navbarRenderedHeight}px;
+  --main-margin-top: ${(props) =>
+    props.spacing
+      ? uiConfigs.postSectionMargin
+      : uiConfigs.navbarRenderedHeight}px;
+  --main-content-padding: 16px;
+
+  margin-top: var(--main-margin-top);
   margin-left: auto;
   margin-right: auto;
 
   @media (max-width: ${uiConfigs.maxContainerWidth}px) {
-    padding: 0 16px;
+    padding: 0
+      ${(props) => (props.spacing ? `var(--main-content-padding)` : '0')};
   }
 
   @media (max-width: 768px) {
-    margin-top: ${({ spacing }) =>
+    --main-margin-top: ${({ spacing }) =>
       spacing
         ? uiConfigs.postSectionMobileMargin
         : uiConfigs.navbarRenderedHeight}px;
