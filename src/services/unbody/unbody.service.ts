@@ -2,11 +2,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import {
   CountDocumentsDocument,
   CountDocumentsQueryVariables,
-  GetAllArticleSlugsDocument,
   GetAllTopicsDocument,
-  GetArticlePostQueryDocument,
-  GetArticlesFromSameAuthorsDocument,
-  GetHomepagePostsDocument,
   GetObjectsGoogleDocWhereInpObj,
   GetObjectsTextBlockWhereInpObj,
   GetPostsDocument,
