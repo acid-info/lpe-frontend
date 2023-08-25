@@ -1,9 +1,9 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import Image from 'next/image'
 import React from 'react'
 import { LPE } from '../../types/lpe.types'
-
-import { LogosCircleIcon } from '../Icons/LogosCircleIcon'
+import { lsdUtils } from '../../utils/lsd.utils'
 import PodcastHost from './Podcast.Host'
 
 export enum Size {
@@ -21,7 +21,12 @@ export default function PodcastShowCard({
 }: PodcastShowCardProps) {
   return (
     <Container {...props}>
-      <LogosCircleIcon width={74} height={74} />
+      <Logo
+        src={show.logo.url}
+        alt={show.logo.alt}
+        width={show.logo.width}
+        height={show.logo.height}
+      />
       <ShowData>
         <Title variant="h3">{show.title}</Title>
         <PodcastHost show={show} />
@@ -49,6 +54,14 @@ const ShowData = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+    margin-top: 32px;
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
+    margin-top: 24px;
+  }
 `
 
 const Description = styled(Typography)`
@@ -61,5 +74,20 @@ const Description = styled(Typography)`
   @media (max-width: 768px) {
     text-align: center;
     margin-top: 8px;
+  }
+`
+
+const Logo = styled(Image)`
+  width: 74px;
+  height: 74px;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+    width: 64px;
+    height: 64px;
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
+    width: 56px;
+    height: 56px;
   }
 `
