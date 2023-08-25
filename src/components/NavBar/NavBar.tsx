@@ -40,8 +40,11 @@ export default function NavBar({ defaultState }: NavBarProps) {
   }, [defaultState])
 
   return (
-    <Container className={`${hide ? 'hide' : ''} ${className}`}>
-      <NavBarContainer bordered={state.showTitle.get()}>
+    <Container
+      bordered={state.showTitle.get()}
+      className={`${hide ? 'hide' : ''} ${className}`}
+    >
+      <NavBarContainer>
         <LeftContainer href={'/'}>
           <LogosIcon color="primary" />
           {state.showTitle.get() && (
@@ -75,7 +78,9 @@ export default function NavBar({ defaultState }: NavBarProps) {
 
 const PressLogoType = styled(Typography)``
 
-const Container = styled.header`
+const Container = styled.header<{
+  bordered?: boolean
+}>`
   width: 100%;
   height: 44px;
 
@@ -87,22 +92,20 @@ const Container = styled.header`
   background: rgb(var(--lsd-surface-primary));
   transition: top 0.2s;
 
+  border-bottom: ${(props) => (props.bordered ? '1px' : '0px')} solid
+    rgb(var(--lsd-theme-primary));
+
   &.article_page,
   &.search_page {
   }
 `
 
-const NavBarContainer = styled.nav<{
-  bordered?: boolean
-}>`
+const NavBarContainer = styled.nav`
   display: flex;
   padding: 16px 0;
   align-items: center;
   justify-content: space-between;
   position: relative;
-
-  border-bottom: ${(props) => (props.bordered ? '1px' : '0px')} solid
-    rgb(var(--lsd-theme-primary));
 
   margin: auto;
 
