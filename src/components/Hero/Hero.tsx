@@ -1,10 +1,11 @@
-import { NavbarFiller } from '@/components/NavBar/NavbarFiller'
+import { HeroTags } from '@/components/Hero/Hero.tags'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useEffect, useRef } from 'react'
 import { useWindowScroll } from 'react-use'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useNavbarState } from '../../states/navbarState'
+import { lsdUtils } from '@/utils/lsd.utils'
 
 export type HeroProps = Partial<React.ComponentProps<typeof Container>> & {
   tags?: string[]
@@ -38,7 +39,7 @@ export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {
         Your Guide to Network States and the technology driving Sovereign
         Communities
       </Description>
-      <NavbarFiller tags={tags} className="navbar__filter" />
+      <HeroTags tags={tags} />
     </Container>
   )
 }
@@ -52,12 +53,8 @@ const Container = styled.div`
   padding: 24px 16px 40px 16px;
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
 
-  .navbar__filter {
-    margin-top: 24px;
-  }
-
   @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
-    padding: 8px 16px 16px;
+    padding: 8px 0 16px 0;
   }
 `
 

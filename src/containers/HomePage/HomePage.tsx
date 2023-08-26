@@ -35,9 +35,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <Root {...props}>
-      <Container>
+      <HeroContainer>
         <Hero tags={tags} />
-      </Container>
+      </HeroContainer>
       <MostRecentContainer>
         <Container>
           <PostsGrid
@@ -179,6 +179,15 @@ const MostRecentContainer = styled.div`
     & > div {
       padding: 0;
       padding-left: var(--main-content-padding);
+    }
+  }
+`
+
+const HeroContainer = styled.div`
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    & > div:last-of-type {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 `
