@@ -50,7 +50,6 @@ export const UnbodyDataTypeKeys = {
   PodcastShowDocument: 'PodcastShowDocument',
   PodcastEpisodeDocument: 'PodcastEpisodeDocument',
   StaticPageDocument: 'StaticPageDocument',
-  PostSearchResultDocument: 'PostSearchResultDocument',
 } as const
 
 export type UnbodyDataTypeKey =
