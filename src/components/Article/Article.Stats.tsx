@@ -10,17 +10,21 @@ const ArticleStats = ({
 }) => (
   <Row>
     <Typography variant="body3" genericFontFamily="sans-serif">
-      {readingLength} minutes read
+      {readingLength} MIN
     </Typography>
-    <Typography variant="body3">•</Typography>
-    <Typography variant="body3" genericFontFamily="sans-serif">
-      {date &&
-        date.toLocaleString('en-GB', {
-          day: 'numeric',
-          month: 'long', // TODO: Should be uppercase
-          year: 'numeric',
-        })}
-    </Typography>
+    {date && (
+      <>
+        <Typography variant="body3">•</Typography>
+        <Date variant="body3" genericFontFamily="sans-serif">
+          {date &&
+            date.toLocaleString('en-GB', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            })}
+        </Date>
+      </>
+    )}
   </Row>
 )
 
@@ -30,6 +34,10 @@ const Row = styled.div`
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
+`
+
+const Date = styled(Typography)`
+  text-transform: uppercase;
 `
 
 export default ArticleStats
