@@ -4853,6 +4853,7 @@ export type GetPostsQueryVariables = Exact<{
   >
   searchResult?: InputMaybe<Scalars['Boolean']['input']>
   nearText?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocNearTextInpObj>
+  hybrid?: InputMaybe<GetObjectsGoogleDocHybridInpObj>
   nearObject?: InputMaybe<GetObjectsGoogleDocNearObjectInpObj>
   skip?: InputMaybe<Scalars['Int']['input']>
   limit?: InputMaybe<Scalars['Int']['input']>
@@ -5009,6 +5010,8 @@ export type SearchBlocksQueryVariables = Exact<{
   imageNearText?: InputMaybe<Txt2VecOpenAiGetObjectsImageBlockNearTextInpObj>
   textFilter?: InputMaybe<GetObjectsTextBlockWhereInpObj>
   imageFilter?: InputMaybe<GetObjectsImageBlockWhereInpObj>
+  textHybrid?: InputMaybe<GetObjectsTextBlockHybridInpObj>
+  imageHybrid?: InputMaybe<GetObjectsImageBlockHybridInpObj>
   text?: InputMaybe<Scalars['Boolean']['input']>
   image?: InputMaybe<Scalars['Boolean']['input']>
 }>
@@ -5989,6 +5992,17 @@ export const GetPostsDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
+            name: { kind: 'Name', value: 'hybrid' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'GetObjectsGoogleDocHybridInpObj' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
             name: { kind: 'Name', value: 'nearObject' },
           },
           type: {
@@ -6067,6 +6081,14 @@ export const GetPostsDocument = {
                       value: {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'filter' },
+                      },
+                    },
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'hybrid' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'hybrid' },
                       },
                     },
                     {
@@ -6971,6 +6993,28 @@ export const SearchBlocksDocument = {
         },
         {
           kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'textHybrid' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'GetObjectsTextBlockHybridInpObj' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'imageHybrid' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'GetObjectsImageBlockHybridInpObj' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'text' } },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'Boolean' } },
           defaultValue: { kind: 'BooleanValue', value: true },
@@ -7012,6 +7056,14 @@ export const SearchBlocksDocument = {
                       value: {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'textNearText' },
+                      },
+                    },
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'hybrid' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'textHybrid' },
                       },
                     },
                     {
@@ -7280,6 +7332,14 @@ export const SearchBlocksDocument = {
                       value: {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'imageNearText' },
+                      },
+                    },
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'hybrid' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'imageHybrid' },
                       },
                     },
                     {

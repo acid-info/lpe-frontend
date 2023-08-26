@@ -55,7 +55,9 @@ export const ArticleSearchResultItemDataType: UnbodyDataTypeConfig<
     }
 
     const score =
-      query.length > 0 || tags.length > 0 ? data._additional.certainty : 0
+      query.length > 0 || tags.length > 0
+        ? UnbodyHelpers.resolveScore(data._additional)
+        : 0
 
     const transformers = helpers.dataTypes.get({ objectType: 'GoogleDoc' })
     const document = await helpers.dataTypes.transform<LPE.Post.Document>(

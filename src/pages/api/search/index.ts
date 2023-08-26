@@ -89,5 +89,36 @@ export default async function handler(
     result.blocks.push(...response.data)
   }
 
+  const calcPostScore = (postScore: number, blockScores: number[]): number => {
+    const topScoreWeight = 0.5
+    const postScoreWeight = 1
+    const blocksCountWeight = 0.1
+
+    const topScore = blockScores[0] ?? 0
+
+    return (
+      (postScore * postScoreWeight +
+        (blockScores.length / result.blocks.length) * blocksCountWeight +
+        topScore * topScoreWeight) /
+      (topScoreWeight + postScoreWeight + blocksCountWeight)
+    )
+  }
+
+  if (skip === 0)
+    result.posts = [...result.posts].sort((a, b) => {
+      const [blocks1, blocks2] = [a, b].map((p) =>
+        result.blocks
+          .filter(
+            (block) =>
+              'document' in block.data && block.data.document.id === p.data.id,
+          )
+          .map((block) => block.score),
+      )
+
+      return calcPostScore(a.score, blocks1) > calcPostScore(b.score, blocks2)
+        ? -1
+        : 1
+    })
+
   res.status(200).json(result)
 }

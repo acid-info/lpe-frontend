@@ -6,6 +6,7 @@ import {
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import SEO from '../components/SEO/SEO'
+import { api } from '../services/api.service'
 import unbodyApi from '../services/unbody/unbody.service'
 
 interface SearchPageProps {
@@ -29,7 +30,7 @@ export default function SearchPage({}: SearchPageProps) {
     }
   }, [])
 
-  useEffect(() => {
+  useEffect(async () => {
     const serchArgs = [
       extractQueryFromQuery(router.query),
       extractTopicsFromQuery(router.query),

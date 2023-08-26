@@ -4,6 +4,7 @@ import {
   CountDocumentsQueryVariables,
   GetAllTopicsDocument,
   GetObjectsGoogleDocWhereInpObj,
+  GetObjectsTextBlockHybridInpObj,
   GetObjectsTextBlockWhereInpObj,
   GetPostsDocument,
   GetPostsQueryVariables,
@@ -371,6 +372,7 @@ export class UnbodyService {
     slug,
     toc = false,
     filter,
+    hybrid,
     nearObject,
     textBlocks = false,
     nearText,
@@ -381,6 +383,7 @@ export class UnbodyService {
     limit?: number
     toc?: boolean
     filter?: GetObjectsGoogleDocWhereInpObj | GetObjectsGoogleDocWhereInpObj[]
+    hybrid?: GetPostsQueryVariables['hybrid']
     nearObject?: string
     textBlocks?: boolean
     nearText?: GetPostsQueryVariables['nearText']
@@ -399,7 +402,8 @@ export class UnbodyService {
           mentions: true,
           imageBlocks: true,
           sort,
-          searchResult: !!nearText || !!nearObject,
+          searchResult: !!hybrid || !!nearText || !!nearObject,
+          ...(hybrid ? { hybrid } : {}),
           nearText,
           ...(nearObject
             ? {
@@ -1123,8 +1127,9 @@ export class UnbodyService {
         skip,
         limit,
         filter,
-        nearText: {
-          concepts: [query || ''],
+        hybrid: {
+          query: query || '',
+          alpha: 0.75,
         },
       })
 
@@ -1172,12 +1177,12 @@ export class UnbodyService {
           ? postType
           : [LPE.PostTypes.Article, LPE.PostTypes.Podcast]
 
-      const nearText =
+      const hybrid =
         (query.trim().length > 0 || tags.length > 0) &&
         ({
-          concepts: [query, ...tags],
-          certainty: 0.75,
-        } as Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj)
+          query: query,
+          alpha: 0.75,
+        } as GetObjectsTextBlockHybridInpObj)
 
       const filter = {
         operator: 'And',
@@ -1205,6 +1210,22 @@ export class UnbodyService {
           valueString: postId,
         })
 
+      if (tags && tags.length > 0) {
+        filter.operands!.push({
+          operator: 'Or',
+          operands: [
+            ...tags.map(
+              (tag) =>
+                ({
+                  operator: 'Equal',
+                  path: ['document', 'GoogleDoc', 'tags'],
+                  valueString: tag,
+                } as GetObjectsGoogleDocWhereInpObj),
+            ),
+          ],
+        })
+      }
+
       const {
         data: {
           Get: { ImageBlock, TextBlock },
@@ -1217,12 +1238,7 @@ export class UnbodyService {
           textFilter: filter,
           text: _type.includes('text'),
           image: _type.includes('image'),
-          ...(nearText
-            ? {
-                textNearText: nearText,
-                imageNearText: nearText,
-              }
-            : {}),
+          ...(hybrid ? { textHybrid: hybrid, imageHybrid: hybrid } : {}),
         },
       })
 
@@ -1237,7 +1253,7 @@ export class UnbodyService {
         { shows, query, tags },
       )
 
-      return blocks
+      return [...blocks].sort((a, b) => (a.score > b.score ? -1 : 1))
     }, [])
 
   getTopics = async (published: boolean = true) =>
