@@ -292,6 +292,24 @@ PostCard.styles = {
       ${PostCardShowDetails.styles.large(theme)}
     }
 
+    .post-card__cover-image {
+      & > div {
+        padding-top: calc(9 / 16 * 100%) !important;
+
+        & > div {
+          width: 100%;
+          height: 100%;
+        }
+
+        & > div > img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover;
+          object-position: center center;
+        }
+      }
+    }
+
     ${lsdUtils.breakpoint(theme, 'md', 'down')} {
       .post-card__title-text {
         ${lsdUtils.typography('h3')}
@@ -326,6 +344,22 @@ PostCard.styles = {
 
     .post-card__cover-image {
       grid-area: image;
+
+      & > div {
+        padding-top: calc(9 / 16 * 100%) !important;
+
+        & > div {
+          width: 100%;
+          height: 100%;
+        }
+
+        & > div > img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover;
+          object-position: center center;
+        }
+      }
     }
 
     .post-card__label {

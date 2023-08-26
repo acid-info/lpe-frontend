@@ -50,8 +50,12 @@ export const ResponsiveImage = ({
         height: height || 'auto',
       }}
     >
-      <img src={lazyUrl} alt={alt} />
-      <Image {...imageProps} alt={alt} />
+      <div>
+        <img src={lazyUrl} alt={alt} />
+      </div>
+      <div className={imageProps.className}>
+        <Image {...imageProps} alt={alt} />
+      </div>
     </Container>
   )
 }
@@ -67,24 +71,16 @@ const Container = styled.div`
     filter: grayscale(0%);
   }
 
-  &.fill {
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-    > img {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: auto;
-    }
   }
 
   > * {
     position: absolute !important;
     width: 100%;
-    height: auto;
+    height: 100%;
     top: 0;
     left: 0;
 
