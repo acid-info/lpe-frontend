@@ -52,7 +52,6 @@ export namespace LPE {
     } as const
 
     export type ContentBlockType = DictValues<typeof ContentBlockTypes>
-
     export const ContentBlockLabels = {
       Title: 'title',
       Subtitle: 'subtitle',

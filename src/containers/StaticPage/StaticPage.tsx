@@ -19,20 +19,19 @@ export const StaticPage: React.FC<StaticPageProps> = ({
   ...props
 }) => {
   const titleBlock = data.page.content.find((block) => {
-    // TODO @Hossein - type definition for classNames is missing for both block types
-    // @ts-ignore
-    return block.classNames && block.classNames.includes('title')
-  })
+    return (
+      block.type === LPE.Post.ContentBlockTypes.Text &&
+      block.classNames &&
+      block.classNames.includes('title')
+    )
+  }) as LPE.Post.TextBlock | undefined
 
   return (
     <Root {...props}>
       <article>
         {titleBlock && (
           <Typography variant={'h1'} genericFontFamily={'serif'}>
-            {
-              // @ts-ignore
-              titleBlock.text
-            }
+            {titleBlock.text}
           </Typography>
         )}
         {data.page.content.map((block, idx) => (
