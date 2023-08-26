@@ -5009,13 +5009,15 @@ export type SearchBlocksQueryVariables = Exact<{
   imageNearText?: InputMaybe<Txt2VecOpenAiGetObjectsImageBlockNearTextInpObj>
   textFilter?: InputMaybe<GetObjectsTextBlockWhereInpObj>
   imageFilter?: InputMaybe<GetObjectsImageBlockWhereInpObj>
+  text?: InputMaybe<Scalars['Boolean']['input']>
+  image?: InputMaybe<Scalars['Boolean']['input']>
 }>
 
 export type SearchBlocksQuery = {
   __typename?: 'WeaviateObj'
   Get: {
     __typename?: 'GetObjectsObj'
-    TextBlock: Array<{
+    TextBlock?: Array<{
       __typename: 'TextBlock'
       footnotes: string
       html: string
@@ -5062,7 +5064,7 @@ export type SearchBlocksQuery = {
         id: string
       }
     }>
-    ImageBlock: Array<{
+    ImageBlock?: Array<{
       __typename: 'ImageBlock'
       url: string
       alt: string
@@ -6967,6 +6969,21 @@ export const SearchBlocksDocument = {
             name: { kind: 'Name', value: 'GetObjectsImageBlockWhereInpObj' },
           },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'text' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Boolean' } },
+          defaultValue: { kind: 'BooleanValue', value: true },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'image' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Boolean' } },
+          defaultValue: { kind: 'BooleanValue', value: true },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -7012,6 +7029,22 @@ export const SearchBlocksDocument = {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'skip' },
                       },
+                    },
+                  ],
+                  directives: [
+                    {
+                      kind: 'Directive',
+                      name: { kind: 'Name', value: 'include' },
+                      arguments: [
+                        {
+                          kind: 'Argument',
+                          name: { kind: 'Name', value: 'if' },
+                          value: {
+                            kind: 'Variable',
+                            name: { kind: 'Name', value: 'text' },
+                          },
+                        },
+                      ],
                     },
                   ],
                   selectionSet: {
@@ -7264,6 +7297,22 @@ export const SearchBlocksDocument = {
                         kind: 'Variable',
                         name: { kind: 'Name', value: 'skip' },
                       },
+                    },
+                  ],
+                  directives: [
+                    {
+                      kind: 'Directive',
+                      name: { kind: 'Name', value: 'include' },
+                      arguments: [
+                        {
+                          kind: 'Argument',
+                          name: { kind: 'Name', value: 'if' },
+                          value: {
+                            kind: 'Variable',
+                            name: { kind: 'Name', value: 'image' },
+                          },
+                        },
+                      ],
                     },
                   ],
                   selectionSet: {

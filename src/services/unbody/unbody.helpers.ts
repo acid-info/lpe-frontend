@@ -23,7 +23,10 @@ export class UnbodyHelpers {
       limit: this.args.limit(limit),
       skip: this.args.skip(skip),
     }),
-    wherePath: (path: Array<string | null | undefined | false>) => {
+    wherePath: (
+      path: Array<string | null | undefined | false>,
+      key: string[] = ['path'],
+    ) => {
       const input = path.filter((p) => p && typeof p === 'string') as string[]
       const paths: string[] = []
       const or: string[] = []
@@ -43,7 +46,7 @@ export class UnbodyHelpers {
             (p) =>
               ({
                 operator: 'Equal',
-                path: ['path'],
+                path: key,
                 valueString: p,
               } as GetObjectsGoogleDocWhereInpObj),
           ),
@@ -51,7 +54,7 @@ export class UnbodyHelpers {
             (p) =>
               ({
                 operator: 'NotEqual',
-                path: ['path'],
+                path: key,
                 valueString: p,
               } as GetObjectsGoogleDocWhereInpObj),
           ),
@@ -63,7 +66,7 @@ export class UnbodyHelpers {
                     (p) =>
                       ({
                         operator: 'Equal',
-                        path: ['path'],
+                        path: key,
                         valueString: p,
                       } as GetObjectsGoogleDocWhereInpObj),
                   ),

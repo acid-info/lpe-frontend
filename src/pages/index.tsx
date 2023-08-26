@@ -46,15 +46,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 
   const shows = [..._shows].sort((a, b) => (a.title > b.title ? -1 : 1))
 
-  const { data } = await unbodyApi.searchPosts({
-    skip: 0,
-    limit: 10,
-    query: 'Money pedal-powered',
-    type: ['podcast', 'article'],
-    tags: ['application', 'tag1'],
-  })
-  console.log(JSON.stringify(data))
-
   return {
     props: {
       data: {

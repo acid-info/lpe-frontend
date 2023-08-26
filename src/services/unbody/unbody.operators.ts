@@ -167,6 +167,8 @@ export const SEARCH_BLOCKS_QUERY = gql`
     $imageNearText: Txt2VecOpenAIGetObjectsImageBlockNearTextInpObj
     $textFilter: GetObjectsTextBlockWhereInpObj
     $imageFilter: GetObjectsImageBlockWhereInpObj
+    $text: Boolean = true
+    $image: Boolean = true
   ) {
     Get {
       TextBlock(
@@ -174,7 +176,7 @@ export const SEARCH_BLOCKS_QUERY = gql`
         nearText: $textNearText
         limit: $limit
         offset: $skip
-      ) {
+      ) @include(if: $text) {
         footnotes
         footnotesObj @client(always: true) {
           index
@@ -226,7 +228,7 @@ export const SEARCH_BLOCKS_QUERY = gql`
         nearText: $imageNearText
         limit: $limit
         offset: $skip
-      ) {
+      ) @include(if: $image) {
         url
         alt
         order

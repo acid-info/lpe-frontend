@@ -42,6 +42,7 @@ export const PostSearchResultDataType: UnbodyDataTypeConfig<
     return {
       score,
       data: transformed,
+      type: transformed.type,
     }
   },
 }
