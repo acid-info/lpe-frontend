@@ -2,6 +2,7 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { LPE } from '../../types/lpe.types'
+import { RenderArticleBlock } from '@/components/Article/Article.Block'
 
 export type StaticPageProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -17,11 +18,46 @@ export const StaticPage: React.FC<StaticPageProps> = ({
   data: { page },
   ...props
 }) => {
+  const titleBlock = data.page.content.find((block) => {
+    // TODO @Hossein - type definition for classNames is missing for both block types
+    // @ts-ignore
+    return block.classNames && block.classNames.includes('title')
+  })
+
   return (
     <Root {...props}>
-      <Typography variant="h1">{page.title}</Typography>
+      <article>
+        {titleBlock && (
+          <Typography variant={'h1'} genericFontFamily={'serif'}>
+            {
+              // @ts-ignore
+              titleBlock.text
+            }
+          </Typography>
+        )}
+        {data.page.content.map((block, idx) => (
+          <RenderArticleBlock block={block} activeId={null} key={idx} />
+        ))}
+      </article>
     </Root>
   )
 }
 
-const Root = styled('div')``
+const Root = styled.div`
+  display: flex;
+  justify-content: center;
+  #p-2 {
+    font-size: var(--lsd-body1-fontSize) !important;
+    line-height: var(--lsd-body1-lineHeight) !important;
+  }
+  article {
+    width: 700px;
+    > * {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .title {
+    display: none;
+  }
+`

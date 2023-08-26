@@ -18,7 +18,7 @@ export const RenderArticleBlock = ({
 }: {
   block: LPE.Article.ContentBlock
   activeId: string | null
-  headingElementsRef: HeadingElementsRef
+  headingElementsRef?: HeadingElementsRef
   hide?: boolean
 }) => {
   switch (block.type) {
@@ -70,7 +70,9 @@ export const RenderArticleBlock = ({
               variant="body1"
               component={block.tagName as any}
               genericFontFamily="sans-serif"
-              className={extractClassFromFirstTag(block.html) || ''}
+              className={`${extractClassFromFirstTag(
+                block.html,
+              )} ${block.classNames.join(' ')}`}
               id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
               dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
             />
@@ -82,7 +84,9 @@ export const RenderArticleBlock = ({
               variant="body1"
               component={block.tagName as any}
               genericFontFamily="sans-serif"
-              className={extractClassFromFirstTag(block.html) || ''}
+              className={`${extractClassFromFirstTag(
+                block.html,
+              )} ${block.classNames.join(' ')}`}
               id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
               dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
             />

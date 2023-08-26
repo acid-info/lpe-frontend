@@ -48,7 +48,7 @@ const ArticleHeader = ({
         <ArticleSubtitle
           variant="body1"
           genericFontFamily="sans-serif"
-          component="div"
+          component="p"
         >
           {subtitle}
         </ArticleSubtitle>

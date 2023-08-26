@@ -34,14 +34,12 @@ const Page: CustomNextPage<PageProps> = ({
         title={`${data.page.title} - Logos Press Engine`}
       />
       <StaticPage data={data} />
-      <NotFoundPage />
     </>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await unbodyApi.getStaticPages()
-
   return {
     paths: data.map((page) => ({
       params: {
