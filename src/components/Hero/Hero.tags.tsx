@@ -3,31 +3,18 @@ import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Tag } from '@acid-info/lsd-react'
+import { LPETag } from '@/components/LPETag'
 
 export type NavbarFilter = Partial<React.ComponentProps<typeof Container>> & {
   tags?: string[]
 }
 
 export const HeroTags: React.FC<NavbarFilter> = ({ tags = [], ...props }) => {
-  const router = useRouter()
-
-  const onTagClick = (tag: string) => {
-    router.push(`/search?topics=${tag}`)
-  }
-
   return (
     <Container {...props}>
       <Tags>
         {tags.map((tag, index) => (
-          <Tag
-            size={'small'}
-            disabled={false}
-            key={index}
-            onClick={() => onTagClick(tag)}
-            variant={'outlined'}
-          >
-            {tag}
-          </Tag>
+          <LPETag tag={tag} key={`tag-${index}`} />
         ))}
       </Tags>
     </Container>

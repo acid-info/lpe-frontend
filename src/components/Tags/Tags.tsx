@@ -1,7 +1,6 @@
-import { Tag } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { LPETag } from '@/components/LPETag'
 
 export type TagsProps = React.ComponentProps<typeof TagsContainer> & {
   tags: string[]
@@ -15,15 +14,13 @@ const Tags: React.FC<TagsProps> = ({ tags, className, ...props }) => {
   return tags?.length > 0 ? (
     <TagsContainer className={className} {...props}>
       {tags.map((tag, idx) => (
-        <Link key={`tag-${idx}`} href={`/search?topics=${tag}`}>
-          <Tag
-            size="small"
-            disabled={false}
-            variant={topics?.includes(tag) ? 'filled' : 'outlined'}
-          >
-            {tag}
-          </Tag>
-        </Link>
+        <LPETag
+          tag={tag}
+          key={`tag-${idx}`}
+          LSDProps={{
+            variant: topics?.includes(tag) ? 'filled' : 'outlined',
+          }}
+        />
       ))}
     </TagsContainer>
   ) : null

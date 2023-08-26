@@ -74,3 +74,7 @@ export function parseTimestamp(text: string) {
   const time = text.match(/^\d{2}:\d{2}/g)
   return time ? time[0] : ''
 }
+
+export function formatTagText(tag: string) {
+  return tag.replace(/_/g, ' ')
+}

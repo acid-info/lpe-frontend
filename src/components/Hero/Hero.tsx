@@ -39,7 +39,7 @@ export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {
         Your Guide to Network States and the technology driving Sovereign
         Communities
       </Description>
-      <HeroTags tags={tags} className="navbar__filter" />
+      <HeroTags tags={tags} />
     </Container>
   )
 }
@@ -52,9 +52,6 @@ const Container = styled.div`
 
   padding: 24px 16px 40px 16px;
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
-
-  .navbar__filter {
-  }
 
   @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
     padding: 8px 0 16px 0;
