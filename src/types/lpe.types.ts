@@ -52,7 +52,6 @@ export namespace LPE {
     } as const
 
     export type ContentBlockType = DictValues<typeof ContentBlockTypes>
-
     export const ContentBlockLabels = {
       Title: 'title',
       Subtitle: 'subtitle',
@@ -90,6 +89,32 @@ export namespace LPE {
     export type ContentBlock<D = any> = TextBlock<D> | ImageBlock<D>
 
     export type Document = LPE.Article.Data | LPE.Podcast.Document
+  }
+
+  export namespace StaticPage {
+    export type TextBlock = Post.TextBlock<Metadata>
+    export type ImageBlock = Post.ImageBlock<Metadata>
+    export type ContentBlock = Post.ContentBlock<Metadata>
+    export type Footnote = Post.Footnote
+    export type Footnotes = Post.Footnotes
+    export const ContentBlockLabels = Post.ContentBlockLabels
+    export type ContentBlockLabel = Post.ContentBlockLabel
+
+    export type Metadata = {
+      id: string
+      slug: string
+      title: string
+      summary: string
+      subtitle: string
+
+      createdAt: string | null
+      modifiedAt: string | null
+      type: 'static_page'
+    }
+
+    export type Document = Metadata & {
+      content: Array<Article.ContentBlock>
+    }
   }
 
   export namespace Article {

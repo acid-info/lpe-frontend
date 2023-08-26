@@ -36,6 +36,10 @@ const podcastEpisodeDocument = unbodyDataTypes.get({
   classes: ['podcast', 'document', 'episode'],
   objectType: 'GoogleDoc',
 })!
+const staticPageDocument = unbodyDataTypes.get({
+  classes: ['static-page', 'document'],
+  objectType: 'GoogleDoc',
+})!
 
 const sortPosts = (a: LPE.Post.Document, b: LPE.Post.Document) =>
   (a.type === 'podcast' ? new Date(a.publishedAt) : new Date(a.modifiedAt!)) >
@@ -52,7 +56,8 @@ export class UnbodyService {
 
   initialData: {
     posts: LPE.Post.Document[]
-  } = { posts: [] }
+    staticPages: LPE.StaticPage.Document[]
+  } = { posts: [], staticPages: [] }
 
   constructor(private apiKey: string, private projectId: string) {
     const cache = new InMemoryCache({
@@ -103,6 +108,7 @@ export class UnbodyService {
   private _loadInitialData = async () => {
     const articles: LPE.Article.Data[] = await this.fetchAllArticles()
     const episodes: LPE.Podcast.Document[] = await this.fetchAllEpisodes()
+    const staticPages = await this.fetchAllStaticPages()
 
     const posts: LPE.Post.Document[] = [...articles, ...episodes].sort(
       sortPosts,
@@ -110,9 +116,10 @@ export class UnbodyService {
 
     this.initialData = {
       posts,
+      staticPages,
     }
 
-    this.initialDataPromise.resolve({ posts })
+    this.initialDataPromise.resolve({ posts, staticPages })
   }
 
   loadInitialData = async (forced: boolean = false) => {
@@ -121,6 +128,31 @@ export class UnbodyService {
     }
 
     return this.initialDataPromise.promise
+  }
+
+  private fetchAllStaticPages = async () => {
+    const result: LPE.StaticPage.Document[] = []
+
+    let skip = 0
+    const limit = 50
+    while (true) {
+      const { data } = await this.findStaticPages({
+        skip,
+        limit,
+        parseContent: false,
+        textBlocks: false,
+        includeDrafts: false,
+        toc: false,
+      })
+
+      result.push(...data)
+
+      if (data.length === 0) break
+
+      skip += 50
+    }
+
+    return result
   }
 
   private fetchAllEpisodes = async () => {
@@ -226,6 +258,112 @@ export class UnbodyService {
 
       return GoogleDoc?.[0]?.meta?.count || 0
     }, 0)
+
+  findStaticPages = ({
+    skip = 0,
+    limit = 10,
+    slug,
+    toc = false,
+    filter,
+    nearObject,
+    textBlocks = false,
+    includeDrafts = false,
+  }: {
+    slug?: string
+    skip?: number
+    limit?: number
+    toc?: boolean
+    filter?: GetPostsQueryVariables['filter']
+    nearObject?: string
+    textBlocks?: boolean
+    parseContent?: boolean
+    includeDrafts?: boolean
+  }) =>
+    this.handleRequest<LPE.StaticPage.Document[]>(async () => {
+      const {
+        data: {
+          Get: { GoogleDoc: docs },
+        },
+      } = await this.client.query({
+        query: GetPostsDocument,
+        variables: {
+          toc,
+          textBlocks,
+          mentions: true,
+          imageBlocks: true,
+          ...(nearObject
+            ? {
+                nearObject: {
+                  id: nearObject,
+                },
+              }
+            : {}),
+          ...this.helpers.args.page(skip, limit),
+          filter: {
+            operator: 'And',
+            operands: [
+              this.helpers.args.wherePath([
+                'Static pages',
+                includeDrafts ? 'published|draft' : 'published',
+              ]),
+              ...(slug
+                ? [
+                    {
+                      path: ['slug'],
+                      operator: 'Equal',
+                      valueString: slug,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
+              ...(nearObject
+                ? [
+                    {
+                      path: ['id'],
+                      operator: 'NotEqual',
+                      valueString: nearObject,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
+              ...(filter ? [filter] : []),
+            ],
+          },
+        },
+      })
+
+      return unbodyDataTypes.transformMany<LPE.StaticPage.Document>(
+        staticPageDocument,
+        docs,
+        undefined,
+      )
+    }, [])
+
+  getStaticPages = () =>
+    this.handleRequest<LPE.StaticPage.Document[]>(async () => {
+      const { staticPages } = await this.loadInitialData()
+
+      return staticPages
+    }, [])
+
+  getStaticPage = ({
+    slug,
+    includeDrafts = false,
+  }: {
+    slug: string
+    includeDrafts?: boolean
+  }) =>
+    this.handleRequest<LPE.StaticPage.Document | null>(async () => {
+      const { data } = await this.findStaticPages({
+        limit: 1,
+        slug,
+        includeDrafts,
+        textBlocks: true,
+        parseContent: true,
+      })
+
+      if (data.length === 0) throw 'Static page not found!'
+
+      return data[0]
+    }, null)
 
   getArticles = ({
     skip = 0,

@@ -11,7 +11,7 @@ import { LPE } from '../../types/lpe.types'
 
 type Props = PropsWithChildren<{
   block: LPE.Article.TextBlock
-  headingElementsRef: HeadingElementsRef
+  headingElementsRef?: HeadingElementsRef
   typographyProps?: TypographyProps
 }>
 export const ArticleHeading = ({
@@ -24,7 +24,9 @@ export const ArticleHeading = ({
     extractIdFromFirstTag(block.html) || `${block.tagName}-${block.order}`
   const refProp = {
     ref: (ref: any) => {
-      headingElementsRef.current[id] = ref
+      if (headingElementsRef) {
+        headingElementsRef.current[id] = ref
+      }
     },
   }
 

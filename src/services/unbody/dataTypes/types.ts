@@ -49,6 +49,7 @@ export const UnbodyDataTypeKeys = {
   ArticleSearchResultItem: 'ArticleSearchResultItem',
   PodcastShowDocument: 'PodcastShowDocument',
   PodcastEpisodeDocument: 'PodcastEpisodeDocument',
+  StaticPageDocument: 'StaticPageDocument',
 } as const
 
 export type UnbodyDataTypeKey =
@@ -61,6 +62,7 @@ export const UnbodyDataTypeClasses = {
   Episode: 'episode',
   Document: 'document',
   Search: 'search',
+  StaticPage: 'static-page',
 } as const
 
 export type UnbodyDataTypeClass =
