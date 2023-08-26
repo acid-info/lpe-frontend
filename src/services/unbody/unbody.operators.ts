@@ -15,6 +15,7 @@ export const GET_POSTS_QUERY = gql`
   query GetPosts(
     $filter: GetObjectsGoogleDocWhereInpObj
     $sort: [GetObjectsGoogleDocSortInpObj]
+    $searchResult: Boolean = false
     $nearText: Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj
     $nearObject: GetObjectsGoogleDocNearObjectInpObj
     $skip: Int = 0
@@ -35,6 +36,9 @@ export const GET_POSTS_QUERY = gql`
       ) {
         _additional {
           id
+          score @include(if: $searchResult)
+          distance @include(if: $searchResult)
+          certainty @include(if: $searchResult)
         }
         title
         subtitle

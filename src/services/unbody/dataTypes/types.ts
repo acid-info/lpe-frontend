@@ -49,6 +49,7 @@ export const UnbodyDataTypeKeys = {
   ArticleSearchResultItem: 'ArticleSearchResultItem',
   PodcastShowDocument: 'PodcastShowDocument',
   PodcastEpisodeDocument: 'PodcastEpisodeDocument',
+  PostSearchResultDocument: 'PostSearchResultDocument',
 } as const
 
 export type UnbodyDataTypeKey =

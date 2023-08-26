@@ -227,6 +227,80 @@ export class UnbodyService {
       return GoogleDoc?.[0]?.meta?.count || 0
     }, 0)
 
+  findPostDocs = ({
+    skip = 0,
+    limit = 10,
+    slug,
+    toc = false,
+    filter,
+    nearObject,
+    textBlocks = false,
+    nearText,
+    sort,
+  }: {
+    slug?: string
+    skip?: number
+    limit?: number
+    toc?: boolean
+    filter?: GetObjectsGoogleDocWhereInpObj | GetObjectsGoogleDocWhereInpObj[]
+    nearObject?: string
+    textBlocks?: boolean
+    nearText?: GetPostsQueryVariables['nearText']
+    sort?: GetPostsQueryVariables['sort']
+  }) =>
+    this.handleRequest(async () => {
+      const {
+        data: {
+          Get: { GoogleDoc: docs },
+        },
+      } = await this.client.query({
+        query: GetPostsDocument,
+        variables: {
+          toc,
+          textBlocks,
+          mentions: true,
+          imageBlocks: true,
+          sort,
+          searchResult: !!nearText || !!nearObject,
+          nearText,
+          ...(nearObject
+            ? {
+                nearObject: {
+                  id: nearObject,
+                },
+              }
+            : {}),
+          ...this.helpers.args.page(skip, limit),
+          filter: {
+            operator: 'And',
+            operands: [
+              ...(slug
+                ? [
+                    {
+                      path: ['slug'],
+                      operator: 'Equal',
+                      valueString: slug,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
+              ...(nearObject
+                ? [
+                    {
+                      path: ['id'],
+                      operator: 'NotEqual',
+                      valueString: nearObject,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
+              ...(filter ? (Array.isArray(filter) ? filter : [filter]) : []),
+            ],
+          },
+        },
+      })
+
+      return docs
+    }, [])
+
   getArticles = ({
     skip = 0,
     limit = 10,
@@ -846,6 +920,85 @@ export class UnbodyService {
       const topics = data.Aggregate.GoogleDoc.map((doc) => doc.groupedBy.value)
 
       return topics
+    }, [])
+
+  searchPosts = ({
+    skip = 0,
+    limit = 10,
+    query,
+    tags = [],
+    type = [LPE.PostTypes.Article, LPE.PostTypes.Podcast],
+  }: {
+    skip?: number
+    limit?: number
+    query?: string
+    tags?: string[]
+    type?: LPE.PostType[]
+  }) =>
+    this.handleRequest<LPE.Search.ResultItem[]>(async () => {
+      const filter: GetObjectsGoogleDocWhereInpObj[] = [
+        {
+          operator: 'Or',
+          operands: [
+            ...(type.includes(LPE.PostTypes.Article)
+              ? [
+                  this.helpers.args.wherePath([
+                    'Articles',
+                    'published|highlighted',
+                  ]),
+                ]
+              : []),
+            ...(type.includes(LPE.PostTypes.Podcast)
+              ? [
+                  this.helpers.args.wherePath([
+                    'Podcasts',
+                    'published|highlighted',
+                  ]),
+                ]
+              : []),
+          ],
+        },
+      ]
+
+      if (tags && tags.length > 0) {
+        filter.push({
+          operator: 'Or',
+          operands: [
+            ...tags.map(
+              (tag) =>
+                ({
+                  operator: 'Equal',
+                  path: ['tags'],
+                  valueString: tag,
+                } as GetObjectsGoogleDocWhereInpObj),
+            ),
+          ],
+        })
+      }
+
+      const { data } = await this.findPostDocs({
+        skip,
+        limit,
+        filter,
+        nearText: {
+          concepts: [query || ''],
+        },
+      })
+
+      const { data: shows } = await this.getPodcastShows({
+        populateEpisodes: false,
+      })
+
+      return unbodyDataTypes.transformMany<LPE.Search.ResultItem>(
+        [unbodyDataTypes.getOne({ key: 'PostSearchResultDocument' })!],
+        data,
+        undefined,
+        {
+          query,
+          tags,
+          shows,
+        },
+      )
     }, [])
 }
 
