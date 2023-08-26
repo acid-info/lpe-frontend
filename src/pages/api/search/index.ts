@@ -120,5 +120,7 @@ export default async function handler(
         : 1
     })
 
-  res.status(200).json(result)
+  res.status(200).json({
+    data: result,
+  })
 }

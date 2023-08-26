@@ -39,5 +39,7 @@ export default async function handler(
     })
     .then((res) => res.data)
 
-  res.status(200).json(result)
+  res.status(200).json({
+    data: result,
+  })
 }
