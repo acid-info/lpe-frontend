@@ -1,8 +1,5 @@
-import { FilterTags } from '@/components/FilterTags'
 import styled from '@emotion/styled'
-import { useRouter } from 'next/router'
 import React from 'react'
-import { Tag } from '@acid-info/lsd-react'
 import { LPETag } from '@/components/LPETag'
 
 export type NavbarFilter = Partial<React.ComponentProps<typeof Container>> & {

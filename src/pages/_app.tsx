@@ -1,7 +1,6 @@
 import { GlobalAudioPlayer } from '@/components/GlobalAudioPlayer'
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 import { uiConfigs } from '@/configs/ui.configs'
-import { SearchBarProvider } from '@/context/searchbar.context'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
 import { css, Global } from '@emotion/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -99,9 +98,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
       />
       <QueryClientProvider client={queryClient}>
         <ProgressBar />
-        <SearchBarProvider>
-          {getLayout(<Component {...pageProps} />)}
-        </SearchBarProvider>
+        {getLayout(<Component {...pageProps} />)}
         {hydrated && <GlobalAudioPlayer />}
       </QueryClientProvider>
     </LSDThemeProvider>

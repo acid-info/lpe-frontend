@@ -1,4 +1,3 @@
-import { useSearchBarContext } from '@/context/searchbar.context'
 import { useSearchGeneric } from '@/hooks/useSearch'
 import { SearchLayout } from '@/layouts/SearchLayout'
 import { PostTypes, SearchResultItem } from '@/types/data.types'
@@ -24,17 +23,9 @@ interface SearchPageProps {
 export default function SearchPage({
   articles: initialArticles = [],
   blocks: initialBlocks = [],
-  topics: allTopics = [],
 }: SearchPageProps) {
-  const { setResultsNumber, setResultsHelperText } = useSearchBarContext()
-
-  const { setTags } = useSearchBarContext()
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setTags(allTopics)
-  }, [setTags, allTopics])
 
   const {
     query: { query = '', topics = [] },
@@ -76,39 +67,6 @@ export default function SearchPage({
     // if we follow the eslint, we will have an infinite loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, router.query])
-
-  useEffect(() => {
-    if (
-      articles.data.length + blocks.data.length <
-      initialArticles.length + initialBlocks.length
-    ) {
-      setResultsNumber(articles.data.length + blocks.data.length)
-    }
-    const tags = extractTopicsFromQuery(router.query)
-    setResultsHelperText(
-      [
-        ...(query.length > 0 ? [query] : []),
-        topics.length > 0
-          ? `<span class="tags">${tags
-              .map((t) => `<span>[${t}]</span>`)
-              .join('<span class="slash">/</span>')}</span>`
-          : '',
-      ].join(tags.length > 0 ? '<span class="dot">.</span>' : ''),
-    )
-
-    return () => {
-      setResultsNumber(null)
-      setResultsHelperText(null)
-    }
-  }, [
-    query,
-    router.query,
-    articles,
-    blocks,
-    setResultsHelperText,
-    setResultsNumber,
-    topics.length,
-  ])
 
   return (
     <div style={{ minHeight: '80vh' }}>
