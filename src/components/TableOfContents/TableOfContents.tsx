@@ -1,6 +1,5 @@
 import { uiConfigs } from '@/configs/ui.configs'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
-import { useSearchBarContext } from '@/context/searchbar.context'
 import { useSticky } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -16,7 +15,7 @@ type Props = {
 export default function TableOfContents({ contents, ...props }: Props) {
   const { tocId, setTocId } = useArticleContainerContext()
   const dy = uiConfigs.navbarRenderedHeight + 2 * uiConfigs.articleSectionMargin
-  const { resultsNumber } = useSearchBarContext()
+  // const { resultsNumber } = useSearchBarContext()
   const router = useRouter()
 
   const { sticky, stickyRef, height } = useSticky<HTMLDivElement>(dy)
@@ -42,9 +41,7 @@ export default function TableOfContents({ contents, ...props }: Props) {
       height={height}
       ref={stickyRef}
       {...props}
-      className={`${resultsNumber !== null ? 'hidden' : ''} ${
-        sticky ? 'sticky' : ''
-      }`}
+      className={`${sticky ? 'sticky' : ''}`}
     >
       <Title variant="body3" component={'div'}>
         Contents
