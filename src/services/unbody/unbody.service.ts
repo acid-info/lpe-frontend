@@ -259,6 +259,13 @@ export class UnbodyService {
       return GoogleDoc?.[0]?.meta?.count || 0
     }, 0)
 
+  getStaticPages = () =>
+    this.handleRequest<LPE.StaticPage.Document[]>(async () => {
+      const { staticPages } = await this.loadInitialData()
+
+      return staticPages
+    }, [])
+
   findStaticPages = ({
     skip = 0,
     limit = 10,
@@ -337,13 +344,6 @@ export class UnbodyService {
       )
     }, [])
 
-  getStaticPages = () =>
-    this.handleRequest<LPE.StaticPage.Document[]>(async () => {
-      const { staticPages } = await this.loadInitialData()
-
-      return staticPages
-    }, [])
-
   getStaticPage = ({
     slug,
     includeDrafts = false,
@@ -364,6 +364,80 @@ export class UnbodyService {
 
       return data[0]
     }, null)
+
+  findPostDocs = ({
+    skip = 0,
+    limit = 10,
+    slug,
+    toc = false,
+    filter,
+    nearObject,
+    textBlocks = false,
+    nearText,
+    sort,
+  }: {
+    slug?: string
+    skip?: number
+    limit?: number
+    toc?: boolean
+    filter?: GetObjectsGoogleDocWhereInpObj | GetObjectsGoogleDocWhereInpObj[]
+    nearObject?: string
+    textBlocks?: boolean
+    nearText?: GetPostsQueryVariables['nearText']
+    sort?: GetPostsQueryVariables['sort']
+  }) =>
+    this.handleRequest(async () => {
+      const {
+        data: {
+          Get: { GoogleDoc: docs },
+        },
+      } = await this.client.query({
+        query: GetPostsDocument,
+        variables: {
+          toc,
+          textBlocks,
+          mentions: true,
+          imageBlocks: true,
+          sort,
+          searchResult: !!nearText || !!nearObject,
+          nearText,
+          ...(nearObject
+            ? {
+                nearObject: {
+                  id: nearObject,
+                },
+              }
+            : {}),
+          ...this.helpers.args.page(skip, limit),
+          filter: {
+            operator: 'And',
+            operands: [
+              ...(slug
+                ? [
+                    {
+                      path: ['slug'],
+                      operator: 'Equal',
+                      valueString: slug,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
+              ...(nearObject
+                ? [
+                    {
+                      path: ['id'],
+                      operator: 'NotEqual',
+                      valueString: nearObject,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
+              ...(filter ? (Array.isArray(filter) ? filter : [filter]) : []),
+            ],
+          },
+        },
+      })
+
+      return docs
+    }, [])
 
   getArticles = ({
     skip = 0,
@@ -919,9 +993,18 @@ export class UnbodyService {
         },
       })
 
+      const { data: shows } = await this.getPodcastShows({
+        populateEpisodes: false,
+      })
+
       const blocks = await unbodyDataTypes.transformMany<
         SearchResultItem<LPE.Article.ContentBlock>
-      >(articleSearchResultItem, [...(ImageBlock || []), ...(TextBlock || [])])
+      >(
+        articleSearchResultItem,
+        [...(ImageBlock || []), ...(TextBlock || [])],
+        undefined,
+        { shows, query: q, tags },
+      )
 
       const result = blocks.sort((a, b) => b.score - a.score)
 
@@ -964,12 +1047,197 @@ export class UnbodyService {
 
       if (!data) throw 'No data'
 
+      const { data: shows } = await this.getPodcastShows({
+        populateEpisodes: false,
+      })
+
       const result = await unbodyDataTypes.transformMany<LPE.Article.Data>(
         articleSearchResultItem,
         data.Get.GoogleDoc || [],
+        undefined,
+        {
+          shows,
+          query: q,
+          tags,
+        },
       )
 
       return result
+    }, [])
+
+  searchPosts = ({
+    skip = 0,
+    limit = 10,
+    query,
+    tags = [],
+    type = [LPE.PostTypes.Article, LPE.PostTypes.Podcast],
+  }: {
+    skip?: number
+    limit?: number
+    query?: string
+    tags?: string[]
+    type?: LPE.PostType[]
+  }) =>
+    this.handleRequest<LPE.Search.ResultItem[]>(async () => {
+      const filter: GetObjectsGoogleDocWhereInpObj[] = [
+        {
+          operator: 'Or',
+          operands: [
+            ...(type.includes(LPE.PostTypes.Article)
+              ? [
+                  this.helpers.args.wherePath([
+                    'Articles',
+                    'published|highlighted',
+                  ]),
+                ]
+              : []),
+            ...(type.includes(LPE.PostTypes.Podcast)
+              ? [
+                  this.helpers.args.wherePath([
+                    'Podcasts',
+                    'published|highlighted',
+                  ]),
+                ]
+              : []),
+          ],
+        },
+      ]
+
+      if (tags && tags.length > 0) {
+        filter.push({
+          operator: 'Or',
+          operands: [
+            ...tags.map(
+              (tag) =>
+                ({
+                  operator: 'Equal',
+                  path: ['tags'],
+                  valueString: tag,
+                } as GetObjectsGoogleDocWhereInpObj),
+            ),
+          ],
+        })
+      }
+
+      const { data } = await this.findPostDocs({
+        skip,
+        limit,
+        filter,
+        nearText: {
+          concepts: [query || ''],
+        },
+      })
+
+      const { data: shows } = await this.getPodcastShows({
+        populateEpisodes: false,
+      })
+
+      return unbodyDataTypes.transformMany<LPE.Search.ResultItem>(
+        articleSearchResultItem,
+        data,
+        undefined,
+        {
+          query,
+          tags,
+          shows,
+        },
+      )
+    }, [])
+
+  searchPostBlocks = async ({
+    skip = 0,
+    limit = 10,
+    postId,
+    query = '',
+    tags = [],
+    postType = [],
+    type,
+  }: {
+    skip?: number
+    limit?: number
+    query?: string
+    tags?: string[]
+    postId?: string
+    postType?: LPE.PostType[]
+    type?: LPE.Post.ContentBlockType[]
+  } = {}) =>
+    this.handleRequest(async () => {
+      const _type =
+        type && type.length > 0
+          ? type
+          : [LPE.Post.ContentBlockTypes.Text, LPE.Post.ContentBlockTypes.Image]
+
+      const _postType =
+        postType && postType.length > 0
+          ? postType
+          : [LPE.PostTypes.Article, LPE.PostTypes.Podcast]
+
+      const nearText =
+        (query.trim().length > 0 || tags.length > 0) &&
+        ({
+          concepts: [query, ...tags],
+          certainty: 0.75,
+        } as Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj)
+
+      const filter = {
+        operator: 'And',
+        operands: [],
+      } as GetObjectsTextBlockWhereInpObj
+
+      if (!postId)
+        filter.operands!.push({
+          operator: 'Or',
+          operands: _postType.map((type) =>
+            this.helpers.args.wherePath(
+              [
+                type === 'podcast' ? 'Podcasts' : 'Articles',
+                !postId && 'published|highlighted',
+              ],
+              ['document', 'GoogleDoc', 'path'],
+            ),
+          ),
+        })
+
+      if (postId)
+        filter.operands!.push({
+          operator: 'Equal',
+          path: ['document', 'GoogleDoc', 'id'],
+          valueString: postId,
+        })
+
+      const {
+        data: {
+          Get: { ImageBlock, TextBlock },
+        },
+      } = await this.client.query({
+        query: SearchBlocksDocument,
+        variables: {
+          ...this.helpers.args.page(skip, limit),
+          imageFilter: filter,
+          textFilter: filter,
+          text: _type.includes('text'),
+          image: _type.includes('image'),
+          ...(nearText
+            ? {
+                textNearText: nearText,
+                imageNearText: nearText,
+              }
+            : {}),
+        },
+      })
+
+      const { data: shows } = await this.getPodcastShows({
+        populateEpisodes: false,
+      })
+
+      const blocks = await unbodyDataTypes.transformMany<LPE.Search.ResultItem>(
+        articleSearchResultItem,
+        [...(ImageBlock || []), ...(TextBlock || [])],
+        undefined,
+        { shows, query, tags },
+      )
+
+      return blocks
     }, [])
 
   getTopics = async (published: boolean = true) =>

@@ -6,6 +6,7 @@ import { ImageBlockDataType } from './ImageBlock.dataType'
 import { PodcastEpisodeDataType } from './PodcastEpisodeDocument.dataType'
 import { PodcastShowDataType } from './PodcastShowDocument.dataType'
 import { StaticPageDataType } from './StaticPageDocument.dataType'
+import { PostSearchResultDataType } from './PostSearchResult.dataType'
 import { TextBlockDataType } from './TextBlock.dataType'
 import { UnbodyDataTypes } from './UnbodyDataTypes'
 
@@ -19,4 +20,5 @@ export const unbodyDataTypes = new UnbodyDataTypes([
   PodcastShowDataType,
   PodcastEpisodeDataType,
   StaticPageDataType,
+  PostSearchResultDataType,
 ])

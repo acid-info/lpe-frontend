@@ -228,4 +228,29 @@ export namespace LPE {
 
     export type Document = Metadata & Content
   }
+
+  export const ContentTypes = {
+    ...PostTypes,
+    ...Post.ContentBlockTypes,
+  } as const
+
+  export type ContentType = DictValues<typeof ContentTypes>
+
+  export namespace Search {
+    export type ResultItemBase<T> = {
+      score: number
+      data: T
+      type: ContentType
+    }
+
+    export type ResultItem =
+      | ResultItemBase<LPE.Post.Document>
+      | ResultItemBase<LPE.Post.TextBlock>
+      | ResultItemBase<LPE.Post.ImageBlock>
+
+    export type Result = {
+      posts: Search.ResultItem[]
+      blocks: Search.ResultItem[]
+    }
+  }
 }
