@@ -16,11 +16,11 @@ export const Main = ({
 }
 
 const Container = styled.main<{
-  spacing: 'default' | false
+  spacing: 'default' | boolean
 }>`
   --main-margin-top: ${(props) =>
     props.spacing
-      ? uiConfigs.postSectionMargin
+      ? uiConfigs.postSectionMargin + uiConfigs.navbarRenderedHeight
       : uiConfigs.navbarRenderedHeight}px;
   --main-content-padding: 16px;
 

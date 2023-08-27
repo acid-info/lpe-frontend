@@ -352,7 +352,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 12px;
   border-bottom: 1px solid rgba(var(--lsd-text-primary), 1);
-  padding: 0 0 14px 14px;
+  padding: 8px 0 14px 14px;
   position: sticky;
 
   z-index: 1;

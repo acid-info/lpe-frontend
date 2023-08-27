@@ -1,16 +1,12 @@
 import { SearchBox } from '@/components/SearchBox'
-import {
-  extractQueryFromQuery,
-  extractTopicsFromQuery,
-} from '@/utils/search.utils'
-import { useRouter } from 'next/router'
+import { SearchResultsExploreView } from '@/containers/Search/ExploreView'
+import { SearchResultsListView } from '@/containers/Search/ListView'
+import { LPE } from '@/types/lpe.types'
 import { useEffect, useState } from 'react'
 import SEO from '../components/SEO/SEO'
+import { DefaultLayout } from '../layouts/DefaultLayout'
 import { api } from '../services/api.service'
 import unbodyApi from '../services/unbody/unbody.service'
-import { LPE } from '@/types/lpe.types'
-import { SearchResultsListView } from '@/containers/Search/ListView'
-import { SearchResultsExploreView } from '@/containers/Search/ExploreView'
 
 interface SearchPageProps {
   topics: string[]
@@ -80,6 +76,10 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
       )}
     </div>
   )
+}
+
+SearchPage.getLayout = function getLayout(page: React.ReactNode) {
+  return <DefaultLayout mainProps={{ spacing: false }}>{page}</DefaultLayout>
 }
 
 export async function getStaticProps() {
