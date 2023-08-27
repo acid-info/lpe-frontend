@@ -4,41 +4,43 @@ import styled from '@emotion/styled'
 import Link from 'next/link'
 import { LPE } from '../../types/lpe.types'
 import { GridItem } from '../Grid/Grid'
-import ContentBlockBody from './ContentBlock.Body'
+import ContentBlockFooter from './ContentBlockFooter'
 import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 
-type Props = Omit<SearchResultItem<LPE.Article.TextBlock>, 'score'>
+type Props = LPE.Search.ResultItemBase<LPE.Post.TextBlock>
 
-const TextBlock = ({ doc }: Props) => {
+const TextBlock = (props: Props) => {
+  const {
+    score,
+    type,
+    data: { document, order, labels, classNames, text, html },
+  } = props
+
   return (
-    <GridItem className="w-4">
-      <Container>
-        <ContentBlockHeader
-          type={BlockType.TEXT}
-          date={
-            doc.document?.modifiedAt ? new Date(doc.document?.modifiedAt) : null
-          }
-        />
-        <Typography variant="body2" genericFontFamily="sans-serif">
-          {doc.text}
-        </Typography>
-        <ContentBlockBody data={doc} />
-      </Container>
-    </GridItem>
+    <Container>
+      <ContentBlockHeader
+        type={BlockType.TEXT}
+        date={
+          document?.publishedAt
+            ? new Date(document?.publishedAt)
+            : document?.modifiedAt
+            ? new Date(document?.modifiedAt)
+            : null
+        }
+      />
+      <Typography variant="body2" genericFontFamily="sans-serif">
+        {text}
+      </Typography>
+      <ContentBlockFooter data={document} order={order} />
+    </Container>
   )
 }
-
-const BlockLink = styled(Link)`
-  text-decoration: none;
-`
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
-  padding: 16px 0;
-  border-top: 1px solid rgb(var(--lsd-theme-primary));
+  padding: 24px 0;
+  gap: 8px;
 `
 
 export default TextBlock

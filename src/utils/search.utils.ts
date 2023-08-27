@@ -2,23 +2,31 @@ import { SearchResultItem } from '@/types/data.types'
 import { ParsedUrlQuery } from 'querystring'
 
 export const extractTopicsFromQuery = (query: ParsedUrlQuery): string[] => {
-  return query.topics ? (query.topics as string).split(',') : []
+  return query.topic ? (query.topic as string).split(',') : []
 }
 
-export const addTopicsToQuery = (topics: string[]) => {
-  return {
-    ...(topics.length > 0 && { topics: topics.join(',') }),
-  }
+export const extractContentTypesFromQuery = (
+  query: ParsedUrlQuery,
+): string[] => {
+  return query.type ? (query.type as string).split(',') : []
+}
+
+export const addTopicsToQuery = (topics: string[]): string | undefined => {
+  return topics.length ? `topic=${topics.join(',')}` : undefined
+}
+
+export const addContentTypesToQuery = (
+  contentTypes: string[],
+): string | undefined => {
+  return contentTypes.length ? `type=${contentTypes.join(',')}` : undefined
 }
 
 export const extractQueryFromQuery = (queryObj: ParsedUrlQuery): string => {
   return (queryObj.query as string) || ''
 }
 
-export const addQueryToQuery = (query: string) => {
-  return {
-    ...(query && query.length > 0 && { query }),
-  }
+export const addQueryToQuery = (query: string): string | undefined => {
+  return query.length > 0 ? `query=${query}` : undefined
 }
 
 export const createMinimizedSearchText = (

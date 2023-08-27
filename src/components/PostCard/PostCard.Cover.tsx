@@ -18,7 +18,7 @@ export const PostCardCover: FC<PostCardCoverProps> = ({
   ...props
 }) => {
   return (
-    <Link {...props}>
+    <Link {...props} className={`post-card__cover-image ${props.className}`}>
       <ResponsiveImage {...imageProps} data={imageData} />
     </Link>
   )

@@ -15,7 +15,9 @@ export const GET_POSTS_QUERY = gql`
   query GetPosts(
     $filter: GetObjectsGoogleDocWhereInpObj
     $sort: [GetObjectsGoogleDocSortInpObj]
+    $searchResult: Boolean = false
     $nearText: Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj
+    $hybrid: GetObjectsGoogleDocHybridInpObj
     $nearObject: GetObjectsGoogleDocNearObjectInpObj
     $skip: Int = 0
     $limit: Int = 10
@@ -27,6 +29,7 @@ export const GET_POSTS_QUERY = gql`
     Get {
       GoogleDoc(
         where: $filter
+        hybrid: $hybrid
         nearText: $nearText
         nearObject: $nearObject
         sort: $sort
@@ -35,6 +38,9 @@ export const GET_POSTS_QUERY = gql`
       ) {
         _additional {
           id
+          score @include(if: $searchResult)
+          distance @include(if: $searchResult)
+          certainty @include(if: $searchResult)
         }
         title
         subtitle
@@ -163,14 +169,19 @@ export const SEARCH_BLOCKS_QUERY = gql`
     $imageNearText: Txt2VecOpenAIGetObjectsImageBlockNearTextInpObj
     $textFilter: GetObjectsTextBlockWhereInpObj
     $imageFilter: GetObjectsImageBlockWhereInpObj
+    $textHybrid: GetObjectsTextBlockHybridInpObj
+    $imageHybrid: GetObjectsImageBlockHybridInpObj
+    $text: Boolean = true
+    $image: Boolean = true
   ) {
     Get {
       TextBlock(
         where: $textFilter
         nearText: $textNearText
+        hybrid: $textHybrid
         limit: $limit
         offset: $skip
-      ) {
+      ) @include(if: $text) {
         footnotes
         footnotesObj @client(always: true) {
           index
@@ -220,9 +231,10 @@ export const SEARCH_BLOCKS_QUERY = gql`
       ImageBlock(
         where: $imageFilter
         nearText: $imageNearText
+        hybrid: $imageHybrid
         limit: $limit
         offset: $skip
-      ) {
+      ) @include(if: $image) {
         url
         alt
         order

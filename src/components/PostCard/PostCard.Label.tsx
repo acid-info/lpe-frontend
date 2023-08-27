@@ -17,7 +17,7 @@ export const PostCardLabel: FC<Props> = ({
   ...props
 }) => {
   return (
-    <Container {...props}>
+    <Container {...props} className={`post-card__label ${props.className}`}>
       <Typography variant="body3" genericFontFamily="sans-serif">
         {contentType.toUpperCase()}
       </Typography>

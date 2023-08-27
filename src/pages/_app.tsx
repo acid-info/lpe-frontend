@@ -94,6 +94,10 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
               display: none !important;
             }
           }
+
+          .lsd-dropdown-menu {
+            z-index: 99;
+          }
         `}
       />
       <QueryClientProvider client={queryClient}>

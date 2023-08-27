@@ -10,7 +10,8 @@ export const StaticPageDataType: UnbodyDataTypeConfig<
   objectType: 'GoogleDoc',
   classes: ['static-page', 'document'],
 
-  isMatch: (helpers, data) => data.pathString.includes('/Static pages/'),
+  isMatch: (helpers, data) =>
+    !!data?.pathString && data.pathString.includes('/Static pages/'),
 
   transform: async (helpers, data) => {
     const textBlock = helpers.dataTypes.get({
