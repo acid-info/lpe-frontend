@@ -196,11 +196,18 @@ const Container = styled.div<{ visible: boolean }>`
 
   > :first-child {
     width: 60%;
+
+    @media (max-width: 768px) {
+      overflow: hidden;
+      white-space: nowrap;
+    }
   }
 
   @media (max-width: 768px) {
+    padding: 10px 16px;
+
     > :first-child {
-      width: 100%;
+      width: calc(100%);
     }
   }
 `
