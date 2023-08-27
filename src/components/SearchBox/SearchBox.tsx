@@ -30,10 +30,11 @@ import { useOutsideClick, useSticky } from '@/utils/ui.utils'
 import { uiConfigs } from '@/configs/ui.configs'
 
 interface SearchBoxProps {
-  onSearch?: (query: string, tags: string[], types: string[]) => void
+  onSearch?: (query: string, tags: string[], types: LPE.ContentType[]) => void
   tags?: string[]
   onViewChange?: (view: string) => void
   resultsNumber: number | null
+  busy?: boolean
 }
 
 const ContentTypesCategories = {
@@ -68,7 +69,7 @@ const allContentTypes = contentTypes.map((c) => c.value)
 
 const useSearchBox = (
   router: NextRouter,
-  callback: (query: string, tags: string[], types: string[]) => void,
+  callback: (query: string, tags: string[], types: LPE.ContentType[]) => void,
 ) => {
   const [query, setQuery] = useState<string>(
     extractQueryFromQuery(router.query),
@@ -90,13 +91,17 @@ const useSearchBox = (
     async (
       q: string = query,
       _filterTags: string[] = filterTags,
-      _contentTypes: string[] = filterContentTypes,
+      _contentTypes: string[] = [],
     ) => {
       const queries = [
         addQueryToQuery(q),
         addTopicsToQuery(_filterTags),
-        addContentTypesToQuery(_contentTypes),
+        addContentTypesToQuery(
+          _contentTypes.length === allContentTypes.length ? [] : _contentTypes,
+        ),
       ].filter((n) => n && n)
+
+      callback(q, _filterTags, _contentTypes as LPE.ContentType[])
 
       await router.push(
         {
@@ -108,7 +113,6 @@ const useSearchBox = (
           shallow: true,
         },
       )
-      callback(q, _filterTags, _contentTypes)
     },
     [router, filterTags, filterContentTypes, query],
   )
@@ -146,6 +150,7 @@ const SearchBox = (props: SearchBoxProps) => {
     onViewChange = nope,
     tags = [],
     resultsNumber,
+    busy = false,
   } = props
   const router = useRouter()
   const {
@@ -158,9 +163,9 @@ const SearchBox = (props: SearchBoxProps) => {
     handleTagsChange,
     performSearch,
   } = useSearchBox(router, onSearch)
+  const [view, setView] = useState<string>('list')
 
   const [enlargeQuery, setEnlargeQuery] = useState(false)
-  const [view, setView] = useState<string>('list')
   const [placeholder, setPlaceholder] = useState<string>(
     copyConfigs.search.searchbarPlaceholders.global(),
   )
@@ -180,6 +185,7 @@ const SearchBox = (props: SearchBoxProps) => {
   const handleViewChange = async (n: string) => {
     setView(n)
     onViewChange(n)
+    performSearch()
   }
 
   useEffect(() => {
@@ -259,9 +265,9 @@ const SearchBox = (props: SearchBoxProps) => {
           onBlurCapture={() => {
             if (query.length === 0) {
               setEnlargeQuery(false)
+              performSearch()
             }
             setFocused(false)
-            performSearch()
           }}
         />
         <ViewButtons>
@@ -299,9 +305,15 @@ const SearchBox = (props: SearchBoxProps) => {
           Clear Filters
         </Clear>
       </Filters>
-      {resultsNumber && (
+      {busy ? (
+        <Typography variant={'subtitle2'}>Searching...</Typography>
+      ) : resultsNumber ? (
         <Results>
-          <Typography variant={'subtitle2'}>{resultsNumber} matches</Typography>
+          <Typography variant={'subtitle2'}>
+            {resultsNumber === 0
+              ? copyConfigs.search.results.noResults
+              : `${resultsNumber} ${copyConfigs.search.results.results}`}
+          </Typography>
           <>
             <Details
               variant={'subtitle2'}
@@ -330,7 +342,7 @@ const SearchBox = (props: SearchBoxProps) => {
             />
           </>
         </Results>
-      )}
+      ) : null}
     </Container>
   )
 }
@@ -341,8 +353,10 @@ const Container = styled.div`
   gap: 12px;
   border-bottom: 1px solid rgba(var(--lsd-text-primary), 1);
   padding: 0 0 14px 14px;
-
   position: sticky;
+
+  z-index: 1;
+  background: rgba(var(--lsd-surface-primary), 1);
 
   &.active {
     .search-input {

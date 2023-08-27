@@ -17,6 +17,8 @@ import { Authors } from '../Authors'
 import { AuthorsDirection } from '../Authors/Authors'
 import { ResponsiveImageProps } from '../ResponsiveImage/ResponsiveImage'
 import { PostCardLabel } from './PostCard.Label'
+import { PostCardTitle } from '@/components/PostCard/PostCard.Title'
+import { PostCardSubTitle } from '@/components/PostCard/PostCard.Subtitle'
 
 export type PostAppearanceProps = {
   imageProps?: ResponsiveImageProps
@@ -71,44 +73,21 @@ export const PostCard = (_props: PostCardProps) => {
       : `/podcasts/${podcastShowDetails?.slug}/${slug}`
 
   const coverImageElement = coverImage && (
-    <PostCardCover
-      className="post-card__cover-image"
-      href={link}
-      imageProps={imageProps}
-      imageData={coverImage}
-    />
+    <PostCardCover href={link} imageProps={imageProps} imageData={coverImage} />
   )
 
   const labelElement = (
     <PostCardLabel
-      className="post-card__label"
       contentType={contentType}
       displayYear={displayYear}
       date={date}
     />
   )
 
-  const titleElement = (
-    <Link href={link} className="post-card__title">
-      <Typography
-        variant={'h3'}
-        component="h3"
-        genericFontFamily="serif"
-        className="post-card__title-text"
-      >
-        {title}
-      </Typography>
-    </Link>
-  )
+  const titleElement = <PostCardTitle href={link}>{title}</PostCardTitle>
 
   const subtitleElement = subtitle && (
-    <Typography
-      className="post-card__subtitle"
-      variant={'body1'}
-      genericFontFamily="sans-serif"
-    >
-      {subtitle}
-    </Typography>
+    <PostCardSubTitle>{subtitle}</PostCardSubTitle>
   )
 
   const authorsElement = authors && authors.length > 0 && (
@@ -139,6 +118,8 @@ export const PostCard = (_props: PostCardProps) => {
       className={clsx(
         'post-card',
         applySizeStyles && applySizeStyles && `post-card--${size}`,
+        props.className,
+        `post-card__${contentType}`,
       )}
     >
       {coverImageElement}
@@ -375,6 +356,55 @@ PostCard.styles = {
     ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
       .post-card__title-text {
         ${lsdUtils.typography('h5')}
+      }
+    }
+
+    &.post-card__search-result {
+      .post-card__subtitle {
+        grid-area: info;
+        grid-row: auto;
+        ${lsdUtils.typography('subtitle2')}
+      }
+      .post-card__authors {
+        display: none;
+        grid-row: auto;
+      }
+      .show-details__logo {
+        width: 16px;
+      }
+      .show-details__title {
+        ${lsdUtils.typography('subtitle3')}
+      }
+
+      .show-details__episodes {
+        display: none !important;
+      }
+
+      padding: 24px 0;
+
+      display: grid;
+      gap: 8px 16px;
+      grid-template-columns: repeat(7, 1fr);
+
+      &.post-card__article {
+        grid-template-areas: 'info info info info info info info';
+      }
+
+      &.post-card__podcast {
+        grid-template-areas:
+          'info info info info info image image image'
+          'info info info info info image image image'
+          'info info info info info image image image'
+          'info info info info info image image image';
+      }
+
+      .post-card__title h3 {
+        ${lsdUtils.typography('h6')}
+      }
+      &.top-post {
+        .post-card__title h3 {
+          ${lsdUtils.typography('h4')}
+        }
       }
     }
   `,

@@ -8,20 +8,29 @@ import { useEffect, useState } from 'react'
 import SEO from '../components/SEO/SEO'
 import { api } from '../services/api.service'
 import unbodyApi from '../services/unbody/unbody.service'
+import { LPE } from '@/types/lpe.types'
+import { SearchResultsListView } from '@/containers/Search/ListView'
+import { SearchResultsExploreView } from '@/containers/Search/ExploreView'
 
 interface SearchPageProps {
   topics: string[]
+  shows: LPE.Podcast.Show[]
   // articles: SearchResultItem<LPE.Article.Data>[]
   // blocks: SearchResultItem<LPE.Article.ContentBlock>[]
 }
 
-export default function SearchPage({}: SearchPageProps) {
-  const router = useRouter()
+export default function SearchPage({ topics, shows }: SearchPageProps) {
   const [mounted, setMounted] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [resultNumber, setResultNumber] = useState<number | null>(null)
+  const [view, setView] = useState<string>('list')
 
-  const {
-    query: { query = '', topics = [] },
-  } = router
+  const [blocks, setBlocks] = useState<
+    LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]
+  >([])
+  const [posts, setPosts] = useState<
+    LPE.Search.ResultItemBase<LPE.Post.Document>[]
+  >([])
 
   useEffect(() => {
     setMounted(true)
@@ -30,24 +39,22 @@ export default function SearchPage({}: SearchPageProps) {
     }
   }, [])
 
-  useEffect(async () => {
-    const serchArgs = [
-      extractQueryFromQuery(router.query),
-      extractTopicsFromQuery(router.query),
-    ]
-
-    const hasQuery = router.query.query && router.query.query.length > 0
-    const hasTopics = router.query.topics && router.query.topics.length > 0
-
-    if (mounted && (hasQuery || hasTopics)) {
-    } else {
-    }
-    // if we follow the eslint, we will have an infinite loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mounted, router.query])
-
-  const handleSearch = (query: string, tags: string[], types: string[]) => {
-    console.log('searching for', query, tags, types)
+  const handleSearch = async (
+    query: string,
+    filteredTags: string[],
+    filteredTypes: LPE.ContentType[],
+  ) => {
+    setBusy(true)
+    const { data, errors } = await api.search({
+      query,
+      tags: filteredTags,
+      type: filteredTypes,
+    })
+    setBusy(false)
+    setResultNumber(data.posts.length || null)
+    setPosts(data.posts as LPE.Search.ResultItemBase<LPE.Post.Document>[])
+    setBlocks(data.blocks as LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[])
+    console.log(data)
   }
 
   return (
@@ -58,7 +65,19 @@ export default function SearchPage({}: SearchPageProps) {
         }
         title={'Logos Press Engine'}
       />
-      <SearchBox tags={[]} onSearch={handleSearch} resultsNumber={7} />
+      <SearchBox
+        tags={topics}
+        onSearch={handleSearch}
+        resultsNumber={resultNumber}
+        busy={busy}
+        onViewChange={setView}
+      />
+      {view === 'list' && (
+        <SearchResultsListView blocks={blocks} posts={posts} shows={shows} />
+      )}
+      {view === 'explore' && (
+        <SearchResultsExploreView blocks={blocks} posts={posts} shows={shows} />
+      )}
     </div>
   )
 }
@@ -67,12 +86,17 @@ export async function getStaticProps() {
   // const { data: articles = [] } = await unbodyApi.searchArticles()
   // const { data: blocks = [] } = await unbodyApi.searchBlocks()
   const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
+  const { data: shows = [] } = await unbodyApi.getPodcastShows({
+    populateEpisodes: true,
+    episodesLimit: 10,
+  })
 
   return {
     props: {
       // articles,
       // blocks: shuffle(blocks),
       topics,
+      shows,
     },
   }
 }

@@ -91,7 +91,6 @@ PostCardShowDetails.styles = {
     .show-details__episodes {
       display: block !important;
     }
-
     .show-details__logo {
       width: 38px;
       height: 38px;

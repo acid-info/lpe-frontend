@@ -11,6 +11,15 @@ export const copyConfigs = {
       default: 'List',
       explore: 'Explore',
     },
+    results: {
+      noResults: 'No results found',
+      results: 'results',
+    },
+    labels: {
+      topResults: 'Top results',
+      articlesAndPodcasts: 'Articles and podcasts',
+      relatedContent: 'Related content',
+    },
     filterTags: [
       'Privacy',
       'Security',

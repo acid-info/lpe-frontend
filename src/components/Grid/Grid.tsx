@@ -2,13 +2,8 @@ import styled from '@emotion/styled'
 
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 16px;
-
-  // TODO: The mobile design works when commenting this out
-  /* @media (max-width: 768px) {
-    grid-template-columns: 100%;
-  } */
 `
 
 export const GridItem = styled.div`
@@ -28,6 +23,10 @@ export const GridItem = styled.div`
 
   &.w-4 {
     grid-column: span 4;
+  }
+
+  &.w-7 {
+    grid-column: span 7;
   }
 
   &.w-8 {

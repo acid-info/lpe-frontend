@@ -22,7 +22,7 @@ const ContentBlockHeader = ({ type, date }: Props) => {
         {date &&
           date.toLocaleString('en-GB', {
             day: 'numeric',
-            month: 'long',
+            month: 'short',
             year: 'numeric',
           })}
       </Typography>
