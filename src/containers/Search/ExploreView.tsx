@@ -19,7 +19,7 @@ export const SearchResultsExploreView = (props: Props) => {
     })
   }, [posts, blocks])
   return (
-    <Container>
+    <Container cols={12}>
       {results.map((result, index) => {
         return (
           <ResultItem

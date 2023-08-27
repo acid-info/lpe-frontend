@@ -75,7 +75,7 @@ export const SearchResultsListView = (props: Props) => {
   }, [posts, blocks, topPost])
 
   return (
-    <Container>
+    <Container cols={12}>
       <PostsList className={'w-8'}>
         {topPost && (
           <PostsListHeader>

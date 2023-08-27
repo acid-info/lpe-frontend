@@ -1,9 +1,43 @@
+import { Breakpoints } from '@acid-info/lsd-react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { lsdUtils } from '../../utils/lsd.utils'
 
-export const Grid = styled.div`
+export const Grid = styled.div<{
+  cols?: number
+
+  breakpoints?: {
+    xs?: {
+      cols?: number
+    }
+    sm?: {
+      cols?: number
+    }
+    md?: {
+      cols?: number
+    }
+    lg?: {
+      cols?: number
+    }
+    xl?: {
+      cols?: number
+    }
+  }
+}>`
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(${(props) => props.cols || 16}, 1fr);
   gap: 16px;
+
+  ${(props) =>
+    Object.entries(props.breakpoints || {}).map(([key, bp]) =>
+      lsdUtils.responsive(
+        props.theme,
+        key as Breakpoints,
+        'exact',
+      )(css`
+        ${bp.cols && `grid-template-columns: repeat(${bp.cols}, 1fr)`}
+      `),
+    )}
 `
 
 export const GridItem = styled.div`
