@@ -3,6 +3,7 @@ import { MoonIcon } from '@/components/Icons/MoonIcon'
 import { Button, IconButton } from '@acid-info/lsd-react'
 import React from 'react'
 import { ThemeState } from '@/states/themeState'
+
 interface Props {
   toggle: () => void
   mode?: ThemeState['mode']
