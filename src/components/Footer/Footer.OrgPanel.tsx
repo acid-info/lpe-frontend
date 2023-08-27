@@ -48,8 +48,6 @@ export const FooterOrgPanel = () => {
 const Wrapper = styled.div`
   display: flex;
   align-items: baseline;
-  border-top: 1px solid rgb(var(--lsd-theme-primary));
-  padding-top: 16px;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -67,5 +65,4 @@ const Links = styled(FooterSection)`
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  margin-bottom: calc(72px + 28px + 16px);
 `
