@@ -407,6 +407,15 @@ PostCard.styles = {
       .show-details__logo {
         width: 16px;
       }
+      .post-card__label {
+        margin-bottom: 0;
+      }
+
+      .post-card__title {
+        margin-bottom: -8px;
+        margin-top: -8px;
+      }
+
       .show-details__title {
         ${lsdUtils.typography('subtitle3')}
       }
@@ -418,7 +427,7 @@ PostCard.styles = {
       padding: 24px 0;
 
       display: grid;
-      gap: 8px 16px;
+      gap: 16px 16px;
       grid-template-columns: repeat(7, 1fr);
 
       &.post-card__article {

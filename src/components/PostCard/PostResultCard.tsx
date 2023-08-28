@@ -98,7 +98,7 @@ const Container = styled.div`
   gap: 16px 0;
 
   .post-card__label {
-    margin-bottom: -8px;
+    margin-bottom: 0 !important;
   }
 
   .post-card__title {

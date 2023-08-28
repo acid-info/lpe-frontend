@@ -101,7 +101,13 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
 
 SearchPage.getLayout = (page: ReactNode) => (
   <QueryParamProvider adapter={NextAdapterPages}>
-    <DefaultLayout>{page}</DefaultLayout>
+    <DefaultLayout
+      mainProps={{
+        spacing: false,
+      }}
+    >
+      {page}
+    </DefaultLayout>
   </QueryParamProvider>
 )
 

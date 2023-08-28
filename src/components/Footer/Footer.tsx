@@ -17,7 +17,7 @@ export default function Footer() {
       <FooterOrgPanel />
       <FooterBuPanel />
       <ScrollToTop size="small" onClick={handleScrollToTop}>
-        Back to up ↑
+        Back to top ↑
       </ScrollToTop>
     </FooterSectionContainer>
   )
