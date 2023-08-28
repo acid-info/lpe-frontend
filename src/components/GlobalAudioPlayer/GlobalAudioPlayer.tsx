@@ -1,6 +1,6 @@
 import ReactPlayer from 'react-player'
 import styled from '@emotion/styled'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { CloseIcon, Typography } from '@acid-info/lsd-react'
 import Image from 'next/image'
 import { playerState } from './globalAudioPlayer.state'
@@ -61,11 +61,9 @@ export default function GlobalAudioPlayer() {
     globalPlayerRef.current?.seekTo(v)
   }
 
-  const handleSeekMouseUp = () =>
-    // e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-    {
-      state.set((prev) => ({ ...prev, seeking: false }))
-    }
+  const handleSeekMouseUp = () => {
+    state.set((prev) => ({ ...prev, seeking: false }))
+  }
 
   const handleDuration = (duration: number) => {
     state.set((prev) => ({ ...prev, duration }))
@@ -94,7 +92,8 @@ export default function GlobalAudioPlayer() {
 
   useEffect(() => {
     if (state.value.isEnabled) {
-      globalPlayerRef.current?.seekTo(state.value.played)
+      const offset = 1 / state.value.duration // 1 second in %
+      globalPlayerRef.current?.seekTo(state.value.played + offset)
     }
   }, [state.value.isEnabled])
 
@@ -171,7 +170,13 @@ export default function GlobalAudioPlayer() {
           <CloseIcon
             width={16}
             height={16}
-            onClick={() => state.set((prev) => ({ ...prev, isEnabled: false }))}
+            onClick={() =>
+              state.set((prev) => ({
+                ...prev,
+                isEnabled: false,
+                playing: false,
+              }))
+            }
           />
         </CloseIconContainer>
       </RightMenu>

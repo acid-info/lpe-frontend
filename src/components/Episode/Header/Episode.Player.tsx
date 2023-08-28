@@ -110,7 +110,8 @@ const EpisodePlayer = ({
 
   useEffect(() => {
     if (!state.value.isEnabled) {
-      playerRef.current?.seekTo(state.value.played)
+      const offset = 1 / state.value.duration // 1 second in %
+      playerRef.current?.seekTo(state.value.played + offset)
     }
   }, [state.value.isEnabled])
 
