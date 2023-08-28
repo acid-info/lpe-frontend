@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { LPE } from '../../../types/lpe.types'
 
 import unbodyApi from '@/services/unbody/unbody.service'
+import { DefaultLayout } from '../../../layouts/DefaultLayout'
 
 type EpisodeProps = {
   episode: LPE.Podcast.Document
@@ -100,13 +101,5 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     },
   }
 }
-
-// EpisodePage.getLayout = function getLayout(page: ReactNode) {
-//   return (
-//     <EpisodeProvider>
-//       <EpisodeLayout>{page}</EpisodeLayout>
-//     </EpisodeProvider>
-//   )
-// }
 
 export default EpisodePage

@@ -23,7 +23,7 @@ const Page: CustomNextPage<PageProps> = (props) => {
 Page.getLayout = function getLayout(page: React.ReactNode) {
   return (
     <DefaultLayout
-      mainProps={{ spacing: false }}
+      mainProps={{ spacing: false, contentPadding: false }}
       navbarProps={{ defaultState: { showTitle: false } }}
     >
       {page}

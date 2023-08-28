@@ -1,9 +1,9 @@
 import { SEO } from '@/components/SEO'
 import PodcastsContainer from '@/containers/PodcastsContainer'
-import PodcastsLayout from '@/layouts/PodcastsLayout/Podcasts.layout'
 import unbodyApi from '@/services/unbody/unbody.service'
 import { GetStaticPropsContext } from 'next'
 import { ReactNode } from 'react'
+import { DefaultLayout } from '../../layouts/DefaultLayout'
 import { LPE } from '../../types/lpe.types'
 
 type PodcastsProps = {
@@ -63,7 +63,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 }
 
 PodcastShowPage.getLayout = function getLayout(page: ReactNode) {
-  return <PodcastsLayout>{page}</PodcastsLayout>
+  return <DefaultLayout>{page}</DefaultLayout>
 }
 
 export default PodcastShowPage

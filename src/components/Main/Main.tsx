@@ -5,11 +5,12 @@ export type MainProps = Partial<React.ComponentProps<typeof Container>> & {}
 
 export const Main = ({
   spacing = 'default',
+  contentPadding = 'default',
   children,
   ...props
 }: MainProps) => {
   return (
-    <Container spacing={spacing} {...props}>
+    <Container spacing={spacing} contentPadding={contentPadding} {...props}>
       {children}
     </Container>
   )
@@ -17,6 +18,7 @@ export const Main = ({
 
 const Container = styled.main<{
   spacing: 'default' | boolean
+  contentPadding: 'default' | boolean
 }>`
   --main-margin-top: ${(props) =>
     props.spacing
@@ -30,7 +32,7 @@ const Container = styled.main<{
 
   @media (max-width: ${uiConfigs.maxContainerWidth}px) {
     padding: 0
-      ${(props) => (props.spacing ? `var(--main-content-padding)` : '0')};
+      ${(props) => (props.contentPadding ? `var(--main-content-padding)` : '0')};
   }
 
   @media (max-width: 768px) {
