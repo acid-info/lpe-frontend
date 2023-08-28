@@ -78,10 +78,6 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
   )
 }
 
-SearchPage.getLayout = function getLayout(page: React.ReactNode) {
-  return <DefaultLayout mainProps={{ spacing: false }}>{page}</DefaultLayout>
-}
-
 export async function getStaticProps() {
   // const { data: articles = [] } = await unbodyApi.searchArticles()
   // const { data: blocks = [] } = await unbodyApi.searchBlocks()

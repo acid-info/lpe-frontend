@@ -26,8 +26,6 @@ const EpisodeBodyContainer = styled(GridItem)``
 
 const EpisodeGrid = styled(Grid)`
   width: 100%;
-  margin-top: -47px; // offset for uiConfig.postSectionMargin
-
   @media (max-width: 768px) {
     margin-top: 32px;
   }

@@ -90,18 +90,26 @@ export const SearchResultsListView = (props: Props) => {
           </PostsListHeader>
         )}
         <PostsListContent>
-          <SearchResultsListHeader
-            title={copyConfigs.search.labels.articlesAndPodcasts}
-          />
-          <SearchResultListPosts posts={renderPosts} shows={shows} />
+          {renderPosts.length > 0 && (
+            <>
+              <SearchResultsListHeader
+                title={copyConfigs.search.labels.articlesAndPodcasts}
+              />
+              <SearchResultListPosts posts={renderPosts} shows={shows} />
+            </>
+          )}
         </PostsListContent>
       </PostsList>
       <GridItem className={'w-1'} />
       <BlocksList className={'w-3'}>
-        <SearchResultsListHeader
-          title={copyConfigs.search.labels.relatedContent}
-        />
-        <SearchResultListBlocks blocks={renderBlocks} />
+        {renderBlocks.length > 0 && (
+          <>
+            <SearchResultsListHeader
+              title={copyConfigs.search.labels.relatedContent}
+            />
+            <SearchResultListBlocks blocks={renderBlocks} />
+          </>
+        )}
       </BlocksList>
     </Container>
   )

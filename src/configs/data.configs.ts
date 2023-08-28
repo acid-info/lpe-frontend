@@ -8,7 +8,7 @@ export const ArticleBlocksOrders = {
 }
 
 export const NavLinksItems = [
-  { label: 'Articles', href: '/search?postType=article' },
+  { label: 'Articles', href: '/search?type=article' },
   { label: 'Podcasts', href: '/podcasts' },
   { label: 'About', href: '/about' },
 ]

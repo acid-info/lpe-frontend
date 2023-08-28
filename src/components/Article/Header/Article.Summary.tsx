@@ -8,7 +8,7 @@ type Props = {
 }
 const ArticleSummary = ({ summary, className, showLabel }: Props) => (
   <ArticleSummaryContainer className={className}>
-    {showLabel && <Typography variant="body3">summary</Typography>}
+    {/*{showLabel && <Typography variant="body3">summary</Typography>}*/}
     <SummaryParagraph variant="h6" component={'p'}>
       {summary}
     </SummaryParagraph>
