@@ -5,7 +5,12 @@ import { NavLinksItems } from '@/configs/data.configs'
 import { uiConfigs } from '@/configs/ui.configs'
 import { useThemeState } from '@/states/themeState'
 import { useScrollDirection } from '@/utils/ui.utils'
-import { IconButton, MenuIcon, Typography } from '@acid-info/lsd-react'
+import {
+  IconButton,
+  MenuIcon,
+  SearchIcon,
+  Typography,
+} from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -28,8 +33,6 @@ export default function NavBar({ defaultState }: NavBarProps) {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const className = pathname.split('/')[1] + '_page'
-
-  const onSearchIconClick = () => {}
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu)
@@ -58,12 +61,17 @@ export default function NavBar({ defaultState }: NavBarProps) {
         </NavLinksContainer>
         <ControlsContainer>
           <SocialMediaKit />
-          <div className={'theme-switch'}>
+          <Buttons>
             <ThemeSwitch
               toggle={themeState.toggleMode}
               mode={themeState.get().mode}
             />
-          </div>
+            <Link href={'/search'}>
+              <IconButton size={'small'}>
+                <SearchIcon color={'primary'} />
+              </IconButton>
+            </Link>
+          </Buttons>
           <div className={'menu-button'}>
             <IconButton size={'small'} onClick={toggleMobileMenu}>
               <MenuIcon color={'primary'} />
@@ -100,6 +108,19 @@ const Container = styled.header<{
   }
 `
 
+const Buttons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > * {
+    background: rgb(var(--lsd-surface-primary));
+
+    :last-of-type {
+      margin-left: -1px;
+    }
+  }
+`
 const NavBarContainer = styled.nav`
   display: flex;
   padding: 16px 0;
