@@ -50,5 +50,5 @@ const Links = styled(FooterSection)`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 72px;
+  margin-bottom: 36px;
 `

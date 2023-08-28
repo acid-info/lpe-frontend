@@ -94,7 +94,9 @@ export default function NavBar({ defaultState }: NavBarProps) {
           <NavbarLinks links={NavLinksItems} />
         </NavLinksContainer>
         <ControlsContainer>
-          <SocialMediaKit />
+          <SocialMediaKitContainer>
+            <SocialMediaKit />
+          </SocialMediaKitContainer>
           {buttons}
         </ControlsContainer>
         {showMobileMenu && <NavbarMobileMenu />}
@@ -111,6 +113,12 @@ const PressLogoType = styled(Typography)<{ display: boolean }>`
       opacity: 0;
       visibility: hidden;
     `}
+`
+
+const SocialMediaKitContainer = styled.div`
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+    display: none;
+  }
 `
 
 const Container = styled.header<{

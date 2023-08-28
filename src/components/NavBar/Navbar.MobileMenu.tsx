@@ -6,6 +6,7 @@ import { FooterOrgPanel } from '@/components/Footer/Footer.OrgPanel'
 import { useThemeState } from '@/states/themeState'
 import { ThemeSwitchWithLabel } from '@/components/ThemeSwitch/ThemeSwitch'
 import { useEffect } from 'react'
+import { SocialMediaKit } from './Navbar.SocialMediaKit'
 
 interface Props {}
 
@@ -24,13 +25,14 @@ export const NavbarMobileMenu = (props: Props) => {
     <NavbarMobileMenuContainer>
       <InnerContainer>
         <NavbarLinks links={NavLinksItems} />
-        <FooterOrgPanel />
-        <ThemeSwitchContainer>
+        <SocialAndThemeSwitchContainer>
+          <SocialMediaKit />
           <ThemeSwitchWithLabel
             toggle={themeState.toggleMode}
             mode={themeState.get().mode}
           />
-        </ThemeSwitchContainer>
+        </SocialAndThemeSwitchContainer>
+        <FooterOrgPanel />
       </InnerContainer>
     </NavbarMobileMenuContainer>
   )
@@ -69,4 +71,11 @@ const ThemeSwitchContainer = styled.div`
   left: 16px;
   margin-top: 0;
   padding-bottom: 16px;
+`
+
+const SocialAndThemeSwitchContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgb(var(--lsd-border-primary));
 `
