@@ -101,12 +101,15 @@ export const SearchResultsExploreView = (props: Props) => {
                     case LPE.ContentTypes.Podcast:
                       return (
                         <PostCard
-                          data={PostCard.toData(
-                            result.data as LPE.Post.Document,
-                            shows,
-                          )}
-                          size={'medium'}
+                          data={{
+                            ...PostCard.toData(
+                              result.data as LPE.Post.Document,
+                              shows,
+                            ),
+                            authors: [],
+                          }}
                           contentType={result.type as LPE.PostType}
+                          className={'post-card__search-explore'}
                         />
                       )
                     case LPE.ContentTypes.Article:
@@ -118,9 +121,10 @@ export const SearchResultsExploreView = (props: Props) => {
                               shows,
                             ),
                             coverImage: null,
+                            authors: [],
                           }}
-                          size={'medium'}
                           contentType={result.type as LPE.PostType}
+                          className={'post-card__search-explore'}
                         />
                       )
                     case LPE.ContentTypes.Image:

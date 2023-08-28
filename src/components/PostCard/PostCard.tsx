@@ -244,6 +244,12 @@ PostCard.styles = {
       ${PostCardShowDetails.styles.large(theme)}
     }
 
+    &.post-card__search-explore {
+      .post-card__title h3 {
+        ${lsdUtils.typography('h6')}
+      }
+    }
+
     ${lsdUtils.breakpoint(theme, 'md', 'down')} {
       .post-card__title-text {
         ${lsdUtils.typography('h5')}
@@ -394,6 +400,10 @@ PostCard.styles = {
       }
     }
 
+    &.post-card__search-explore {
+      opacity: 0.5;
+    }
+
     &.post-card__search-result {
       .post-card__subtitle {
         grid-area: info;
@@ -407,6 +417,15 @@ PostCard.styles = {
       .show-details__logo {
         width: 16px;
       }
+      .post-card__label {
+        margin-bottom: 0;
+      }
+
+      .post-card__title {
+        margin-bottom: -8px;
+        margin-top: -8px;
+      }
+
       .show-details__title {
         ${lsdUtils.typography('subtitle3')}
       }
@@ -418,7 +437,7 @@ PostCard.styles = {
       padding: 24px 0;
 
       display: grid;
-      gap: 8px 16px;
+      gap: 16px 16px;
       grid-template-columns: repeat(7, 1fr);
 
       &.post-card__article {
@@ -436,6 +455,7 @@ PostCard.styles = {
       .post-card__title h3 {
         ${lsdUtils.typography('h6')}
       }
+
       &.top-post {
         .post-card__title h3 {
           ${lsdUtils.typography('h4')}

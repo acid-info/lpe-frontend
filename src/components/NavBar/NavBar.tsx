@@ -105,6 +105,7 @@ export default function NavBar({ defaultState }: NavBarProps) {
 }
 
 const PressLogoType = styled(Typography)<{ display: boolean }>`
+  text-transform: uppercase;
   ${(props) =>
     !props.display &&
     css`

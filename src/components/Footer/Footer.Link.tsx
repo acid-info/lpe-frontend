@@ -5,10 +5,16 @@ export const FooterLink = styled(Typography)`
   width: fit-content;
   &:not(:last-child) {
     &:after {
-      content: '•';
-      margin-left: 8px;
-      text-decoration: none;
+      width: 2px;
+      height: 2px;
+      background: rgb(var(--lsd-surface-secondary));
       display: inline-block;
+      content: ' ';
+      margin-left: 8px;
+      border-radius: 50%;
+      transform: translateY(-2px);
+      //text-decoration: none;
+      //display: inline-block;
     }
   }
 `

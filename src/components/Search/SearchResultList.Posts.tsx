@@ -16,6 +16,7 @@ export const SearchResultListPosts = ({ posts, shows }: Props) => {
             data={{
               ...data,
               coverImage: post.type === 'podcast' ? data.coverImage : undefined,
+              authors: [],
             }}
             className={'post-card__search-result'}
             size={'large'}
