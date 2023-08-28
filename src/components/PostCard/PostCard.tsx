@@ -91,13 +91,14 @@ export const PostCard = (_props: PostCardProps) => {
   )
 
   const authorsElement = authors && authors.length > 0 && (
-    <Authors
-      className="post-card__authors"
-      authors={authors}
-      email={false}
-      flexDirection={AuthorsDirection.ROW}
-      gap={8}
-    />
+    <div className="post-card__authors">
+      <Authors
+        authors={authors}
+        email={false}
+        flexDirection={AuthorsDirection.ROW}
+        gap={8}
+      />
+    </div>
   )
 
   const showElement = displayPodcastShow && podcastShowDetails && (
