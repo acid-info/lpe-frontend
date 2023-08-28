@@ -29,9 +29,7 @@ export default function NavBar({ defaultState }: NavBarProps) {
   const state = useNavbarState(defaultState)
   const themeState = useThemeState()
   const { pathname } = useRouter()
-  const isSearchPage = pathname === '/search'
   const [hide, setHide] = useState(false)
-  const scrollDirection = useScrollDirection()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const className = pathname.split('/')[1] + '_page'
@@ -39,6 +37,10 @@ export default function NavBar({ defaultState }: NavBarProps) {
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu)
   }
+
+  useEffect(() => {
+    setShowMobileMenu(false)
+  }, [pathname])
 
   useEffect(() => {
     defaultState && state.state.set((value) => ({ ...value, ...defaultState }))
