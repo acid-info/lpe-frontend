@@ -15,10 +15,12 @@ export const NavbarMobileMenu = (props: Props) => {
       <InnerContainer>
         <NavbarLinks links={NavLinksItems} />
         <FooterOrgPanel />
-        <ThemeSwitchWithLabel
-          toggle={themeState.toggleMode}
-          mode={themeState.get().mode}
-        />
+        <ThemeSwitchContainer>
+          <ThemeSwitchWithLabel
+            toggle={themeState.toggleMode}
+            mode={themeState.get().mode}
+          />
+        </ThemeSwitchContainer>
       </InnerContainer>
     </NavbarMobileMenuContainer>
   )
@@ -43,7 +45,12 @@ const InnerContainer = styled.div`
   flex-direction: column;
 
   > * {
-    border-top: 1px solid rgb(var(--lsd-theme-primary));
     margin-top: 16px;
   }
+`
+
+const ThemeSwitchContainer = styled.div`
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
 `

@@ -14,7 +14,7 @@ export const NavbarLinks = ({ links }: Props) => {
     <Container>
       {links.map((link, idx) => (
         <>
-          <Typography variant={'label2'}>
+          <LinkText variant={'label2'}>
             <Link
               href={link.href}
               key={`navbar-link-${idx}`}
@@ -22,7 +22,7 @@ export const NavbarLinks = ({ links }: Props) => {
             >
               {link.label}
             </Link>
-          </Typography>
+          </LinkText>
           {idx !== links.length - 1 && <span className={'divider'} />}
         </>
       ))}
@@ -39,7 +39,10 @@ const Container = styled.div`
     text-decoration: none;
   }
 
-  a:hover, a:active, a:focus, a.active {
+  a:hover,
+  a:active,
+  a:focus,
+  a.active {
     text-decoration: underline;
   }
 
@@ -53,10 +56,23 @@ const Container = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
-    flex -direction: column;
+    flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 32px;
+    border-top: 1px solid rgb(var(--lsd-theme-primary));
+    gap: 28px;
+    height: 100%;
+
     .divider {
       display: none;
     }
+  }
+`
+
+const LinkText = styled(Typography)`
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+    font-size: 20px; // LSD doesn't have this font size
+    line-height: 28px; // LSD doesn't have this line height
   }
 `
