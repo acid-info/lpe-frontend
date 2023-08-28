@@ -29,6 +29,7 @@ const EpisodePlayer = ({
   const playerContainerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<ReactPlayer>(null)
 
+  const [volume, setVolume] = useState(state.value.volume)
   const isSimplecast = channel?.name === LPE.Podcast.ChannelNames.Simplecast
 
   const url =
@@ -71,6 +72,7 @@ const EpisodePlayer = ({
         state.set((prev) => ({
           ...prev,
           isEnabled: true,
+          volume: volume,
         }))
       }
     })
@@ -79,7 +81,7 @@ const EpisodePlayer = ({
     return () => {
       observer.disconnect()
     }
-  }, [keepGlobalPlay])
+  }, [keepGlobalPlay, volume])
 
   useEffect(() => {
     const handleLeave = () => {
@@ -114,17 +116,41 @@ const EpisodePlayer = ({
   }, [state.value.isEnabled])
 
   useEffect(() => {
-    if (channel?.name === LPE.Podcast.ChannelNames.Youtube) {
-      window.addEventListener('message', function (event) {
-        if (event.origin == 'https://www.youtube.com') {
-          const data = JSON.parse(event?.data)
-          const volume = data?.info?.volume
+    const listener = (event: any) => {
+      if (event.origin == 'https://www.youtube.com') {
+        const data = JSON.parse(event?.data)
 
-          if (typeof volume !== 'undefined') {
-            state.set((prev) => ({ ...prev, volume: volume / 100 }))
+        if (data?.info?.hasOwnProperty('muted') && !state.value.isEnabled) {
+          const isMuted = data.info.muted === true
+          const muteChanged = state.value.muted !== isMuted
+
+          const newVolume = data.info?.volume / 100 || state.value.volume
+
+          if (isMuted) {
+            if (muteChanged) {
+              state.set((prev) => ({ ...prev, muted: true, volume: newVolume }))
+            }
+          } else if (!isMuted) {
+            if (muteChanged) {
+              state.set((prev) => ({
+                ...prev,
+                muted: false,
+                volume: newVolume,
+              }))
+            }
+
+            setVolume(newVolume)
           }
         }
-      })
+      }
+    }
+
+    if (channel?.name === LPE.Podcast.ChannelNames.Youtube) {
+      window.addEventListener('message', listener)
+    }
+
+    return () => {
+      window.removeEventListener('message', listener)
     }
   }, [])
 
