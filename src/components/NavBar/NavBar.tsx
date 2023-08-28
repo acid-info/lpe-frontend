@@ -5,7 +5,6 @@ import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch'
 import { NavLinksItems } from '@/configs/data.configs'
 import { uiConfigs } from '@/configs/ui.configs'
 import { useThemeState } from '@/states/themeState'
-import { useScrollDirection } from '@/utils/ui.utils'
 import {
   CloseIcon,
   IconButton,

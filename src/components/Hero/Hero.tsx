@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 import { useWindowScroll } from 'react-use'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useNavbarState } from '../../states/navbarState'
-import { lsdUtils } from '@/utils/lsd.utils'
+import { copyConfigs } from '@/configs/copy.configs'
 
 export type HeroProps = Partial<React.ComponentProps<typeof Container>> & {
   tags?: string[]
@@ -31,13 +31,12 @@ export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {
   return (
     <Container {...props}>
       <Title genericFontFamily="serif" component="h1" variant="display2">
-        <span>LOGOS</span>
-        <span> → </span>
-        <span ref={ref}>PRESS ENGINE</span>
+        <span>{copyConfigs.site.heroTitle[0]}</span>
+        <span>{copyConfigs.site.heroTitle[1]}</span>
+        <span ref={ref}>{copyConfigs.site.heroTitle[2]}</span>
       </Title>
       <Description component="div" variant="subtitle1">
-        Your Guide to Network States and the technology driving Sovereign
-        Communities
+        {copyConfigs.site.description}
       </Description>
       <HeroTags tags={tags} />
     </Container>
@@ -60,7 +59,7 @@ const Container = styled.div`
 
 const Title = styled(Typography)`
   text-align: center;
-
+  text-transform: uppercase;
   @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
     font-size: var(--lsd-h4-fontSize) !important;
     font-weight: var(--lsd-h4-fontWeight) !important;
@@ -71,6 +70,7 @@ const Title = styled(Typography)`
 const Description = styled(Typography)`
   text-align: center;
   max-width: 407px;
+  text-transform: capitalize;
 
   @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
     font-size: 12px !important;
