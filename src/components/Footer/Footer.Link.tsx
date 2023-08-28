@@ -3,6 +3,7 @@ import { Typography } from '@acid-info/lsd-react'
 
 export const FooterLink = styled(Typography)`
   width: fit-content;
+  text-transform: capitalize;
   &:not(:last-child) {
     &:after {
       width: 2px;
@@ -13,8 +14,6 @@ export const FooterLink = styled(Typography)`
       margin-left: 8px;
       border-radius: 50%;
       transform: translateY(-2px);
-      //text-decoration: none;
-      //display: inline-block;
     }
   }
 `

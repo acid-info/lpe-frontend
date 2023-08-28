@@ -1,18 +1,17 @@
-import { SearchResultItem } from './data.types'
-
-export enum ESearchScope {
-  GLOBAL = 'global',
-  ARTICLE = 'article',
-}
-
-export enum ESearchStatus {
-  SEARCHING = 'searching',
-  IDLE = 'idle',
-  ERROR = 'error',
-  NOT_ACTIVE = 'not_active',
-}
-
+import React, { ReactNode } from 'react'
 export const enum PostListLayout {
   XXXX = 'xxxx',
   XXXX_XX = 'xxxx_xx',
+}
+
+export type LPEFooterItem = {
+  label: string | null
+  href: string
+  icon?: ReactNode
+  key?: string
+}
+export type LPEFooterGroup = {
+  title: string | null
+  key?: string
+  links: LPEFooterItem[]
 }
