@@ -207,7 +207,7 @@ const Container = styled.div<{ visible: boolean }>`
     padding: 10px 16px;
 
     > :first-child {
-      width: calc(100%);
+      width: 100%;
     }
   }
 `

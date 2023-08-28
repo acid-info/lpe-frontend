@@ -10,6 +10,7 @@ interface Props {
 export const NavbarLinks = ({ links }: Props) => {
   const router = useRouter()
   const { pathname } = router
+
   return (
     <Container>
       {links.map((link, idx) => (
@@ -60,6 +61,7 @@ const Container = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
     padding-top: 32px;
+    padding-bottom: 16px;
     border-top: 1px solid rgb(var(--lsd-theme-primary));
     gap: 28px;
     height: 100%;
