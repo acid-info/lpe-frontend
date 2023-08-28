@@ -1,47 +1,60 @@
-import { Breakpoints } from '@acid-info/lsd-react'
+import { THEME_BREAKPOINTS } from '@acid-info/lsd-react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { lsdUtils } from '../../utils/lsd.utils'
 
-export const Grid = styled.div<{
+export type GridOptions = {
   cols?: number
+}
 
-  breakpoints?: {
-    xs?: {
-      cols?: number
-    }
-    sm?: {
-      cols?: number
-    }
-    md?: {
-      cols?: number
-    }
-    lg?: {
-      cols?: number
-    }
-    xl?: {
-      cols?: number
-    }
+export type GridProps = React.HTMLProps<HTMLDivElement> &
+  GridOptions & {
+    xs?: GridOptions
+    sm?: GridOptions
+    md?: GridOptions
+    lg?: GridOptions
+    xl?: GridOptions
   }
-}>`
+
+export const Grid = styled.div<GridProps>`
   display: grid;
   grid-template-columns: repeat(${(props) => props.cols || 16}, 1fr);
   gap: 16px;
 
   ${(props) =>
-    Object.entries(props.breakpoints || {}).map(([key, bp]) =>
-      lsdUtils.responsive(
+    THEME_BREAKPOINTS.map((key) => {
+      if (!props[key]) return null
+
+      const bp = props[key] as GridItemOptions
+
+      return lsdUtils.responsive(
         props.theme,
-        key as Breakpoints,
-        'exact',
+        key,
+        'up',
       )(css`
-        ${bp.cols && `grid-template-columns: repeat(${bp.cols}, 1fr)`}
-      `),
-    )}
+        ${bp.cols &&
+        css`
+          grid-template-columns: repeat(${bp.cols}, 1fr);
+        `}
+      `)
+    })}
 `
 
-export const GridItem = styled.div`
-  grid-column: span 4;
+export type GridItemOptions = {
+  cols?: number
+}
+
+export type GridItemProps = React.HTMLProps<HTMLDivElement> &
+  GridItemOptions & {
+    xs?: GridItemOptions
+    sm?: GridItemOptions
+    md?: GridItemOptions
+    lg?: GridItemOptions
+    xl?: GridItemOptions
+  }
+
+export const GridItem = styled.div<GridItemProps>`
+  grid-column: span ${(props) => props.cols || 4};
 
   &.w-1 {
     grid-column: span 1;
@@ -74,4 +87,20 @@ export const GridItem = styled.div`
   @media (max-width: 768px) {
     grid-column: span 16 !important;
   }
+
+  ${(props) =>
+    THEME_BREAKPOINTS.map((key) => {
+      if (!props[key]) return null
+
+      const bp = props[key] as GridItemOptions
+
+      return lsdUtils.responsive(
+        props.theme,
+        key,
+        'up',
+      )(css`
+        ${bp.cols === 0 ? `display: none;` : `display: initial;`}
+        ${bp.cols && `grid-column: span ${bp.cols};`}
+      `)
+    })}
 `

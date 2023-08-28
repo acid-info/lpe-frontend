@@ -11,13 +11,17 @@ interface Props {
 const EpisodeContainer = (props: Props) => {
   const { episode, relatedEpisodes } = props
 
+  const emptyGridItem = (
+    <GridItem xs={{ cols: 0 }} sm={{ cols: 2 }} lg={{ cols: 4 }} />
+  )
+
   return (
-    <EpisodeGrid>
-      <GridItem className={'w-4'} />
-      <EpisodeBodyContainer className={'w-8'}>
+    <EpisodeGrid cols={16} xs={{ cols: 1 }} sm={{ cols: 12 }} lg={{ cols: 16 }}>
+      {emptyGridItem}
+      <EpisodeBodyContainer cols={8} xs={{ cols: 1 }} sm={{ cols: 8 }}>
         <EpisodeBody episode={episode} relatedEpisodes={relatedEpisodes} />
       </EpisodeBodyContainer>
-      <GridItem className={'w-4'} />
+      {emptyGridItem}
     </EpisodeGrid>
   )
 }
@@ -26,9 +30,6 @@ const EpisodeBodyContainer = styled(GridItem)``
 
 const EpisodeGrid = styled(Grid)`
   width: 100%;
-  @media (max-width: 768px) {
-    margin-top: 32px;
-  }
 `
 
 export default EpisodeContainer
