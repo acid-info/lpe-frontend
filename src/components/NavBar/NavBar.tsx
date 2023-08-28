@@ -1,11 +1,13 @@
 import { NavbarLinks } from '@/components/NavBar/Navbar.Links'
 import { NavbarMobileMenu } from '@/components/NavBar/Navbar.MobileMenu'
+import { SocialMediaKit } from '@/components/NavBar/Navbar.SocialMediaKit'
 import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch'
 import { NavLinksItems } from '@/configs/data.configs'
 import { uiConfigs } from '@/configs/ui.configs'
 import { useThemeState } from '@/states/themeState'
 import { useScrollDirection } from '@/utils/ui.utils'
 import {
+  CloseIcon,
   IconButton,
   MenuIcon,
   SearchIcon,
@@ -16,8 +18,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { NavbarState, useNavbarState } from '../../states/navbarState'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { LogosIcon } from '../Icons/LogosIcon'
-import { SocialMediaKit } from '@/components/NavBar/Navbar.SocialMediaKit'
 
 export interface NavBarProps {
   defaultState?: Partial<NavbarState>
@@ -42,6 +44,37 @@ export default function NavBar({ defaultState }: NavBarProps) {
     defaultState && state.state.set((value) => ({ ...value, ...defaultState }))
   }, [defaultState])
 
+  const buttons = (
+    <>
+      <Buttons>
+        <ThemeSwitch
+          toggle={themeState.toggleMode}
+          mode={themeState.get().mode}
+        />
+        <Link href={'/search'}>
+          <IconButton size={'small'}>
+            <SearchIcon color={'primary'} />
+          </IconButton>
+        </Link>
+      </Buttons>
+      <Buttons mobile>
+        <Link href={'/search'}>
+          <IconButton size={'small'}>
+            <SearchIcon color={'primary'} />
+          </IconButton>
+        </Link>
+
+        <IconButton size={'small'} onClick={toggleMobileMenu}>
+          {showMobileMenu ? (
+            <CloseIcon color="primary" />
+          ) : (
+            <MenuIcon color={'primary'} />
+          )}
+        </IconButton>
+      </Buttons>
+    </>
+  )
+
   return (
     <Container
       bordered={state.showTitle.get()}
@@ -61,22 +94,7 @@ export default function NavBar({ defaultState }: NavBarProps) {
         </NavLinksContainer>
         <ControlsContainer>
           <SocialMediaKit />
-          <Buttons>
-            <ThemeSwitch
-              toggle={themeState.toggleMode}
-              mode={themeState.get().mode}
-            />
-            <Link href={'/search'}>
-              <IconButton size={'small'}>
-                <SearchIcon color={'primary'} />
-              </IconButton>
-            </Link>
-          </Buttons>
-          <div className={'menu-button'}>
-            <IconButton size={'small'} onClick={toggleMobileMenu}>
-              <MenuIcon color={'primary'} />
-            </IconButton>
-          </div>
+          {buttons}
         </ControlsContainer>
         {showMobileMenu && <NavbarMobileMenu />}
       </NavBarContainer>
@@ -108,8 +126,8 @@ const Container = styled.header<{
   }
 `
 
-const Buttons = styled.div`
-  display: flex;
+const Buttons = styled.div<{ mobile?: boolean }>`
+  display: none;
   align-items: center;
   justify-content: center;
 
@@ -119,6 +137,14 @@ const Buttons = styled.div`
     :last-of-type {
       margin-left: -1px;
     }
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    ${(props) => props.mobile && `display: flex;`}
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
+    ${(props) => !props.mobile && `display: flex;`}
   }
 `
 const NavBarContainer = styled.nav`
