@@ -4,7 +4,6 @@ import {
   extractIdFromFirstTag,
   extractInnerHtml,
 } from '@/utils/html.utils'
-import { convertToIframe } from '@/utils/string.utils'
 import { HeadingElementsRef } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -40,31 +39,18 @@ export const RenderArticleBlock = ({
           )
         }
         case 'p': {
-          const isIframeRegex = /<iframe[^>]*>(?:<\/iframe>|[^]*?<\/iframe>)/
-          const isIframe = isIframeRegex.test(block.text)
+          const isIframe = block.embed && block.labels.includes('embed')
 
-          const isYoutubeRegex =
-            /^(https?\:\/\/)?((www\.)?youtube\.com|youtu\.?be)\/.+$/
-
-          const isYoutube = isYoutubeRegex.test(block.text)
-          const youtubeLink = block.text.match(isYoutubeRegex) ?? []
-
-          const isSimplecastRegex =
-            /^https?:\/\/([a-zA-Z0-9-]+\.)*simplecast\.com\/[^?\s]+(\?[\s\S]*)?$/
-
-          const isSimplecast = isSimplecastRegex.test(block.text)
-          const simplecastLink = block.text.match(isSimplecastRegex) ?? []
-
-          return isIframe ? (
-            <IframeContainer dangerouslySetInnerHTML={{ __html: block.text }} />
-          ) : isYoutube ? (
-            <ReactPlayer url={youtubeLink[0]} />
-          ) : isSimplecast ? (
-            <IframeContainer
-              dangerouslySetInnerHTML={{
-                __html: convertToIframe(simplecastLink[0] ?? ''),
-              }}
-            />
+          return block.embed && isIframe ? (
+            block.labels.includes('youtube_embed') ? (
+              <ReactPlayer url={block.embed.src} />
+            ) : (
+              <IframeContainer
+                dangerouslySetInnerHTML={{
+                  __html: block.embed.html,
+                }}
+              />
+            )
           ) : (
             <Paragraph
               variant="body1"

@@ -61,6 +61,9 @@ export namespace LPE {
       Footnote: 'footnote',
       Paragraph: 'paragraph',
       CoverImage: 'cover_image',
+      Embed: 'embed',
+      YoutubeEmbed: 'youtube_embed',
+      SimplecastEmbed: 'simplecast_embed',
     } as const
 
     export type ContentBlockLabel = DictValues<typeof ContentBlockLabels>
@@ -72,6 +75,11 @@ export namespace LPE {
       document?: D
     }
 
+    export type TextBlockEmbed = {
+      src: string
+      html: string
+    }
+
     export type TextBlock<D = any> = ContentBlockCommon<D> & {
       text: string
       html: string
@@ -79,6 +87,7 @@ export namespace LPE {
       classNames: string[]
       type: Extract<ContentBlockType, 'text'>
       footnotes: Post.Footnotes
+      embed?: TextBlockEmbed
     }
 
     export type ImageBlock<D = any> = ContentBlockCommon<D> &

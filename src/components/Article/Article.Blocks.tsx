@@ -17,7 +17,12 @@ const ArticleBlocks = ({ data }: Props) => {
   const headingElementsRef = useIntersectionObserver(setTocId)
 
   const blocks = useMemo(
-    () => data.content.filter((b) => b.labels.length === 0),
+    () =>
+      data.content.filter(
+        (b) =>
+          b.labels.length === 0 ||
+          b.labels.includes(LPE.Post.ContentBlockLabels.Embed),
+      ),
     [data.content],
   )
 

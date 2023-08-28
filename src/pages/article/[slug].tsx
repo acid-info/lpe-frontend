@@ -18,7 +18,6 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
 
   if (!data) return null
   if (errors) return <div>{errors}</div>
-
   return (
     <>
       <SEO
