@@ -5,16 +5,13 @@ export const config = {
   runtime: 'edge',
 }
 
-const image = fetch(new URL('public/og.png', import.meta.url)).then((res) =>
-  res.arrayBuffer(),
-)
-
 // Doc: https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation/og-image-examples#using-a-local-image
 export default async function handler() {
+  const image = fetch(new URL('public/og.png', import.meta.url)).then((res) =>
+    res.arrayBuffer(),
+  )
+
   const imageData = await image
-  const blob = new Blob([imageData])
-  // Doc has type error
-  const srcBlob = URL.createObjectURL(blob)
 
   return new ImageResponse(
     (
@@ -28,7 +25,12 @@ export default async function handler() {
           alignItems: 'center',
         }}
       >
-        <img width="1200" height="630" src={srcBlob} alt="og-image" />
+        <img
+          width="1200"
+          height="630"
+          alt="og-image"
+          src={imageData as any as string}
+        />
       </div>
     ),
     {
