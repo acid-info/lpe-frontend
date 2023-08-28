@@ -9,6 +9,7 @@ import { SearchResultTopPost } from '@/components/Search/SearchResult.TopPost'
 import { SearchResultListBlocks } from '@/components/Search/SearchResult.Blocks'
 import { Typography } from '@acid-info/lsd-react'
 import { lsdUtils } from '@/utils/lsd.utils'
+import { uiConfigs } from '@/configs/ui.configs'
 
 interface Props {
   posts: LPE.Search.ResultItemBase<LPE.Post.Document>[]
@@ -107,12 +108,12 @@ export const SearchResultsListView = (props: Props) => {
       <GridItem className={'w-1'} />
       <BlocksList className={'w-3'}>
         {renderBlocks.length > 0 ? (
-          <>
+          <BlockListSticky>
             <SearchResultsListHeader
               title={copyConfigs.search.labels.relatedContent}
             />
             <SearchResultListBlocks blocks={renderBlocks} />
-          </>
+          </BlockListSticky>
         ) : (
           !busy && (
             <Typography variant={'subtitle2'} genericFontFamily={'serif'}>
@@ -144,3 +145,10 @@ const PostsListHeader = styled.div``
 const PostsListContent = styled.div``
 
 const BlocksList = styled(GridItem)``
+
+const BlockListSticky = styled.div`
+  position: sticky;
+  top: ${uiConfigs.navbarRenderedHeight * 2 + 12}px;
+  height: 100vh;
+  overflow-y: auto;
+`
