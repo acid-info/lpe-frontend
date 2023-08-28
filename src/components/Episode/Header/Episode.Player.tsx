@@ -30,6 +30,7 @@ const EpisodePlayer = ({
   const playerRef = useRef<ReactPlayer>(null)
 
   const [volume, setVolume] = useState(state.value.volume)
+
   const isSimplecast = channel?.name === LPE.Podcast.ChannelNames.Simplecast
 
   const url =
@@ -110,7 +111,7 @@ const EpisodePlayer = ({
 
   useEffect(() => {
     if (!state.value.isEnabled) {
-      const offset = 1 / state.value.duration // 1 second in %
+      const offset = state.value.played === 0 ? 0 : 1 / state.value.duration // 1 second in %
       playerRef.current?.seekTo(state.value.played + offset)
     }
   }, [state.value.isEnabled])
@@ -127,8 +128,8 @@ const EpisodePlayer = ({
           const newVolume = data.info?.volume / 100 || state.value.volume
 
           if (isMuted) {
-            if (muteChanged) {
-              state.set((prev) => ({ ...prev, muted: true, volume: newVolume }))
+            if (muteChanged && !state.value.muted) {
+              // TODO : handle mute
             }
           } else if (!isMuted) {
             if (muteChanged) {
@@ -138,7 +139,6 @@ const EpisodePlayer = ({
                 volume: newVolume,
               }))
             }
-
             setVolume(newVolume)
           }
         }
