@@ -14,7 +14,7 @@ type Props = {
 
 export default function TableOfContents({ contents, ...props }: Props) {
   const { tocId, setTocId } = useArticleContainerContext()
-  const dy = uiConfigs.navbarRenderedHeight + 2 * uiConfigs.articleSectionMargin
+  const dy = uiConfigs.navbarRenderedHeight + uiConfigs.articleSectionMargin
   // const { resultsNumber } = useSearchBarContext()
   const router = useRouter()
 
