@@ -38,10 +38,6 @@ const PodcastsContainer = (props: Props) => {
                   breakpoint: 'sm',
                   pattern: [{ cols: 2, size: 'small' }],
                 },
-                {
-                  breakpoint: 'md',
-                  pattern: [{ cols: 2, size: 'small' }],
-                },
               ]}
             />
             <EpisodesList
