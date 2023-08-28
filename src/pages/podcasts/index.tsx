@@ -8,12 +8,14 @@ import { LPE } from '../../types/lpe.types'
 
 type PodcastsProps = {
   shows: LPE.Podcast.Show[]
+  latestEpisodes: LPE.Podcast.Document[]
   highlightedEpisodes: LPE.Podcast.Document[]
   errors: string | null
 }
 
 const PodcastShowPage = ({
   shows,
+  latestEpisodes,
   highlightedEpisodes,
   errors,
 }: PodcastsProps) => {
@@ -31,6 +33,7 @@ const PodcastShowPage = ({
       />
       <PodcastsContainer
         shows={shows}
+        latestEpisodes={latestEpisodes}
         highlightedEpisodes={highlightedEpisodes}
       />
     </>
@@ -40,11 +43,17 @@ const PodcastShowPage = ({
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   // TODO : error handling
   const { data: podcastShows, errors: podcastShowsErrors } =
-    await unbodyApi.getPodcastShows({ populateEpisodes: true })
+    await unbodyApi.getPodcastShows({ populateEpisodes: false })
 
   // TODO : error handling
   const { data: highlightedEpisodes, errors: highlightedEpisodesErrors } =
     await unbodyApi.getHighlightedEpisodes({})
+
+  const { data: latestEpisodes } = await unbodyApi.getPodcastEpisodes({
+    limit: 10,
+    populateShow: false,
+    highlighted: 'exclude',
+  })
 
   if (!podcastShows) {
     return {
@@ -56,6 +65,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   return {
     props: {
       shows: podcastShows,
+      latestEpisodes,
       highlightedEpisodes,
       // errors,
     },

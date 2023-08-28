@@ -3,19 +3,17 @@ import EpisodesList from '@/components/Podcasts/Episodes.List'
 import PodcastSection from '@/components/Podcasts/Podcast.Section'
 import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
 import { uiConfigs } from '@/configs/ui.configs'
-import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import Image from 'next/image'
-import Link from 'next/link'
 import { LPE } from '../types/lpe.types'
 
 interface Props {
   shows: LPE.Podcast.Show[]
+  latestEpisodes: LPE.Podcast.Document[]
   highlightedEpisodes: LPE.Podcast.Document[]
 }
 
 const PodcastsContainer = (props: Props) => {
-  const { shows, highlightedEpisodes } = props
+  const { shows, highlightedEpisodes, latestEpisodes } = props
 
   return (
     <PodcastsGrid>
@@ -25,7 +23,7 @@ const PodcastsContainer = (props: Props) => {
         <Episodes>
           <PodcastSection>
             <EpisodesList
-              episodes={highlightedEpisodes.slice(0, 2)}
+              episodes={highlightedEpisodes}
               bordered="except-first-row"
               header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
               pattern={[{ cols: 2, size: 'medium' }]}
@@ -48,7 +46,8 @@ const PodcastsContainer = (props: Props) => {
             />
             <EpisodesList
               bordered
-              episodes={highlightedEpisodes.slice(2)}
+              shows={shows}
+              episodes={latestEpisodes.slice(0, 4)}
               pattern={[{ cols: 4, size: 'small' }]}
               breakpoints={[
                 {
@@ -66,49 +65,6 @@ const PodcastsContainer = (props: Props) => {
               ]}
             />
           </PodcastSection>
-
-          {shows.map((show) => (
-            <PodcastSection key={show.id}>
-              <EpisodesList
-                header={
-                  <EpisodeListHeader>
-                    <Show>
-                      <Image
-                        src={show.logo.url}
-                        alt={show.logo.alt}
-                        width={38}
-                        height={38}
-                      />
-                      <PodcastInfo>
-                        <Typography variant="body1">{show.title}</Typography>
-                        <Typography variant="body3">
-                          {show.numberOfEpisodes} EP
-                        </Typography>
-                      </PodcastInfo>
-                    </Show>
-                    <Link href={`/podcasts/${show.slug}`}>
-                      <Button size="small">See all episodes</Button>
-                    </Link>
-                  </EpisodeListHeader>
-                }
-                shows={[show]}
-                bordered="except-first-row"
-                displayShow={false}
-                episodes={(show.episodes as LPE.Podcast.Document[]).slice(0, 4)}
-                pattern={[{ cols: 4, size: 'small' }]}
-                breakpoints={[
-                  {
-                    breakpoint: 'xs',
-                    pattern: [{ cols: 1, size: 'small' }],
-                  },
-                  {
-                    breakpoint: 'sm',
-                    pattern: [{ cols: 2, size: 'small' }],
-                  },
-                ]}
-              />
-            </PodcastSection>
-          ))}
         </Episodes>
       </PodcastsBodyContainer>
     </PodcastsGrid>
@@ -133,18 +89,6 @@ const EpisodeListHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-`
-
-const Show = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-`
-
-const PodcastInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 `
 
 export default PodcastsContainer
