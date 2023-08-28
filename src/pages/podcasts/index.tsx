@@ -73,7 +73,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 }
 
 PodcastShowPage.getLayout = function getLayout(page: ReactNode) {
-  return <DefaultLayout>{page}</DefaultLayout>
+  return <DefaultLayout mainProps={{ spacing: false }}>{page}</DefaultLayout>
 }
 
 export default PodcastShowPage

@@ -5,6 +5,7 @@ import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
 import { uiConfigs } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import { LPE } from '../types/lpe.types'
+import { lsdUtils } from '../utils/lsd.utils'
 
 interface Props {
   shows: LPE.Podcast.Show[]
@@ -71,8 +72,10 @@ const PodcastsBodyContainer = styled(GridItem)``
 
 const PodcastsGrid = styled(Grid)`
   width: 100%;
-  @media (max-width: 768px) {
-    margin-top: ${uiConfigs.navbarRenderedHeight + 80}px;
+  padding-top: 64px;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    padding-top: 24px;
   }
 `
 
