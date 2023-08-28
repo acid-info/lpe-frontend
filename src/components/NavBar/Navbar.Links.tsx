@@ -60,11 +60,14 @@ const Container = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding-top: 32px;
+    padding-top: 0;
     padding-bottom: 16px;
-    border-top: 1px solid rgb(var(--lsd-theme-primary));
-    gap: 28px;
+    gap: 0;
     height: 100%;
+
+    > label {
+      padding: 14px 0;
+    }
 
     .divider {
       display: none;

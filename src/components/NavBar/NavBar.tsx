@@ -13,6 +13,7 @@ import {
   SearchIcon,
   Typography,
 } from '@acid-info/lsd-react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -78,18 +79,17 @@ export default function NavBar({ defaultState }: NavBarProps) {
   )
 
   return (
-    <Container
-      bordered={state.showTitle.get()}
-      className={`${hide ? 'hide' : ''} ${className}`}
-    >
-      <NavBarContainer>
+    <Container className={`${hide ? 'hide' : ''} ${className}`}>
+      <NavBarContainer bordered={state.showTitle.get()}>
         <LeftContainer href={'/'}>
           <LogosIcon color="primary" />
-          {state.showTitle.get() && (
-            <PressLogoType variant={'h6'} genericFontFamily={'serif'}>
-              {state.title.get()}
-            </PressLogoType>
-          )}
+          <PressLogoType
+            variant={'h6'}
+            genericFontFamily={'serif'}
+            display={state.showTitle.get() || showMobileMenu}
+          >
+            {state.title.get()}
+          </PressLogoType>
         </LeftContainer>
         <NavLinksContainer>
           <NavbarLinks links={NavLinksItems} />
@@ -104,7 +104,14 @@ export default function NavBar({ defaultState }: NavBarProps) {
   )
 }
 
-const PressLogoType = styled(Typography)``
+const PressLogoType = styled(Typography)<{ display: boolean }>`
+  ${(props) =>
+    !props.display &&
+    css`
+      opacity: 0;
+      visibility: hidden;
+    `}
+`
 
 const Container = styled.header<{
   bordered?: boolean
@@ -119,9 +126,6 @@ const Container = styled.header<{
 
   background: rgb(var(--lsd-surface-primary));
   transition: top 0.2s;
-
-  border-bottom: ${(props) => (props.bordered ? '1px' : '0px')} solid
-    rgb(var(--lsd-theme-primary));
 
   &.article_page,
   &.search_page {
@@ -149,12 +153,17 @@ const Buttons = styled.div<{ mobile?: boolean }>`
     ${(props) => !props.mobile && `display: flex;`}
   }
 `
-const NavBarContainer = styled.nav`
+const NavBarContainer = styled.nav<{
+  bordered?: boolean
+}>`
   display: flex;
   padding: 16px 0;
   align-items: center;
   justify-content: space-between;
   position: relative;
+  height: 100%;
+  border-bottom: ${(props) => (props.bordered ? '1px' : '0px')} solid
+    rgb(var(--lsd-theme-primary));
 
   margin: auto;
 
@@ -170,6 +179,10 @@ const NavBarContainer = styled.nav`
 
   style {
     display: none !important;
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    border-bottom: 1px solid rgb(var(--lsd-theme-primary));
   }
 `
 
