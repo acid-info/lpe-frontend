@@ -366,6 +366,7 @@ const Container = styled.div`
   }
 
   .search-input {
+    background: transparent;
     font-size: var(--lsd-label1-fontSize);
     line-height: var(--lsd-label1-lineHeight);
     outline: none;
