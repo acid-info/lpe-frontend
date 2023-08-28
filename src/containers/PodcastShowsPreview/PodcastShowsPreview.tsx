@@ -1,10 +1,11 @@
-import { ArrowDownIcon, Button, Typography } from '@acid-info/lsd-react'
+import { Button, Typography } from '@acid-info/lsd-react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { ChevronRightIcon } from '../../components/Icons/ChevronRightIcon'
 import { PostsGrid } from '../../components/PostsGrid'
 import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
@@ -67,7 +68,7 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
                 <Button
                   size="small"
                   variant="outlined"
-                  icon={<ArrowDownIcon color="primary" />}
+                  icon={<ChevronRightIcon color="primary" />}
                 >
                   Podcast page
                 </Button>
