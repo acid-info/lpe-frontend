@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { PostCard } from '@/components/PostCard'
 import { SearchResultTopPostBlocks } from '@/components/Search/SearchResult.TopPost.Blocks'
 import { Typography } from '@acid-info/lsd-react'
+import { lsdUtils } from '@/utils/lsd.utils'
 
 interface Props {
   post: LPE.Search.ResultItemBase<LPE.Post.Document>
@@ -29,4 +30,8 @@ export const SearchResultTopPost = ({ post, shows, blocks }: Props) => {
 
 const Container = styled.div`
   padding: 24px 0;
+
+  ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+    padding: 0;
+  }
 `

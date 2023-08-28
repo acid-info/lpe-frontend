@@ -8,6 +8,7 @@ import { useMemo } from 'react'
 import { SearchResultTopPost } from '@/components/Search/SearchResult.TopPost'
 import { SearchResultListBlocks } from '@/components/Search/SearchResult.Blocks'
 import { Typography } from '@acid-info/lsd-react'
+import { lsdUtils } from '@/utils/lsd.utils'
 
 interface Props {
   posts: LPE.Search.ResultItemBase<LPE.Post.Document>[]
@@ -126,12 +127,18 @@ export const SearchResultsListView = (props: Props) => {
 
 const Container = styled(Grid)`
   padding-top: 56px;
+  ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+    padding-top: 32px;
+  }
 `
 
 const PostsList = styled(GridItem)`
   display: flex;
   flex-direction: column;
   gap: 56px;
+  ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+    gap: 32px;
+  }
 `
 const PostsListHeader = styled.div``
 const PostsListContent = styled.div``
