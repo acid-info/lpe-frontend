@@ -5,4 +5,9 @@ export const uiConfigs = {
   articleSectionMargin: 40,
   maxContainerWidth: 1440,
   articleRenderedMT: 45 * 2,
+  searchExplore: {
+    gridColumns: 16,
+    largeColumn: 4,
+    smallColumn: 2,
+  },
 }

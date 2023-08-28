@@ -7,20 +7,17 @@ import { SearchResultListPosts } from '@/components/Search/SearchResultList.Post
 import { useMemo } from 'react'
 import { SearchResultTopPost } from '@/components/Search/SearchResult.TopPost'
 import { SearchResultListBlocks } from '@/components/Search/SearchResult.Blocks'
+import { Typography } from '@acid-info/lsd-react'
 
 interface Props {
   posts: LPE.Search.ResultItemBase<LPE.Post.Document>[]
   blocks: LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]
   shows: LPE.Podcast.Show[]
-}
-
-type Accumulator = {
-  count: number
-  block: LPE.Search.ResultItemBase<LPE.Post.ContentBlock>
+  busy: boolean
 }
 
 export const SearchResultsListView = (props: Props) => {
-  const { posts, shows, blocks } = props
+  const { posts, shows, blocks, busy } = props
 
   const mostReferredPostIndex = useMemo(() => {
     // Extract the IDs of the first 3 posts
@@ -90,25 +87,37 @@ export const SearchResultsListView = (props: Props) => {
           </PostsListHeader>
         )}
         <PostsListContent>
-          {renderPosts.length > 0 && (
+          {renderPosts.length > 0 ? (
             <>
               <SearchResultsListHeader
                 title={copyConfigs.search.labels.articlesAndPodcasts}
               />
               <SearchResultListPosts posts={renderPosts} shows={shows} />
             </>
+          ) : (
+            !busy && (
+              <Typography variant={'subtitle2'} genericFontFamily={'serif'}>
+                No results found
+              </Typography>
+            )
           )}
         </PostsListContent>
       </PostsList>
       <GridItem className={'w-1'} />
       <BlocksList className={'w-3'}>
-        {renderBlocks.length > 0 && (
+        {renderBlocks.length > 0 ? (
           <>
             <SearchResultsListHeader
               title={copyConfigs.search.labels.relatedContent}
             />
             <SearchResultListBlocks blocks={renderBlocks} />
           </>
+        ) : (
+          !busy && (
+            <Typography variant={'subtitle2'} genericFontFamily={'serif'}>
+              No related content found
+            </Typography>
+          )
         )}
       </BlocksList>
     </Container>

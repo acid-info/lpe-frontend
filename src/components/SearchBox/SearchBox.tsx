@@ -1,40 +1,29 @@
 import styled from '@emotion/styled'
-import styles from '@/components/Searchbar/Search.module.css'
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  TabItem,
-  Tabs,
-  TextField,
-  Typography,
-} from '@acid-info/lsd-react'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  addContentTypesToQuery,
-  addQueryToQuery,
-  addTopicsToQuery,
-  extractContentTypesFromQuery,
-  extractQueryFromQuery,
-  extractTopicsFromQuery,
-} from '@/utils/search.utils'
-import { NextRouter, useRouter } from 'next/router'
+import { Dropdown, TabItem, Tabs, Typography } from '@acid-info/lsd-react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import { nope } from '@/utils/general.utils'
 import { LPE } from '@/types/lpe.types'
 import PostTypes = LPE.PostTypes
 import ContentBlockTypes = LPE.Post.ContentBlockTypes
-import { ESearchScope } from '@/types/ui.types'
 import { copyConfigs } from '@/configs/copy.configs'
-import { useOutsideClick, useSticky } from '@/utils/ui.utils'
 import { uiConfigs } from '@/configs/ui.configs'
-
+import { useHydrated } from '@/utils/useHydrated.util'
+import {
+  ArrayParam,
+  StringParam,
+  useQueryParam,
+  withDefault,
+} from 'use-query-params'
+import { useDeepCompareEffect } from 'react-use'
+import { lsdUtils } from '@/utils/lsd.utils'
 interface SearchBoxProps {
   onSearch?: (query: string, tags: string[], types: LPE.ContentType[]) => void
   tags?: string[]
   onViewChange?: (view: string) => void
   resultsNumber: number | null
   busy?: boolean
+  showModeSwitch?: boolean
 }
 
 const ContentTypesCategories = {
@@ -67,83 +56,6 @@ const contentTypes = [
 
 const allContentTypes = contentTypes.map((c) => c.value)
 
-const useSearchBox = (
-  router: NextRouter,
-  callback: (query: string, tags: string[], types: LPE.ContentType[]) => void,
-) => {
-  const [query, setQuery] = useState<string>(
-    extractQueryFromQuery(router.query),
-  )
-  const [filterTags, setFilterTags] = useState<string[]>(
-    extractTopicsFromQuery(router.query),
-  )
-  const [filterContentTypes, setFilterContentTypes] =
-    useState<string[]>(allContentTypes)
-
-  useEffect(() => {
-    setQuery(extractQueryFromQuery(router.query))
-    setFilterTags(extractTopicsFromQuery(router.query))
-    const contentTypes = extractContentTypesFromQuery(router.query)
-    setFilterContentTypes(contentTypes.length ? contentTypes : allContentTypes)
-  }, [router.query, router.query.topics, router.pathname])
-
-  const performSearch = useCallback(
-    async (
-      q: string = query,
-      _filterTags: string[] = filterTags,
-      _contentTypes: string[] = [],
-    ) => {
-      const queries = [
-        addQueryToQuery(q),
-        addTopicsToQuery(_filterTags),
-        addContentTypesToQuery(
-          _contentTypes.length === allContentTypes.length ? [] : _contentTypes,
-        ),
-      ].filter((n) => n && n)
-
-      callback(q, _filterTags, _contentTypes as LPE.ContentType[])
-
-      await router.push(
-        {
-          pathname: '/search',
-          query: queries.length ? queries.join('&') : undefined,
-        },
-        undefined,
-        {
-          shallow: true,
-        },
-      )
-    },
-    [router, filterTags, filterContentTypes, query],
-  )
-
-  const handleEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      await performSearch()
-    }
-  }
-
-  const handleTypesChange = async (n: string | string[]) => {
-    await performSearch(undefined, undefined, n as string[])
-  }
-  const handleTagsChange = async (n: string | string[]) => {
-    await performSearch(undefined, n as string[])
-  }
-
-  return {
-    query,
-    filterTags,
-    filterContentTypes,
-    setQuery,
-    setFilterTags,
-    setFilterContentTypes,
-    handleEnter,
-    handleTypesChange,
-    handleTagsChange,
-    performSearch,
-  }
-}
-
 const SearchBox = (props: SearchBoxProps) => {
   const {
     onSearch = nope,
@@ -151,20 +63,30 @@ const SearchBox = (props: SearchBoxProps) => {
     tags = [],
     resultsNumber,
     busy = false,
+    showModeSwitch = true,
   } = props
-  const router = useRouter()
-  const {
-    query,
-    filterTags,
-    filterContentTypes,
-    setQuery,
-    handleEnter,
-    handleTypesChange,
-    handleTagsChange,
-    performSearch,
-  } = useSearchBox(router, onSearch)
-  const [view, setView] = useState<string>('list')
 
+  const [filterTags, setFilterTags] = useQueryParam(
+    'topic',
+    withDefault(ArrayParam, []),
+    {
+      skipUpdateWhenNoChange: false,
+    },
+  )
+  const [filterContentTypes, setFilterContentTypes] = useQueryParam(
+    'type',
+    withDefault(ArrayParam, allContentTypes),
+    {
+      skipUpdateWhenNoChange: true,
+    },
+  )
+  const [query, setQuery] = useQueryParam('q', withDefault(StringParam, ''), {
+    skipUpdateWhenNoChange: true,
+  })
+
+  const [queryInput, setQueryInput] = useState<string>(query)
+
+  const [view, setView] = useState<string>('list')
   const [enlargeQuery, setEnlargeQuery] = useState(false)
   const [placeholder, setPlaceholder] = useState<string>(
     copyConfigs.search.searchbarPlaceholders.global(),
@@ -185,18 +107,24 @@ const SearchBox = (props: SearchBoxProps) => {
   const handleViewChange = async (n: string) => {
     setView(n)
     onViewChange(n)
-    performSearch()
+    onSearch(
+      query,
+      filterTags as string[],
+      filterContentTypes as LPE.ContentType[],
+    )
   }
 
   useEffect(() => {
-    if (enlargeQuery) {
+    setEnlargeQuery(!(queryInput.length === 0 && !focused))
+    if (focused) {
       setPlaceholder('')
     } else {
       setTimeout(() => {
         setPlaceholder(copyConfigs.search.searchbarPlaceholders.global())
       }, 200)
+      setQuery('')
     }
-  }, [enlargeQuery])
+  }, [focused, queryInput])
 
   useEffect(() => {
     if (filtersRef.current) {
@@ -204,7 +132,7 @@ const SearchBox = (props: SearchBoxProps) => {
       const parentT =
         filtersRef.current.parentElement?.getBoundingClientRect().top || 0
       const whereResultsStick =
-        -1 * (filtersB - parentT - uiConfigs.navbarRenderedHeight)
+        -1 * (filtersB - parentT - uiConfigs.navbarRenderedHeight + 2)
       setWhereResultsStick(whereResultsStick)
       setDetailsTop(filtersB + whereResultsStick)
     }
@@ -219,17 +147,6 @@ const SearchBox = (props: SearchBoxProps) => {
   }, [detailsTop])
 
   useEffect(() => {
-    if (query.length === 0 && mounted && !focused) {
-      setTimeout(() => {
-        setEnlargeQuery(false)
-      }, 200)
-    } else {
-      setEnlargeQuery(true)
-      setPlaceholder('')
-    }
-  }, [query])
-
-  useEffect(() => {
     if (
       filterContentTypes.length < allContentTypes.length ||
       filterTags.length > 0
@@ -240,9 +157,31 @@ const SearchBox = (props: SearchBoxProps) => {
     }
   }, [filterTags, filterContentTypes])
 
-  const handleClear = async () => {
-    await performSearch(undefined, [], [])
+  const clear = async () => {
+    setQuery('')
+    setFilterTags([])
+    setFilterContentTypes(allContentTypes)
   }
+
+  const handleKeyUp = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setQuery(queryInput)
+    }
+  }
+
+  useEffect(() => {
+    if (query?.length > 0) setQueryInput(query)
+  }, [query])
+
+  useDeepCompareEffect(() => {
+    onSearch(
+      query,
+      filterTags as string[],
+      filterContentTypes as LPE.ContentType[],
+    )
+  }, [query, filterTags, filterContentTypes])
+
+  const hydrated = useHydrated()
 
   return (
     <Container
@@ -253,54 +192,51 @@ const SearchBox = (props: SearchBoxProps) => {
         <input
           className={`search-input`}
           placeholder={placeholder}
-          value={query as string}
+          value={queryInput as string}
           onFocus={() => {
-            if (query.length === 0) {
-              setEnlargeQuery(true)
-            }
             setFocused(true)
           }}
-          onKeyDown={handleEnter}
-          onChange={(e) => setQuery(e.target.value)}
+          onKeyUp={handleKeyUp}
+          onChange={(e) => setQueryInput(e.target.value)}
           onBlurCapture={() => {
-            if (query.length === 0) {
-              setEnlargeQuery(false)
-              performSearch()
-            }
             setFocused(false)
           }}
         />
-        <ViewButtons>
-          <Tabs size={'small'} activeTab={view} onChange={handleViewChange}>
-            <TabItem name={'list'}>{copyConfigs.search.views.default}</TabItem>
-            <TabItem name={'explore'}>
-              {copyConfigs.search.views.explore}
-            </TabItem>
-          </Tabs>
-        </ViewButtons>
+        {showModeSwitch && (
+          <ViewButtons>
+            <Tabs size={'small'} activeTab={view} onChange={handleViewChange}>
+              <TabItem name={'list'}>
+                {copyConfigs.search.views.default}
+              </TabItem>
+              <TabItem name={'explore'}>
+                {copyConfigs.search.views.explore}
+              </TabItem>
+            </Tabs>
+          </ViewButtons>
+        )}
       </FirstRow>
       <Filters ref={filtersRef}>
         <Dropdown
           size={'small'}
           placeholder={'Content Type'}
           options={contentTypes.map((c) => ({ name: c.label, value: c.value }))}
-          value={filterContentTypes}
-          onChange={handleTypesChange}
+          value={hydrated ? (filterContentTypes as string[]) : []}
+          onChange={(n) => setFilterContentTypes(n as string[])}
           multi={true}
         />
         <Dropdown
           size={'small'}
           placeholder={'Topics'}
           options={tags.map((t) => ({ name: t, value: t }))}
-          value={filterTags}
-          onChange={handleTagsChange}
+          value={hydrated ? (filterTags as string[]) : []}
+          onChange={(n) => setFilterTags(n as string[])}
           multi={true}
           triggerLabel={'Topics'}
         />
         <Clear
           variant={'label2'}
           className={`${showClear ? 'show' : ''}`}
-          onClick={handleClear}
+          onClick={clear}
         >
           Clear Filters
         </Clear>
@@ -352,7 +288,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 12px;
   border-bottom: 1px solid rgba(var(--lsd-text-primary), 1);
-  padding: 8px 0 14px 14px;
+  padding: 8px 14px;
   position: sticky;
 
   z-index: 1;
@@ -391,7 +327,6 @@ const Container = styled.div`
   }
 `
 
-// align last item to the right and first item takes the rest of the space
 const FirstRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -410,6 +345,12 @@ const Filters = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 12px;
+
+  ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+    .lsd-dropdown--small {
+      width: 135px;
+    }
+  }
 `
 const Results = styled.div`
   width: 100%;
@@ -419,6 +360,10 @@ const Results = styled.div`
   gap: 8px;
 
   overflow: hidden;
+
+  > span {
+    white-space: nowrap;
+  }
 
   .dot {
     width: 3px;
