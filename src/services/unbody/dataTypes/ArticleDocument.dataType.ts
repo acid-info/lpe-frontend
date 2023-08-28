@@ -11,7 +11,7 @@ export const ArticleDataType: UnbodyDataTypeConfig<
   objectType: 'GoogleDoc',
   classes: ['article', 'podcast', 'show', 'episode', 'document'],
 
-  isMatch: (helpers, data) =>
+  isMatch: (helpers, data, original, root) =>
     data.pathString.includes('/Articles/') ||
     data.pathString.includes('/Podcasts/'),
 
@@ -26,7 +26,12 @@ export const ArticleDataType: UnbodyDataTypeConfig<
     const blocks =
       await helpers.dataTypes.transformMany<LPE.Article.ContentBlock>(
         [...textBlock, ...imageBlock],
-        [...(data.blocks || [])].sort((a, b) => a.order - b.order),
+        [...(data.blocks || [])]
+          .filter(
+            (block) =>
+              block.__typename === 'ImageBlock' || !!block.html || !!block.text,
+          )
+          .sort((a, b) => a.order - b.order),
         data,
       )
 

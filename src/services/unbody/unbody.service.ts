@@ -933,10 +933,7 @@ export class UnbodyService {
 
       if (docs.length === 0) throw 'No data for same authors'
 
-      return await unbodyDataTypes.transformMany<LPE.Article.Metadata>(
-        articleDocument,
-        docs,
-      )
+      return docs
     }, [])
 
   searchBlocks = async ({
