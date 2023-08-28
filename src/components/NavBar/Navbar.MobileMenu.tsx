@@ -5,11 +5,21 @@ import { uiConfigs } from '@/configs/ui.configs'
 import { FooterOrgPanel } from '@/components/Footer/Footer.OrgPanel'
 import { useThemeState } from '@/states/themeState'
 import { ThemeSwitchWithLabel } from '@/components/ThemeSwitch/ThemeSwitch'
+import { useEffect } from 'react'
 
 interface Props {}
 
 export const NavbarMobileMenu = (props: Props) => {
   const themeState = useThemeState()
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    document.documentElement.style.overflow = 'hidden'
+    return () => {
+      document.documentElement.style.overflow = 'auto'
+    }
+  }, [])
+
   return (
     <NavbarMobileMenuContainer>
       <InnerContainer>
