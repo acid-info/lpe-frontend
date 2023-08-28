@@ -15,10 +15,12 @@ export const NavbarMobileMenu = (props: Props) => {
       <InnerContainer>
         <NavbarLinks links={NavLinksItems} />
         <FooterOrgPanel />
-        <ThemeSwitchWithLabel
-          toggle={themeState.toggleMode}
-          mode={themeState.get().mode}
-        />
+        <ThemeSwitchContainer>
+          <ThemeSwitchWithLabel
+            toggle={themeState.toggleMode}
+            mode={themeState.get().mode}
+          />
+        </ThemeSwitchContainer>
       </InnerContainer>
     </NavbarMobileMenuContainer>
   )
@@ -32,6 +34,11 @@ const NavbarMobileMenuContainer = styled.div`
   height: calc(100vh - ${uiConfigs.navbarRenderedHeight - 2}px);
   z-index: 100;
   background: rgb(var(--lsd-surface-primary));
+  overflow-y: auto;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+    display: none;
+  }
 `
 
 const InnerContainer = styled.div`
@@ -43,7 +50,13 @@ const InnerContainer = styled.div`
   flex-direction: column;
 
   > * {
-    border-top: 1px solid rgb(var(--lsd-theme-primary));
     margin-top: 16px;
   }
+`
+
+const ThemeSwitchContainer = styled.div`
+  bottom: 16px;
+  left: 16px;
+  margin-top: 0;
+  padding-bottom: 16px;
 `

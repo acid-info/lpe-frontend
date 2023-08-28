@@ -137,8 +137,9 @@ const PlayPause = styled.button`
 const Row = styled.div`
   display: flex;
   align-items: center;
-  white-space: pre-wrap;
   gap: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 
 const TimeContainer = styled(Row)<{ color: string; isHidden: boolean }>`
@@ -162,6 +163,9 @@ const Metadata = styled.div`
   flex-direction: column;
   margin-left: 8px;
 
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   @media (min-width: 768px) {
     display: none;
   }
@@ -171,7 +175,6 @@ const Title = styled(Typography)`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  word-break: break-all;
 `
 
 const Podcast = styled(Typography)`
