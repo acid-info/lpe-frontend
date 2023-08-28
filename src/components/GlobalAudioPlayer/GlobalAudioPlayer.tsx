@@ -180,7 +180,7 @@ export default function GlobalAudioPlayer() {
 }
 
 const Container = styled.div<{ visible: boolean }>`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   padding: 22px 16px;
   background: rgb(var(--lsd-surface-primary));
