@@ -244,6 +244,12 @@ PostCard.styles = {
       ${PostCardShowDetails.styles.large(theme)}
     }
 
+    &.post-card__search-explore {
+      .post-card__title h3 {
+        ${lsdUtils.typography('h6')}
+      }
+    }
+
     ${lsdUtils.breakpoint(theme, 'md', 'down')} {
       .post-card__title-text {
         ${lsdUtils.typography('h5')}
@@ -394,6 +400,10 @@ PostCard.styles = {
       }
     }
 
+    &.post-card__search-explore {
+      opacity: 0.5;
+    }
+
     &.post-card__search-result {
       .post-card__subtitle {
         grid-area: info;
@@ -445,6 +455,7 @@ PostCard.styles = {
       .post-card__title h3 {
         ${lsdUtils.typography('h6')}
       }
+
       &.top-post {
         .post-card__title h3 {
           ${lsdUtils.typography('h4')}

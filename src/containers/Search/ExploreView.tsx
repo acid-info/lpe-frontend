@@ -108,8 +108,8 @@ export const SearchResultsExploreView = (props: Props) => {
                             ),
                             authors: [],
                           }}
-                          size={'medium'}
                           contentType={result.type as LPE.PostType}
+                          className={'post-card__search-explore'}
                         />
                       )
                     case LPE.ContentTypes.Article:
@@ -123,8 +123,8 @@ export const SearchResultsExploreView = (props: Props) => {
                             coverImage: null,
                             authors: [],
                           }}
-                          size={'medium'}
                           contentType={result.type as LPE.PostType}
+                          className={'post-card__search-explore'}
                         />
                       )
                     case LPE.ContentTypes.Image:
