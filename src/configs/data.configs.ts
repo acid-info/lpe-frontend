@@ -10,6 +10,10 @@ export const ArticleBlocksOrders = {
   cover: 5,
 }
 
+export const AuthorsConfig = {
+  hiddenEmailAddresses: ['noshow@logos.co'],
+}
+
 export const NavLinksItems = [
   { label: 'Articles', href: '/search?type=article' },
   { label: 'Podcasts', href: '/podcasts' },

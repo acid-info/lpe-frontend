@@ -1,5 +1,6 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { AuthorsConfig } from '../../configs/data.configs'
 import { LPE } from '../../types/lpe.types'
 
 const Author = ({
@@ -14,16 +15,18 @@ const Author = ({
     <Typography variant="body3" component="p" genericFontFamily="sans-serif">
       {author.name}
     </Typography>
-    {email && (
-      <Typography
-        href={`mailto:${author.emailAddress}`}
-        variant="body3"
-        component="a"
-        genericFontFamily="sans-serif"
-      >
-        {author.emailAddress}
-      </Typography>
-    )}
+    {email &&
+      author.emailAddress &&
+      !AuthorsConfig.hiddenEmailAddresses.includes(author.emailAddress) && (
+        <Typography
+          href={`mailto:${author.emailAddress}`}
+          variant="body3"
+          component="a"
+          genericFontFamily="sans-serif"
+        >
+          {author.emailAddress}
+        </Typography>
+      )}
   </AuthorInfo>
 )
 
