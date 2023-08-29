@@ -13,6 +13,7 @@ type Metadata = {
   tags?: string[]
   pagePath?: string
   date?: string | null
+  contentType?: LPE.PostType
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://press.logos.co'
@@ -29,13 +30,14 @@ export default function SEO({
   tags = ['Logos Press Engine', 'Logos Press', 'Logos'],
   pagePath = '',
   date,
+  contentType,
 }: Metadata) {
   const ogSearchParams = new URLSearchParams()
 
   title && ogSearchParams.set('title', title)
   image?.url && ogSearchParams.set('image', image?.url || '')
   image?.alt && ogSearchParams.set('alt', image?.alt || '')
-  type && ogSearchParams.set('type', type || 'article')
+  contentType && ogSearchParams.set('contentType', contentType)
   date && ogSearchParams.set('date', date || '')
 
   const ogUrl = `${imageUrl}?${ogSearchParams.toString()}`

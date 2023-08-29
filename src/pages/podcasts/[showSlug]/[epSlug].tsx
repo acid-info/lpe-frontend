@@ -32,7 +32,7 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
           ...episode.tags,
           ...episode.authors.map((author) => author.name),
         ]}
-        type="episode"
+        contentType={LPE.PostTypes.Podcast}
       />
       <EpisodeContainer episode={episode} relatedEpisodes={relatedEpisodes} />
     </>

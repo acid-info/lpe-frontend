@@ -1,3 +1,4 @@
+import { LPE } from '@/types/lpe.types'
 import { ImageResponse } from '@vercel/og'
 import { handleMethodNotAllowedResponse } from 'next/dist/server/future/route-modules/helpers/response-handlers'
 import { NextRequest } from 'next/server'
@@ -14,7 +15,7 @@ export default async function handler(request: NextRequest) {
   const title = searchParams.get('title')
   const image = searchParams.get('image') || ''
   const alt = searchParams.get('alt') || ''
-  const type = searchParams.get('type') || 'article'
+  const contentType = searchParams.get('contentType')
   const date = searchParams.get('date')
 
   const imgSrc = image
@@ -25,8 +26,20 @@ export default async function handler(request: NextRequest) {
     date && new Date(date).toLocaleString('default', { month: 'short' })
   const year = date && new Date(date).getUTCFullYear()
 
+  const titleMaxLength = 66
+
   return new ImageResponse(
-    type === 'article' ? (
+    contentType === LPE.PostTypes.Podcast ? (
+      <img
+        src={imgSrc}
+        alt={alt}
+        style={{
+          objectFit: 'cover',
+          width: '1200px',
+          height: '630px',
+        }}
+      />
+    ) : (
       <div
         style={{
           display: 'flex',
@@ -82,9 +95,11 @@ export default async function handler(request: NextRequest) {
                 whiteSpace: 'pre-wrap',
               }}
             >
-              {title}
+              {title && title.length < titleMaxLength
+                ? title
+                : title?.substring(0, titleMaxLength) + '...'}
             </div>
-            {type && (
+            {contentType && (
               <div
                 style={{
                   display: 'flex',
@@ -93,7 +108,7 @@ export default async function handler(request: NextRequest) {
                   textTransform: 'capitalize',
                 }}
               >
-                <p>{type}</p>
+                <p>{contentType}</p>
                 {date && <p>•</p>}
                 {date && <p>{`${day} ${month} ${year}`}</p>}
               </div>
@@ -115,17 +130,6 @@ export default async function handler(request: NextRequest) {
           </div>
         )}
       </div>
-    ) : (
-      <img
-        src={imgSrc}
-        alt={alt}
-        style={{
-          filter: 'grayscale(100%)',
-          objectFit: 'cover',
-          width: '1200px',
-          height: '630px',
-        }}
-      />
     ),
     {
       width: 1200,

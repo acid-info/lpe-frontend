@@ -9,10 +9,9 @@ import { useClickAway } from 'react-use'
 
 type Props = {
   url: string
-  title?: string
 }
 
-export default function ShareButton({ url, title }: Props) {
+export default function ShareButton({ url }: Props) {
   const [showOptions, setShowOptions] = useState(false)
   const [copied, setCopied] = useState(false)
   const ref = useRef(null)
