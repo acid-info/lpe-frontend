@@ -1,15 +1,15 @@
 import { ArticleHeading } from '@/components/Article/Article.Heading'
 import { Authors } from '@/components/Authors'
-import { Tags } from '@/components/Tags'
+import { TagsAndSocial } from '@/components/TagsAndSocial'
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { useIntersectionObserver } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { ArticleBlocksOrders } from '../../../configs/data.configs'
 import { LPE } from '../../../types/lpe.types'
 import { ArticleImageBlockWrapper } from '../Article.ImageBlockWrapper'
 import ArticleStats from '../Article.Stats'
 import ArticleSummary from './Article.Summary'
-import { TagsAndSocial } from '@/components/TagsAndSocial'
 
 export type ArticleHeaderProps = LPE.Article.Data
 
@@ -67,7 +67,12 @@ const ArticleHeader = ({
         className={'mobileSummary'}
         showLabel={false}
       />
-      {coverImage && <ArticleImageBlockWrapper image={coverImage} />}
+      {coverImage && (
+        <ArticleImageBlockWrapper
+          image={coverImage}
+          order={ArticleBlocksOrders.cover}
+        />
+      )}
       <ArticleSummary
         summary={summary}
         className={'desktopSummary'}
