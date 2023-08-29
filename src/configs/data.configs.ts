@@ -1,4 +1,5 @@
 import { LPEFooterGroup } from '@/types/ui.types'
+import { siteConfigs } from '@/configs/site.configs'
 
 export const ArticleBlocksOrders = {
   title: 0,
@@ -63,13 +64,17 @@ export const FooterLinksItems: {
           href: 'https://discord.gg/logos-state',
           key: 'discord',
         },
-        { label: 'X', href: 'https://twitter.com/Logos_state', key: 'x' },
+        { label: 'X', href: `https://x.com/${siteConfigs.xHandle}`, key: 'x' },
         {
           label: 'Github',
-          href: 'https://github.com/acid-info',
+          href: `https://github.com/${siteConfigs.githubHandle}`,
           key: 'github',
         },
-        { label: 'Youtube', href: 'https://www.youtube.com', key: 'youtube' },
+        {
+          label: 'Youtube',
+          href: `https://www.youtube.com/${siteConfigs.youtubeHandle}`,
+          key: 'youtube',
+        },
       ],
     },
     {

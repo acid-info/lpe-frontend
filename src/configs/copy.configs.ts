@@ -1,11 +1,11 @@
+import { siteConfigs } from '@/configs/site.configs'
+
 export const copyConfigs = {
   site: {
-    title: 'Logos Press Engine',
-    heroTitle: ['Logos', ' → ', 'Press Engine'],
-    description:
-      'Your Guide to Network States and the technology driving Sovereign Communities',
-    keywords:
-      'Logos, Press Engine, Network States, Sovereign Communities, Blockchain, Cryptocurrency, Decentralization, Privacy, Security, Liberty, Censorship, Openness, Inclusivity, Innovation, Interview, Podcast, Law',
+    title: siteConfigs.title,
+    heroTitle: siteConfigs.heroTitle,
+    description: siteConfigs.description,
+    keywords: siteConfigs.keywords.join(','),
   },
   navbar: {
     title: 'Press Engine',
