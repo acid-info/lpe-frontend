@@ -7,6 +7,7 @@ import { episodeState } from '@/components/GlobalAudioPlayer/episode.state'
 import SimplecastPlayer from './Episode.SimplecastPlayer'
 import { LPE } from '@/types/lpe.types'
 import { useRouter } from 'next/router'
+import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 
 export type EpisodePlayerProps = {
   channel: LPE.Podcast.Channel
@@ -30,6 +31,7 @@ const EpisodePlayer = ({
   const playerRef = useRef<ReactPlayer>(null)
 
   const [volume, setVolume] = useState(state.value.volume)
+  const [loading, setLoading] = useState(true)
 
   const isSimplecast = channel?.name === LPE.Podcast.ChannelNames.Simplecast
 
@@ -191,6 +193,11 @@ const EpisodePlayer = ({
 
   return (
     <>
+      {loading && coverImage && (
+        <PlaceholderImage>
+          <ResponsiveImage data={coverImage} />
+        </PlaceholderImage>
+      )}
       {isSimplecast && (
         <SimplecastPlayer
           playing={keepGlobalPlay ? false : state.value.playing}
@@ -219,6 +226,7 @@ const EpisodePlayer = ({
           onPlay={handlePlay}
           onPause={handlePause}
           onDuration={handleDuration}
+          onReady={() => setLoading(false)}
           config={{
             youtube: {
               playerVars: { enablejsapi: 1 },
@@ -251,6 +259,12 @@ const PlayerContainer = styled.div<{ isAudio: boolean }>`
   @media (max-width: 768px) {
     padding-top: 24px;
   }
+`
+
+const PlaceholderImage = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 100%;
 `
 
 export default EpisodePlayer
