@@ -33,7 +33,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
 
     const name = original.path[original.path.length - 1]
     const [ep, date, ...rest] = name.split('-')
-    const slug = rest.join('-')
+    const slug = original.slug.slice(`${ep}-${date}-`.length)
 
     const today = new Date()
     today.setHours(0, 0, 0, 0)
