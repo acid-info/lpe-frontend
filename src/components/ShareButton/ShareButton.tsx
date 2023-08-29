@@ -21,15 +21,24 @@ export default function ShareButton({ url, title }: Props) {
     setShowOptions(false)
   })
 
-  const handleCopyClipBoard = (url: string) => {
-    const shareObject = {
-      url: url,
+  const handleClick = () => {
+    if (navigator.share) {
+      const shareObject = {
+        url: url,
+      }
+      navigator.share(shareObject).catch((error) => {
+        console.error('Error sharing', error)
+        setShowOptions(!showOptions)
+      })
+    } else {
+      setShowOptions(!showOptions)
     }
+  }
 
-    navigator.share(shareObject)
+  const handleCopyClipBoard = async (url: string) => {
+    await navigator.clipboard.writeText(url)
     setCopied(true)
 
-    // TODO : Temporary solution
     setTimeout(() => {
       setCopied(false)
     }, 2000)
@@ -38,7 +47,7 @@ export default function ShareButton({ url, title }: Props) {
   return (
     <Container ref={ref}>
       <CustomTag
-        onClick={() => setShowOptions(!showOptions)}
+        onClick={handleClick}
         icon={<ShareIcon width={14} height={14} />}
         iconDirection="left"
         showOptions={showOptions}
