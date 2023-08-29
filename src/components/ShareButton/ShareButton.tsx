@@ -9,9 +9,10 @@ import { useClickAway } from 'react-use'
 
 type Props = {
   url: string
+  title?: string
 }
 
-export default function ShareButton({ url }: Props) {
+export default function ShareButton({ url, title }: Props) {
   const [showOptions, setShowOptions] = useState(false)
   const [copied, setCopied] = useState(false)
   const ref = useRef(null)
@@ -20,8 +21,12 @@ export default function ShareButton({ url }: Props) {
     setShowOptions(false)
   })
 
-  const handleCopyClipBoard = async (text: string) => {
-    await navigator.clipboard.writeText(text)
+  const handleCopyClipBoard = (url: string) => {
+    const shareObject = {
+      url: url,
+    }
+
+    navigator.share(shareObject)
     setCopied(true)
 
     // TODO : Temporary solution
