@@ -9,6 +9,7 @@ import { LPE } from '../../../types/lpe.types'
 import { ArticleImageBlockWrapper } from '../Article.ImageBlockWrapper'
 import ArticleStats from '../Article.Stats'
 import ArticleSummary from './Article.Summary'
+import { TagsAndSocial } from '@/components/TagsAndSocial'
 
 export type ArticleHeaderProps = LPE.Article.Data
 
@@ -53,7 +54,7 @@ const ArticleHeader = ({
           {subtitle}
         </ArticleSubtitle>
       )}
-      <Tags tags={tags} className={'articleTags'} />
+      <TagsAndSocial tags={tags} className={'articleTags'} />
       <AuthorsContainer>
         <Authors authors={authors} email={true} gap={12} />
       </AuthorsContainer>

@@ -1,7 +1,4 @@
 import { LPEFooterGroup } from '@/types/ui.types'
-import { DiscordIcon } from '@/components/Icons/DiscordIcon'
-import { YoutubeIcon } from '@/components/Icons/YTIcon'
-import { XIcon } from '@/components/Icons/XIcon'
 
 export const ArticleBlocksOrders = {
   title: 0,
@@ -61,12 +58,12 @@ export const FooterLinksItems: {
       title: null,
       key: 'social',
       links: [
-        { label: 'X', href: 'https://twitter.com/Logos_state', key: 'x' },
         {
           label: 'Discord',
           href: 'https://discord.gg/logos-state',
           key: 'discord',
         },
+        { label: 'X', href: 'https://twitter.com/Logos_state', key: 'x' },
         {
           label: 'Github',
           href: 'https://github.com/acid-info',

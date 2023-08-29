@@ -7,6 +7,8 @@ import EpisodeStats from '../Episode.Stats'
 import EpisodePlayer from './Episode.Player'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ShareButton } from '@/components/ShareButton'
+import { TagsAndSocial } from '@/components/TagsAndSocial'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   channel: LPE.Podcast.Channel
@@ -51,7 +53,7 @@ const EpisodeHeader = ({
           </Show>
         </CustomLink>
       )}
-      {tags && <Tags tags={tags} />}
+      <TagsAndSocial tags={tags} />
       {channels && <EpisodeChannels channels={channels} />}
       {description && (
         <EpisodeSubtitle
@@ -106,6 +108,7 @@ const Show = styled.div`
 
 const CustomLink = styled(Link)`
   text-decoration: none;
+  width: fit-content;
 `
 
 export default EpisodeHeader

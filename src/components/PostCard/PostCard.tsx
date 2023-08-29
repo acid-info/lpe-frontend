@@ -4,12 +4,11 @@ import {
   PostCardShowDetailsProps,
 } from '@/components/PostCard/PostCard.ShowDetails'
 import { Tags } from '@/components/Tags'
-import { Theme, Typography } from '@acid-info/lsd-react'
+import { Theme } from '@acid-info/lsd-react'
 import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
-import Link from 'next/link'
 import React from 'react'
 import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
@@ -73,7 +72,12 @@ export const PostCard = (_props: PostCardProps) => {
       : `/podcasts/${podcastShowDetails?.slug}/${slug}`
 
   const coverImageElement = coverImage && (
-    <PostCardCover href={link} imageProps={imageProps} imageData={coverImage} />
+    <PostCardCover
+      href={link}
+      imageProps={imageProps}
+      imageData={coverImage}
+      playIcon={contentType === LPE.PostTypes.Podcast}
+    />
   )
 
   const labelElement = (

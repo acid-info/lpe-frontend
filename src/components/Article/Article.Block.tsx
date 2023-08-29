@@ -43,9 +43,12 @@ export const RenderArticleBlock = ({
 
           return block.embed && isIframe ? (
             block.labels.includes('youtube_embed') ? (
-              <ReactPlayer url={block.embed.src} />
+              <IframeContainer isSimplecast={false}>
+                <ReactPlayer url={block.embed.src} />
+              </IframeContainer>
             ) : (
               <IframeContainer
+                isSimplecast={true}
                 dangerouslySetInnerHTML={{
                   __html: block.embed.html,
                 }}
@@ -91,9 +94,9 @@ const Paragraph = styled(Typography)`
   }
 `
 
-const IframeContainer = styled.div`
+const IframeContainer = styled.div<{ isSimplecast?: boolean }>`
   position: relative;
-  padding-bottom: 56.25%;
+  padding-bottom: ${({ isSimplecast }) => (isSimplecast ? '30%' : '60%')};
   padding-top: 30px;
   height: 0;
   overflow: hidden;
@@ -106,5 +109,11 @@ const IframeContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+  & > div {
+    width: 100% !important;
+    height: unset !important;
+    aspect-ratio: 16 / 9;
   }
 `

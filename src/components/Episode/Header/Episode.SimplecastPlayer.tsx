@@ -96,12 +96,6 @@ const SimplecastPlayer = ({
 const Container = styled.div`
   position: relative;
   width: 100%;
-  padding-top: 56%;
-  background: red;
-
-  > * {
-    position: absolute;
-  }
 `
 
 const ImageContainer = styled.div`

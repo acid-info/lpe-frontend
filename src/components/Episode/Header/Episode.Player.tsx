@@ -7,6 +7,7 @@ import { episodeState } from '@/components/GlobalAudioPlayer/episode.state'
 import SimplecastPlayer from './Episode.SimplecastPlayer'
 import { LPE } from '@/types/lpe.types'
 import { useRouter } from 'next/router'
+import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 
 export type EpisodePlayerProps = {
   channel: LPE.Podcast.Channel
@@ -28,6 +29,9 @@ const EpisodePlayer = ({
 
   const playerContainerRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<ReactPlayer>(null)
+
+  const [volume, setVolume] = useState(state.value.volume)
+  const [loading, setLoading] = useState(true)
 
   const isSimplecast = channel?.name === LPE.Podcast.ChannelNames.Simplecast
 
@@ -68,12 +72,11 @@ const EpisodePlayer = ({
           }))
         }
       } else {
-        if (state.value.playing) {
-          state.set((prev) => ({
-            ...prev,
-            isEnabled: true,
-          }))
-        }
+        state.set((prev) => ({
+          ...prev,
+          isEnabled: true,
+          volume: volume,
+        }))
       }
     })
     observer.observe(playerContainerRef.current as any)
@@ -81,7 +84,7 @@ const EpisodePlayer = ({
     return () => {
       observer.disconnect()
     }
-  }, [keepGlobalPlay])
+  }, [keepGlobalPlay, volume])
 
   useEffect(() => {
     const handleLeave = () => {
@@ -110,22 +113,46 @@ const EpisodePlayer = ({
 
   useEffect(() => {
     if (!state.value.isEnabled) {
-      playerRef.current?.seekTo(state.value.played)
+      const offset = state.value.played === 0 ? 0 : 1 / state.value.duration // 1 second in %
+      playerRef.current?.seekTo(state.value.played + offset)
     }
   }, [state.value.isEnabled])
 
   useEffect(() => {
-    if (channel?.name === LPE.Podcast.ChannelNames.Youtube) {
-      window.addEventListener('message', function (event) {
-        if (event.origin == 'https://www.youtube.com') {
-          const data = JSON.parse(event?.data)
-          const volume = data?.info?.volume
+    const listener = (event: any) => {
+      if (event.origin == 'https://www.youtube.com') {
+        const data = JSON.parse(event?.data)
 
-          if (typeof volume !== 'undefined') {
-            state.set((prev) => ({ ...prev, volume: volume / 100 }))
+        if (data?.info?.hasOwnProperty('muted') && !state.value.isEnabled) {
+          const isMuted = data.info.muted === true
+          const muteChanged = state.value.muted !== isMuted
+
+          const newVolume = data.info?.volume / 100 || state.value.volume
+
+          if (isMuted) {
+            if (muteChanged && !state.value.muted) {
+              // TODO : handle mute
+            }
+          } else if (!isMuted) {
+            if (muteChanged) {
+              state.set((prev) => ({
+                ...prev,
+                muted: false,
+                volume: newVolume,
+              }))
+            }
+            setVolume(newVolume)
           }
         }
-      })
+      }
+    }
+
+    if (channel?.name === LPE.Podcast.ChannelNames.Youtube) {
+      window.addEventListener('message', listener)
+    }
+
+    return () => {
+      window.removeEventListener('message', listener)
     }
   }, [])
 
@@ -166,7 +193,12 @@ const EpisodePlayer = ({
 
   return (
     <>
-      {isSimplecast && (
+      {loading && coverImage && (
+        <PlaceholderImage>
+          <ResponsiveImage data={coverImage} />
+        </PlaceholderImage>
+      )}
+      {!loading && isSimplecast && (
         <SimplecastPlayer
           playing={keepGlobalPlay ? false : state.value.playing}
           playedSeconds={keepGlobalPlay ? 0 : state.value.playedSeconds}
@@ -194,6 +226,7 @@ const EpisodePlayer = ({
           onPlay={handlePlay}
           onPause={handlePause}
           onDuration={handleDuration}
+          onReady={() => setLoading(false)}
           config={{
             youtube: {
               playerVars: { enablejsapi: 1 },
@@ -226,6 +259,13 @@ const PlayerContainer = styled.div<{ isAudio: boolean }>`
   @media (max-width: 768px) {
     padding-top: 24px;
   }
+`
+
+const PlaceholderImage = styled.div`
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 16/9;
 `
 
 export default EpisodePlayer

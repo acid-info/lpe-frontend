@@ -9,6 +9,7 @@ import { LPEFooterGroup } from '@/types/ui.types'
 const socialLinks = FooterLinksItems.about.find(
   (item) => item.key === 'social',
 ) as LPEFooterGroup
+
 export const SocialMediaKit = () => {
   return (
     <Container>
@@ -29,14 +30,18 @@ export const SocialMediaKit = () => {
               Icon = null
           }
           return (
-            <Link
-              href={link.href}
-              key={`sm-link-${index}`}
-              title={`Join us on ${link.label}`}
-              target={'_blank'}
-            >
-              {Icon && <Icon />}
-            </Link>
+            Icon && (
+              <LinkContainer>
+                <Link
+                  href={link.href}
+                  key={`sm-link-${index}`}
+                  title={`Join us on ${link.label}`}
+                  target={'_blank'}
+                >
+                  <Icon />
+                </Link>
+              </LinkContainer>
+            )
           )
         })}
     </Container>
@@ -46,8 +51,24 @@ export const SocialMediaKit = () => {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
+
   a {
     display: flex;
+  }
+`
+
+const LinkContainer = styled.div`
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+    width: fit-content;
+    display: flex;
+
+    &:not(:last-child) {
+      &:after {
+        content: '';
+        margin-left: 16px;
+        border-right: 1px solid rgb(var(--lsd-border-primary));
+      }
+    }
   }
 `
