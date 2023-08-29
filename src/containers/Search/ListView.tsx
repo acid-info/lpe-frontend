@@ -10,18 +10,22 @@ import { SearchResultListBlocks } from '@/components/Search/SearchResult.Blocks'
 import { Typography } from '@acid-info/lsd-react'
 import { lsdUtils } from '@/utils/lsd.utils'
 import { uiConfigs } from '@/configs/ui.configs'
+import useWindowSize from '@/utils/ui.utils'
 
 interface Props {
   posts: LPE.Search.ResultItemBase<LPE.Post.Document>[]
   blocks: LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]
   shows: LPE.Podcast.Show[]
   busy: boolean
+  showTopPost: boolean
 }
 
 export const SearchResultsListView = (props: Props) => {
-  const { posts, shows, blocks, busy } = props
+  const { posts, shows, blocks, busy, showTopPost } = props
+  const isMobile = useWindowSize().width < 768
 
   const mostReferredPostIndex = useMemo(() => {
+    if (!showTopPost) return -1
     // Extract the IDs of the first 3 posts
     const firstThreePostIds = posts.slice(0, 3).map((post) => post.data.id)
 
@@ -57,20 +61,45 @@ export const SearchResultsListView = (props: Props) => {
     return mostReferredPostIndex >= 0 ? posts[mostReferredPostIndex] : null
   }, [mostReferredPostIndex])
 
-  const [renderPosts, renderBlocks, topResultBlocks] = useMemo(() => {
+  const [
+    renderPosts,
+    renderBlocks,
+    imageBlocksInTopResult,
+    textBlocksInTopResult,
+  ] = useMemo(() => {
     const _renderPosts = topPost
       ? posts.filter((p) => p.data.id !== topPost.data.id)
       : posts
-    // we want to only show those blocks in top results
-    // that are among the top 10 results
-    const _topResultBlocks = blocks
-      .slice(0, 10)
-      .filter((b) => b.data.document.id === topPost?.data.id)
-    const _renderBlocks = blocks.filter(
-      (b) =>
-        _topResultBlocks.findIndex((tb) => tb.data.id === b.data.id) === -1,
+
+    const blocksRelatedToTopPost = blocks.filter(
+      (b) => b.data.document.id === topPost?.data.id,
     )
-    return [_renderPosts, _renderBlocks, _topResultBlocks]
+
+    const imageBlocksInTopResult = blocksRelatedToTopPost
+      .filter((block) => block.type === LPE.ContentTypes.Image)
+      .slice(0, uiConfigs.searchResult.numberOfImagesShowInTopResult)
+      .map((b) => b.data)
+
+    const textBlocksInTopResult = blocksRelatedToTopPost
+      .filter((block) => block.type === LPE.ContentTypes.Text)
+      .slice(0, uiConfigs.searchResult.numberOfParagraphsShowInTopResult)
+      .map((b) => b.data)
+
+    const _renderBlocks = blocks.filter((b) => {
+      if (b.type === LPE.ContentTypes.Image) {
+        return (
+          imageBlocksInTopResult.findIndex((ib) => ib.id === b.data.id) === -1
+        )
+      }
+      return true
+    })
+
+    return [
+      _renderPosts,
+      _renderBlocks,
+      imageBlocksInTopResult,
+      textBlocksInTopResult,
+    ]
   }, [posts, blocks, topPost])
 
   return (
@@ -84,7 +113,12 @@ export const SearchResultsListView = (props: Props) => {
             <SearchResultTopPost
               post={topPost}
               shows={shows}
-              blocks={topResultBlocks}
+              relatedImageBlocks={
+                imageBlocksInTopResult as LPE.Article.ImageBlock[]
+              }
+              relatedTextBlocks={
+                textBlocksInTopResult as LPE.Article.TextBlock[]
+              }
             />
           </PostsListHeader>
         )}
@@ -97,7 +131,8 @@ export const SearchResultsListView = (props: Props) => {
               <SearchResultListPosts posts={renderPosts} shows={shows} />
             </>
           ) : (
-            !busy && (
+            !busy &&
+            !topPost && (
               <Typography variant={'subtitle2'} genericFontFamily={'serif'}>
                 No results found
               </Typography>
@@ -107,20 +142,21 @@ export const SearchResultsListView = (props: Props) => {
       </PostsList>
       <GridItem className={'w-1'} />
       <BlocksList className={'w-3'}>
-        {renderBlocks.length > 0 ? (
-          <BlockListSticky>
-            <SearchResultsListHeader
-              title={copyConfigs.search.labels.relatedContent}
-            />
-            <SearchResultListBlocks blocks={renderBlocks} />
-          </BlockListSticky>
-        ) : (
-          !busy && (
-            <Typography variant={'subtitle2'} genericFontFamily={'serif'}>
-              No related content found
-            </Typography>
-          )
-        )}
+        {!isMobile &&
+          (renderBlocks.length > 0 ? (
+            <BlockListSticky>
+              <SearchResultsListHeader
+                title={copyConfigs.search.labels.relatedContent}
+              />
+              <SearchResultListBlocks blocks={renderBlocks} />
+            </BlockListSticky>
+          ) : (
+            !busy && (
+              <Typography variant={'subtitle2'} genericFontFamily={'serif'}>
+                No related content found
+              </Typography>
+            )
+          ))}
       </BlocksList>
     </Container>
   )
@@ -128,6 +164,7 @@ export const SearchResultsListView = (props: Props) => {
 
 const Container = styled(Grid)`
   padding-top: 56px;
+
   ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
     padding-top: 32px;
   }
@@ -137,6 +174,7 @@ const PostsList = styled(GridItem)`
   display: flex;
   flex-direction: column;
   gap: 56px;
+
   ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
     gap: 32px;
   }

@@ -15,6 +15,7 @@ import { ApiResponse } from '@/types/data.types'
 import useWindowSize from '@/utils/ui.utils'
 import { uiConfigs } from '@/configs/ui.configs'
 import themeState, { useThemeState } from '@/states/themeState/theme.state'
+import { searchBlocksBasicFilter } from '@/utils/search.utils'
 
 interface SearchPageProps {
   topics: string[]
@@ -41,16 +42,30 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
   const [types, setTypes] = useState<string[]>([])
 
   const { data, isLoading } = useQuery(['search', query, tags, types], () => {
-    return api.search({
-      query: query.length > 0 ? query : ' ',
-      tags,
-      type: types as LPE.ContentType[],
-    })
+    return api
+      .search({
+        query: query.length > 0 ? query : ' ',
+        tags,
+        type: types as LPE.ContentType[],
+      })
+      .then((res) => {
+        if (!res) return
+        if (res.errors) return
+        if (!res.data) return
+        return {
+          ...res.data,
+          blocks: res.data.blocks.filter((b) =>
+            searchBlocksBasicFilter(
+              b as LPE.Search.ResultItemBase<LPE.Post.ContentBlock>,
+            ),
+          ),
+        }
+      })
   })
 
-  const blocks = (data?.data.blocks ||
+  const blocks = (data?.blocks ||
     []) as LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]
-  const posts = (data?.data.posts ||
+  const posts = (data?.posts ||
     []) as LPE.Search.ResultItemBase<LPE.Post.Document>[]
   const handleSearch = async (
     query: string,
@@ -86,10 +101,14 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
       />
       {view === 'list' && (
         <SearchResultsListView
-          blocks={blocks}
+          blocks={blocks.slice(
+            0,
+            uiConfigs.searchResult.numberOfTotalBlocksInListView,
+          )}
           posts={posts}
           shows={shows}
           busy={isLoading}
+          showTopPost={query.length > 0}
         />
       )}
       {view === 'explore' && (

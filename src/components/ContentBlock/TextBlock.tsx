@@ -6,6 +6,7 @@ import { LPE } from '../../types/lpe.types'
 import { GridItem } from '../Grid/Grid'
 import ContentBlockFooter from './ContentBlockFooter'
 import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
+import { NicerTextFormat } from '@/components/Search/SearchResult.NicerTextFormat'
 
 type Props = LPE.Search.ResultItemBase<LPE.Post.TextBlock>
 
@@ -28,9 +29,9 @@ const TextBlock = (props: Props) => {
             : null
         }
       />
-      <Typography variant="body2" genericFontFamily="sans-serif">
-        {text}
-      </Typography>
+      <NicerTextFormat variant="body2" genericFontFamily="sans-serif">
+        {text as string}
+      </NicerTextFormat>
       <ContentBlockFooter data={document} order={order} />
     </Container>
   )
