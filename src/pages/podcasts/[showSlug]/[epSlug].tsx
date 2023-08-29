@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { LPE } from '../../../types/lpe.types'
 
 import unbodyApi from '@/services/unbody/unbody.service'
-import { DefaultLayout } from '../../../layouts/DefaultLayout'
 
 type EpisodeProps = {
   episode: LPE.Podcast.Document
@@ -33,6 +32,7 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
           ...episode.tags,
           ...episode.authors.map((author) => author.name),
         ]}
+        type="episode"
       />
       <EpisodeContainer episode={episode} relatedEpisodes={relatedEpisodes} />
     </>

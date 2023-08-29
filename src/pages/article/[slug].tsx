@@ -18,14 +18,15 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
 
   if (!data) return null
   if (errors) return <div>{errors}</div>
+
   return (
     <>
       <SEO
         title={data.data.title}
         description={data.data.summary}
         image={data.data.coverImage}
-        imageUrl={undefined}
         pagePath={`/article/${slug}`}
+        date={data.data.createdAt}
         tags={[
           ...data.data.tags,
           ...data.data.authors.map((author) => author.name),
