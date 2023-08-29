@@ -19,7 +19,7 @@ const ImageBlock = (props: Props) => {
 
   return (
     <Container>
-      <Link href={`/article/${document?.slug}#p-${order}`}>
+      <Link href={`/article/${document?.slug}#i-${order}`}>
         <ResponsiveImage data={data} />
       </Link>
       <ContentBlockHeader
