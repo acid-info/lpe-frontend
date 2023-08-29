@@ -12,15 +12,19 @@ const Author = ({
   gap?: number
 }) => (
   <AuthorInfo key={author.name}>
-    <Typography variant="body3" component="p" genericFontFamily="sans-serif">
+    <CustomTypography
+      variant="body3"
+      component="p"
+      genericFontFamily="sans-serif"
+    >
       {author.name}
-    </Typography>
+    </CustomTypography>
     {email &&
       author.emailAddress &&
       !AuthorsConfig.hiddenEmailAddresses.includes(author.emailAddress) && (
         <Typography
           href={`mailto:${author.emailAddress}`}
-          variant="body3"
+          variant="label2"
           component="a"
           genericFontFamily="sans-serif"
         >
@@ -33,7 +37,10 @@ const Author = ({
 const AuthorInfo = styled.div`
   display: flex;
   flex-direction: column;
-  text-transform: capitalize;
+`
+
+const CustomTypography = styled(Typography)`
+  text-transform: capitalized;
 `
 
 export default Author
