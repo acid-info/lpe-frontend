@@ -11,11 +11,8 @@ interface Props {
 export const ThemeSwitch = ({ toggle, mode }: Props) => {
   return (
     <IconButton size="small" onClick={() => toggle()}>
-      {mode === 'light' ? (
-        <MoonIcon color="primary" />
-      ) : (
-        <SunIcon color="primary" />
-      )}
+      <MoonIcon color="primary" className="dark-mode-hidden" />
+      <SunIcon color="primary" className="light-mode-hidden" />
     </IconButton>
   )
 }
