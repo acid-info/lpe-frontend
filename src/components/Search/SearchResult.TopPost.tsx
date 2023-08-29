@@ -8,9 +8,16 @@ import { lsdUtils } from '@/utils/lsd.utils'
 interface Props {
   post: LPE.Search.ResultItemBase<LPE.Post.Document>
   shows: LPE.Podcast.Show[]
-  blocks: LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]
+  relatedTextBlocks: LPE.Article.TextBlock[]
+  relatedImageBlocks: LPE.Article.ImageBlock[]
 }
-export const SearchResultTopPost = ({ post, shows, blocks }: Props) => {
+
+export const SearchResultTopPost = ({
+  post,
+  shows,
+  relatedImageBlocks,
+  relatedTextBlocks,
+}: Props) => {
   const data = PostCard.toData(post.data, shows)
   return (
     <Container>
@@ -23,7 +30,12 @@ export const SearchResultTopPost = ({ post, shows, blocks }: Props) => {
         size={'large'}
         contentType={post.type as LPE.PostType}
       />
-      {blocks.length > 0 && <SearchResultTopPostBlocks blocks={blocks} />}
+      {relatedTextBlocks.length + relatedImageBlocks.length > 0 && (
+        <SearchResultTopPostBlocks
+          imageBlocks={relatedImageBlocks}
+          textBlocks={relatedTextBlocks}
+        />
+      )}
     </Container>
   )
 }

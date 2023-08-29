@@ -1,61 +1,23 @@
-import { SearchResultItem } from '@/types/data.types'
-import { ParsedUrlQuery } from 'querystring'
+import { LPE } from '@/types/lpe.types'
 
-export const extractTopicsFromQuery = (query: ParsedUrlQuery): string[] => {
-  return query.topic ? (query.topic as string).split(',') : []
-}
-
-export const extractContentTypesFromQuery = (
-  query: ParsedUrlQuery,
-): string[] => {
-  return query.type ? (query.type as string).split(',') : []
-}
-
-export const addTopicsToQuery = (topics: string[]): string | undefined => {
-  return topics.length ? `topic=${topics.join(',')}` : undefined
-}
-
-export const addContentTypesToQuery = (
-  contentTypes: string[],
-): string | undefined => {
-  return contentTypes.length ? `type=${contentTypes.join(',')}` : undefined
-}
-
-export const extractQueryFromQuery = (queryObj: ParsedUrlQuery): string => {
-  return (queryObj.query as string) || ''
-}
-
-export const addQueryToQuery = (query: string): string | undefined => {
-  return query.length > 0 ? `query=${query}` : undefined
-}
-
-export const createMinimizedSearchText = (
-  query: string,
-  filterTags: string[],
+export const searchBlocksBasicFilter = (
+  block: LPE.Search.ResultItemBase<LPE.Post.ContentBlock>,
 ) => {
-  let txt = ''
-  if (query !== undefined && query.length > 0) {
-    txt += `<span>${query}</span>`
+  const isTitle = (b: LPE.Post.TextBlock) => {
+    return b.classNames.includes('title')
   }
-  if (filterTags.length > 0) {
-    if (txt.length > 0) txt += '<b> . </b>'
-    txt += `${filterTags.map((t) => `<small>[${t}]</small>`).join(' ')}`
-  }
-  return txt
-}
-
-export const createSearchLink = (query: string, filterTags: string[]) => {
-  let link = '/search'
-  if (query.length > 0 || filterTags.length > 0) {
-    link += '?'
-  }
-  if (query.length > 0 && filterTags.length > 0) {
-    link += `query=${query}&topics=${filterTags.join(',')}`
-  } else if (query.length > 0) {
-    link += `query=${query}`
-  } else if (filterTags.length > 0) {
-    link += `topics=${filterTags.join(',')}`
+  const isLongEnough = (b: LPE.Post.TextBlock) => {
+    return b.text.length > 60
   }
 
-  return link
+  if (block.type === LPE.ContentTypes.Text) {
+    return (
+      !isTitle(block.data as LPE.Post.TextBlock) &&
+      isLongEnough(block.data as LPE.Post.TextBlock)
+    )
+  } else {
+    //   is an image
+    const isPodcastImage = block.data.document.type === LPE.PostTypes.Podcast
+    return !isPodcastImage
+  }
 }

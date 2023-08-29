@@ -10,4 +10,9 @@ export const uiConfigs = {
     largeColumn: 4,
     smallColumn: 2,
   },
+  searchResult: {
+    numberOfParagraphsShowInTopResult: 4,
+    numberOfImagesShowInTopResult: 3,
+    numberOfTotalBlocksInListView: 20,
+  },
 }

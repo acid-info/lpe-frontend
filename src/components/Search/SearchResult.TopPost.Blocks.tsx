@@ -4,18 +4,18 @@ import { ParagraphIcon } from '@/components/Icons/ParagraphIcon'
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
 import { Grid, GridItem } from '@/components/Grid/Grid'
 import { Typography } from '@acid-info/lsd-react'
+import { uiConfigs } from '@/configs/ui.configs'
+import { NicerTextFormat } from '@/components/Search/SearchResult.NicerTextFormat'
 
 interface Props {
-  blocks: LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]
+  textBlocks: LPE.Post.TextBlock[]
+  imageBlocks: LPE.Post.ImageBlock[]
 }
-export const SearchResultTopPostBlocks = ({ blocks }: Props) => {
-  const imageBlocks = blocks.filter(
-    (block) => block.type === LPE.ContentTypes.Image,
-  )
-  const textBlocks = blocks.filter(
-    (block) => block.type === LPE.ContentTypes.Text,
-  )
 
+export const SearchResultTopPostBlocks = ({
+  textBlocks,
+  imageBlocks,
+}: Props) => {
   return (
     <Container>
       <div>
@@ -26,17 +26,16 @@ export const SearchResultTopPostBlocks = ({ blocks }: Props) => {
           {textBlocks.map((block, index) => (
             <TextBlockItem key={`para-${index}`}>
               <ParagraphIcon />
-              <Typography variant={'subtitle2'}>
-                {(block.data as LPE.Post.TextBlock).text.slice(0, 60)}...
-              </Typography>
+              <NicerTextFormat variant={'subtitle2'}>
+                {block.text}
+              </NicerTextFormat>
             </TextBlockItem>
           ))}
         </TextBlocks>
       )}
       {imageBlocks.length > 0 && (
         <ImageBlocks>
-          {imageBlocks.map((block, index) => {
-            const data = block.data as LPE.Post.ImageBlock
+          {imageBlocks.map((data, index) => {
             const isPortrait = data.width < data.height
             return (
               <ImageBlockItem
@@ -65,16 +64,22 @@ const TextBlockItem = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  > *:last-of-type {
+    max-width: 70%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `
 
 const ImageBlocks = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 8px;
   margin-top: 8px;
 `
 const ImageBlockItem = styled.div`
-  width: 30%;
+  width: 20%;
   .refImage__portrait {
     width: 15%;
   }
