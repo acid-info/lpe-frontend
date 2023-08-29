@@ -19,7 +19,6 @@ export const ResponsiveImage = ({
   data,
   height,
   fill = false,
-  alt = 'alt',
   nextImageProps,
   className,
 }: Props) => {
@@ -51,10 +50,10 @@ export const ResponsiveImage = ({
       }}
     >
       <div>
-        <img src={lazyUrl} alt={alt} />
+        <img src={lazyUrl} alt={data.alt} title={data.alt} />
       </div>
       <div className={imageProps.className}>
-        <Image {...imageProps} alt={alt} />
+        <Image {...imageProps} alt={data.alt} title={data.alt} />
       </div>
     </Container>
   )

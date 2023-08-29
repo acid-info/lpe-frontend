@@ -9,10 +9,6 @@ type Props = {
 }
 
 const ArticleBlocks = ({ data }: Props) => {
-  // const {data: searchResultBlocks = []} = useArticleContext()
-  // const ids = searchResultBlocks?.map(
-  //     (block) => (block as SearchResultsItemTypes).doc.id,
-  // )
   const { setTocId, tocId } = useArticleContainerContext()
   const headingElementsRef = useIntersectionObserver(setTocId)
 

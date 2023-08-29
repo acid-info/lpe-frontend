@@ -30,6 +30,7 @@ const Author = ({
 const AuthorInfo = styled.div`
   display: flex;
   flex-direction: column;
+  text-transform: capitalize;
 `
 
 export default Author
