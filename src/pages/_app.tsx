@@ -98,6 +98,9 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           .lsd-dropdown-menu {
             z-index: 99;
           }
+          .lsd-dropdown-item__label {
+            text-transform: capitalize;
+          }
         `}
       />
       <QueryClientProvider client={queryClient}>

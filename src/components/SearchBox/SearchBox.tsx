@@ -17,6 +17,7 @@ import {
 } from 'use-query-params'
 import { useDeepCompareEffect } from 'react-use'
 import { lsdUtils } from '@/utils/lsd.utils'
+import { formatTagText } from '@/utils/string.utils'
 interface SearchBoxProps {
   onSearch?: (query: string, tags: string[], types: LPE.ContentType[]) => void
   tags?: string[]
@@ -227,7 +228,7 @@ const SearchBox = (props: SearchBoxProps) => {
         <Dropdown
           size={'small'}
           placeholder={'Topics'}
-          options={tags.map((t) => ({ name: t, value: t }))}
+          options={tags.map((t) => ({ name: formatTagText(t), value: t }))}
           value={hydrated ? (filterTags as string[]) : []}
           onChange={(n) => setFilterTags(n as string[])}
           multi={true}
