@@ -198,7 +198,7 @@ const EpisodePlayer = ({
           <ResponsiveImage data={coverImage} />
         </PlaceholderImage>
       )}
-      {isSimplecast && (
+      {!loading && isSimplecast && (
         <SimplecastPlayer
           playing={keepGlobalPlay ? false : state.value.playing}
           playedSeconds={keepGlobalPlay ? 0 : state.value.playedSeconds}
@@ -265,6 +265,7 @@ const PlaceholderImage = styled.div`
   position: absolute;
   z-index: 1;
   width: 100%;
+  aspect-ratio: 16/9;
 `
 
 export default EpisodePlayer
