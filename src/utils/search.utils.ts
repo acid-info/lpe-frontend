@@ -16,8 +16,9 @@ export const searchBlocksBasicFilter = (
       isLongEnough(block.data as LPE.Post.TextBlock)
     )
   } else {
-    //   is an image
     const isPodcastImage = block.data.document.type === LPE.PostTypes.Podcast
-    return !isPodcastImage
+    if (isPodcastImage) return false
+    // exclude it if its cover image
+    return block.data.order !== 5
   }
 }

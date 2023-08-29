@@ -22,7 +22,7 @@ export const RenderArticleBlock = ({
 }) => {
   switch (block.type) {
     case 'image':
-      return <ArticleImageBlockWrapper image={block} />
+      return <ArticleImageBlockWrapper image={block} order={block.order} />
     case 'text':
       switch (block.tagName) {
         case 'h1':
