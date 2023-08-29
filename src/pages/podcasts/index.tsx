@@ -51,7 +51,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 
   const { data: latestEpisodes } = await unbodyApi.getPodcastEpisodes({
     limit: 10,
-    populateShow: false,
+    populateShow: true,
     highlighted: 'exclude',
   })
 
@@ -65,8 +65,8 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   return {
     props: {
       shows: podcastShows,
-      latestEpisodes,
       highlightedEpisodes,
+      latestEpisodes: latestEpisodes.map((ep) => ({ ...ep, show: null })),
       // errors,
     },
   }
