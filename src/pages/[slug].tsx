@@ -31,6 +31,7 @@ const Page: CustomNextPage<PageProps> = ({
           'Logos online publishing and blogging platform for writers and readers.'
         }
         title={`${data.page.title} - Logos Press Engine`}
+        pagePath={`/${data.page.slug}`}
       />
       <StaticPage data={data} />
     </>

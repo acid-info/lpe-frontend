@@ -87,6 +87,7 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
           'Logos online publishing and blogging platform for writers and readers.'
         }
         title={'Logos Press Engine'}
+        pagePath={`/search`}
       />
       <SearchBox
         tags={topics}

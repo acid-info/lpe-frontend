@@ -12,6 +12,8 @@ type Metadata = {
   image?: LPE.Image.Document | null
   tags?: string[]
   pagePath?: string
+  date?: string | null
+  contentType?: LPE.PostType
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://press.logos.co'
@@ -27,7 +29,20 @@ export default function SEO({
   image,
   tags = ['Logos Press Engine', 'Logos Press', 'Logos'],
   pagePath = '',
+  date,
+  contentType,
 }: Metadata) {
+  const ogSearchParams = new URLSearchParams()
+
+  title && ogSearchParams.set('title', title)
+  image?.url && ogSearchParams.set('image', image?.url || '')
+  image?.alt && ogSearchParams.set('alt', image?.alt || '')
+  contentType && ogSearchParams.set('contentType', contentType)
+  date && ogSearchParams.set('date', date || '')
+  pagePath && ogSearchParams.set('pagePath', pagePath || '')
+
+  const ogUrl = `${imageUrl}?${ogSearchParams.toString()}`
+
   return (
     <Head>
       <title>{title}</title>
@@ -44,19 +59,11 @@ export default function SEO({
       />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {image ? (
-        <meta property="og:image" content={image.url} />
-      ) : (
-        <meta property="og:image" content={imageUrl} />
-      )}
+      <meta property="og:image" content={ogUrl} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
       <meta name="twitter:site" content="@TWITTERHANDLE" />
-      {image ? (
-        <meta name="twitter:image" content={image.url} />
-      ) : (
-        <meta property="twitter:image" content={imageUrl} />
-      )}
+      <meta property="twitter:image" content={ogUrl} />
       <link rel="canonical" href={`${SITE_URL}${pagePath}`} />
     </Head>
   )
