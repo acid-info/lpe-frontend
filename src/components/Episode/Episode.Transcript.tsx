@@ -1,7 +1,7 @@
+import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import EpisodeBlocks from './Episode.Blocks'
-import { Typography } from '@acid-info/lsd-react'
 import EpisodeDivider from './Episode.Divider'
 
 const EpisodeTranscript = ({ episode }: { episode: LPE.Podcast.Document }) => {

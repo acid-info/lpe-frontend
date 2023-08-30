@@ -1,6 +1,6 @@
 // TimeTracker.tsx
-import React, { useState, useRef, useEffect } from 'react'
 import styled from '@emotion/styled'
+import React, { useEffect, useRef, useState } from 'react'
 
 export interface ControlsTimeTrackProps {
   min?: number

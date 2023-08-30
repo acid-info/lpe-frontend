@@ -1,11 +1,9 @@
-import { LPE } from '@/types/lpe.types'
-import styled from '@emotion/styled'
 import { ParagraphIcon } from '@/components/Icons/ParagraphIcon'
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
-import { Grid, GridItem } from '@/components/Grid/Grid'
-import { Typography } from '@acid-info/lsd-react'
-import { uiConfigs } from '@/configs/ui.configs'
 import { NicerTextFormat } from '@/components/Search/SearchResult.NicerTextFormat'
+import { LPE } from '@/types/lpe.types'
+import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 
 interface Props {
   textBlocks: LPE.Post.TextBlock[]

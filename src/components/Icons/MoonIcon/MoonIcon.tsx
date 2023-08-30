@@ -1,4 +1,4 @@
-import { LsdIcon } from "@acid-info/lsd-react";
+import { LsdIcon } from '@acid-info/lsd-react'
 
 export const MoonIcon = LsdIcon(
   (props) => (
@@ -16,5 +16,5 @@ export const MoonIcon = LsdIcon(
       />
     </svg>
   ),
-  { filled: true }
-);
+  { filled: true },
+)

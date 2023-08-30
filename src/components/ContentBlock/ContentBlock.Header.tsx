@@ -1,5 +1,5 @@
-import styled from '@emotion/styled'
 import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 
 export enum BlockType {
   TEXT = 'text',

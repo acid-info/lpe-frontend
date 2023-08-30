@@ -1,11 +1,10 @@
 import styled from '@emotion/styled'
+import { useHookstate } from '@hookstate/core'
 import { LPE } from '../../types/lpe.types'
+import { playerState } from '../GlobalAudioPlayer/globalAudioPlayer.state'
+import EpisodeTranscript from './Episode.Transcript'
 import EpisodeFooter from './Footer/Episode.Footer'
 import EpisodeHeader from './Header/Episode.Header'
-import EpisodeTranscript from './Episode.Transcript'
-import { playerState } from '../GlobalAudioPlayer/globalAudioPlayer.state'
-import { useHookstate } from '@hookstate/core'
-import { uiConfigs } from '@/configs/ui.configs'
 
 interface Props {
   episode: LPE.Podcast.Document

@@ -1,11 +1,11 @@
 import { HeroTags } from '@/components/Hero/Hero.tags'
+import { copyConfigs } from '@/configs/copy.configs'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useEffect, useRef } from 'react'
 import { useWindowScroll } from 'react-use'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useNavbarState } from '../../states/navbarState'
-import { copyConfigs } from '@/configs/copy.configs'
 
 export type HeroProps = Partial<React.ComponentProps<typeof Container>> & {
   tags?: string[]

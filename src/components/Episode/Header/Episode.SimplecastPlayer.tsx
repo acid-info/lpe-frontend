@@ -1,13 +1,13 @@
 import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
-import { LPE } from '@/types/lpe.types'
-import styled from '@emotion/styled'
-import { useHookstate } from '@hookstate/core'
-import { useState } from 'react'
 import {
   LpeAudioPlayerControls,
   PlayerType,
 } from '@/components/LpePlayer/Controls/Controls'
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
+import { LPE } from '@/types/lpe.types'
+import styled from '@emotion/styled'
+import { useHookstate } from '@hookstate/core'
+import { useState } from 'react'
 
 export type SimplecastPlayerProps = {
   playing: boolean

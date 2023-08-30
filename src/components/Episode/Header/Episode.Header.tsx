@@ -1,14 +1,12 @@
-import { Tags } from '@/components/Tags'
+import { TagsAndSocial } from '@/components/TagsAndSocial'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { LPE } from '../../../types/lpe.types'
-import EpisodeChannels from './Episode.Channels'
-import EpisodeStats from '../Episode.Stats'
-import EpisodePlayer from './Episode.Player'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShareButton } from '@/components/ShareButton'
-import { TagsAndSocial } from '@/components/TagsAndSocial'
+import { LPE } from '../../../types/lpe.types'
+import EpisodeStats from '../Episode.Stats'
+import EpisodeChannels from './Episode.Channels'
+import EpisodePlayer from './Episode.Player'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
   channel: LPE.Podcast.Channel

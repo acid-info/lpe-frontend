@@ -1,16 +1,15 @@
-import styled from '@emotion/styled'
+import styles from '@/components/GlobalAudioPlayer/GlobalAudioPlayer.module.css'
+import { MuteIcon } from '@/components/Icons/MuteIcon'
 import { PauseIcon } from '@/components/Icons/PauseIcon'
 import { PlayIcon } from '@/components/Icons/PlayIcon'
-import { convertSecToMinAndSec } from '@/utils/string.utils'
-import { Typography } from '@acid-info/lsd-react'
-import { MuteIcon } from '@/components/Icons/MuteIcon'
 import { VolumeIcon } from '@/components/Icons/VolumeIcon'
-import styles from '@/components/GlobalAudioPlayer/GlobalAudioPlayer.module.css'
-import React from 'react'
 import {
   ControlsTimeTrackProps,
   TimeTrack,
 } from '@/components/LpePlayer/Controls/Controls.TimeTrack'
+import { convertSecToMinAndSec } from '@/utils/string.utils'
+import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 
 export enum PlayerType {
   GLOBAL = 'global',

@@ -1,5 +1,5 @@
-import { LPEFooterGroup } from '@/types/ui.types'
 import { siteConfigs } from '@/configs/site.configs'
+import { LPEFooterGroup } from '@/types/ui.types'
 
 export const ArticleBlocksOrders = {
   title: 0,

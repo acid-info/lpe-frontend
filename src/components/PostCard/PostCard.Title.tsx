@@ -1,7 +1,6 @@
-import styled from '@emotion/styled'
 import { Typography } from '@acid-info/lsd-react'
 import Link from 'next/link'
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 interface Props {
   href: string

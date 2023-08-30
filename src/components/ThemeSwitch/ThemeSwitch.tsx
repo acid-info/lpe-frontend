@@ -1,8 +1,7 @@
-import { SunIcon } from '@/components/Icons/SunIcon'
 import { MoonIcon } from '@/components/Icons/MoonIcon'
-import { Button, IconButton } from '@acid-info/lsd-react'
-import React from 'react'
+import { SunIcon } from '@/components/Icons/SunIcon'
 import { ThemeState } from '@/states/themeState'
+import { Button, IconButton } from '@acid-info/lsd-react'
 interface Props {
   toggle: () => void
   mode?: ThemeState['mode']

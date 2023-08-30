@@ -1,5 +1,5 @@
 import { Typography } from '@acid-info/lsd-react'
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 export const PostCardSubTitle = ({ children }: PropsWithChildren) => (
   <Typography

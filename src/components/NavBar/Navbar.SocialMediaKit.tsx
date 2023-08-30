@@ -1,10 +1,10 @@
-import styled from '@emotion/styled'
-import Link from 'next/link'
 import { DiscordIcon } from '@/components/Icons/DiscordIcon'
 import { XIcon } from '@/components/Icons/XIcon'
 import { YoutubeIcon } from '@/components/Icons/YTIcon'
 import { FooterLinksItems } from '@/configs/data.configs'
 import { LPEFooterGroup } from '@/types/ui.types'
+import styled from '@emotion/styled'
+import Link from 'next/link'
 
 const socialLinks = FooterLinksItems.about.find(
   (item) => item.key === 'social',

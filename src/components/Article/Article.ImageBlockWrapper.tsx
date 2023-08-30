@@ -1,7 +1,7 @@
+import { lsdUtils } from '@/utils/lsd.utils'
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
-import { lsdUtils } from '@/utils/lsd.utils'
 
 type Props = {
   image: LPE.Image.Document

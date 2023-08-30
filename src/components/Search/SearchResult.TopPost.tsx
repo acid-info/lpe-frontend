@@ -1,9 +1,8 @@
-import { LPE } from '@/types/lpe.types'
-import styled from '@emotion/styled'
 import { PostCard } from '@/components/PostCard'
 import { SearchResultTopPostBlocks } from '@/components/Search/SearchResult.TopPost.Blocks'
-import { Typography } from '@acid-info/lsd-react'
+import { LPE } from '@/types/lpe.types'
 import { lsdUtils } from '@/utils/lsd.utils'
+import styled from '@emotion/styled'
 
 interface Props {
   post: LPE.Search.ResultItemBase<LPE.Post.Document>

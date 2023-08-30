@@ -1,11 +1,11 @@
 import { Tag, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { ShareIcon } from '../Icons/ShareIcon'
-import { useRef, useState } from 'react'
-import { CopyIcon } from '../Icons/CopyIcon'
-import { XIcon } from '../Icons/XIcon'
 import Link from 'next/link'
+import { useRef, useState } from 'react'
 import { useClickAway } from 'react-use'
+import { CopyIcon } from '../Icons/CopyIcon'
+import { ShareIcon } from '../Icons/ShareIcon'
+import { XIcon } from '../Icons/XIcon'
 
 type Props = {
   url: string

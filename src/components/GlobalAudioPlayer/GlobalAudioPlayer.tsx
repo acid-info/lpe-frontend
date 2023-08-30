@@ -1,13 +1,13 @@
-import ReactPlayer from 'react-player'
-import styled from '@emotion/styled'
-import React, { useEffect, useRef } from 'react'
-import { CloseIcon, Typography } from '@acid-info/lsd-react'
-import Image from 'next/image'
-import { playerState } from './globalAudioPlayer.state'
-import { useHookstate } from '@hookstate/core'
-import { episodeState } from './episode.state'
 import { LpeAudioPlayer } from '@/components/LpePlayer/LpeAudioPlayer'
+import { CloseIcon, Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import { useHookstate } from '@hookstate/core'
+import Image from 'next/image'
+import React, { useEffect, useRef } from 'react'
+import ReactPlayer from 'react-player'
 import { PlayerType } from '../LpePlayer/Controls/Controls'
+import { episodeState } from './episode.state'
+import { playerState } from './globalAudioPlayer.state'
 
 export default function GlobalAudioPlayer() {
   const state = useHookstate(playerState)

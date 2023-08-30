@@ -1,6 +1,6 @@
+import { LPETag } from '@/components/LPETag'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
-import { LPETag } from '@/components/LPETag'
 
 export type TagsProps = React.ComponentProps<typeof TagsContainer> & {
   tags: string[]

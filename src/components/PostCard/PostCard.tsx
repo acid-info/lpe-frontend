@@ -3,6 +3,8 @@ import {
   PostCardShowDetails,
   PostCardShowDetailsProps,
 } from '@/components/PostCard/PostCard.ShowDetails'
+import { PostCardSubTitle } from '@/components/PostCard/PostCard.Subtitle'
+import { PostCardTitle } from '@/components/PostCard/PostCard.Title'
 import { Tags } from '@/components/Tags'
 import { Theme } from '@acid-info/lsd-react'
 import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
@@ -16,8 +18,6 @@ import { Authors } from '../Authors'
 import { AuthorsDirection } from '../Authors/Authors'
 import { ResponsiveImageProps } from '../ResponsiveImage/ResponsiveImage'
 import { PostCardLabel } from './PostCard.Label'
-import { PostCardTitle } from '@/components/PostCard/PostCard.Title'
-import { PostCardSubTitle } from '@/components/PostCard/PostCard.Subtitle'
 
 export type PostAppearanceProps = {
   imageProps?: ResponsiveImageProps

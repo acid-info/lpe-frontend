@@ -15,8 +15,8 @@ import {
 import { ApiResponse, SearchResultItem } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
 import {
-  createPromise,
   CreatePromiseResult,
+  createPromise,
   settle,
 } from '../../utils/promise.utils'
 import { unbodyDataTypes } from './dataTypes'

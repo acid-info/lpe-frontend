@@ -1,5 +1,5 @@
-import React from 'react'
 import { Typography, TypographyProps } from '@acid-info/lsd-react'
+import React from 'react'
 
 type UrlReplacerProps = {
   rawHtml: string

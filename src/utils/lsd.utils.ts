@@ -1,10 +1,10 @@
 import {
   Breakpoints,
+  THEME_BREAKPOINTS,
   Theme,
   TypographyVariants,
-  THEME_BREAKPOINTS,
 } from '@acid-info/lsd-react'
-import { css, SerializedStyles } from '@emotion/react'
+import { SerializedStyles, css } from '@emotion/react'
 
 export class LsdUtils {
   breakpoints = (exclude: Breakpoints[] = []) =>

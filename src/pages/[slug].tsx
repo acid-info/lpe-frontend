@@ -3,7 +3,6 @@ import Error from 'next/error'
 import SEO from '../components/SEO/SEO'
 import { StaticPage, StaticPageProps } from '../containers/StaticPage'
 import unbodyApi from '../services/unbody/unbody.service'
-import NotFoundPage from './404'
 
 type PageProps = Partial<Pick<StaticPageProps, 'data'>> & {
   error?: string

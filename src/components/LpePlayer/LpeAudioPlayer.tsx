@@ -1,9 +1,8 @@
-import React from 'react'
-import styled from '@emotion/styled'
 import {
   LpeAudioPlayerControls,
   LpeAudioPlayerControlsProps,
 } from '@/components/LpePlayer/Controls/Controls'
+import styled from '@emotion/styled'
 
 interface LpeAudioPlayerProps {
   controlProps: LpeAudioPlayerControlsProps

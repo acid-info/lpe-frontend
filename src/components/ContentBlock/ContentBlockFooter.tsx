@@ -1,7 +1,7 @@
+import { LPE } from '@/types/lpe.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import { LPE } from '@/types/lpe.types'
 
 type Props = {
   data: LPE.Post.Document

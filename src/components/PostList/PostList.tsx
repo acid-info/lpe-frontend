@@ -1,10 +1,10 @@
+import { PostCard } from '@/components/PostCard'
 import { PostListLayout } from '@/types/ui.types'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { LPE } from '../../types/lpe.types'
 import { Grid, GridItem } from '../Grid/Grid'
-import { PostCard } from '@/components/PostCard'
 import PostTypes = LPE.PostTypes
 
 type Props = {

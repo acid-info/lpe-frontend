@@ -1,7 +1,7 @@
 import { Collapse, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { LPE } from '../../../types/lpe.types'
 import { useState } from 'react'
+import { LPE } from '../../../types/lpe.types'
 
 const EpisodeFootnotes = ({
   footnotes,

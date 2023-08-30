@@ -1,6 +1,6 @@
+import { PostCard } from '@/components/PostCard'
 import { LPE } from '@/types/lpe.types'
 import styled from '@emotion/styled'
-import { PostCard } from '@/components/PostCard'
 
 interface Props {
   posts: LPE.Search.ResultItemBase<LPE.Post.Document>[]

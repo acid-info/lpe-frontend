@@ -4,10 +4,9 @@ import {
 } from '@/components/ResponsiveImage/ResponsiveImage'
 import { LPE } from '@/types/lpe.types'
 import { IconButton } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 import Link from 'next/link'
 import { FC } from 'react'
-import { PlayIcon } from '../Icons/PlayIcon'
-import styled from '@emotion/styled'
 import { UnfilledPlayIcon } from '../Icons/UnfilledPlayIcon'
 
 export type PostCardCoverProps = React.ComponentProps<typeof Link> & {

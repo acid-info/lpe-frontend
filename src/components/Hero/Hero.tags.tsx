@@ -1,6 +1,6 @@
+import { LPETag } from '@/components/LPETag'
 import styled from '@emotion/styled'
 import React from 'react'
-import { LPETag } from '@/components/LPETag'
 
 export type NavbarFilter = Partial<React.ComponentProps<typeof Container>> & {
   tags?: string[]

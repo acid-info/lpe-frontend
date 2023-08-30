@@ -1,12 +1,8 @@
-import { SearchResultItem } from '@/types/data.types'
-import { Typography } from '@acid-info/lsd-react'
-import styled from '@emotion/styled'
-import Link from 'next/link'
-import { LPE } from '../../types/lpe.types'
-import { GridItem } from '../Grid/Grid'
-import ContentBlockFooter from './ContentBlockFooter'
-import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
 import { NicerTextFormat } from '@/components/Search/SearchResult.NicerTextFormat'
+import styled from '@emotion/styled'
+import { LPE } from '../../types/lpe.types'
+import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
+import ContentBlockFooter from './ContentBlockFooter'
 
 type Props = LPE.Search.ResultItemBase<LPE.Post.TextBlock>
 

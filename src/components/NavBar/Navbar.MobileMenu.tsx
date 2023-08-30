@@ -1,10 +1,10 @@
-import styled from '@emotion/styled'
+import { FooterOrgPanel } from '@/components/Footer/Footer.OrgPanel'
 import { NavbarLinks } from '@/components/NavBar/Navbar.Links'
+import { ThemeSwitchWithLabel } from '@/components/ThemeSwitch/ThemeSwitch'
 import { NavLinksItems } from '@/configs/data.configs'
 import { uiConfigs } from '@/configs/ui.configs'
-import { FooterOrgPanel } from '@/components/Footer/Footer.OrgPanel'
 import { useThemeState } from '@/states/themeState'
-import { ThemeSwitchWithLabel } from '@/components/ThemeSwitch/ThemeSwitch'
+import styled from '@emotion/styled'
 import { useEffect } from 'react'
 import { SocialMediaKit } from './Navbar.SocialMediaKit'
 

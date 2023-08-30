@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 export const enum PostListLayout {
   XXXX = 'xxxx',
   XXXX_XX = 'xxxx_xx',

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Breakpoints, Theme, useTheme } from '@acid-info/lsd-react'
-import { css, SerializedStyles } from '@emotion/react'
+import { SerializedStyles, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { LPE } from '../../types/lpe.types'

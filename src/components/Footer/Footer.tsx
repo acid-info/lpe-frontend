@@ -1,8 +1,8 @@
-import { Button } from '@acid-info/lsd-react'
-import styled from '@emotion/styled'
+import { FooterBuPanel } from '@/components/Footer/Footer.BuPanel'
 import { FooterOrgPanel } from '@/components/Footer/Footer.OrgPanel'
 import { FooterSectionContainer } from '@/components/Footer/Footer.Section'
-import { FooterBuPanel } from '@/components/Footer/Footer.BuPanel'
+import { Button } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 
 export default function Footer() {
   const handleScrollToTop = () => {

@@ -1,7 +1,6 @@
+import { ImageBlock, TextBlock } from '@/components/ContentBlock'
 import { LPE } from '@/types/lpe.types'
 import styled from '@emotion/styled'
-import { PostCard } from '@/components/PostCard'
-import { ImageBlock, TextBlock } from '@/components/ContentBlock'
 
 interface Props {
   blocks: LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]

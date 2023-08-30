@@ -1,13 +1,13 @@
-import styled from '@emotion/styled'
-import ReactPlayer from 'react-player'
-import { useHookstate } from '@hookstate/core'
-import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
-import { useEffect, useRef, useState } from 'react'
 import { episodeState } from '@/components/GlobalAudioPlayer/episode.state'
-import SimplecastPlayer from './Episode.SimplecastPlayer'
-import { LPE } from '@/types/lpe.types'
-import { useRouter } from 'next/router'
+import { playerState } from '@/components/GlobalAudioPlayer/globalAudioPlayer.state'
 import { ResponsiveImage } from '@/components/ResponsiveImage/ResponsiveImage'
+import { LPE } from '@/types/lpe.types'
+import styled from '@emotion/styled'
+import { useHookstate } from '@hookstate/core'
+import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
+import ReactPlayer from 'react-player'
+import SimplecastPlayer from './Episode.SimplecastPlayer'
 
 export type EpisodePlayerProps = {
   channel: LPE.Podcast.Channel

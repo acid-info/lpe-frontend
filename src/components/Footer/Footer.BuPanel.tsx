@@ -1,8 +1,8 @@
-import { Typography } from '@acid-info/lsd-react'
-import styled from '@emotion/styled'
 import { FooterLink } from '@/components/Footer/Footer.Link'
 import { FooterSection } from '@/components/Footer/Footer.Section'
 import { FooterLinksItems } from '@/configs/data.configs'
+import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 
 export const FooterBuPanel = () => {
   return (

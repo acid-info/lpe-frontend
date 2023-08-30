@@ -1,5 +1,5 @@
-import { Typography } from '@acid-info/lsd-react'
 import { FooterSection } from '@/components/Footer/Footer.Section'
+import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 
 export const FooterCopyright = () => (

@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import styled from '@emotion/styled'
 import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 interface Props {

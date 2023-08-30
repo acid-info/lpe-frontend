@@ -1,10 +1,10 @@
-import { Typography } from '@acid-info/lsd-react'
-import styled from '@emotion/styled'
-import { LPE } from '../../../types/lpe.types'
 import { ApplePodcastsIcon } from '@/components/Icons/ApplePodcastsIcon'
 import { GooglePodcastsIcon } from '@/components/Icons/GooglePodcastsIcon'
 import { SpotifyIcon } from '@/components/Icons/SpotifyIcon'
+import { Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
 import Link from 'next/link'
+import { LPE } from '../../../types/lpe.types'
 
 export type EpisodeChannelProps = {
   channels: LPE.Podcast.Channel[]

@@ -1,10 +1,10 @@
-import styled from '@emotion/styled'
-import { LPE } from '@/types/lpe.types'
-import { Grid, GridItem } from '@/components/Grid/Grid'
-import { useMemo } from 'react'
-import { PostCard } from '@/components/PostCard'
 import { ImageBlock, TextBlock } from '@/components/ContentBlock'
+import { Grid, GridItem } from '@/components/Grid/Grid'
+import { PostCard } from '@/components/PostCard'
 import { uiConfigs } from '@/configs/ui.configs'
+import { LPE } from '@/types/lpe.types'
+import styled from '@emotion/styled'
+import { useMemo } from 'react'
 
 type Block = LPE.Search.ResultItemBase<LPE.Post.ContentBlock>
 type Post = LPE.Search.ResultItemBase<LPE.Post.Document>

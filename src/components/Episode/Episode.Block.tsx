@@ -2,11 +2,11 @@ import {
   extractClassFromFirstTag,
   extractIdFromFirstTag,
 } from '@/utils/html.utils'
+import { parseText, parseTimestamp } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'
 import { LPE } from '../../types/lpe.types'
-import { parseText, parseTimestamp } from '@/utils/string.utils'
 
 export const RenderEpisodeBlock = ({
   block,

@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import { Tag } from '@acid-info/lsd-react'
 import { formatTagText } from '@/utils/string.utils'
+import { Tag } from '@acid-info/lsd-react'
 import { TagProps } from '@acid-info/lsd-react/dist/components/Tag/Tag'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 
 interface Props {
   tag: string

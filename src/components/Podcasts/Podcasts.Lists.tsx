@@ -1,8 +1,8 @@
-import styled from '@emotion/styled'
-import { LPE } from '../../types/lpe.types'
 import { ArrowDownIcon, Button, Typography } from '@acid-info/lsd-react'
-import Link from 'next/link'
+import styled from '@emotion/styled'
 import Image from 'next/image'
+import Link from 'next/link'
+import { LPE } from '../../types/lpe.types'
 import { Grid, GridItem } from '../Grid/Grid'
 import PodcastHost from './Podcast.Host'
 

@@ -1,12 +1,11 @@
+import { lsdUtils } from '@/utils/lsd.utils'
+import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { LPE } from '../../types/lpe.types'
-import { GridItem } from '../Grid/Grid'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
-import ContentBlockFooter from './ContentBlockFooter'
 import ContentBlockHeader, { BlockType } from './ContentBlock.Header'
-import { lsdUtils } from '@/utils/lsd.utils'
-import { Typography } from '@acid-info/lsd-react'
+import ContentBlockFooter from './ContentBlockFooter'
 
 type Props = LPE.Search.ResultItemBase<LPE.Post.ImageBlock>
 

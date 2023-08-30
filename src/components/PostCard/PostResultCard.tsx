@@ -1,23 +1,16 @@
 import { PostCardCover } from '@/components/PostCard/PostCard.Cover'
 import { PostCardShowDetails } from '@/components/PostCard/PostCard.ShowDetails'
 import { Tags } from '@/components/Tags'
-import { CommonProps } from '@acid-info/lsd-react/dist/utils/useCommonProps'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 
-import React from 'react'
+import { PostCardProps } from '@/components/PostCard/PostCard'
+import { PostCardSubTitle } from '@/components/PostCard/PostCard.Subtitle'
+import { PostCardTitle } from '@/components/PostCard/PostCard.Title'
 import { LPE } from '../../types/lpe.types'
 import { Authors } from '../Authors'
 import { AuthorsDirection } from '../Authors/Authors'
-import { ResponsiveImageProps } from '../ResponsiveImage/ResponsiveImage'
 import { PostCardLabel } from './PostCard.Label'
-import { PostCardTitle } from '@/components/PostCard/PostCard.Title'
-import { PostCardSubTitle } from '@/components/PostCard/PostCard.Subtitle'
-import {
-  PostAppearanceProps,
-  PostCardProps,
-  PostDataProps,
-} from '@/components/PostCard/PostCard'
 
 type PostResultCardProps = Omit<PostCardProps, 'size'>
 

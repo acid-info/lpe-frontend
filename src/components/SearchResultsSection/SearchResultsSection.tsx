@@ -1,6 +1,6 @@
 import { Section } from '@/components/Section/Section'
-import React, { PropsWithChildren } from 'react'
 import { Typography } from '@acid-info/lsd-react'
+import { PropsWithChildren } from 'react'
 
 type Props = PropsWithChildren<{
   resultSize: number

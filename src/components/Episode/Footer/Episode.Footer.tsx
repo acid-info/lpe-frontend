@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
+import { useMemo } from 'react'
 import { LPE } from '../../../types/lpe.types'
 import EpisodeCredits from './Episode.Credits'
-import RelatedEpisodes from './Episode.RelatedEpisodes'
-import { useMemo } from 'react'
 import EpisodeFootnotes from './Episode.Footnotes'
+import RelatedEpisodes from './Episode.RelatedEpisodes'
 
 type Props = {
   episode: LPE.Podcast.Document

@@ -1,23 +1,22 @@
-import styled from '@emotion/styled'
-import { Dropdown, TabItem, Tabs, Typography } from '@acid-info/lsd-react'
-import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/router'
-import { nope } from '@/utils/general.utils'
-import { LPE } from '@/types/lpe.types'
-import PostTypes = LPE.PostTypes
-import ContentBlockTypes = LPE.Post.ContentBlockTypes
 import { copyConfigs } from '@/configs/copy.configs'
 import { uiConfigs } from '@/configs/ui.configs'
+import { LPE } from '@/types/lpe.types'
+import { nope } from '@/utils/general.utils'
+import { lsdUtils } from '@/utils/lsd.utils'
+import { formatTagText } from '@/utils/string.utils'
 import { useHydrated } from '@/utils/useHydrated.util'
+import { Dropdown, TabItem, Tabs, Typography } from '@acid-info/lsd-react'
+import styled from '@emotion/styled'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDeepCompareEffect } from 'react-use'
 import {
   ArrayParam,
   StringParam,
   useQueryParam,
   withDefault,
 } from 'use-query-params'
-import { useDeepCompareEffect } from 'react-use'
-import { lsdUtils } from '@/utils/lsd.utils'
-import { formatTagText } from '@/utils/string.utils'
+import PostTypes = LPE.PostTypes
+import ContentBlockTypes = LPE.Post.ContentBlockTypes
 interface SearchBoxProps {
   onSearch?: (query: string, tags: string[], types: LPE.ContentType[]) => void
   tags?: string[]

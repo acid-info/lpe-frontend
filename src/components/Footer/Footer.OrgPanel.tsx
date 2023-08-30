@@ -1,8 +1,8 @@
-import styled from '@emotion/styled'
-import { FooterSection } from '@/components/Footer/Footer.Section'
-import { FooterLink } from '@/components/Footer/Footer.Link'
 import { FooterCopyright } from '@/components/Footer/Footer.Copyright'
+import { FooterLink } from '@/components/Footer/Footer.Link'
+import { FooterSection } from '@/components/Footer/Footer.Section'
 import { FooterLinksItems } from '@/configs/data.configs'
+import styled from '@emotion/styled'
 
 export const FooterOrgPanel = () => {
   return (
