@@ -11,6 +11,7 @@ const NotFoundPage = () => {
         description={'Description'}
         imageUrl={undefined}
         tags={[]}
+        pagePath={`/404`}
       />
       <NotFound />
     </>

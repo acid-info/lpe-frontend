@@ -39,6 +39,7 @@ export default function SEO({
   image?.alt && ogSearchParams.set('alt', image?.alt || '')
   contentType && ogSearchParams.set('contentType', contentType)
   date && ogSearchParams.set('date', date || '')
+  pagePath && ogSearchParams.set('pagePath', pagePath || '')
 
   const ogUrl = `${imageUrl}?${ogSearchParams.toString()}`
 
@@ -62,11 +63,7 @@ export default function SEO({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
       <meta name="twitter:site" content="@TWITTERHANDLE" />
-      {image ? (
-        <meta name="twitter:image" content={image.url} />
-      ) : (
-        <meta property="twitter:image" content={imageUrl} />
-      )}
+      <meta property="twitter:image" content={ogUrl} />
       <link rel="canonical" href={`${SITE_URL}${pagePath}`} />
     </Head>
   )

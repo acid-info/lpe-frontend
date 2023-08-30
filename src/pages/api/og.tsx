@@ -21,10 +21,12 @@ export default async function handler(request: NextRequest) {
   ).then((res) => res.arrayBuffer())
 
   const searchParams = new URL(href).searchParams
-  const title = searchParams.get('title') || 'LOGOS→PRESS ENGINE'
+  const contentType = searchParams.get('contentType')
+  const title =
+    contentType == null ? 'LOGOS→PRESS ENGINE' : searchParams.get('title')
   const image = searchParams.get('image') || ''
   const alt = searchParams.get('alt') || ''
-  const contentType = searchParams.get('contentType')
+  const pagePath = searchParams.get('pagePath') || '/'
   const date = searchParams.get('date')
 
   const imgSrc = image
@@ -120,7 +122,7 @@ export default async function handler(request: NextRequest) {
                 fontFamily: 'Inter',
               }}
             >
-              <p>{contentType ?? '/'}</p>
+              <p>{contentType ?? pagePath}</p>
               {date && <p>∙</p>}
               {date && <p>{`${day} ${month} ${year}`}</p>}
             </div>
