@@ -2,6 +2,7 @@ import { LPE } from '@/types/lpe.types'
 import { ImageResponse } from '@vercel/og'
 import { handleMethodNotAllowedResponse } from 'next/dist/server/future/route-modules/helpers/response-handlers'
 import { NextRequest } from 'next/server'
+import { siteConfigs } from '@/configs/site.configs'
 
 export const config = {
   runtime: 'edge',
@@ -69,7 +70,7 @@ export default async function handler(request: NextRequest) {
             display: 'flex',
             flexDirection: 'column',
             width: hasImage ? '600px' : '100%',
-            padding: '56px 48px',
+            padding: '48px',
             justifyContent: 'space-between',
             height: '100%',
             position: 'relative',
@@ -97,6 +98,20 @@ export default async function handler(request: NextRequest) {
                 fill="white"
               />
             </svg>
+            {contentType === 'article' && (
+              <div
+                style={{
+                  display: 'flex',
+                  fontFamily: 'Lora',
+                  fontSize: '40px',
+                  whiteSpace: 'pre-wrap',
+                  paddingLeft: '40px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {siteConfigs.title.replace('Logos', '')}
+              </div>
+            )}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div
@@ -122,7 +137,10 @@ export default async function handler(request: NextRequest) {
                 fontFamily: 'Inter',
               }}
             >
-              <p>{contentType ?? pagePath.replace(/^\/+/, '')}</p>
+              <p>
+                {contentType ??
+                  pagePath.replace(/^\/+/, '').replace(/\/+/, ' | ')}
+              </p>
               {date && <p>∙</p>}
               {date && <p>{`${day} ${month} ${year}`}</p>}
             </div>
