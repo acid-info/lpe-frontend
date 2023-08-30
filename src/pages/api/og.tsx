@@ -69,7 +69,7 @@ export default async function handler(request: NextRequest) {
             display: 'flex',
             flexDirection: 'column',
             width: hasImage ? '600px' : '100%',
-            padding: hasImage ? '48px 40px' : '80px',
+            padding: '56px 48px',
             justifyContent: 'space-between',
             height: '100%',
             position: 'relative',
