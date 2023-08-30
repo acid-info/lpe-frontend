@@ -11,7 +11,7 @@ export const uiConfigs = {
     smallColumn: 2,
   },
   searchResult: {
-    numberOfParagraphsShowInTopResult: 4,
+    numberOfParagraphsShowInTopResult: 3,
     numberOfImagesShowInTopResult: 3,
     numberOfTotalBlocksInListView: 20,
   },

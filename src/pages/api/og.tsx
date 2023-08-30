@@ -1,8 +1,8 @@
+import { siteConfigs } from '@/configs/site.configs'
 import { LPE } from '@/types/lpe.types'
 import { ImageResponse } from '@vercel/og'
 import { handleMethodNotAllowedResponse } from 'next/dist/server/future/route-modules/helpers/response-handlers'
 import { NextRequest } from 'next/server'
-import { siteConfigs } from '@/configs/site.configs'
 
 export const config = {
   runtime: 'edge',
@@ -24,7 +24,9 @@ export default async function handler(request: NextRequest) {
   const searchParams = new URL(href).searchParams
   const contentType = searchParams.get('contentType')
   const title =
-    contentType == null ? 'LOGOS→PRESS ENGINE' : searchParams.get('title')
+    contentType == null
+      ? siteConfigs.heroTitle.join('')
+      : searchParams.get('title')
   const image = searchParams.get('image') || ''
   const alt = searchParams.get('alt') || ''
   const pagePath = searchParams.get('pagePath') || 'press.logos.co'

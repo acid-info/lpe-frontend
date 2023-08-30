@@ -6,6 +6,7 @@ export type EpisodeState = {
   podcast: string
   url: string
   coverImage: LPE.Post.ImageBlock | null
+  path: string
 }
 
 export const defaultEpisodeState: EpisodeState = {
@@ -13,6 +14,7 @@ export const defaultEpisodeState: EpisodeState = {
   podcast: '',
   url: '',
   coverImage: null,
+  path: '',
 }
 
 export const episodeState =

@@ -3,6 +3,7 @@ import { CloseIcon, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useHookstate } from '@hookstate/core'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
 import { PlayerType } from '../LpePlayer/Controls/Controls'
@@ -158,12 +159,17 @@ export default function GlobalAudioPlayer() {
           <Thumbnail
             src={epState.value.coverImage.url}
             alt={epState.value.coverImage.alt}
-            width={48}
             height={48}
+            width={
+              48 *
+              (epState.value.coverImage.width / epState.value.coverImage.height)
+            }
           />
         )}
-        <EpisodeData>
-          <Typography variant="body2">{epState.value.title}</Typography>
+        <EpisodeData href={epState.value.path} title={epState.value.title}>
+          <Typography variant="body2" genericFontFamily={'serif'}>
+            {epState.value.title}
+          </Typography>
           <Typography variant="body3">{epState.value.podcast}</Typography>
         </EpisodeData>
         <CloseIconContainer>
@@ -219,7 +225,6 @@ const Container = styled.div<{ visible: boolean }>`
 
 const RightMenu = styled.div`
   display: flex;
-  width: 40%;
   align-items: center;
   justify-content: flex-end;
   margin-left: 32px;
@@ -230,10 +235,17 @@ const RightMenu = styled.div`
   }
 `
 
-const EpisodeData = styled.div`
+const EpisodeData = styled(Link)`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  text-decoration: none;
+
+  > :first-child {
+    width: 85%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 
   @media (max-width: 768px) {
     display: none !important;

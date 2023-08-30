@@ -25,9 +25,11 @@ const ImageBlock = (props: Props) => {
         type={BlockType.IMAGE}
         date={document?.modifiedAt ? new Date(document?.modifiedAt) : null}
       />
-      <Typography variant={'body2'} component={'p'}>
-        {data.alt}
-      </Typography>
+      {data.alt.length > 0 && (
+        <Typography variant={'body2'} component={'p'}>
+          {data.alt}
+        </Typography>
+      )}
       <ContentBlockFooter data={document} order={order} />
     </Container>
   )
@@ -39,6 +41,10 @@ const Container = styled.div`
   gap: 8px;
   padding: 0 0;
   position: relative;
+
+  > a {
+    margin-bottom: 8px;
+  }
 
   figure {
     margin: 0;

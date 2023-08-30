@@ -108,6 +108,7 @@ const EpisodePlayer = ({
       podcast: showTitle,
       url: url as string,
       coverImage: coverImage ?? null,
+      path: router.asPath,
     })
   }, [title, showTitle, coverImage])
 
