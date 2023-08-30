@@ -1,6 +1,4 @@
-const regexForInnerHtml = /<[^>]*>/
-const regexForId = /id="([^"]*)"/
-const regexForClass = /class="([^"]*)"/
+const attributeRegex = (name: string) => new RegExp(`^<[^>]*${name}="([^"]*)"`)
 
 export function extractInnerHtml(htmlString: string) {
   var regex = /^<[^>]+>([\s\S]*)<\/[^>]+>$/
@@ -13,14 +11,31 @@ export function extractInnerHtml(htmlString: string) {
   }
 }
 
-export const extractIdFromFirstTag = (html: string) => {
-  const match = html.match(regexForId)
-  return match ? match[1] : null
-}
+export const extractIdFromFirstTag = (html: string) =>
+  extractAttributeFromHTML(html, 'id')
 
-export const extractClassFromFirstTag = (html: string) => {
-  const match = html.match(regexForClass)
-  return match ? match[1] : null
+export const extractClassFromFirstTag = (html: string) =>
+  extractAttributeFromHTML(html, 'class')
+
+export function extractAttributeFromHTML(
+  html: string,
+  attribute: string,
+): string | null
+export function extractAttributeFromHTML(
+  html: string,
+  attribute: string,
+  defaultValue: string,
+): string
+export function extractAttributeFromHTML(
+  html: string,
+  attribute: string,
+  defaultValue?: string,
+): string | null {
+  return (
+    (html.match(attributeRegex(attribute))?.[1] as string) ||
+    defaultValue ||
+    null
+  )
 }
 
 export const isAuthorsParagraph = (html: string) => {
