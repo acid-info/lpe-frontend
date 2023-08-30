@@ -26,7 +26,7 @@ export default async function handler(request: NextRequest) {
     contentType == null ? 'LOGOS→PRESS ENGINE' : searchParams.get('title')
   const image = searchParams.get('image') || ''
   const alt = searchParams.get('alt') || ''
-  const pagePath = searchParams.get('pagePath') || '/'
+  const pagePath = searchParams.get('pagePath') || 'press.logos.co'
   const date = searchParams.get('date')
 
   const imgSrc = image
@@ -122,7 +122,7 @@ export default async function handler(request: NextRequest) {
                 fontFamily: 'Inter',
               }}
             >
-              <p>{contentType ?? pagePath}</p>
+              <p>{contentType ?? pagePath.replace(/^\/+/, '')}</p>
               {date && <p>∙</p>}
               {date && <p>{`${day} ${month} ${year}`}</p>}
             </div>
