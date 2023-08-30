@@ -37,3 +37,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Continuous Integration
+
+Jenkins CI builds exist to deploy the two main branches:
+
+* https://press.logos.co/ - [Built from `master`](https://ci.infra.status.im/job/website/job/press.logos.co/) and pushed as `statusteam/logos-press-engine:deploy-master`.
+* https://dev-press.logos.co/ - [Built from `develop`](https://ci.infra.status.im/job/website/job/dev-press.logos.co/) and pushed as `statusteam/logos-press-engine:deploy-develop`.
+
+Those builds should run on ever commit to the respective branch.
