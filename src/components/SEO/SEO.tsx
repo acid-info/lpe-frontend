@@ -58,11 +58,7 @@ export default function SEO({
       />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {image ? (
-        <meta property="og:image" content={ogUrl} />
-      ) : (
-        <meta property="og:image" content={ogUrl} />
-      )}
+      <meta property="og:image" content={ogUrl} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
       <meta name="twitter:site" content="@TWITTERHANDLE" />

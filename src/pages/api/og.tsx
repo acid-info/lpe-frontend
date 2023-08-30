@@ -8,11 +8,20 @@ export const config = {
 }
 
 // Doc: https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation/og-image-examples#using-a-local-image
+// Font: https://vercel.com/docs/functions/edge-functions/og-image-generation/og-image-examples#using-a-custom-font
 export default async function handler(request: NextRequest) {
   const { href } = request.nextUrl
 
+  const lora = await fetch(
+    new URL('../../../assets/Lora-Regular.ttf', import.meta.url),
+  ).then((res) => res.arrayBuffer())
+
+  const inter = await fetch(
+    new URL('../../../assets/Inter-Regular.ttf', import.meta.url),
+  ).then((res) => res.arrayBuffer())
+
   const searchParams = new URL(href).searchParams
-  const title = searchParams.get('title')
+  const title = searchParams.get('title') || 'LOGOS→PRESS ENGINE'
   const image = searchParams.get('image') || ''
   const alt = searchParams.get('alt') || ''
   const contentType = searchParams.get('contentType')
@@ -34,9 +43,10 @@ export default async function handler(request: NextRequest) {
         src={imgSrc}
         alt={alt}
         style={{
-          objectFit: 'cover',
           width: '1200px',
           height: '630px',
+          objectFit: 'contain',
+          backgroundColor: '#000',
         }}
       />
     ) : (
@@ -90,6 +100,7 @@ export default async function handler(request: NextRequest) {
             <div
               style={{
                 display: 'flex',
+                fontFamily: 'Lora',
                 fontSize: '64px',
                 lineHeight: '115%',
                 whiteSpace: 'pre-wrap',
@@ -99,20 +110,20 @@ export default async function handler(request: NextRequest) {
                 ? title
                 : title?.substring(0, titleMaxLength) + '...'}
             </div>
-            {contentType && (
-              <div
-                style={{
-                  display: 'flex',
-                  gap: '24px',
-                  fontSize: '36px',
-                  textTransform: 'capitalize',
-                }}
-              >
-                <p>{contentType}</p>
-                {date && <p>•</p>}
-                {date && <p>{`${day} ${month} ${year}`}</p>}
-              </div>
-            )}
+            <div
+              style={{
+                display: 'flex',
+                gap: '24px',
+                fontSize: '36px',
+                alignItems: 'center',
+                textTransform: 'capitalize',
+                fontFamily: 'Inter',
+              }}
+            >
+              <p>{contentType ?? '/'}</p>
+              {date && <p>∙</p>}
+              {date && <p>{`${day} ${month} ${year}`}</p>}
+            </div>
           </div>
         </div>
         {imgSrc && (
@@ -134,6 +145,18 @@ export default async function handler(request: NextRequest) {
     {
       width: 1200,
       height: 630,
+      fonts: [
+        {
+          name: 'Lora',
+          data: lora,
+          style: 'normal',
+        },
+        {
+          name: 'Inter',
+          data: inter,
+          style: 'normal',
+        },
+      ],
     },
   )
 }
