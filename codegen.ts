@@ -1,7 +1,7 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
 
 const graphqlEndpoint = 'https://graphql.unbody.io'
-const projectId = process.env.UNBODY_LPE_PROJECT_ID || ''
+const projectId = process.env.UNBODY_PROJECT_ID || ''
 const authorization = process.env.UNBODY_API_KEY || ''
 
 const config: CodegenConfig = {

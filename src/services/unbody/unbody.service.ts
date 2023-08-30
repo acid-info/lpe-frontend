@@ -1270,6 +1270,6 @@ export class UnbodyService {
 
 const unbodyApi = new UnbodyService(
   process.env.UNBODY_API_KEY || '',
-  process.env.UNBODY_LPE_PROJECT_ID || '',
+  process.env.UNBODY_PROJECT_ID || '',
 )
 export default unbodyApi

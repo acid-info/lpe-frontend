@@ -1,20 +1,21 @@
-FROM node:18.13.0-alpine 
+FROM node:18.13.0-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-ENV PORT 3000
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+# Listening port
+ARG PORT=3000
+EXPOSE ${PORT}
 
-EXPOSE ${PORT} 
+# UnBody CDN credentials
+ARG UNBODY_PROJECT_ID
+ARG UNBODY_API_KEY
 
-COPY yarn.lock .
-COPY package.json .
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN yarn install 
+COPY . .
 
-COPY . . 
-
+RUN yarn install --production
 RUN yarn build
 
-CMD yarn start
+CMD ["yarn", "start"]
