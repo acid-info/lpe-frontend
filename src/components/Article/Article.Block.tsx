@@ -82,7 +82,7 @@ export const RenderArticleBlock = ({
             React.HTMLProps<HTMLUListElement>
           >
           return (
-            <Typography
+            <Paragraph
               variant="body1"
               component="div"
               genericFontFamily="sans-serif"
@@ -104,7 +104,7 @@ export const RenderArticleBlock = ({
                   __html: extractInnerHtml(block.html),
                 }}
               />
-            </Typography>
+            </Paragraph>
           )
         }
         default:
@@ -134,6 +134,19 @@ const Paragraph = styled(Typography)`
   &#p-2 {
     font-size: var(--lsd-h6-fontSize);
     line-height: var(--lsd-h6-lineHeight);
+  }
+
+  .u-font-style-italic {
+    font-style: italic;
+  }
+  .u-text-decoration-underline {
+    text-decoration: underline;
+  }
+  .u-text-decoration-line-through {
+    text-decoration: line-through;
+  }
+  &.u-text-align-center {
+    text-align: center;
   }
 `
 
