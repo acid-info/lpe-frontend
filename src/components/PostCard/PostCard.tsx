@@ -237,7 +237,7 @@ PostCard.styles = {
   `,
   small: (theme: Theme) => css`
     .post-card__title-text {
-      ${lsdUtils.typography('h4')}
+      ${lsdUtils.typography('h5')}
     }
 
     .post-card__subtitle {
@@ -252,6 +252,10 @@ PostCard.styles = {
       .post-card__title h3 {
         ${lsdUtils.typography('h6')}
       }
+    }
+
+    .post-card__show-details {
+      ${PostCardShowDetails.styles.small(theme)}
     }
 
     ${lsdUtils.breakpoint(theme, 'md', 'down')} {
