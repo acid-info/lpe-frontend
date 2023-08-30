@@ -1,12 +1,17 @@
+/** @jsxImportSource @emotion/react */
 import { ArticleHeading } from '@/components/Article/Article.Heading'
 import {
+  extractAttributeFromHTML,
   extractClassFromFirstTag,
   extractIdFromFirstTag,
   extractInnerHtml,
 } from '@/utils/html.utils'
 import { HeadingElementsRef } from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import clsx from 'clsx'
+import React from 'react'
 import ReactPlayer from 'react-player'
 import { LPE } from '../../types/lpe.types'
 import { ArticleImageBlockWrapper } from './Article.ImageBlockWrapper'
@@ -59,23 +64,61 @@ export const RenderArticleBlock = ({
               variant="body1"
               component={block.tagName as any}
               genericFontFamily="sans-serif"
-              className={`${extractClassFromFirstTag(
-                block.html,
-              )} ${block.classNames.join(' ')}`}
+              className={clsx(
+                extractClassFromFirstTag(block.html),
+                block.classNames,
+              )}
               id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
+              css={css`
+                ${extractAttributeFromHTML(block.html, 'style', '')}
+              `}
               dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
             />
+          )
+        }
+        case 'ul':
+        case 'ol': {
+          const Component = block.tagName as any as React.ComponentType<
+            React.HTMLProps<HTMLUListElement>
+          >
+          return (
+            <Typography
+              variant="body1"
+              component="div"
+              genericFontFamily="sans-serif"
+              id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
+            >
+              <Component
+                start={Number.parseInt(
+                  extractAttributeFromHTML(block.html, 'start', '1'),
+                  10,
+                )}
+                css={css`
+                  ${extractAttributeFromHTML(block.html, 'style', '')}
+                `}
+                className={clsx(
+                  extractClassFromFirstTag(block.html),
+                  block.classNames,
+                )}
+                dangerouslySetInnerHTML={{
+                  __html: extractInnerHtml(block.html),
+                }}
+              />
+            </Typography>
           )
         }
         default:
           return (
             <Paragraph
-              variant="body1"
               component={block.tagName as any}
               genericFontFamily="sans-serif"
-              className={`${extractClassFromFirstTag(
-                block.html,
-              )} ${block.classNames.join(' ')}`}
+              css={css`
+                ${extractAttributeFromHTML(block.html, 'style', '')}
+              `}
+              className={clsx(
+                extractClassFromFirstTag(block.html),
+                block.classNames,
+              )}
               id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
               dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
             />
