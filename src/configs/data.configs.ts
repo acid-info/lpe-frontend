@@ -1,5 +1,6 @@
 import { siteConfigs } from '@/configs/site.configs'
 import { LPEFooterGroup } from '@/types/ui.types'
+import { getPostLink } from '../utils/route.utils'
 
 export const ArticleBlocksOrders = {
   title: 0,
@@ -16,7 +17,7 @@ export const AuthorsConfig = {
 
 export const NavLinksItems = [
   { label: 'Articles', href: '/search?type=article' },
-  { label: 'Podcasts', href: '/podcasts' },
+  { label: 'Podcasts', href: getPostLink('podcast') },
   { label: 'About', href: '/about' },
 ]
 

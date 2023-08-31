@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../../../types/lpe.types'
+import { getPostLink } from '../../../utils/route.utils'
 import EpisodeStats from '../Episode.Stats'
 import EpisodeChannels from './Episode.Channels'
 import EpisodePlayer from './Episode.Player'
@@ -39,7 +40,7 @@ const EpisodeHeader = ({
         {title}
       </EpisodeTitle>
       {show && (
-        <CustomLink href={`/podcasts/${show.slug}`}>
+        <CustomLink href={getPostLink('podcast', { showSlug: show.slug })}>
           <Show>
             <Image
               src={show.logo.url}

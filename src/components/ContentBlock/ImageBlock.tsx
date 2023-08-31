@@ -28,7 +28,7 @@ const ImageBlock = (props: Props) => {
       <Typography variant={'body2'} component={'p'}>
         {data.alt}
       </Typography>
-      <ContentBlockFooter data={document} order={order} />
+      <ContentBlockFooter type="image" data={document} order={order} />
     </Container>
   )
 }

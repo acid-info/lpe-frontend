@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../../types/lpe.types'
+import { getPostLink } from '../../utils/route.utils'
 import { Grid, GridItem } from '../Grid/Grid'
 import PodcastHost from './Podcast.Host'
 
@@ -45,7 +46,9 @@ export default function PodcastsLists({ shows }: Props) {
                     <PodcastHost show={show} />
                   </ShowData>
                 </div>
-                <ShowButtonLink href={`/podcasts/${show.slug}`}>
+                <ShowButtonLink
+                  href={getPostLink('podcast', { showSlug: show.slug })}
+                >
                   <ShowButton isEven={isEven}>
                     <ColoredText isEven={isEven} variant="body3">
                       Podcast page

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { DefaultLayout } from '../../../layouts/DefaultLayout'
 import { LPE } from '../../../types/lpe.types'
+import { getPostLink } from '../../../utils/route.utils'
 
 interface PodcastShowProps {
   show: LPE.Podcast.Show
@@ -33,7 +34,7 @@ const PodcastShowPage = ({
         title={show.title}
         description={show.description}
         imageUrl={undefined}
-        pagePath={`/podcasts/${showSlug}`}
+        pagePath={getPostLink('podcast', { showSlug: showSlug as string })}
         tags={[]}
       />
       <PodcastShowContainer

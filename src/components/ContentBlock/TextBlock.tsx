@@ -28,7 +28,7 @@ const TextBlock = (props: Props) => {
       <NicerTextFormat variant="body2" genericFontFamily="sans-serif">
         {text as string}
       </NicerTextFormat>
-      <ContentBlockFooter data={document} order={order} />
+      <ContentBlockFooter order={order} data={document} type="text" />
     </Container>
   )
 }
