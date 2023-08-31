@@ -1,4 +1,5 @@
 import { LPE } from '../../../types/lpe.types'
+import { getPostLink } from '../../../utils/route.utils'
 import { UnbodyResGoogleDocData } from '../unbody.types'
 import { UnbodyDataTypeConfig } from './types'
 
@@ -37,7 +38,7 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
       title: data.title,
       numberOfEpisodes: context?.numberOfEpisodes || 0,
       hosts: data.authors,
-      url: `/podcasts/${showSlug}`,
+      url: getPostLink('podcast', { showSlug }),
       description: (description?.type === 'text' && description.html) || '',
       logo: {
         alt: data.title,

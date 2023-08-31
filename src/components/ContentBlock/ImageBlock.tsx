@@ -29,7 +29,7 @@ const ImageBlock = (props: Props) => {
           {data.alt}
         </Caption>
       )}
-      <ContentBlockFooter data={document} order={order} />
+      <ContentBlockFooter type="image" data={document} order={order} />
     </Container>
   )
 }

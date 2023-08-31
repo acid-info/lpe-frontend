@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getPostLink } from '../../utils/route.utils'
 
 type Size = 'small' | 'medium' | 'large'
 
@@ -29,7 +30,7 @@ export const PostCardShowDetails = ({
   return (
     <CustomLink
       {...props}
-      href={`/podcasts/${slug}`}
+      href={getPostLink('podcast', { showSlug: slug })}
       applySizeStyles={applySizeStyles}
       className={clsx('show-details', `show-details--${size}`, props.className)}
     >

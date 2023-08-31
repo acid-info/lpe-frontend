@@ -14,6 +14,7 @@ import clsx from 'clsx'
 import React from 'react'
 import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
+import { getPostLink } from '../../utils/route.utils'
 import { Authors } from '../Authors'
 import { AuthorsDirection } from '../Authors/Authors'
 import { ResponsiveImageProps } from '../ResponsiveImage/ResponsiveImage'
@@ -66,10 +67,10 @@ export const PostCard = (_props: PostCardProps) => {
     ...props
   } = _props
 
-  const link =
-    contentType === LPE.PostTypes.Article
-      ? `/article/${slug}`
-      : `/podcasts/${podcastShowDetails?.slug}/${slug}`
+  const link = getPostLink(contentType, {
+    showSlug: podcastShowDetails?.slug,
+    postSlug: slug,
+  })
 
   const coverImageElement = coverImage && (
     <PostCardCover

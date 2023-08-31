@@ -9,6 +9,7 @@ import { ChevronRightIcon } from '../../components/Icons/ChevronRightIcon'
 import { PostsGrid } from '../../components/PostsGrid'
 import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
+import { getPostLink } from '../../utils/route.utils'
 
 export type PodcastShowsPreviewProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -62,7 +63,7 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
               )}
 
               <Link
-                href={`/podcasts/${show.slug}`}
+                href={getPostLink('podcast', { showSlug: show.slug })}
                 className="podcasts__show-link"
               >
                 <Button

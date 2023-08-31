@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { LPE } from '../../../types/lpe.types'
 
 import unbodyApi from '@/services/unbody/unbody.service'
+import { getPostLink } from '../../../utils/route.utils'
 
 type EpisodeProps = {
   episode: LPE.Podcast.Document
@@ -27,7 +28,10 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
         description={episode.description}
         image={episode.coverImage}
         imageUrl={undefined}
-        pagePath={`/podcasts/${showSlug}/${epSlug}`}
+        pagePath={getPostLink('podcast', {
+          showSlug: showSlug as string,
+          postSlug: epSlug as string,
+        })}
         tags={[
           ...episode.tags,
           ...episode.authors.map((author) => author.name),

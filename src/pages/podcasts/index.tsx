@@ -5,6 +5,7 @@ import { GetStaticPropsContext } from 'next'
 import { ReactNode } from 'react'
 import { DefaultLayout } from '../../layouts/DefaultLayout'
 import { LPE } from '../../types/lpe.types'
+import { getPostLink } from '../../utils/route.utils'
 
 type PodcastsProps = {
   shows: LPE.Podcast.Show[]
@@ -28,7 +29,7 @@ const PodcastShowPage = ({
         title={'Logos Podcasts'}
         description={'Description'}
         imageUrl={undefined}
-        pagePath={`/podcasts`}
+        pagePath={getPostLink('podcast')}
         tags={[]}
       />
       <PodcastsContainer

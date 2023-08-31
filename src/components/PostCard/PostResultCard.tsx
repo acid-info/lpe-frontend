@@ -7,22 +7,12 @@ import clsx from 'clsx'
 import { PostCardProps } from '@/components/PostCard/PostCard'
 import { PostCardSubTitle } from '@/components/PostCard/PostCard.Subtitle'
 import { PostCardTitle } from '@/components/PostCard/PostCard.Title'
-import { LPE } from '../../types/lpe.types'
+import { getPostLink } from '../../utils/route.utils'
 import { Authors } from '../Authors'
 import { AuthorsDirection } from '../Authors/Authors'
 import { PostCardLabel } from './PostCard.Label'
 
 type PostResultCardProps = Omit<PostCardProps, 'size'>
-
-const getPostLink = (
-  contentType: LPE.PostType,
-  slug: string,
-  showSlug?: string,
-) => {
-  return contentType === LPE.PostTypes.Article
-    ? `/article/${slug}`
-    : `/podcasts/${showSlug}/${slug}`
-}
 
 export const PostResultCard = (_props: PostResultCardProps) => {
   const {
@@ -44,7 +34,10 @@ export const PostResultCard = (_props: PostResultCardProps) => {
     ...props
   } = _props
 
-  const link = getPostLink(contentType, slug, podcastShowDetails?.slug)
+  const link = getPostLink(contentType, {
+    postSlug: slug,
+    showSlug: podcastShowDetails?.slug,
+  })
 
   return (
     <Container className={clsx('post-card-result', props.className)}>
