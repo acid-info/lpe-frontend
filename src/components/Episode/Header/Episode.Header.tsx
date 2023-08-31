@@ -1,3 +1,4 @@
+import ArticleSummary from '@/components/Article/Header/Article.Summary'
 import { TagsAndSocial } from '@/components/TagsAndSocial'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -54,13 +55,7 @@ const EpisodeHeader = ({
       <TagsAndSocial tags={tags} />
       {channels && <EpisodeChannels channels={channels} />}
       {description && (
-        <EpisodeSubtitle
-          variant="h6"
-          genericFontFamily="sans-serif"
-          component="div"
-        >
-          {description}
-        </EpisodeSubtitle>
+        <ArticleSummary summary={description} showLabel={false} />
       )}
     </EpisodeHeaderContainer>
   )

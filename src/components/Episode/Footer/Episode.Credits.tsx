@@ -36,8 +36,6 @@ const EpisodeCredits = ({
 }
 
 const Container = styled.div`
-  margin-bottom: 32px;
-
   button {
     width: 100% !important;
   }

@@ -46,11 +46,12 @@ const EpisodeChannels = ({ channels }: EpisodeChannelProps) => {
   )
 }
 
-const EpisodeChannelContainer = styled.header`
+const EpisodeChannelContainer = styled.div`
   display: flex;
   gap: 24px;
   align-items: center;
   margin-top: 32px;
+  margin-bottom: 32px;
 
   @media (max-width: 768px) {
     margin-top: 24px;

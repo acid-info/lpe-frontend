@@ -2,17 +2,18 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import EpisodeBlocks from './Episode.Blocks'
-import EpisodeDivider from './Episode.Divider'
 
 const EpisodeTranscript = ({ episode }: { episode: LPE.Podcast.Document }) => {
   return (
-    <>
-      <EpisodeDivider />
+    <Container>
       <EpisodeBlocks data={episode} />
-    </>
+    </Container>
   )
 }
 
+const Container = styled.div`
+  margin-top: 32px;
+`
 const Title = styled(Typography)`
   margin-bottom: 8px;
 `

@@ -325,6 +325,10 @@ const Container = styled.div`
       color: rgba(var(--lsd-text-primary), 0.3);
     }
   }
+
+  ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+    padding: 8px 0;
+  }
 `
 
 const FirstRow = styled.div`

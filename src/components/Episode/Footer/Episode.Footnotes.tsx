@@ -1,3 +1,4 @@
+import { cleanUpUrlsInRawHtml } from '@/utils/string.utils'
 import { Collapse, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useState } from 'react'
@@ -22,14 +23,19 @@ const EpisodeFootnotes = ({
             <Footnote key={idx}>
               <Typography
                 component="a"
-                variant="body3"
+                variant="label1"
                 href={`#${footnote.refId}`}
                 target="_blank"
                 id={footnote.id.replace('#', '')}
               >
-                {footnote.refValue}
+                {footnote.refValue.replace('[', '').replace(']', '')}.
               </Typography>
-              <P dangerouslySetInnerHTML={{ __html: footnote.valueHTML }} />
+              <FootNoteText
+                variant="label1"
+                dangerouslySetInnerHTML={{
+                  __html: cleanUpUrlsInRawHtml(footnote.valueHTML.trim()),
+                }}
+              />
             </Footnote>
           ))}
         </Footnotes>
@@ -38,8 +44,13 @@ const EpisodeFootnotes = ({
   ) : null
 }
 
+const FootNoteText = styled(Typography)`
+  line-height: var(--lsd-body2-lineHeight);
+`
+
 const Container = styled.div`
   margin-bottom: 32px;
+  margin-top: -1px;
 
   button {
     width: 100% !important;
@@ -57,7 +68,14 @@ const Footnotes = styled.div`
 const Footnote = styled.div`
   display: flex;
   flex-direction: flex;
-  align-items: baseline;
+  align-items: start;
+  gap: 3px;
+  > a:first-of-type {
+    text-decoration: none;
+    a:hover {
+      text-decoration: underline;
+    }
+  }
 `
 
 const P = styled.p`

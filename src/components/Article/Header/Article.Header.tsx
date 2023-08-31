@@ -58,26 +58,13 @@ const ArticleHeader = ({
       <AuthorsContainer>
         <Authors authors={authors} email={true} gap={12} />
       </AuthorsContainer>
-      {/*<MobileCollapseContainer>*/}
-      {/*  {resultsNumber === null && <MobileToc toc={toc} />}*/}
-      {/*  {resultsNumber === null && <MobileSummary summary={summary} />}*/}
-      {/*</MobileCollapseContainer>*/}
-      <ArticleSummary
-        summary={summary}
-        className={'mobileSummary'}
-        showLabel={false}
-      />
       {coverImage && (
         <ArticleImageBlockWrapper
           image={coverImage}
           order={ArticleBlocksOrders.cover}
         />
       )}
-      <ArticleSummary
-        summary={summary}
-        className={'desktopSummary'}
-        showLabel={true}
-      />
+      <ArticleSummary summary={summary} showLabel={false} />
     </ArticleHeaderContainer>
   )
 }

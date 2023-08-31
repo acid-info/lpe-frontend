@@ -78,3 +78,19 @@ export function parseTimestamp(text: string) {
 export function formatTagText(tag: string) {
   return tag.replace(/_/g, ' ')
 }
+
+export function cleanUpUrlsInRawHtml(rh: string): string {
+  const regex = /<a href="(.*)">(.*)<\/a>/g
+  const matches = rh.matchAll(regex) || []
+  let newRh = rh
+
+  // TODO TS complains about matches not being iterable
+  for (const match of matches as any) {
+    const url = match[1]
+    const text = match[2]
+    // clean the text by removing http:// or https:// or www.
+    const cleanText = text.replace(/(http:\/\/|https:\/\/|www\.)/g, '')
+    newRh = newRh.replace(match[0], `<a href="${url}">${cleanText}</a>`)
+  }
+  return newRh
+}
