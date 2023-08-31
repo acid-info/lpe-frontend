@@ -18,7 +18,7 @@ export default function PodcastsLists({ shows }: Props) {
           const isEven = idx % 2 === 0
           return (
             <ShowCardContainer key={show.id} className="w-8">
-              <ShowCard isEven={isEven}>
+              <ShowCard isEven={isEven} href={`/podcasts/${show.slug}`}>
                 <div>
                   <Top>
                     <ShowInfoContainer>
@@ -72,7 +72,7 @@ const PodcastListsContainer = styled(Grid)`
 
 const ShowCardContainer = styled(GridItem)``
 
-const ShowCard = styled.div<{ isEven: boolean }>`
+const ShowCard = styled(Link)<{ isEven: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -80,6 +80,7 @@ const ShowCard = styled.div<{ isEven: boolean }>`
   border: 1px solid rgb(var(--lsd-text-primary));
   box-sizing: border-box;
   height: 516px;
+  text-decoration: none;
   background-color: ${(props) =>
     props.isEven
       ? 'rgb(var(--lsd-surface-secondary))'
@@ -89,6 +90,8 @@ const ShowCard = styled.div<{ isEven: boolean }>`
     height: 374px;
   }
 `
+
+const ShowCardLinkContainer = styled(Link)``
 
 const ShowInfoContainer = styled.div`
   display: flex;

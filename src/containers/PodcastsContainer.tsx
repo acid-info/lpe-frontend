@@ -15,6 +15,20 @@ interface Props {
 const PodcastsContainer = (props: Props) => {
   const { shows, highlightedEpisodes, latestEpisodes } = props
 
+  const requiredHighlightPostsCount = 2
+  const gapCount = requiredHighlightPostsCount - highlightedEpisodes.length
+
+  // Spread the existing highlighted episodes and fill the rest with the latest episodes
+  const highlightPosts = [
+    ...highlightedEpisodes,
+    ...latestEpisodes.slice(0, gapCount),
+  ]
+
+  // Now we need to remove the highlight posts from the latest episodes
+  const latestPosts = latestEpisodes.filter(
+    (episode) => !highlightPosts.includes(episode),
+  )
+
   return (
     <PodcastsGrid>
       <PodcastsBodyContainer className={'w-16'}>
@@ -23,7 +37,7 @@ const PodcastsContainer = (props: Props) => {
         <Episodes>
           <PodcastSection>
             <EpisodesList
-              episodes={highlightedEpisodes}
+              episodes={highlightPosts}
               bordered="except-first-row"
               header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
               pattern={[{ cols: 2, size: 'medium' }]}
@@ -43,7 +57,7 @@ const PodcastsContainer = (props: Props) => {
             <EpisodesList
               bordered
               shows={shows}
-              episodes={latestEpisodes.slice(0, 4)}
+              episodes={latestPosts.slice(0, 4)}
               pattern={[{ cols: 4, size: 'small' }]}
               breakpoints={[
                 {
