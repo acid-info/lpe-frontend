@@ -35,7 +35,6 @@ const Tags = styled.div`
   overflow-x: auto;
   position: relative;
   scroll-snap-type: x mandatory;
-  justify-content: center;
   gap: 0 8px;
 
   padding-top: 16px;
@@ -53,10 +52,17 @@ const Tags = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
+    &:first-child {
+      margin-left: auto;
+    }
+
+    &:last-child {
+      margin-right: auto;
+    }
   }
 
   @media (max-width: ${(props) => props.theme.breakpoints.sm.width}px) {
-    justify-content: flex-start;
     padding-left: var(--main-content-padding);
     padding-right: var(--main-content-padding);
   }
