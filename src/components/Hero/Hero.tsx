@@ -39,6 +39,7 @@ export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {
         {copyConfigs.site.description}
       </Description>
       <HeroTags tags={tags} />
+      <Border />
     </Container>
   )
 }
@@ -49,8 +50,8 @@ const Container = styled.div`
   gap: 8px 0;
   align-items: center;
 
+  position: relative;
   padding: 24px 16px 40px 16px;
-  border-bottom: 1px solid rgb(var(--lsd-border-primary));
 
   @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
     padding: 8px 0 16px 0;
@@ -60,6 +61,7 @@ const Container = styled.div`
 const Title = styled(Typography)`
   text-align: center;
   text-transform: uppercase;
+  padding: 0 var(--main-content-padding);
   @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
     font-size: var(--lsd-h4-fontSize) !important;
     font-weight: var(--lsd-h4-fontWeight) !important;
@@ -71,10 +73,22 @@ const Description = styled(Typography)`
   text-align: center;
   max-width: 407px;
   text-transform: capitalize;
+  padding: 0 var(--main-content-padding);
 
   @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
     font-size: 12px !important;
     font-weight: 400 !important;
     line-height: 16px !important;
   }
+`
+
+const Border = styled.div`
+  line-height: 0;
+  height: 0;
+  width: calc(100% - 2 * var(--main-content-padding));
+  background: red;
+  position: absolute;
+  bottom: 0;
+  left: var(--main-content-padding);
+  border-bottom: 1px solid rgb(var(--lsd-border-primary));
 `
