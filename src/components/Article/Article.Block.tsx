@@ -7,7 +7,7 @@ import {
   extractInnerHtml,
 } from '@/utils/html.utils'
 import { HeadingElementsRef } from '@/utils/ui.utils'
-import { Typography } from '@acid-info/lsd-react'
+import { Quote, Typography } from '@acid-info/lsd-react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
@@ -45,9 +45,8 @@ export const RenderArticleBlock = ({
         }
         case 'p': {
           const isIframe = block.embed && block.labels.includes('embed')
-
-          return block.embed && isIframe ? (
-            block.labels.includes('youtube_embed') ? (
+          if (block.embed && isIframe) {
+            return block.labels.includes('youtube_embed') ? (
               <IframeContainer isSimplecast={false}>
                 <ReactPlayer url={block.embed.src} />
               </IframeContainer>
@@ -59,7 +58,29 @@ export const RenderArticleBlock = ({
                 }}
               />
             )
-          ) : (
+          }
+
+          if (
+            block.classNames.includes('subtitle') &&
+            block.classNames.includes('u-with-margin-left')
+          ) {
+            return (
+              <Quote
+                mode="indented-line"
+                genericFontFamily="serif"
+                id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
+              >
+                <Paragraph
+                  variant="body1"
+                  dangerouslySetInnerHTML={{
+                    __html: extractInnerHtml(block.html),
+                  }}
+                />
+              </Quote>
+            )
+          }
+
+          return (
             <Paragraph
               variant="body1"
               component={block.tagName as any}
