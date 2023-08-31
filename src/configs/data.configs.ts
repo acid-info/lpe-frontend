@@ -85,7 +85,7 @@ export const FooterLinksItems: {
       title: null,
       key: 'info',
       links: [
-        { label: 'Terms of Service', href: '/terms' },
+        { label: 'Terms of Use', href: '/terms' },
         { label: 'about', href: '/about' },
       ],
     },
