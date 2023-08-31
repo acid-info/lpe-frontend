@@ -23,6 +23,8 @@ import {
 import { unbodyDataTypes } from './dataTypes'
 import { UnbodyHelpers } from './unbody.helpers'
 
+const isVercel = process.env.VERCEL === '1'
+
 const articleDocument = unbodyDataTypes.get({
   objectType: 'GoogleDoc',
   classes: ['article', 'document'],
@@ -107,7 +109,8 @@ export class UnbodyService {
 
     this.loadInitialData(true)
 
-    if (process.env.NODE_ENV !== 'development') this.checkForUpdates()
+    if (!isVercel && process.env.NODE_ENV !== 'development')
+      this.checkForUpdates()
   }
 
   private checkForUpdates = async () => {
