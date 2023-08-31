@@ -1,6 +1,7 @@
 import { LPETag } from '@/components/LPETag'
 import styled from '@emotion/styled'
 import React from 'react'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 export type NavbarFilter = Partial<React.ComponentProps<typeof Container>> & {
   tags?: string[]
@@ -62,7 +63,7 @@ const Tags = styled.div`
     }
   }
 
-  @media (max-width: ${(props) => props.theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
     padding-left: var(--main-content-padding);
     padding-right: var(--main-content-padding);
   }
