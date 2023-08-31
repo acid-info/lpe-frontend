@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Image, { ImageProps } from 'next/image'
+import Image, { ImageLoader, ImageProps } from 'next/image'
 import { useState } from 'react'
 import { LPE } from '../../types/lpe.types'
 
@@ -14,6 +14,9 @@ export type Props = {
   data: LPE.Image.Document
   alt?: string
 } & ResponsiveImageProps
+
+const unbodyImageLoader: ImageLoader = ({ src, width, quality }) =>
+  `${src}?w=${width}&q=${quality || 75}`
 
 export const ResponsiveImage = ({
   data,
@@ -34,6 +37,9 @@ export const ResponsiveImage = ({
     className: loaded ? 'loaded' : '',
     onLoad: () => setLoaded(true),
     loading: 'lazy',
+    ...(data.url.startsWith('https://images.cdn.unbody.io')
+      ? { loader: unbodyImageLoader }
+      : {}),
     ...(nextImageProps || {}),
     style: {
       width: '100%',
