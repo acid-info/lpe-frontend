@@ -103,8 +103,8 @@ export const SearchResultsListView = (props: Props) => {
   }, [posts, blocks, topPost])
 
   return (
-    <Container cols={12}>
-      <PostsList className={'w-8'}>
+    <Container xs={{ cols: 8 }} md={{ cols: 12 }} lg={{ cols: 16 }} cols={16}>
+      <PostsList xs={{ cols: 8 }} md={{ cols: 8 }} lg={{ cols: 11 }}>
         {topPost && (
           <PostsListHeader>
             <SearchResultsListHeader
@@ -140,8 +140,8 @@ export const SearchResultsListView = (props: Props) => {
           )}
         </PostsListContent>
       </PostsList>
-      <GridItem className={'w-1'} />
-      <BlocksList className={'w-3'}>
+      <GridItem xs={{ cols: 0 }} md={{ cols: 1 }} cols={1} />
+      <BlocksList xs={{ cols: 8 }} md={{ cols: 3 }} lg={{ cols: 4 }} cols={4}>
         {!isMobile &&
           (renderBlocks.length > 0 ? (
             <BlockListSticky>

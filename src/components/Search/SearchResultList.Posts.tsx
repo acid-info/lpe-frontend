@@ -15,7 +15,6 @@ export const SearchResultListPosts = ({ posts, shows }: Props) => {
           <PostCard
             data={{
               ...data,
-              coverImage: post.type === 'podcast' ? data.coverImage : undefined,
               authors: [],
             }}
             className={'post-card__search-result'}
