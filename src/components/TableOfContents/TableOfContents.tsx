@@ -124,6 +124,8 @@ const TocItem = styled(Link)<{ active: boolean }>`
   }
 
   &.level-3 {
-    text-indent: 16px;
+    & > * {
+      margin-left: 16px;
+    }
   }
 `
