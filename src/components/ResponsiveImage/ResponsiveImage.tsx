@@ -16,7 +16,7 @@ export type Props = {
 } & ResponsiveImageProps
 
 const unbodyImageLoader: ImageLoader = ({ src, width, quality }) =>
-  `${src}?w=${width}&q=${quality || 75}`
+  `${src}?w=${width}&q=${quality || 75}&auto=format`
 
 export const ResponsiveImage = ({
   data,
