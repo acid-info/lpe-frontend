@@ -38,6 +38,7 @@ const PodcastsContainer = (props: Props) => {
           <PodcastSection>
             <EpisodesList
               episodes={highlightPosts}
+              shows={shows}
               bordered="except-first-row"
               header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
               pattern={[{ cols: 2, size: 'medium' }]}
