@@ -91,6 +91,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     return {
       notFound: true,
       props: { why: 'no article' },
+      revalidate: 10,
     }
   }
 
@@ -99,6 +100,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       episode,
       relatedEpisodes,
     },
+    revalidate: 10,
   }
 }
 

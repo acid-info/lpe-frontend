@@ -1,4 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { minutesToMilliseconds } from 'date-fns'
 import {
   CountDocumentsDocument,
   CountDocumentsQueryVariables,
@@ -12,6 +13,7 @@ import {
   SearchBlocksDocument,
   Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj,
 } from '../../lib/unbody/unbody.generated'
+import { getWebhookData } from '../../pages/api/webhook'
 import { ApiResponse, SearchResultItem } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
 import {
@@ -52,6 +54,8 @@ export class UnbodyService {
   client: ApolloClient<any> = null as any
   helpers = UnbodyHelpers
 
+  lastUpdate: number = 0
+  initialDataLastUpdate: number = 0
   initialDataPromise: CreatePromiseResult<(typeof this)['initialData']> =
     createPromise()
 
@@ -104,9 +108,26 @@ export class UnbodyService {
     })
 
     this.loadInitialData(true)
+
+    if (process.env.NODE_ENV !== 'development') this.checkForUpdates()
+  }
+
+  private checkForUpdates = async () => {
+    const data = await getWebhookData()
+    if (!data) return
+
+    if (data.lastUpdate > this.lastUpdate) {
+      this.lastUpdate = data.lastUpdate
+      await this.clearCache()
+      this.loadInitialData(true)
+    }
+
+    setTimeout(this.checkForUpdates, 1000)
   }
 
   private _loadInitialData = async () => {
+    this.initialDataLastUpdate = +new Date()
+
     const articles: LPE.Article.Data[] = await this.fetchAllArticles()
     const episodes: LPE.Podcast.Document[] = await this.fetchAllEpisodes()
     const staticPages = await this.fetchAllStaticPages()
@@ -124,11 +145,24 @@ export class UnbodyService {
   }
 
   loadInitialData = async (forced: boolean = false) => {
-    if (forced) {
+    if (
+      forced ||
+      +new Date() - this.initialDataLastUpdate > minutesToMilliseconds(10)
+    ) {
+      console.log('load initial data')
+      this.initialDataPromise &&
+        this.initialDataPromise.resolve(this.initialData)
+
+      this.initialDataPromise = createPromise()
+      await this.clearCache()
       this._loadInitialData()
     }
 
     return this.initialDataPromise.promise
+  }
+
+  clearCache = async () => {
+    this.client.cache.reset()
   }
 
   private fetchAllStaticPages = async () => {
@@ -220,8 +254,8 @@ export class UnbodyService {
     data: T | null = null,
     errors: any = null,
   ): ApiResponse<T> => {
+    if (errors) console.log(errors)
     if (errors || !data) {
-      console.log(errors)
       return {
         data: data as any,
         errors: JSON.stringify(errors),
@@ -262,7 +296,8 @@ export class UnbodyService {
 
   getStaticPages = () =>
     this.handleRequest<LPE.StaticPage.Document[]>(async () => {
-      const { staticPages } = await this.loadInitialData()
+      await this.loadInitialData()
+      const { staticPages } = this.initialData
 
       return staticPages
     }, [])
@@ -878,7 +913,8 @@ export class UnbodyService {
     skip?: number
   }) =>
     this.handleRequest(async () => {
-      const { posts } = await this.loadInitialData()
+      await this.loadInitialData()
+      const { posts } = this.initialData
 
       return posts.slice(skip, skip + limit)
     }, [])

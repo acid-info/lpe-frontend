@@ -69,6 +69,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       latestEpisodes: latestEpisodes.map((ep) => ({ ...ep, show: null })),
       // errors,
     },
+    revalidate: 10,
   }
 }
 

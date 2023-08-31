@@ -55,6 +55,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
         highlighted,
       },
     },
+    revalidate: 10,
   }
 }
 
