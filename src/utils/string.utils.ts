@@ -67,11 +67,11 @@ export function convertToIframe(url: string) {
 }
 
 export function parseText(text: string) {
-  return text.replace(/^\d{2}:\d{2}\s|\[\d+\]/g, '')
+  return text.replace(/^(\d{2}:)?\d{2}:\d{2}\s|\[\d+\]/g, '')
 }
 
 export function parseTimestamp(text: string) {
-  const time = text.match(/^\d{2}:\d{2}/g)
+  const time = text.match(/^(\d{2}:)?\d{2}:\d{2}/g)
   return time ? time[0] : ''
 }
 
