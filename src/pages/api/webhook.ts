@@ -3,7 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import path from 'path'
 
 const WEBHOOK_DATA_PATH = path.join(__dirname, '../../webhook_data.json')
-const TOKEN = process.env.REVALIDATE_WEBHOOK_TOKEN || ''
+const TOKEN =
+  process.env.REVALIDATE_WEBHOOK_TOKEN ||
+  'f8f1023d7d9d320af73b5ff49a8430dda97e9b666318c7a76b60c13d7a2e152b'
 
 export type WebhookData = {
   lastUpdate: number
