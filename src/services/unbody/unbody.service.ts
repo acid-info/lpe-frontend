@@ -1,5 +1,4 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { minutesToMilliseconds } from 'date-fns'
 import {
   CountDocumentsDocument,
   CountDocumentsQueryVariables,
@@ -55,14 +54,13 @@ export class UnbodyService {
   helpers = UnbodyHelpers
 
   lastUpdate: number = 0
-  initialDataLastUpdate: number = 0
-  initialDataPromise: CreatePromiseResult<(typeof this)['initialData']> =
-    createPromise()
+  loadingInitialData: boolean = false
 
   initialData: {
     posts: LPE.Post.Document[]
     staticPages: LPE.StaticPage.Document[]
   } = { posts: [], staticPages: [] }
+  initialDataPromise: CreatePromiseResult<any> = null as any
 
   constructor(private apiKey: string, private projectId: string) {
     const cache = new InMemoryCache({
@@ -114,20 +112,17 @@ export class UnbodyService {
 
   private checkForUpdates = async () => {
     const data = await getWebhookData()
-    if (!data) return
 
-    if (data.lastUpdate > this.lastUpdate) {
+    if (!this.loadingInitialData && data && data.lastUpdate > this.lastUpdate) {
       this.lastUpdate = data.lastUpdate
-      await this.clearCache()
       this.loadInitialData(true)
     }
 
     setTimeout(this.checkForUpdates, 1000)
   }
 
-  private _loadInitialData = async () => {
-    this.initialDataLastUpdate = +new Date()
-
+  private _loadInitialData = async (callback: (data: any) => void) => {
+    this.loadingInitialData = true
     const articles: LPE.Article.Data[] = await this.fetchAllArticles()
     const episodes: LPE.Podcast.Document[] = await this.fetchAllEpisodes()
     const staticPages = await this.fetchAllStaticPages()
@@ -140,22 +135,19 @@ export class UnbodyService {
       posts,
       staticPages,
     }
-
-    this.initialDataPromise.resolve({ posts, staticPages })
+    callback(this.initialData)
+    this.loadingInitialData = false
   }
 
   loadInitialData = async (forced: boolean = false) => {
-    if (
-      forced ||
-      +new Date() - this.initialDataLastUpdate > minutesToMilliseconds(10)
-    ) {
-      console.log('load initial data')
+    if (forced) {
       this.initialDataPromise &&
         this.initialDataPromise.resolve(this.initialData)
 
       this.initialDataPromise = createPromise()
+
       await this.clearCache()
-      this._loadInitialData()
+      this._loadInitialData(this.initialDataPromise.callback)
     }
 
     return this.initialDataPromise.promise
