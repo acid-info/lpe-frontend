@@ -1,4 +1,3 @@
-import { lsdUtils } from '@/utils/lsd.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
@@ -26,9 +25,9 @@ const ImageBlock = (props: Props) => {
         date={document?.modifiedAt ? new Date(document?.modifiedAt) : null}
       />
       {data.alt.length > 0 && (
-        <Typography variant={'body2'} component={'p'}>
+        <Caption variant={'body2'} component={'p'}>
           {data.alt}
-        </Typography>
+        </Caption>
       )}
       <ContentBlockFooter data={document} order={order} />
     </Container>
@@ -38,18 +37,17 @@ const ImageBlock = (props: Props) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
   padding: 0 0;
   position: relative;
+  gap: 8px;
 
   > a {
     margin-bottom: 8px;
   }
+`
 
-  figure {
-    margin: 0;
-    padding: 0;
-    ${lsdUtils.typography('body2')}
-  }
+const Caption = styled(Typography)`
+  margin-top: 8px;
+  font-style: italic;
 `
 export default ImageBlock

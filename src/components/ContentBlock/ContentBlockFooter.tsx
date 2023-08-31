@@ -11,23 +11,41 @@ type Props = {
 const ContentBlockFooter = ({ data: { title, slug }, order }: Props) => {
   return (
     <Container>
-      <Link href={`/article/${slug}#p-${order}`}>
+      <PostTitle>
         <Typography
           variant="subtitle1"
           component="h4"
           genericFontFamily="serif"
         >
-          {title.slice(0, Math.min(60, title.length))}
-          {title.length > 60 ? '...' : ''}
+          <span>☞</span>
         </Typography>
-      </Link>
+        <Link href={`/article/${slug}#p-${order}`}>
+          <Typography
+            variant="subtitle1"
+            component="h4"
+            genericFontFamily="serif"
+          >
+            {title.slice(0, Math.min(60, title.length))}
+            {title.length > 60 ? '...' : ''}
+          </Typography>
+        </Link>
+      </PostTitle>
     </Container>
   )
 }
 
-const Container = styled.div`
+const Container = styled.div``
+
+const PostTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
   a {
     text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 `
 

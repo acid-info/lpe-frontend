@@ -4,6 +4,7 @@ import { NicerTextFormat } from '@/components/Search/SearchResult.NicerTextForma
 import { LPE } from '@/types/lpe.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 
 interface Props {
   textBlocks: LPE.Post.TextBlock[]
@@ -24,9 +25,11 @@ export const SearchResultTopPostBlocks = ({
           {textBlocks.map((block, index) => (
             <TextBlockItem key={`para-${index}`}>
               <ParagraphIcon />
-              <NicerTextFormat variant={'subtitle2'}>
-                {block.text}
-              </NicerTextFormat>
+              <Link href={`/article/${block.document.slug}#p-${block.order}`}>
+                <NicerTextFormat variant={'subtitle2'}>
+                  {block.text}
+                </NicerTextFormat>
+              </Link>
             </TextBlockItem>
           ))}
         </TextBlocks>
@@ -67,6 +70,12 @@ const TextBlockItem = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
   }
 `
 

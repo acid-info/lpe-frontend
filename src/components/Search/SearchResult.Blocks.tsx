@@ -34,4 +34,6 @@ export const SearchResultListBlocks = ({ blocks }: Props) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 48px;
+  padding-top: 24px;
 `

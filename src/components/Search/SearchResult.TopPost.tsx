@@ -1,7 +1,6 @@
 import { PostCard } from '@/components/PostCard'
 import { SearchResultTopPostBlocks } from '@/components/Search/SearchResult.TopPost.Blocks'
 import { LPE } from '@/types/lpe.types'
-import { lsdUtils } from '@/utils/lsd.utils'
 import styled from '@emotion/styled'
 
 interface Props {
@@ -40,9 +39,5 @@ export const SearchResultTopPost = ({
 }
 
 const Container = styled.div`
-  padding: 24px 0;
-
-  ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
-    padding: 0;
-  }
+  padding: 0;
 `

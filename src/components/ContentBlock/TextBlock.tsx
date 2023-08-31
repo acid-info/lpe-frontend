@@ -36,8 +36,7 @@ const TextBlock = (props: Props) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 24px 0;
-  gap: 8px;
+  gap: 16px;
 `
 
 export default TextBlock

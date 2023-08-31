@@ -420,7 +420,6 @@ PostCard.styles = {
       }
       .post-card__authors {
         display: none;
-        grid-row: auto;
       }
       .show-details__logo {
         width: 16px;
@@ -436,6 +435,11 @@ PostCard.styles = {
 
       .show-details__title {
         ${lsdUtils.typography('subtitle3')}
+      }
+
+      .post-card__show-details {
+        grid-area: info;
+        grid-row: auto;
       }
 
       .show-details__episodes {
@@ -454,7 +458,6 @@ PostCard.styles = {
 
       &.post-card__podcast {
         grid-template-areas:
-          'info info info info info image image image'
           'info info info info info image image image'
           'info info info info info image image image'
           'info info info info info image image image';
