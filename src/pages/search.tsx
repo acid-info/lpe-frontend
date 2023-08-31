@@ -140,5 +140,6 @@ export async function getStaticProps() {
       topics,
       shows,
     },
+    revalidate: 10,
   }
 }

@@ -69,6 +69,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     return {
       notFound: true,
       props: { why: 'no slug' },
+      revalidate: 10,
     }
   }
 

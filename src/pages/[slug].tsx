@@ -62,6 +62,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
         props: {
           notFound: true,
         },
+        revalidate: 10,
       }
     }
 
@@ -71,6 +72,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
         error: 'Something went wrong!',
       },
       notFound: false,
+      revalidate: 10,
     }
   }
 
@@ -81,6 +83,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
       },
     },
     notFound: false,
+    revalidate: 10,
   }
 }
 
