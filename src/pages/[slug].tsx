@@ -17,7 +17,7 @@ const Page: CustomNextPage<PageProps> = ({
 }) => {
   if (!data) {
     if (notFound) {
-      return <Error statusCode={400} />
+      return <Error statusCode={404} />
     }
 
     return <Error statusCode={500} />
