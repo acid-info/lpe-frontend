@@ -17,7 +17,9 @@ const ArticleBlocks = ({ data }: Props) => {
       data.content.filter(
         (b) =>
           b.labels.length === 0 ||
-          b.labels.includes(LPE.Post.ContentBlockLabels.Embed),
+          b.labels.includes(LPE.Post.ContentBlockLabels.Embed) ||
+          (b.labels.includes(LPE.Post.ContentBlockLabels.Subtitle) &&
+            b.order > 5),
       ),
     [data.content],
   )
