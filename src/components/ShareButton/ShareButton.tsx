@@ -1,8 +1,8 @@
 import { Tag, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
-import { useClickAway } from 'react-use'
+import { useMemo, useRef, useState } from 'react'
+import { useClickAway, useWindowSize } from 'react-use'
 import { CopyIcon } from '../Icons/CopyIcon'
 import { ShareIcon } from '../Icons/ShareIcon'
 import { XIcon } from '../Icons/XIcon'
@@ -14,7 +14,8 @@ type Props = {
 export default function ShareButton({ url }: Props) {
   const [showOptions, setShowOptions] = useState(false)
   const [copied, setCopied] = useState(false)
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
+  const windowSize = useWindowSize()
 
   useClickAway(ref, () => {
     setShowOptions(false)
@@ -26,6 +27,7 @@ export default function ShareButton({ url }: Props) {
         url: url,
       }
       navigator.share(shareObject).catch((error) => {
+        if (error.name === 'AbortError') return
         console.error('Error sharing', error)
         setShowOptions(!showOptions)
       })
@@ -43,6 +45,14 @@ export default function ShareButton({ url }: Props) {
     }, 2000)
   }
 
+  const pos = useMemo(() => {
+    if (!ref.current) return
+
+    const rect = ref.current.getBoundingClientRect()
+    if (windowSize.width < rect.left + 180) return 'left'
+    return 'right'
+  }, [windowSize])
+
   return (
     <Container ref={ref}>
       <CustomTag
@@ -54,7 +64,12 @@ export default function ShareButton({ url }: Props) {
         <Typography variant="body3">Share</Typography>
       </CustomTag>
       {showOptions && (
-        <Options>
+        <Options
+          style={{
+            left: pos === 'right' ? 0 : 'initial',
+            right: pos === 'left' ? 0 : 'initial',
+          }}
+        >
           <Label>
             <Typography variant="body3">Share Options</Typography>
           </Label>
