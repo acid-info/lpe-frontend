@@ -122,7 +122,6 @@ const SearchBox = (props: SearchBoxProps) => {
       setTimeout(() => {
         setPlaceholder(copyConfigs.search.searchbarPlaceholders.global())
       }, 200)
-      setQuery('')
     }
   }, [focused, queryInput])
 
@@ -180,6 +179,11 @@ const SearchBox = (props: SearchBoxProps) => {
       filterContentTypes as LPE.ContentType[],
     )
   }, [query, filterTags, filterContentTypes])
+
+  // useEffect(() => {
+  //   if (focused) return
+  //   if (query !== queryInput) setQuery(queryInput)
+  // }, [focused, query, queryInput])
 
   const hydrated = useHydrated()
 
