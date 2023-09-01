@@ -47,7 +47,7 @@ export default function ShareButton({ url }: Props) {
     <Container ref={ref}>
       <CustomTag
         onClick={handleClick}
-        icon={<ShareIcon width={14} height={14} />}
+        icon={<ShareIcon color="primary" width={14} height={14} />}
         iconDirection="left"
         showOptions={showOptions}
       >
@@ -59,7 +59,7 @@ export default function ShareButton({ url }: Props) {
             <Typography variant="body3">Share Options</Typography>
           </Label>
           <ShareOption onClick={() => handleCopyClipBoard(url)}>
-            <CopyIcon width={14} height={14} />
+            <CopyIcon color="primary" width={14} height={14} />
             <Typography variant="body2">
               {copied ? 'Copied' : 'Copy link'}
             </Typography>
