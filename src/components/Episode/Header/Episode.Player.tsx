@@ -7,6 +7,7 @@ import { useHookstate } from '@hookstate/core'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
+import { useHydrated } from '../../../utils/useHydrated.util'
 import SimplecastPlayer from './Episode.SimplecastPlayer'
 
 export type EpisodePlayerProps = {
@@ -23,6 +24,7 @@ const EpisodePlayer = ({
   showTitle,
 }: EpisodePlayerProps) => {
   const router = useRouter()
+  const hydrated = useHydrated()
 
   const state = useHookstate(playerState)
   const epState = useHookstate(episodeState)
@@ -215,27 +217,29 @@ const EpisodePlayer = ({
         />
       ) : null}
       <PlayerContainer ref={playerContainerRef} isAudio={isSimplecast}>
-        <ReactPlayer
-          forceAudio={isSimplecast ? true : false}
-          ref={playerRef}
-          url={url as string}
-          playing={keepGlobalPlay ? false : state.value.playing}
-          controls={isSimplecast ? false : true}
-          volume={state.value.volume}
-          muted={
-            state.value.isEnabled ? true : state.value.muted ? true : false
-          }
-          onProgress={handleProgress}
-          onPlay={handlePlay}
-          onPause={handlePause}
-          onDuration={handleDuration}
-          onReady={() => setLoading(false)}
-          config={{
-            youtube: {
-              playerVars: { enablejsapi: 1 },
-            },
-          }}
-        />
+        {hydrated && (
+          <ReactPlayer
+            forceAudio={isSimplecast ? true : false}
+            ref={playerRef}
+            url={url as string}
+            playing={keepGlobalPlay ? false : state.value.playing}
+            controls={isSimplecast ? false : true}
+            volume={state.value.volume}
+            muted={
+              state.value.isEnabled ? true : state.value.muted ? true : false
+            }
+            onProgress={handleProgress}
+            onPlay={handlePlay}
+            onPause={handlePause}
+            onDuration={handleDuration}
+            onReady={() => setLoading(false)}
+            config={{
+              youtube: {
+                playerVars: { enablejsapi: 1 },
+              },
+            }}
+          />
+        )}
       </PlayerContainer>
     </>
   )

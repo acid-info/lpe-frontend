@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../../types/lpe.types'
-import { getPostLink } from '../../utils/route.utils'
 import { Grid, GridItem } from '../Grid/Grid'
 import PodcastHost from './Podcast.Host'
 
@@ -46,16 +45,12 @@ export default function PodcastsLists({ shows }: Props) {
                     <PodcastHost show={show} />
                   </ShowData>
                 </div>
-                <ShowButtonLink
-                  href={getPostLink('podcast', { showSlug: show.slug })}
-                >
-                  <ShowButton isEven={isEven}>
-                    <ColoredText isEven={isEven} variant="body3">
-                      Podcast page
-                    </ColoredText>
-                    <ArrowDownIcon color={isEven ? 'secondary' : 'primary'} />
-                  </ShowButton>
-                </ShowButtonLink>
+                <ShowButton isEven={isEven}>
+                  <ColoredText isEven={isEven} variant="body3">
+                    Podcast page
+                  </ColoredText>
+                  <ArrowDownIcon color={isEven ? 'secondary' : 'primary'} />
+                </ShowButton>
               </ShowCard>
             </ShowCardContainer>
           )
@@ -93,8 +88,6 @@ const ShowCard = styled(Link)<{ isEven: boolean }>`
     height: 374px;
   }
 `
-
-const ShowCardLinkContainer = styled(Link)``
 
 const ShowInfoContainer = styled.div`
   display: flex;
@@ -154,11 +147,6 @@ const Description = styled(Typography)`
     font-size: var(--lsd-h6-fontSize);
     line-height: var(--lsd-h6-lineHeight);
   }
-`
-
-const ShowButtonLink = styled(Link)`
-  text-decoration: none;
-  width: fit-content;
 `
 
 const ShowButton = styled(Button)<{ isEven: boolean }>`
