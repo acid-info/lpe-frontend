@@ -30,6 +30,11 @@ const Row = styled.div`
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
+  margin-top: 32px;
+
+  @media (max-width: 768px) {
+    margin-top: 24px;
+  }
 `
 
 export default EpisodeStats
