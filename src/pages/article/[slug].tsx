@@ -85,9 +85,6 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     await unbodyApi.getArticlesFromSameAuthors({
       slug: slug as string,
       authors: data.authors.map((author) => author.name),
-      skip: 0,
-      limit: 10,
-      includeDrafts: false,
     })
 
   return {
