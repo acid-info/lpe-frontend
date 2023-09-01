@@ -199,7 +199,9 @@ const EpisodePlayer = ({
           <ResponsiveImage data={coverImage} />
         </PlaceholderImage>
       )}
-      {!loading && isSimplecast && (
+      {isSimplecast && loading ? (
+        <SimplecastPlaceholder />
+      ) : isSimplecast && !loading ? (
         <SimplecastPlayer
           playing={keepGlobalPlay ? false : state.value.playing}
           playedSeconds={keepGlobalPlay ? 0 : state.value.playedSeconds}
@@ -211,7 +213,7 @@ const EpisodePlayer = ({
           handlePlay={handlePlay}
           handlePause={handlePause}
         />
-      )}
+      ) : null}
       <PlayerContainer ref={playerContainerRef} isAudio={isSimplecast}>
         <ReactPlayer
           forceAudio={isSimplecast ? true : false}
@@ -240,10 +242,8 @@ const EpisodePlayer = ({
 }
 
 const PlayerContainer = styled.div<{ isAudio: boolean }>`
-  margin-bottom: ${(props) => (props.isAudio ? '0' : '32px')};
   position: relative;
   padding-bottom: ${(props) => (props.isAudio ? '0' : '56.25%')};
-  padding-top: 32px;
   height: 0;
   overflow: hidden;
 
@@ -256,15 +256,17 @@ const PlayerContainer = styled.div<{ isAudio: boolean }>`
     width: 100%;
     height: 100%;
   }
-
-  @media (max-width: 768px) {
-    padding-top: 24px;
-  }
 `
 
 const PlaceholderImage = styled.div`
   position: absolute;
   z-index: 1;
+  width: 100%;
+  aspect-ratio: 16/9;
+`
+
+const SimplecastPlaceholder = styled.div`
+  position: relative;
   width: 100%;
   aspect-ratio: 16/9;
 `
