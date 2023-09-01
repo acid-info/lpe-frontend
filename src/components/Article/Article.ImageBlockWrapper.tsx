@@ -21,6 +21,7 @@ const Container = styled.figure`
   margin: 32px 0 32px 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
   figcaption {
     padding-top: 8px;
     ${lsdUtils.typography('body3')}
