@@ -10,6 +10,9 @@ export type ApiResponse<T> = {
   errors: any
 }
 
+export type ApiPaginatedPayload<T> = { data: T; hasMore: boolean }
+export type ApiPaginatedResponse<T> = ApiResponse<ApiPaginatedPayload<T>>
+
 export type SearchResultItem<T> = {
   doc: T
   score: number

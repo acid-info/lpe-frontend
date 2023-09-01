@@ -5,12 +5,13 @@ import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { DefaultLayout } from '../../../layouts/DefaultLayout'
+import { ApiPaginatedPayload } from '../../../types/data.types'
 import { LPE } from '../../../types/lpe.types'
 import { getPostLink } from '../../../utils/route.utils'
 
 interface PodcastShowProps {
   show: LPE.Podcast.Show
-  latestEpisodes: LPE.Podcast.Document[]
+  latestEpisodes: ApiPaginatedPayload<LPE.Podcast.Document[]>
   highlightedEpisodes: LPE.Podcast.Document[]
   errors: string | null
 }

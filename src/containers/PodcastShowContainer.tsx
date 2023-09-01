@@ -5,12 +5,13 @@ import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useRecentEpisodes } from '../queries/useRecentEpisodes.query'
+import { ApiPaginatedPayload } from '../types/data.types'
 import { LPE } from '../types/lpe.types'
 import { lsdUtils } from '../utils/lsd.utils'
 
 interface Props {
   show: LPE.Podcast.Show
-  latestEpisodes: LPE.Podcast.Document[]
+  latestEpisodes: ApiPaginatedPayload<LPE.Podcast.Document[]>
   highlightedEpisodes: LPE.Podcast.Document[]
 }
 

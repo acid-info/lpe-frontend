@@ -1,4 +1,4 @@
-import { ApiResponse } from '../types/data.types'
+import { ApiPaginatedResponse, ApiResponse } from '../types/data.types'
 import { LPE } from '../types/lpe.types'
 
 export class ApiService {
@@ -8,7 +8,7 @@ export class ApiService {
   }: {
     skip?: number
     limit?: number
-  }): Promise<ApiResponse<LPE.Post.Document[]>> =>
+  }): Promise<ApiPaginatedResponse<LPE.Post.Document[]>> =>
     fetch(`/api/posts?skip=${skip}&limit=${limit}`)
       .then((res) => res.json())
       .catch((e) => {
@@ -24,7 +24,7 @@ export class ApiService {
     skip?: number
     limit?: number
     showSlug: string
-  }): Promise<ApiResponse<LPE.Podcast.Document[]>> =>
+  }): Promise<ApiPaginatedResponse<LPE.Podcast.Document[]>> =>
     fetch(`/api/podcasts/${showSlug}/episodes?skip=${skip}&limit=${limit}`)
       .then((res) => res.json())
       .catch((e) => {

@@ -5,6 +5,7 @@ import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useRecentPosts } from '../../queries/useRecentPosts.query'
+import { ApiPaginatedPayload } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
 import { PodcastShowsPreview } from '../PodcastShowsPreview'
@@ -16,14 +17,14 @@ export type HomePageProps = React.DetailedHTMLProps<
   data: {
     tags: string[]
     shows: LPE.Podcast.Show[]
-    latest: LPE.Post.Document[]
+    latest: ApiPaginatedPayload<LPE.Post.Document[]>
     highlighted: LPE.Post.Document[]
   }
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   data,
-  data: { highlighted = [], shows = [], tags = [], latest = [] },
+  data: { highlighted = [], shows = [], tags = [], latest },
   ...props
 }) => {
   const query = useRecentPosts({ initialData: latest, limit: 10 })

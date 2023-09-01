@@ -1,27 +1,28 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { api } from '../services/api.service'
+import { ApiPaginatedPayload } from '../types/data.types'
 import { LPE } from '../types/lpe.types'
 
 export const useRecentPosts = ({
-  initialData = [],
+  initialData,
   limit = 10,
 }: {
-  initialData?: LPE.Post.Document[]
+  initialData?: ApiPaginatedPayload<LPE.Post.Document[]>
   limit?: number
 }) => {
   const query = useInfiniteQuery(
     ['latest-posts', initialData, limit],
     async ({ pageParam }) => {
-      const firstPageLimit = initialData.length
+      const firstPageLimit = initialData?.data.length || 0
       const _limit = pageParam === 1 ? firstPageLimit : limit
       const skip =
         pageParam === 1 ? 0 : (pageParam - 2) * limit + firstPageLimit
 
       return api.getRecentPosts({ skip, limit: _limit }).then((res) => ({
         page: pageParam,
-        posts: res.data,
-        hasMore: res.data.length !== 0,
+        posts: res.data.data,
+        hasMore: res.data.hasMore,
       }))
     },
     {
@@ -30,8 +31,8 @@ export const useRecentPosts = ({
         pages: [
           {
             page: 1,
-            hasMore: true,
-            posts: initialData,
+            hasMore: initialData?.hasMore,
+            posts: initialData?.data || [],
           },
         ],
       },

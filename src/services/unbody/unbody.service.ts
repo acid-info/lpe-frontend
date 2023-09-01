@@ -13,7 +13,11 @@ import {
   Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj,
 } from '../../lib/unbody/unbody.generated'
 import { getWebhookData } from '../../pages/api/webhook'
-import { ApiResponse, SearchResultItem } from '../../types/data.types'
+import {
+  ApiPaginatedPayload,
+  ApiResponse,
+  SearchResultItem,
+} from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
 import {
   CreatePromiseResult,
@@ -60,8 +64,10 @@ export class UnbodyService {
 
   initialData: {
     posts: LPE.Post.Document[]
+    articles: LPE.Article.Data[]
+    episodes: LPE.Podcast.Document[]
     staticPages: LPE.StaticPage.Document[]
-  } = { posts: [], staticPages: [] }
+  } = { articles: [], episodes: [], posts: [], staticPages: [] }
   initialDataPromise: CreatePromiseResult<any> = null as any
 
   constructor(private apiKey: string, private projectId: string) {
@@ -136,6 +142,8 @@ export class UnbodyService {
 
     this.initialData = {
       posts,
+      articles,
+      episodes,
       staticPages,
     }
     callback(this.initialData)
@@ -892,13 +900,22 @@ export class UnbodyService {
     skip?: number
     limit?: number
   }) =>
-    this.getPodcastEpisodes({
-      skip,
-      limit,
-      showSlug,
-      highlighted: 'include',
-      populateShow: false,
-    })
+    this.handleRequest<ApiPaginatedPayload<LPE.Podcast.Document[]>>(
+      async () => {
+        await this.loadInitialData()
+        let episodes = [...this.initialData.episodes]
+        if (showSlug)
+          episodes = episodes.filter((ep) => ep.show?.slug === showSlug)
+
+        const data = episodes.slice(skip, skip + limit)
+
+        return {
+          data,
+          hasMore: episodes.length > skip + limit,
+        }
+      },
+      { data: [], hasMore: false },
+    )
 
   getRecentPosts = async ({
     limit = 10,
@@ -907,12 +924,23 @@ export class UnbodyService {
     limit?: number
     skip?: number
   }) =>
-    this.handleRequest(async () => {
-      await this.loadInitialData()
-      const { posts } = this.initialData
+    this.handleRequest<ApiPaginatedPayload<LPE.Post.Document[]>>(
+      async () => {
+        await this.loadInitialData()
+        const { posts } = this.initialData
 
-      return posts.slice(skip, skip + limit)
-    }, [])
+        const data = posts.slice(skip, skip + limit)
+
+        return {
+          data,
+          hasMore: posts.length > skip + limit,
+        }
+      },
+      {
+        data: [],
+        hasMore: false,
+      },
+    )
 
   getHighlightedPosts = async () =>
     this.handleRequest<LPE.Post.Document[]>(async () => {
