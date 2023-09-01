@@ -924,47 +924,19 @@ export class UnbodyService {
 
   getArticlesFromSameAuthors = async ({
     slug,
-    skip = 0,
-    limit = 10,
     authors = [],
-    includeDrafts,
   }: {
     slug?: string
-    skip?: number
-    limit?: number
     authors?: string[]
-    includeDrafts?: boolean
   }) =>
     this.handleRequest<LPE.Article.Metadata[]>(async () => {
-      const { data: docs } = await this.getArticles({
-        includeDrafts,
-        parseContent: false,
-        highlighted: 'include',
-        ...this.helpers.args.page(skip, limit),
-        filter: {
-          operator: 'And',
-          operands: [
-            {
-              operator: 'Like',
-              path: ['mentions'],
-              valueText: authors.join(' '),
-            },
-            ...(slug
-              ? [
-                  {
-                    operator: 'NotEqual',
-                    valueString: slug,
-                    path: ['slug'],
-                  } as GetObjectsGoogleDocWhereInpObj,
-                ]
-              : []),
-          ],
-        },
-      })
-
-      if (docs.length === 0) throw 'No data for same authors'
-
-      return docs
+      await this.loadInitialData()
+      const { posts } = this.initialData
+      return posts.filter(
+        (post) =>
+          post.slug !== slug &&
+          authors.every((name) => !!post.authors.find((a) => a.name === name)),
+      ) as LPE.Article.Metadata[]
     }, [])
 
   searchBlocks = async ({
