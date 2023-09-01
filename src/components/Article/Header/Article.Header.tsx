@@ -94,10 +94,6 @@ const ArticleHeaderContainer = styled.header`
     .desktopSummary {
       display: none;
     }
-
-    .articleTags {
-      display: none;
-    }
   }
 `
 
