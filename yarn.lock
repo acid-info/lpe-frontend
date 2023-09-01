@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@acid-info/lsd-react@^0.1.0-alpha.17":
-  version "0.1.0-alpha.17"
-  resolved "https://registry.yarnpkg.com/@acid-info/lsd-react/-/lsd-react-0.1.0-alpha.17.tgz#4a0da00ad779717bcd6c5771863ec94937c701a0"
-  integrity sha512-qDnDr4uK7xXulf3StBLhCdq+0zT+6NT1TstQ+qAw3/kLonE2wiQx+w+aRlyaRobSevhtyC+bfR+QDvfFwkG8Rw==
+"@acid-info/lsd-react@^0.1.0-alpha.18":
+  version "0.1.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/@acid-info/lsd-react/-/lsd-react-0.1.0-alpha.18.tgz#bc1e6ea46541108f89ff4d83fe57eaa92ebc2201"
+  integrity sha512-R9EUbFS3xkiSumOAG6SjNTN6pkToGEERBG8TqFKPASrQXtgQpEGE5j/NTdbovMQGy44uOmKq3QKciwtufYeK9g==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
