@@ -86,7 +86,6 @@ const Border = styled.div`
   line-height: 0;
   height: 0;
   width: calc(100% - 2 * var(--main-content-padding));
-  background: red;
   position: absolute;
   bottom: 0;
   left: var(--main-content-padding);
