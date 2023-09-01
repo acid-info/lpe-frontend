@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../../types/lpe.types'
+import { getPostLink } from '../../utils/route.utils'
 import { Grid, GridItem } from '../Grid/Grid'
 import PodcastHost from './Podcast.Host'
 
@@ -18,7 +19,10 @@ export default function PodcastsLists({ shows }: Props) {
           const isEven = idx % 2 === 0
           return (
             <ShowCardContainer key={show.id} className="w-8">
-              <ShowCard isEven={isEven} href={`/podcasts/${show.slug}`}>
+              <ShowCard
+                isEven={isEven}
+                href={getPostLink('podcast', { showSlug: show.slug })}
+              >
                 <div>
                   <Top>
                     <ShowInfoContainer>
