@@ -26,11 +26,8 @@ const Page: CustomNextPage<PageProps> = ({
   return (
     <>
       <SEO
-        description={
-          data.page.subtitle ||
-          'Logos online publishing and blogging platform for writers and readers.'
-        }
-        title={`${data.page.title} - Logos Press Engine`}
+        title={data.page.title}
+        description={data.page.subtitle}
         pagePath={`/${data.page.slug}`}
       />
       <StaticPage data={data} />

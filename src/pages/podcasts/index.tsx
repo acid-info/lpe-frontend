@@ -26,8 +26,7 @@ const PodcastShowPage = ({
   return (
     <>
       <SEO
-        title={'Logos Podcasts'}
-        description={'Description'}
+        title="Logos Podcasts"
         imageUrl={undefined}
         pagePath={getPostLink('podcast')}
         tags={[]}

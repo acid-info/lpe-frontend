@@ -9,12 +9,7 @@ type PageProps = Pick<HomePageProps, 'data'>
 const Page: CustomNextPage<PageProps> = (props) => {
   return (
     <>
-      <SEO
-        description={
-          'Logos online publishing and blogging platform for writers and readers.'
-        }
-        title={'Logos Press Engine'}
-      />
+      <SEO />
       <HomePage data={props.data} />
     </>
   )

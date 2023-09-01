@@ -82,13 +82,7 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
 
   return (
     <div style={{ minHeight: '80vh' }}>
-      <SEO
-        description={
-          'Logos online publishing and blogging platform for writers and readers.'
-        }
-        title={'Logos Press Engine'}
-        pagePath={`/search`}
-      />
+      <SEO title="Search" pagePath={`/search`} />
       <SearchBox
         tags={topics}
         onSearch={handleSearch}

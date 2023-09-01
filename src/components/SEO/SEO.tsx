@@ -1,9 +1,10 @@
 import Head from 'next/head'
+import { siteConfigs } from '../../configs/site.configs'
 import { LPE } from '../../types/lpe.types'
 
 type Metadata = {
-  title: string
-  description: string
+  title?: string
+  description?: string
   type?: string
   locale?: string
   site_name?: string
@@ -19,20 +20,26 @@ type Metadata = {
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://press.logos.co'
 
 export default function SEO({
-  title,
-  description,
+  title: _title,
+  description: _description,
   type,
   locale,
   site_name,
   pageURL,
   imageUrl = `${SITE_URL}/api/og`,
   image,
-  tags = ['Logos Press Engine', 'Logos Press', 'Logos'],
+  tags = siteConfigs.keywords,
   pagePath = '',
   date,
   contentType,
 }: Metadata) {
   const ogSearchParams = new URLSearchParams()
+
+  const title =
+    _title && _title.length
+      ? `${_title} - ${siteConfigs.title}`
+      : siteConfigs.title
+  const description = _description || siteConfigs.description
 
   title && ogSearchParams.set('title', title)
   image?.url && ogSearchParams.set('image', image?.url || '')
@@ -53,16 +60,13 @@ export default function SEO({
       <meta property="og:type" content={type ?? 'website'} />
       <meta property="og:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
       <meta property="keywords" content={tags.join(', ')} />
-      <meta
-        property="og:site_name"
-        content={site_name ?? 'Logos Press Engine'}
-      />
+      <meta property="og:site_name" content={site_name ?? siteConfigs.title} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta property="og:image" content={ogUrl} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
-      <meta name="twitter:site" content="@TWITTERHANDLE" />
+      <meta name="twitter:site" content={`@${siteConfigs.xHandle}`} />
       <meta property="twitter:image" content={ogUrl} />
       <link rel="canonical" href={`${SITE_URL}${pagePath}`} />
     </Head>
