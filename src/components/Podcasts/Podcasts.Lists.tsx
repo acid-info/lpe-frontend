@@ -66,7 +66,7 @@ export default function PodcastsLists({ shows }: Props) {
 const PodcastListsContainer = styled(Grid)`
   gap: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
     flex-direction: column;
     gap: 24px 16px;
   }
@@ -88,7 +88,11 @@ const ShowCard = styled(Link)<{ isEven: boolean }>`
       ? 'rgb(var(--lsd-surface-secondary))'
       : 'rgb(var(--lsd-surface-primary))'};
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md.width}px) {
+    height: 420px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
     height: 374px;
   }
 `
@@ -97,7 +101,7 @@ const ShowInfoContainer = styled.div`
   display: flex;
   gap: 16px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
     gap: 8px;
   }
 `
@@ -131,7 +135,7 @@ const ShowData = styled.div<{ isEven: boolean }>`
         : 'rgb(var(--lsd-text-primary))'};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
     margin-top: 57px;
   }
 `
@@ -147,7 +151,7 @@ const Description = styled(Typography)`
   font-size: var(--lsd-h4-fontSize);
   line-height: var(--lsd-h4-lineHeight);
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
     font-size: var(--lsd-h6-fontSize);
     line-height: var(--lsd-h6-lineHeight);
   }
@@ -177,7 +181,7 @@ const ShowButton = styled(Button)<{ isEven: boolean }>`
     transform: rotate(-90deg);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
     padding: 7px;
   }
 `
