@@ -142,21 +142,14 @@ export const SearchResultsListView = (props: Props) => {
       </PostsList>
       <GridItem xs={{ cols: 0 }} md={{ cols: 1 }} cols={1} />
       <BlocksList xs={{ cols: 8 }} md={{ cols: 3 }} lg={{ cols: 4 }} cols={4}>
-        {!isMobile &&
-          (renderBlocks.length > 0 ? (
-            <BlockListSticky>
-              <SearchResultsListHeader
-                title={copyConfigs.search.labels.relatedContent}
-              />
-              <SearchResultListBlocks blocks={renderBlocks} />
-            </BlockListSticky>
-          ) : (
-            !busy && (
-              <Typography variant={'subtitle2'} genericFontFamily={'serif'}>
-                No related content found
-              </Typography>
-            )
-          ))}
+        {!isMobile && (
+          <BlockListSticky>
+            <SearchResultsListHeader
+              title={copyConfigs.search.labels.relatedContent}
+            />
+            <SearchResultListBlocks blocks={renderBlocks} />
+          </BlockListSticky>
+        )}
       </BlocksList>
     </Container>
   )
