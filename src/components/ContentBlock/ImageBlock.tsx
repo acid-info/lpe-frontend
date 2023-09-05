@@ -25,8 +25,10 @@ const ImageBlock = (props: Props) => {
         date={document?.modifiedAt ? new Date(document?.modifiedAt) : null}
       />
       {data.alt.length > 0 && (
-        <Caption variant={'body2'} component={'p'}>
-          {data.alt}
+        <Caption>
+          <Typography variant={'body2'} component={'p'}>
+            {data.alt}
+          </Typography>
         </Caption>
       )}
       <ContentBlockFooter type="image" data={document} order={order} />
@@ -46,8 +48,7 @@ const Container = styled.div`
   }
 `
 
-const Caption = styled(Typography)`
-  margin-top: 8px;
+const Caption = styled.figcaption`
   font-style: italic;
 `
 export default ImageBlock
