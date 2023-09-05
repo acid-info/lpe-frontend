@@ -21,9 +21,9 @@ export const LSDThemeProvider: React.FC<LSDThemeProviderProps> = ({
 
   return (
     <ThemeProvider theme={theme.current} injectCssVars={false}>
-      {children}
       <Global styles={theme.darkCssVars} />
       <Global styles={theme.lightCssVars} />
+      {children}
     </ThemeProvider>
   )
 }
