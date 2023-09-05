@@ -1,4 +1,5 @@
 import { LPE } from '../../../types/lpe.types'
+import { setAttributeOnHTML } from '../../../utils/html.utils'
 import { convertToIframe } from '../../../utils/string.utils'
 import { UnbodyResGoogleDocData, UnbodyResTextBlockData } from '../unbody.types'
 import { UnbodyDataTypeConfig } from './types'
@@ -16,7 +17,7 @@ export const TextBlockDataType: UnbodyDataTypeConfig<
   isMatch: (helpers, data, original, root) => data.__typename === 'TextBlock',
 
   transform: (helpers, data, original, root) => {
-    const { text = '', html = '' } = data
+    let { text = '', html = '' } = data
     const labels: LPE.Post.ContentBlockLabel[] = []
     let embed: LPE.Post.TextBlockEmbed | null = null
 
@@ -67,10 +68,23 @@ export const TextBlockDataType: UnbodyDataTypeConfig<
       }
     }
 
+    // set target="_blank" on anchor elements
+    {
+      const matches = Array.from(
+        html.matchAll(/<a[^>]*href="http[^>]*"[^>]*>/gi),
+      )
+
+      for (const match of matches) {
+        const [anchorHTML] = match
+        const newAnchorHTML = setAttributeOnHTML(anchorHTML, 'target', '_blank')
+        html = html.replace(anchorHTML, newAnchorHTML)
+      }
+    }
+
     return {
       id: data?._additional?.id || `${data.order}`,
       type: 'text',
-      html: data.html,
+      html,
       text: data.text || '',
       classNames: data.classNames,
       footnotes: data.footnotesObj,

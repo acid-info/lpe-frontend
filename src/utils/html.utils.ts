@@ -38,6 +38,30 @@ export function extractAttributeFromHTML(
   )
 }
 
+export const setAttributeOnHTML = (
+  html: string,
+  attribute: string,
+  value: string,
+) => {
+  let result = html.trim()
+  const tagName = html.match(/^<([\w])+/)?.[0]?.slice(1)!
+  const current = extractAttributeFromHTML(html, attribute)
+
+  if (current) {
+    const currentAttribute = `${attribute}="${current}"`
+    const index = html.indexOf(currentAttribute)
+
+    result =
+      result.slice(0, index) + result.slice(index + currentAttribute.length + 1)
+  }
+
+  result = `<${tagName} ${attribute}="${value}"${result.slice(
+    tagName.length + 1,
+  )}`
+
+  return result
+}
+
 export const isAuthorsParagraph = (html: string) => {
   const regex = /<a\s+[^>]*href="mailto:([^"]+)"[^>]*>([^<]+)<\/a>/g
   const matches = html.match(regex)

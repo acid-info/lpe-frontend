@@ -53,6 +53,7 @@ const EpisodeChannelContainer = styled.div`
   align-items: center;
   margin-top: 32px;
   margin-bottom: 32px;
+  flex-wrap: wrap;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 24px;

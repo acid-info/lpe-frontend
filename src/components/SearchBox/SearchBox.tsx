@@ -66,6 +66,8 @@ const SearchBox = (props: SearchBoxProps) => {
     showModeSwitch = true,
   } = props
 
+  const hydrated = useHydrated()
+
   const [filterTags, setFilterTags] = useQueryParam(
     'topic',
     withDefault(ArrayParam, []),
@@ -96,14 +98,9 @@ const SearchBox = (props: SearchBoxProps) => {
   const [whereResultsStick, setWhereResultsStick] = useState(0)
   const [showDetails, setShowDetails] = useState(false)
   const [detailsTop, setDetailsTop] = useState(0)
-  const [mounted, setMounted] = useState(false)
   const [focused, setFocused] = useState(false)
   const [showClear, setShowClear] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-    return () => setMounted(false)
-  }, [])
   const handleViewChange = async (n: string) => {
     setView(n)
     onViewChange(n)
@@ -184,8 +181,6 @@ const SearchBox = (props: SearchBoxProps) => {
   //   if (focused) return
   //   if (query !== queryInput) setQuery(queryInput)
   // }, [focused, query, queryInput])
-
-  const hydrated = useHydrated()
 
   return (
     <Container
