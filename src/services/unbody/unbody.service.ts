@@ -647,6 +647,7 @@ export class UnbodyService {
           imageBlocks: true,
           textBlocks: true,
           mentions: true,
+          sort: { order: 'desc', path: ['pathString'] },
         },
       })
 
