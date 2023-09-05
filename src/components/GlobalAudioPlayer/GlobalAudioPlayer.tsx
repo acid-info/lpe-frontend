@@ -173,20 +173,20 @@ export default function GlobalAudioPlayer() {
           </Typography>
           <Typography variant="body3">{epState.value.podcast}</Typography>
         </EpisodeData>
-        <CloseIconContainer>
-          <CloseIcon
-            width={16}
-            height={16}
-            onClick={() =>
-              state.set((prev) => ({
-                ...prev,
-                isEnabled: false,
-                playing: false,
-              }))
-            }
-          />
-        </CloseIconContainer>
       </RightMenu>
+      <CloseIconContainer>
+        <CloseIcon
+          width={16}
+          height={16}
+          onClick={() =>
+            state.set((prev) => ({
+              ...prev,
+              isEnabled: false,
+              playing: false,
+            }))
+          }
+        />
+      </CloseIconContainer>
     </Container>
   )
 }
@@ -228,7 +228,14 @@ const RightMenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: 32px;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
+    margin-left: 79px;
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'lg', 'up')} {
+    margin-left: 105px;
+  }
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     width: fit-content;

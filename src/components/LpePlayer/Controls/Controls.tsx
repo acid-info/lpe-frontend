@@ -166,7 +166,7 @@ const Metadata = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
     display: none;
   }
 `
