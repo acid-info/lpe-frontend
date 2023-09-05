@@ -424,6 +424,10 @@ PostCard.styles = {
         margin-top: 8px;
       }
 
+      .post-card__title-text {
+        ${lsdUtils.typography('h4')}
+      }
+
       .post-card__subtitle {
         margin-top: 8px;
 
@@ -454,10 +458,6 @@ PostCard.styles = {
         align-self: end;
       }
 
-      .post-card__title-text {
-        ${lsdUtils.typography('h6')}
-      }
-
       .post-card__cover-image button {
         display: none;
       }
@@ -476,14 +476,6 @@ PostCard.styles = {
           'info info info info info info info info' !important;
       }
 
-      ${lsdUtils.breakpoint(theme, 'sm', 'down')} {
-        &.post-card__article {
-          .post-card__subtitle {
-            display: none;
-          }
-        }
-      }
-
       ${lsdUtils.breakpoint(theme, 'md', 'down')} {
         grid-template-columns: repeat(8, 1fr);
         grid-template-areas:
@@ -492,9 +484,17 @@ PostCard.styles = {
           'info info info info info image image image'
           'info info info info info image image image'
           '. . . . . image image image';
+      }
+
+      ${lsdUtils.breakpoint(theme, 'sm', 'down')} {
+        &.post-card__article {
+          .post-card__subtitle {
+            display: none;
+          }
+        }
 
         .post-card__title-text {
-          ${lsdUtils.typography('subtitle1')}
+          ${lsdUtils.typography('h6')}
         }
       }
 
