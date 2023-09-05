@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../../../types/lpe.types'
+import { lsdUtils } from '../../../utils/lsd.utils'
 import { getPostLink } from '../../../utils/route.utils'
 import EpisodeStats from '../Episode.Stats'
 import EpisodeChannels from './Episode.Channels'
@@ -37,7 +38,7 @@ const EpisodeHeader = ({
         coverImage={coverImage}
       />
       <EpisodeStats date={date} duration={duration} />
-      <EpisodeTitle variant="h1" genericFontFamily="serif" component="h1">
+      <EpisodeTitle variant="h2" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
       {show && (
@@ -75,10 +76,10 @@ const CustomTypography = styled(Typography)`
 
 const EpisodeTitle = styled(Typography)`
   margin-bottom: 16px;
-  @media (max-width: 768px) {
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     margin-bottom: 8px;
-    font-size: var(--lsd-h4-fontSize) !important;
-    line-height: var(--lsd-h4-lineHeight) !important;
+    ${lsdUtils.typography('h4')}
   }
 `
 
