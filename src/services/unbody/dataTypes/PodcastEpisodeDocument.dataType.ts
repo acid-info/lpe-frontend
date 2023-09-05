@@ -1,4 +1,4 @@
-import parseDate from 'date-fns/parse'
+import parseISO from 'date-fns/parseISO'
 import { LPE } from '../../../types/lpe.types'
 import { settle } from '../../../utils/promise.utils'
 import { simplecastApi } from '../../simplecast.service'
@@ -32,12 +32,10 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
     const show = shows.find((show) => show.slug === original.path[2])
 
     const name = original.path[original.path.length - 1]
-    const [ep, date, ...rest] = name.split('-')
+    const [ep, date] = name.split('-')
     const slug = original.slug.slice(`${ep}-${date}-`.length)
 
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-    const publishedAt = parseDate(date, 'yyyyMMdd', today)
+    const publishedAt = parseISO(date)
     const episodeNumber = parseInt(ep.slice(2), 10)
 
     const coverImage = data.content.find(
