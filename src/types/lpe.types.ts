@@ -62,6 +62,7 @@ export namespace LPE {
       Paragraph: 'paragraph',
       CoverImage: 'cover_image',
       Embed: 'embed',
+      LinkOnly: 'link_only',
       YoutubeEmbed: 'youtube_embed',
       SimplecastEmbed: 'simplecast_embed',
     } as const

@@ -22,12 +22,14 @@ export const TextBlockDataType: UnbodyDataTypeConfig<
 
     if (text.length > 0 || html.length > 0) {
       const isLink =
-        /^<p[^>]*><span[^>]*><a[^>]*href="(https):\/\/[^ "]+"[^>]*>.*<\/a><\/span><\/p>$/.test(
+        /^<p[^>]*>(<span[^>]*>[\s]*<\/span>)*<span[^>]*><a[^>]*href="(https):\/\/[^ "]+"[^>]*>.*<\/a><\/span>(<span[^>]*>(\s|(<br(\/)?>))*<\/span>)*<\/p>$/.test(
           html,
         )
       const isIframe = /<iframe[^>]*>(?:<\/iframe>|[^]*?<\/iframe>)/.test(text)
 
       if (isLink) {
+        labels.push(LPE.Post.ContentBlockLabels.LinkOnly)
+
         const youtube = html.match(
           /(https?\:\/\/)?((www\.)?youtube\.com|youtu\.?be)\/[^ "]+/gi,
         )

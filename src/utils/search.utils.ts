@@ -13,7 +13,8 @@ export const searchBlocksBasicFilter = (
   if (block.type === LPE.ContentTypes.Text) {
     return (
       !isTitle(block.data as LPE.Post.TextBlock) &&
-      isLongEnough(block.data as LPE.Post.TextBlock)
+      isLongEnough(block.data as LPE.Post.TextBlock) &&
+      !block.data.labels.includes('link_only')
     )
   } else {
     const isPodcastImage = block.data.document.type === LPE.PostTypes.Podcast
