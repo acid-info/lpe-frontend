@@ -39,8 +39,7 @@ const ContentBlockFooter = ({
             component="h4"
             genericFontFamily="serif"
           >
-            {title.slice(0, Math.min(60, title.length))}
-            {title.length > 60 ? '...' : ''}
+            {title}
           </Typography>
         </Link>
       </PostTitle>
