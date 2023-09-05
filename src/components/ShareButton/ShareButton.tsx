@@ -98,9 +98,9 @@ const Container = styled.div`
 `
 
 const CustomTag = styled(Tag)<{ showOptions: boolean }>`
-  width: 69px;
-  height: ${HEIGHT}px;
-  padding: 0 8px;
+  gap: 0 8px;
+  padding: 4px 8px 4px 6px;
+  max-height: ${HEIGHT}px;
   border-bottom: ${(props) =>
     props.showOptions
       ? '1px solid transparent'
