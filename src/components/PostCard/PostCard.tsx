@@ -124,6 +124,7 @@ export const PostCard = (_props: PostCardProps) => {
       className={clsx(
         'post-card',
         applySizeStyles && applySizeStyles && `post-card--${size}`,
+        coverImageElement && 'post-card--with-image',
         props.className,
         `post-card__${contentType}`,
       )}
@@ -465,6 +466,14 @@ PostCard.styles = {
         .post-card__title-text {
           ${lsdUtils.typography('h4')}
         }
+      }
+
+      &:not(.post-card--with-image) {
+        grid-template-areas:
+          'info info info info info info info info'
+          'info info info info info info info info'
+          'info info info info info info info info'
+          'info info info info info info info info' !important;
       }
 
       ${lsdUtils.breakpoint(theme, 'sm', 'down')} {
