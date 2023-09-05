@@ -22,7 +22,7 @@ const EpisodeCredits = ({
             <Credit key={idx}>
               <Typography
                 component="p"
-                variant="body3"
+                variant="label1"
                 id={credit.id.replace('#', '')}
               >
                 {credit.text}
