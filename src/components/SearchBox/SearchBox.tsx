@@ -242,7 +242,9 @@ const SearchBox = (props: SearchBoxProps) => {
           className={`${showClear ? 'show' : ''}`}
           onClick={clear}
         >
-          Clear Filters
+          <span>clear</span>
+          <span> </span>
+          <span>filters</span>
         </Clear>
       </Filters>
       {busy ? (
@@ -393,6 +395,12 @@ const Clear = styled(Typography)`
 
   &.show {
     opacity: 1;
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    span:not(:first-child) {
+      display: none;
+    }
   }
 `
 
