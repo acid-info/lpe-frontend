@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { getPostLink } from '../../utils/route.utils'
 
 type Size = 'small' | 'medium' | 'large'
@@ -145,28 +146,28 @@ const CustomLink = styled(Link)<CustomLinkProps>`
   }
 
   &.show-details {
-    @media (max-width: ${({ theme }) => theme.breakpoints.sm.width - 1}px) {
+    ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
       ${(props) =>
         props.xsSize &&
         props.applySizeStyles &&
         PostCardShowDetails.styles[props.xsSize](props.theme)}
     }
 
-    @media (min-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+    ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
       ${(props) =>
         props.smSize &&
         props.applySizeStyles &&
         PostCardShowDetails.styles[props.smSize](props.theme)}
     }
 
-    @media (min-width: ${({ theme }) => theme.breakpoints.md.width}px) {
+    ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'up')} {
       ${(props) =>
         props.mdSize &&
         props.applySizeStyles &&
         PostCardShowDetails.styles[props.mdSize](props.theme)}
     }
 
-    @media (min-width: ${({ theme }) => theme.breakpoints.lg.width}px) {
+    ${(props) => lsdUtils.breakpoint(props.theme, 'lg', 'up')} {
       ${(props) =>
         props.lgSize &&
         props.applySizeStyles &&

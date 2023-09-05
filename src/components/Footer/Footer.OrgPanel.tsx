@@ -3,6 +3,7 @@ import { FooterLink } from '@/components/Footer/Footer.Link'
 import { FooterSection } from '@/components/Footer/Footer.Section'
 import { FooterLinksItems } from '@/configs/data.configs'
 import styled from '@emotion/styled'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 export const FooterOrgPanel = () => {
   return (
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
   border-top: 1px solid rgb(var(--lsd-theme-primary));
   padding-top: 16px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     flex-direction: column;
   }
 `

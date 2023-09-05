@@ -10,6 +10,7 @@ import {
 import { convertSecToMinAndSec } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { lsdUtils } from '../../../utils/lsd.utils'
 
 export enum PlayerType {
   GLOBAL = 'global',
@@ -148,7 +149,7 @@ const TimeContainer = styled(Row)<{ color: string; isHidden: boolean }>`
     color: ${({ color }) => color || 'black'};
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
   }
 `
@@ -165,7 +166,7 @@ const Metadata = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @media (min-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none;
   }
 `
@@ -181,7 +182,7 @@ const Podcast = styled(Typography)`
 `
 
 const Volume = styled(Row)<{ isHidden: boolean }>`
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
   }
 `

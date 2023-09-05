@@ -8,6 +8,7 @@ import { Typography, TypographyProps } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { PropsWithChildren } from 'react'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 type Props = PropsWithChildren<{
   block: LPE.Article.TextBlock
@@ -50,7 +51,7 @@ const Headline = styled(Typography)`
   white-space: pre-wrap;
   margin-top: 16px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     &.title {
       font-size: var(--lsd-h4-fontSize);
       line-height: var(--lsd-h4-lineHeight);

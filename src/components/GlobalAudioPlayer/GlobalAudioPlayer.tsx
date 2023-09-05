@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { PlayerType } from '../LpePlayer/Controls/Controls'
 import { episodeState } from './episode.state'
 import { playerState } from './globalAudioPlayer.state'
@@ -208,13 +209,13 @@ const Container = styled.div<{ visible: boolean }>`
   > :first-child {
     width: 60%;
 
-    @media (max-width: 768px) {
+    ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
       overflow: hidden;
       white-space: nowrap;
     }
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     padding: 10px 16px;
 
     > :first-child {
@@ -229,7 +230,7 @@ const RightMenu = styled.div`
   justify-content: flex-end;
   margin-left: 32px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     width: fit-content;
     margin-left: auto;
   }
@@ -247,7 +248,7 @@ const EpisodeData = styled(Link)`
     white-space: nowrap;
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none !important;
   }
 `
@@ -255,7 +256,7 @@ const EpisodeData = styled(Link)`
 const Thumbnail = styled(Image)`
   margin-right: 16px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none !important;
   }
 `
@@ -263,7 +264,7 @@ const Thumbnail = styled(Image)`
 const CloseIconContainer = styled.div`
   margin-left: 43px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-left: 16px;
   }
 `

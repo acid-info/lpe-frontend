@@ -25,9 +25,6 @@ const Container = styled.div`
   text-align: center;
   display: flex;
   overflow: hidden;
-
-  @media (max-width: 768px) {
-  }
 `
 
 const Tags = styled.div`

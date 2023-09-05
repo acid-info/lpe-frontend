@@ -4,6 +4,7 @@ import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useEffect, useState } from 'react'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { Grid, GridItem } from '../Grid/Grid'
 import PostTypes = LPE.PostTypes
 
@@ -90,7 +91,7 @@ export const PostsList = (props: Props) => {
 
 const CustomGrid = styled(Grid)`
   min-height: 500px;
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     gap: 8px;
     min-height: auto;
   }

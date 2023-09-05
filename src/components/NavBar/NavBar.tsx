@@ -116,7 +116,7 @@ const PressLogoType = styled(Typography)<{ display: boolean }>`
 `
 
 const SocialMediaKitContainer = styled.div`
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none;
   }
 `
@@ -198,7 +198,7 @@ const NavLinksContainer = styled.div`
   flex: 1;
   justify-content: center;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none !important;
   }
 `
@@ -210,7 +210,7 @@ const LeftContainer = styled(Link)`
   left: 0;
   display: flex;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     position: relative;
   }
 `
@@ -230,7 +230,7 @@ const ControlsContainer = styled.div`
     display: none;
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     .theme-switch {
       // hide theme switch
       display: none;

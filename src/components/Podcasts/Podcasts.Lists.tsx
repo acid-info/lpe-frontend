@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { getPostLink } from '../../utils/route.utils'
 import { Grid, GridItem } from '../Grid/Grid'
 import PodcastHost from './Podcast.Host'
@@ -66,7 +67,7 @@ export default function PodcastsLists({ shows }: Props) {
 const PodcastListsContainer = styled(Grid)`
   gap: 16px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     flex-direction: column;
     gap: 24px 16px;
   }
@@ -88,11 +89,11 @@ const ShowCard = styled(Link)<{ isEven: boolean }>`
       ? 'rgb(var(--lsd-surface-secondary))'
       : 'rgb(var(--lsd-surface-primary))'};
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     height: 420px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     height: 374px;
   }
 `
@@ -101,7 +102,7 @@ const ShowInfoContainer = styled.div`
   display: flex;
   gap: 16px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     gap: 8px;
   }
 `
@@ -135,7 +136,7 @@ const ShowData = styled.div<{ isEven: boolean }>`
         : 'rgb(var(--lsd-text-primary))'};
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 57px;
   }
 `
@@ -151,7 +152,7 @@ const Description = styled(Typography)`
   font-size: var(--lsd-h4-fontSize);
   line-height: var(--lsd-h4-lineHeight);
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     font-size: var(--lsd-h6-fontSize);
     line-height: var(--lsd-h6-lineHeight);
   }
@@ -181,7 +182,7 @@ const ShowButton = styled(Button)<{ isEven: boolean }>`
     transform: rotate(-90deg);
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     padding: 7px;
   }
 `

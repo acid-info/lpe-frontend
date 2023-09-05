@@ -1,5 +1,6 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 const EpisodeStats = ({
   date,
@@ -32,7 +33,7 @@ const Row = styled.div`
   margin-bottom: 12px;
   margin-top: 32px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 24px;
   }
 `

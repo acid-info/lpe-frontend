@@ -7,6 +7,7 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { ArticleBlocksOrders } from '../../../configs/data.configs'
 import { LPE } from '../../../types/lpe.types'
+import { lsdUtils } from '../../../utils/lsd.utils'
 import { ArticleImageBlockWrapper } from '../Article.ImageBlockWrapper'
 import ArticleStats from '../Article.Stats'
 import ArticleSummary from './Article.Summary'
@@ -78,7 +79,7 @@ const ArticleHeaderContainer = styled.header`
     display: block;
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     .mobileSummary {
       display: block;
       p {
@@ -105,7 +106,7 @@ const CustomTypography = styled(Typography)`
 
 const ArticleTitle = styled(ArticleHeading)`
   margin-bottom: 16px;
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-bottom: 8px;
   }
 `
@@ -113,7 +114,7 @@ const ArticleTitle = styled(ArticleHeading)`
 const ArticleSubtitle = styled(CustomTypography)`
   margin-bottom: 16px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     font-size: var(--lsd-subtitle1-fontSize);
   }
 `
@@ -123,7 +124,7 @@ const AuthorsContainer = styled.div`
   margin-top: 24px;
   margin-bottom: 32px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 16px;
     margin-bottom: 24px;
 

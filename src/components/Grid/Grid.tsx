@@ -84,7 +84,7 @@ export const GridItem = styled.div<GridItemProps>`
     grid-column: span 16;
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     grid-column: span 16 !important;
   }
 

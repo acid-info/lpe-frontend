@@ -5,6 +5,7 @@ import { ArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import styled from '@emotion/styled'
 import { useState } from 'react'
 import { LPE } from '../types/lpe.types'
+import { lsdUtils } from '../utils/lsd.utils'
 
 interface Props {
   data: LPE.Article.Document
@@ -30,25 +31,23 @@ const ArticleContainer = (props: Props) => {
 }
 
 const ArticleBodyContainer = styled(GridItem)`
-  @media (min-width: 768px) and (max-width: 1200px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'between', 'lg')} {
     grid-column: span 10 !important;
   }
 `
 
 const ArticleTocContainer = styled(GridItem)`
-  @media (min-width: 768px) and (max-width: 1200px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'between', 'lg')} {
     grid-column: span 4 !important;
   }
 `
 
 const ArticleGrid = styled(Grid)`
   width: 100%;
-  @media (min-width: 768px) and (max-width: 1200px) {
-  }
 `
 
 const Gap = styled(GridItem)`
-  @media (max-width: 550px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none;
   }
 `

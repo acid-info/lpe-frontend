@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { useMemo } from 'react'
 import { LPE } from '../../../types/lpe.types'
+import { lsdUtils } from '../../../utils/lsd.utils'
 import EpisodeCredits from './Episode.Credits'
 import EpisodeFootnotes from './Episode.Footnotes'
 import RelatedEpisodes from './Episode.RelatedEpisodes'
@@ -43,7 +44,7 @@ const EpisodeFooterContainer = styled.div`
     border-top: none;
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 72px;
   }
 `

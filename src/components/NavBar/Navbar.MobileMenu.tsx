@@ -6,6 +6,7 @@ import { uiConfigs } from '@/configs/ui.configs'
 import { useThemeState } from '@/states/themeState'
 import styled from '@emotion/styled'
 import { useEffect } from 'react'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { SocialMediaKit } from './Navbar.SocialMediaKit'
 
 interface Props {}
@@ -48,7 +49,7 @@ const NavbarMobileMenuContainer = styled.div`
   background: rgb(var(--lsd-surface-primary));
   overflow-y: auto;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
     display: none;
   }
 `

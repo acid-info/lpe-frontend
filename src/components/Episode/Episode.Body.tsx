@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { useHookstate } from '@hookstate/core'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { playerState } from '../GlobalAudioPlayer/globalAudioPlayer.state'
 import EpisodeTranscript from './Episode.Transcript'
 import EpisodeFooter from './Footer/Episode.Footer'
@@ -41,7 +42,7 @@ const EpisodeContainer = styled.article`
   flex-direction: column;
   max-width: 696px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 32px;
   }
 `

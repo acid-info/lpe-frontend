@@ -1,5 +1,6 @@
 import { uiConfigs } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 export type MainProps = Partial<React.ComponentProps<typeof Container>> & {}
 
@@ -35,7 +36,7 @@ const Container = styled.main<{
       ${(props) => (props.contentPadding ? `var(--main-content-padding)` : '0')};
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     --main-margin-top: ${({ spacing }) =>
       spacing
         ? uiConfigs.postSectionMobileMargin

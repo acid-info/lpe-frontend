@@ -3,6 +3,7 @@ import { FooterSection } from '@/components/Footer/Footer.Section'
 import { FooterLinksItems } from '@/configs/data.configs'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 export const FooterBuPanel = () => {
   return (
@@ -68,14 +69,14 @@ const BusinessUnits = styled.div`
   display: flex;
   align-items: baseline;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     flex-direction: column;
     margin-top: 72px;
   }
 `
 
 const BUInfo = styled(FooterSection)`
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-bottom: 76px;
   }
 `
@@ -85,7 +86,7 @@ const BUs = styled(FooterSection)`
   flex-direction: row;
   gap: 8px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     flex-direction: column;
   }
 `
@@ -103,7 +104,7 @@ const BusinessUnitItemGroup = styled.div`
     grid-area: 1 / 1 / 2 / 2;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     grid-template-columns: repeat(1, 1fr);
     padding-bottom: 24px;
   }
@@ -115,7 +116,7 @@ const LinkGroup = styled.div`
   margin-bottom: 34px;
   gap: 4px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-bottom: 24px;
   }
 `

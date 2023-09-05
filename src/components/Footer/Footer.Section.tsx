@@ -1,5 +1,6 @@
 import { uiConfigs } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 export const FooterSection = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const FooterSection = styled.div`
   flex-wrap: wrap;
   width: 50%;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     width: 100%;
   }
 `

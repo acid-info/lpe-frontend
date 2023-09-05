@@ -5,6 +5,7 @@ import { FooterLinksItems } from '@/configs/data.configs'
 import { LPEFooterGroup } from '@/types/ui.types'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 const socialLinks = FooterLinksItems.about.find(
   (item) => item.key === 'social',
@@ -59,7 +60,7 @@ const Container = styled.div`
 `
 
 const LinkContainer = styled.div`
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     width: fit-content;
     display: flex;
 

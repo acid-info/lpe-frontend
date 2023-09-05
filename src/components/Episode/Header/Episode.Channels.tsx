@@ -5,6 +5,7 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { LPE } from '../../../types/lpe.types'
+import { lsdUtils } from '../../../utils/lsd.utils'
 
 export type EpisodeChannelProps = {
   channels: LPE.Podcast.Channel[]
@@ -53,7 +54,7 @@ const EpisodeChannelContainer = styled.div`
   margin-top: 32px;
   margin-bottom: 32px;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 24px;
   }
 `
@@ -66,7 +67,7 @@ const Channel = styled(Link)`
 `
 
 const ChannelName = styled(Typography)`
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     font-size: var(--lsd-body3-fontSize) !important;
     line-height: var(--lsd-body3-lineHeight) !important;
   }

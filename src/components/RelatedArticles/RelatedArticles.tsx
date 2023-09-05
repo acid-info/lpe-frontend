@@ -2,6 +2,7 @@ import { SearchResultsSection } from '@/components/SearchResultsSection/SearchRe
 import { SearchHook } from '@/types/data.types'
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 import { PostsList } from '../PostList/PostList'
 
 type Props = {
@@ -36,7 +37,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     align-items: flex-start;
   }
 `

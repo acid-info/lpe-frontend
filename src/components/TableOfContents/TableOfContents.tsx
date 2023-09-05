@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { LPE } from '../../types/lpe.types'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 type Props = {
   contents?: LPE.Article.TocItem[]
@@ -79,7 +80,7 @@ const Container = styled.aside<{ dy: number; height: number }>`
     opacity: 0;
   }
 
-  @media (max-width: 776px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none;
   }
 `

@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react'
 import { useWindowScroll } from 'react-use'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useNavbarState } from '../../states/navbarState'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 export type HeroProps = Partial<React.ComponentProps<typeof Container>> & {
   tags?: string[]
@@ -53,7 +54,7 @@ const Container = styled.div`
   position: relative;
   padding: 24px 16px 40px 16px;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     padding: 8px 0 16px 0;
   }
 `
@@ -62,7 +63,8 @@ const Title = styled(Typography)`
   text-align: center;
   text-transform: uppercase;
   padding: 0 var(--main-content-padding);
-  @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     font-size: var(--lsd-h4-fontSize) !important;
     font-weight: var(--lsd-h4-fontWeight) !important;
     line-height: var(--lsd-h4-lineHeight) !important;
@@ -75,7 +77,7 @@ const Description = styled(Typography)`
   text-transform: capitalize;
   padding: 0 var(--main-content-padding);
 
-  @media (max-width: ${(props) => props.theme.breakpoints.md.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     font-size: 12px !important;
     font-weight: 400 !important;
     line-height: 16px !important;

@@ -4,6 +4,7 @@ import { uiConfigs } from '@/configs/ui.configs'
 import styled from '@emotion/styled'
 import { PropsWithChildren } from 'react'
 import { AppBar } from '../../components/NavBar'
+import { lsdUtils } from '../../utils/lsd.utils'
 import styles from './Search.layout.module.css'
 
 export default function SearchLayout(props: PropsWithChildren<any>) {
@@ -23,7 +24,7 @@ const MainContainer = styled(Main)`
     // margin-top: ${uiConfigs.postSectionMargin}px;
   }
 
-  @media (max-width: 768px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     &.search_page {
       margin-top: ${uiConfigs.postSectionMobileMargin * 3}px;
     }

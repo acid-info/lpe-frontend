@@ -1,12 +1,47 @@
 import {
   Breakpoints,
-  THEME_BREAKPOINTS,
   Theme,
+  THEME_BREAKPOINTS,
   TypographyVariants,
 } from '@acid-info/lsd-react'
-import { SerializedStyles, css } from '@emotion/react'
+import { css, SerializedStyles } from '@emotion/react'
 
 export class LsdUtils {
+  private _breakpoints: Record<
+    string,
+    Record<string, { min: number; max: number }>
+  > = {}
+
+  private getBreakpoints = (theme: Theme) => {
+    if (this._breakpoints[theme.name]) {
+      return this._breakpoints[theme.name]
+    }
+
+    const breakpoints: (typeof this._breakpoints)[string] = {}
+    for (let i = 0; i < THEME_BREAKPOINTS.length; i++) {
+      const name = THEME_BREAKPOINTS[i]
+      const breakpoint = theme.breakpoints[name]
+      const next = theme.breakpoints[THEME_BREAKPOINTS[i + 1]]
+
+      const min = breakpoint.width
+      const max = next ? next.width - 1 : Number.MAX_SAFE_INTEGER
+
+      breakpoints[name] = {
+        min,
+        max,
+      }
+    }
+
+    this._breakpoints[theme.name] = breakpoints
+
+    return breakpoints
+  }
+
+  private getBreakpoint = (theme: Theme, breakpoint: Breakpoints) => {
+    const breakpoints = this.getBreakpoints(theme)
+    return breakpoints[breakpoint]
+  }
+
   breakpoints = (exclude: Breakpoints[] = []) =>
     THEME_BREAKPOINTS.filter((b) => !exclude.find((b2) => b2 === b))
 
@@ -30,20 +65,22 @@ export class LsdUtils {
   breakpoint = (
     theme: Theme,
     breakpoint: Breakpoints,
-    func: 'exact' | 'up' | 'down' = 'up',
+    func: 'exact' | 'up' | 'down' | 'between' = 'up',
+    next?: Breakpoints,
   ) => {
-    const width = theme.breakpoints[breakpoint].width
-    const idx = THEME_BREAKPOINTS.findIndex((b) => b === breakpoint)
-    const next = theme.breakpoints[THEME_BREAKPOINTS[idx + 1]]
-    const min = width
-    const max = next?.width ? next.width - 1 : Number.MAX_SAFE_INTEGER
+    const { min, max } = this.getBreakpoint(theme, breakpoint)
 
     let media = `@media `
 
     if (func === 'up') {
       media += `(min-width: ${min}px)`
     } else if (func === 'down') media += `(max-width: ${max}px)`
-    else media += `(min-width: ${min}px) and (max-width: ${max}px)`
+    else if (func === 'between' && !!next) {
+      const nextBreakpoint = this.getBreakpoint(theme, next)
+      media += `(min-width: ${min}px) and (max-width: ${
+        nextBreakpoint.min - 1
+      }px)`
+    } else media += `(min-width: ${min}px) and (max-width: ${max}px)`
 
     return `${media}`
   }

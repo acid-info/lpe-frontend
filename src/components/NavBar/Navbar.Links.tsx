@@ -2,6 +2,7 @@ import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { lsdUtils } from '../../utils/lsd.utils'
 
 interface Props {
   links: { href: string; label: string }[]
@@ -56,7 +57,7 @@ const Container = styled.div`
     margin: 0 20px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -76,7 +77,7 @@ const Container = styled.div`
 `
 
 const LinkText = styled(Typography)`
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm.width}px) {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     font-size: 20px; // LSD doesn't have this font size
     line-height: 28px; // LSD doesn't have this line height
   }
