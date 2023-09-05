@@ -67,11 +67,11 @@ const PodcastsContainer = (props: Props) => {
                 },
                 {
                   breakpoint: 'sm',
-                  pattern: [{ cols: 2, size: 'small' }],
+                  pattern: [{ cols: 4, size: 'xsmall' }],
                 },
                 {
                   breakpoint: 'md',
-                  pattern: [{ cols: 2, size: 'small' }],
+                  pattern: [{ cols: 4, size: 'xsmall' }],
                 },
               ]}
             />

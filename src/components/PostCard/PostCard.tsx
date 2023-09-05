@@ -236,6 +236,12 @@ PostCard.styles = {
     .post-card__title-text {
       ${lsdUtils.typography('h6')}
     }
+
+    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
+      .post-card__title-text {
+        ${lsdUtils.typography('h5')}
+      }
+    }
   `,
   small: (theme: Theme) => css`
     .post-card__title-text {
