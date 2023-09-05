@@ -2,6 +2,7 @@ import { LPE } from '@/types/lpe.types'
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useState } from 'react'
+import { lsdUtils } from '../../../utils/lsd.utils'
 import { PostsGrid } from '../../PostsGrid'
 
 type props = {
@@ -24,6 +25,7 @@ const RelatedEpisodes = ({ podcastSlug, relatedEpisodes }: props) => {
     <Container>
       <Typography>More Episodes</Typography>
       <PostsGrid
+        className="related-episodes"
         displayPodcastShow={false}
         posts={relatedEpisodes.slice(0, showIndex)}
         pattern={[{ cols: 2, size: 'xsmall' }]}
@@ -53,6 +55,24 @@ const Container = styled.div`
   padding-block: 16px;
   display: flex;
   flex-direction: column;
+
+  .related-episodes {
+    .post-card-wrapper {
+      padding-top: 24px;
+      padding-bottom: 8px;
+    }
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
+    .related-episodes {
+      padding-top: 24px;
+
+      .post-card-wrapper {
+        padding-top: 0;
+        padding-bottom: 24px;
+      }
+    }
+  }
 `
 
 const ShowButton = styled(Button)`
