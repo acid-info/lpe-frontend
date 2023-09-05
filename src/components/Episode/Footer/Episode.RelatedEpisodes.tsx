@@ -34,10 +34,6 @@ const RelatedEpisodes = ({ podcastSlug, relatedEpisodes }: props) => {
           },
           {
             breakpoint: 'sm',
-            pattern: [{ cols: 1, size: 'small' }],
-          },
-          {
-            breakpoint: 'md',
             pattern: [{ cols: 2, size: 'small' }],
           },
         ]}
