@@ -464,10 +464,6 @@ PostCard.styles = {
         align-self: end;
       }
 
-      .post-card__cover-image button {
-        display: none;
-      }
-
       &.top-post {
         .post-card__title-text {
           ${lsdUtils.typography('h4')}

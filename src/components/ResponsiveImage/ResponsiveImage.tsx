@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import Image, { ImageLoader, ImageProps } from 'next/image'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { LPE } from '../../types/lpe.types'
 
 export type ResponsiveImageProps = {
@@ -24,7 +24,8 @@ export const ResponsiveImage = ({
   fill = false,
   nextImageProps,
   className,
-}: Props) => {
+  children,
+}: React.PropsWithChildren<Props>) => {
   const [loaded, setLoaded] = useState(false)
 
   const lazyUrl = `${data.url}?blur=200&px=16&auto=format`
@@ -57,9 +58,11 @@ export const ResponsiveImage = ({
     >
       <div>
         <img src={lazyUrl} alt={data.alt} title={data.alt} />
+        {children}
       </div>
       <div className={imageProps.className}>
         <Image {...imageProps} alt={data.alt} title={data.alt} />
+        {children}
       </div>
     </Container>
   )

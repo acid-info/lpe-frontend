@@ -25,12 +25,13 @@ export const PostCardCover: FC<PostCardCoverProps> = ({
       {...props}
       className={`post-card__cover-image ${props.className}`}
     >
-      <ResponsiveImage {...imageProps} data={imageData} />
-      {playIcon && (
-        <Icon size="small">
-          <UnfilledPlayIcon />
-        </Icon>
-      )}
+      <ResponsiveImage {...imageProps} data={imageData}>
+        {playIcon && (
+          <Icon size="small">
+            <UnfilledPlayIcon />
+          </Icon>
+        )}
+      </ResponsiveImage>
     </CustomLink>
   )
 }
