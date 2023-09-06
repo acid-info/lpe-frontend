@@ -1,48 +1,94 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Logos Press Engline
 
-## Getting Started
+The repository for [press.logos.co](https://press.logos.co/) website.
 
-First, run the development server:
+**Tech Stacks**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+- NextJS : React Framework
+
+- [LSD](https://github.com/acid-info/lsd) : Design System
+
+- Hookstate : State Management
+
+- Emotion: CSS-in-JS
+
+- [Unbody](https://unbody.io/) : CMS
+
+
+## Environment Variables
+
+Please check the environment values in `.env` located in the root directory.
+
+```
+UNBODY_API_KEY=
+UNBODY_PROJECT_ID=
+SIMPLECAST_ACCESS_TOKEN=
+REVALIDATE_WEBHOOK_TOKEN=
+NEXT_PUBLIC_SITE_URL=https://press.logos.co
 ```
 
+This is a template for `.env.local`, which is included in `.gitignore`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can obtain an Unbody API key and project ID through your [Unbody project](https://app.unbody.io/).
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+To find the Simplecast access token, follow these steps on the Simplecast dashboard:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. Click the gear button in the top-right corner.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+2. Select `Private Apps` to acquire your JWT bearer token.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## How to Run Locally
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone this repository
+```bash
+$ git clone https://github.com/acid-info/logos-press-engine.git
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install the dependencies:
+```bash
+$ yarn install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Start the development server:
+```bash
+$ yarn dev
+```
 
-## Deploy on Vercel
+4. Visit `http://localhost:3000` in your browser
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## How to Run a Static Build (Production Build)
 
-## Continuous Integration
+1. Generate static files for production:
 
-Jenkins CI builds exist to deploy the two main branches:
+```bash
+$ yarn build
+```
 
-* https://press.logos.co/ - [Built from `master`](https://ci.infra.status.im/job/website/job/press.logos.co/) and pushed as `statusteam/logos-press-engine:deploy-master`.
-* https://dev-press.logos.co/ - [Built from `develop`](https://ci.infra.status.im/job/website/job/dev-press.logos.co/) and pushed as `statusteam/logos-press-engine:deploy-develop`.
+The static files will be created in the `build` directory.
 
-Those builds should run on ever commit to the respective branch.
+2. Serve the static build:
+
+```bash
+$ yarn start
+```
+
+4. Visit `http://localhost:3000` in your browser
+
+
+## CI/CD
+
+- The `master` branch is automatically deployed to the production server (e.g., logos.co) through [CI](https://ci.infra.status.im)
+- The `develop` branch is automatically deployed to the staging server (e.g., dev.logos.co) through [CI](https://ci.infra.status.im)
+
+
+## Change Process
+
+1. Create a new working branch from `develop`: `git checkout develop; git checkout -b my-changes`.
+
+2. Make your changes, push them to the `origin`, and open a Pull Request against the `develop` branch.
+
+3. After approval, merge the pull request, and verify the changes on the staging server (https://dev-press.logos.co/).
+
+4. When ready to promote changes to the live website, create a pull request against the "master" branch, based on the "develop" branch.
