@@ -1,5 +1,4 @@
 import { copyConfigs } from '@/configs/copy.configs'
-import { uiConfigs } from '@/configs/ui.configs'
 import { LPE } from '@/types/lpe.types'
 import { nope } from '@/utils/general.utils'
 import { lsdUtils } from '@/utils/lsd.utils'
@@ -95,7 +94,9 @@ const SearchBox = (props: SearchBoxProps) => {
   )
 
   const filtersRef = useRef<HTMLDivElement>(null)
-  const [whereResultsStick, setWhereResultsStick] = useState(0)
+  const [whereResultsStick, setWhereResultsStick] = useState<number | null>(
+    null,
+  )
   const [showDetails, setShowDetails] = useState(false)
   const [detailsTop, setDetailsTop] = useState(0)
   const [focused, setFocused] = useState(false)
@@ -123,12 +124,17 @@ const SearchBox = (props: SearchBoxProps) => {
   }, [focused, queryInput])
 
   useEffect(() => {
-    if (filtersRef.current) {
-      const filtersB = filtersRef.current.getBoundingClientRect().bottom
+    if (filtersRef.current && whereResultsStick === null) {
+      const filtersB =
+        filtersRef.current.offsetTop -
+        window.scrollY +
+        filtersRef.current.clientHeight
+
       const parentT =
-        filtersRef.current.parentElement?.getBoundingClientRect().top || 0
-      const whereResultsStick =
-        -1 * (filtersB - parentT - uiConfigs.navbarRenderedHeight + 2)
+        (filtersRef.current.parentElement?.offsetTop || 0) - window.scrollY
+
+      const whereResultsStick = -1 * (filtersB - parentT + 2)
+
       setWhereResultsStick(whereResultsStick)
       setDetailsTop(filtersB + whereResultsStick)
     }
@@ -185,7 +191,17 @@ const SearchBox = (props: SearchBoxProps) => {
   return (
     <Container
       className={enlargeQuery ? 'active' : ''}
-      style={{ top: `${whereResultsStick}px` }}
+      style={{
+        ...(whereResultsStick === null
+          ? {
+              top: 0,
+              position: 'relative',
+            }
+          : {
+              top: whereResultsStick,
+              position: 'sticky',
+            }),
+      }}
     >
       <FirstRow>
         <input
