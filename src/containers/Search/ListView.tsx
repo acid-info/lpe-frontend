@@ -172,7 +172,9 @@ const PostsList = styled(GridItem)`
     gap: 32px;
   }
 `
-const PostsListHeader = styled.div``
+const PostsListHeader = styled.div`
+  margin-bottom: 56px;
+`
 const PostsListContent = styled.div``
 
 const BlocksList = styled(GridItem)``
