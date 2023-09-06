@@ -123,19 +123,16 @@ const SearchBox = (props: SearchBoxProps) => {
   }, [focused, queryInput])
 
   useEffect(() => {
-    if (filtersRef.current && hydrated && queryInput) {
+    if (filtersRef.current) {
       const filtersB = filtersRef.current.getBoundingClientRect().bottom
-
       const parentT =
         filtersRef.current.parentElement?.getBoundingClientRect().top || 0
-
       const whereResultsStick =
         -1 * (filtersB - parentT - uiConfigs.navbarRenderedHeight + 2)
-
       setWhereResultsStick(whereResultsStick)
       setDetailsTop(filtersB + whereResultsStick)
     }
-  }, [filtersRef, hydrated, queryInput])
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
