@@ -24,6 +24,7 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
       <SEO
         title={data.data.title}
         description={data.data.summary}
+        noIndex={data.data.isDraft}
         image={data.data.coverImage}
         pagePath={`/article/${slug}`}
         date={data.data.createdAt}
@@ -49,13 +50,21 @@ export async function getStaticPaths() {
   return {
     paths: errors
       ? []
-      : posts.map((post) => ({ params: { slug: `${post.slug}` } })),
+      : posts.map((post) => ({ params: { path: [post.slug] } })),
     fallback: true,
   }
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { slug } = params!
+  const { path } = params || {}
+  const [slug, idProp, id] = (Array.isArray(path) && path) || []
+
+  if (idProp && (idProp !== 'id' || !id)) {
+    return {
+      notFound: true,
+      props: {},
+    }
+  }
 
   if (!slug) {
     return {
@@ -67,6 +76,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   const { data, errors } = await unbodyApi.getArticle({
     parseContent: true,
     slug: slug as string,
+    ...(id ? { id, includeDrafts: true } : {}),
   })
 
   if (!data) {

@@ -15,6 +15,7 @@ type Metadata = {
   pagePath?: string
   date?: string | null
   contentType?: LPE.PostType
+  noIndex?: boolean
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://press.logos.co'
@@ -32,6 +33,7 @@ export default function SEO({
   pagePath = '',
   date,
   contentType,
+  noIndex = false,
 }: Metadata) {
   const ogSearchParams = new URLSearchParams()
 
@@ -69,6 +71,11 @@ export default function SEO({
       <meta name="twitter:site" content={`@${siteConfigs.xHandle}`} />
       <meta property="twitter:image" content={ogUrl} />
       <link rel="canonical" href={`${SITE_URL}${pagePath}`} />
+      {noIndex && (
+        <>
+          <meta name="robots" content="noindex, nofollow" />
+        </>
+      )}
     </Head>
   )
 }

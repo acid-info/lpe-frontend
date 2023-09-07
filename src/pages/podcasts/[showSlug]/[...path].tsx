@@ -26,6 +26,7 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
       <SEO
         title={episode.title}
         description={episode.description}
+        noIndex={episode.isDraft}
         image={episode.coverImage}
         imageUrl={undefined}
         pagePath={getPostLink('podcast', {
@@ -53,7 +54,7 @@ export async function getStaticPaths() {
         return {
           params: {
             showSlug: show.slug,
-            epSlug: episode.slug,
+            path: [episode.slug],
           },
         }
       })
@@ -62,12 +63,20 @@ export async function getStaticPaths() {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
-  const { showSlug, epSlug } = params!
+  const { showSlug, path } = params!
+  const [epSlug, idProp, id] = (Array.isArray(path) && path) || []
+
+  if (idProp && (idProp !== 'id' || !id)) {
+    return {
+      notFound: true,
+      props: {},
+    }
+  }
 
   if (!epSlug || !showSlug) {
     return {
@@ -82,6 +91,12 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       showSlug: showSlug as string,
       slug: epSlug as string,
       textBlocks: true,
+      ...(id
+        ? {
+            id: id as string,
+            includeDraft: true,
+          }
+        : {}),
     })
 
   // TODO : error handlings

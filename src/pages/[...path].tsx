@@ -28,6 +28,7 @@ const Page: CustomNextPage<PageProps> = ({
       <SEO
         title={data.page.title}
         description={data.page.subtitle}
+        noIndex={data.page.isDraft}
         pagePath={`/${data.page.slug}`}
       />
       <StaticPage data={data} />
@@ -40,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: data.map((page) => ({
       params: {
-        slug: page.slug,
+        path: [page.slug],
       },
     })),
     fallback: true,
@@ -48,8 +49,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
+  const { path } = ctx.params || {}
+  const [slug, idProp, id] = (Array.isArray(path) && path) || []
+
+  if (idProp && (idProp !== 'id' || !id)) {
+    return {
+      notFound: true,
+      props: {},
+    }
+  }
+
   const { data, errors } = await unbodyApi.getStaticPage({
-    slug: ctx.params!.slug as string,
+    slug: slug as string,
+    ...(id
+      ? {
+          id,
+          includeDrafts: true,
+        }
+      : {}),
   })
 
   if (!data) {

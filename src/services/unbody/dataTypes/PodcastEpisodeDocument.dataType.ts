@@ -114,6 +114,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
       ...(show ? { showId: show.id } : {}),
       ...(coverImage ? { coverImage } : {}),
       highlighted: data.highlighted,
+      isDraft: data.isDraft,
       type: LPE.PostTypes.Podcast,
     }
   },

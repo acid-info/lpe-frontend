@@ -306,6 +306,7 @@ export class UnbodyService {
     }, [])
 
   findStaticPages = ({
+    id,
     skip = 0,
     limit = 10,
     slug,
@@ -315,6 +316,7 @@ export class UnbodyService {
     textBlocks = false,
     includeDrafts = false,
   }: {
+    id?: string
     slug?: string
     skip?: number
     limit?: number
@@ -352,6 +354,15 @@ export class UnbodyService {
                 'Static pages',
                 includeDrafts ? 'published|draft' : 'published',
               ]),
+              ...(id
+                ? [
+                    {
+                      operator: 'Equal',
+                      path: ['remoteId'],
+                      valueString: id,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
               ...(slug
                 ? [
                     {
@@ -384,15 +395,18 @@ export class UnbodyService {
     }, [])
 
   getStaticPage = ({
+    id,
     slug,
     includeDrafts = false,
   }: {
+    id?: string
     slug: string
     includeDrafts?: boolean
   }) =>
     this.handleRequest<LPE.StaticPage.Document | null>(async () => {
       const { data } = await this.findStaticPages({
         limit: 1,
+        id,
         slug,
         includeDrafts,
         textBlocks: true,
@@ -407,6 +421,7 @@ export class UnbodyService {
   findPostDocs = ({
     skip = 0,
     limit = 10,
+    id,
     slug,
     toc = false,
     filter,
@@ -416,6 +431,7 @@ export class UnbodyService {
     nearText,
     sort,
   }: {
+    id?: string
     slug?: string
     skip?: number
     limit?: number
@@ -454,6 +470,15 @@ export class UnbodyService {
           filter: {
             operator: 'And',
             operands: [
+              ...(id
+                ? [
+                    {
+                      operator: 'Equal',
+                      path: ['remoteId'],
+                      valueString: id,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
               ...(slug
                 ? [
                     {
@@ -484,6 +509,7 @@ export class UnbodyService {
   getArticles = ({
     skip = 0,
     limit = 10,
+    id,
     slug,
     toc = false,
     filter,
@@ -492,6 +518,7 @@ export class UnbodyService {
     includeDrafts = false,
     highlighted = 'include',
   }: {
+    id?: string
     slug?: string
     skip?: number
     limit?: number
@@ -529,10 +556,19 @@ export class UnbodyService {
               this.helpers.args.wherePath([
                 'Articles',
                 highlighted !== 'only' && '|published',
-                highlighted !== 'only' && includeDrafts && '|drafts',
+                highlighted !== 'only' && includeDrafts && '|draft',
                 (highlighted === 'include' || highlighted === 'only') &&
                   '|highlighted',
               ]),
+              ...(id
+                ? [
+                    {
+                      operator: 'Equal',
+                      path: ['remoteId'],
+                      valueString: id,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
               ...(slug
                 ? [
                     {
@@ -565,9 +601,11 @@ export class UnbodyService {
     }, [])
 
   getArticle = ({
+    id,
     slug,
     includeDrafts = false,
   }: {
+    id?: string
     slug?: string
     parseContent?: boolean
     includeDrafts?: boolean
@@ -576,6 +614,7 @@ export class UnbodyService {
       async () =>
         this.getArticles({
           limit: 1,
+          id,
           slug,
           toc: true,
           includeDrafts,
@@ -698,6 +737,7 @@ export class UnbodyService {
   getPodcastEpisodes = ({
     limit = 10,
     skip = 0,
+    id,
     slug,
     showSlug = '',
     toc = false,
@@ -709,6 +749,7 @@ export class UnbodyService {
     includeDrafts = false,
     highlighted = 'include',
   }: {
+    id?: string
     slug?: string
     showSlug?: string
     skip?: number
@@ -749,10 +790,19 @@ export class UnbodyService {
                 'Podcasts',
                 showSlug,
                 highlighted !== 'only' && '|published',
-                highlighted !== 'only' && includeDrafts && '|drafts',
+                highlighted !== 'only' && includeDrafts && '|draft',
                 (highlighted === 'include' || highlighted === 'only') &&
                   '|highlighted',
               ]),
+              ...(id
+                ? [
+                    {
+                      operator: 'Equal',
+                      path: ['remoteId'],
+                      valueString: id,
+                    } as GetObjectsGoogleDocWhereInpObj,
+                  ]
+                : []),
               ...(slug
                 ? [
                     {
@@ -802,12 +852,14 @@ export class UnbodyService {
     }, [])
 
   getPodcastEpisode = ({
+    id,
     slug,
     showSlug = '',
     toc = false,
     includeDraft = false,
     textBlocks = false,
   }: {
+    id?: string
     slug: string
     showSlug?: string
     toc?: boolean
@@ -816,6 +868,7 @@ export class UnbodyService {
   }) =>
     this.handleRequest<LPE.Podcast.Document | null>(async () => {
       const { data } = await this.getPodcastEpisodes({
+        id,
         slug,
         showSlug,
         skip: 0,
@@ -1284,6 +1337,65 @@ export class UnbodyService {
 
       return [...blocks].sort((a, b) => (a.score > b.score ? -1 : 1))
     }, [])
+
+  getDocById = ({
+    id,
+    includeDrafts = false,
+  }: {
+    id: string
+    includeDrafts?: boolean
+  }) =>
+    this.handleRequest<LPE.Post.Document | LPE.StaticPage.Document | null>(
+      async () => {
+        const { data, errors } = await this.findPostDocs({
+          toc: true,
+          skip: 0,
+          limit: 1,
+          textBlocks: false,
+          filter: {
+            operator: 'And',
+            operands: [
+              {
+                operator: 'Equal',
+                valueString: id,
+                path: ['remoteId'],
+              },
+              this.helpers.args.wherePath([
+                'published|highlighted',
+                includeDrafts && '|draft',
+              ]),
+            ],
+          },
+        })
+
+        if (errors) throw errors
+
+        const [doc] = data
+        if (!doc) throw 'Not found!'
+
+        const { data: shows } = await this.getPodcastShows({
+          populateEpisodes: false,
+        })
+
+        const transformers = unbodyDataTypes.get({
+          classes: ['document'],
+          objectType: 'GoogleDoc',
+        })
+
+        const transformed = await unbodyDataTypes.transform(
+          transformers,
+          doc,
+          undefined,
+          {
+            shows,
+            parseContent: false,
+          },
+        )
+
+        return transformed
+      },
+      null,
+    )
 
   getTopics = async (published: boolean = true) =>
     this.handleRequest(async () => {

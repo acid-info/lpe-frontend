@@ -63,6 +63,7 @@ export const ArticleDataType: UnbodyDataTypeConfig<
       toc: data.tocObj ?? [],
       featured: data.path.includes('featured'),
       highlighted: data.path.includes('highlighted'),
+      isDraft: data.path.includes('draft'),
       type: LPE.PostTypes.Article,
     }
   },

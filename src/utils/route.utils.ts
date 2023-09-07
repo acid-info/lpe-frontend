@@ -1,29 +1,33 @@
 import { LPE } from '../types/lpe.types'
 
 export const getPostLink = (
-  postType: LPE.PostType,
+  postType: LPE.PostType | LPE.StaticPage.Metadata['type'],
   {
+    id,
     block,
     showSlug,
     postSlug,
     blockType,
   }: {
+    id?: string
     block?: string | number | null
     showSlug?: string | number | null
     postSlug?: string | number | null
     blockType?: LPE.Post.ContentBlockType | null
   } = {},
 ) => {
-  const basePath =
-    postType === 'article' ? `/article` : `/podcasts/${showSlug || ''}`
+  let path =
+    postType === 'article'
+      ? `/article`
+      : postType === 'podcast'
+      ? `/podcasts/${showSlug || ''}`
+      : ''
 
-  if (!postSlug) return basePath
+  if (postSlug) path += `/${postSlug}`
+  if (id) path += `/id/${id}`
 
-  const postPath = `${basePath}/${postSlug}`
+  if (blockType && block)
+    path += `#${blockType === 'text' ? 'p' : 'i'}-${block}`
 
-  if (!blockType && !block) return postPath
-
-  const blockPath = `${postPath}/#${blockType === 'text' ? 'p' : 'i'}-${block}`
-
-  return blockPath
+  return path
 }

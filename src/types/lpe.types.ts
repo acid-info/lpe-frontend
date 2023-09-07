@@ -116,6 +116,7 @@ export namespace LPE {
       title: string
       summary: string
       subtitle: string
+      isDraft?: boolean
 
       createdAt: string | null
       modifiedAt: string | null
@@ -147,6 +148,7 @@ export namespace LPE {
       authors: Author.Document[]
       tags: string[]
       highlighted?: boolean
+      isDraft?: boolean
 
       createdAt: string | null
       modifiedAt: string | null
@@ -217,6 +219,7 @@ export namespace LPE {
       episodeNumber: number
       showId?: string
       highlighted?: boolean
+      isDraft?: boolean
       coverImage?: Post.ImageBlock
       show?: Show
       type: typeof LPE.PostTypes.Podcast

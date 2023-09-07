@@ -38,6 +38,7 @@ export const StaticPageDataType: UnbodyDataTypeConfig<
       modifiedAt: data.modifiedAt || null,
       content: blocks,
       type: 'static_page',
+      isDraft: data.pathString.includes('/draft/'),
     }
   },
 }
