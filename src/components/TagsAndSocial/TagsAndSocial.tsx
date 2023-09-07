@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
+import { useMemo } from 'react'
 import { lsdUtils } from '../../utils/lsd.utils'
+import { parsePostUrl } from '../../utils/route.utils'
 import { ShareButton } from '../ShareButton'
 import { Tags } from '../Tags'
 
@@ -9,13 +11,32 @@ export type TagsProps = {
 }
 
 const TagsAndSocial: React.FC<TagsProps> = ({ tags, className }) => {
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
+  const postUrl = useMemo(() => {
+    if (typeof window === 'undefined') return ''
+
+    const link = parsePostUrl(window.location.href)
+    if (!link) return window.location.href
+
+    const url = new URL(window.location.href)
+
+    url.hash = ''
+    url.searchParams.forEach((_value, key) => {
+      url.searchParams.delete(key)
+    })
+
+    if (link.id) {
+      url.pathname = `/preview`
+      url.searchParams.set('id', link.id)
+    }
+
+    return url.toString()
+  }, [])
 
   return (
     <Container>
       {tags && <CustomTags tags={tags} className={className} />}
       <VerticalLine />
-      <ShareButton url={currentUrl} />
+      <ShareButton url={postUrl} />
     </Container>
   )
 }
