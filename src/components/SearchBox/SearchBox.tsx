@@ -247,7 +247,7 @@ const SearchBox = (props: SearchBoxProps) => {
       </Filters>
       {busy ? (
         <Typography variant={'subtitle2'}>Searching...</Typography>
-      ) : resultsNumber ? (
+      ) : (
         <Results>
           <Typography variant={'subtitle2'}>
             {resultsNumber === 0
@@ -282,7 +282,7 @@ const SearchBox = (props: SearchBoxProps) => {
             />
           </>
         </Results>
-      ) : null}
+      )}
     </Container>
   )
 }
