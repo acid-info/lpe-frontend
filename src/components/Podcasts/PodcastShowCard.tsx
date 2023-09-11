@@ -66,6 +66,8 @@ const ShowData = styled.div`
 
 const Description = styled(Typography)`
   margin-top: 16px;
+  max-width: 518px;
+  text-align: center;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'exact')} {
     margin-top: 12px;
