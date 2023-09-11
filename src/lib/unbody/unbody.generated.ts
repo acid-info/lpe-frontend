@@ -5384,6 +5384,7 @@ export type GetPostsQueryVariables = Exact<{
   mentions?: InputMaybe<Scalars['Boolean']['input']>
   textBlocks?: InputMaybe<Scalars['Boolean']['input']>
   imageBlocks?: InputMaybe<Scalars['Boolean']['input']>
+  remoteId?: InputMaybe<Scalars['Boolean']['input']>
 }>
 
 export type GetPostsQuery = {
@@ -5401,6 +5402,7 @@ export type GetPostsQuery = {
       createdAt: string
       modifiedAt: string
       pathString: string
+      remoteId?: string
       mentions?: string
       toc?: string
       _additional: {
@@ -6534,6 +6536,15 @@ export const GetPostsDocument = {
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'Boolean' } },
           defaultValue: { kind: 'BooleanValue', value: false },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'remoteId' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Boolean' } },
+          defaultValue: { kind: 'BooleanValue', value: false },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -6713,6 +6724,26 @@ export const GetPostsDocument = {
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'pathString' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'remoteId' },
+                        directives: [
+                          {
+                            kind: 'Directive',
+                            name: { kind: 'Name', value: 'include' },
+                            arguments: [
+                              {
+                                kind: 'Argument',
+                                name: { kind: 'Name', value: 'if' },
+                                value: {
+                                  kind: 'Variable',
+                                  name: { kind: 'Name', value: 'remoteId' },
+                                },
+                              },
+                            ],
+                          },
+                        ],
                       },
                       {
                         kind: 'Field',

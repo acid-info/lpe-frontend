@@ -29,6 +29,11 @@ export const getPostLink = (
   return path
 }
 
+export const getPostUrl = (
+  postType: LPE.PostType | LPE.StaticPage.Metadata['type'],
+  opts: Omit<PostLinkData, 'type'> = {},
+) => new URL(getPostLink(postType, opts), getWebsiteUrl()).toString()
+
 export const parsePostUrl = (url: string): PostLinkData | null => {
   const { pathname, hash } = new URL(url)
   const path = pathname.split('/').filter((p) => p.length > 0)
@@ -83,4 +88,12 @@ export const parsePostUrl = (url: string): PostLinkData | null => {
         }
       : {}),
   }
+}
+
+export const getWebsiteUrl = () => {
+  if (typeof window === 'undefined')
+    return process.env.NEXT_PUBLIC_SITE_URL || 'https://dev-press.logos.co'
+
+  const url = new URL(window.location.href)
+  return url.origin
 }

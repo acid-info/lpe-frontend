@@ -25,6 +25,7 @@ export const GET_POSTS_QUERY = gql`
     $mentions: Boolean = false
     $textBlocks: Boolean = false
     $imageBlocks: Boolean = false
+    $remoteId: Boolean = false
   ) {
     Get {
       GoogleDoc(
@@ -51,6 +52,7 @@ export const GET_POSTS_QUERY = gql`
         createdAt
         modifiedAt
         pathString
+        remoteId @include(if: $remoteId)
         mentions @include(if: $mentions)
         mentionsObj @client(always: true) @include(if: $mentions) {
           name
