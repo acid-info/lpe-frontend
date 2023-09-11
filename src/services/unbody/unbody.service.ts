@@ -1,5 +1,4 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import formatRFC7231 from 'date-fns/formatRFC7231'
 import { WebhookClient } from 'discord.js'
 import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants'
 import {
@@ -305,22 +304,10 @@ export class UnbodyService {
     ) => {
       const pageType =
         record.type === 'podcast'
-          ? 'Episode'
+          ? 'episode'
           : record.type === 'article'
-          ? 'Article'
+          ? 'article'
           : 'static page'
-      const actionMessage = {
-        delete: 'removed',
-        update: 'updated',
-        create: 'created',
-        publish: 'published',
-        unpublish: 'was moved to drafts',
-      }[action]
-
-      if (action === 'delete')
-        return `${
-          record.isDraft ? 'Draft page' : 'Page'
-        } ${actionMessage}\n${pageType} "${record.title}"`
 
       const pageUrl = record.isDraft
         ? new URL(
@@ -335,11 +322,38 @@ export class UnbodyService {
             ...(record.isDraft ? { recordId: record.id, preview: true } : {}),
           })
 
-      return `${
+      const messageTitlePageType =
         action !== 'unpublish' && record.isDraft ? 'Draft page' : 'Page'
-      } ${actionMessage}\n${pageType} "${record.title}" - ${formatRFC7231(
-        getRecordDate(record),
-      )}.\n ${pageUrl}`
+      const messageTitleAction =
+        action === 'create'
+          ? 'created'
+          : action === 'delete'
+          ? 'removed'
+          : action === 'publish'
+          ? 'published'
+          : action === 'unpublish'
+          ? 'moved to drafts'
+          : 'updated'
+
+      const messageTitle = `${messageTitlePageType} ${messageTitleAction}`
+
+      const messageDescriptionAction =
+        (action === 'create'
+          ? 'New'
+          : action === 'delete'
+          ? 'Removed'
+          : action === 'update'
+          ? 'Updated'
+          : action === 'publish'
+          ? 'Published'
+          : 'Draft') +
+        ' ' +
+        pageType
+
+      return (
+        `${messageTitle}\n${messageDescriptionAction}: "${record.title}".` +
+        (action === 'delete' ? '' : `\n${pageUrl}`)
+      )
     }
 
     for (const change of changes) {
