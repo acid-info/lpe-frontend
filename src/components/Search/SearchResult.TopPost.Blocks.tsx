@@ -24,7 +24,7 @@ export const SearchResultTopPostBlocks = ({
         <TextBlocks>
           {textBlocks.map((block, index) => (
             <TextBlockItem key={`para-${index}`}>
-              <ParagraphIcon />
+              <ParagraphIcon color="primary" />
               <Link href={`/article/${block.document.slug}#p-${block.order}`}>
                 <NicerTextFormat variant={'subtitle2'}>
                   {block.text}
