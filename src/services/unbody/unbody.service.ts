@@ -32,14 +32,15 @@ import { UnbodyHelpers } from './unbody.helpers'
 
 const isBuildTime = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD
 const isVercel = process.env.VERCEL === '1'
+
+const discordWebhookURL =
+  process.env.DISCORD_LOGS_WEBHOOK_URL ||
+  'https://discord.com/api/webhooks/1149295380345925682/q70d7nmOZIOYl53ZIdPdtV00RcMarYBwHeqQ0x8XKq5SV0BRaNW1TUK7wClmRfSX6ZkT' // temporary for testing,
 const sendDiscordNotifications =
-  process.env.NODE_ENV === 'production' &&
-  !!process.env.DISCORD_LOGS_WEBHOOK_URL
+  process.env.NODE_ENV === 'production' && !!discordWebhookURL
 
 const discordWebhook = new WebhookClient({
-  url:
-    process.env.DISCORD_LOGS_WEBHOOK_URL ||
-    'https://discord.com/api/webhooks/1149295380345925682/q70d7nmOZIOYl53ZIdPdtV00RcMarYBwHeqQ0x8XKq5SV0BRaNW1TUK7wClmRfSX6ZkT', // temporary for testing,
+  url: discordWebhookURL,
 })
 
 const articleDocument = unbodyDataTypes.get({
