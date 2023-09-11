@@ -265,9 +265,20 @@ export class UnbodyService {
           record,
         })
       } else {
-        const newDate = getRecordDate(record)
-        const oldDate = getRecordDate(oldRecord)
-        const isUpdated = +newDate > +oldDate || record.slug !== oldRecord.slug
+        const isUpdated =
+          JSON.stringify([
+            getRecordDate(record),
+            record.slug,
+            record.isDraft,
+            'highlighted' in record && record.highlighted,
+          ]) !==
+          JSON.stringify([
+            getRecordDate(oldRecord),
+            oldRecord.slug,
+            oldRecord.isDraft,
+            'highlighted' in oldRecord && oldRecord.highlighted,
+          ])
+
         if (!isUpdated) continue
 
         changes.push({
@@ -326,9 +337,9 @@ export class UnbodyService {
 
       return `${
         action !== 'unpublish' && record.isDraft ? 'Draft page' : 'Page'
-      } ${actionMessage}\n${pageType} "${record.title}" (${formatRFC7231(
+      } ${actionMessage}\n${pageType} "${record.title}" - ${formatRFC7231(
         getRecordDate(record),
-      )}).\n ${pageUrl}`
+      )}.\n ${pageUrl}`
     }
 
     for (const change of changes) {
