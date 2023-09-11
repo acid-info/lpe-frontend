@@ -82,7 +82,7 @@ const ShowCard = styled(Link)<{ isEven: boolean }>`
   padding: 24px;
   border: 1px solid rgb(var(--lsd-text-primary));
   box-sizing: border-box;
-  height: 516px;
+  min-height: 516px;
   text-decoration: none;
   background-color: ${(props) =>
     props.isEven
@@ -90,11 +90,11 @@ const ShowCard = styled(Link)<{ isEven: boolean }>`
       : 'rgb(var(--lsd-surface-primary))'};
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
-    height: 420px;
+    min-height: 420px;
   }
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    height: 374px;
+    min-height: 374px;
   }
 `
 
@@ -138,6 +138,7 @@ const ShowData = styled.div<{ isEven: boolean }>`
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     margin-top: 57px;
+    margin-bottom: 57px;
   }
 `
 
