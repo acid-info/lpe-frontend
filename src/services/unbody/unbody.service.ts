@@ -8,7 +8,6 @@ import {
   GetObjectsTextBlockWhereInpObj,
   GetPostsDocument,
   GetPostsQueryVariables,
-  SearchArticlesDocument,
   SearchBlocksDocument,
   Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj,
 } from '../../lib/unbody/unbody.generated'
@@ -1093,60 +1092,6 @@ export class UnbodyService {
       )
 
       const result = blocks.sort((a, b) => b.score - a.score)
-
-      return result
-    }, [])
-
-  searchArticles = async (
-    q: string = '',
-    tags: string[] = [],
-    published: boolean = true,
-  ) =>
-    this.handleRequest(async () => {
-      const { data } = await this.client.query({
-        query: SearchArticlesDocument,
-        variables: {
-          ...(q.trim().length > 0
-            ? {
-                nearText: {
-                  concepts: [q],
-                },
-              }
-            : {}),
-
-          filter: {
-            operator: 'And',
-            operands: [
-              this.helpers.args.wherePublished(published),
-              ...tags.map(
-                (tag) =>
-                  ({
-                    operator: 'Like',
-                    path: ['tags'],
-                    valueString: tag,
-                  } as GetObjectsGoogleDocWhereInpObj),
-              ),
-            ],
-          },
-        },
-      })
-
-      if (!data) throw 'No data'
-
-      const { data: shows } = await this.getPodcastShows({
-        populateEpisodes: false,
-      })
-
-      const result = await unbodyDataTypes.transformMany<LPE.Article.Data>(
-        articleSearchResultItem,
-        data.Get.GoogleDoc || [],
-        undefined,
-        {
-          shows,
-          query: q,
-          tags,
-        },
-      )
 
       return result
     }, [])

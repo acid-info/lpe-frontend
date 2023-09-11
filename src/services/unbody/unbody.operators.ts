@@ -114,53 +114,6 @@ export const GET_ALL_TOPICS_QUERY = gql`
   }
 `
 
-export const SEARCH_ARTICLES_QUERY = gql`
-  query SearchArticles(
-    $filter: GetObjectsGoogleDocWhereInpObj
-    $nearText: Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj
-  ) {
-    Get {
-      GoogleDoc(where: $filter, nearText: $nearText) {
-        sourceId
-        title
-        subtitle
-        summary
-        tags
-        createdAt
-        modifiedAt
-        slug
-        path
-        pathString
-        mentions
-        mentionsObj @client(always: true) {
-          name
-          emailAddress
-        }
-
-        blocks {
-          ... on ImageBlock {
-            url
-            alt
-            order
-            width
-            height
-            __typename
-            _additional {
-              id
-            }
-          }
-        }
-
-        _additional {
-          id
-          score
-          certainty
-        }
-      }
-    }
-  }
-`
-
 export const SEARCH_BLOCKS_QUERY = gql`
   query SearchBlocks(
     $limit: Int

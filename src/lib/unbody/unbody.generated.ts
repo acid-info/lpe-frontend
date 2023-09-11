@@ -26,6 +26,126 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean }
   Int: { input: number; output: number }
   Float: { input: number; output: number }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsAudioFile: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsGoogleDoc: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsImageBlock: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsTextBlock: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsAudioFile: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsGoogleDoc: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsImageBlock: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsTextBlock: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsAudioFile: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsGoogleDoc: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsImageBlock: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsTextBlock: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsAudioFile: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsGoogleDoc: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsImageBlock: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsTextBlock: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsAudioFile: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsGoogleDoc: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsImageBlock: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsTextBlock: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsAudioFile: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsGoogleDoc: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsImageBlock: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsAudioFile: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsGoogleDoc: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsImageBlock: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsAudioFile: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsGoogleDoc: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsImageBlock: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsAudioFile: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsGoogleDoc: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsImageBlock: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsAudioFile: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsGoogleDoc: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsImageBlock: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsAudioFile: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsGoogleDoc: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsImageBlock: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsAudioFile: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsGoogleCalendarEvent: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsGoogleDoc: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsImageBlock: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsTextBlock: { input: any; output: any }
 }
 
 export type AggregateAudioFile = {
@@ -1955,19 +2075,23 @@ export type AggregateObjectsAudioFileWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsAudioFile']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsAudioFile']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsAudioFileWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsAudioFile']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsAudioFile']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsAudioFile']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsAudioFile']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -1981,24 +2105,30 @@ export type AggregateObjectsAudioFileWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsAudioFile']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsAudioFile']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsAudioFileWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsAudioFile']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsAudioFile']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsAudioFile']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsAudioFile']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type AggregateObjectsAudioFileWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -2072,19 +2202,31 @@ export type AggregateObjectsGoogleCalendarEventWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsGoogleCalendarEventWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<
+    Scalars['IntAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<
+    Scalars['TextAggregateObjectsGoogleCalendarEvent']['input']
+  >
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -2098,24 +2240,38 @@ export type AggregateObjectsGoogleCalendarEventWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsGoogleCalendarEventWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<
+    Scalars['IntAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<
+    Scalars['TextAggregateObjectsGoogleCalendarEvent']['input']
+  >
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type AggregateObjectsGoogleCalendarEventWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -2188,19 +2344,23 @@ export type AggregateObjectsGoogleDocWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsGoogleDoc']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsGoogleDoc']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsGoogleDocWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsGoogleDoc']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsGoogleDoc']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsGoogleDoc']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsGoogleDoc']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -2214,24 +2374,30 @@ export type AggregateObjectsGoogleDocWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsGoogleDoc']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsGoogleDoc']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsGoogleDocWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsGoogleDoc']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsGoogleDoc']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsGoogleDoc']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsGoogleDoc']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type AggregateObjectsGoogleDocWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -2304,19 +2470,23 @@ export type AggregateObjectsImageBlockWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsImageBlock']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsImageBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsImageBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsImageBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsImageBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsImageBlock']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsImageBlock']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -2330,24 +2500,30 @@ export type AggregateObjectsImageBlockWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsImageBlock']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsImageBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsImageBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsImageBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsImageBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsImageBlock']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsImageBlock']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type AggregateObjectsImageBlockWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -2495,19 +2671,23 @@ export type AggregateObjectsTextBlockWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsTextBlock']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsTextBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsTextBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsTextBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsTextBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsTextBlock']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsTextBlock']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -2521,24 +2701,30 @@ export type AggregateObjectsTextBlockWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsTextBlock']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsTextBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<AggregateObjectsTextBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsTextBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsTextBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsTextBlock']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsTextBlock']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type AggregateObjectsTextBlockWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -2833,6 +3019,7 @@ export type AudioFileAdditional = {
   distance: Maybe<Scalars['Float']['output']>
   explainScore: Maybe<Scalars['String']['output']>
   featureProjection: Maybe<AudioFileAdditionalFeatureProjection>
+  group: Maybe<AudioFileAdditionalGroup>
   /** The UUID of a Object, assigned by its local Weaviate */
   id: Maybe<Scalars['String']['output']>
   lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
@@ -2871,6 +3058,44 @@ export type AudioFileAdditionalFeatureProjection = {
   vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
+export type AudioFileAdditionalGroup = {
+  __typename?: 'AudioFileAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<AudioFileAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<AudioFileAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type AudioFileAdditionalGroupGroupedBy = {
+  __typename?: 'AudioFileAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type AudioFileAdditionalGroupHits = {
+  __typename?: 'AudioFileAdditionalGroupHits'
+  _additional: Maybe<AudioFileAdditionalGroupHitsAdditional>
+  document: Maybe<Array<Maybe<AudioFileDocumentObj>>>
+  duration: Maybe<Scalars['Float']['output']>
+  ext: Maybe<Scalars['String']['output']>
+  mimeType: Maybe<Scalars['String']['output']>
+  order: Maybe<Scalars['Int']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Int']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  url: Maybe<Scalars['String']['output']>
+}
+
+export type AudioFileAdditionalGroupHitsAdditional = {
+  __typename?: 'AudioFileAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
 export type AudioFileDocumentObj = Beacon | GoogleCalendarEvent | GoogleDoc
 
 export type Beacon = {
@@ -2888,11 +3113,16 @@ export type Footnote = {
   valueText: Scalars['String']['output']
 }
 
-export type GetObjectsAudioFileBm25InpObj = {
-  /** The properties to search in */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The query to search for */
-  query?: InputMaybe<Scalars['String']['input']>
+export type FusionEnum = 'rankedFusion' | 'relativeScoreFusion'
+
+/** Specify the property of the class to group by */
+export type GetObjectsAudioFileGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
@@ -2904,10 +3134,21 @@ export type GetObjectsAudioFileGroupInpObj = {
 
 export type GetObjectsAudioFileGroupInpObjTypeEnum = 'closest' | 'merge'
 
+export type GetObjectsAudioFileHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
 /** Hybrid search */
 export type GetObjectsAudioFileHybridInpObj = {
   /** Search weight */
   alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Query string */
   query?: InputMaybe<Scalars['String']['input']>
   /** Vector search */
@@ -2974,19 +3215,19 @@ export type GetObjectsAudioFileWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsAudioFile']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsAudioFile']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsAudioFileWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsAudioFile']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsAudioFile']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsAudioFile']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsAudioFile']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -3000,24 +3241,26 @@ export type GetObjectsAudioFileWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsAudioFile']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsAudioFile']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsAudioFileWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsAudioFile']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsAudioFile']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsAudioFile']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsAudioFile']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type GetObjectsAudioFileWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -3030,11 +3273,14 @@ export type GetObjectsAudioFileWhereOperatorEnum =
   | 'Or'
   | 'WithinGeoRange'
 
-export type GetObjectsGoogleCalendarEventBm25InpObj = {
-  /** The properties to search in */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The query to search for */
-  query?: InputMaybe<Scalars['String']['input']>
+/** Specify the property of the class to group by */
+export type GetObjectsGoogleCalendarEventGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
@@ -3048,10 +3294,21 @@ export type GetObjectsGoogleCalendarEventGroupInpObjTypeEnum =
   | 'closest'
   | 'merge'
 
+export type GetObjectsGoogleCalendarEventHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
 /** Hybrid search */
 export type GetObjectsGoogleCalendarEventHybridInpObj = {
   /** Search weight */
   alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Query string */
   query?: InputMaybe<Scalars['String']['input']>
   /** Vector search */
@@ -3118,19 +3375,27 @@ export type GetObjectsGoogleCalendarEventWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<
+    Scalars['TextDateGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsGoogleCalendarEventWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsGoogleCalendarEvent']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<
+    Scalars['FloatGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsGoogleCalendarEvent']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -3144,24 +3409,34 @@ export type GetObjectsGoogleCalendarEventWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<
+    Scalars['TextDateGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsGoogleCalendarEventWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsGoogleCalendarEvent']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<
+    Scalars['FloatGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<
+    Scalars['TextStringGetObjectsGoogleCalendarEvent']['input']
+  >
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsGoogleCalendarEvent']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type GetObjectsGoogleCalendarEventWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -3174,11 +3449,14 @@ export type GetObjectsGoogleCalendarEventWhereOperatorEnum =
   | 'Or'
   | 'WithinGeoRange'
 
-export type GetObjectsGoogleDocBm25InpObj = {
-  /** The properties to search in */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The query to search for */
-  query?: InputMaybe<Scalars['String']['input']>
+/** Specify the property of the class to group by */
+export type GetObjectsGoogleDocGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
@@ -3190,10 +3468,21 @@ export type GetObjectsGoogleDocGroupInpObj = {
 
 export type GetObjectsGoogleDocGroupInpObjTypeEnum = 'closest' | 'merge'
 
+export type GetObjectsGoogleDocHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
 /** Hybrid search */
 export type GetObjectsGoogleDocHybridInpObj = {
   /** Search weight */
   alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Query string */
   query?: InputMaybe<Scalars['String']['input']>
   /** Vector search */
@@ -3260,19 +3549,19 @@ export type GetObjectsGoogleDocWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsGoogleDoc']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsGoogleDoc']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsGoogleDocWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsGoogleDoc']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsGoogleDoc']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsGoogleDoc']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsGoogleDoc']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -3286,24 +3575,26 @@ export type GetObjectsGoogleDocWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsGoogleDoc']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsGoogleDoc']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsGoogleDocWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsGoogleDoc']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsGoogleDoc']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsGoogleDoc']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsGoogleDoc']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type GetObjectsGoogleDocWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -3316,11 +3607,14 @@ export type GetObjectsGoogleDocWhereOperatorEnum =
   | 'Or'
   | 'WithinGeoRange'
 
-export type GetObjectsImageBlockBm25InpObj = {
-  /** The properties to search in */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The query to search for */
-  query?: InputMaybe<Scalars['String']['input']>
+/** Specify the property of the class to group by */
+export type GetObjectsImageBlockGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
@@ -3332,10 +3626,21 @@ export type GetObjectsImageBlockGroupInpObj = {
 
 export type GetObjectsImageBlockGroupInpObjTypeEnum = 'closest' | 'merge'
 
+export type GetObjectsImageBlockHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
 /** Hybrid search */
 export type GetObjectsImageBlockHybridInpObj = {
   /** Search weight */
   alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Query string */
   query?: InputMaybe<Scalars['String']['input']>
   /** Vector search */
@@ -3402,19 +3707,19 @@ export type GetObjectsImageBlockWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsImageBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsImageBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsImageBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsImageBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsImageBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsImageBlock']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsImageBlock']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -3428,24 +3733,26 @@ export type GetObjectsImageBlockWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsImageBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsImageBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsImageBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsImageBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsImageBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsImageBlock']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsImageBlock']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type GetObjectsImageBlockWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -3470,9 +3777,12 @@ export type GetObjectsObj = {
 
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjAudioFileArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
   ask?: InputMaybe<QnATransformersGetObjectsAudioFileAskInpObj>
-  bm25?: InputMaybe<GetObjectsAudioFileBm25InpObj>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsAudioFileHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsAudioFileGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsAudioFileGroupByInpObj>
   hybrid?: InputMaybe<GetObjectsAudioFileHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsAudioFileNearObjectInpObj>
@@ -3485,9 +3795,12 @@ export type GetObjectsObjAudioFileArgs = {
 
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjGoogleCalendarEventArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
   ask?: InputMaybe<QnATransformersGetObjectsGoogleCalendarEventAskInpObj>
-  bm25?: InputMaybe<GetObjectsGoogleCalendarEventBm25InpObj>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsGoogleCalendarEventHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsGoogleCalendarEventGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsGoogleCalendarEventGroupByInpObj>
   hybrid?: InputMaybe<GetObjectsGoogleCalendarEventHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsGoogleCalendarEventNearObjectInpObj>
@@ -3500,9 +3813,12 @@ export type GetObjectsObjGoogleCalendarEventArgs = {
 
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjGoogleDocArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
   ask?: InputMaybe<QnATransformersGetObjectsGoogleDocAskInpObj>
-  bm25?: InputMaybe<GetObjectsGoogleDocBm25InpObj>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsGoogleDocHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsGoogleDocGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsGoogleDocGroupByInpObj>
   hybrid?: InputMaybe<GetObjectsGoogleDocHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsGoogleDocNearObjectInpObj>
@@ -3515,9 +3831,12 @@ export type GetObjectsObjGoogleDocArgs = {
 
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjImageBlockArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
   ask?: InputMaybe<QnATransformersGetObjectsImageBlockAskInpObj>
-  bm25?: InputMaybe<GetObjectsImageBlockBm25InpObj>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsImageBlockHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsImageBlockGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsImageBlockGroupByInpObj>
   hybrid?: InputMaybe<GetObjectsImageBlockHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsImageBlockNearObjectInpObj>
@@ -3530,9 +3849,12 @@ export type GetObjectsObjImageBlockArgs = {
 
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjTextBlockArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
   ask?: InputMaybe<QnATransformersGetObjectsTextBlockAskInpObj>
-  bm25?: InputMaybe<GetObjectsTextBlockBm25InpObj>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsTextBlockHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsTextBlockGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsTextBlockGroupByInpObj>
   hybrid?: InputMaybe<GetObjectsTextBlockHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsTextBlockNearObjectInpObj>
@@ -3543,11 +3865,14 @@ export type GetObjectsObjTextBlockArgs = {
   where?: InputMaybe<GetObjectsTextBlockWhereInpObj>
 }
 
-export type GetObjectsTextBlockBm25InpObj = {
-  /** The properties to search in */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The query to search for */
-  query?: InputMaybe<Scalars['String']['input']>
+/** Specify the property of the class to group by */
+export type GetObjectsTextBlockGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
@@ -3559,10 +3884,21 @@ export type GetObjectsTextBlockGroupInpObj = {
 
 export type GetObjectsTextBlockGroupInpObjTypeEnum = 'closest' | 'merge'
 
+export type GetObjectsTextBlockHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
 /** Hybrid search */
 export type GetObjectsTextBlockHybridInpObj = {
   /** Search weight */
   alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Query string */
   query?: InputMaybe<Scalars['String']['input']>
   /** Vector search */
@@ -3629,19 +3965,19 @@ export type GetObjectsTextBlockWhereInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsTextBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsTextBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsTextBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsTextBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsTextBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsTextBlock']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsTextBlock']['input']>
 }
 
 /** An object containing the Operands that can be applied to a 'where' filter */
@@ -3655,24 +3991,26 @@ export type GetObjectsTextBlockWhereOperandsInpObj = {
   /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
   path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** Specify a Boolean value that the target property will be compared to */
-  valueBoolean?: InputMaybe<Scalars['Boolean']['input']>
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsTextBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueDate?: InputMaybe<Scalars['String']['input']>
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsTextBlock']['input']>
   /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
   valueGeoRange?: InputMaybe<GetObjectsTextBlockWhereGeoRangeInpObj>
   /** Specify an Integer value that the target property will be compared to */
-  valueInt?: InputMaybe<Scalars['Int']['input']>
+  valueInt?: InputMaybe<Scalars['IntGetObjectsTextBlock']['input']>
   /** Specify a Float value that the target property will be compared to */
-  valueNumber?: InputMaybe<Scalars['Float']['input']>
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsTextBlock']['input']>
   /** Specify a String value that the target property will be compared to */
-  valueString?: InputMaybe<Scalars['String']['input']>
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsTextBlock']['input']>
   /** Specify a Text value that the target property will be compared to */
-  valueText?: InputMaybe<Scalars['String']['input']>
+  valueText?: InputMaybe<Scalars['TextGetObjectsTextBlock']['input']>
 }
 
 /** An object containing the Operators that can be applied to a 'where' filter */
 export type GetObjectsTextBlockWhereOperatorEnum =
   | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
   | 'Equal'
   | 'GreaterThan'
   | 'GreaterThanEqual'
@@ -3723,6 +4061,7 @@ export type GoogleCalendarEventAdditional = {
   distance: Maybe<Scalars['Float']['output']>
   explainScore: Maybe<Scalars['String']['output']>
   featureProjection: Maybe<GoogleCalendarEventAdditionalFeatureProjection>
+  group: Maybe<GoogleCalendarEventAdditionalGroup>
   /** The UUID of a Object, assigned by its local Weaviate */
   id: Maybe<Scalars['String']['output']>
   lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
@@ -3758,6 +4097,58 @@ export type GoogleCalendarEventAdditionalClassification = {
 
 export type GoogleCalendarEventAdditionalFeatureProjection = {
   __typename?: 'GoogleCalendarEventAdditionalFeatureProjection'
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type GoogleCalendarEventAdditionalGroup = {
+  __typename?: 'GoogleCalendarEventAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<GoogleCalendarEventAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<GoogleCalendarEventAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type GoogleCalendarEventAdditionalGroupGroupedBy = {
+  __typename?: 'GoogleCalendarEventAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type GoogleCalendarEventAdditionalGroupHits = {
+  __typename?: 'GoogleCalendarEventAdditionalGroupHits'
+  _additional: Maybe<GoogleCalendarEventAdditionalGroupHitsAdditional>
+  attachments: Maybe<Array<Maybe<GoogleCalendarEventAttachmentsObj>>>
+  createdAt: Maybe<Scalars['String']['output']>
+  creatorDisplayName: Maybe<Scalars['String']['output']>
+  creatorEmail: Maybe<Scalars['String']['output']>
+  creatorId: Maybe<Scalars['String']['output']>
+  creatorSelf: Maybe<Scalars['Boolean']['output']>
+  descriptionHtml: Maybe<Scalars['String']['output']>
+  descriptionText: Maybe<Scalars['String']['output']>
+  end: Maybe<Scalars['String']['output']>
+  htmlLink: Maybe<Scalars['String']['output']>
+  location: Maybe<Scalars['String']['output']>
+  organizerDisplayName: Maybe<Scalars['String']['output']>
+  organizerEmail: Maybe<Scalars['String']['output']>
+  organizerId: Maybe<Scalars['String']['output']>
+  organizerSelf: Maybe<Scalars['Boolean']['output']>
+  recurrence: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  remoteId: Maybe<Scalars['String']['output']>
+  sequence: Maybe<Scalars['Int']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  start: Maybe<Scalars['String']['output']>
+  status: Maybe<Scalars['String']['output']>
+  summary: Maybe<Scalars['String']['output']>
+  title: Maybe<Scalars['String']['output']>
+  updatedAt: Maybe<Scalars['String']['output']>
+}
+
+export type GoogleCalendarEventAdditionalGroupHitsAdditional = {
+  __typename?: 'GoogleCalendarEventAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
   vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
@@ -3798,6 +4189,7 @@ export type GoogleDocAdditional = {
   distance: Maybe<Scalars['Float']['output']>
   explainScore: Maybe<Scalars['String']['output']>
   featureProjection: Maybe<GoogleDocAdditionalFeatureProjection>
+  group: Maybe<GoogleDocAdditionalGroup>
   /** The UUID of a Object, assigned by its local Weaviate */
   id: Maybe<Scalars['String']['output']>
   lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
@@ -3836,6 +4228,53 @@ export type GoogleDocAdditionalFeatureProjection = {
   vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
+export type GoogleDocAdditionalGroup = {
+  __typename?: 'GoogleDocAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<GoogleDocAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<GoogleDocAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type GoogleDocAdditionalGroupGroupedBy = {
+  __typename?: 'GoogleDocAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type GoogleDocAdditionalGroupHits = {
+  __typename?: 'GoogleDocAdditionalGroupHits'
+  _additional: Maybe<GoogleDocAdditionalGroupHitsAdditional>
+  blocks: Maybe<Array<Maybe<GoogleDocBlocksObj>>>
+  createdAt: Maybe<Scalars['String']['output']>
+  html: Maybe<Scalars['String']['output']>
+  mentions: Maybe<Scalars['String']['output']>
+  mimeType: Maybe<Scalars['String']['output']>
+  modifiedAt: Maybe<Scalars['String']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Int']['output']>
+  slug: Maybe<Scalars['String']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  subtitle: Maybe<Scalars['String']['output']>
+  summary: Maybe<Scalars['String']['output']>
+  tags: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  text: Maybe<Scalars['String']['output']>
+  title: Maybe<Scalars['String']['output']>
+  toc: Maybe<Scalars['String']['output']>
+}
+
+export type GoogleDocAdditionalGroupHitsAdditional = {
+  __typename?: 'GoogleDocAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
 export type GoogleDocBlocksObj = Beacon | ImageBlock | TextBlock
 
 export type ImageBlock = {
@@ -3869,6 +4308,7 @@ export type ImageBlockAdditional = {
   distance: Maybe<Scalars['Float']['output']>
   explainScore: Maybe<Scalars['String']['output']>
   featureProjection: Maybe<ImageBlockAdditionalFeatureProjection>
+  group: Maybe<ImageBlockAdditionalGroup>
   /** The UUID of a Object, assigned by its local Weaviate */
   id: Maybe<Scalars['String']['output']>
   lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
@@ -3904,6 +4344,51 @@ export type ImageBlockAdditionalClassification = {
 
 export type ImageBlockAdditionalFeatureProjection = {
   __typename?: 'ImageBlockAdditionalFeatureProjection'
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type ImageBlockAdditionalGroup = {
+  __typename?: 'ImageBlockAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<ImageBlockAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<ImageBlockAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type ImageBlockAdditionalGroupGroupedBy = {
+  __typename?: 'ImageBlockAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type ImageBlockAdditionalGroupHits = {
+  __typename?: 'ImageBlockAdditionalGroupHits'
+  _additional: Maybe<ImageBlockAdditionalGroupHitsAdditional>
+  alt: Maybe<Scalars['String']['output']>
+  createdAt: Maybe<Scalars['String']['output']>
+  document: Maybe<Array<Maybe<ImageBlockDocumentObj>>>
+  ext: Maybe<Scalars['String']['output']>
+  height: Maybe<Scalars['Int']['output']>
+  mimeType: Maybe<Scalars['String']['output']>
+  modifiedAt: Maybe<Scalars['String']['output']>
+  order: Maybe<Scalars['Int']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Int']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  title: Maybe<Scalars['String']['output']>
+  url: Maybe<Scalars['String']['output']>
+  width: Maybe<Scalars['Int']['output']>
+}
+
+export type ImageBlockAdditionalGroupHitsAdditional = {
+  __typename?: 'ImageBlockAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
   vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
@@ -4019,6 +4504,7 @@ export type TextBlockAdditional = {
   distance: Maybe<Scalars['Float']['output']>
   explainScore: Maybe<Scalars['String']['output']>
   featureProjection: Maybe<TextBlockAdditionalFeatureProjection>
+  group: Maybe<TextBlockAdditionalGroup>
   /** The UUID of a Object, assigned by its local Weaviate */
   id: Maybe<Scalars['String']['output']>
   lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
@@ -4054,6 +4540,43 @@ export type TextBlockAdditionalClassification = {
 
 export type TextBlockAdditionalFeatureProjection = {
   __typename?: 'TextBlockAdditionalFeatureProjection'
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type TextBlockAdditionalGroup = {
+  __typename?: 'TextBlockAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<TextBlockAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<TextBlockAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type TextBlockAdditionalGroupGroupedBy = {
+  __typename?: 'TextBlockAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type TextBlockAdditionalGroupHits = {
+  __typename?: 'TextBlockAdditionalGroupHits'
+  _additional: Maybe<TextBlockAdditionalGroupHitsAdditional>
+  classNames: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  document: Maybe<Array<Maybe<TextBlockDocumentObj>>>
+  footnotes: Maybe<Scalars['String']['output']>
+  html: Maybe<Scalars['String']['output']>
+  order: Maybe<Scalars['Int']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  tagName: Maybe<Scalars['String']['output']>
+  text: Maybe<Scalars['String']['output']>
+}
+
+export type TextBlockAdditionalGroupHitsAdditional = {
+  __typename?: 'TextBlockAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
   vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
@@ -4948,56 +5471,6 @@ export type GetAllTopicsQuery = {
       groupedBy: {
         __typename?: 'AggregateGoogleDocGroupedByObj'
         value: string
-      }
-    }>
-  }
-}
-
-export type SearchArticlesQueryVariables = Exact<{
-  filter?: InputMaybe<GetObjectsGoogleDocWhereInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocNearTextInpObj>
-}>
-
-export type SearchArticlesQuery = {
-  __typename?: 'WeaviateObj'
-  Get: {
-    __typename?: 'GetObjectsObj'
-    GoogleDoc: Array<{
-      __typename?: 'GoogleDoc'
-      sourceId: string
-      title: string
-      subtitle: string
-      summary: string
-      tags: Array<string>
-      createdAt: string
-      modifiedAt: string
-      slug: string
-      path: Array<string>
-      pathString: string
-      mentions: string
-      mentionsObj: Array<{
-        __typename?: 'Mention'
-        name: string
-        emailAddress: string
-      }>
-      blocks: Array<
-        | { __typename?: 'Beacon' }
-        | {
-            __typename: 'ImageBlock'
-            url: string
-            alt: string
-            order: number
-            width: number
-            height: number
-            _additional: { __typename?: 'ImageBlockAdditional'; id: string }
-          }
-        | { __typename?: 'TextBlock' }
-      >
-      _additional: {
-        __typename?: 'GoogleDocAdditional'
-        id: string
-        score: string
-        certainty: number
       }
     }>
   }
@@ -6698,228 +7171,6 @@ export const GetAllTopicsDocument = {
     },
   ],
 } as unknown as DocumentNode<GetAllTopicsQuery, GetAllTopicsQueryVariables>
-export const SearchArticlesDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'SearchArticles' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'filter' },
-          },
-          type: {
-            kind: 'NamedType',
-            name: { kind: 'Name', value: 'GetObjectsGoogleDocWhereInpObj' },
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'nearText' },
-          },
-          type: {
-            kind: 'NamedType',
-            name: {
-              kind: 'Name',
-              value: 'Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj',
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'Get' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'GoogleDoc' },
-                  arguments: [
-                    {
-                      kind: 'Argument',
-                      name: { kind: 'Name', value: 'where' },
-                      value: {
-                        kind: 'Variable',
-                        name: { kind: 'Name', value: 'filter' },
-                      },
-                    },
-                    {
-                      kind: 'Argument',
-                      name: { kind: 'Name', value: 'nearText' },
-                      value: {
-                        kind: 'Variable',
-                        name: { kind: 'Name', value: 'nearText' },
-                      },
-                    },
-                  ],
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'sourceId' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'subtitle' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'summary' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'tags' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'createdAt' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'modifiedAt' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'path' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'pathString' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'mentions' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'mentionsObj' },
-                        directives: [
-                          {
-                            kind: 'Directive',
-                            name: { kind: 'Name', value: 'client' },
-                            arguments: [
-                              {
-                                kind: 'Argument',
-                                name: { kind: 'Name', value: 'always' },
-                                value: { kind: 'BooleanValue', value: true },
-                              },
-                            ],
-                          },
-                        ],
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'name' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'emailAddress' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'blocks' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'InlineFragment',
-                              typeCondition: {
-                                kind: 'NamedType',
-                                name: { kind: 'Name', value: 'ImageBlock' },
-                              },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'url' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'alt' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'order' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'width' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'height' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: '__typename' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: {
-                                      kind: 'Name',
-                                      value: '_additional',
-                                    },
-                                    selectionSet: {
-                                      kind: 'SelectionSet',
-                                      selections: [
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'id' },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: '_additional' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'score' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'certainty' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<SearchArticlesQuery, SearchArticlesQueryVariables>
 export const SearchBlocksDocument = {
   kind: 'Document',
   definitions: [
