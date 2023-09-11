@@ -176,6 +176,7 @@ export default function GlobalAudioPlayer() {
       </RightMenu>
       <CloseIconContainer>
         <CloseIcon
+          color="primary"
           width={16}
           height={16}
           onClick={() =>
