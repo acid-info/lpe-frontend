@@ -34,6 +34,8 @@ const isVercel = process.env.VERCEL === '1'
 
 const websiteUrl = getWebsiteUrl()
 const discordWebhookURL = process.env.DISCORD_WEBHOOK || ''
+const discordWebhookUsername = 'Logos Press Engine'
+const discordWebhookAvatarURL = 'https://press.logos.co/logo.png'
 const sendDiscordNotifications =
   process.env.NODE_ENV === 'production' &&
   !!discordWebhookURL &&
@@ -370,7 +372,11 @@ export class UnbodyService {
     }
 
     for (const log of logs) {
-      await discordWebhook.send({ content: log })
+      await discordWebhook.send({
+        content: log,
+        username: discordWebhookUsername,
+        avatarURL: discordWebhookAvatarURL,
+      })
     }
   }
 
