@@ -157,6 +157,12 @@ const Paragraph = styled(Typography)`
     line-height: var(--lsd-h6-lineHeight);
   }
 
+  .u-font-weight-700,
+  .u-font-weight-800,
+  .u-font-weight-900,
+  .u-font-weight-bold {
+    font-weight: bold;
+  }
   .u-font-style-italic {
     font-style: italic;
   }
