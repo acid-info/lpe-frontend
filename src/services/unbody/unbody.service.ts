@@ -32,9 +32,12 @@ import { UnbodyHelpers } from './unbody.helpers'
 const isBuildTime = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD
 const isVercel = process.env.VERCEL === '1'
 
+const websiteUrl = getWebsiteUrl()
 const discordWebhookURL = process.env.DISCORD_LOGS_WEBHOOK_URL || ''
 const sendDiscordNotifications =
-  process.env.NODE_ENV === 'production' && !!discordWebhookURL
+  process.env.NODE_ENV === 'production' &&
+  !!discordWebhookURL &&
+  websiteUrl.includes('dev-') // temporary solution to avoid sending duplicate notification messages
 
 const discordWebhook = new WebhookClient({
   url: discordWebhookURL,
