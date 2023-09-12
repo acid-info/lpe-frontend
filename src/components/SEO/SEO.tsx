@@ -43,7 +43,7 @@ export default function SEO({
       : siteConfigs.title
   const description = _description || siteConfigs.description
 
-  title && ogSearchParams.set('title', title)
+  _title && ogSearchParams.set('title', _title)
   image?.url && ogSearchParams.set('image', image?.url || '')
   image?.alt && ogSearchParams.set('alt', image?.alt || '')
   contentType && ogSearchParams.set('contentType', contentType)
