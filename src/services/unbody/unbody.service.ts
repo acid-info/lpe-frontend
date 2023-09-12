@@ -33,15 +33,11 @@ const isBuildTime = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD
 const isVercel = process.env.VERCEL === '1'
 
 const websiteUrl = getWebsiteUrl()
-const discordWebhookURL = process.env.DISCORD_LOGS_WEBHOOK_URL || ''
+const discordWebhookURL = process.env.DISCORD_WEBHOOK || ''
 const sendDiscordNotifications =
   process.env.NODE_ENV === 'production' &&
   !!discordWebhookURL &&
   websiteUrl.includes('dev-') // temporary solution to avoid sending duplicate notification messages
-
-const discordWebhook = new WebhookClient({
-  url: discordWebhookURL,
-})
 
 const articleDocument = unbodyDataTypes.get({
   objectType: 'GoogleDoc',
@@ -214,15 +210,23 @@ export class UnbodyService {
       newData.posts = [...newData.articles, ...newData.episodes]
       newData.allRecords = [...articles, ...episodes, ...staticPages]
 
-      if (!this.firstLoad && !isBuildTime && !isVercel) {
-        const changes = this.findChanges(this.data, newData)
-        if (sendDiscordNotifications)
-          settle(() => this.sendUpdatesToDiscord(changes))
-      }
+      const oldData = { ...this.data }
 
       this.data = newData
       if (this.firstLoad) this.firstLoad = false
       callback(this.data)
+
+      if (!this.firstLoad && !isBuildTime && !isVercel) {
+        const changes = this.findChanges(oldData, newData)
+        if (sendDiscordNotifications) {
+          const [_res, err] = await settle(() =>
+            this.sendUpdatesToDiscord(changes),
+          )
+          if (err) {
+            console.error(err)
+          }
+        }
+      }
     } catch (error) {
       console.error(error)
     } finally {
@@ -297,6 +301,10 @@ export class UnbodyService {
   }
 
   sendUpdatesToDiscord = async (changes: PageRecordChange[]) => {
+    const discordWebhook = new WebhookClient({
+      url: discordWebhookURL,
+    })
+
     const logs: string[] = []
 
     const generateLog = async (
