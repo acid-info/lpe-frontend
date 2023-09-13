@@ -56,7 +56,7 @@ export const ResponsiveImage = ({
         height: height || 'auto',
       }}
     >
-      <div>
+      <div className="comment">
         <img src={lazyUrl} alt={data.alt} title={data.alt} />
         {children}
       </div>
