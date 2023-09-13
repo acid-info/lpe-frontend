@@ -2,6 +2,7 @@ import { LPE } from '@/types/lpe.types'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import React, { FC } from 'react'
+import { DotIcon } from '../Icons/DotIcon'
 import PostType = LPE.PostType
 
 export type Props = React.ComponentProps<typeof Container> & {
@@ -23,7 +24,7 @@ export const PostCardLabel: FC<Props> = ({
       </Typography>
       {date && (
         <>
-          <Typography variant="body3">•</Typography>
+          <DotIcon color="primary" />
           <Date variant="body3" genericFontFamily="sans-serif">
             {date.toLocaleString('en-GB', {
               day: 'numeric',

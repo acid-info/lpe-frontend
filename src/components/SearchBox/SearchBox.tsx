@@ -15,6 +15,7 @@ import {
   useQueryParam,
   withDefault,
 } from 'use-query-params'
+import { DotIcon } from '../Icons/DotIcon'
 import PostTypes = LPE.PostTypes
 import ContentBlockTypes = LPE.Post.ContentBlockTypes
 interface SearchBoxProps {
@@ -258,28 +259,30 @@ const SearchBox = (props: SearchBoxProps) => {
             <Details
               variant={'subtitle2'}
               className={`search-details ${showDetails ? 'show' : ''}`}
-              dangerouslySetInnerHTML={{
-                __html: [
-                  ...(query && query.length
-                    ? [`<span class="dot">.</span><span>${query}</span>`]
-                    : []),
-                  ...(filterTags && filterTags.length
-                    ? [
-                        `<span>${filterTags
-                          .map((t) => `<span>[${t}]</span>`)
-                          .join('')}</span>`,
-                      ]
-                    : []),
-                  ...(filterContentTypes && filterContentTypes.length
-                    ? [
-                        `<span>${filterContentTypes
-                          .map((t) => `<span>[${t}]</span>`)
-                          .join('')}</span>`,
-                      ]
-                    : []),
-                ].join('<span class="dot">.</span>'),
-              }}
-            />
+            >
+              {query && query.length > 0 && (
+                <span>
+                  <DotIcon className="dot" color="primary" />
+                  <span>{query}</span>
+                </span>
+              )}
+              {filterTags && filterTags.length > 0 && (
+                <span>
+                  <DotIcon className="dot" color="primary" />
+                  {filterTags.map((filterTag, index) => (
+                    <span key={index}>[{filterTag}]</span>
+                  ))}
+                </span>
+              )}
+              {filterContentTypes && filterContentTypes.length > 0 && (
+                <span>
+                  <DotIcon className="dot" color="primary" />
+                  {filterContentTypes.map((contentType, index) => (
+                    <span key={index}>[{contentType}]</span>
+                  ))}
+                </span>
+              )}
+            </Details>
           </>
         </Results>
       )}
@@ -373,15 +376,6 @@ const Results = styled.div`
     white-space: nowrap;
   }
 
-  .dot {
-    width: 3px;
-    height: 3px;
-    display: inline-block;
-    border-radius: 50%;
-    background-color: rgba(var(--lsd-text-primary), 1);
-    transform: translateY(1px);
-  }
-
   .search-details {
   }
 `
@@ -422,6 +416,10 @@ const Details = styled(Typography)`
     flex-direction: row;
     gap: 4px;
     align-items: center;
+
+    .dot {
+      margin-right: 4px;
+    }
   }
 `
 export default SearchBox

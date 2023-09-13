@@ -1,6 +1,6 @@
-import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
+import { DotIcon } from '../Icons/DotIcon'
 import Author from './Author'
 
 export enum AuthorsDirection {
@@ -24,16 +24,12 @@ const Authors: React.FC<AuthorsProps> = ({
 }) => {
   return authors?.length > 0 ? (
     <AuthorsContainer gap={gap} flexDirection={flexDirection} {...props}>
-      {authors.map((author, index) =>
-        index < authors.length - 1 ? (
-          <AuthorContainer gap={gap} key={author.name}>
-            <Author author={author} email={email} />
-            <Dot variant={'body2'}>•</Dot>
-          </AuthorContainer>
-        ) : (
-          <Author key={author.name} author={author} email={email} />
-        ),
-      )}
+      {authors.map((author, index) => (
+        <AuthorContainer gap={gap} key={author.name}>
+          <Author author={author} email={email} />
+          {index < authors.length - 1 && <DotIcon color="primary" />}
+        </AuthorContainer>
+      ))}
     </AuthorsContainer>
   ) : null
 }
@@ -45,12 +41,6 @@ const AuthorsContainer = styled.div<{
   display: flex;
   flex-direction: ${({ flexDirection }) => flexDirection};
   gap: ${({ gap }) => gap}px;
-  align-items: center;
-`
-
-const Dot = styled(Typography)`
-  font-size: 14px;
-  display: flex;
   align-items: center;
 `
 

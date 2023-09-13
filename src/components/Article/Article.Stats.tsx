@@ -1,5 +1,6 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { DotIcon } from '../Icons/DotIcon'
 
 const ArticleStats = ({
   date,
@@ -14,7 +15,7 @@ const ArticleStats = ({
     </Typography>
     {date && (
       <>
-        <Typography variant="body3">•</Typography>
+        <DotIcon color="primary" />
         <Date variant="body3" genericFontFamily="sans-serif">
           {date &&
             date.toLocaleString('en-GB', {
