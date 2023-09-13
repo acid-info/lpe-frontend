@@ -174,6 +174,7 @@ const Root = styled('div')`
     }
 
     &__show-description {
+      display: block;
       margin-top: 8px;
     }
 
