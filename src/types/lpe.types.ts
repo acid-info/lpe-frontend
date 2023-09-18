@@ -216,6 +216,7 @@ export namespace LPE {
       description: string
       authors: Author.Document[]
       publishedAt: string
+      modifiedAt: string
       episodeNumber: number
       showId?: string
       highlighted?: boolean

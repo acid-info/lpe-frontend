@@ -41,7 +41,7 @@ const isBuildTime = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD
 const isVercel = process.env.VERCEL === '1'
 
 const websiteUrl = getWebsiteUrl()
-const discordWebhookURL = process.env.DISCORD_WEBHOOK || ''
+const discordWebhookURL = process.env.DISCORD_LOGS_WEBHOOK_URL || ''
 const discordWebhookUsername = 'Logos Press Engine'
 const discordWebhookAvatarURL = 'https://press.logos.co/logo.png'
 const sendDiscordNotifications =
@@ -418,12 +418,16 @@ export class UnbodyService {
         const isUpdated =
           JSON.stringify([
             getRecordDate(record),
+            record.modifiedAt,
+            record.type === 'podcast' && record.episodeNumber,
             record.slug,
             record.isDraft,
             'highlighted' in record && record.highlighted,
           ]) !==
           JSON.stringify([
             getRecordDate(oldRecord),
+            oldRecord.modifiedAt,
+            record.type === 'podcast' && record.episodeNumber,
             oldRecord.slug,
             oldRecord.isDraft,
             'highlighted' in oldRecord && oldRecord.highlighted,

@@ -103,6 +103,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
       title: data.title,
       authors: data.authors,
       description: data.summary,
+      modifiedAt: data.modifiedAt || '',
       publishedAt: publishedAt.toJSON(),
       episodeNumber,
       tags: data.tags,
