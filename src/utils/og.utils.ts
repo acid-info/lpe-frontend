@@ -14,7 +14,7 @@ export const getOpenGraphImageUrl = ({
   date?: string | null
   pagePath?: string | null
 }) => {
-  const url = new URL(getWebsiteUrl())
+  const url = new URL('/api/og', getWebsiteUrl())
   const searchParams = url.searchParams
 
   title && searchParams.set('title', title)
