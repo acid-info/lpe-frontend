@@ -20,7 +20,7 @@ type Metadata = {
   noIndex?: boolean
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://press.logos.co'
+const SITE_URL = getWebsiteUrl()
 
 export default function SEO({
   title: _title,
