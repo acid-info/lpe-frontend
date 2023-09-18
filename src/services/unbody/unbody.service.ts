@@ -225,12 +225,7 @@ export class UnbodyService {
       this.data = newData
       callback(this.data)
 
-      console.log({
-        firstLoad: this.firstLoad,
-        isVercel,
-        isBuildTime,
-        sendDiscordNotifications,
-      })
+      console.log(process.env.NODE_ENV, !!discordWebhookURL, websiteUrl)
 
       if (!this.firstLoad && !isVercel) {
         const changes = isBuildTime ? [] : this.findChanges(oldData, newData)
