@@ -223,11 +223,18 @@ export class UnbodyService {
       const oldData = { ...this.data }
 
       this.data = newData
-      if (this.firstLoad) this.firstLoad = false
       callback(this.data)
+
+      console.log({
+        firstLoad: this.firstLoad,
+        isVercel,
+        isBuildTime,
+        sendDiscordNotifications,
+      })
 
       if (!this.firstLoad && !isVercel) {
         const changes = isBuildTime ? [] : this.findChanges(oldData, newData)
+        console.log('changes', changes.length)
 
         if (sendDiscordNotifications) {
           const [_res, err] = await settle(() =>
@@ -245,6 +252,8 @@ export class UnbodyService {
           }
         }
       }
+
+      if (this.firstLoad) this.firstLoad = false
     } catch (error) {
       console.error(error)
     } finally {
@@ -636,7 +645,7 @@ export class UnbodyService {
     data: T | null = null,
     errors: any = null,
   ): ApiResponse<T> => {
-    if (errors) console.log(errors)
+    if (errors) console.error(errors)
     if (errors || !data) {
       return {
         data: data as any,
