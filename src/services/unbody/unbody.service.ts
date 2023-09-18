@@ -1,6 +1,12 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { WebhookClient } from 'discord.js'
+import { XMLBuilder, XMLParser } from 'fast-xml-parser'
+import { Feed } from 'feed'
+import { writeFile } from 'fs/promises'
 import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants'
+import path from 'path'
+import { AuthorsConfig } from '../../configs/data.configs'
+import { siteConfigs } from '../../configs/site.configs'
 import {
   CountDocumentsDocument,
   CountDocumentsQueryVariables,
@@ -20,6 +26,8 @@ import {
   SearchResultItem,
 } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
+import { chunkArray } from '../../utils/array.utils'
+import { getOpenGraphImageUrl } from '../../utils/og.utils'
 import {
   CreatePromiseResult,
   createPromise,
@@ -218,12 +226,20 @@ export class UnbodyService {
       if (this.firstLoad) this.firstLoad = false
       callback(this.data)
 
-      if (!this.firstLoad && !isBuildTime && !isVercel) {
-        const changes = this.findChanges(oldData, newData)
+      if (!this.firstLoad && !isVercel) {
+        const changes = isBuildTime ? [] : this.findChanges(oldData, newData)
+
         if (sendDiscordNotifications) {
           const [_res, err] = await settle(() =>
             this.sendUpdatesToDiscord(changes),
           )
+          if (err) {
+            console.error(err)
+          }
+        }
+
+        if (isBuildTime || changes.length > 0) {
+          const [_res, err] = await settle(() => this.generateRSSFeed(newData))
           if (err) {
             console.error(err)
           }
@@ -233,6 +249,130 @@ export class UnbodyService {
       console.error(error)
     } finally {
       this.loadingData = false
+    }
+  }
+
+  generateRSSFeed = async (data: Data) => {
+    const { posts } = data
+    const grouped = chunkArray(posts, 15)
+    const { data: shows } = await this.getPodcastShows({
+      populateEpisodes: false,
+    })
+
+    const getFeedFilename = (index: number) => (format: 'atom' | 'rss') =>
+      `${format}${index === 0 ? '' : `_page${index + 1}`}.xml`
+
+    const getFeedUrl = (index: number) => (format: 'atom' | 'rss') =>
+      `${getWebsiteUrl()}/${getFeedFilename(index)(format)}`
+
+    for (let i = 0; i < grouped.length; i++) {
+      const group = grouped[i]
+
+      const filename = getFeedFilename(i)
+      const url = getFeedUrl(i)
+      const nextUrl = i < grouped.length - 1 && getFeedUrl(i + 1)
+      const prevUrl = i > 0 && getFeedUrl(i - 1)
+
+      const feed = new Feed({
+        title: siteConfigs.title,
+        description: siteConfigs.description,
+        id: websiteUrl,
+        link: websiteUrl,
+        language: 'en',
+        image: `${websiteUrl}/logo.png`,
+        favicon: `${websiteUrl}/favicon.ico`,
+        copyright: `All rights reserved ${new Date().getFullYear()}, ${
+          siteConfigs.title
+        }`,
+        feedLinks: {
+          rss: url('rss'),
+          atom: url('atom'),
+        },
+      })
+
+      const articleCategory = {
+        name: 'Articles',
+        domain: getWebsiteUrl(),
+      }
+      const showCategories = Object.fromEntries(
+        shows.map((show) => [
+          show.id,
+          {
+            name: `${show.title} Podcast`,
+            domain: getPostUrl('podcast', { showSlug: show.slug }),
+          },
+        ]),
+      )
+
+      feed.addCategory(articleCategory.name)
+      Object.values(showCategories).forEach((cat) => feed.addCategory(cat.name))
+
+      group.forEach((post) => {
+        feed.addItem({
+          id: post.id,
+          guid: post.id,
+          title: post.title,
+          date: getRecordDate(post),
+          link: getPostUrl(post.type, {
+            postSlug: post.slug,
+            showSlug: (post.type === 'podcast' && post.slug) || null,
+          }),
+          author: post.authors.map((author) => ({
+            name: author.name,
+            ...(author.emailAddress &&
+            !AuthorsConfig.hiddenEmailAddresses.includes(author.emailAddress)
+              ? {
+                  email: author.emailAddress,
+                }
+              : {}),
+          })),
+          category:
+            post.type === 'article'
+              ? [articleCategory]
+              : [showCategories[post.show!.id]],
+          description:
+            post.type === 'article' ? post.summary : post.description,
+          image: getOpenGraphImageUrl({
+            title: post.title,
+            contentType: post.type,
+            imageUrl: post.coverImage?.url,
+            date: getRecordDate(post).toJSON(),
+          }),
+        })
+      })
+
+      const feeds = [feed.atom1(), i === 0 && feed.rss2()].filter(
+        (f) => !!f,
+      ) as string[]
+
+      for (const file of feeds) {
+        const parser = new XMLParser({ ignoreAttributes: false })
+        const obj = parser.parse(file)
+        const isAtom = !!obj.feed
+        if (isAtom) {
+          prevUrl &&
+            obj.feed.link.push({
+              '@_rel': 'prev',
+              '@_href': prevUrl('atom'),
+            })
+          nextUrl &&
+            obj.feed.link.push({
+              '@_rel': 'next',
+              '@_href': nextUrl('atom'),
+            })
+        }
+
+        const builder = new XMLBuilder({
+          ignoreAttributes: false,
+          format: true,
+        })
+        const xml = builder.build(obj)
+        const name = filename(isAtom ? 'atom' : 'rss')
+        await writeFile(
+          path.resolve(process.cwd(), './public', name),
+          Buffer.from(xml),
+        )
+      }
     }
   }
 
@@ -1636,4 +1776,12 @@ if (!_globalThis.unbodyApi)
     process.env.UNBODY_PROJECT_ID || '',
   )
 
-export default _globalThis.unbodyApi as UnbodyService
+const unbodyApi =
+  process.env.NODE_ENV === 'development'
+    ? new UnbodyService(
+        process.env.UNBODY_API_KEY || '',
+        process.env.UNBODY_PROJECT_ID || '',
+      )
+    : _globalThis.unbodyApi
+
+export default unbodyApi as UnbodyService

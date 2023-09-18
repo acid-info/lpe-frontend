@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { siteConfigs } from '../../configs/site.configs'
 import { LPE } from '../../types/lpe.types'
+import { getOpenGraphImageUrl } from '../../utils/og.utils'
+import { getWebsiteUrl } from '../../utils/route.utils'
 
 type Metadata = {
   title?: string
@@ -27,7 +29,7 @@ export default function SEO({
   locale,
   site_name,
   pageURL,
-  imageUrl = `${SITE_URL}/api/og`,
+  imageUrl,
   image,
   tags = siteConfigs.keywords,
   pagePath = '',
@@ -35,22 +37,21 @@ export default function SEO({
   contentType,
   noIndex = false,
 }: Metadata) {
-  const ogSearchParams = new URLSearchParams()
-
   const title =
     _title && _title.length
       ? `${_title} - ${siteConfigs.title}`
       : siteConfigs.title
   const description = _description || siteConfigs.description
 
-  _title && ogSearchParams.set('title', _title)
-  image?.url && ogSearchParams.set('image', image?.url || '')
-  image?.alt && ogSearchParams.set('alt', image?.alt || '')
-  contentType && ogSearchParams.set('contentType', contentType)
-  date && ogSearchParams.set('date', date || '')
-  pagePath && ogSearchParams.set('pagePath', pagePath || '')
-
-  const ogUrl = `${imageUrl}?${ogSearchParams.toString()}`
+  const ogImageUrl =
+    imageUrl ||
+    getOpenGraphImageUrl({
+      title: _title,
+      imageUrl: image?.url,
+      contentType,
+      date,
+      pagePath,
+    })
 
   return (
     <Head>
@@ -65,12 +66,22 @@ export default function SEO({
       <meta property="og:site_name" content={site_name ?? siteConfigs.title} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta property="og:image" content={ogUrl} />
+      <meta property="og:image" content={ogImageUrl} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={pageURL ?? `${SITE_URL}${pagePath}`} />
       <meta name="twitter:site" content={`@${siteConfigs.xHandle}`} />
-      <meta property="twitter:image" content={ogUrl} />
+      <meta property="twitter:image" content={ogImageUrl} />
       <link rel="canonical" href={`${SITE_URL}${pagePath}`} />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        href={`${getWebsiteUrl()}/rss.xml`}
+      />
+      <link
+        rel="alternate"
+        type="application/atom+xml"
+        href={`${getWebsiteUrl()}/atom.xml`}
+      />
       {noIndex && (
         <>
           <meta name="robots" content="noindex, nofollow" />
