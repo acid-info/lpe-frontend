@@ -11,7 +11,7 @@ import { Quote, Typography } from '@acid-info/lsd-react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
-import React from 'react'
+import React, { useMemo } from 'react'
 import ReactPlayer from 'react-player'
 import { LPE } from '../../types/lpe.types'
 import { ArticleImageBlockWrapper } from './Article.ImageBlockWrapper'
@@ -25,95 +25,107 @@ export const RenderArticleBlock = ({
   headingElementsRef?: HeadingElementsRef
   hide?: boolean
 }) => {
-  switch (block.type) {
-    case 'image':
-      return <ArticleImageBlockWrapper image={block} order={block.order} />
-    case 'text':
-      switch (block.tagName) {
-        case 'h1':
-        case 'h2':
-        case 'h3':
-        case 'h4':
-        case 'h5':
-        case 'h6': {
-          return (
-            <ArticleHeading
-              block={block}
-              headingElementsRef={headingElementsRef}
-            />
-          )
-        }
-        case 'p': {
-          const isIframe = block.embed && block.labels.includes('embed')
-          if (block.embed && isIframe) {
-            return block.labels.includes('youtube_embed') ? (
-              <IframeContainer isSimplecast={false}>
-                <ReactPlayer url={block.embed.src} />
-              </IframeContainer>
-            ) : (
-              <IframeContainer
-                isSimplecast={true}
+  const content = useMemo(() => {
+    switch (block.type) {
+      case 'image':
+        return <ArticleImageBlockWrapper image={block} order={block.order} />
+
+      case 'text':
+        switch (block.tagName) {
+          case 'h1':
+          case 'h2':
+          case 'h3':
+          case 'h4':
+          case 'h5':
+          case 'h6': {
+            return <ArticleHeading block={block} />
+          }
+          case 'p': {
+            const isIframe = block.embed && block.labels.includes('embed')
+            if (block.embed && isIframe) {
+              return block.labels.includes('youtube_embed') ? (
+                <IframeContainer isSimplecast={false}>
+                  <ReactPlayer url={block.embed.src} />
+                </IframeContainer>
+              ) : (
+                <IframeContainer
+                  isSimplecast={true}
+                  dangerouslySetInnerHTML={{
+                    __html: block.embed.html,
+                  }}
+                />
+              )
+            }
+
+            if (
+              block.classNames.includes('subtitle') &&
+              block.classNames.includes('u-with-margin-left')
+            ) {
+              return (
+                <Quote mode="indented-line" genericFontFamily="serif">
+                  <Paragraph
+                    variant="body1"
+                    dangerouslySetInnerHTML={{
+                      __html: extractInnerHtml(block.html),
+                    }}
+                  />
+                </Quote>
+              )
+            }
+
+            return (
+              <Paragraph
+                variant="body1"
+                component={block.tagName as any}
+                genericFontFamily="sans-serif"
+                className={clsx(
+                  extractClassFromFirstTag(block.html),
+                  block.classNames,
+                )}
+                css={css`
+                  ${extractAttributeFromHTML(block.html, 'style', '')}
+                `}
                 dangerouslySetInnerHTML={{
-                  __html: block.embed.html,
+                  __html: extractInnerHtml(block.html),
                 }}
               />
             )
           }
-
-          if (
-            block.classNames.includes('subtitle') &&
-            block.classNames.includes('u-with-margin-left')
-          ) {
+          case 'ul':
+          case 'ol': {
+            const Component = block.tagName as any as React.ComponentType<
+              React.HTMLProps<HTMLUListElement>
+            >
             return (
-              <Quote
-                mode="indented-line"
-                genericFontFamily="serif"
-                id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
+              <Paragraph
+                variant="body1"
+                component="div"
+                genericFontFamily="sans-serif"
               >
-                <Paragraph
-                  variant="body1"
+                <Component
+                  start={Number.parseInt(
+                    extractAttributeFromHTML(block.html, 'start', '1'),
+                    10,
+                  )}
+                  css={css`
+                    ${extractAttributeFromHTML(block.html, 'style', '')}
+                  `}
+                  className={clsx(
+                    extractClassFromFirstTag(block.html),
+                    block.classNames,
+                  )}
                   dangerouslySetInnerHTML={{
                     __html: extractInnerHtml(block.html),
                   }}
                 />
-              </Quote>
+              </Paragraph>
             )
           }
-
-          return (
-            <Paragraph
-              variant="body1"
-              component={block.tagName as any}
-              genericFontFamily="sans-serif"
-              className={clsx(
-                extractClassFromFirstTag(block.html),
-                block.classNames,
-              )}
-              id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
-              css={css`
-                ${extractAttributeFromHTML(block.html, 'style', '')}
-              `}
-              dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
-            />
-          )
-        }
-        case 'ul':
-        case 'ol': {
-          const Component = block.tagName as any as React.ComponentType<
-            React.HTMLProps<HTMLUListElement>
-          >
-          return (
-            <Paragraph
-              variant="body1"
-              component="div"
-              genericFontFamily="sans-serif"
-              id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
-            >
-              <Component
-                start={Number.parseInt(
-                  extractAttributeFromHTML(block.html, 'start', '1'),
-                  10,
-                )}
+          default:
+            return (
+              <Paragraph
+                component={block.tagName as any}
+                genericFontFamily="sans-serif"
                 css={css`
                   ${extractAttributeFromHTML(block.html, 'style', '')}
                 `}
@@ -125,29 +137,38 @@ export const RenderArticleBlock = ({
                   __html: extractInnerHtml(block.html),
                 }}
               />
-            </Paragraph>
-          )
+            )
         }
-        default:
-          return (
-            <Paragraph
-              component={block.tagName as any}
-              genericFontFamily="sans-serif"
-              css={css`
-                ${extractAttributeFromHTML(block.html, 'style', '')}
-              `}
-              className={clsx(
-                extractClassFromFirstTag(block.html),
-                block.classNames,
-              )}
-              id={extractIdFromFirstTag(block.html) || `p-${block.order}`}
-              dangerouslySetInnerHTML={{ __html: extractInnerHtml(block.html) }}
-            />
+      default:
+        return null
+    }
+  }, [block])
+
+  const elementId = useMemo(
+    () =>
+      (block.type === 'text' && extractIdFromFirstTag(block.html)) ||
+      `${block.type === 'image' ? 'i' : block.tagName}-${block.order}`,
+    [block],
+  )
+
+  return (
+    <>
+      <span
+        className="anchor"
+        id={elementId}
+        ref={(el) => {
+          if (
+            headingElementsRef &&
+            el &&
+            block.type === 'text' &&
+            ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(block.tagName)
           )
-      }
-    default:
-      return null
-  }
+            headingElementsRef.current[elementId] = el as HTMLHeadingElement
+        }}
+      />
+      {content}
+    </>
+  )
 }
 
 const Paragraph = styled(Typography)`

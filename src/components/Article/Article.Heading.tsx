@@ -1,9 +1,4 @@
-import {
-  extractClassFromFirstTag,
-  extractIdFromFirstTag,
-  extractInnerHtml,
-} from '@/utils/html.utils'
-import { HeadingElementsRef } from '@/utils/ui.utils'
+import { extractClassFromFirstTag, extractInnerHtml } from '@/utils/html.utils'
 import { Typography, TypographyProps } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { PropsWithChildren } from 'react'
@@ -12,38 +7,19 @@ import { lsdUtils } from '../../utils/lsd.utils'
 
 type Props = PropsWithChildren<{
   block: LPE.Article.TextBlock
-  headingElementsRef?: HeadingElementsRef
   typographyProps?: TypographyProps
 }>
-export const ArticleHeading = ({
-  block,
-  headingElementsRef,
-  typographyProps,
-  ...props
-}: Props) => {
-  const id =
-    extractIdFromFirstTag(block.html) || `${block.tagName}-${block.order}`
-  const refProp = {
-    ref: (ref: any) => {
-      if (headingElementsRef) {
-        headingElementsRef.current[id] = ref
-      }
-    },
-  }
-
+export const ArticleHeading = ({ block, typographyProps, ...props }: Props) => {
   return (
-    <>
-      <span className="anchor" id={id} {...refProp} />
-      <Headline
-        variant={block.tagName as any}
-        component={block.tagName as any}
-        genericFontFamily="serif"
-        className={extractClassFromFirstTag(block.html) || ''}
-        dangerouslySetInnerHTML={{ __html: `${extractInnerHtml(block.html)}` }}
-        {...(typographyProps || {})}
-        {...props}
-      />
-    </>
+    <Headline
+      variant={block.tagName as any}
+      component={block.tagName as any}
+      genericFontFamily="serif"
+      className={extractClassFromFirstTag(block.html) || ''}
+      dangerouslySetInnerHTML={{ __html: `${extractInnerHtml(block.html)}` }}
+      {...(typographyProps || {})}
+      {...props}
+    />
   )
 }
 
