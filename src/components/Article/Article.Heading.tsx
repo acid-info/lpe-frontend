@@ -1,25 +1,62 @@
-import { extractClassFromFirstTag, extractInnerHtml } from '@/utils/html.utils'
+import {
+  extractClassFromFirstTag,
+  extractIdFromFirstTag,
+  extractInnerHtml,
+} from '@/utils/html.utils'
 import { Typography, TypographyProps } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useMemo } from 'react'
 import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
+import { HeadingElementsRef } from '../../utils/ui.utils'
 
 type Props = PropsWithChildren<{
   block: LPE.Article.TextBlock
   typographyProps?: TypographyProps
+  headingElementsRef?: HeadingElementsRef
 }>
-export const ArticleHeading = ({ block, typographyProps, ...props }: Props) => {
+export const ArticleHeading = ({
+  block,
+  typographyProps,
+  headingElementsRef,
+  ...props
+}: Props) => {
+  const id = useMemo(
+    () =>
+      extractIdFromFirstTag(block.html) || `${block.tagName}-${block.order}`,
+    [block],
+  )
+
+  const anchorElement = useMemo(() => {
+    if (headingElementsRef)
+      return (
+        <span
+          id={id}
+          className="anchor"
+          ref={(el) => {
+            if (el) {
+              headingElementsRef.current[id] = el as HTMLHeadingElement
+            }
+          }}
+        ></span>
+      )
+
+    return null
+  }, [id, headingElementsRef])
+
   return (
-    <Headline
-      variant={block.tagName as any}
-      component={block.tagName as any}
-      genericFontFamily="serif"
-      className={extractClassFromFirstTag(block.html) || ''}
-      dangerouslySetInnerHTML={{ __html: `${extractInnerHtml(block.html)}` }}
-      {...(typographyProps || {})}
-      {...props}
-    />
+    <>
+      {anchorElement}
+      <Headline
+        variant={block.tagName as any}
+        component={block.tagName as any}
+        genericFontFamily="serif"
+        className={extractClassFromFirstTag(block.html) || ''}
+        dangerouslySetInnerHTML={{ __html: `${extractInnerHtml(block.html)}` }}
+        {...(typographyProps || {})}
+        {...props}
+      />
+    </>
   )
 }
 
