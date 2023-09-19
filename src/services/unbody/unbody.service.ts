@@ -2,8 +2,8 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { WebhookClient } from 'discord.js'
 import { XMLBuilder, XMLParser } from 'fast-xml-parser'
 import { Feed } from 'feed'
+import { Category } from 'feed/lib/typings'
 import { writeFile } from 'fs/promises'
-import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants'
 import path from 'path'
 import { AuthorsConfig } from '../../configs/data.configs'
 import { siteConfigs } from '../../configs/site.configs'
@@ -27,6 +27,7 @@ import {
 } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
 import { chunkArray } from '../../utils/array.utils'
+import { isBuildTime, isVercel } from '../../utils/env.utils'
 import { getOpenGraphImageUrl } from '../../utils/og.utils'
 import {
   CreatePromiseResult,
@@ -34,11 +35,9 @@ import {
   settle,
 } from '../../utils/promise.utils'
 import { getPostUrl, getWebsiteUrl } from '../../utils/route.utils'
+import { formatTagText } from '../../utils/string.utils'
 import { unbodyDataTypes } from './dataTypes'
 import { UnbodyHelpers } from './unbody.helpers'
-
-const isBuildTime = process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD
-const isVercel = process.env.VERCEL === '1'
 
 const websiteUrl = getWebsiteUrl()
 const discordWebhookURL = process.env.DISCORD_LOGS_WEBHOOK_URL || ''
@@ -85,6 +84,12 @@ type PageRecordChangeAction =
   | 'publish'
   | 'unpublish'
 type PageRecordChange = { action: PageRecordChangeAction; record: PageRecord }
+type ChangeEventHandler = (
+  oldData: Data,
+  data: Data,
+  changes: PageRecordChange[],
+  firstLoad: boolean,
+) => void | Promise<void>
 type Data = {
   posts: LPE.Post.Document[]
   articles: LPE.Article.Data[]
@@ -119,6 +124,8 @@ export class UnbodyService {
     highlightedEpisodes: [],
   }
   fetchDataPromise: CreatePromiseResult<any> = null as any
+
+  changeEventHandlers: ChangeEventHandler[] = []
 
   constructor(private apiKey: string, private projectId: string) {
     const cache = new InMemoryCache({
@@ -165,8 +172,12 @@ export class UnbodyService {
 
     this.fetchData(true)
 
-    if (!isVercel && process.env.NODE_ENV !== 'development')
+    if (!isVercel() && process.env.NODE_ENV !== 'development')
       this.checkForUpdates()
+  }
+
+  onChange = (handler: ChangeEventHandler) => {
+    this.changeEventHandlers.push(handler)
   }
 
   private checkForUpdates = async () => {
@@ -225,23 +236,14 @@ export class UnbodyService {
       this.data = newData
       callback(this.data)
 
-      if (!this.firstLoad && !isVercel) {
-        const changes = isBuildTime ? [] : this.findChanges(oldData, newData)
+      const changes = isBuildTime() ? [] : this.findChanges(oldData, newData)
 
-        if (sendDiscordNotifications) {
-          const [_res, err] = await settle(() =>
-            this.sendUpdatesToDiscord(changes),
-          )
-          if (err) {
-            console.error(err)
-          }
-        }
-
-        if (isBuildTime || changes.length > 0) {
-          const [_res, err] = await settle(() => this.generateRSSFeed(newData))
-          if (err) {
-            console.error(err)
-          }
+      for (const handler of this.changeEventHandlers) {
+        const [_res, err] = await settle(() =>
+          handler(oldData, newData, changes, this.firstLoad),
+        )
+        if (err) {
+          console.error(err)
         }
       }
 
@@ -250,130 +252,6 @@ export class UnbodyService {
       console.error(error)
     } finally {
       this.loadingData = false
-    }
-  }
-
-  generateRSSFeed = async (data: Data) => {
-    const { posts } = data
-    const grouped = chunkArray(posts, 15)
-    const { data: shows } = await this.getPodcastShows({
-      populateEpisodes: false,
-    })
-
-    const getFeedFilename = (index: number) => (format: 'atom' | 'rss') =>
-      `${format}${index === 0 ? '' : `_page${index + 1}`}.xml`
-
-    const getFeedUrl = (index: number) => (format: 'atom' | 'rss') =>
-      `${getWebsiteUrl()}/${getFeedFilename(index)(format)}`
-
-    for (let i = 0; i < grouped.length; i++) {
-      const group = grouped[i]
-
-      const filename = getFeedFilename(i)
-      const url = getFeedUrl(i)
-      const nextUrl = i < grouped.length - 1 && getFeedUrl(i + 1)
-      const prevUrl = i > 0 && getFeedUrl(i - 1)
-
-      const feed = new Feed({
-        title: siteConfigs.title,
-        description: siteConfigs.description,
-        id: websiteUrl,
-        link: websiteUrl,
-        language: 'en',
-        image: `${websiteUrl}/logo.png`,
-        favicon: `${websiteUrl}/favicon.ico`,
-        copyright: `All rights reserved ${new Date().getFullYear()}, ${
-          siteConfigs.title
-        }`,
-        feedLinks: {
-          rss: url('rss'),
-          atom: url('atom'),
-        },
-      })
-
-      const articleCategory = {
-        name: 'Articles',
-        domain: getWebsiteUrl(),
-      }
-      const showCategories = Object.fromEntries(
-        shows.map((show) => [
-          show.id,
-          {
-            name: `${show.title} Podcast`,
-            domain: getPostUrl('podcast', { showSlug: show.slug }),
-          },
-        ]),
-      )
-
-      feed.addCategory(articleCategory.name)
-      Object.values(showCategories).forEach((cat) => feed.addCategory(cat.name))
-
-      group.forEach((post) => {
-        feed.addItem({
-          id: post.id,
-          guid: post.id,
-          title: post.title,
-          date: getRecordDate(post),
-          link: getPostUrl(post.type, {
-            postSlug: post.slug,
-            showSlug: (post.type === 'podcast' && post.slug) || null,
-          }),
-          author: post.authors.map((author) => ({
-            name: author.name,
-            ...(author.emailAddress &&
-            !AuthorsConfig.hiddenEmailAddresses.includes(author.emailAddress)
-              ? {
-                  email: author.emailAddress,
-                }
-              : {}),
-          })),
-          category:
-            post.type === 'article'
-              ? [articleCategory]
-              : [showCategories[post.show!.id]],
-          description:
-            post.type === 'article' ? post.summary : post.description,
-          image: getOpenGraphImageUrl({
-            title: post.title,
-            contentType: post.type,
-            imageUrl: post.coverImage?.url,
-            date: getRecordDate(post).toJSON(),
-          }),
-        })
-      })
-
-      const feeds = [feed.atom1(), i === 0 && feed.rss2()].filter(
-        (f) => !!f,
-      ) as string[]
-
-      for (const file of feeds) {
-        const parser = new XMLParser({ ignoreAttributes: false })
-        const obj = parser.parse(file)
-        const isAtom = !!obj.feed
-        if (isAtom) {
-          prevUrl &&
-            obj.feed.link.push({
-              '@_rel': 'prev',
-              '@_href': prevUrl('atom'),
-            })
-          nextUrl &&
-            obj.feed.link.push({
-              '@_rel': 'next',
-              '@_href': nextUrl('atom'),
-            })
-        }
-
-        const builder = new XMLBuilder({
-          ignoreAttributes: false,
-          format: true,
-        })
-        const xml = builder.build(obj)
-        const name = filename(isAtom ? 'atom' : 'rss')
-        await writeFile(
-          path.resolve(process.cwd(), './public', name),
-          Buffer.from(xml),
-        )
-      }
     }
   }
 
@@ -447,83 +325,7 @@ export class UnbodyService {
     return changes
   }
 
-  sendUpdatesToDiscord = async (changes: PageRecordChange[]) => {
-    const discordWebhook = new WebhookClient({
-      url: discordWebhookURL,
-    })
-
-    const logs: string[] = []
-
-    const generateLog = async (
-      record: PageRecord,
-      action: (typeof changes)[number]['action'],
-    ) => {
-      const pageType =
-        record.type === 'podcast'
-          ? 'episode'
-          : record.type === 'article'
-          ? 'article'
-          : 'static page'
-
-      const pageUrl = record.isDraft
-        ? new URL(
-            `/preview?id=${
-              (await this.findDocRemoteId({ id: record.id })).data
-            }`,
-            getWebsiteUrl(),
-          ).toString()
-        : getPostUrl(record.type, {
-            postSlug: record.slug,
-            showSlug: (record.type === 'podcast' && record?.show?.slug) || null,
-            ...(record.isDraft ? { recordId: record.id, preview: true } : {}),
-          })
-
-      const messageTitlePageType =
-        action !== 'unpublish' && record.isDraft ? 'Draft page' : 'Page'
-      const messageTitleAction =
-        action === 'create'
-          ? 'created'
-          : action === 'delete'
-          ? 'removed'
-          : action === 'publish'
-          ? 'published'
-          : action === 'unpublish'
-          ? 'moved to drafts'
-          : 'updated'
-
-      const messageTitle = `${messageTitlePageType} ${messageTitleAction}`
-
-      const messageDescriptionAction =
-        (action === 'create'
-          ? 'New'
-          : action === 'delete'
-          ? 'Removed'
-          : action === 'update'
-          ? 'Updated'
-          : action === 'publish'
-          ? 'Published'
-          : 'Draft') +
-        ' ' +
-        pageType
-
-      return (
-        `${messageTitle}\n${messageDescriptionAction}: "${record.title}".` +
-        (action === 'delete' ? '' : `\n${pageUrl}`)
-      )
-    }
-
-    for (const change of changes) {
-      logs.push(await generateLog(change.record, change.action))
-    }
-
-    for (const log of logs) {
-      await discordWebhook.send({
-        content: log,
-        username: discordWebhookUsername,
-        avatarURL: discordWebhookAvatarURL,
-      })
-    }
-  }
+  sendUpdatesToDiscord = async (changes: PageRecordChange[]) => {}
 
   fetchData = async (forced: boolean = false) => {
     if (forced) {
@@ -1781,12 +1583,227 @@ if (!_globalThis.unbodyApi)
     process.env.UNBODY_PROJECT_ID || '',
   )
 
-const unbodyApi =
+const unbodyApi: UnbodyService =
   process.env.NODE_ENV === 'development'
     ? new UnbodyService(
         process.env.UNBODY_API_KEY || '',
         process.env.UNBODY_PROJECT_ID || '',
       )
     : _globalThis.unbodyApi
+
+unbodyApi.onChange(async (oldData, data, changes, firstLoad) => {
+  if (firstLoad || isBuildTime() || !sendDiscordNotifications) return
+
+  const discordWebhook = new WebhookClient({
+    url: discordWebhookURL,
+  })
+
+  const logs: string[] = []
+
+  const generateLog = async (
+    record: PageRecord,
+    action: (typeof changes)[number]['action'],
+  ) => {
+    const pageType =
+      record.type === 'podcast'
+        ? 'episode'
+        : record.type === 'article'
+        ? 'article'
+        : 'static page'
+
+    const pageUrl = record.isDraft
+      ? new URL(
+          `/preview?id=${
+            (await unbodyApi.findDocRemoteId({ id: record.id })).data
+          }`,
+          getWebsiteUrl(),
+        ).toString()
+      : getPostUrl(record.type, {
+          postSlug: record.slug,
+          showSlug: (record.type === 'podcast' && record?.show?.slug) || null,
+          ...(record.isDraft ? { recordId: record.id, preview: true } : {}),
+        })
+
+    const messageTitlePageType =
+      action !== 'unpublish' && record.isDraft ? 'Draft page' : 'Page'
+    const messageTitleAction =
+      action === 'create'
+        ? 'created'
+        : action === 'delete'
+        ? 'removed'
+        : action === 'publish'
+        ? 'published'
+        : action === 'unpublish'
+        ? 'moved to drafts'
+        : 'updated'
+
+    const messageTitle = `${messageTitlePageType} ${messageTitleAction}`
+
+    const messageDescriptionAction =
+      (action === 'create'
+        ? 'New'
+        : action === 'delete'
+        ? 'Removed'
+        : action === 'update'
+        ? 'Updated'
+        : action === 'publish'
+        ? 'Published'
+        : 'Draft') +
+      ' ' +
+      pageType
+
+    return (
+      `${messageTitle}\n${messageDescriptionAction}: "${record.title}".` +
+      (action === 'delete' ? '' : `\n${pageUrl}`)
+    )
+  }
+
+  for (const change of changes) {
+    logs.push(await generateLog(change.record, change.action))
+  }
+
+  for (const log of logs) {
+    await discordWebhook.send({
+      content: log,
+      username: discordWebhookUsername,
+      avatarURL: discordWebhookAvatarURL,
+    })
+  }
+})
+
+unbodyApi.onChange(async (oldData, data, changes, firstLoad) => {
+  if (!isBuildTime() && changes.length === 0) return
+
+  const { posts } = data
+  const grouped = chunkArray(posts, 15)
+  const { data: shows } = await unbodyApi.getPodcastShows({
+    populateEpisodes: false,
+  })
+  const { data: topics } = await unbodyApi.getTopics()
+
+  const getFeedFilename = (index: number) => (format: 'atom' | 'rss') =>
+    `${format}${index === 0 ? '' : `_page${index + 1}`}.xml`
+
+  const getFeedUrl = (index: number) => (format: 'atom' | 'rss') =>
+    `${getWebsiteUrl()}/${getFeedFilename(index)(format)}`
+
+  for (let i = 0; i < grouped.length; i++) {
+    const group = grouped[i]
+
+    const filename = getFeedFilename(i)
+    const url = getFeedUrl(i)
+    const nextUrl = i < grouped.length - 1 && getFeedUrl(i + 1)
+    const prevUrl = i > 0 && getFeedUrl(i - 1)
+
+    const feed = new Feed({
+      title: siteConfigs.title,
+      description: siteConfigs.description,
+      id: websiteUrl,
+      link: websiteUrl,
+      language: 'en',
+      image: `${websiteUrl}/logo.png`,
+      favicon: `${websiteUrl}/favicon.ico`,
+      copyright: `All rights reserved ${new Date().getFullYear()}, ${
+        siteConfigs.title
+      }`,
+      feedLinks: {
+        rss: url('rss'),
+        atom: url('atom'),
+      },
+    })
+
+    const articleCategory = {
+      name: 'Article',
+      domain: getWebsiteUrl(),
+    }
+    const showCategories = Object.fromEntries(
+      shows.map((show) => [
+        show.id,
+        {
+          name: `Podcast - ${show.title}`,
+          domain: getPostUrl('podcast', { showSlug: show.slug }),
+        },
+      ]),
+    )
+    topics.forEach((topic) => feed.addCategory(formatTagText(topic)))
+
+    feed.addCategory(articleCategory.name)
+    Object.values(showCategories).forEach((cat) => feed.addCategory(cat.name))
+
+    group.forEach((post) => {
+      feed.addItem({
+        id: post.id,
+        guid: post.id,
+        title: post.title,
+        date: getRecordDate(post),
+        link: getPostUrl(post.type, {
+          postSlug: post.slug,
+          showSlug: (post.type === 'podcast' && post.slug) || null,
+        }),
+        author: post.authors.map((author) => ({
+          name: author.name,
+          ...(author.emailAddress &&
+          !AuthorsConfig.hiddenEmailAddresses.includes(author.emailAddress)
+            ? {
+                email: author.emailAddress,
+              }
+            : {}),
+        })),
+        category: [
+          ...(post.type === 'article'
+            ? [articleCategory]
+            : [showCategories[post.show!.id]]),
+          ...post.tags.map(
+            (tag) =>
+              ({
+                name: formatTagText(tag),
+                domain: formatTagText(tag),
+              } as Category),
+          ),
+        ],
+        description: post.type === 'article' ? post.summary : post.description,
+        image: getOpenGraphImageUrl({
+          title: post.title,
+          contentType: post.type,
+          imageUrl: post.coverImage?.url,
+          date: getRecordDate(post).toJSON(),
+        }),
+      })
+    })
+
+    const feeds = [feed.atom1(), i === 0 && feed.rss2()].filter(
+      (f) => !!f,
+    ) as string[]
+
+    for (const file of feeds) {
+      const parser = new XMLParser({ ignoreAttributes: false })
+      const obj = parser.parse(file)
+      const isAtom = !!obj.feed
+      if (isAtom) {
+        prevUrl &&
+          obj.feed.link.push({
+            '@_rel': 'prev',
+            '@_href': prevUrl('atom'),
+          })
+        nextUrl &&
+          obj.feed.link.push({
+            '@_rel': 'next',
+            '@_href': nextUrl('atom'),
+          })
+      }
+
+      const builder = new XMLBuilder({
+        ignoreAttributes: false,
+        format: true,
+      })
+      const xml = builder.build(obj)
+      const name = filename(isAtom ? 'atom' : 'rss')
+      await writeFile(
+        path.resolve(process.cwd(), './public', name),
+        Buffer.from(xml),
+      )
+    }
+  }
+})
 
 export default unbodyApi as UnbodyService
