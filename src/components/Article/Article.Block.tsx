@@ -2,7 +2,6 @@
 import { ArticleHeading } from '@/components/Article/Article.Heading'
 import {
   extractAttributeFromHTML,
-  extractClassFromFirstTag,
   extractIdFromFirstTag,
   extractInnerHtml,
 } from '@/utils/html.utils'
@@ -78,10 +77,7 @@ export const RenderArticleBlock = ({
                 variant="body1"
                 component={block.tagName as any}
                 genericFontFamily="sans-serif"
-                className={clsx(
-                  extractClassFromFirstTag(block.html),
-                  block.classNames,
-                )}
+                className={clsx(block.classNames)}
                 css={css`
                   ${extractAttributeFromHTML(block.html, 'style', '')}
                 `}
@@ -110,10 +106,7 @@ export const RenderArticleBlock = ({
                   css={css`
                     ${extractAttributeFromHTML(block.html, 'style', '')}
                   `}
-                  className={clsx(
-                    extractClassFromFirstTag(block.html),
-                    block.classNames,
-                  )}
+                  className={clsx(block.classNames)}
                   dangerouslySetInnerHTML={{
                     __html: extractInnerHtml(block.html),
                   }}
@@ -129,10 +122,7 @@ export const RenderArticleBlock = ({
                 css={css`
                   ${extractAttributeFromHTML(block.html, 'style', '')}
                 `}
-                className={clsx(
-                  extractClassFromFirstTag(block.html),
-                  block.classNames,
-                )}
+                className={clsx(block.classNames)}
                 dangerouslySetInnerHTML={{
                   __html: extractInnerHtml(block.html),
                 }}
