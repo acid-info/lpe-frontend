@@ -161,4 +161,14 @@ export const useIsMobile = () => {
   return windowSize.width < smWidth
 }
 
+export const useOnWindowResize = (callback: () => void): void => {
+  useEffect(() => {
+    window.addEventListener('resize', callback)
+
+    return () => {
+      window.removeEventListener('resize', callback)
+    }
+  }, [callback])
+}
+
 export default useWindowSize
