@@ -1,5 +1,6 @@
+import { uiConfigs } from '@/configs/ui.configs'
 import { lsdUtils } from '@/utils/lsd.utils'
-import { useIsMobile } from '@/utils/ui.utils'
+import { useIsMobile, useOnWindowResize } from '@/utils/ui.utils'
 import { IconButton } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import React, {
@@ -13,7 +14,6 @@ import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom'
 import { useWindowScroll } from 'react-use'
 import { ExitFullscreenIcon } from '../Icons/ExitFullscreenIcon'
 import { FullscreenIcon } from '../Icons/FullscreenIcon'
-import { HEADER_HEIGHT_PX } from '../NavBar/NavBar'
 
 type UseLightBoxReturnType = {
   getStyle: (element: HTMLElement | null) => React.CSSProperties
@@ -67,9 +67,12 @@ export const useLightBox = (): UseLightBoxReturnType => {
     })
   }
 
-  const close = () => {
+  const close = useCallback(() => {
     setDisplayedElement(null)
-  }
+  }, [])
+
+  // When the window is resized, close the lightbox.
+  useOnWindowResize(close)
 
   // If the user scrolls, close the lightbox.
   useEffect(() => {
@@ -236,7 +239,7 @@ export const Header = styled.header`
   left: 0;
 
   width: 100%;
-  height: ${HEADER_HEIGHT_PX};
+  height: ${uiConfigs.navbarRenderedHeight - 1}px;
 
   z-index: 1000;
 

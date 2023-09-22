@@ -21,8 +21,6 @@ import { NavbarState, useNavbarState } from '../../states/navbarState'
 import { lsdUtils } from '../../utils/lsd.utils'
 import { LogosIcon } from '../Icons/LogosIcon'
 
-export const HEADER_HEIGHT_PX = '44px'
-
 export interface NavBarProps {
   defaultState?: Partial<NavbarState>
 }
@@ -127,7 +125,7 @@ const Container = styled.header<{
   bordered?: boolean
 }>`
   width: 100%;
-  height: ${HEADER_HEIGHT_PX};
+  height: 44px;
 
   position: fixed;
   top: 0;
