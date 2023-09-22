@@ -21,6 +21,8 @@ import { NavbarState, useNavbarState } from '../../states/navbarState'
 import { lsdUtils } from '../../utils/lsd.utils'
 import { LogosIcon } from '../Icons/LogosIcon'
 
+export const HEADER_HEIGHT_PX = '44px'
+
 export interface NavBarProps {
   defaultState?: Partial<NavbarState>
 }
@@ -121,11 +123,11 @@ const SocialMediaKitContainer = styled.div`
   }
 `
 
-const Container = styled.header<{
+export const Container = styled.header<{
   bordered?: boolean
 }>`
   width: 100%;
-  height: 44px;
+  height: ${HEADER_HEIGHT_PX};
 
   position: fixed;
   top: 0;

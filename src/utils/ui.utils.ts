@@ -1,3 +1,4 @@
+import { useTheme } from '@emotion/react'
 import React, {
   MutableRefObject,
   RefObject,
@@ -149,6 +150,15 @@ export const useScrollDirection = () => {
   }, [lastScrollTop])
 
   return scrollDirection
+}
+
+export const useIsMobile = () => {
+  const theme = useTheme()
+  const windowSize = useWindowSize()
+
+  const smWidth = theme.breakpoints.sm.width
+
+  return windowSize.width < smWidth
 }
 
 export default useWindowSize

@@ -1,6 +1,7 @@
 import { lsdUtils } from '@/utils/lsd.utils'
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
+import { LightBox } from '../LightBox'
 import { ResponsiveImage } from '../ResponsiveImage/ResponsiveImage'
 
 type Props = {
@@ -11,7 +12,9 @@ type Props = {
 export const ArticleImageBlockWrapper = ({ image, order }: Props) => {
   return (
     <Container id={`i-${order}`}>
-      <ResponsiveImage data={image} />
+      <LightBox>
+        <ResponsiveImage data={image} />
+      </LightBox>
       <figcaption>{image.alt}</figcaption>
     </Container>
   )
