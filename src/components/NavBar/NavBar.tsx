@@ -123,7 +123,7 @@ const SocialMediaKitContainer = styled.div`
   }
 `
 
-export const Container = styled.header<{
+const Container = styled.header<{
   bordered?: boolean
 }>`
   width: 100%;
