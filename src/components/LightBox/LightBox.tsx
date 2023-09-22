@@ -160,7 +160,11 @@ export const LightBox = ({ children }: LightBoxProps) => {
         </>
       )}
 
-      <LightboxMediaContainer ref={ref} style={getStyle(ref.current)}>
+      <LightboxMediaContainer
+        ref={ref}
+        style={getStyle(ref.current)}
+        isActive={isActive}
+      >
         {lightBoxContent}
       </LightboxMediaContainer>
     </>
@@ -197,7 +201,7 @@ const ExitFullscreenIconButton = styled(IconButton)`
   margin-right: 16px;
 `
 
-const LightboxMediaContainer = styled.div`
+const LightboxMediaContainer = styled.div<{ isActive?: boolean }>`
   // Show the fullscreen button when users hover over the container.
   &:hover .fullscreen-button {
     opacity: 1;
@@ -210,6 +214,15 @@ const LightboxMediaContainer = styled.div`
       overflow: visible !important;
     }
   }
+
+  // When the lightbox is active and showing media - removes any filters from said media.
+  ${(props) =>
+    props.isActive &&
+    `
+  div {
+    filter: none;
+  }
+`}
 `
 
 export const Header = styled.header`
