@@ -12,10 +12,9 @@ type Props = {
 export const ArticleImageBlockWrapper = ({ image, order }: Props) => {
   return (
     <Container id={`i-${order}`}>
-      <LightBox>
+      <LightBox caption={image.alt}>
         <ResponsiveImage data={image} />
       </LightBox>
-      <figcaption>{image.alt}</figcaption>
     </Container>
   )
 }
@@ -25,10 +24,6 @@ const Container = styled.figure`
   padding: 0;
   display: flex;
   flex-direction: column;
-  figcaption {
-    padding-top: 8px;
-    ${lsdUtils.typography('body3')}
-  }
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     margin: 24px 0 24px 0;
