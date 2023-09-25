@@ -180,6 +180,12 @@ export const LightBox = ({ children, caption }: LightBoxProps) => {
       </>
     )
 
+  // Edge case: if the user pinches to zoom in, and presses the exit fullscreen button,
+  // the opacity of the caption will be set to 0. This will reset it to 1.
+  if (captionRef.current) {
+    captionRef.current.style.opacity = '1'
+  }
+
   return (
     <>
       {isActive && (
@@ -232,9 +238,6 @@ const LightBoxCaption = styled.figcaption<{ isActive?: boolean }>`
     height: 72px;
     overflow: auto;
     `}
-
-  // Edge case: when users are pinch zooming and press exit fullscreen - opacity will be 0. 
-  ${(props) => !props.isActive && `opacity: 1 !important;`}
 `
 
 const Backdrop = styled.div`
