@@ -50,7 +50,7 @@ export const useLightBox = (): UseLightBoxReturnType => {
     const vh = window.innerHeight
 
     const maxWidth = isMobile ? vw - 32 : vw * 0.9375
-    const maxHeight = vh - 128
+    const maxHeight = vh - 160
 
     const rect = element.getBoundingClientRect()
 
@@ -226,7 +226,11 @@ const LightBoxCaption = styled.figcaption<{ isActive?: boolean }>`
     props.isActive &&
     `
     ${lsdUtils.typography('body1')}
-    z-index: 202; 
+    z-index: 202;
+
+    // The following will prevent very large captions from overflowing / being cut off.
+    height: 72px;
+    overflow: auto;
     `}
 
   // Edge case: when users are pinch zooming and press exit fullscreen - opacity will be 0. 
