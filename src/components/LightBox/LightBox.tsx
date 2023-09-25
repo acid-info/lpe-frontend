@@ -16,7 +16,7 @@ import { ExitFullscreenIcon } from '../Icons/ExitFullscreenIcon'
 import { FullscreenIcon } from '../Icons/FullscreenIcon'
 
 type UseLightBoxReturnType = {
-  getStyle: (element: HTMLElement | null) => React.CSSProperties
+  getDisplayedStyle: (element: HTMLElement | null) => React.CSSProperties
   close: () => void
   display: (element: HTMLElement) => void
   isDisplayedElement: (el: HTMLElement) => boolean
@@ -38,8 +38,9 @@ export const useLightBox = (): UseLightBoxReturnType => {
 
   const defaultStyle: CSSProperties = {
     opacity: 1,
-    transform: 'scale(1) translate(0px, 0px)',
-    transition: 'all 0.3s ease-in-out',
+    transform: 'translate(0px, 0px)',
+    width: '100%',
+    height: '100%',
   }
 
   const display = (element: HTMLElement) => {
@@ -53,16 +54,29 @@ export const useLightBox = (): UseLightBoxReturnType => {
 
     const rect = element.getBoundingClientRect()
 
-    const scale = Math.min(maxHeight / rect.height, maxWidth / rect.width)
+    // Calculate the scaling factor for both dimensions
+    const widthScale = maxWidth / rect.width
+    const heightScale = maxHeight / rect.height
 
-    const center = [rect.left + rect.width / 2, rect.top + rect.height / 2]
-    const windowCenter = [vw / 2, vh / 2]
+    // Pick the smaller scale factor to ensure the image fits within maxWidth and maxHeight
+    const scale = Math.min(widthScale, heightScale)
 
-    const translate = windowCenter.map((w, i) => (w - center[i]!) / scale)
+    // Calculate the new dimensions of the image
+    const newWidth = rect.width * scale
+    const newHeight = rect.height * scale
+
+    // Compute the translation to center the image
+    const centerX = (vw - newWidth) / 2
+    const centerY = (vh - newHeight) / 2
+
+    const translateX = centerX - rect.left
+    const translateY = centerY - rect.top
 
     setDisplayedStyle({
       zIndex: 202,
-      transform: `scale(${scale}) translate(${translate[0]}px, ${translate[1]}px)`,
+      width: `${newWidth}px`,
+      height: `${newHeight}px`,
+      transform: `translate(${translateX}px, ${translateY}px)`,
       position: 'relative',
     })
   }
@@ -89,7 +103,7 @@ export const useLightBox = (): UseLightBoxReturnType => {
   }, [isMobile, displayedElement])
 
   return {
-    getStyle: (element: HTMLElement | null) => ({
+    getDisplayedStyle: (element: HTMLElement | null) => ({
       ...defaultStyle,
       ...(element === displayedElement ? displayedStyle : {}),
     }),
@@ -109,19 +123,37 @@ type OnUpdateParams = {
 
 type LightBoxProps = {
   children: React.ReactNode
+  caption: string
 }
 
-export const LightBox = ({ children }: LightBoxProps) => {
-  const { getStyle, display, isDisplayedElement, isActive, close, isMobile } =
-    useLightBox()
+export const LightBox = ({ children, caption }: LightBoxProps) => {
+  const {
+    getDisplayedStyle,
+    display,
+    isDisplayedElement,
+    isActive,
+    close,
+    isMobile,
+  } = useLightBox()
   const ref = useRef<HTMLDivElement>(null)
   const childRef = useRef<HTMLDivElement>(null)
+  const captionRef = useRef<HTMLElement>(null)
+  const displayedStyle = getDisplayedStyle(ref.current)
 
   const handleUpdate = useCallback(({ x, y, scale }: OnUpdateParams) => {
     const img = childRef.current
     if (img) {
       const transformValue = make3dTransformValue({ x, y, scale })
       img.style.transform = transformValue
+    }
+
+    // Hide / show the captions when pinch zooming.
+    if (captionRef.current && scale > 1) {
+      captionRef.current.style.opacity = '0'
+    }
+
+    if (captionRef.current && scale <= 1) {
+      captionRef.current.style.opacity = '1'
     }
   }, [])
 
@@ -165,14 +197,41 @@ export const LightBox = ({ children }: LightBoxProps) => {
 
       <LightboxMediaContainer
         ref={ref}
-        style={getStyle(ref.current)}
+        style={displayedStyle}
         isActive={isActive}
       >
         {lightBoxContent}
       </LightboxMediaContainer>
+
+      <LightBoxCaption
+        isActive={isActive}
+        style={{
+          transform: displayedStyle.transform,
+          width: displayedStyle.width,
+        }}
+        ref={captionRef}
+      >
+        {caption}
+      </LightBoxCaption>
     </>
   )
 }
+
+const LightBoxCaption = styled.figcaption<{ isActive?: boolean }>`
+  padding-top: 8px;
+  ${lsdUtils.typography('body3')}
+  transition: all 0.3s ease-in-out;
+
+  ${(props) =>
+    props.isActive &&
+    `
+    ${lsdUtils.typography('body1')}
+    z-index: 202; 
+    `}
+
+  // Edge case: when users are pinch zooming and press exit fullscreen - opacity will be 0. 
+  ${(props) => !props.isActive && `opacity: 1 !important;`}
+`
 
 const Backdrop = styled.div`
   position: fixed;
@@ -205,6 +264,8 @@ const ExitFullscreenIconButton = styled(IconButton)`
 `
 
 const LightboxMediaContainer = styled.div<{ isActive?: boolean }>`
+  transition: all 0.3s ease-in-out;
+
   // Show the fullscreen button when users hover over the container.
   &:hover .fullscreen-button {
     opacity: 1;
