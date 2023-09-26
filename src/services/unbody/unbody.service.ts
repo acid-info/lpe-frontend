@@ -1576,20 +1576,22 @@ export class UnbodyService {
     }, [])
 }
 
-const _globalThis = globalThis as any
-if (!_globalThis.unbodyApi)
-  _globalThis.unbodyApi = new UnbodyService(
-    process.env.UNBODY_API_KEY || '',
-    process.env.UNBODY_PROJECT_ID || '',
-  )
-
 const unbodyApi: UnbodyService =
   process.env.NODE_ENV === 'development'
     ? new UnbodyService(
         process.env.UNBODY_API_KEY || '',
         process.env.UNBODY_PROJECT_ID || '',
       )
-    : _globalThis.unbodyApi
+    : (() => {
+        const _globalThis = globalThis as any
+        if (!_globalThis.unbodyApi)
+          _globalThis.unbodyApi = new UnbodyService(
+            process.env.UNBODY_API_KEY || '',
+            process.env.UNBODY_PROJECT_ID || '',
+          )
+
+        return _globalThis.unbodyApi
+      })()
 
 unbodyApi.onChange(async (oldData, data, changes, firstLoad) => {
   if (firstLoad || isBuildTime() || !sendDiscordNotifications) return
