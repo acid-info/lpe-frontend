@@ -3,20 +3,90 @@ import { lsdUtils } from '@/utils/lsd.utils'
 import { useIsMobile, useOnWindowResize } from '@/utils/ui.utils'
 import { IconButton } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import React, {
-  CSSProperties,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom'
 import { useWindowScroll } from 'react-use'
 import { ExitFullscreenIcon } from '../Icons/ExitFullscreenIcon'
 import { FullscreenIcon } from '../Icons/FullscreenIcon'
 
+type ExpandedTransformValues = {
+  scale: number
+  translateX: number
+  translateY: number
+  windowCenterX: number
+  windowCenterY: number
+  originalWidth: number
+  originalHeight: number
+}
+
+const DEFAULT_TRANSFORM_VALUES: ExpandedTransformValues = {
+  scale: 1,
+  translateX: 0,
+  translateY: 0,
+  windowCenterX: 0,
+  windowCenterY: 0,
+  originalWidth: 0,
+  originalHeight: 0,
+}
+
+// Places the caption below the media.
+const getCaptionPositionStyles = (
+  captionElement: HTMLElement | null,
+  expandedTransformValues: ExpandedTransformValues,
+): React.CSSProperties => {
+  if (!captionElement) return {}
+
+  const { scale, originalWidth, originalHeight, windowCenterX, windowCenterY } =
+    expandedTransformValues
+
+  // Calculate the caption position - it should be below the media.
+  // Here, we assume the media is centered in the window. So, the expanded bottom position is:
+  const expandedBottom = windowCenterY + (originalHeight * scale) / 2
+  const expandedLeft = windowCenterX - (originalWidth * scale) / 2
+
+  return {
+    position: 'fixed',
+    top: expandedBottom,
+    left: expandedLeft,
+    width: originalWidth * scale,
+  }
+}
+
+const calculateExpandedTransformValues = (
+  element: HTMLElement | null,
+  isMobile: boolean,
+): ExpandedTransformValues => {
+  if (!element) return DEFAULT_TRANSFORM_VALUES
+
+  const vw = document.body.clientWidth
+  const vh = window.innerHeight
+
+  const maxWidth = isMobile ? vw - 32 : vw * 0.9375
+  const maxHeight = vh - 160
+
+  const rect = element.getBoundingClientRect()
+
+  const scale = Math.min(maxHeight / rect.height, maxWidth / rect.width)
+
+  const center = [rect.left + rect.width / 2, rect.top + rect.height / 2]
+  const windowCenter = [vw / 2, vh / 2]
+
+  const translate = windowCenter.map((w, i) => (w - center[i]!) / scale)
+
+  return {
+    scale,
+    translateX: translate[0],
+    translateY: translate[1],
+    originalWidth: rect.width,
+    originalHeight: rect.height,
+    windowCenterX: windowCenter[0],
+    windowCenterY: windowCenter[1],
+  }
+}
+
 type UseLightBoxReturnType = {
-  getDisplayedStyle: (element: HTMLElement | null) => React.CSSProperties
+  expandedCSS: React.CSSProperties
+  expandedTransformValues: ExpandedTransformValues
   close: () => void
   display: (element: HTMLElement) => void
   isDisplayedElement: (el: HTMLElement) => boolean
@@ -31,54 +101,18 @@ export const useLightBox = (): UseLightBoxReturnType => {
   const [displayedElement, setDisplayedElement] = useState<HTMLElement | null>(
     null,
   )
-  const [displayedStyle, setDisplayedStyle] = useState<CSSProperties>({
-    opacity: '0.5',
-  })
   const isMobile = useIsMobile()
-
-  const defaultStyle: CSSProperties = {
-    opacity: 1,
-    transform: 'translate(0px, 0px)',
-    width: '100%',
-    height: '100%',
-  }
+  const [expandedTransformValues, setExpandedTransformValues] =
+    useState<ExpandedTransformValues>(DEFAULT_TRANSFORM_VALUES)
+  const { scale, translateX, translateY } = expandedTransformValues
+  const isActive = !!displayedElement
 
   const display = (element: HTMLElement) => {
     setDisplayedElement(element)
 
-    const vw = document.body.clientWidth
-    const vh = window.innerHeight
+    const transformValues = calculateExpandedTransformValues(element, isMobile)
 
-    const maxWidth = isMobile ? vw - 32 : vw * 0.9375
-    const maxHeight = vh - 160
-
-    const rect = element.getBoundingClientRect()
-
-    // Calculate the scaling factor for both dimensions
-    const widthScale = maxWidth / rect.width
-    const heightScale = maxHeight / rect.height
-
-    // Pick the smaller scale factor to ensure the image fits within maxWidth and maxHeight
-    const scale = Math.min(widthScale, heightScale)
-
-    // Calculate the new dimensions of the image
-    const newWidth = rect.width * scale
-    const newHeight = rect.height * scale
-
-    // Compute the translation to center the image
-    const centerX = (vw - newWidth) / 2
-    const centerY = (vh - newHeight) / 2
-
-    const translateX = centerX - rect.left
-    const translateY = centerY - rect.top
-
-    setDisplayedStyle({
-      zIndex: 202,
-      width: `${newWidth}px`,
-      height: `${newHeight}px`,
-      transform: `translate(${translateX}px, ${translateY}px)`,
-      position: 'relative',
-    })
+    setExpandedTransformValues(transformValues)
   }
 
   const close = useCallback(() => {
@@ -96,21 +130,27 @@ export const useLightBox = (): UseLightBoxReturnType => {
     if (displayedElement) close()
   }, [scrollY])
 
-  // Only for mobile - toggle the whole page's overflow when the lightbox is displayed.
+  // Only for mobile - hide the whole page's overflow when the lightbox is displayed.
   useEffect(() => {
     const html = document.querySelector('html')!
     html.style.overflow = isMobile && displayedElement ? 'hidden' : 'initial'
   }, [isMobile, displayedElement])
 
+  const expandedCSS: React.CSSProperties = isActive
+    ? {
+        zIndex: 203,
+        transform: `scale(${scale}) translate(${translateX}px, ${translateY}px)`,
+        position: 'relative',
+      }
+    : {}
+
   return {
-    getDisplayedStyle: (element: HTMLElement | null) => ({
-      ...defaultStyle,
-      ...(element === displayedElement ? displayedStyle : {}),
-    }),
+    expandedCSS,
+    expandedTransformValues,
     close,
     display,
     isDisplayedElement: (el: HTMLElement) => displayedElement === el,
-    isActive: !!displayedElement,
+    isActive,
     isMobile,
   }
 }
@@ -128,7 +168,8 @@ type LightBoxProps = {
 
 export const LightBox = ({ children, caption }: LightBoxProps) => {
   const {
-    getDisplayedStyle,
+    expandedCSS,
+    expandedTransformValues,
     display,
     isDisplayedElement,
     isActive,
@@ -136,24 +177,14 @@ export const LightBox = ({ children, caption }: LightBoxProps) => {
     isMobile,
   } = useLightBox()
   const ref = useRef<HTMLDivElement>(null)
-  const childRef = useRef<HTMLDivElement>(null)
+  const pinchZoomChildRef = useRef<HTMLDivElement>(null)
   const captionRef = useRef<HTMLElement>(null)
-  const displayedStyle = getDisplayedStyle(ref.current)
 
   const handleUpdate = useCallback(({ x, y, scale }: OnUpdateParams) => {
-    const img = childRef.current
+    const img = pinchZoomChildRef.current
     if (img) {
       const transformValue = make3dTransformValue({ x, y, scale })
       img.style.transform = transformValue
-    }
-
-    // Hide / show the captions when pinch zooming.
-    if (captionRef.current && scale > 1) {
-      captionRef.current.style.opacity = '0'
-    }
-
-    if (captionRef.current && scale <= 1) {
-      captionRef.current.style.opacity = '1'
     }
   }, [])
 
@@ -164,7 +195,7 @@ export const LightBox = ({ children, caption }: LightBoxProps) => {
         doubleTapZoomOutOnMaxScale
         maxZoom={3}
       >
-        <div ref={childRef}>{children}</div>
+        <div ref={pinchZoomChildRef}>{children}</div>
       </QuickPinchZoom>
     ) : (
       <>
@@ -179,12 +210,6 @@ export const LightBox = ({ children, caption }: LightBoxProps) => {
         </FullscreenIconButton>
       </>
     )
-
-  // Edge case: if the user pinches to zoom in, and presses the exit fullscreen button,
-  // the opacity of the caption will be set to 0. This will reset it to 1.
-  if (captionRef.current) {
-    captionRef.current.style.opacity = '1'
-  }
 
   return (
     <>
@@ -201,20 +226,17 @@ export const LightBox = ({ children, caption }: LightBoxProps) => {
         </>
       )}
 
-      <LightboxMediaContainer
-        ref={ref}
-        style={displayedStyle}
-        isActive={isActive}
-      >
+      <LightboxMediaContainer ref={ref} style={expandedCSS} isActive={isActive}>
         {lightBoxContent}
       </LightboxMediaContainer>
 
       <LightBoxCaption
+        style={
+          isActive
+            ? getCaptionPositionStyles(ref.current, expandedTransformValues)
+            : undefined
+        }
         isActive={isActive}
-        style={{
-          transform: displayedStyle.transform,
-          width: displayedStyle.width,
-        }}
         ref={captionRef}
       >
         {caption}
@@ -226,7 +248,15 @@ export const LightBox = ({ children, caption }: LightBoxProps) => {
 const LightBoxCaption = styled.figcaption<{ isActive?: boolean }>`
   padding-top: 8px;
   ${lsdUtils.typography('body3')}
-  transition: all 0.3s ease-in-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
   ${(props) =>
     props.isActive &&
@@ -234,9 +264,10 @@ const LightBoxCaption = styled.figcaption<{ isActive?: boolean }>`
     ${lsdUtils.typography('body1')}
     z-index: 202;
 
-    // The following will prevent very large captions from overflowing / being cut off.
+    // The following prevents very large captions from overflowing.
     height: 72px;
     overflow: auto;
+    animation: fadeIn 0.4s forwards;  // Apply the fadeIn animation when active
     `}
 `
 
@@ -271,6 +302,7 @@ const ExitFullscreenIconButton = styled(IconButton)`
 `
 
 const LightboxMediaContainer = styled.div<{ isActive?: boolean }>`
+  position: relative;
   transition: all 0.3s ease-in-out;
 
   // Show the fullscreen button when users hover over the container.
