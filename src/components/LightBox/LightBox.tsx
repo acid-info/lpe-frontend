@@ -5,7 +5,7 @@ import { IconButton } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import QuickPinchZoom, { make3dTransformValue } from 'react-quick-pinch-zoom'
-import { useWindowScroll } from 'react-use'
+import { useKey, useWindowScroll } from 'react-use'
 import { ExitFullscreenIcon } from '../Icons/ExitFullscreenIcon'
 import { FullscreenIcon } from '../Icons/FullscreenIcon'
 
@@ -122,6 +122,9 @@ export const useLightBox = (): UseLightBoxReturnType => {
   // When the window is resized, close the lightbox.
   useOnWindowResize(close)
 
+  // When esc key is pressed, close the lightbox.
+  useKey('Escape', close)
+
   // If the user scrolls, close the lightbox.
   useEffect(() => {
     // On mobile, this is not needed: even if the user attempts to scroll, lightbox stays open.
@@ -140,7 +143,6 @@ export const useLightBox = (): UseLightBoxReturnType => {
     ? {
         zIndex: 203,
         transform: `scale(${scale}) translate(${translateX}px, ${translateY}px)`,
-        position: 'relative',
       }
     : {}
 
@@ -261,7 +263,6 @@ const LightBoxCaption = styled.figcaption<{ isActive?: boolean }>`
   ${(props) =>
     props.isActive &&
     `
-    ${lsdUtils.typography('body1')}
     z-index: 202;
 
     // The following prevents very large captions from overflowing.
@@ -295,6 +296,8 @@ const FullscreenIconButton = styled(IconButton)`
     opacity: 0;
     pointer-events: none;
   }
+
+  outline: none;
 `
 
 const ExitFullscreenIconButton = styled(IconButton)`
