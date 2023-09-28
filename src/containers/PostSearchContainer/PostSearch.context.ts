@@ -10,7 +10,6 @@ export type PostSearchContextType = {
   query?: string
   fetching?: boolean
   results: Block[]
-  mappedResults?: Record<string, Block>
 }
 
 export const PostSearchContext = React.createContext<PostSearchContextType>({
@@ -18,14 +17,12 @@ export const PostSearchContext = React.createContext<PostSearchContextType>({
   query: '',
   fetching: false,
   results: [],
-  mappedResults: {},
 })
 
 export const usePostSearch = () =>
   useContext(PostSearchContext) || {
     query: '',
     results: [],
-    mappedResults: {},
     active: false,
     fetching: false,
   }

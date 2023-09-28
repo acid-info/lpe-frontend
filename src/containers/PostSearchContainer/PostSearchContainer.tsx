@@ -73,7 +73,7 @@ export const PostSearchContainer: React.FC<
           globalMode={false}
           showCloseButton
           fetching={res.isLoading}
-          numberOfResults={res.data?.result?.length}
+          numberOfResults={res.data?.length}
         />
       </SearchBoxContainer>
       <PostSearchContext.Provider
@@ -81,8 +81,7 @@ export const PostSearchContainer: React.FC<
           query,
           fetching: res.isLoading,
           active: active && query.length > 0,
-          results: res.data?.result || [],
-          mappedResults: res.data?.mapped || {},
+          results: res.data || [],
         }}
       >
         {children}

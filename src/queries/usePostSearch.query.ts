@@ -14,21 +14,14 @@ export const usePostSearchQuery = ({
   limit?: number
   active?: boolean
 }) =>
-  useQuery<{
-    result: LPE.Search.ResultBlockItem[]
-    mapped: Record<string, LPE.Search.ResultBlockItem>
-  }>(['post-search-query', active, id, query, limit], async () =>
+  useQuery(['post-search-query', active, id, query, limit], async () =>
     !active
-      ? { result: [], mapped: {} }
-      : api.searchPostBlocks({ limit, id, query, skip: 0 }).then((res) => {
-          let items = res.data.blocks as LPE.Search.ResultBlockItem[]
-          items = items.filter(searchBlocksBasicFilter)
-
-          return {
-            result: items,
-            mapped: Object.fromEntries(
-              items.map((item) => [item.data.id, item]),
+      ? []
+      : api
+          .searchPostBlocks({ limit, id, query, skip: 0 })
+          .then((res) =>
+            (res.data.blocks as LPE.Search.ResultBlockItem[]).filter(
+              searchBlocksBasicFilter,
             ),
-          }
-        }),
+          ),
   )
