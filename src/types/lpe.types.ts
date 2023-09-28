@@ -257,10 +257,11 @@ export namespace LPE {
       type: ContentType
     }
 
-    export type ResultItem =
-      | ResultItemBase<LPE.Post.Document>
+    export type ResultBlockItem =
       | ResultItemBase<LPE.Post.TextBlock>
       | ResultItemBase<LPE.Post.ImageBlock>
+
+    export type ResultItem = ResultItemBase<LPE.Post.Document> | ResultBlockItem
 
     export type Result = {
       posts: Search.ResultItem[]

@@ -46,6 +46,20 @@ export default function NavBar({ defaultState }: NavBarProps) {
     defaultState && state.state.set((value) => ({ ...value, ...defaultState }))
   }, [defaultState])
 
+  const searchButton =
+    state.showSearchButton.get() &&
+    (!!state.onSearch ? (
+      <IconButton size={'small'} onClick={() => state.onSearch!()}>
+        <SearchIcon color={'primary'} />
+      </IconButton>
+    ) : (
+      <Link href={'/search'}>
+        <IconButton size={'small'}>
+          <SearchIcon color={'primary'} />
+        </IconButton>
+      </Link>
+    ))
+
   const buttons = (
     <>
       <Buttons>
@@ -53,18 +67,10 @@ export default function NavBar({ defaultState }: NavBarProps) {
           toggle={themeState.toggleMode}
           mode={themeState.get().mode}
         />
-        <Link href={'/search'}>
-          <IconButton size={'small'}>
-            <SearchIcon color={'primary'} />
-          </IconButton>
-        </Link>
+        {searchButton}
       </Buttons>
       <Buttons mobile>
-        <Link href={'/search'}>
-          <IconButton size={'small'}>
-            <SearchIcon color={'primary'} />
-          </IconButton>
-        </Link>
+        {searchButton}
 
         <IconButton size={'small'} onClick={toggleMobileMenu}>
           {showMobileMenu ? (
