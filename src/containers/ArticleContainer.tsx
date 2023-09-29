@@ -52,6 +52,7 @@ const ArticleGrid = styled(Grid)<{ searchMode?: boolean }>`
     props.searchMode &&
     css`
       padding-top: 90px;
+      min-height: 100vh;
     `}
 `
 
