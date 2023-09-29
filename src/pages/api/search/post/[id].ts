@@ -33,6 +33,8 @@ export default async function handler(
       type: ['text', 'image'],
       postId: Array.isArray(id) ? id[0] : id,
       query: Array.isArray(q) ? q.join(' ') : q,
+      method: 'nearText',
+      certainty: 0.85,
 
       limit: parseInt(limit, 50),
       skip: parseInt(skip, 0),

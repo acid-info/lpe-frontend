@@ -1371,6 +1371,9 @@ export class UnbodyService {
     tags = [],
     postType = [],
     type,
+    method = 'hybrid',
+    alpha = 0.75,
+    certainty = 0.8,
   }: {
     skip?: number
     limit?: number
@@ -1379,6 +1382,9 @@ export class UnbodyService {
     postId?: string
     postType?: LPE.PostType[]
     type?: LPE.Post.ContentBlockType[]
+    method?: 'hybrid' | 'nearText'
+    certainty?: number
+    alpha?: number
   } = {}) =>
     this.handleRequest(async () => {
       const _type =
@@ -1392,11 +1398,20 @@ export class UnbodyService {
           : [LPE.PostTypes.Article, LPE.PostTypes.Podcast]
 
       const hybrid =
-        (query.trim().length > 0 || tags.length > 0) &&
+        method === 'hybrid' &&
+        query.trim().length > 0 &&
         ({
           query: query,
-          alpha: 0.75,
+          alpha,
         } as GetObjectsTextBlockHybridInpObj)
+
+      const nearText =
+        method === 'nearText' &&
+        query.trim().length > 0 &&
+        ({
+          concepts: [query],
+          certainty,
+        } as Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj)
 
       const filter = {
         operator: 'And',
@@ -1453,6 +1468,9 @@ export class UnbodyService {
           text: _type.includes('text'),
           image: _type.includes('image'),
           ...(hybrid ? { textHybrid: hybrid, imageHybrid: hybrid } : {}),
+          ...(nearText
+            ? { textNearText: nearText, imageNearText: nearText }
+            : {}),
         },
       })
 

@@ -82,6 +82,7 @@ export default async function handler(
       postType: postTypes as LPE.PostType[],
       type: blockTypes as LPE.Post.ContentBlockType[],
 
+      method: 'hybrid',
       limit: parseInt(limit, 50),
       skip: parseInt(skip, 0),
     })
