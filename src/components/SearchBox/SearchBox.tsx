@@ -38,7 +38,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
   query = '',
   filters = [],
   fetching = false,
-  numberOfResults = 0,
+  numberOfResults,
   showCloseButton = false,
   showClearQueryButton = false,
   globalMode = true,

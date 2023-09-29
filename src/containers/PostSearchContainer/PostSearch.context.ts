@@ -9,6 +9,7 @@ export type PostSearchContextType = {
   active?: boolean
   query?: string
   fetching?: boolean
+  isInitialLoading?: boolean
   results: Block[]
 }
 
@@ -16,6 +17,7 @@ export const PostSearchContext = React.createContext<PostSearchContextType>({
   active: false,
   query: '',
   fetching: false,
+  isInitialLoading: true,
   results: [],
 })
 

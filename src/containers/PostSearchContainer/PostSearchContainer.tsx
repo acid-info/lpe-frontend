@@ -17,6 +17,7 @@ export const PostSearchContainer: React.FC<
 > = ({ postId = '', postTitle, children, ...props }) => {
   const navbarState = useNavbarState()
 
+  const [prevQuery, setPrevQuery] = useState('')
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(false)
   const [height, setHeight] = useState(
@@ -28,6 +29,8 @@ export const PostSearchContainer: React.FC<
     query,
     active: active && query.length > 0,
   })
+
+  const isInitialLoading = prevQuery.length === 0 && res.isFetching
 
   useEffect(() => {
     const onSearch = () => {
@@ -67,19 +70,23 @@ export const PostSearchContainer: React.FC<
           query={query}
           onClearQuery={() => setQuery('')}
           onClose={() => setActive(false)}
-          onQueryChange={(q) => setQuery(q)}
+          onQueryChange={(q) => {
+            setPrevQuery(query)
+            setQuery(q)
+          }}
           title={postTitle}
           showClearQueryButton
           globalMode={false}
           showCloseButton
-          fetching={res.isLoading}
-          numberOfResults={res.data?.length}
+          fetching={res.isFetching}
+          numberOfResults={res.data?.length || undefined}
         />
       </SearchBoxContainer>
       <PostSearchContext.Provider
         value={{
           query,
-          fetching: res.isLoading,
+          isInitialLoading,
+          fetching: res.isFetching,
           active: active && query.length > 0,
           results: res.data || [],
         }}

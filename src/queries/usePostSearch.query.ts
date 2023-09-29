@@ -14,14 +14,17 @@ export const usePostSearchQuery = ({
   limit?: number
   active?: boolean
 }) =>
-  useQuery(['post-search-query', active, id, query, limit], async () =>
-    !active
-      ? []
-      : api
-          .searchPostBlocks({ limit, id, query, skip: 0 })
-          .then((res) =>
-            (res.data.blocks as LPE.Search.ResultBlockItem[]).filter(
-              searchBlocksBasicFilter,
+  useQuery(
+    ['post-search-query', active, id, query, limit],
+    async () =>
+      !active
+        ? []
+        : api
+            .searchPostBlocks({ limit, id, query, skip: 0 })
+            .then((res) =>
+              (res.data.blocks as LPE.Search.ResultBlockItem[]).filter(
+                searchBlocksBasicFilter,
+              ),
             ),
-          ),
+    { keepPreviousData: true },
   )

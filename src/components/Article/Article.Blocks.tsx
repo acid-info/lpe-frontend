@@ -27,9 +27,10 @@ const ArticleBlocks = ({ data }: Props) => {
     [data.content],
   )
 
-  const blocks = search.active
-    ? search.results.map((i) => i.data)
-    : filteredBlocks
+  const blocks =
+    search.active && !search.isInitialLoading
+      ? search.results.map((i) => i.data)
+      : filteredBlocks
 
   return blocks.length ? (
     <>

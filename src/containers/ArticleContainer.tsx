@@ -21,38 +21,59 @@ const ArticleContainer = (props: Props) => {
   return (
     <PostSearchContainer postId={data.data.id} postTitle={data.data.title}>
       <PostSearchContext.Consumer>
-        {(search) => (
-          <ArticleContainerContext.Provider value={{ tocId, setTocId }}>
-            <ArticleGrid searchMode={search.active}>
-              <ArticleTocContainer className={'w-3'}>
-                {!search.active && (
-                  <TableOfContents contents={data.data.toc ?? []} />
-                )}
-              </ArticleTocContainer>
-              <Gap className={'w-1'} />
-              <ArticleBodyContainer className={'w-8'}>
-                <ArticleBody
-                  data={data}
-                  header={!search.active}
-                  footer={!search.active}
-                />
-              </ArticleBodyContainer>
-            </ArticleGrid>
-          </ArticleContainerContext.Provider>
-        )}
+        {(search) => {
+          const displaySearchResults = search.active && !search.isInitialLoading
+
+          return (
+            <ArticleContainerContext.Provider value={{ tocId, setTocId }}>
+              <ArticleGrid
+                searchMode={search.active}
+                displaySearchResults={displaySearchResults}
+                isSearching={search.fetching}
+              >
+                <ArticleTocContainer className={'w-3'}>
+                  {!displaySearchResults && (
+                    <TableOfContents contents={data.data.toc ?? []} />
+                  )}
+                </ArticleTocContainer>
+                <Gap className={'w-1'} />
+                <ArticleBodyContainer className={'w-8'}>
+                  <ArticleBody
+                    data={data}
+                    header={!displaySearchResults}
+                    footer={!displaySearchResults}
+                  />
+                </ArticleBodyContainer>
+              </ArticleGrid>
+            </ArticleContainerContext.Provider>
+          )
+        }}
       </PostSearchContext.Consumer>
     </PostSearchContainer>
   )
 }
 
-const ArticleGrid = styled(Grid)<{ searchMode?: boolean }>`
+const ArticleGrid = styled(Grid)<{
+  searchMode?: boolean
+  isSearching?: boolean
+  displaySearchResults?: boolean
+}>`
   width: 100%;
 
   ${(props) =>
     props.searchMode &&
     css`
-      padding-top: 90px;
-      min-height: 100vh;
+      ${props.displaySearchResults &&
+      css`
+        padding-top: 90px;
+        min-height: 100vh;
+      `}
+
+      ${props.isSearching &&
+      css`
+        filter: blur(2px);
+        pointer-events: none;
+      `}
     `}
 `
 

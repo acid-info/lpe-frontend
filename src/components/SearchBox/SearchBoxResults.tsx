@@ -35,16 +35,20 @@ export const SearchBoxResults: React.FC<SearchBoxResultsProps> = ({
     <Typography variant="subtitle2">Searching...</Typography>
   ) : (
     <>
-      <Typography variant={'subtitle2'}>
-        {numberOfResults === 0
-          ? copyConfigs.search.results.noResults
-          : `${numberOfResults} ${copyConfigs.search.results.results}`}
-      </Typography>
-      {title && !isMobile && (
+      {typeof numberOfResults === 'number' && (
         <>
+          <Typography variant={'subtitle2'}>
+            {numberOfResults === 0
+              ? copyConfigs.search.results.noResults
+              : `${numberOfResults} ${copyConfigs.search.results.results}`}
+          </Typography>
           <span className="dot">
             <DotIcon color="primary" />
           </span>
+        </>
+      )}
+      {title && !isMobile && (
+        <>
           <Typography
             component="span"
             variant="subtitle2"
