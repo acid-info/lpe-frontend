@@ -61,7 +61,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
   const [activeInput, setActiveInput] = useState(false)
   const stickyComponent = globalMode
     ? 'results'
-    : focused || !activeInput
+    : query.length === 0 || !activeInput
     ? 'root'
     : 'results'
 
