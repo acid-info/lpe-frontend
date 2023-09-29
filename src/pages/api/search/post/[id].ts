@@ -27,19 +27,26 @@ export default async function handler(
     blocks: [],
   }
 
-  result.blocks = await unbodyApi
-    .searchPostBlocks({
-      tags,
-      type: ['text', 'image'],
-      postId: Array.isArray(id) ? id[0] : id,
-      query: Array.isArray(q) ? q.join(' ') : q,
-      method: 'nearText',
-      certainty: 0.85,
+  const query: Parameters<(typeof unbodyApi)['searchPostBlocks']>[0] = {
+    tags,
+    type: ['text', 'image'],
+    postId: Array.isArray(id) ? id[0] : id,
+    query: Array.isArray(q) ? q.join(' ') : q,
+    method: 'nearText',
+    certainty: 0.85,
 
-      limit: parseInt(limit, 50),
-      skip: parseInt(skip, 0),
-    })
+    limit: parseInt(limit, 50),
+    skip: parseInt(skip, 0),
+  }
+
+  result.blocks = await unbodyApi
+    .searchPostBlocks(query)
     .then((res) => res.data)
+
+  if (result.blocks.length === 0)
+    result.blocks = await unbodyApi
+      .searchPostBlocks({ ...query, method: 'hybrid' })
+      .then((res) => res.data)
 
   res.status(200).json({
     data: result,
