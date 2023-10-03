@@ -1,15 +1,15 @@
-import { SearchBox } from '@/components/SearchBox'
 import { uiConfigs } from '@/configs/ui.configs'
 import { SearchResultsExploreView } from '@/containers/Search/ExploreView'
 import { SearchResultsListView } from '@/containers/Search/ListView'
 import { LPE } from '@/types/lpe.types'
 import { searchBlocksBasicFilter } from '@/utils/search.utils'
-import useWindowSize from '@/utils/ui.utils'
 import { useQuery } from '@tanstack/react-query'
 import NextAdapterPages from 'next-query-params'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { QueryParamProvider } from 'use-query-params'
 import SEO from '../components/SEO/SEO'
+import { copyConfigs } from '../configs/copy.configs'
+import { GlobalSearchBox } from '../containers/GlobalSearchBox/GlobalSearchBox'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { api } from '../services/api.service'
 import unbodyApi from '../services/unbody/unbody.service'
@@ -22,17 +22,7 @@ interface SearchPageProps {
 }
 
 export default function SearchPage({ topics, shows }: SearchPageProps) {
-  const [mounted, setMounted] = useState(false)
-  const [busy, setBusy] = useState(false)
   const [view, setView] = useState<string>('list')
-  const isMobile = useWindowSize().width < 768
-
-  useEffect(() => {
-    setMounted(true)
-    return () => {
-      setMounted(false)
-    }
-  }, [])
 
   const [query, setQuery] = useState<string>('')
   const [tags, setTags] = useState<string[]>([])
@@ -64,6 +54,7 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
     []) as LPE.Search.ResultItemBase<LPE.Post.ContentBlock>[]
   const posts = (data?.posts ||
     []) as LPE.Search.ResultItemBase<LPE.Post.Document>[]
+
   const handleSearch = async (
     query: string,
     filteredTags: string[],
@@ -83,13 +74,17 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
   return (
     <div style={{ minHeight: '80vh' }}>
       <SEO title="Search" pagePath={`/search`} />
-      <SearchBox
+      <GlobalSearchBox
+        view={view}
+        views={[
+          { key: 'list', label: copyConfigs.search.views.default },
+          { key: 'explore', label: copyConfigs.search.views.explore },
+        ]}
         tags={topics}
         onSearch={handleSearch}
         resultsNumber={resultsNumber}
-        busy={isLoading}
+        fetching={isLoading}
         onViewChange={setView}
-        showModeSwitch={!isMobile}
       />
       {view === 'list' && (
         <SearchResultsListView

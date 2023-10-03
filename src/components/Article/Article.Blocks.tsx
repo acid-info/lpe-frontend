@@ -1,6 +1,7 @@
 import { useArticleContainerContext } from '@/containers/ArticleContainer.Context'
 import { useIntersectionObserver } from '@/utils/ui.utils'
 import { useMemo } from 'react'
+import { usePostSearch } from '../../containers/PostSearchContainer/PostSearch.context'
 import { LPE } from '../../types/lpe.types'
 import { RenderArticleBlock } from './Article.Block'
 
@@ -12,7 +13,9 @@ const ArticleBlocks = ({ data }: Props) => {
   const { setTocId, tocId } = useArticleContainerContext()
   const headingElementsRef = useIntersectionObserver(setTocId)
 
-  const blocks = useMemo(
+  const search = usePostSearch()
+
+  const filteredBlocks = useMemo(
     () =>
       data.content.filter(
         (b) =>
@@ -23,6 +26,11 @@ const ArticleBlocks = ({ data }: Props) => {
       ),
     [data.content],
   )
+
+  const blocks =
+    search.active && !search.isInitialLoading
+      ? search.results.map((i) => i.data)
+      : filteredBlocks
 
   return blocks.length ? (
     <>

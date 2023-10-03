@@ -1,291 +1,169 @@
-import { copyConfigs } from '@/configs/copy.configs'
-import { uiConfigs } from '@/configs/ui.configs'
-import { LPE } from '@/types/lpe.types'
 import { nope } from '@/utils/general.utils'
 import { lsdUtils } from '@/utils/lsd.utils'
-import { formatTagText } from '@/utils/string.utils'
 import { useHydrated } from '@/utils/useHydrated.util'
-import { Dropdown, TabItem, Tabs, Typography } from '@acid-info/lsd-react'
+import { CloseIcon, IconButton, TabItem, Tabs } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
 import { useDeepCompareEffect } from 'react-use'
-import {
-  ArrayParam,
-  StringParam,
-  useQueryParam,
-  withDefault,
-} from 'use-query-params'
-import { DotIcon } from '../Icons/DotIcon'
-import PostTypes = LPE.PostTypes
-import ContentBlockTypes = LPE.Post.ContentBlockTypes
-interface SearchBoxProps {
-  onSearch?: (query: string, tags: string[], types: LPE.ContentType[]) => void
-  tags?: string[]
-  onViewChange?: (view: string) => void
-  resultsNumber: number | null
-  busy?: boolean
-  showModeSwitch?: boolean
-}
+import { SearchBoxFilters, SearchBoxFiltersProps } from './SearchBoxFilters'
+import { SearchBoxInput } from './SearchBoxInput'
+import { SearchBoxResults } from './SearchBoxResults'
 
-const ContentTypesCategories = {
-  Post: 'post',
-  Block: 'block',
-} as const
+export type SearchBoxProps = Partial<React.ComponentProps<typeof Container>> &
+  Pick<SearchBoxFiltersProps, 'filters'> & {
+    view?: string
+    views?: { key: string; label: string }[]
+    query?: string
+    title?: string
+    fetching?: boolean
+    numberOfResults?: number
+    showCloseButton?: boolean
+    showClearQueryButton?: boolean
 
-const contentTypes = [
-  {
-    label: 'Articles',
-    value: PostTypes.Article,
-    category: ContentTypesCategories.Post,
-  },
-  {
-    label: 'Podcasts',
-    value: PostTypes.Podcast,
-    category: ContentTypesCategories.Post,
-  },
-  {
-    label: 'Paragraphs',
-    value: ContentBlockTypes.Text,
-    category: ContentTypesCategories.Block,
-  },
-  {
-    label: 'Images',
-    value: ContentBlockTypes.Image,
-    category: ContentTypesCategories.Block,
-  },
-]
+    globalMode?: boolean
 
-const allContentTypes = contentTypes.map((c) => c.value)
+    onViewChange?: (view: string) => void
+    onQueryChange?: (query: string) => void
+    onFilterChange?: SearchBoxFiltersProps['onChange']
+    onSearch?: () => void
+    onClose?: () => void
+    onClearQuery?: () => void
+  }
 
-const SearchBox = (props: SearchBoxProps) => {
-  const {
-    onSearch = nope,
-    onViewChange = nope,
-    tags = [],
-    resultsNumber,
-    busy = false,
-    showModeSwitch = true,
-  } = props
-
+export const SearchBox: React.FC<SearchBoxProps> = ({
+  view,
+  views,
+  title,
+  query = '',
+  filters = [],
+  fetching = false,
+  numberOfResults,
+  showCloseButton = false,
+  showClearQueryButton = false,
+  globalMode = true,
+  onQueryChange = nope,
+  onViewChange = nope,
+  onFilterChange = nope,
+  onSearch = nope,
+  onClose = nope,
+  onClearQuery = nope,
+  ...props
+}) => {
   const hydrated = useHydrated()
 
-  const [filterTags, setFilterTags] = useQueryParam(
-    'topic',
-    withDefault(ArrayParam, []),
-    {
-      skipUpdateWhenNoChange: false,
-    },
-  )
-  const [filterContentTypes, setFilterContentTypes] = useQueryParam(
-    'type',
-    withDefault(ArrayParam, allContentTypes),
-    {
-      skipUpdateWhenNoChange: true,
-    },
-  )
-  const [query, setQuery] = useQueryParam('q', withDefault(StringParam, ''), {
-    skipUpdateWhenNoChange: true,
-  })
+  const rootRef = useRef<HTMLDivElement>(null)
+  const resultsRef = useRef<HTMLDivElement>(null)
 
-  const [queryInput, setQueryInput] = useState<string>(query)
-
-  const [view, setView] = useState<string>('list')
-  const [enlargeQuery, setEnlargeQuery] = useState(false)
-  const [placeholder, setPlaceholder] = useState<string>(
-    copyConfigs.search.searchbarPlaceholders.global(),
-  )
-
-  const filtersRef = useRef<HTMLDivElement>(null)
-  const [whereResultsStick, setWhereResultsStick] = useState(0)
-  const [showDetails, setShowDetails] = useState(false)
-  const [detailsTop, setDetailsTop] = useState(0)
+  const [top, setTop] = useState(0)
   const [focused, setFocused] = useState(false)
-  const [showClear, setShowClear] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
+  const [activeInput, setActiveInput] = useState(false)
+  const stickyComponent = globalMode
+    ? 'results'
+    : query.length === 0 || !activeInput
+    ? 'root'
+    : 'results'
 
   const handleViewChange = async (n: string) => {
-    setView(n)
     onViewChange(n)
-    onSearch(
-      query,
-      filterTags as string[],
-      filterContentTypes as LPE.ContentType[],
-    )
+    onSearch()
   }
 
   useEffect(() => {
-    setEnlargeQuery(!(queryInput.length === 0 && !focused))
-    if (focused) {
-      setPlaceholder('')
-    } else {
-      setTimeout(() => {
-        setPlaceholder(copyConfigs.search.searchbarPlaceholders.global())
-      }, 200)
-    }
-  }, [focused, queryInput])
+    if (!hydrated) return
 
-  useEffect(() => {
-    if (filtersRef.current && hydrated) {
-      const filtersB = filtersRef.current.getBoundingClientRect().bottom
+    const rootElement = rootRef.current
+    let stickyElement =
+      stickyComponent === 'results' ? resultsRef.current : rootElement
 
-      const parentT =
-        filtersRef.current.parentElement?.getBoundingClientRect().top || 0
+    const navbarRect = document
+      .querySelector('header > nav')
+      ?.getBoundingClientRect()
 
-      const whereResultsStick =
-        -1 * (filtersB - parentT - uiConfigs.navbarRenderedHeight + 2)
+    if (!stickyElement || !rootElement || !navbarRect) return
 
-      setWhereResultsStick(whereResultsStick)
-      setDetailsTop(filtersB + whereResultsStick)
-    }
-  }, [filtersRef, hydrated, queryInput])
+    const rootRect = rootElement.getBoundingClientRect()
+    const rect = stickyElement.getBoundingClientRect()
+    let top = navbarRect.height
 
-  useEffect(() => {
+    top -= rect.top - rootRect.top
+    top += rootRect.bottom - rect.bottom
+
+    setTop(top)
+    setCollapsed(window.scrollY > rect.bottom + top)
+
     const onScroll = () => {
-      setShowDetails(window.scrollY >= detailsTop)
+      setCollapsed(window.scrollY > rect.bottom + top)
     }
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [detailsTop])
 
-  useEffect(() => {
-    if (
-      filterContentTypes.length < allContentTypes.length ||
-      filterTags.length > 0
-    ) {
-      setShowClear(true)
-    } else {
-      setShowClear(false)
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
     }
-  }, [filterTags, filterContentTypes])
-
-  const clear = async () => {
-    setQuery('')
-    setFilterTags([])
-    setFilterContentTypes(allContentTypes)
-  }
-
-  const handleKeyUp = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setQuery(queryInput)
-    }
-  }
-
-  useEffect(() => {
-    if (query?.length > 0) setQueryInput(query)
-  }, [query])
+  }, [resultsRef, hydrated, globalMode, stickyComponent])
 
   useDeepCompareEffect(() => {
-    onSearch(
-      query,
-      filterTags as string[],
-      filterContentTypes as LPE.ContentType[],
-    )
-  }, [query, filterTags, filterContentTypes])
-
-  // useEffect(() => {
-  //   if (focused) return
-  //   if (query !== queryInput) setQuery(queryInput)
-  // }, [focused, query, queryInput])
+    onSearch()
+  }, [query, filters])
 
   return (
     <Container
-      className={enlargeQuery ? 'active' : ''}
-      style={{ top: `${whereResultsStick}px` }}
+      ref={rootRef}
+      {...props}
+      className={clsx(
+        props.className,
+        'search-box',
+        activeInput && 'search-box--active',
+        collapsed && 'search-box--collapsed',
+        globalMode && 'search-box--global',
+        `search-box--sticky-${stickyComponent}`,
+      )}
+      style={{ top: `${top}px`, ...(props.style || {}) }}
     >
-      <FirstRow>
-        <input
-          className={`search-input`}
-          placeholder={placeholder}
-          value={queryInput as string}
-          onFocus={() => {
-            setFocused(true)
-          }}
-          onKeyUp={handleKeyUp}
-          onChange={(e) => setQueryInput(e.target.value)}
-          onBlurCapture={() => {
-            setFocused(false)
-          }}
+      <div className="search-box__controls">
+        <SearchBoxInput
+          value={query}
+          globalMode={globalMode}
+          keepEnlarged={!globalMode}
+          triggerOnBlur={!globalMode}
+          showClearButton={showClearQueryButton}
+          onChange={(value) => onQueryChange(value)}
+          onFocusChange={(value) => setFocused(value)}
+          onActive={(value) => setActiveInput(value)}
         />
-        {showModeSwitch && (
+        {views && views.length > 0 && (
           <ViewButtons>
             <Tabs size={'small'} activeTab={view} onChange={handleViewChange}>
-              <TabItem name={'list'}>
-                {copyConfigs.search.views.default}
-              </TabItem>
-              <TabItem name={'explore'}>
-                {copyConfigs.search.views.explore}
-              </TabItem>
+              {views.map((view) => (
+                <TabItem key={view.key} name={view.key}>
+                  {view.label}
+                </TabItem>
+              ))}
             </Tabs>
           </ViewButtons>
         )}
-      </FirstRow>
-      <Filters ref={filtersRef}>
-        <Dropdown
-          size={'small'}
-          placeholder={'Content Type'}
-          options={contentTypes.map((c) => ({ name: c.label, value: c.value }))}
-          value={hydrated ? (filterContentTypes as string[]) : []}
-          onChange={(n) => setFilterContentTypes(n as string[])}
-          multi={true}
-        />
-        <Dropdown
-          size={'small'}
-          placeholder={'Topics'}
-          options={tags.map((t) => ({ name: formatTagText(t), value: t }))}
-          value={hydrated ? (filterTags as string[]) : []}
-          onChange={(n) => setFilterTags(n as string[])}
-          multi={true}
-          triggerLabel={'Topics'}
-        />
-        <Clear
-          variant={'label2'}
-          className={`${showClear ? 'show' : ''}`}
-          onClick={clear}
-        >
-          <span>clear</span>
-          <span> </span>
-          <span>filters</span>
-        </Clear>
-      </Filters>
-      {busy ? (
-        <Typography variant={'subtitle2'}>Searching...</Typography>
-      ) : (
-        <Results>
-          <Typography variant={'subtitle2'}>
-            {resultsNumber === 0
-              ? copyConfigs.search.results.noResults
-              : `${resultsNumber} ${copyConfigs.search.results.results}`}
-          </Typography>
-          <>
-            <Details
-              variant={'subtitle2'}
-              className={`search-details ${showDetails ? 'show' : ''}`}
-            >
-              {query && query.length > 0 && (
-                <span>
-                  <DotIcon className="dot" color="primary" />
-                  <span>{query}</span>
-                </span>
-              )}
-              {filterTags && filterTags.length > 0 && (
-                <span>
-                  <DotIcon className="dot" color="primary" />
-                  {filterTags.map((filterTag, index) => (
-                    <span key={index}>[{filterTag}]</span>
-                  ))}
-                </span>
-              )}
-              {filterContentTypes && filterContentTypes.length > 0 && (
-                <span>
-                  <DotIcon className="dot" color="primary" />
-                  {filterContentTypes.map((contentType, index) => (
-                    <span key={index}>[{contentType}]</span>
-                  ))}
-                </span>
-              )}
-            </Details>
-          </>
-        </Results>
-      )}
+        {showCloseButton && (
+          <IconButton
+            className="search-box__close-button"
+            size="small"
+            onClick={() => onClose()}
+          >
+            <CloseIcon color="primary" />
+          </IconButton>
+        )}
+      </div>
+      <SearchBoxFilters filters={filters} onChange={onFilterChange} />
+      <SearchBoxResults
+        title={title}
+        query={query}
+        filters={filters}
+        fetching={fetching}
+        showDetails={collapsed}
+        numberOfResults={numberOfResults}
+        containerRef={resultsRef}
+      />
     </Container>
   )
 }
@@ -301,125 +179,51 @@ const Container = styled.div`
   z-index: 1;
   background: rgba(var(--lsd-surface-primary), 1);
 
-  &.active {
-    .search-input {
-      font-size: var(--lsd-h4-lineHeight);
-      line-height: var(--lsd-h4-lineHeight);
-    }
-  }
-
-  .search-input {
-    background: transparent;
-    font-size: var(--lsd-label1-fontSize);
-    line-height: var(--lsd-label1-lineHeight);
-    outline: none;
-    border: none;
-
-    width: 100%;
-    height: 44px;
-
-    transition: all 0.2s ease-in-out;
-
-    ::placeholder {
-      color: rgba(var(--lsd-text-primary), 0.3);
-    }
-
-    :-ms-input-placeholder {
-      color: rgba(var(--lsd-text-primary), 0.3);
-    }
-
-    ::-ms-input-placeholder {
-      color: rgba(var(--lsd-text-primary), 0.3);
-    }
-  }
-
   ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
     padding: 8px 0;
   }
+
+  .search-box__controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &:not(.search-box--global) {
+    padding: 0 0 0 14px;
+
+    .search-box-results {
+      display: none;
+    }
+
+    &.search-box--active {
+      padding: 8px 0px 8px 14px;
+
+      .search-box-results {
+        display: block;
+      }
+    }
+  }
+
+  .search-box__close-button {
+    transition: 0.2s;
+  }
+
+  &.search-box--collapsed.search-box--sticky-results {
+    .search-box-results {
+      width: calc(100% - 32px) !important;
+    }
+
+    .search-box__close-button {
+      transform: translateY(160%);
+    }
+  }
 `
 
-const FirstRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`
 const ViewButtons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 12px;
 `
-
-const Filters = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-
-  ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
-    .lsd-dropdown--small {
-      width: 135px;
-    }
-  }
-`
-const Results = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-
-  overflow: hidden;
-
-  > span {
-    white-space: nowrap;
-  }
-
-  .search-details {
-  }
-`
-
-const Clear = styled(Typography)`
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
-  text-decoration: underline;
-
-  &.show {
-    opacity: 1;
-  }
-
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
-    span:not(:first-child) {
-      display: none;
-    }
-  }
-`
-
-const Details = styled(Typography)`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-
-  opacity: 0;
-  transform: translateY(-40px);
-  transition: all 0.2s ease-in-out;
-
-  &.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  > span {
-    display: flex;
-    flex-direction: row;
-    gap: 4px;
-    align-items: center;
-
-    .dot {
-      margin-right: 4px;
-    }
-  }
-`
-export default SearchBox
