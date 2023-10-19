@@ -106,7 +106,11 @@ const SearchBoxContainer = styled.div<{ active?: boolean; height?: number }>`
   top: ${uiConfigs.navbarRenderedHeight - 1}px;
 
   & > div {
+    visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
+    opacity: ${(props) => (props.active ? 1 : 0)};
+    transition: transform 0.3s,
+      opacity ${(props) => (props.active ? 0 : 0.3)}s
+        ${(props) => (props.active ? 0 : 0.1)}s;
     transform: translateY(${(props) => (props.active ? '0' : '-100%')});
-    transition: 0.3s;
   }
 `
