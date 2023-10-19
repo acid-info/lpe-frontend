@@ -16,13 +16,22 @@ interface Props {
 }
 
 const PodcastShowContainer = (props: Props) => {
-  const { show, latestEpisodes, highlightedEpisodes } = props
+  const { show } = props
 
   const query = useRecentEpisodes({
     limit: 8,
     showSlug: show.slug,
-    initialData: latestEpisodes,
+    initialData: props.latestEpisodes,
   })
+
+  const highlightedPosts = [...props.highlightedEpisodes, ...query.posts].slice(
+    0,
+    2,
+  )
+
+  const latestPosts = query.posts.filter(
+    (post) => !highlightedPosts.includes(post),
+  )
 
   return (
     <>
@@ -33,7 +42,7 @@ const PodcastShowContainer = (props: Props) => {
             <EpisodesList
               shows={[show]}
               displayShow={false}
-              episodes={highlightedEpisodes}
+              episodes={highlightedPosts}
               header={<Typography variant="body2">All episodes</Typography>}
               bordered="except-first-row"
               pattern={[
@@ -59,10 +68,8 @@ const PodcastShowContainer = (props: Props) => {
           <EpisodesList
             shows={[show]}
             displayShow={false}
-            episodes={query.posts}
-            bordered={
-              highlightedEpisodes.length > 0 ? true : 'except-first-row'
-            }
+            episodes={latestPosts}
+            bordered={highlightedPosts.length > 0 ? true : 'except-first-row'}
             pattern={[
               {
                 cols: 4,
