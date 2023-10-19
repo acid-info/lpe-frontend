@@ -87,9 +87,14 @@ const Description = styled(Typography)`
 const Border = styled.div`
   line-height: 0;
   height: 0;
-  width: calc(100% - 2 * var(--main-content-padding));
+  width: 100%;
   position: absolute;
+  left: 0px;
   bottom: 0;
-  left: var(--main-content-padding);
   border-bottom: 1px solid rgb(var(--lsd-border-primary));
+
+  @media (max-width: ${uiConfigs.maxContainerWidth}px) {
+    width: calc(100% - 2 * var(--main-content-padding));
+    left: var(--main-content-padding);
+  }
 `
