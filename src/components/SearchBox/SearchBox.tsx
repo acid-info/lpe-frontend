@@ -191,7 +191,7 @@ const Container = styled.div`
   }
 
   &:not(.search-box--global) {
-    padding: 0 0 0 14px;
+    padding: 2px 0 2px 14px;
 
     .search-box-results {
       display: none;
