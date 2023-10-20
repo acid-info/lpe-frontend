@@ -1,3 +1,4 @@
+import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { LPE } from '../../types/lpe.types'
 import { DotIcon } from '../Icons/DotIcon'
@@ -24,6 +25,9 @@ const Authors: React.FC<AuthorsProps> = ({
 }) => {
   return authors?.length > 0 ? (
     <AuthorsContainer gap={gap} flexDirection={flexDirection} {...props}>
+      <Typography variant="label2" style={{ marginRight: `${3 - gap}px` }}>
+        by
+      </Typography>
       {authors.map((author, index) => (
         <AuthorContainer gap={gap} key={author.name}>
           <Author author={author} email={email} />
