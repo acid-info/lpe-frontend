@@ -19,7 +19,7 @@ export const siteConfigs = {
     'update',
     'whistleblower',
   ],
-  xHandle: 'logos_state',
-  youtubeHandle: ',',
+  xHandle: 'NetStatePress',
+  youtubeHandle: '@NetworkStatePress',
   githubHandle: 'logos-co',
 }
