@@ -1,16 +1,22 @@
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { FC } from 'react'
 import { DiscordIcon } from '../Icons/DiscordIcon'
 
-type JoinDiscordCardProps = React.HTMLAttributes<HTMLDivElement>
+type JoinDiscordCardProps = React.HTMLAttributes<HTMLDivElement> & {
+  discordHref?: string
+}
 
-export const JoinDiscordCard = (props: JoinDiscordCardProps) => {
+export const JoinDiscordCard: FC<JoinDiscordCardProps> = ({
+  discordHref = 'https://discord.gg/logos-state',
+  ...props
+}) => {
   return (
     <JoinDiscordCardContainer {...props}>
       <Typography variant="body1">Join the discussion</Typography>
       <Link
-        href="https://discord.gg/logos-state"
+        href={discordHref}
         style={{
           textDecoration: 'none',
         }}
