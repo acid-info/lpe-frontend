@@ -2,6 +2,7 @@ import { GlobalAudioPlayer } from '@/components/GlobalAudioPlayer'
 import { ProgressBar } from '@/components/ProgressBar/ProgressBar'
 import { uiConfigs } from '@/configs/ui.configs'
 import { DefaultLayout } from '@/layouts/DefaultLayout'
+import useFathomAnalytics from '@/utils/useFathomAnalytics'
 import { css, Global } from '@emotion/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { NextComponentType, NextPageContext } from 'next'
@@ -27,6 +28,7 @@ const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppLayoutProps) {
   const hydrated = useHydrated()
+  useFathomAnalytics()
 
   const getLayout =
     Component.getLayout ||
