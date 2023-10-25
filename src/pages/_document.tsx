@@ -1,6 +1,8 @@
 import { Head, Html, Main, NextScript } from 'next/document'
 import { defaultThemeState } from '../states/themeState'
 
+const fathom = process.env.FATHOM_SITE_ID || ''
+
 export default function Document() {
   return (
     <Html lang="en" data-theme="light">
@@ -21,7 +23,7 @@ export default function Document() {
               o.async=1; o.src=t; o.id='fathom-script';
               m.parentNode.insertBefore(o,m)
             })(document, window, '//fathom.status.im/tracker.js', 'fathom');
-            fathom('set', 'siteId', 'VERNO');
+            fathom('set', 'siteId', '${fathom}');
             fathom('trackPageview');`,
           }}
         />
