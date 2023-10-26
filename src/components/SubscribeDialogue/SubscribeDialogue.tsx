@@ -69,11 +69,13 @@ export default function SubscribeDialogue({
     try {
       const firstName = e.currentTarget.firstName.value || ''
       const lastName = e.currentTarget.lastName.value || ''
+      const email = e.currentTarget.email.value
 
-      const apiResponse = await api.subscribeToMailingList(
-        e.currentTarget.email.value,
-        e.currentTarget.firstName.value + ' ' + e.currentTarget.lastName.value,
-      )
+      const apiResponse = await api.subscribeToMailingList({
+        email,
+        firstName,
+        lastName,
+      })
 
       setSuccessMessage(apiResponse.message)
     } catch (error) {

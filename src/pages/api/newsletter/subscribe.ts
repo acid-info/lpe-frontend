@@ -108,7 +108,7 @@ export default async function handler(
 
   if (subscribed) {
     return res.status(200).json({
-      message: 'already subscribed',
+      message: 'Already subscribed',
       data: {},
     })
   }
