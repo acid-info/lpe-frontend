@@ -93,6 +93,13 @@ export class ApiService {
       body: JSON.stringify(payload),
     })
 
+    if (res.status >= 400) {
+      // Handle errors for status codes 400 and 500
+      const errorMessage = `Error: ${res.status} - ${res.statusText}`
+      console.error(errorMessage)
+      throw new Error(errorMessage)
+    }
+
     return res.json()
   }
 }
