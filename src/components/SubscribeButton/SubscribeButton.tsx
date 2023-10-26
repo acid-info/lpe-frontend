@@ -12,7 +12,7 @@ export default function SubscribeButton() {
 
   return (
     <>
-      <CustomTag onClick={handleClick} iconDirection="left">
+      <CustomTag onClick={handleClick}>
         <Typography variant="body3" className="subscribe-button-text">
           Subscribe
         </Typography>
@@ -26,7 +26,6 @@ export default function SubscribeButton() {
 }
 
 const CustomTag = styled(Tag)`
-  gap: 0 8px;
   padding: 4px 12px;
   background-color: rgb(var(--lsd-surface-secondary));
 
