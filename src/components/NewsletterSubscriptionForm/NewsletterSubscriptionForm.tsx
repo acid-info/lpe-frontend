@@ -128,6 +128,8 @@ const EmailSubscribeForm = styled.form<{
   gap: 16px;
   width: 100%;
   margin-top: 50px;
+
+  margin-bottom: 30px;
 `
 
 const StyledTextField = styled(TextField)`

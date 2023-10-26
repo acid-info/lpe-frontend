@@ -50,6 +50,11 @@ const MainContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* safe center will center for large screens, but still show a scroll bar for smaller screens */
+  justify-content: safe center;
+
+  overflow: auto;
+  height: 100%;
 
   padding: 24px 0;
   width: 430px;
@@ -64,6 +69,7 @@ const MainContentContainer = styled.div`
 
 const FullscreenDialogContainer = styled.div`
   position: fixed;
+
   top: 0;
   left: 0;
   width: 100vw;
