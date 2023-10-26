@@ -101,6 +101,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       latestEpisodes,
       highlightedEpisodes,
     },
+    revalidate: 10,
   }
 }
 
