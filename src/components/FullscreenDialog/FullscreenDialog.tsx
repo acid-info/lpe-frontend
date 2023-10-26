@@ -69,7 +69,6 @@ const MainContentContainer = styled.div`
 
 const FullscreenDialogContainer = styled.div`
   position: fixed;
-
   top: 0;
   left: 0;
   width: 100vw;
