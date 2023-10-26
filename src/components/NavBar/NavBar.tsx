@@ -121,6 +121,10 @@ const PressLogoType = styled(Typography)<{ display: boolean }>`
       opacity: 0;
       visibility: hidden;
     `}
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
+    display: none;
+  }
 `
 
 const SocialMediaKitContainer = styled.div`
