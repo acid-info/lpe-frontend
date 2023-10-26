@@ -101,6 +101,8 @@ const GoBackButton = styled(Button)`
 `
 
 const MessageContainer = styled.div`
+  box-sizing: border-box;
+
   display: flex;
   align-items: center;
 
@@ -110,8 +112,11 @@ const MessageContainer = styled.div`
   margin-bottom: -6px;
   margin-top: 40px;
 
-  width: 430px;
-  max-width: 93%;
+  width: 100%;
+
+  svg {
+    flex-shrink: 0;
+  }
 `
 
 const SubmitionInfoMessage = styled(Typography)`
