@@ -9,7 +9,7 @@ type JoinDiscordCardProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 export const JoinDiscordCard: FC<JoinDiscordCardProps> = ({
-  discordHref = 'https://discord.gg/logos-state',
+  discordHref = 'https://discord.gg/logosnetwork',
   ...props
 }) => {
   return (

@@ -66,7 +66,7 @@ export const FooterLinksItems: {
       links: [
         {
           label: 'Discord',
-          href: 'https://discord.gg/logos-state',
+          href: 'https://discord.gg/logosnetwork',
           key: 'discord',
         },
         { label: 'X', href: `https://x.com/${siteConfigs.xHandle}`, key: 'x' },
