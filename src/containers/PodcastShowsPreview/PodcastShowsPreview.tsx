@@ -77,7 +77,12 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
 
               <Typography className="podcasts__show-hosts">
                 {show.hosts.length > 0 && (
-                  <span>Hosted by: {show.hosts[0].name}</span>
+                  <span>
+                    Hosted by:{' '}
+                    {show.hosts.map((host, index) => (
+                      <span key={index}>{host.name}</span>
+                    ))}
+                  </span>
                 )}
                 <span>{show.numberOfEpisodes} EP</span>
               </Typography>
