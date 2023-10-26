@@ -6,7 +6,6 @@ import {
   Typography,
 } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import Link from 'next/link'
 
 type NewsletterSubscriptionFormProps = React.HTMLAttributes<HTMLDivElement> & {
   handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void
@@ -44,9 +43,9 @@ export default function NewsletterSubscriptionForm({
               {successMessage}
             </SubmitionInfoMessage>
           </MessageContainer>
-          <Link href="/" onClick={onClose}>
-            <ToHomePageButton variant="filled">To home page</ToHomePageButton>
-          </Link>
+          <ToHomePageButton variant="filled" onClick={onClose}>
+            Go back
+          </ToHomePageButton>
         </>
       )}
 
