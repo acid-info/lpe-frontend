@@ -1,44 +1,60 @@
 import { copyConfigs } from '@/configs/copy.configs'
-import { Button, CloseIcon, IconButton, Typography } from '@acid-info/lsd-react'
+import { api } from '@/services/api.service'
+import { lsdUtils } from '@/utils/lsd.utils'
+import {
+  Button,
+  CheckIcon,
+  CloseIcon,
+  ErrorIcon,
+  IconButton,
+  Typography,
+} from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { LogosIcon } from '../Icons/LogosIcon'
-import { PressLogoType } from '../NavBar/NavBar'
+
+const mockOnSubmit = (data: any) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('Form data submitted:', data)
+      resolve(true)
+    }, 3000)
+  })
+}
 
 type EmailSubscribeProps = React.HTMLAttributes<HTMLDivElement> & {
-  onSubmit: (formData: SubscribeFormData) => void
   isOpen: boolean
   onClose: () => void
 }
 
-type SubscribeFormData = {
+export type SubscribeFormData = {
   email: string
   firstName: string
   lastName: string
 }
 
 export default function SubscribeDialogue({
-  onSubmit,
   isOpen,
   onClose,
   ...props
 }: EmailSubscribeProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
   // Reset states when the dialog is closed.
   useEffect(() => {
     if (!isOpen) {
-      if (isSuccess) {
-        setIsSuccess(false)
+      if (successMessage) {
+        setSuccessMessage('')
       }
 
       if (errorMessage) {
         setErrorMessage('')
       }
     }
-  }, [isOpen, isSuccess, errorMessage])
+  }, [isOpen, successMessage, errorMessage])
 
   if (!isOpen) {
     return null
@@ -47,18 +63,20 @@ export default function SubscribeDialogue({
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setErrorMessage('')
+    setSuccessMessage('')
 
     try {
-      await onSubmit({
-        email: e.currentTarget.email.value,
-        firstName: e.currentTarget.firstName.value,
-        lastName: e.currentTarget.lastName.value,
-      })
+      const firstName = e.currentTarget.firstName.value || ''
+      const lastName = e.currentTarget.lastName.value || ''
 
-      setErrorMessage('')
-      setIsSuccess(true)
+      const apiResponse = await api.subscribeToMailingList(
+        e.currentTarget.email.value,
+        e.currentTarget.firstName.value + ' ' + e.currentTarget.lastName.value,
+      )
+
+      setSuccessMessage(apiResponse.message)
     } catch (error) {
-      setIsSuccess(false)
       setErrorMessage(
         'There was an error submitting the form. Please try again.',
       )
@@ -79,27 +97,46 @@ export default function SubscribeDialogue({
         </IconButton>
 
         <LogosIconAndTitleContainer>
-          <LogosIcon color="primary" width="44px" height="44px" />
-          <PressLogoType variant={'h2'} genericFontFamily={'serif'} display>
+          <LogosIcon color="primary" width="36px" height="36px" />
+          <PressLogoType variant={'h1'} genericFontFamily={'serif'}>
             {copyConfigs.navbar.title}
           </PressLogoType>
         </LogosIconAndTitleContainer>
-        <Typography
-          variant="body1"
-          style={{
-            marginBottom: '24px',
-          }}
+        <Typography variant="body2">Subscribe for updates</Typography>
+
+        {errorMessage && (
+          <MessageContainer>
+            <ErrorIcon color="primary" />
+            <SubmitionInfoMessage variant="body2">
+              {errorMessage}
+            </SubmitionInfoMessage>
+          </MessageContainer>
+        )}
+
+        {successMessage && (
+          <>
+            <MessageContainer>
+              <CheckIcon color="primary" />
+              <SubmitionInfoMessage variant="body2">
+                {successMessage}
+              </SubmitionInfoMessage>
+            </MessageContainer>
+            <Link href="/">
+              <ToHomePageButton variant="filled">To home page</ToHomePageButton>
+            </Link>
+          </>
+        )}
+
+        <EmailSubscribeForm
+          onSubmit={handleFormSubmit}
+          hideForm={!!successMessage}
         >
-          Subscribe for updates
-        </Typography>
-        <EmailSubscribeForm onSubmit={handleFormSubmit}>
           <StyledInput
             type="text"
             id="firstName"
             name="firstName"
             placeholder="First Name"
             disabled={isSubmitting}
-            required
           />
 
           <StyledInput
@@ -108,14 +145,13 @@ export default function SubscribeDialogue({
             name="lastName"
             placeholder="Last Name"
             disabled={isSubmitting}
-            required
           />
 
           <StyledInput
             type="email"
             id="email"
             name="email"
-            placeholder="Email address"
+            placeholder="Email address (required)"
             disabled={isSubmitting}
             required
           />
@@ -123,34 +159,51 @@ export default function SubscribeDialogue({
           <SubscribeButton
             variant="filled"
             type="submit"
+            size="medium"
             disabled={isSubmitting}
           >
-            Subscribe
+            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
           </SubscribeButton>
         </EmailSubscribeForm>
-
-        {isSubmitting && (
-          <SubmitionInfoMessage variant="body1">
-            Submitting...
-          </SubmitionInfoMessage>
-        )}
-        {isSuccess && (
-          <SubmitionInfoMessage variant="body1">
-            Submitted successfully!
-          </SubmitionInfoMessage>
-        )}
-        {errorMessage && (
-          <SubmitionInfoMessage variant="body1">
-            {errorMessage}
-          </SubmitionInfoMessage>
-        )}
       </MainContentContainer>
     </SubscribeDialogueContainer>
   )
 }
 
+const PressLogoType = styled(Typography)`
+  text-transform: uppercase;
+  font-size: 30px;
+  line-height: 36px;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
+    font-size: 20px;
+    line-height: 26px;
+  }
+`
+
+const ToHomePageButton = styled(Button)`
+  margin-top: 46px;
+  height: 40px;
+  width: 162px;
+  color: rgb(var(--lsd-text-secondary));
+`
+
+const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  border: 1px solid rgb(var(--lsd-border-primary));
+  padding: 14px;
+
+  margin-bottom: -6px;
+  margin-top: 40px;
+
+  width: 430px;
+  max-width: 93%;
+`
+
 const SubmitionInfoMessage = styled(Typography)`
-  margin: 16px 0px;
+  padding-left: 14px;
 `
 
 const LogosIconAndTitleContainer = styled.div`
@@ -166,13 +219,13 @@ const MainContentContainer = styled.div`
   align-items: center;
 
   padding: 24px 0;
-  width: 518px;
+  width: 430px;
   max-width: 90%;
 
   .subscribe-dialogue__close-button {
     position: absolute;
-    top: 16px;
-    right: 32px;
+    top: 8px;
+    right: 30px;
   }
 `
 
@@ -190,8 +243,10 @@ const SubscribeDialogueContainer = styled.div`
   justify-content: center;
 `
 
-const EmailSubscribeForm = styled.form`
-  display: flex;
+const EmailSubscribeForm = styled.form<{
+  hideForm: boolean
+}>`
+  display: ${({ hideForm }) => (hideForm ? 'none' : 'flex')};
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -215,11 +270,12 @@ const StyledInput = styled.input`
   &:focus {
     outline: none;
   }
+
+  background-color: rgb(var(--lsd-surface-primary));
 `
 
 const SubscribeButton = styled(Button)`
   margin-top: 30px;
   height: 40px;
   width: 162px;
-  flex-shrink: 0;
 `
