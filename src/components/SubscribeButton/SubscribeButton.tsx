@@ -1,13 +1,13 @@
+import { NewsletterSubscriptionDialog } from '@/containers/NewsletterSubscriptionDialog'
 import { Tag, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useState } from 'react'
-import { SubscribeDialogue } from '../SubscribeDialogue'
 
 export default function SubscribeButton() {
-  const [showDialogue, setShowDialogue] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
 
   const handleClick = () => {
-    setShowDialogue(!showDialogue)
+    setShowDialog(!showDialog)
   }
 
   return (
@@ -17,9 +17,9 @@ export default function SubscribeButton() {
           Subscribe
         </Typography>
       </CustomTag>
-      <SubscribeDialogue
-        isOpen={showDialogue}
-        onClose={() => setShowDialogue(false)}
+      <NewsletterSubscriptionDialog
+        isOpen={showDialog}
+        onClose={() => setShowDialog(false)}
       />
     </>
   )
