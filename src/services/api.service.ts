@@ -80,13 +80,17 @@ export class ApiService {
         return { data: { posts: [], blocks: [] }, errors: JSON.stringify(e) }
       })
 
-  subscribeToMailingList = async (email: string, name?: string) => {
+  subscribeToMailingList = async (payload: {
+    email: string
+    firstName?: string
+    lastName?: string
+  }) => {
     const res = await fetch('/api/newsletter/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, name }),
+      body: JSON.stringify(payload),
     })
 
     return res.json()
