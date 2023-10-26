@@ -51,6 +51,7 @@
     "next": "13.3.0",
     "next-query-params": "^4.2.3",
     "nextjs-progressbar": "^0.0.16",
+    "odoo-await": "^3.4.1",
     "react": "18.2.0",
     "react-blurhash": "^0.3.0",
     "react-dom": "18.2.0",
@@ -59,7 +60,8 @@
     "react-quick-pinch-zoom": "^4.9.0",
     "react-use": "^17.4.0",
     "typescript": "5.0.4",
-    "use-query-params": "^2.2.1"
+    "use-query-params": "^2.2.1",
+    "yup": "^1.3.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.0",

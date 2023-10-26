@@ -79,6 +79,18 @@ export class ApiService {
         console.error(e)
         return { data: { posts: [], blocks: [] }, errors: JSON.stringify(e) }
       })
+
+  subscribeToMailingList = async (email: string, name?: string) => {
+    const res = await fetch('/api/newsletter/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, name }),
+    })
+
+    return res.json()
+  }
 }
 
 export const api = new ApiService()
