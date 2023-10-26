@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react'
 import { NavbarState, useNavbarState } from '../../states/navbarState'
 import { lsdUtils } from '../../utils/lsd.utils'
 import { LogosIcon } from '../Icons/LogosIcon'
+import { SubscribeButton } from '../SubscribeButton'
 
 export interface NavBarProps {
   defaultState?: Partial<NavbarState>
@@ -62,6 +63,7 @@ export default function NavBar({ defaultState }: NavBarProps) {
 
   const buttons = (
     <>
+      <SubscribeButton />
       <Buttons>
         <ThemeSwitch
           toggle={themeState.toggleMode}
@@ -111,7 +113,7 @@ export default function NavBar({ defaultState }: NavBarProps) {
   )
 }
 
-const PressLogoType = styled(Typography)<{ display: boolean }>`
+export const PressLogoType = styled(Typography)<{ display: boolean }>`
   text-transform: uppercase;
   ${(props) =>
     !props.display &&
