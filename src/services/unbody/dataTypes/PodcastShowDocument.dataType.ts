@@ -44,7 +44,7 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
         alt: data.title,
         width: 24,
         height: 24,
-        url: `/${showSlug}-logo.svg`,
+        url: `/podcasts/${showSlug}-logo.svg`,
       },
       episodes: [],
     }
