@@ -43,9 +43,9 @@ export default function NewsletterSubscriptionForm({
               {successMessage}
             </SubmitionInfoMessage>
           </MessageContainer>
-          <ToHomePageButton variant="filled" onClick={onClose}>
+          <GoBackButton variant="filled" onClick={onClose}>
             Go back
-          </ToHomePageButton>
+          </GoBackButton>
         </>
       )}
 
@@ -92,8 +92,9 @@ export default function NewsletterSubscriptionForm({
   )
 }
 
-const ToHomePageButton = styled(Button)`
+const GoBackButton = styled(Button)`
   margin-top: 46px;
+  margin-bottom: 60px;
   height: 40px;
   width: 162px;
   color: rgb(var(--lsd-text-secondary));
@@ -129,7 +130,7 @@ const EmailSubscribeForm = styled.form<{
   width: 100%;
   margin-top: 50px;
 
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 `
 
 const StyledTextField = styled(TextField)`
