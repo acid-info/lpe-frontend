@@ -3,15 +3,6 @@ import styled from '@emotion/styled'
 import { useState } from 'react'
 import { SubscribeDialogue } from '../SubscribeDialogue'
 
-const mockOnSubmit = (data: any) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log('Form data submitted:', data)
-      resolve(true)
-    }, 3000)
-  })
-}
-
 export default function SubscribeButton() {
   const [showDialogue, setShowDialogue] = useState(false)
 
@@ -27,7 +18,6 @@ export default function SubscribeButton() {
         </Typography>
       </CustomTag>
       <SubscribeDialogue
-        onSubmit={mockOnSubmit}
         isOpen={showDialogue}
         onClose={() => setShowDialogue(false)}
       />
