@@ -1,3 +1,4 @@
+import { uiConfigs } from '@/configs/ui.configs'
 import { CloseIcon, IconButton } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useEffect } from 'react'
@@ -33,18 +34,26 @@ export default function FullscreenDialog({
   return (
     <FullscreenDialogContainer {...props}>
       <MainContentContainer>
-        <IconButton
-          className="fullscreen-dialog__close-button"
-          size="small"
-          onClick={() => onClose()}
-        >
-          <CloseIcon color="primary" />
-        </IconButton>
+        <CloseIconContainer>
+          <IconButton size="small" onClick={() => onClose()}>
+            <CloseIcon color="primary" />
+          </IconButton>
+        </CloseIconContainer>
         {children}
       </MainContentContainer>
     </FullscreenDialogContainer>
   )
 }
+
+const CloseIconContainer = styled.div`
+  position: fixed;
+  top: 8px;
+  width: ${uiConfigs.maxContainerWidth}px;
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 30px;
+`
 
 const MainContentContainer = styled.div`
   display: flex;
@@ -56,15 +65,8 @@ const MainContentContainer = styled.div`
   overflow: auto;
   height: 100%;
 
-  padding: 24px 0;
-  width: 430px;
-  max-width: 90%;
-
-  .fullscreen-dialog__close-button {
-    position: absolute;
-    top: 8px;
-    right: 30px;
-  }
+  width: ${uiConfigs.maxContainerWidth}px;
+  max-width: 100%;
 `
 
 const FullscreenDialogContainer = styled.div`
