@@ -34,18 +34,18 @@ export default function FullscreenDialog({
   return (
     <FullscreenDialogContainer {...props}>
       <MainContentContainer>
-        <CloseIconContainer>
+        <CloseButtonContainer>
           <IconButton size="small" onClick={() => onClose()}>
             <CloseIcon color="primary" />
           </IconButton>
-        </CloseIconContainer>
+        </CloseButtonContainer>
         {children}
       </MainContentContainer>
     </FullscreenDialogContainer>
   )
 }
 
-const CloseIconContainer = styled.div`
+const CloseButtonContainer = styled.div`
   position: fixed;
   top: 8px;
   width: ${uiConfigs.maxContainerWidth}px;
