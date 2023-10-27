@@ -25,7 +25,7 @@ export default function NewsletterSubscriptionForm({
   const disabled = isSubmitting
 
   return (
-    <>
+    <FormContainer>
       {errorMessage && (
         <MessageContainer>
           <ErrorIcon color="primary" />
@@ -88,9 +88,15 @@ export default function NewsletterSubscriptionForm({
           {isSubmitting ? 'Subscribing...' : 'Subscribe'}
         </SubscribeButton>
       </EmailSubscribeForm>
-    </>
+    </FormContainer>
   )
 }
+
+const FormContainer = styled.div`
+  padding: 24px 0;
+  width: 430px;
+  max-width: 90%;
+`
 
 const GoBackButton = styled(Button)`
   margin-top: 46px;
