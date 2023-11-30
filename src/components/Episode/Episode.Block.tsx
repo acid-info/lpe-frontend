@@ -2,7 +2,7 @@ import {
   extractClassFromFirstTag,
   extractIdFromFirstTag,
 } from '@/utils/html.utils'
-import { parseText, parseTimestamp } from '@/utils/string.utils'
+import { parseTranscriptionText } from '@/utils/string.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import ReactPlayer from 'react-player'
@@ -20,20 +20,27 @@ export const RenderEpisodeBlock = ({
   const isYoutube = isYoutubeRegex.test(block.html)
   const youtubeLink = block.html.match(isYoutubeRegex) ?? []
 
-  return isYoutube ? (
-    <ReactPlayer url={youtubeLink[0]} />
-  ) : (
-    <TranscriptionItem variant="body1" component={'p'}>
-      <span>{parseTimestamp(block.text)}</span>
-      <span>|</span>
-      <span
-        className={extractClassFromFirstTag(block.html) || ''}
-        id={extractIdFromFirstTag(block.html) || `p-${block.id}`}
-      >
-        {parseText(block.text.replace(/-/, '')).trim()}
-      </span>
-    </TranscriptionItem>
-  )
+  if (isYoutube) return <ReactPlayer url={youtubeLink[0]} />
+  else {
+    const { time, transcript } = parseTranscriptionText(block.text)
+
+    return (
+      <TranscriptionItem variant="body1" component={'p'}>
+        {time && (
+          <>
+            <span>{time}</span>
+            <span>|</span>
+          </>
+        )}
+        <span
+          className={extractClassFromFirstTag(block.html) || ''}
+          id={extractIdFromFirstTag(block.html) || `p-${block.id}`}
+        >
+          {transcript}
+        </span>
+      </TranscriptionItem>
+    )
+  }
 }
 
 const TranscriptionItem = styled(Typography)`

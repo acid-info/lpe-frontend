@@ -66,13 +66,22 @@ export function convertToIframe(url: string) {
   return `<iframe height="200px" width="100%" frameborder="no" scrolling="no" seamless src="${url}"></iframe>`
 }
 
-export function parseText(text: string) {
-  return text.replace(/^(\d{2}:)?\d{2}:\d{2}\s|\[\d+\]/g, '')
-}
+const removeFootnoteReferences = (text: string) =>
+  text.replaceAll(/\[\d+\]/g, '')
 
-export function parseTimestamp(text: string) {
-  const time = text.match(/^(\d{2}:)?\d{2}:\d{2}/g)
-  return time ? time[0] : ''
+export const parseTranscriptionText = (text: string) => {
+  const time = text.match(/^(\d{1,2}:?){2,3}/g)?.[0] ?? ''
+  const transcript = removeFootnoteReferences(
+    time ? text.replace(time, '') : text,
+  ).trim()
+
+  const parsedTime = time.endsWith(':') ? time.slice(0, -1) : time
+  const parsedTranscript = transcript.replace(/^(-|\||\s)*/, '')
+
+  return {
+    time: parsedTime,
+    transcript: parsedTranscript,
+  }
 }
 
 export function formatTagText(tag: string) {
