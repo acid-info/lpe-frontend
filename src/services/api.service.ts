@@ -82,23 +82,31 @@ export class ApiService {
 
   subscribeToMailingList = async (payload: {
     email: string
-    firstName?: string
-    lastName?: string
-  }) => {
-    const res = await fetch('/api/newsletter/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
-
-    if (res.status >= 400) {
-      // Handle errors for status codes 400 and 500
-      const errorMessage = `Error: ${res.status} - ${res.statusText}`
-      console.error(errorMessage)
-      throw new Error(errorMessage)
+    name?: string
+  }): Promise<{
+    result: {
+      message: string
     }
+  }> => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_ODOO_BASE_URL}/website_mass_mailing/subscribe2`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          method: 'call',
+          params: {
+            value: payload.email,
+            name: payload.name || '',
+            list_id: process.env.NEXT_PUBLIC_ODOO_MAILING_LIST_ID,
+            subscription_type: 'email',
+          },
+        }),
+      },
+    )
 
     return res.json()
   }

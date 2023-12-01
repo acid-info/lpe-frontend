@@ -53,7 +53,6 @@ export default function NewsletterSubscriptionDialog({
 
     try {
       const firstName = e.currentTarget.firstName.value || ''
-      const lastName = e.currentTarget.lastName.value || ''
       const email = e.currentTarget.email.value
 
       if (email === 'successtest@successtest.com') {
@@ -63,11 +62,10 @@ export default function NewsletterSubscriptionDialog({
       } else {
         const apiResponse = await api.subscribeToMailingList({
           email,
-          firstName,
-          lastName,
+          name: firstName,
         })
 
-        setSuccessMessage(apiResponse.message)
+        setSuccessMessage(apiResponse.result.message)
       }
     } catch (error) {
       setErrorMessage(defaultErrorMessage)

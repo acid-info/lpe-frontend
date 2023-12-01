@@ -56,14 +56,7 @@ export default function NewsletterSubscriptionForm({
         <StyledTextField
           id="firstName"
           inputProps={{ name: 'firstName', disabled }}
-          placeholder="First Name"
-          disabled={disabled}
-        />
-
-        <StyledTextField
-          id="lastName"
-          inputProps={{ name: 'lastName', disabled }}
-          placeholder="Last Name"
+          placeholder="First name or pseudonym"
           disabled={disabled}
         />
 
