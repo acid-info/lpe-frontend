@@ -46,20 +46,14 @@ export class LsdUtils {
     THEME_BREAKPOINTS.filter((b) => !exclude.find((b2) => b2 === b))
 
   typography = (variant: TypographyVariants | 'subtitle3', important = false) =>
-    variant === 'subtitle3'
-      ? `
-    font-size: 12px !important;
-    font-weight: 400 !important;
-    line-height: 16px !important;
-  `
-      : `
+    `
     font-size: var(--lsd-${variant}-fontSize)${important ? '!important' : ''};
     font-weight: var(--lsd-${variant}-fontWeight)${
-          important ? '!important' : ''
-        };
+      important ? '!important' : ''
+    };
     line-height: var(--lsd-${variant}-lineHeight)${
-          important ? '!important' : ''
-        };
+      important ? '!important' : ''
+    };
   `
 
   breakpoint = (

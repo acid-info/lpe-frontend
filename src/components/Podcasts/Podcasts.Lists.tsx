@@ -1,4 +1,4 @@
-import { ArrowDownIcon, Button, Typography } from '@acid-info/lsd-react'
+import { Button, ChevronDownIcon, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -54,7 +54,7 @@ export default function PodcastsLists({ shows }: Props) {
                   <ColoredText isEven={isEven} variant="body3">
                     Podcast page
                   </ColoredText>
-                  <ArrowDownIcon color={isEven ? 'secondary' : 'primary'} />
+                  <ChevronDownIcon color={isEven ? 'secondary' : 'primary'} />
                 </ShowButton>
               </ShowCard>
             </ShowCardContainer>

@@ -1,4 +1,8 @@
-import { ArrowDownIcon, ArrowUpIcon, Typography } from '@acid-info/lsd-react'
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  Typography,
+} from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 import { useState } from 'react'
@@ -36,9 +40,9 @@ export default function Collapse({
         </Label>
         <Icon>
           {open ? (
-            <ArrowUpIcon color="primary" />
+            <ChevronUpIcon color="primary" />
           ) : (
-            <ArrowDownIcon color="primary" />
+            <ChevronDownIcon color="primary" />
           )}
         </Icon>
       </Header>

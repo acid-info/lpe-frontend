@@ -52,6 +52,7 @@ export const useLSDTheme = () => {
         },
       },
       palette: {},
+      spacing: [],
       typography: {},
       typographyGlobal: {
         genericFontFamily: genericFontFamily,
