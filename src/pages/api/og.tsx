@@ -11,8 +11,6 @@ export const config = {
 // Doc: https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation/og-image-examples#using-a-local-image
 // Font: https://vercel.com/docs/functions/edge-functions/og-image-generation/og-image-examples#using-a-custom-font
 export default async function handler(request: NextRequest) {
-  const { href } = request.nextUrl
-
   const lora = await fetch(
     new URL('../../../assets/Lora-Regular.ttf', import.meta.url),
   ).then((res) => res.arrayBuffer())
@@ -21,7 +19,9 @@ export default async function handler(request: NextRequest) {
     new URL('../../../assets/Inter-Regular.ttf', import.meta.url),
   ).then((res) => res.arrayBuffer())
 
-  const searchParams = new URL(href).searchParams
+  const searchParams = new URLSearchParams(
+    decodeURIComponent(request.nextUrl.searchParams.get('q') || ''),
+  )
   const contentType = searchParams.get('contentType')
   const title =
     contentType == null
