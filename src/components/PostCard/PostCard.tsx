@@ -182,9 +182,9 @@ PostCard.styles = {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      max-height: calc(2 * var(--lsd-h6-lineHeight));
+      max-height: calc(2 * var(--lsd-h5-lineHeight));
 
-      ${lsdUtils.typography('h6')}
+      ${lsdUtils.typography('h5')}
     }
 
     .post-card__subtitle {
@@ -234,7 +234,7 @@ PostCard.styles = {
   `,
   xsmall: (theme: Theme) => css`
     .post-card__title-text {
-      ${lsdUtils.typography('h6')}
+      ${lsdUtils.typography('h5')}
     }
 
     ${lsdUtils.breakpoint(theme, 'md', 'down')} {
@@ -245,7 +245,7 @@ PostCard.styles = {
   `,
   small: (theme: Theme) => css`
     .post-card__title-text {
-      ${lsdUtils.typography('h5')}
+      ${lsdUtils.typography('h4')}
     }
 
     .post-card__subtitle {
