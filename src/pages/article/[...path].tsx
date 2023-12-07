@@ -1,7 +1,6 @@
 import { SEO } from '@/components/SEO'
 import ArticleContainer from '@/containers/ArticleContainer'
 import { GetStaticPropsContext } from 'next'
-import { useRouter } from 'next/router'
 import unbodyApi from '../../services/unbody/unbody.service'
 import { LPE } from '../../types/lpe.types'
 
@@ -12,10 +11,6 @@ type ArticleProps = {
 }
 
 const ArticlePage = ({ data, errors, why }: ArticleProps) => {
-  const {
-    query: { slug },
-  } = useRouter()
-
   if (!data) return null
   if (errors) return <div>{errors}</div>
 
@@ -26,7 +21,7 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
         description={data.data.summary}
         noIndex={data.data.isDraft}
         image={data.data.coverImage}
-        pagePath={`/article/${slug}`}
+        pagePath={`/article/${data.data.slug}`}
         date={data.data.createdAt}
         tags={[
           ...data.data.tags,

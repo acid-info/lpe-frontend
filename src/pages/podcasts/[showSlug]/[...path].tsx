@@ -1,7 +1,6 @@
 import { SEO } from '@/components/SEO'
 import EpisodeContainer from '@/containers/EpisodeContainer'
 import { GetStaticPropsContext } from 'next'
-import { useRouter } from 'next/router'
 import { LPE } from '../../../types/lpe.types'
 
 import unbodyApi from '@/services/unbody/unbody.service'
@@ -14,10 +13,6 @@ type EpisodeProps = {
 }
 
 const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
-  const {
-    query: { showSlug, epSlug },
-  } = useRouter()
-
   if (!episode) return null
   if (errors) return <div>{errors}</div>
 
@@ -30,8 +25,8 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
         image={episode.coverImage}
         imageUrl={undefined}
         pagePath={getPostLink('podcast', {
-          showSlug: showSlug as string,
-          postSlug: epSlug as string,
+          showSlug: episode.show?.slug as string,
+          postSlug: episode.slug as string,
         })}
         tags={[
           ...episode.tags,
