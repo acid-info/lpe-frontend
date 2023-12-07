@@ -33,7 +33,7 @@ const PodcastShowPage = ({
     <>
       <SEO
         title={show.title}
-        description={show.description}
+        description={show.descriptionText}
         imageUrl={undefined}
         pagePath={getPostLink('podcast', { showSlug: showSlug as string })}
         tags={[]}

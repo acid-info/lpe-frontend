@@ -176,6 +176,7 @@ export namespace LPE {
       url: string
       title: string
       description: string
+      descriptionText?: string
       logo: Image.Document
       hosts: Author.Document[]
       numberOfEpisodes: number

@@ -40,6 +40,7 @@ export const PodcastShowDataType: UnbodyDataTypeConfig<
       hosts: data.authors,
       url: getPostLink('podcast', { showSlug }),
       description: (description?.type === 'text' && description.html) || '',
+      descriptionText: (description?.type === 'text' && description.text) || '',
       logo: {
         alt: data.title,
         width: 24,
