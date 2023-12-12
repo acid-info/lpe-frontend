@@ -893,7 +893,11 @@ export class UnbodyService {
               }).then((res) => res.data)
             : [],
           numberOfEpisodes: await this.countDocuments(
-            this.helpers.args.wherePath(['Podcasts', show.slug, 'published']),
+            this.helpers.args.wherePath([
+              'Podcasts',
+              show.slug,
+              'published|highlighted',
+            ]),
           ).then((res) => res.data),
         })),
       )
