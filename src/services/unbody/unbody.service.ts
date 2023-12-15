@@ -73,7 +73,7 @@ const getRecordDate = (record: PageRecord) =>
     ? new Date(record.publishedAt)
     : new Date(record.modifiedAt!)
 
-const sortPosts = (a: LPE.Post.Document, b: LPE.Post.Document) =>
+export const sortPosts = (a: LPE.Post.Document, b: LPE.Post.Document) =>
   getRecordDate(a) > getRecordDate(b) ? -1 : 1
 
 type PageRecord = LPE.Post.Document | LPE.StaticPage.Document
@@ -228,7 +228,7 @@ export class UnbodyService {
         else newData.draftStaticPages.push(staticPage)
       }
 
-      newData.posts = [...newData.articles, ...newData.episodes]
+      newData.posts = [...newData.articles, ...newData.episodes].sort(sortPosts)
       newData.allRecords = [...articles, ...episodes, ...staticPages]
 
       const oldData = { ...this.data }

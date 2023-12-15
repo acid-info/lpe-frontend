@@ -43,7 +43,10 @@ const PodcastShowPage = ({
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   // TODO : error handling
   const { data: podcastShows, errors: podcastShowsErrors } =
-    await unbodyApi.getPodcastShows({ populateEpisodes: false })
+    await unbodyApi.getPodcastShows({
+      populateEpisodes: true,
+      episodesLimit: 6,
+    })
 
   // TODO : error handling
   const { data: highlightedEpisodes, errors: highlightedEpisodesErrors } =
@@ -62,11 +65,20 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
+  const latestEps = podcastShows
+    .flatMap((show) => show.episodes)
+    .sort((a, b) => {
+      const aDate = new Date(a!.publishedAt)
+      const bDate = new Date(b!.publishedAt)
+      return aDate > bDate ? -1 : 1
+    })
+    .filter((p) => p?.highlighted !== true)
+
   return {
     props: {
       shows: podcastShows,
       highlightedEpisodes,
-      latestEpisodes: latestEpisodes.map((ep) => ({ ...ep, show: null })),
+      latestEpisodes: latestEps,
       // errors,
     },
     revalidate: 10,
