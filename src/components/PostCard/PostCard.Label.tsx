@@ -9,6 +9,7 @@ export type Props = React.ComponentProps<typeof Container> & {
   contentType: PostType
   date: Date | null
   displayYear?: boolean
+  size?: 'small' | 'medium' | 'large'
 }
 
 export const PostCardLabel: FC<Props> = ({
@@ -19,13 +20,13 @@ export const PostCardLabel: FC<Props> = ({
 }) => {
   return (
     <Container {...props} className={`post-card__label ${props.className}`}>
-      <Typography variant="body3" genericFontFamily="sans-serif">
+      <Typography variant="subtitle2" genericFontFamily="sans-serif">
         {contentType.toUpperCase()}
       </Typography>
       {date && (
         <>
           <DotIcon color="primary" />
-          <Date variant="body3" genericFontFamily="sans-serif">
+          <Date variant="subtitle2" genericFontFamily="sans-serif">
             {date.toLocaleString('en-GB', {
               day: 'numeric',
               month: 'short',
@@ -36,6 +37,12 @@ export const PostCardLabel: FC<Props> = ({
                 : {}),
             })}
           </Date>
+        </>
+      )}
+      {props.children && (
+        <>
+          <DotIcon color="primary" />
+          {props.children}
         </>
       )}
     </Container>

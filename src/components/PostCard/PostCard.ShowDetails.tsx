@@ -45,14 +45,9 @@ export const PostCardShowDetails = ({
               alt={podcast.logo.alt}
               className="show-details__logo"
             />
-            <div className="show-details__info">
-              <Typography variant="subtitle2" className="show-details__title">
-                {podcast.title}
-              </Typography>
-              <Typography variant="body3" className="show-details__episodes">
-                {episodeNumber} EP
-              </Typography>
-            </div>
+            <Typography variant="label1" className="show-details__title">
+              {podcast.title}
+            </Typography>
           </>
         )}
       </div>
@@ -63,13 +58,7 @@ export const PostCardShowDetails = ({
 PostCardShowDetails.styles = {
   small: (theme: Theme) => css`
     .show-details__title {
-      font-size: 12px !important;
-      font-weight: 400 !important;
-      line-height: 16px !important;
-    }
-
-    .show-details__episodes {
-      display: none !important;
+      ${lsdUtils.typography('label2')}
     }
 
     .show-details__logo {
@@ -78,9 +67,9 @@ PostCardShowDetails.styles = {
     }
   `,
 
-  medium: (theme: Theme) => css`
-    .show-details__episodes {
-      display: none;
+  large: (theme: Theme) => css`
+    .show-details__title {
+      ${lsdUtils.typography('label1')}
     }
 
     .show-details__logo {
@@ -88,41 +77,19 @@ PostCardShowDetails.styles = {
       height: 28px;
     }
   `,
-
-  large: (theme: Theme) => css`
-    .show-details__episodes {
-      display: block !important;
-    }
-    .show-details__logo {
-      width: 38px;
-      height: 38px;
-    }
-  `,
 }
 
 type CustomLinkProps = {
   size?: Size
-  xsSize?: Size
-  smSize?: Size
-  mdSize?: Size
-  lgSize?: Size
   applySizeStyles?: boolean
 }
 
 const CustomLink = styled(Link)<CustomLinkProps>`
-  text-decoration: none;
-
   .show-details {
     &__container {
       display: flex;
-      gap: 8px;
+      gap: 12px;
       align-items: center;
-    }
-
-    &__info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
     }
 
     &__logo {
@@ -135,17 +102,14 @@ const CustomLink = styled(Link)<CustomLinkProps>`
       props.applySizeStyles && PostCardShowDetails.styles.small(props.theme)}
   }
 
-  &.show-details--medium {
-    ${(props) =>
-      props.applySizeStyles && PostCardShowDetails.styles.medium(props.theme)}
-  }
-
   &.show-details--large {
     ${(props) =>
       props.applySizeStyles && PostCardShowDetails.styles.large(props.theme)}
   }
+`
 
-  &.show-details {
+/**
+ *  &.show-details {
     ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
       ${(props) =>
         props.xsSize &&
@@ -174,4 +138,5 @@ const CustomLink = styled(Link)<CustomLinkProps>`
         PostCardShowDetails.styles[props.lgSize](props.theme)}
     }
   }
-`
+ * 
+ */

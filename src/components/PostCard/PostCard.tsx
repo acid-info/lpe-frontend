@@ -16,7 +16,6 @@ import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
 import { getPostLink } from '../../utils/route.utils'
 import { Authors } from '../Authors'
-import { AuthorsDirection } from '../Authors/Authors'
 import { ResponsiveImageProps } from '../ResponsiveImage/ResponsiveImage'
 import { PostCardLabel } from './PostCard.Label'
 
@@ -81,29 +80,26 @@ export const PostCard = (_props: PostCardProps) => {
     />
   )
 
+  const authorsElement = authors && authors.length > 0 && (
+    <div className="post-card__authors">
+      <Authors authors={authors} separator={false} />
+    </div>
+  )
+
   const labelElement = (
     <PostCardLabel
       contentType={contentType}
       displayYear={displayYear}
       date={date}
-    />
+    >
+      {contentType === 'article' && authorsElement}
+    </PostCardLabel>
   )
 
   const titleElement = <PostCardTitle href={link}>{title}</PostCardTitle>
 
   const subtitleElement = subtitle && (
     <PostCardSubTitle>{subtitle}</PostCardSubTitle>
-  )
-
-  const authorsElement = authors && authors.length > 0 && (
-    <div className="post-card__authors">
-      <Authors
-        authors={authors}
-        email={false}
-        flexDirection={AuthorsDirection.ROW}
-        gap={8}
-      />
-    </div>
   )
 
   const showElement = displayPodcastShow && podcastShowDetails && (
@@ -126,16 +122,14 @@ export const PostCard = (_props: PostCardProps) => {
         applySizeStyles && applySizeStyles && `post-card--${size}`,
         coverImageElement && 'post-card--with-image',
         props.className,
-        `post-card__${contentType}`,
+        `post-card--${contentType}`,
       )}
     >
       {coverImageElement}
-      {labelElement}
       {titleElement}
+      {labelElement}
       {subtitleElement}
       {showElement}
-      {authorsElement}
-      {tagsElement}
     </Container>
   )
 }
@@ -175,125 +169,71 @@ PostCard.toData = (post: LPE.Post.Document, shows: LPE.Podcast.Show[] = []) => {
 }
 
 PostCard.styles = {
-  xxsmall: (theme: Theme) => css`
-    height: 100%;
-
-    .post-card__title-text {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      max-height: calc(2 * var(--lsd-h5-lineHeight));
-
-      ${lsdUtils.typography('h5')}
-    }
-
-    .post-card__subtitle {
-      display: none;
-    }
-
-    .post-card__cover-image {
-      display: none;
-    }
-
-    .post-card__tags {
-      display: none;
-    }
-
-    .post-card__authors,
-    .post-card__show-details {
-      flex-grow: 1;
-      display: flex;
-      align-items: flex-end;
-    }
-
-    .post-card__show-details {
-      ${PostCardShowDetails.styles.small(theme)}
-    }
-
-    ${lsdUtils.breakpoint(theme, 'sm', 'exact')} {
-      .post-card__authors {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px 0;
-
-        > div {
-          > span {
-            display: none;
-          }
-        }
-      }
-    }
-
-    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
-      .post-card__title-text {
-        ${lsdUtils.typography('subtitle1', true)}
-        max-height: calc(2 * var(--lsd-subtitle1-lineHeight));
-      }
-    }
-  `,
-  xsmall: (theme: Theme) => css`
-    .post-card__title-text {
-      ${lsdUtils.typography('h5')}
-    }
-
-    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
-      .post-card__title-text {
-        ${lsdUtils.typography('h5')}
-      }
-    }
-  `,
+  xxsmall: (theme: Theme) => css``,
+  xsmall: (theme: Theme) => css``,
   small: (theme: Theme) => css`
+    .post-card__title {
+      margin-top: var(--lsd-spacing-16);
+    }
+
     .post-card__title-text {
-      ${lsdUtils.typography('h4')}
+      ${lsdUtils.typography('h5')}
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      max-height: calc(3 * var(--lsd-h5-lineHeight));
     }
 
     .post-card__subtitle {
-      ${lsdUtils.typography('subtitle2')}
+      ${lsdUtils.typography('subtitle4')}
+
+      margin-top: var(--lsd-spacing-16);
     }
 
-    .post-card__show-details {
-      ${PostCardShowDetails.styles.large(theme)}
+    .post-card__label {
+      margin-top: var(--lsd-spacing-8);
+
+      * {
+        ${lsdUtils.typography('subtitle4')}
+      }
     }
 
     &.post-card__search-explore {
-      .post-card__title h3 {
-        ${lsdUtils.typography('h6')}
-      }
     }
 
     .post-card__show-details {
       ${PostCardShowDetails.styles.small(theme)}
-    }
 
-    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
-      .post-card__title-text {
-        ${lsdUtils.typography('h5')}
-
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        max-height: calc(3 * var(--lsd-h5-lineHeight));
-      }
-    }
-
-    ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
-      .post-card__show-details {
-        ${PostCardShowDetails.styles.small(theme)}
-      }
+      margin-top: var(--lsd-spacing-16);
     }
   `,
   medium: (theme: Theme) => css`
-    .post-card__title-text {
-      ${lsdUtils.typography('h2')}
+    .post-card__title {
+      margin-top: var(--lsd-spacing-24);
     }
 
-    .post-card__subtitle {
-      ${lsdUtils.typography('subtitle2')}
+    .post-card__title-text {
+      ${lsdUtils.typography('h2')}
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      max-height: calc(3 * var(--lsd-h2-lineHeight));
+    }
+
+    .post-card__label {
+      margin-top: var(--lsd-spacing-16);
+
+      * {
+        ${lsdUtils.typography('subtitle2')}
+      }
     }
 
     .post-card__show-details {
       ${PostCardShowDetails.styles.large(theme)}
+
+      margin-top: var(--lsd-spacing-24);
     }
 
     .post-card__cover-image {
@@ -313,17 +253,6 @@ PostCard.styles = {
         }
       }
     }
-
-    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
-      .post-card__title-text {
-        ${lsdUtils.typography('h3')}
-
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        max-height: calc(3 * var(--lsd-h3-lineHeight));
-      }
-    }
   `,
   large: (theme: Theme) => css`
     display: grid;
@@ -332,18 +261,20 @@ PostCard.styles = {
       'info image'
       'info image'
       'info image'
-      'info image'
-      'info image'
-      'info image'
       '. image';
-    gap: 16px 105px;
+    gap: 0 var(--lsd-spacing-64);
 
     .post-card__title-text {
-      ${lsdUtils.typography('h2')}
+      ${lsdUtils.typography('h1')}
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      max-height: calc(3 * var(--lsd-h1-lineHeight));
     }
 
-    .postcard__subtitle {
-      ${lsdUtils.typography('subtitle2')}
+    .post-card__subtitle {
+      margin-top: var(--lsd-spacing-32);
     }
 
     .post-card__cover-image {
@@ -369,6 +300,9 @@ PostCard.styles = {
     .post-card__label {
       grid-area: info;
       grid-row: auto;
+      * {
+        ${lsdUtils.typography('subtitle2')}
+      }
     }
 
     .post-card__title {
@@ -391,124 +325,10 @@ PostCard.styles = {
       ${PostCardShowDetails.styles.large(theme)}
     }
 
-    ${lsdUtils.breakpoint(theme, 'sm', 'exact')} {
-      gap: 16px 16px;
-    }
-
-    ${lsdUtils.breakpoint(theme, 'md', 'exact')} {
-      gap: 16px 100px;
-    }
-
-    ${lsdUtils.breakpoint(theme, 'md', 'down')} {
-      .post-card__title-text {
-        ${lsdUtils.typography('h3')}
-
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        max-height: calc(3 * var(--lsd-h3-lineHeight));
-      }
-    }
-
-    ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
-      .post-card__title-text {
-        ${lsdUtils.typography('h5')}
-      }
-    }
-
     &.post-card__search-explore {
-      opacity: 0.5;
     }
 
     &.post-card__search-result {
-      padding: 24px 0;
-
-      gap: 0 16px;
-      display: grid;
-
-      .post-card__title {
-        margin-top: 8px;
-      }
-
-      .post-card__title-text {
-        ${lsdUtils.typography('h4')}
-      }
-
-      .post-card__subtitle {
-        margin-top: 8px;
-
-        grid-area: info;
-        grid-row: auto;
-        ${lsdUtils.typography('subtitle2')}
-      }
-
-      .post-card__authors {
-        display: none;
-      }
-
-      .post-card__label {
-        margin-bottom: 0;
-      }
-
-      .show-details__title {
-        ${lsdUtils.typography('subtitle3')}
-      }
-
-      .post-card__show-details {
-        margin-top: 12px;
-        ${PostCardShowDetails.styles.small(theme)}
-      }
-
-      .post-card__tags {
-        margin-top: 16px;
-        align-self: end;
-      }
-
-      &.top-post {
-        .post-card__title-text {
-          ${lsdUtils.typography('h4')}
-        }
-      }
-
-      &:not(.post-card--with-image) {
-        grid-template-areas:
-          'info info info info info info info info'
-          'info info info info info info info info'
-          'info info info info info info info info'
-          'info info info info info info info info' !important;
-      }
-
-      ${lsdUtils.breakpoint(theme, 'md', 'down')} {
-        grid-template-columns: repeat(8, 1fr);
-        grid-template-areas:
-          'info info info info info image image image'
-          'info info info info info image image image'
-          'info info info info info image image image'
-          'info info info info info image image image'
-          '. . . . . image image image';
-      }
-
-      ${lsdUtils.breakpoint(theme, 'sm', 'down')} {
-        &.post-card__article {
-          .post-card__subtitle {
-            display: none;
-          }
-        }
-
-        .post-card__title-text {
-          ${lsdUtils.typography('h6')}
-        }
-      }
-
-      ${lsdUtils.breakpoint(theme, 'lg', 'up')} {
-        grid-template-columns: repeat(11, 1fr);
-        grid-template-areas:
-          'info info info info info info info info image image image'
-          'info info info info info info info info image image image'
-          'info info info info info info info info image image image'
-          'info info info info info info info info image image image'
-          '. . . . . . . . image image image';
-      }
     }
   `,
 }
@@ -517,11 +337,6 @@ const Container = styled.div<Pick<PostCardProps, 'size'>>`
   display: flex;
   flex-direction: column;
   position: 'relative';
-  gap: 16px 0;
-
-  .post-card__label {
-    margin-bottom: -8px;
-  }
 
   .post-card__title {
     text-decoration: none;
@@ -533,6 +348,20 @@ const Container = styled.div<Pick<PostCardProps, 'size'>>`
     text-overflow: ellipsis;
     overflow: hidden;
     word-break: break-word;
+  }
+
+  .post-card__label {
+    margin-top: var(--lsd-spacing-16);
+  }
+
+  .post-card__show-details {
+    margin-top: var(--lsd-spacing-16);
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+    .post-card__label {
+      margin-top: var(--lsd-spacing-8);
+    }
   }
 
   &.post-card--xxsmall {

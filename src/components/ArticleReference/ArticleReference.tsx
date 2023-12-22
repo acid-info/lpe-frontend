@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import Link from 'next/link'
 import { LPE } from '../../types/lpe.types'
 import { Authors } from '../Authors'
-import { AuthorsDirection } from '../Authors/Authors'
 
 type Props = {
   data: LPE.Article.Metadata
@@ -29,12 +28,7 @@ export default function ArticleReference({
         </Typography>
       </ArticleLink>
       <Info>
-        <Authors
-          flexDirection={AuthorsDirection.ROW}
-          gap={4}
-          email={false}
-          authors={authors}
-        />
+        <Authors authors={authors} />
         <Typography variant="body3">•</Typography>
         <Typography variant="body3" genericFontFamily="sans-serif">
           {localDate}
