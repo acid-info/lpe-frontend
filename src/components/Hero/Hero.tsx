@@ -1,4 +1,3 @@
-import { HeroTags } from '@/components/Hero/Hero.tags'
 import { copyConfigs } from '@/configs/copy.configs'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -36,10 +35,9 @@ export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {
         <span>{copyConfigs.site.heroTitle[1]}</span>
         <span ref={ref}>{copyConfigs.site.heroTitle[2]}</span>
       </Title>
-      <Description component="div" variant="subtitle1">
+      <Description component="div" variant="subtitle2">
         {copyConfigs.site.description}
       </Description>
-      <HeroTags tags={tags} />
       <Border />
     </Container>
   )
@@ -48,11 +46,11 @@ export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px 0;
+  gap: var(--lsd-spacing-8) 0;
   align-items: center;
 
   position: relative;
-  padding: 24px 16px 40px 16px;
+  padding: var(--lsd-spacing-40) 0 var(--lsd-spacing-64);
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     padding: 8px 0 16px 0;
@@ -62,25 +60,18 @@ const Container = styled.div`
 const Title = styled(Typography)`
   text-align: center;
   text-transform: uppercase;
-  padding: 0 var(--main-content-padding);
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
-    font-size: var(--lsd-h4-fontSize) !important;
-    font-weight: var(--lsd-h4-fontWeight) !important;
-    line-height: var(--lsd-h4-lineHeight) !important;
+    ${lsdUtils.typography('h3')}
   }
 `
 
 const Description = styled(Typography)`
   text-align: center;
-  max-width: 407px;
-  text-transform: capitalize;
-  padding: 0 var(--main-content-padding);
+  max-width: 410px;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
-    font-size: 12px !important;
-    font-weight: 400 !important;
-    line-height: 16px !important;
+    ${lsdUtils.typography('subtitle4')}
   }
 `
 
