@@ -280,16 +280,12 @@ const Container = styled.div<{
   }
 }>`
   display: grid;
-  gap: 16px 0;
+  gap: var(--lsd-spacing-16);
 
   ${(props) => css`
     > .row {
       display: grid;
-      gap: 0 16px;
-
-      & > div {
-        padding: 24px 0;
-      }
+      gap: var(--lsd-spacing-16);
     }
 
     ${lsdUtils

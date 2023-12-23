@@ -172,6 +172,8 @@ PostCard.styles = {
   xxsmall: (theme: Theme) => css``,
   xsmall: (theme: Theme) => css``,
   small: (theme: Theme) => css`
+    padding-bottom: var(--lsd-spacing-8);
+
     .post-card__title {
       margin-top: var(--lsd-spacing-16);
     }
@@ -209,6 +211,8 @@ PostCard.styles = {
     }
   `,
   medium: (theme: Theme) => css`
+    padding-bottom: var(--lsd-spacing-8);
+
     .post-card__title {
       margin-top: var(--lsd-spacing-24);
     }
@@ -263,6 +267,7 @@ PostCard.styles = {
       'info image'
       '. image';
     gap: 0 var(--lsd-spacing-64);
+    padding: var(--lsd-spacing-24) 0;
 
     .post-card__title-text {
       ${lsdUtils.typography('h1')}
