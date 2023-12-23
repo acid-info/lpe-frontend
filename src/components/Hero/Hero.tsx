@@ -53,7 +53,7 @@ const Container = styled.div`
   padding: var(--lsd-spacing-40) 0 var(--lsd-spacing-64);
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
-    padding: 8px 0 16px 0;
+    padding: 8px 16px 32px 16px;
   }
 `
 
