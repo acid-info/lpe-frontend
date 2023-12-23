@@ -1,6 +1,6 @@
-import { Button, Typography } from '@acid-info/lsd-react'
+import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
 import { uiConfigs } from '../../configs/ui.configs'
@@ -27,45 +27,15 @@ export const HomePage: React.FC<HomePageProps> = ({
   data: { highlighted = [], shows = [], tags = [], latest },
   ...props
 }) => {
-  const query = useRecentPosts({ initialData: latest, limit: 10 })
-
-  const [group1, group2] = useMemo(
-    () => [query.posts.slice(0, 5), query.posts.slice(5)],
-    [query.posts],
-  )
+  const query = useRecentPosts({ initialData: latest, limit: 12 })
 
   return (
     <Root {...props}>
       <HeroContainer>
         <Hero tags={tags} />
       </HeroContainer>
-      <MostRecentContainer>
-        <Container>
-          <PostsGrid
-            posts={group1}
-            horizontal
-            displayYear={false}
-            pattern={[{ cols: 5, size: 'xxsmall' }]}
-            breakpoints={[
-              {
-                breakpoint: 'xs',
-                pattern: [{ cols: 1.5, size: 'xxsmall', maxWidth: '192px' }],
-              },
-              {
-                breakpoint: 'sm',
-                pattern: [{ cols: 4, size: 'xxsmall' }],
-              },
-              {
-                breakpoint: 'md',
-                pattern: [{ cols: 4, size: 'xxsmall' }],
-              },
-            ]}
-          />
-        </Container>
-      </MostRecentContainer>
       <Container>
         <PostsGrid
-          bordered
           posts={highlighted.slice(0, 1)}
           pattern={[{ cols: 1, size: 'large' }]}
           breakpoints={[
@@ -73,58 +43,52 @@ export const HomePage: React.FC<HomePageProps> = ({
               breakpoint: 'xs',
               pattern: [{ cols: 1, size: 'small' }],
             },
-          ]}
-        />
-        <PostsGrid
-          pattern={[
-            { cols: 4, size: 'small' },
-            {
-              cols: 2,
-              size: 'medium',
-            },
-          ]}
-          breakpoints={[
-            {
-              breakpoint: 'xs',
-              pattern: [
-                {
-                  cols: 1,
-                  size: 'small',
-                },
-              ],
-            },
-            {
-              breakpoint: 'sm',
-              pattern: [
-                {
-                  cols: 3,
-                  size: 'small',
-                },
-                {
-                  cols: 2,
-                  size: 'medium',
-                },
-              ],
-            },
             {
               breakpoint: 'md',
-              pattern: [
-                {
-                  cols: 3,
-                  size: 'small',
-                },
-                {
-                  cols: 2,
-                  size: 'medium',
-                },
-              ],
+              pattern: [{ cols: 1, size: 'large' }],
             },
           ]}
-          posts={group2}
-          bordered
         />
+        <Section>
+          <Typography component="h2" variant="subtitle2">
+            Latest posts
+          </Typography>
+          <PostsGrid
+            pattern={[{ cols: 4, size: 'small' }]}
+            breakpoints={[
+              {
+                breakpoint: 'xs',
+                pattern: [
+                  {
+                    cols: 1,
+                    size: 'small',
+                  },
+                ],
+              },
+              {
+                breakpoint: 'sm',
+                pattern: [
+                  {
+                    cols: 2,
+                    size: 'small',
+                  },
+                ],
+              },
+              {
+                breakpoint: 'md',
+                pattern: [
+                  {
+                    cols: 4,
+                    size: 'small',
+                  },
+                ],
+              },
+            ]}
+            posts={query.posts.slice(0, 8)}
+          />
+        </Section>
 
-        {query.hasNextPage && (
+        {/* {query.hasNextPage && (
           <div className="load-more">
             <Button
               onClick={() => query.fetchNextPage()}
@@ -136,7 +100,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </Typography>
             </Button>
           </div>
-        )}
+        )} */}
 
         <PodcastShowsPreview data={{ shows }} />
       </Container>
@@ -175,11 +139,19 @@ const Root = styled('div')`
   }
 `
 
-const MostRecentContainer = styled.div`
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
-    & > div {
-      padding: 0;
-      padding-left: var(--main-content-padding);
+const Section = styled.div`
+  border-top: 1px solid rgb(var(--lsd-border-primary));
+
+  & > h2 {
+    padding: var(--lsd-spacing-24) 0;
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+    margin-top: var(--lsd-spacing-16);
+
+    & > h2 {
+      padding: var(--lsd-spacing-16) 0;
+      ${lsdUtils.typography('subtitle3')}
     }
   }
 `
