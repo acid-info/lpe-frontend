@@ -57,7 +57,7 @@ const ArticleHeader = ({
       )}
       <TagsAndSocial tags={tags} className={'articleTags'} />
       <AuthorsContainer>
-        <Authors authors={authors} email={true} gap={12} />
+        <Authors authors={authors} />
       </AuthorsContainer>
       {coverImage && (
         <ArticleImageBlockWrapper
