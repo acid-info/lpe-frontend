@@ -1,40 +1,58 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
+import { lsdUtils } from '../../utils/lsd.utils'
 
-type Props = PropsWithChildren<{
-  title: string
+export type SectionProps = Partial<
+  React.ComponentProps<typeof SectionContainer>
+> & {
+  title?: React.ReactNode
   subtitle?: string | React.ReactNode
-}>
+  bordered?: boolean
+}
 
-export const Section = ({ title, subtitle, children, ...props }: Props) => {
+export const Section = ({
+  title,
+  subtitle,
+  bordered = true,
+  children,
+  ...props
+}: SectionProps) => {
   return (
-    <SectionContainer {...props}>
-      <Container>
-        <Typography genericFontFamily="sans-serif" variant="body2">
-          {title}
-        </Typography>
-        {subtitle && (
-          <>
-            <Typography variant="body2">•</Typography>
-            {typeof subtitle === 'string' ? (
-              <Typography genericFontFamily="sans-serif" variant="body2">
+    <SectionContainer bordered={bordered} {...props}>
+      {(title || subtitle) && (
+        <Container>
+          <Typography component="h2" variant="subtitle2">
+            {title}
+          </Typography>
+          {subtitle && (
+            <>
+              <Typography variant="body2">•</Typography>
+              {typeof subtitle === 'string' ? (
+                <Typography variant="body2">subtitle</Typography>
+              ) : (
                 subtitle
-              </Typography>
-            ) : (
-              subtitle
-            )}
-          </>
-        )}
-      </Container>
+              )}
+            </>
+          )}
+        </Container>
+      )}
       {children}
     </SectionContainer>
   )
 }
 
-const SectionContainer = styled.section`
+const SectionContainer = styled.section<{
+  bordered?: boolean
+}>`
   width: 100%;
   box-sizing: border-box;
+  border-top: ${(props) =>
+    props.bordered ? '1px solid rgb(var(--lsd-border-primary))' : 'none'};
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+    margin-top: var(--lsd-spacing-16);
+  }
 `
 
 const Container = styled.div`
@@ -42,4 +60,14 @@ const Container = styled.div`
   align-items: center;
   gap: 8px;
   width: 100%;
+
+  padding: var(--lsd-spacing-24) 0;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
+    padding: var(--lsd-spacing-16) 0;
+
+    & > h2 {
+      ${lsdUtils.typography('subtitle3')}
+    }
+  }
 `

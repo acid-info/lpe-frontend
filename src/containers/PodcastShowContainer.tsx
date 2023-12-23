@@ -1,9 +1,9 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import EpisodesList from '@/components/Podcasts/Episodes.List'
-import PodcastSection from '@/components/Podcasts/Podcast.Section'
 import PodcastShowCard from '@/components/Podcasts/PodcastShowCard'
-import { Button, Typography } from '@acid-info/lsd-react'
+import { Button } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import { PodcastSection } from '../components/Podcasts/Podcast.Section'
+import { PostsGrid } from '../components/PostsGrid'
 import { useRecentEpisodes } from '../queries/useRecentEpisodes.query'
 import { ApiPaginatedPayload } from '../types/data.types'
 import { LPE } from '../types/lpe.types'
@@ -38,13 +38,10 @@ const PodcastShowContainer = (props: Props) => {
       <PodcastsGrid>
         <PodcastsBodyContainer>
           <CustomPodcastShowCard show={show} />
-          <PodcastSection>
-            <EpisodesList
+          <PodcastSection title="Latest episodes">
+            <PostsGrid
               shows={[show]}
-              displayShow={false}
-              episodes={highlightedPosts}
-              header={<Typography variant="body2">All episodes</Typography>}
-              bordered="except-first-row"
+              posts={highlightedPosts}
               pattern={[
                 {
                   cols: 2,
@@ -58,39 +55,32 @@ const PodcastShowContainer = (props: Props) => {
                     {
                       cols: 1,
                       size: 'small',
-                      rowBorder: 'except-first-row',
                     },
                   ],
                 },
               ]}
             />
+            <PostsGrid
+              shows={[show]}
+              posts={latestPosts}
+              pattern={[
+                {
+                  cols: 4,
+                  size: 'small',
+                },
+              ]}
+              breakpoints={[
+                {
+                  breakpoint: 'xs',
+                  pattern: [{ cols: 1, size: 'small' }],
+                },
+                {
+                  breakpoint: 'sm',
+                  pattern: [{ cols: 4, size: 'small' }],
+                },
+              ]}
+            />
           </PodcastSection>
-          <EpisodesList
-            shows={[show]}
-            displayShow={false}
-            episodes={latestPosts}
-            bordered={highlightedPosts.length > 0 ? true : 'except-first-row'}
-            pattern={[
-              {
-                cols: 4,
-                size: 'small',
-              },
-            ]}
-            breakpoints={[
-              {
-                breakpoint: 'xs',
-                pattern: [{ cols: 1, size: 'small' }],
-              },
-              {
-                breakpoint: 'sm',
-                pattern: [{ cols: 4, size: 'xsmall' }],
-              },
-              {
-                breakpoint: 'md',
-                pattern: [{ cols: 4, size: 'xsmall' }],
-              },
-            ]}
-          />
         </PodcastsBodyContainer>
       </PodcastsGrid>
       {query.hasNextPage && (

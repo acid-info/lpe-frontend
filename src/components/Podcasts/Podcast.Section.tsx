@@ -1,14 +1,19 @@
 import styled from '@emotion/styled'
-import React from 'react'
+import { Section, SectionProps } from '../Section/Section'
 
-interface Props {
-  children: React.ReactNode
-}
+export type PodcastSectionProps = SectionProps
 
-export default function PodcastSection({ children, ...props }: Props) {
-  return <Section {...props}>{children}</Section>
-}
+export const PodcastSection: React.FC<PodcastSectionProps> = ({
+  children,
+  ...props
+}) => (
+  <Section {...props}>
+    <Container>{children}</Container>
+  </Section>
+)
 
-const Section = styled.div`
-  border-top: 1px solid rgb(var(--lsd-border-primary));
+const Container = styled.div`
+  & > *:not(:first-child) {
+    margin-top: var(--lsd-spacing-16);
+  }
 `

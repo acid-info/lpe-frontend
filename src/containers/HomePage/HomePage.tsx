@@ -1,8 +1,8 @@
-import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
+import { Section } from '../../components/Section/Section'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useRecentPosts } from '../../queries/useRecentPosts.query'
 import { ApiPaginatedPayload } from '../../types/data.types'
@@ -49,10 +49,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             },
           ]}
         />
-        <Section>
-          <Typography component="h2" variant="subtitle2">
-            Latest posts
-          </Typography>
+        <Section title="Latest posts">
           <PostsGrid
             pattern={[{ cols: 4, size: 'small' }]}
             breakpoints={[
@@ -136,23 +133,6 @@ const Root = styled('div')`
 
   .podcasts {
     margin-top: 40px;
-  }
-`
-
-const Section = styled.div`
-  border-top: 1px solid rgb(var(--lsd-border-primary));
-
-  & > h2 {
-    padding: var(--lsd-spacing-24) 0;
-  }
-
-  ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
-    margin-top: var(--lsd-spacing-16);
-
-    & > h2 {
-      padding: var(--lsd-spacing-16) 0;
-      ${lsdUtils.typography('subtitle3')}
-    }
   }
 `
 
