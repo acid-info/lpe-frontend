@@ -11,6 +11,7 @@ import useWindowSize from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useMemo } from 'react'
+import { Section } from '../../components/Section/Section'
 
 interface Props {
   posts: LPE.Search.ResultItemBase<LPE.Post.Document>[]
@@ -106,10 +107,7 @@ export const SearchResultsListView = (props: Props) => {
     <Container xs={{ cols: 8 }} md={{ cols: 12 }} lg={{ cols: 16 }} cols={16}>
       <PostsList xs={{ cols: 8 }} md={{ cols: 8 }} lg={{ cols: 11 }}>
         {topPost && (
-          <PostsListHeader>
-            <SearchResultsListHeader
-              title={copyConfigs.search.labels.topResults}
-            />
+          <Section title={copyConfigs.search.labels.topResults}>
             <SearchResultTopPost
               post={topPost}
               shows={shows}
@@ -120,15 +118,14 @@ export const SearchResultsListView = (props: Props) => {
                 textBlocksInTopResult as LPE.Article.TextBlock[]
               }
             />
-          </PostsListHeader>
+          </Section>
         )}
         <PostsListContent>
           {renderPosts.length > 0 ? (
             <>
-              <SearchResultsListHeader
-                title={copyConfigs.search.labels.articlesAndPodcasts}
-              />
-              <SearchResultListPosts posts={renderPosts} shows={shows} />
+              <Section title={copyConfigs.search.labels.articlesAndPodcasts}>
+                <SearchResultListPosts posts={renderPosts} shows={shows} />
+              </Section>
             </>
           ) : (
             !busy &&
@@ -164,16 +161,13 @@ const Container = styled(Grid)`
 `
 
 const PostsList = styled(GridItem)`
-  display: flex;
+  display: flex !important;
   flex-direction: column;
-  gap: 56px;
+  gap: 80px;
 
   ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
-    gap: 32px;
+    gap: 64px;
   }
-`
-const PostsListHeader = styled.div`
-  margin-bottom: 56px;
 `
 const PostsListContent = styled.div``
 

@@ -71,13 +71,15 @@ export const PostCard = (_props: PostCardProps) => {
     postSlug: slug,
   })
 
-  const coverImageElement = coverImage && (
+  const coverImageElement = coverImage ? (
     <PostCardCover
       href={link}
       imageProps={imageProps}
       imageData={coverImage}
       playIcon={contentType === LPE.PostTypes.Podcast}
     />
+  ) : (
+    <div className="post-card__cover-image"></div>
   )
 
   const authorsElement = authors && authors.length > 0 && (
@@ -330,10 +332,95 @@ PostCard.styles = {
       ${PostCardShowDetails.styles.large(theme)}
     }
 
+    &:not(.post-card--with-image) {
+    }
+
     &.post-card__search-explore {
     }
 
     &.post-card__search-result {
+      padding: 0;
+      gap: 0 var(--lsd-spacing-96);
+      grid-template-columns: 7fr 3fr;
+
+      .post-card__title-text {
+        ${lsdUtils.typography('h4')}
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        max-height: calc(3 * var(--lsd-h4-lineHeight));
+      }
+
+      .post-card__label {
+        margin-top: var(--lsd-spacing-8);
+
+        * {
+          ${lsdUtils.typography('subtitle4')}
+        }
+      }
+
+      .post-card__subtitle {
+        margin-top: var(--lsd-spacing-16);
+      }
+
+      .post-card__show-details {
+        ${PostCardShowDetails.styles.small(theme)}
+
+        margin-top: var(--lsd-spacing-16);
+      }
+
+      ${lsdUtils.breakpoint(theme, 'xs', 'exact')} {
+        gap: 0 var(--lsd-spacing-24);
+        grid-template-areas: unset;
+        grid-template-columns: 1fr 94px;
+        grid-template-rows: auto auto auto;
+
+        & > * {
+          grid-area: unset;
+          grid-column: span 2;
+        }
+
+        .post-card__title {
+          grid-area: unset;
+          grid-row: auto;
+        }
+
+        .post-card__title-text {
+          ${lsdUtils.typography('subtitle1')}
+
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          max-height: calc(2 * var(--lsd-subtitle1-lineHeight));
+        }
+
+        .post-card__subtitle {
+          ${lsdUtils.typography('subtitle4')}
+        }
+
+        .post-card__cover-image {
+          grid-area: unset;
+          grid-column: 2 / 3;
+          grid-row: 1 / 2;
+
+          & > div {
+            padding-top: calc(9 / 16 * 94px) !important;
+
+            & > div {
+              width: 94px;
+              height: 100%;
+            }
+
+            & > div > img {
+              width: 100% !important;
+              height: 100% !important;
+              object-fit: cover;
+              object-position: center center;
+            }
+          }
+        }
+      }
     }
   `,
 }

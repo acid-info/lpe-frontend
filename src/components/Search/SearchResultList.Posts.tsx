@@ -31,4 +31,5 @@ export const SearchResultListPosts = ({ posts, shows }: Props) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  gap: var(--lsd-spacing-40);
 `
