@@ -9533,6 +9533,14 @@ export type GetAllTopicsQuery = {
         __typename?: 'AggregateGoogleDocGroupedByObj'
         value: string
       }
+      tags: {
+        __typename?: 'AggregateGoogleDoctagsObj'
+        topOccurrences: Array<{
+          __typename?: 'AggregateGoogleDoctagsTopOccurrencesObj'
+          value: string
+          occurs: number
+        }>
+      }
     }>
   }
 }
@@ -11248,6 +11256,32 @@ export const GetAllTopicsDocument = {
                             {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'value' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'tags' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'topOccurrences' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'value' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'occurs' },
+                                  },
+                                ],
+                              },
                             },
                           ],
                         },

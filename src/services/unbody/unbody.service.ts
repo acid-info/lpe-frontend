@@ -98,6 +98,7 @@ type Data = {
   episodes: LPE.Podcast.Document[]
   draftEpisodes: LPE.Podcast.Document[]
   highlightedEpisodes: LPE.Podcast.Document[]
+  publishedPosts: LPE.Post.Document[]
   staticPages: LPE.StaticPage.Document[]
   draftStaticPages: LPE.StaticPage.Document[]
   allRecords: PageRecord[]
@@ -119,6 +120,7 @@ export class UnbodyService {
     allRecords: [],
     draftArticles: [],
     draftEpisodes: [],
+    publishedPosts: [],
     draftStaticPages: [],
     highlightedArticles: [],
     highlightedEpisodes: [],
@@ -206,6 +208,7 @@ export class UnbodyService {
         allRecords: [],
         draftArticles: [],
         draftEpisodes: [],
+        publishedPosts: [],
         draftStaticPages: [],
         highlightedArticles: [],
         highlightedEpisodes: [],
@@ -229,6 +232,11 @@ export class UnbodyService {
       }
 
       newData.posts = [...newData.articles, ...newData.episodes].sort(sortPosts)
+      newData.publishedPosts = [
+        ...newData.posts,
+        ...newData.highlightedArticles,
+        ...newData.highlightedEpisodes,
+      ].sort(sortPosts)
       newData.allRecords = [...articles, ...episodes, ...staticPages]
 
       const oldData = { ...this.data }
@@ -1171,13 +1179,13 @@ export class UnbodyService {
     this.handleRequest<ApiPaginatedPayload<LPE.Post.Document[]>>(
       async () => {
         await this.fetchData()
-        const { posts } = this.data
+        const { publishedPosts } = this.data
 
-        const data = posts.slice(skip, skip + limit)
+        const data = publishedPosts.slice(skip, skip + limit)
 
         return {
           data,
-          hasMore: posts.length > skip + limit,
+          hasMore: publishedPosts.length > skip + limit,
         }
       },
       {
@@ -1596,7 +1604,13 @@ export class UnbodyService {
         },
       })
 
-      const topics = data.Aggregate.GoogleDoc.map((doc) => doc.groupedBy.value)
+      const topics = data.Aggregate.GoogleDoc.map((doc) => ({
+        value: doc.groupedBy.value,
+        count:
+          (doc.tags.topOccurrences || []).find(
+            (t) => t.value === doc.groupedBy.value,
+          )?.occurs ?? 1,
+      }))
 
       return topics
     }, [])
@@ -1753,7 +1767,7 @@ unbodyApi.onChange(async (oldData, data, changes, firstLoad) => {
         },
       ]),
     )
-    topics.forEach((topic) => feed.addCategory(formatTagText(topic)))
+    topics.forEach((topic) => feed.addCategory(formatTagText(topic.value)))
 
     feed.addCategory(articleCategory.name)
     Object.values(showCategories).forEach((cat) => feed.addCategory(cat.name))

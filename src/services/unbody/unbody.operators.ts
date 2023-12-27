@@ -111,6 +111,12 @@ export const GET_ALL_TOPICS_QUERY = gql`
         groupedBy {
           value
         }
+        tags {
+          topOccurrences {
+            value
+            occurs
+          }
+        }
       }
     }
   }

@@ -126,7 +126,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      topics,
+      topics: topics.map((topic) => topic.value),
       shows,
     },
     revalidate: 10,

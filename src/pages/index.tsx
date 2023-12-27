@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
   const { data: highlighted } = await unbodyApi.getHighlightedPosts()
   const { data: latest } = await unbodyApi.getRecentPosts({
     skip: 0,
-    limit: 15,
+    limit: 12,
   })
 
   const { data: _shows = [] } = await unbodyApi.getPodcastShows({

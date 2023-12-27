@@ -24,6 +24,13 @@ export namespace LPE {
     }
   }
 
+  export namespace Tag {
+    export type Document = {
+      value: string
+      count: number
+    }
+  }
+
   export namespace Post {
     export type Footnote = {
       index: number

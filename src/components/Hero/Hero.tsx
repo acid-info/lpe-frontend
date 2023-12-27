@@ -7,11 +7,9 @@ import { uiConfigs } from '../../configs/ui.configs'
 import { useNavbarState } from '../../states/navbarState'
 import { lsdUtils } from '../../utils/lsd.utils'
 
-export type HeroProps = Partial<React.ComponentProps<typeof Container>> & {
-  tags?: string[]
-}
+export type HeroProps = Partial<React.ComponentProps<typeof Container>> & {}
 
-export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {
+export const Hero: React.FC<HeroProps> = ({ ...props }) => {
   const ref = useRef<HTMLElement>(null)
   const scroll = useWindowScroll()
   const navbarState = useNavbarState()
