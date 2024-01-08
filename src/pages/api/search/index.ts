@@ -63,7 +63,7 @@ export default async function handler(
   if (postTypes.length > 0) {
     const response = await unbodyApi.searchPosts({
       tags,
-      query: Array.isArray(q) ? q.join(' ') : q,
+      query: Array.isArray(q) ? q.join(' ').trim() : q.trim(),
 
       type: postTypes as LPE.PostType[],
 

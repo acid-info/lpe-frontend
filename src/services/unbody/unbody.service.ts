@@ -17,7 +17,7 @@ import {
   GetPostsDocument,
   GetPostsQueryVariables,
   SearchBlocksDocument,
-  Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj,
+  Txt2VecC11yGetObjectsTextBlockNearTextInpObj,
 } from '../../lib/unbody/unbody.generated'
 import { getWebhookData } from '../../pages/api/webhook'
 import {
@@ -1228,7 +1228,7 @@ export class UnbodyService {
         ({
           concepts: [q, ...tags],
           certainty: 0.75,
-        } as Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj)
+        } as Txt2VecC11yGetObjectsTextBlockNearTextInpObj)
 
       const filter = {
         operator: 'And',
@@ -1345,10 +1345,14 @@ export class UnbodyService {
         skip,
         limit,
         filter,
-        hybrid: {
-          query: query || '',
-          alpha: 0.75,
-        },
+        ...(query && query.length > 0
+          ? {
+              hybrid: {
+                query,
+                alpha: 0.75,
+              },
+            }
+          : {}),
       })
 
       const { data: shows } = await this.getPodcastShows({
@@ -1415,7 +1419,7 @@ export class UnbodyService {
         ({
           concepts: [query],
           certainty,
-        } as Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj)
+        } as Txt2VecC11yGetObjectsTextBlockNearTextInpObj)
 
       const filter = {
         operator: 'And',

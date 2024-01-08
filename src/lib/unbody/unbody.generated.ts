@@ -35,7 +35,15 @@ export type Scalars = {
   /** Boolean or Boolean[] */
   BooleanAggregateObjectsImageBlock: { input: any; output: any }
   /** Boolean or Boolean[] */
+  BooleanAggregateObjectsSubtitleEntry: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsSubtitleFile: { input: any; output: any }
+  /** Boolean or Boolean[] */
   BooleanAggregateObjectsTextBlock: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsTextDocument: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanAggregateObjectsVideoFile: { input: any; output: any }
   /** Boolean or Boolean[] */
   BooleanGetObjectsAudioFile: { input: any; output: any }
   /** Boolean or Boolean[] */
@@ -45,7 +53,15 @@ export type Scalars = {
   /** Boolean or Boolean[] */
   BooleanGetObjectsImageBlock: { input: any; output: any }
   /** Boolean or Boolean[] */
+  BooleanGetObjectsSubtitleEntry: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsSubtitleFile: { input: any; output: any }
+  /** Boolean or Boolean[] */
   BooleanGetObjectsTextBlock: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsTextDocument: { input: any; output: any }
+  /** Boolean or Boolean[] */
+  BooleanGetObjectsVideoFile: { input: any; output: any }
   /** Float or Float[] */
   FloatAggregateObjectsAudioFile: { input: any; output: any }
   /** Float or Float[] */
@@ -55,7 +71,15 @@ export type Scalars = {
   /** Float or Float[] */
   FloatAggregateObjectsImageBlock: { input: any; output: any }
   /** Float or Float[] */
+  FloatAggregateObjectsSubtitleEntry: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsSubtitleFile: { input: any; output: any }
+  /** Float or Float[] */
   FloatAggregateObjectsTextBlock: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsTextDocument: { input: any; output: any }
+  /** Float or Float[] */
+  FloatAggregateObjectsVideoFile: { input: any; output: any }
   /** Float or Float[] */
   FloatGetObjectsAudioFile: { input: any; output: any }
   /** Float or Float[] */
@@ -65,7 +89,15 @@ export type Scalars = {
   /** Float or Float[] */
   FloatGetObjectsImageBlock: { input: any; output: any }
   /** Float or Float[] */
+  FloatGetObjectsSubtitleEntry: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsSubtitleFile: { input: any; output: any }
+  /** Float or Float[] */
   FloatGetObjectsTextBlock: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsTextDocument: { input: any; output: any }
+  /** Float or Float[] */
+  FloatGetObjectsVideoFile: { input: any; output: any }
   /** Int or Int[] */
   IntAggregateObjectsAudioFile: { input: any; output: any }
   /** Int or Int[] */
@@ -75,7 +107,15 @@ export type Scalars = {
   /** Int or Int[] */
   IntAggregateObjectsImageBlock: { input: any; output: any }
   /** Int or Int[] */
+  IntAggregateObjectsSubtitleEntry: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsSubtitleFile: { input: any; output: any }
+  /** Int or Int[] */
   IntAggregateObjectsTextBlock: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsTextDocument: { input: any; output: any }
+  /** Int or Int[] */
+  IntAggregateObjectsVideoFile: { input: any; output: any }
   /** Int or Int[] */
   IntGetObjectsAudioFile: { input: any; output: any }
   /** Int or Int[] */
@@ -85,7 +125,15 @@ export type Scalars = {
   /** Int or Int[] */
   IntGetObjectsImageBlock: { input: any; output: any }
   /** Int or Int[] */
+  IntGetObjectsSubtitleEntry: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsSubtitleFile: { input: any; output: any }
+  /** Int or Int[] */
   IntGetObjectsTextBlock: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsTextDocument: { input: any; output: any }
+  /** Int or Int[] */
+  IntGetObjectsVideoFile: { input: any; output: any }
   /** String or String[] */
   TextAggregateObjectsAudioFile: { input: any; output: any }
   /** String or String[] */
@@ -95,7 +143,15 @@ export type Scalars = {
   /** String or String[] */
   TextAggregateObjectsImageBlock: { input: any; output: any }
   /** String or String[] */
+  TextAggregateObjectsSubtitleEntry: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsSubtitleFile: { input: any; output: any }
+  /** String or String[] */
   TextAggregateObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsTextDocument: { input: any; output: any }
+  /** String or String[] */
+  TextAggregateObjectsVideoFile: { input: any; output: any }
   /** String or String[] */
   TextDateAggregateObjectsAudioFile: { input: any; output: any }
   /** String or String[] */
@@ -105,7 +161,15 @@ export type Scalars = {
   /** String or String[] */
   TextDateAggregateObjectsImageBlock: { input: any; output: any }
   /** String or String[] */
+  TextDateAggregateObjectsSubtitleEntry: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsSubtitleFile: { input: any; output: any }
+  /** String or String[] */
   TextDateAggregateObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsTextDocument: { input: any; output: any }
+  /** String or String[] */
+  TextDateAggregateObjectsVideoFile: { input: any; output: any }
   /** String or String[] */
   TextDateGetObjectsAudioFile: { input: any; output: any }
   /** String or String[] */
@@ -115,7 +179,15 @@ export type Scalars = {
   /** String or String[] */
   TextDateGetObjectsImageBlock: { input: any; output: any }
   /** String or String[] */
+  TextDateGetObjectsSubtitleEntry: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsSubtitleFile: { input: any; output: any }
+  /** String or String[] */
   TextDateGetObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsTextDocument: { input: any; output: any }
+  /** String or String[] */
+  TextDateGetObjectsVideoFile: { input: any; output: any }
   /** String or String[] */
   TextGetObjectsAudioFile: { input: any; output: any }
   /** String or String[] */
@@ -125,7 +197,15 @@ export type Scalars = {
   /** String or String[] */
   TextGetObjectsImageBlock: { input: any; output: any }
   /** String or String[] */
+  TextGetObjectsSubtitleEntry: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsSubtitleFile: { input: any; output: any }
+  /** String or String[] */
   TextGetObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsTextDocument: { input: any; output: any }
+  /** String or String[] */
+  TextGetObjectsVideoFile: { input: any; output: any }
   /** String or String[] */
   TextStringAggregateObjectsAudioFile: { input: any; output: any }
   /** String or String[] */
@@ -135,7 +215,15 @@ export type Scalars = {
   /** String or String[] */
   TextStringAggregateObjectsImageBlock: { input: any; output: any }
   /** String or String[] */
+  TextStringAggregateObjectsSubtitleEntry: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsSubtitleFile: { input: any; output: any }
+  /** String or String[] */
   TextStringAggregateObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsTextDocument: { input: any; output: any }
+  /** String or String[] */
+  TextStringAggregateObjectsVideoFile: { input: any; output: any }
   /** String or String[] */
   TextStringGetObjectsAudioFile: { input: any; output: any }
   /** String or String[] */
@@ -145,11 +233,23 @@ export type Scalars = {
   /** String or String[] */
   TextStringGetObjectsImageBlock: { input: any; output: any }
   /** String or String[] */
+  TextStringGetObjectsSubtitleEntry: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsSubtitleFile: { input: any; output: any }
+  /** String or String[] */
   TextStringGetObjectsTextBlock: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsTextDocument: { input: any; output: any }
+  /** String or String[] */
+  TextStringGetObjectsVideoFile: { input: any; output: any }
 }
 
 export type AggregateAudioFile = {
   __typename?: 'AggregateAudioFile'
+  /** Aggregate this property"assetId" */
+  assetId: Maybe<AggregateAudioFileassetIdObj>
+  /** Aggregate this property"blob" */
+  blob: Maybe<AggregateAudioFileblobObj>
   /** Aggregate this property"document" */
   document: Maybe<AggregateAudioFiledocumentObj>
   /** Aggregate this property"duration" */
@@ -158,6 +258,8 @@ export type AggregateAudioFile = {
   ext: Maybe<AggregateAudioFileextObj>
   /** Indicates the group of returned data */
   groupedBy: Maybe<AggregateAudioFileGroupedByObj>
+  /** Aggregate this property"hlsUrl" */
+  hlsUrl: Maybe<AggregateAudioFilehlsUrlObj>
   /** An object used to Get Meta information about Objects on a local Weaviate */
   meta: Maybe<AggregateAudioFileMetaObject>
   /** Aggregate this property"mimeType" */
@@ -166,12 +268,20 @@ export type AggregateAudioFile = {
   order: Maybe<AggregateAudioFileorderObj>
   /** Aggregate this property"originalName" */
   originalName: Maybe<AggregateAudioFileoriginalNameObj>
+  /** Aggregate this property"path" */
+  path: Maybe<AggregateAudioFilepathObj>
+  /** Aggregate this property"pathString" */
+  pathString: Maybe<AggregateAudioFilepathStringObj>
+  /** Aggregate this property"playbackId" */
+  playbackId: Maybe<AggregateAudioFileplaybackIdObj>
   /** Aggregate this property"remoteId" */
   remoteId: Maybe<AggregateAudioFileremoteIdObj>
   /** Aggregate this property"size" */
   size: Maybe<AggregateAudioFilesizeObj>
   /** Aggregate this property"sourceId" */
   sourceId: Maybe<AggregateAudioFilesourceIdObj>
+  /** Aggregate this property"subtitles" */
+  subtitles: Maybe<AggregateAudioFilesubtitlesObj>
   /** Aggregate this property"url" */
   url: Maybe<AggregateAudioFileurlObj>
 }
@@ -188,6 +298,58 @@ export type AggregateAudioFileGroupedByObj = {
 export type AggregateAudioFileMetaObject = {
   __typename?: 'AggregateAudioFileMetaObject'
   count: Maybe<Scalars['Int']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFileassetIdObj = {
+  __typename?: 'AggregateAudioFileassetIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateAudioFileassetIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFileassetIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateAudioFileassetIdTopOccurrencesObj = {
+  __typename?: 'AggregateAudioFileassetIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFileblobObj = {
+  __typename?: 'AggregateAudioFileblobObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateAudioFileblobTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFileblobObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateAudioFileblobTopOccurrencesObj = {
+  __typename?: 'AggregateAudioFileblobTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
 }
 
 /** An object containing Aggregation information about this property */
@@ -242,6 +404,31 @@ export type AggregateAudioFileextObjTopOccurrencesArgs = {
 /** An object containing data about the most frequently occurring values for this property */
 export type AggregateAudioFileextTopOccurrencesObj = {
   __typename?: 'AggregateAudioFileextTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFilehlsUrlObj = {
+  __typename?: 'AggregateAudioFilehlsUrlObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateAudioFilehlsUrlTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFilehlsUrlObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateAudioFilehlsUrlTopOccurrencesObj = {
+  __typename?: 'AggregateAudioFilehlsUrlTopOccurrencesObj'
   /** How often the most frequently occurring value for this property occurs */
   occurs: Maybe<Scalars['Int']['output']>
   /** The most frequently occurring value for this property */
@@ -324,6 +511,85 @@ export type AggregateAudioFileoriginalNameTopOccurrencesObj = {
 }
 
 /** An object containing Aggregation information about this property */
+export type AggregateAudioFilepathObj = {
+  __typename?: 'AggregateAudioFilepathObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateAudioFilepathTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFilepathObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFilepathStringObj = {
+  __typename?: 'AggregateAudioFilepathStringObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateAudioFilepathStringTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFilepathStringObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateAudioFilepathStringTopOccurrencesObj = {
+  __typename?: 'AggregateAudioFilepathStringTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateAudioFilepathTopOccurrencesObj = {
+  __typename?: 'AggregateAudioFilepathTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFileplaybackIdObj = {
+  __typename?: 'AggregateAudioFileplaybackIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateAudioFileplaybackIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFileplaybackIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateAudioFileplaybackIdTopOccurrencesObj = {
+  __typename?: 'AggregateAudioFileplaybackIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
 export type AggregateAudioFileremoteIdObj = {
   __typename?: 'AggregateAudioFileremoteIdObj'
   /** The total amount of found instances for this property */
@@ -396,6 +662,18 @@ export type AggregateAudioFilesourceIdTopOccurrencesObj = {
   occurs: Maybe<Scalars['Int']['output']>
   /** The most frequently occurring value for this property */
   value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateAudioFilesubtitlesObj = {
+  __typename?: 'AggregateAudioFilesubtitlesObj'
+  /**
+   * The classes that this object contains a reference to
+   * @deprecated Experimental, the format will change
+   */
+  pointingTo: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The datatype of this property */
+  type: Maybe<Scalars['String']['output']>
 }
 
 /** An object containing Aggregation information about this property */
@@ -1577,6 +1855,8 @@ export type AggregateImageBlock = {
   __typename?: 'AggregateImageBlock'
   /** Aggregate this property"alt" */
   alt: Maybe<AggregateImageBlockaltObj>
+  /** Aggregate this property"blob" */
+  blob: Maybe<AggregateImageBlockblobObj>
   /** Aggregate this property"createdAt" */
   createdAt: Maybe<AggregateImageBlockcreatedAtObj>
   /** Aggregate this property"document" */
@@ -1648,6 +1928,31 @@ export type AggregateImageBlockaltObjTopOccurrencesArgs = {
 /** An object containing data about the most frequently occurring values for this property */
 export type AggregateImageBlockaltTopOccurrencesObj = {
   __typename?: 'AggregateImageBlockaltTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateImageBlockblobObj = {
+  __typename?: 'AggregateImageBlockblobObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateImageBlockblobTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateImageBlockblobObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateImageBlockblobTopOccurrencesObj = {
+  __typename?: 'AggregateImageBlockblobTopOccurrencesObj'
   /** How often the most frequently occurring value for this property occurs */
   occurs: Maybe<Scalars['Int']['output']>
   /** The most frequently occurring value for this property */
@@ -2543,17 +2848,20 @@ export type AggregateObjectsObj = {
   GoogleCalendarEvent: Maybe<Array<Maybe<AggregateGoogleCalendarEvent>>>
   GoogleDoc: Maybe<Array<Maybe<AggregateGoogleDoc>>>
   ImageBlock: Maybe<Array<Maybe<AggregateImageBlock>>>
+  SubtitleEntry: Maybe<Array<Maybe<AggregateSubtitleEntry>>>
+  SubtitleFile: Maybe<Array<Maybe<AggregateSubtitleFile>>>
   TextBlock: Maybe<Array<Maybe<AggregateTextBlock>>>
+  TextDocument: Maybe<Array<Maybe<AggregateTextDocument>>>
+  VideoFile: Maybe<Array<Maybe<AggregateVideoFile>>>
 }
 
 /** An object allowing Aggregation of %ss on a local Weaviate */
 export type AggregateObjectsObjAudioFileArgs = {
-  ask?: InputMaybe<QnATransformersAggregateAudioFileAskInpObj>
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   hybrid?: InputMaybe<AggregateObjectsAudioFileHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<AggregateObjectsAudioFileNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiAggregateAudioFileNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateAudioFileNearTextInpObj>
   nearVector?: InputMaybe<AggregateObjectsAudioFileNearVectorInpObj>
   objectLimit?: InputMaybe<Scalars['Int']['input']>
   where?: InputMaybe<AggregateObjectsAudioFileWhereInpObj>
@@ -2561,12 +2869,11 @@ export type AggregateObjectsObjAudioFileArgs = {
 
 /** An object allowing Aggregation of %ss on a local Weaviate */
 export type AggregateObjectsObjGoogleCalendarEventArgs = {
-  ask?: InputMaybe<QnATransformersAggregateGoogleCalendarEventAskInpObj>
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   hybrid?: InputMaybe<AggregateObjectsGoogleCalendarEventHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<AggregateObjectsGoogleCalendarEventNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiAggregateGoogleCalendarEventNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateGoogleCalendarEventNearTextInpObj>
   nearVector?: InputMaybe<AggregateObjectsGoogleCalendarEventNearVectorInpObj>
   objectLimit?: InputMaybe<Scalars['Int']['input']>
   where?: InputMaybe<AggregateObjectsGoogleCalendarEventWhereInpObj>
@@ -2574,12 +2881,11 @@ export type AggregateObjectsObjGoogleCalendarEventArgs = {
 
 /** An object allowing Aggregation of %ss on a local Weaviate */
 export type AggregateObjectsObjGoogleDocArgs = {
-  ask?: InputMaybe<QnATransformersAggregateGoogleDocAskInpObj>
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   hybrid?: InputMaybe<AggregateObjectsGoogleDocHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<AggregateObjectsGoogleDocNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiAggregateGoogleDocNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateGoogleDocNearTextInpObj>
   nearVector?: InputMaybe<AggregateObjectsGoogleDocNearVectorInpObj>
   objectLimit?: InputMaybe<Scalars['Int']['input']>
   where?: InputMaybe<AggregateObjectsGoogleDocWhereInpObj>
@@ -2587,29 +2893,343 @@ export type AggregateObjectsObjGoogleDocArgs = {
 
 /** An object allowing Aggregation of %ss on a local Weaviate */
 export type AggregateObjectsObjImageBlockArgs = {
-  ask?: InputMaybe<QnATransformersAggregateImageBlockAskInpObj>
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   hybrid?: InputMaybe<AggregateObjectsImageBlockHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<AggregateObjectsImageBlockNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiAggregateImageBlockNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateImageBlockNearTextInpObj>
   nearVector?: InputMaybe<AggregateObjectsImageBlockNearVectorInpObj>
   objectLimit?: InputMaybe<Scalars['Int']['input']>
   where?: InputMaybe<AggregateObjectsImageBlockWhereInpObj>
 }
 
 /** An object allowing Aggregation of %ss on a local Weaviate */
+export type AggregateObjectsObjSubtitleEntryArgs = {
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  hybrid?: InputMaybe<AggregateObjectsSubtitleEntryHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<AggregateObjectsSubtitleEntryNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateSubtitleEntryNearTextInpObj>
+  nearVector?: InputMaybe<AggregateObjectsSubtitleEntryNearVectorInpObj>
+  objectLimit?: InputMaybe<Scalars['Int']['input']>
+  where?: InputMaybe<AggregateObjectsSubtitleEntryWhereInpObj>
+}
+
+/** An object allowing Aggregation of %ss on a local Weaviate */
+export type AggregateObjectsObjSubtitleFileArgs = {
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  hybrid?: InputMaybe<AggregateObjectsSubtitleFileHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<AggregateObjectsSubtitleFileNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateSubtitleFileNearTextInpObj>
+  nearVector?: InputMaybe<AggregateObjectsSubtitleFileNearVectorInpObj>
+  objectLimit?: InputMaybe<Scalars['Int']['input']>
+  where?: InputMaybe<AggregateObjectsSubtitleFileWhereInpObj>
+}
+
+/** An object allowing Aggregation of %ss on a local Weaviate */
 export type AggregateObjectsObjTextBlockArgs = {
-  ask?: InputMaybe<QnATransformersAggregateTextBlockAskInpObj>
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   hybrid?: InputMaybe<AggregateObjectsTextBlockHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<AggregateObjectsTextBlockNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiAggregateTextBlockNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateTextBlockNearTextInpObj>
   nearVector?: InputMaybe<AggregateObjectsTextBlockNearVectorInpObj>
   objectLimit?: InputMaybe<Scalars['Int']['input']>
   where?: InputMaybe<AggregateObjectsTextBlockWhereInpObj>
 }
+
+/** An object allowing Aggregation of %ss on a local Weaviate */
+export type AggregateObjectsObjTextDocumentArgs = {
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  hybrid?: InputMaybe<AggregateObjectsTextDocumentHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<AggregateObjectsTextDocumentNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateTextDocumentNearTextInpObj>
+  nearVector?: InputMaybe<AggregateObjectsTextDocumentNearVectorInpObj>
+  objectLimit?: InputMaybe<Scalars['Int']['input']>
+  where?: InputMaybe<AggregateObjectsTextDocumentWhereInpObj>
+}
+
+/** An object allowing Aggregation of %ss on a local Weaviate */
+export type AggregateObjectsObjVideoFileArgs = {
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  hybrid?: InputMaybe<AggregateObjectsVideoFileHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<AggregateObjectsVideoFileNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yAggregateVideoFileNearTextInpObj>
+  nearVector?: InputMaybe<AggregateObjectsVideoFileNearVectorInpObj>
+  objectLimit?: InputMaybe<Scalars['Int']['input']>
+  where?: InputMaybe<AggregateObjectsVideoFileWhereInpObj>
+}
+
+/** Hybrid search */
+export type AggregateObjectsSubtitleEntryHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type AggregateObjectsSubtitleEntryNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type AggregateObjectsSubtitleEntryNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+export type AggregateObjectsSubtitleEntryWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type AggregateObjectsSubtitleEntryWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type AggregateObjectsSubtitleEntryWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: AggregateObjectsSubtitleEntryWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: AggregateObjectsSubtitleEntryWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type AggregateObjectsSubtitleEntryWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsSubtitleEntryWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsSubtitleEntryWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsSubtitleEntryWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsSubtitleEntry']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsSubtitleEntry']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type AggregateObjectsSubtitleEntryWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsSubtitleEntryWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsSubtitleEntryWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsSubtitleEntryWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsSubtitleEntry']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsSubtitleEntry']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsSubtitleEntry']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type AggregateObjectsSubtitleEntryWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
+
+/** Hybrid search */
+export type AggregateObjectsSubtitleFileHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type AggregateObjectsSubtitleFileNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type AggregateObjectsSubtitleFileNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+export type AggregateObjectsSubtitleFileWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type AggregateObjectsSubtitleFileWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type AggregateObjectsSubtitleFileWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: AggregateObjectsSubtitleFileWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: AggregateObjectsSubtitleFileWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type AggregateObjectsSubtitleFileWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsSubtitleFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsSubtitleFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsSubtitleFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsSubtitleFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsSubtitleFile']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type AggregateObjectsSubtitleFileWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsSubtitleFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsSubtitleFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsSubtitleFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsSubtitleFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsSubtitleFile']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsSubtitleFile']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type AggregateObjectsSubtitleFileWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
 
 /** Hybrid search */
 export type AggregateObjectsTextBlockHybridInpObj = {
@@ -2736,6 +3356,855 @@ export type AggregateObjectsTextBlockWhereOperatorEnum =
   | 'NotEqual'
   | 'Or'
   | 'WithinGeoRange'
+
+/** Hybrid search */
+export type AggregateObjectsTextDocumentHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type AggregateObjectsTextDocumentNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type AggregateObjectsTextDocumentNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+export type AggregateObjectsTextDocumentWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type AggregateObjectsTextDocumentWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type AggregateObjectsTextDocumentWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: AggregateObjectsTextDocumentWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: AggregateObjectsTextDocumentWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type AggregateObjectsTextDocumentWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsTextDocumentWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsTextDocumentWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsTextDocument']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsTextDocument']['input']
+  >
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsTextDocumentWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsTextDocument']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsTextDocument']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsTextDocument']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsTextDocument']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type AggregateObjectsTextDocumentWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsTextDocumentWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsTextDocumentWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsTextDocument']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<
+    Scalars['TextDateAggregateObjectsTextDocument']['input']
+  >
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsTextDocumentWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsTextDocument']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<
+    Scalars['FloatAggregateObjectsTextDocument']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsTextDocument']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsTextDocument']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type AggregateObjectsTextDocumentWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
+
+/** Hybrid search */
+export type AggregateObjectsVideoFileHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type AggregateObjectsVideoFileNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type AggregateObjectsVideoFileNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+export type AggregateObjectsVideoFileWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type AggregateObjectsVideoFileWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type AggregateObjectsVideoFileWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: AggregateObjectsVideoFileWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: AggregateObjectsVideoFileWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type AggregateObjectsVideoFileWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsVideoFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsVideoFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsVideoFile']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsVideoFile']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsVideoFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsVideoFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsVideoFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsVideoFile']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsVideoFile']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type AggregateObjectsVideoFileWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<AggregateObjectsVideoFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<AggregateObjectsVideoFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<
+    Scalars['BooleanAggregateObjectsVideoFile']['input']
+  >
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateAggregateObjectsVideoFile']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<AggregateObjectsVideoFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntAggregateObjectsVideoFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatAggregateObjectsVideoFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringAggregateObjectsVideoFile']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextAggregateObjectsVideoFile']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type AggregateObjectsVideoFileWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
+
+export type AggregateSubtitleEntry = {
+  __typename?: 'AggregateSubtitleEntry'
+  /** Aggregate this property"document" */
+  document: Maybe<AggregateSubtitleEntrydocumentObj>
+  /** Aggregate this property"end" */
+  end: Maybe<AggregateSubtitleEntryendObj>
+  /** Indicates the group of returned data */
+  groupedBy: Maybe<AggregateSubtitleEntryGroupedByObj>
+  /** An object used to Get Meta information about Objects on a local Weaviate */
+  meta: Maybe<AggregateSubtitleEntryMetaObject>
+  /** Aggregate this property"order" */
+  order: Maybe<AggregateSubtitleEntryorderObj>
+  /** Aggregate this property"remoteId" */
+  remoteId: Maybe<AggregateSubtitleEntryremoteIdObj>
+  /** Aggregate this property"sourceId" */
+  sourceId: Maybe<AggregateSubtitleEntrysourceIdObj>
+  /** Aggregate this property"start" */
+  start: Maybe<AggregateSubtitleEntrystartObj>
+  /** Aggregate this property"text" */
+  text: Maybe<AggregateSubtitleEntrytextObj>
+}
+
+/** An object containing the path and value of the grouped property */
+export type AggregateSubtitleEntryGroupedByObj = {
+  __typename?: 'AggregateSubtitleEntryGroupedByObj'
+  /** The path of the grouped property */
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The value of the grouped property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type AggregateSubtitleEntryMetaObject = {
+  __typename?: 'AggregateSubtitleEntryMetaObject'
+  count: Maybe<Scalars['Int']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntrydocumentObj = {
+  __typename?: 'AggregateSubtitleEntrydocumentObj'
+  /**
+   * The classes that this object contains a reference to
+   * @deprecated Experimental, the format will change
+   */
+  pointingTo: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The datatype of this property */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntryendObj = {
+  __typename?: 'AggregateSubtitleEntryendObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleEntryendTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntryendObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleEntryendTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleEntryendTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntryorderObj = {
+  __typename?: 'AggregateSubtitleEntryorderObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mean of numeric property values */
+  mean: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the sum of numeric property values */
+  sum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntryremoteIdObj = {
+  __typename?: 'AggregateSubtitleEntryremoteIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleEntryremoteIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntryremoteIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleEntryremoteIdTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleEntryremoteIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntrysourceIdObj = {
+  __typename?: 'AggregateSubtitleEntrysourceIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleEntrysourceIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntrysourceIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleEntrysourceIdTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleEntrysourceIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntrystartObj = {
+  __typename?: 'AggregateSubtitleEntrystartObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleEntrystartTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntrystartObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleEntrystartTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleEntrystartTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntrytextObj = {
+  __typename?: 'AggregateSubtitleEntrytextObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleEntrytextTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleEntrytextObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleEntrytextTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleEntrytextTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type AggregateSubtitleFile = {
+  __typename?: 'AggregateSubtitleFile'
+  /** Aggregate this property"autogenerated" */
+  autogenerated: Maybe<AggregateSubtitleFileautogeneratedObj>
+  /** Aggregate this property"createdAt" */
+  createdAt: Maybe<AggregateSubtitleFilecreatedAtObj>
+  /** Aggregate this property"entries" */
+  entries: Maybe<AggregateSubtitleFileentriesObj>
+  /** Aggregate this property"format" */
+  format: Maybe<AggregateSubtitleFileformatObj>
+  /** Indicates the group of returned data */
+  groupedBy: Maybe<AggregateSubtitleFileGroupedByObj>
+  /** Aggregate this property"language" */
+  language: Maybe<AggregateSubtitleFilelanguageObj>
+  /** Aggregate this property"media" */
+  media: Maybe<AggregateSubtitleFilemediaObj>
+  /** An object used to Get Meta information about Objects on a local Weaviate */
+  meta: Maybe<AggregateSubtitleFileMetaObject>
+  /** Aggregate this property"mimeType" */
+  mimeType: Maybe<AggregateSubtitleFilemimeTypeObj>
+  /** Aggregate this property"modifiedAt" */
+  modifiedAt: Maybe<AggregateSubtitleFilemodifiedAtObj>
+  /** Aggregate this property"originalName" */
+  originalName: Maybe<AggregateSubtitleFileoriginalNameObj>
+  /** Aggregate this property"path" */
+  path: Maybe<AggregateSubtitleFilepathObj>
+  /** Aggregate this property"pathString" */
+  pathString: Maybe<AggregateSubtitleFilepathStringObj>
+  /** Aggregate this property"remoteId" */
+  remoteId: Maybe<AggregateSubtitleFileremoteIdObj>
+  /** Aggregate this property"size" */
+  size: Maybe<AggregateSubtitleFilesizeObj>
+  /** Aggregate this property"sourceId" */
+  sourceId: Maybe<AggregateSubtitleFilesourceIdObj>
+  /** Aggregate this property"url" */
+  url: Maybe<AggregateSubtitleFileurlObj>
+}
+
+/** An object containing the path and value of the grouped property */
+export type AggregateSubtitleFileGroupedByObj = {
+  __typename?: 'AggregateSubtitleFileGroupedByObj'
+  /** The path of the grouped property */
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The value of the grouped property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type AggregateSubtitleFileMetaObject = {
+  __typename?: 'AggregateSubtitleFileMetaObject'
+  count: Maybe<Scalars['Int']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileautogeneratedObj = {
+  __typename?: 'AggregateSubtitleFileautogeneratedObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** The percentage of false values for this boolean property in the dataset */
+  percentageFalse: Maybe<Scalars['Float']['output']>
+  /** The percentage of true values for this boolean property in the dataset */
+  percentageTrue: Maybe<Scalars['Float']['output']>
+  /** How often this boolean property's value is false in the dataset */
+  totalFalse: Maybe<Scalars['Int']['output']>
+  /** How often this boolean property's value is true in the dataset */
+  totalTrue: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilecreatedAtObj = {
+  __typename?: 'AggregateSubtitleFilecreatedAtObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['String']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileentriesObj = {
+  __typename?: 'AggregateSubtitleFileentriesObj'
+  /**
+   * The classes that this object contains a reference to
+   * @deprecated Experimental, the format will change
+   */
+  pointingTo: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The datatype of this property */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileformatObj = {
+  __typename?: 'AggregateSubtitleFileformatObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFileformatTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileformatObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFileformatTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFileformatTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilelanguageObj = {
+  __typename?: 'AggregateSubtitleFilelanguageObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFilelanguageTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilelanguageObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFilelanguageTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFilelanguageTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilemediaObj = {
+  __typename?: 'AggregateSubtitleFilemediaObj'
+  /**
+   * The classes that this object contains a reference to
+   * @deprecated Experimental, the format will change
+   */
+  pointingTo: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The datatype of this property */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilemimeTypeObj = {
+  __typename?: 'AggregateSubtitleFilemimeTypeObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFilemimeTypeTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilemimeTypeObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFilemimeTypeTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFilemimeTypeTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilemodifiedAtObj = {
+  __typename?: 'AggregateSubtitleFilemodifiedAtObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['String']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileoriginalNameObj = {
+  __typename?: 'AggregateSubtitleFileoriginalNameObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFileoriginalNameTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileoriginalNameObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFileoriginalNameTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFileoriginalNameTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilepathObj = {
+  __typename?: 'AggregateSubtitleFilepathObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFilepathTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilepathObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilepathStringObj = {
+  __typename?: 'AggregateSubtitleFilepathStringObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFilepathStringTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilepathStringObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFilepathStringTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFilepathStringTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFilepathTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFilepathTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileremoteIdObj = {
+  __typename?: 'AggregateSubtitleFileremoteIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFileremoteIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileremoteIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFileremoteIdTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFileremoteIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilesizeObj = {
+  __typename?: 'AggregateSubtitleFilesizeObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mean of numeric property values */
+  mean: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the sum of numeric property values */
+  sum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilesourceIdObj = {
+  __typename?: 'AggregateSubtitleFilesourceIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateSubtitleFilesourceIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFilesourceIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFilesourceIdTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFilesourceIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileurlObj = {
+  __typename?: 'AggregateSubtitleFileurlObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateSubtitleFileurlTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateSubtitleFileurlObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateSubtitleFileurlTopOccurrencesObj = {
+  __typename?: 'AggregateSubtitleFileurlTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
 
 export type AggregateTextBlock = {
   __typename?: 'AggregateTextBlock'
@@ -2995,24 +4464,1050 @@ export type AggregateTextBlocktextTopOccurrencesObj = {
   value: Maybe<Scalars['String']['output']>
 }
 
+export type AggregateTextDocument = {
+  __typename?: 'AggregateTextDocument'
+  /** Aggregate this property"authors" */
+  authors: Maybe<AggregateTextDocumentauthorsObj>
+  /** Aggregate this property"blocks" */
+  blocks: Maybe<AggregateTextDocumentblocksObj>
+  /** Aggregate this property"createdAt" */
+  createdAt: Maybe<AggregateTextDocumentcreatedAtObj>
+  /** Aggregate this property"description" */
+  description: Maybe<AggregateTextDocumentdescriptionObj>
+  /** Aggregate this property"ext" */
+  ext: Maybe<AggregateTextDocumentextObj>
+  /** Indicates the group of returned data */
+  groupedBy: Maybe<AggregateTextDocumentGroupedByObj>
+  /** Aggregate this property"html" */
+  html: Maybe<AggregateTextDocumenthtmlObj>
+  /** An object used to Get Meta information about Objects on a local Weaviate */
+  meta: Maybe<AggregateTextDocumentMetaObject>
+  /** Aggregate this property"mimeType" */
+  mimeType: Maybe<AggregateTextDocumentmimeTypeObj>
+  /** Aggregate this property"modifiedAt" */
+  modifiedAt: Maybe<AggregateTextDocumentmodifiedAtObj>
+  /** Aggregate this property"originalName" */
+  originalName: Maybe<AggregateTextDocumentoriginalNameObj>
+  /** Aggregate this property"path" */
+  path: Maybe<AggregateTextDocumentpathObj>
+  /** Aggregate this property"pathString" */
+  pathString: Maybe<AggregateTextDocumentpathStringObj>
+  /** Aggregate this property"properties" */
+  properties: Maybe<AggregateTextDocumentpropertiesObj>
+  /** Aggregate this property"remoteId" */
+  remoteId: Maybe<AggregateTextDocumentremoteIdObj>
+  /** Aggregate this property"sourceId" */
+  sourceId: Maybe<AggregateTextDocumentsourceIdObj>
+  /** Aggregate this property"subtitle" */
+  subtitle: Maybe<AggregateTextDocumentsubtitleObj>
+  /** Aggregate this property"tags" */
+  tags: Maybe<AggregateTextDocumenttagsObj>
+  /** Aggregate this property"text" */
+  text: Maybe<AggregateTextDocumenttextObj>
+  /** Aggregate this property"title" */
+  title: Maybe<AggregateTextDocumenttitleObj>
+  /** Aggregate this property"toc" */
+  toc: Maybe<AggregateTextDocumenttocObj>
+}
+
+/** An object containing the path and value of the grouped property */
+export type AggregateTextDocumentGroupedByObj = {
+  __typename?: 'AggregateTextDocumentGroupedByObj'
+  /** The path of the grouped property */
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The value of the grouped property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type AggregateTextDocumentMetaObject = {
+  __typename?: 'AggregateTextDocumentMetaObject'
+  count: Maybe<Scalars['Int']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentauthorsObj = {
+  __typename?: 'AggregateTextDocumentauthorsObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentauthorsTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentauthorsObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentauthorsTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentauthorsTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentblocksObj = {
+  __typename?: 'AggregateTextDocumentblocksObj'
+  /**
+   * The classes that this object contains a reference to
+   * @deprecated Experimental, the format will change
+   */
+  pointingTo: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The datatype of this property */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentcreatedAtObj = {
+  __typename?: 'AggregateTextDocumentcreatedAtObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['String']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentdescriptionObj = {
+  __typename?: 'AggregateTextDocumentdescriptionObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentdescriptionTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentdescriptionObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentdescriptionTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentdescriptionTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentextObj = {
+  __typename?: 'AggregateTextDocumentextObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateTextDocumentextTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentextObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentextTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentextTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenthtmlObj = {
+  __typename?: 'AggregateTextDocumenthtmlObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumenthtmlTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenthtmlObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumenthtmlTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumenthtmlTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentmimeTypeObj = {
+  __typename?: 'AggregateTextDocumentmimeTypeObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentmimeTypeTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentmimeTypeObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentmimeTypeTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentmimeTypeTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentmodifiedAtObj = {
+  __typename?: 'AggregateTextDocumentmodifiedAtObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['String']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['String']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentoriginalNameObj = {
+  __typename?: 'AggregateTextDocumentoriginalNameObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentoriginalNameTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentoriginalNameObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentoriginalNameTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentoriginalNameTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentpathObj = {
+  __typename?: 'AggregateTextDocumentpathObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentpathTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentpathObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentpathStringObj = {
+  __typename?: 'AggregateTextDocumentpathStringObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentpathStringTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentpathStringObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentpathStringTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentpathStringTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentpathTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentpathTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentpropertiesObj = {
+  __typename?: 'AggregateTextDocumentpropertiesObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentpropertiesTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentpropertiesObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentpropertiesTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentpropertiesTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentremoteIdObj = {
+  __typename?: 'AggregateTextDocumentremoteIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentremoteIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentremoteIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentremoteIdTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentremoteIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentsourceIdObj = {
+  __typename?: 'AggregateTextDocumentsourceIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentsourceIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentsourceIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentsourceIdTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentsourceIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentsubtitleObj = {
+  __typename?: 'AggregateTextDocumentsubtitleObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumentsubtitleTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumentsubtitleObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumentsubtitleTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumentsubtitleTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttagsObj = {
+  __typename?: 'AggregateTextDocumenttagsObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumenttagsTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttagsObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumenttagsTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumenttagsTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttextObj = {
+  __typename?: 'AggregateTextDocumenttextObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumenttextTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttextObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumenttextTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumenttextTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttitleObj = {
+  __typename?: 'AggregateTextDocumenttitleObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateTextDocumenttitleTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttitleObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumenttitleTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumenttitleTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttocObj = {
+  __typename?: 'AggregateTextDocumenttocObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateTextDocumenttocTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateTextDocumenttocObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateTextDocumenttocTopOccurrencesObj = {
+  __typename?: 'AggregateTextDocumenttocTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type AggregateVideoFile = {
+  __typename?: 'AggregateVideoFile'
+  /** Aggregate this property"assetId" */
+  assetId: Maybe<AggregateVideoFileassetIdObj>
+  /** Aggregate this property"blob" */
+  blob: Maybe<AggregateVideoFileblobObj>
+  /** Aggregate this property"duration" */
+  duration: Maybe<AggregateVideoFiledurationObj>
+  /** Aggregate this property"ext" */
+  ext: Maybe<AggregateVideoFileextObj>
+  /** Indicates the group of returned data */
+  groupedBy: Maybe<AggregateVideoFileGroupedByObj>
+  /** Aggregate this property"height" */
+  height: Maybe<AggregateVideoFileheightObj>
+  /** Aggregate this property"hlsUrl" */
+  hlsUrl: Maybe<AggregateVideoFilehlsUrlObj>
+  /** An object used to Get Meta information about Objects on a local Weaviate */
+  meta: Maybe<AggregateVideoFileMetaObject>
+  /** Aggregate this property"mimeType" */
+  mimeType: Maybe<AggregateVideoFilemimeTypeObj>
+  /** Aggregate this property"order" */
+  order: Maybe<AggregateVideoFileorderObj>
+  /** Aggregate this property"originalName" */
+  originalName: Maybe<AggregateVideoFileoriginalNameObj>
+  /** Aggregate this property"path" */
+  path: Maybe<AggregateVideoFilepathObj>
+  /** Aggregate this property"pathString" */
+  pathString: Maybe<AggregateVideoFilepathStringObj>
+  /** Aggregate this property"playbackId" */
+  playbackId: Maybe<AggregateVideoFileplaybackIdObj>
+  /** Aggregate this property"remoteId" */
+  remoteId: Maybe<AggregateVideoFileremoteIdObj>
+  /** Aggregate this property"size" */
+  size: Maybe<AggregateVideoFilesizeObj>
+  /** Aggregate this property"sourceId" */
+  sourceId: Maybe<AggregateVideoFilesourceIdObj>
+  /** Aggregate this property"subtitles" */
+  subtitles: Maybe<AggregateVideoFilesubtitlesObj>
+  /** Aggregate this property"url" */
+  url: Maybe<AggregateVideoFileurlObj>
+  /** Aggregate this property"width" */
+  width: Maybe<AggregateVideoFilewidthObj>
+}
+
+/** An object containing the path and value of the grouped property */
+export type AggregateVideoFileGroupedByObj = {
+  __typename?: 'AggregateVideoFileGroupedByObj'
+  /** The path of the grouped property */
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The value of the grouped property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type AggregateVideoFileMetaObject = {
+  __typename?: 'AggregateVideoFileMetaObject'
+  count: Maybe<Scalars['Int']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileassetIdObj = {
+  __typename?: 'AggregateVideoFileassetIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateVideoFileassetIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileassetIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFileassetIdTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFileassetIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileblobObj = {
+  __typename?: 'AggregateVideoFileblobObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateVideoFileblobTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileblobObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFileblobTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFileblobTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFiledurationObj = {
+  __typename?: 'AggregateVideoFiledurationObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mean of numeric property values */
+  mean: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the sum of numeric property values */
+  sum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileextObj = {
+  __typename?: 'AggregateVideoFileextObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateVideoFileextTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileextObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFileextTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFileextTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileheightObj = {
+  __typename?: 'AggregateVideoFileheightObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mean of numeric property values */
+  mean: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the sum of numeric property values */
+  sum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilehlsUrlObj = {
+  __typename?: 'AggregateVideoFilehlsUrlObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateVideoFilehlsUrlTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilehlsUrlObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFilehlsUrlTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFilehlsUrlTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilemimeTypeObj = {
+  __typename?: 'AggregateVideoFilemimeTypeObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateVideoFilemimeTypeTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilemimeTypeObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFilemimeTypeTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFilemimeTypeTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileorderObj = {
+  __typename?: 'AggregateVideoFileorderObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mean of numeric property values */
+  mean: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the sum of numeric property values */
+  sum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileoriginalNameObj = {
+  __typename?: 'AggregateVideoFileoriginalNameObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateVideoFileoriginalNameTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileoriginalNameObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFileoriginalNameTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFileoriginalNameTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilepathObj = {
+  __typename?: 'AggregateVideoFilepathObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateVideoFilepathTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilepathObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilepathStringObj = {
+  __typename?: 'AggregateVideoFilepathStringObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateVideoFilepathStringTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilepathStringObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFilepathStringTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFilepathStringTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFilepathTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFilepathTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileplaybackIdObj = {
+  __typename?: 'AggregateVideoFileplaybackIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateVideoFileplaybackIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileplaybackIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFileplaybackIdTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFileplaybackIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileremoteIdObj = {
+  __typename?: 'AggregateVideoFileremoteIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateVideoFileremoteIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileremoteIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFileremoteIdTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFileremoteIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilesizeObj = {
+  __typename?: 'AggregateVideoFilesizeObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mean of numeric property values */
+  mean: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the sum of numeric property values */
+  sum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilesourceIdObj = {
+  __typename?: 'AggregateVideoFilesourceIdObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<
+    Array<Maybe<AggregateVideoFilesourceIdTopOccurrencesObj>>
+  >
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilesourceIdObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFilesourceIdTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFilesourceIdTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilesubtitlesObj = {
+  __typename?: 'AggregateVideoFilesubtitlesObj'
+  /**
+   * The classes that this object contains a reference to
+   * @deprecated Experimental, the format will change
+   */
+  pointingTo: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  /** The datatype of this property */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileurlObj = {
+  __typename?: 'AggregateVideoFileurlObj'
+  /** The total amount of found instances for this property */
+  count: Maybe<Scalars['Int']['output']>
+  /** An object containing data about the most frequently occurring values for this property */
+  topOccurrences: Maybe<Array<Maybe<AggregateVideoFileurlTopOccurrencesObj>>>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFileurlObjTopOccurrencesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+}
+
+/** An object containing data about the most frequently occurring values for this property */
+export type AggregateVideoFileurlTopOccurrencesObj = {
+  __typename?: 'AggregateVideoFileurlTopOccurrencesObj'
+  /** How often the most frequently occurring value for this property occurs */
+  occurs: Maybe<Scalars['Int']['output']>
+  /** The most frequently occurring value for this property */
+  value: Maybe<Scalars['String']['output']>
+}
+
+/** An object containing Aggregation information about this property */
+export type AggregateVideoFilewidthObj = {
+  __typename?: 'AggregateVideoFilewidthObj'
+  /** Aggregate on the total amount of found property values */
+  count: Maybe<Scalars['Int']['output']>
+  /** Aggregate on the maximum of numeric property values */
+  maximum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mean of numeric property values */
+  mean: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the median of numeric property values */
+  median: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the minimum of numeric property values */
+  minimum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the mode of numeric property values */
+  mode: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the sum of numeric property values */
+  sum: Maybe<Scalars['Float']['output']>
+  /** Aggregate on the total amount of found property values */
+  type: Maybe<Scalars['String']['output']>
+}
+
 export type AudioFile = {
   __typename?: 'AudioFile'
   _additional: Maybe<AudioFileAdditional>
+  assetId: Maybe<Scalars['String']['output']>
+  blob: Maybe<Scalars['String']['output']>
   document: Maybe<Array<Maybe<AudioFileDocumentObj>>>
   duration: Maybe<Scalars['Float']['output']>
   ext: Maybe<Scalars['String']['output']>
+  files: Maybe<Array<Maybe<AudioFile_Files_Object>>>
+  hlsUrl: Maybe<Scalars['String']['output']>
   mimeType: Maybe<Scalars['String']['output']>
   order: Maybe<Scalars['Int']['output']>
   originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  playbackId: Maybe<Scalars['String']['output']>
   remoteId: Maybe<Scalars['String']['output']>
   size: Maybe<Scalars['Int']['output']>
   sourceId: Maybe<Scalars['String']['output']>
+  subtitles: Maybe<Array<Maybe<AudioFileSubtitlesObj>>>
   url: Maybe<Scalars['String']['output']>
 }
 
 export type AudioFileAdditional = {
   __typename?: 'AudioFileAdditional'
-  answer: Maybe<AudioFileAdditionalAnswer>
   certainty: Maybe<Scalars['Float']['output']>
   classification: Maybe<AudioFileAdditionalClassification>
   creationTimeUnix: Maybe<Scalars['String']['output']>
@@ -3033,15 +5528,6 @@ export type AudioFileAdditionalFeatureProjectionArgs = {
   iterations?: InputMaybe<Scalars['Int']['input']>
   learningRate?: InputMaybe<Scalars['Int']['input']>
   perplexity?: InputMaybe<Scalars['Int']['input']>
-}
-
-export type AudioFileAdditionalAnswer = {
-  __typename?: 'AudioFileAdditionalAnswer'
-  endPosition: Maybe<Scalars['Int']['output']>
-  hasAnswer: Maybe<Scalars['Boolean']['output']>
-  property: Maybe<Scalars['String']['output']>
-  result: Maybe<Scalars['String']['output']>
-  startPosition: Maybe<Scalars['Int']['output']>
 }
 
 export type AudioFileAdditionalClassification = {
@@ -3077,15 +5563,23 @@ export type AudioFileAdditionalGroupGroupedBy = {
 export type AudioFileAdditionalGroupHits = {
   __typename?: 'AudioFileAdditionalGroupHits'
   _additional: Maybe<AudioFileAdditionalGroupHitsAdditional>
+  assetId: Maybe<Scalars['String']['output']>
+  blob: Maybe<Scalars['String']['output']>
   document: Maybe<Array<Maybe<AudioFileDocumentObj>>>
   duration: Maybe<Scalars['Float']['output']>
   ext: Maybe<Scalars['String']['output']>
+  files: Maybe<Array<Maybe<AudioFile_Files_Object>>>
+  hlsUrl: Maybe<Scalars['String']['output']>
   mimeType: Maybe<Scalars['String']['output']>
   order: Maybe<Scalars['Int']['output']>
   originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  playbackId: Maybe<Scalars['String']['output']>
   remoteId: Maybe<Scalars['String']['output']>
   size: Maybe<Scalars['Int']['output']>
   sourceId: Maybe<Scalars['String']['output']>
+  subtitles: Maybe<Array<Maybe<AudioFileSubtitlesObj>>>
   url: Maybe<Scalars['String']['output']>
 }
 
@@ -3098,9 +5592,55 @@ export type AudioFileAdditionalGroupHitsAdditional = {
 
 export type AudioFileDocumentObj = Beacon | GoogleCalendarEvent | GoogleDoc
 
+export type AudioFileSubtitlesObj = Beacon | SubtitleFile
+
+export type AudioFile_Files_Object = {
+  __typename?: 'AudioFile_files_object'
+  bitrate: Maybe<Scalars['Float']['output']>
+  ext: Maybe<Scalars['String']['output']>
+  height: Maybe<Scalars['Float']['output']>
+  name: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Float']['output']>
+  url: Maybe<Scalars['String']['output']>
+  width: Maybe<Scalars['Float']['output']>
+}
+
 export type Beacon = {
   __typename?: 'Beacon'
   beacon: Maybe<Scalars['String']['output']>
+}
+
+export type ExploreNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type ExploreNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+/** Explore Concepts on a local weaviate with vector-aided search */
+export type ExploreObj = {
+  __typename?: 'ExploreObj'
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon: Maybe<Scalars['String']['output']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty: Maybe<Scalars['Float']['output']>
+  /** Name of the Class */
+  className: Maybe<Scalars['String']['output']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance: Maybe<Scalars['Float']['output']>
 }
 
 export type Footnote = {
@@ -3772,13 +6312,16 @@ export type GetObjectsObj = {
   GoogleCalendarEvent: Maybe<Array<Maybe<GoogleCalendarEvent>>>
   GoogleDoc: Maybe<Array<Maybe<GoogleDoc>>>
   ImageBlock: Maybe<Array<Maybe<ImageBlock>>>
+  SubtitleEntry: Maybe<Array<Maybe<SubtitleEntry>>>
+  SubtitleFile: Maybe<Array<Maybe<SubtitleFile>>>
   TextBlock: Maybe<Array<Maybe<TextBlock>>>
+  TextDocument: Maybe<Array<Maybe<TextDocument>>>
+  VideoFile: Maybe<Array<Maybe<VideoFile>>>
 }
 
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjAudioFileArgs = {
   after?: InputMaybe<Scalars['String']['input']>
-  ask?: InputMaybe<QnATransformersGetObjectsAudioFileAskInpObj>
   autocut?: InputMaybe<Scalars['Int']['input']>
   bm25?: InputMaybe<GetObjectsAudioFileHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsAudioFileGroupInpObj>
@@ -3786,7 +6329,7 @@ export type GetObjectsObjAudioFileArgs = {
   hybrid?: InputMaybe<GetObjectsAudioFileHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsAudioFileNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiGetObjectsAudioFileNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsAudioFileNearTextInpObj>
   nearVector?: InputMaybe<GetObjectsAudioFileNearVectorInpObj>
   offset?: InputMaybe<Scalars['Int']['input']>
   sort?: InputMaybe<Array<InputMaybe<GetObjectsAudioFileSortInpObj>>>
@@ -3796,7 +6339,6 @@ export type GetObjectsObjAudioFileArgs = {
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjGoogleCalendarEventArgs = {
   after?: InputMaybe<Scalars['String']['input']>
-  ask?: InputMaybe<QnATransformersGetObjectsGoogleCalendarEventAskInpObj>
   autocut?: InputMaybe<Scalars['Int']['input']>
   bm25?: InputMaybe<GetObjectsGoogleCalendarEventHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsGoogleCalendarEventGroupInpObj>
@@ -3804,7 +6346,7 @@ export type GetObjectsObjGoogleCalendarEventArgs = {
   hybrid?: InputMaybe<GetObjectsGoogleCalendarEventHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsGoogleCalendarEventNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleCalendarEventNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsGoogleCalendarEventNearTextInpObj>
   nearVector?: InputMaybe<GetObjectsGoogleCalendarEventNearVectorInpObj>
   offset?: InputMaybe<Scalars['Int']['input']>
   sort?: InputMaybe<Array<InputMaybe<GetObjectsGoogleCalendarEventSortInpObj>>>
@@ -3814,7 +6356,6 @@ export type GetObjectsObjGoogleCalendarEventArgs = {
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjGoogleDocArgs = {
   after?: InputMaybe<Scalars['String']['input']>
-  ask?: InputMaybe<QnATransformersGetObjectsGoogleDocAskInpObj>
   autocut?: InputMaybe<Scalars['Int']['input']>
   bm25?: InputMaybe<GetObjectsGoogleDocHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsGoogleDocGroupInpObj>
@@ -3822,7 +6363,7 @@ export type GetObjectsObjGoogleDocArgs = {
   hybrid?: InputMaybe<GetObjectsGoogleDocHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsGoogleDocNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsGoogleDocNearTextInpObj>
   nearVector?: InputMaybe<GetObjectsGoogleDocNearVectorInpObj>
   offset?: InputMaybe<Scalars['Int']['input']>
   sort?: InputMaybe<Array<InputMaybe<GetObjectsGoogleDocSortInpObj>>>
@@ -3832,7 +6373,6 @@ export type GetObjectsObjGoogleDocArgs = {
 /** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjImageBlockArgs = {
   after?: InputMaybe<Scalars['String']['input']>
-  ask?: InputMaybe<QnATransformersGetObjectsImageBlockAskInpObj>
   autocut?: InputMaybe<Scalars['Int']['input']>
   bm25?: InputMaybe<GetObjectsImageBlockHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsImageBlockGroupInpObj>
@@ -3840,7 +6380,7 @@ export type GetObjectsObjImageBlockArgs = {
   hybrid?: InputMaybe<GetObjectsImageBlockHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsImageBlockNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiGetObjectsImageBlockNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsImageBlockNearTextInpObj>
   nearVector?: InputMaybe<GetObjectsImageBlockNearVectorInpObj>
   offset?: InputMaybe<Scalars['Int']['input']>
   sort?: InputMaybe<Array<InputMaybe<GetObjectsImageBlockSortInpObj>>>
@@ -3848,9 +6388,42 @@ export type GetObjectsObjImageBlockArgs = {
 }
 
 /** An object used to get %ss on a local Weaviate */
+export type GetObjectsObjSubtitleEntryArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsSubtitleEntryHybridGetBm25InpObj>
+  group?: InputMaybe<GetObjectsSubtitleEntryGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsSubtitleEntryGroupByInpObj>
+  hybrid?: InputMaybe<GetObjectsSubtitleEntryHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<GetObjectsSubtitleEntryNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsSubtitleEntryNearTextInpObj>
+  nearVector?: InputMaybe<GetObjectsSubtitleEntryNearVectorInpObj>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  sort?: InputMaybe<Array<InputMaybe<GetObjectsSubtitleEntrySortInpObj>>>
+  where?: InputMaybe<GetObjectsSubtitleEntryWhereInpObj>
+}
+
+/** An object used to get %ss on a local Weaviate */
+export type GetObjectsObjSubtitleFileArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsSubtitleFileHybridGetBm25InpObj>
+  group?: InputMaybe<GetObjectsSubtitleFileGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsSubtitleFileGroupByInpObj>
+  hybrid?: InputMaybe<GetObjectsSubtitleFileHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<GetObjectsSubtitleFileNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsSubtitleFileNearTextInpObj>
+  nearVector?: InputMaybe<GetObjectsSubtitleFileNearVectorInpObj>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  sort?: InputMaybe<Array<InputMaybe<GetObjectsSubtitleFileSortInpObj>>>
+  where?: InputMaybe<GetObjectsSubtitleFileWhereInpObj>
+}
+
+/** An object used to get %ss on a local Weaviate */
 export type GetObjectsObjTextBlockArgs = {
   after?: InputMaybe<Scalars['String']['input']>
-  ask?: InputMaybe<QnATransformersGetObjectsTextBlockAskInpObj>
   autocut?: InputMaybe<Scalars['Int']['input']>
   bm25?: InputMaybe<GetObjectsTextBlockHybridGetBm25InpObj>
   group?: InputMaybe<GetObjectsTextBlockGroupInpObj>
@@ -3858,12 +6431,366 @@ export type GetObjectsObjTextBlockArgs = {
   hybrid?: InputMaybe<GetObjectsTextBlockHybridInpObj>
   limit?: InputMaybe<Scalars['Int']['input']>
   nearObject?: InputMaybe<GetObjectsTextBlockNearObjectInpObj>
-  nearText?: InputMaybe<Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsTextBlockNearTextInpObj>
   nearVector?: InputMaybe<GetObjectsTextBlockNearVectorInpObj>
   offset?: InputMaybe<Scalars['Int']['input']>
   sort?: InputMaybe<Array<InputMaybe<GetObjectsTextBlockSortInpObj>>>
   where?: InputMaybe<GetObjectsTextBlockWhereInpObj>
 }
+
+/** An object used to get %ss on a local Weaviate */
+export type GetObjectsObjTextDocumentArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsTextDocumentHybridGetBm25InpObj>
+  group?: InputMaybe<GetObjectsTextDocumentGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsTextDocumentGroupByInpObj>
+  hybrid?: InputMaybe<GetObjectsTextDocumentHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<GetObjectsTextDocumentNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsTextDocumentNearTextInpObj>
+  nearVector?: InputMaybe<GetObjectsTextDocumentNearVectorInpObj>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  sort?: InputMaybe<Array<InputMaybe<GetObjectsTextDocumentSortInpObj>>>
+  where?: InputMaybe<GetObjectsTextDocumentWhereInpObj>
+}
+
+/** An object used to get %ss on a local Weaviate */
+export type GetObjectsObjVideoFileArgs = {
+  after?: InputMaybe<Scalars['String']['input']>
+  autocut?: InputMaybe<Scalars['Int']['input']>
+  bm25?: InputMaybe<GetObjectsVideoFileHybridGetBm25InpObj>
+  group?: InputMaybe<GetObjectsVideoFileGroupInpObj>
+  groupBy?: InputMaybe<GetObjectsVideoFileGroupByInpObj>
+  hybrid?: InputMaybe<GetObjectsVideoFileHybridInpObj>
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<GetObjectsVideoFileNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsVideoFileNearTextInpObj>
+  nearVector?: InputMaybe<GetObjectsVideoFileNearVectorInpObj>
+  offset?: InputMaybe<Scalars['Int']['input']>
+  sort?: InputMaybe<Array<InputMaybe<GetObjectsVideoFileSortInpObj>>>
+  where?: InputMaybe<GetObjectsVideoFileWhereInpObj>
+}
+
+/** Specify the property of the class to group by */
+export type GetObjectsSubtitleEntryGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsSubtitleEntryGroupInpObj = {
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  type?: InputMaybe<GetObjectsSubtitleEntryGroupInpObjTypeEnum>
+}
+
+export type GetObjectsSubtitleEntryGroupInpObjTypeEnum = 'closest' | 'merge'
+
+export type GetObjectsSubtitleEntryHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
+/** Hybrid search */
+export type GetObjectsSubtitleEntryHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type GetObjectsSubtitleEntryNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type GetObjectsSubtitleEntryNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsSubtitleEntrySortInpObj = {
+  /** Specify the sort order, either ascending (asc) which is default or descending (desc) */
+  order?: InputMaybe<GetObjectsSubtitleEntrySortInpObjTypeEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type GetObjectsSubtitleEntrySortInpObjTypeEnum = 'asc' | 'desc'
+
+export type GetObjectsSubtitleEntryWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type GetObjectsSubtitleEntryWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type GetObjectsSubtitleEntryWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: GetObjectsSubtitleEntryWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: GetObjectsSubtitleEntryWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsSubtitleEntryWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsSubtitleEntryWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsSubtitleEntryWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsSubtitleEntry']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsSubtitleEntry']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsSubtitleEntryWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsSubtitleEntry']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsSubtitleEntry']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringGetObjectsSubtitleEntry']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsSubtitleEntry']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type GetObjectsSubtitleEntryWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsSubtitleEntryWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsSubtitleEntryWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsSubtitleEntry']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsSubtitleEntry']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsSubtitleEntryWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsSubtitleEntry']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsSubtitleEntry']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<
+    Scalars['TextStringGetObjectsSubtitleEntry']['input']
+  >
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsSubtitleEntry']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type GetObjectsSubtitleEntryWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
+
+/** Specify the property of the class to group by */
+export type GetObjectsSubtitleFileGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsSubtitleFileGroupInpObj = {
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  type?: InputMaybe<GetObjectsSubtitleFileGroupInpObjTypeEnum>
+}
+
+export type GetObjectsSubtitleFileGroupInpObjTypeEnum = 'closest' | 'merge'
+
+export type GetObjectsSubtitleFileHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
+/** Hybrid search */
+export type GetObjectsSubtitleFileHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type GetObjectsSubtitleFileNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type GetObjectsSubtitleFileNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsSubtitleFileSortInpObj = {
+  /** Specify the sort order, either ascending (asc) which is default or descending (desc) */
+  order?: InputMaybe<GetObjectsSubtitleFileSortInpObjTypeEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type GetObjectsSubtitleFileSortInpObjTypeEnum = 'asc' | 'desc'
+
+export type GetObjectsSubtitleFileWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type GetObjectsSubtitleFileWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type GetObjectsSubtitleFileWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: GetObjectsSubtitleFileWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: GetObjectsSubtitleFileWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsSubtitleFileWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsSubtitleFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsSubtitleFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsSubtitleFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsSubtitleFile']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsSubtitleFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsSubtitleFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsSubtitleFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsSubtitleFile']['input']>
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsSubtitleFile']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type GetObjectsSubtitleFileWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsSubtitleFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsSubtitleFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsSubtitleFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsSubtitleFile']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsSubtitleFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsSubtitleFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsSubtitleFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsSubtitleFile']['input']>
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsSubtitleFile']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type GetObjectsSubtitleFileWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
 
 /** Specify the property of the class to group by */
 export type GetObjectsTextBlockGroupByInpObj = {
@@ -4023,6 +6950,322 @@ export type GetObjectsTextBlockWhereOperatorEnum =
   | 'Or'
   | 'WithinGeoRange'
 
+/** Specify the property of the class to group by */
+export type GetObjectsTextDocumentGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsTextDocumentGroupInpObj = {
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  type?: InputMaybe<GetObjectsTextDocumentGroupInpObjTypeEnum>
+}
+
+export type GetObjectsTextDocumentGroupInpObjTypeEnum = 'closest' | 'merge'
+
+export type GetObjectsTextDocumentHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
+/** Hybrid search */
+export type GetObjectsTextDocumentHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type GetObjectsTextDocumentNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type GetObjectsTextDocumentNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsTextDocumentSortInpObj = {
+  /** Specify the sort order, either ascending (asc) which is default or descending (desc) */
+  order?: InputMaybe<GetObjectsTextDocumentSortInpObjTypeEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type GetObjectsTextDocumentSortInpObjTypeEnum = 'asc' | 'desc'
+
+export type GetObjectsTextDocumentWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type GetObjectsTextDocumentWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type GetObjectsTextDocumentWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: GetObjectsTextDocumentWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: GetObjectsTextDocumentWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsTextDocumentWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsTextDocumentWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsTextDocumentWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsTextDocument']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsTextDocument']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsTextDocumentWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsTextDocument']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsTextDocument']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsTextDocument']['input']>
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsTextDocument']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type GetObjectsTextDocumentWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsTextDocumentWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsTextDocumentWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsTextDocument']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsTextDocument']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsTextDocumentWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsTextDocument']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsTextDocument']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsTextDocument']['input']>
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsTextDocument']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type GetObjectsTextDocumentWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
+
+/** Specify the property of the class to group by */
+export type GetObjectsVideoFileGroupByInpObj = {
+  /** Specify the number of groups to be created */
+  groups: Scalars['Int']['input']
+  /** Specify the number of max objects in group */
+  objectsPerGroup: Scalars['Int']['input']
+  /** Specify the path from the objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path: Array<InputMaybe<Scalars['String']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsVideoFileGroupInpObj = {
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  type?: InputMaybe<GetObjectsVideoFileGroupInpObjTypeEnum>
+}
+
+export type GetObjectsVideoFileGroupInpObjTypeEnum = 'closest' | 'merge'
+
+export type GetObjectsVideoFileHybridGetBm25InpObj = {
+  /** The properties to search in */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The query to search for */
+  query?: InputMaybe<Scalars['String']['input']>
+}
+
+/** Hybrid search */
+export type GetObjectsVideoFileHybridInpObj = {
+  /** Search weight */
+  alpha?: InputMaybe<Scalars['Float']['input']>
+  /** Algorithm used for fusing results from vector and keyword search */
+  fusionType?: InputMaybe<FusionEnum>
+  /** Which properties should be included in the sparse search */
+  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Query string */
+  query?: InputMaybe<Scalars['String']['input']>
+  /** Vector search */
+  vector?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>
+}
+
+export type GetObjectsVideoFileNearObjectInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Concept identifier in the uuid format */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type GetObjectsVideoFileNearVectorInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Target vector to be used in kNN search */
+  vector: Array<InputMaybe<Scalars['Float']['input']>>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsVideoFileSortInpObj = {
+  /** Specify the sort order, either ascending (asc) which is default or descending (desc) */
+  order?: InputMaybe<GetObjectsVideoFileSortInpObjTypeEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Get', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type GetObjectsVideoFileSortInpObjTypeEnum = 'asc' | 'desc'
+
+export type GetObjectsVideoFileWhereGeoRangeDistanceInpObj = {
+  /** The maximum distance from the point specified geoCoordinates. */
+  max: Scalars['Float']['input']
+}
+
+export type GetObjectsVideoFileWhereGeoRangeGeoCoordinatesInpObj = {
+  /** The latitude (in decimal format) of the geoCoordinates to search around. */
+  latitude: Scalars['Float']['input']
+  /** The longitude (in decimal format) of the geoCoordinates to search around. */
+  longitude: Scalars['Float']['input']
+}
+
+export type GetObjectsVideoFileWhereGeoRangeInpObj = {
+  /** The distance from the point specified via geoCoordinates. */
+  distance: GetObjectsVideoFileWhereGeoRangeDistanceInpObj
+  /** The geoCoordinates that form the center point of the search. */
+  geoCoordinates: GetObjectsVideoFileWhereGeoRangeGeoCoordinatesInpObj
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type GetObjectsVideoFileWhereInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsVideoFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsVideoFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsVideoFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsVideoFile']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsVideoFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsVideoFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsVideoFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsVideoFile']['input']>
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsVideoFile']['input']>
+}
+
+/** An object containing the Operands that can be applied to a 'where' filter */
+export type GetObjectsVideoFileWhereOperandsInpObj = {
+  /** Contains the Operands that can be applied to a 'where' filter */
+  operands?: InputMaybe<
+    Array<InputMaybe<GetObjectsVideoFileWhereOperandsInpObj>>
+  >
+  /** Contains the Operators that can be applied to a 'where' filter */
+  operator?: InputMaybe<GetObjectsVideoFileWhereOperatorEnum>
+  /** Specify the path from the Objects fields to the property name (e.g. ['Things', 'City', 'population'] leads to the 'population' property of a 'City' object) */
+  path?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** Specify a Boolean value that the target property will be compared to */
+  valueBoolean?: InputMaybe<Scalars['BooleanGetObjectsVideoFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueDate?: InputMaybe<Scalars['TextDateGetObjectsVideoFile']['input']>
+  /** Specify both geo-coordinates (latitude and longitude as decimals) and a maximum distance from the described coordinates. The search will return any result which is located less than or equal to the specified maximum distance in km away from the specified point. */
+  valueGeoRange?: InputMaybe<GetObjectsVideoFileWhereGeoRangeInpObj>
+  /** Specify an Integer value that the target property will be compared to */
+  valueInt?: InputMaybe<Scalars['IntGetObjectsVideoFile']['input']>
+  /** Specify a Float value that the target property will be compared to */
+  valueNumber?: InputMaybe<Scalars['FloatGetObjectsVideoFile']['input']>
+  /** Specify a String value that the target property will be compared to */
+  valueString?: InputMaybe<Scalars['TextStringGetObjectsVideoFile']['input']>
+  /** Specify a Text value that the target property will be compared to */
+  valueText?: InputMaybe<Scalars['TextGetObjectsVideoFile']['input']>
+}
+
+/** An object containing the Operators that can be applied to a 'where' filter */
+export type GetObjectsVideoFileWhereOperatorEnum =
+  | 'And'
+  | 'ContainsAll'
+  | 'ContainsAny'
+  | 'Equal'
+  | 'GreaterThan'
+  | 'GreaterThanEqual'
+  | 'IsNull'
+  | 'LessThan'
+  | 'LessThanEqual'
+  | 'Like'
+  | 'Not'
+  | 'NotEqual'
+  | 'Or'
+  | 'WithinGeoRange'
+
 export type GoogleCalendarEvent = {
   __typename?: 'GoogleCalendarEvent'
   _additional: Maybe<GoogleCalendarEventAdditional>
@@ -4054,7 +7297,6 @@ export type GoogleCalendarEvent = {
 
 export type GoogleCalendarEventAdditional = {
   __typename?: 'GoogleCalendarEventAdditional'
-  answer: Maybe<GoogleCalendarEventAdditionalAnswer>
   certainty: Maybe<Scalars['Float']['output']>
   classification: Maybe<GoogleCalendarEventAdditionalClassification>
   creationTimeUnix: Maybe<Scalars['String']['output']>
@@ -4075,15 +7317,6 @@ export type GoogleCalendarEventAdditionalFeatureProjectionArgs = {
   iterations?: InputMaybe<Scalars['Int']['input']>
   learningRate?: InputMaybe<Scalars['Int']['input']>
   perplexity?: InputMaybe<Scalars['Int']['input']>
-}
-
-export type GoogleCalendarEventAdditionalAnswer = {
-  __typename?: 'GoogleCalendarEventAdditionalAnswer'
-  endPosition: Maybe<Scalars['Int']['output']>
-  hasAnswer: Maybe<Scalars['Boolean']['output']>
-  property: Maybe<Scalars['String']['output']>
-  result: Maybe<Scalars['String']['output']>
-  startPosition: Maybe<Scalars['Int']['output']>
 }
 
 export type GoogleCalendarEventAdditionalClassification = {
@@ -4182,7 +7415,6 @@ export type GoogleDoc = {
 
 export type GoogleDocAdditional = {
   __typename?: 'GoogleDocAdditional'
-  answer: Maybe<GoogleDocAdditionalAnswer>
   certainty: Maybe<Scalars['Float']['output']>
   classification: Maybe<GoogleDocAdditionalClassification>
   creationTimeUnix: Maybe<Scalars['String']['output']>
@@ -4203,15 +7435,6 @@ export type GoogleDocAdditionalFeatureProjectionArgs = {
   iterations?: InputMaybe<Scalars['Int']['input']>
   learningRate?: InputMaybe<Scalars['Int']['input']>
   perplexity?: InputMaybe<Scalars['Int']['input']>
-}
-
-export type GoogleDocAdditionalAnswer = {
-  __typename?: 'GoogleDocAdditionalAnswer'
-  endPosition: Maybe<Scalars['Int']['output']>
-  hasAnswer: Maybe<Scalars['Boolean']['output']>
-  property: Maybe<Scalars['String']['output']>
-  result: Maybe<Scalars['String']['output']>
-  startPosition: Maybe<Scalars['Int']['output']>
 }
 
 export type GoogleDocAdditionalClassification = {
@@ -4281,6 +7504,7 @@ export type ImageBlock = {
   __typename?: 'ImageBlock'
   _additional: Maybe<ImageBlockAdditional>
   alt: Maybe<Scalars['String']['output']>
+  blob: Maybe<Scalars['String']['output']>
   createdAt: Maybe<Scalars['String']['output']>
   document: Maybe<Array<Maybe<ImageBlockDocumentObj>>>
   ext: Maybe<Scalars['String']['output']>
@@ -4301,7 +7525,6 @@ export type ImageBlock = {
 
 export type ImageBlockAdditional = {
   __typename?: 'ImageBlockAdditional'
-  answer: Maybe<ImageBlockAdditionalAnswer>
   certainty: Maybe<Scalars['Float']['output']>
   classification: Maybe<ImageBlockAdditionalClassification>
   creationTimeUnix: Maybe<Scalars['String']['output']>
@@ -4322,15 +7545,6 @@ export type ImageBlockAdditionalFeatureProjectionArgs = {
   iterations?: InputMaybe<Scalars['Int']['input']>
   learningRate?: InputMaybe<Scalars['Int']['input']>
   perplexity?: InputMaybe<Scalars['Int']['input']>
-}
-
-export type ImageBlockAdditionalAnswer = {
-  __typename?: 'ImageBlockAdditionalAnswer'
-  endPosition: Maybe<Scalars['Int']['output']>
-  hasAnswer: Maybe<Scalars['Boolean']['output']>
-  property: Maybe<Scalars['String']['output']>
-  result: Maybe<Scalars['String']['output']>
-  startPosition: Maybe<Scalars['Int']['output']>
 }
 
 export type ImageBlockAdditionalClassification = {
@@ -4367,6 +7581,7 @@ export type ImageBlockAdditionalGroupHits = {
   __typename?: 'ImageBlockAdditionalGroupHits'
   _additional: Maybe<ImageBlockAdditionalGroupHitsAdditional>
   alt: Maybe<Scalars['String']['output']>
+  blob: Maybe<Scalars['String']['output']>
   createdAt: Maybe<Scalars['String']['output']>
   document: Maybe<Array<Maybe<ImageBlockDocumentObj>>>
   ext: Maybe<Scalars['String']['output']>
@@ -4392,7 +7607,11 @@ export type ImageBlockAdditionalGroupHitsAdditional = {
   vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
-export type ImageBlockDocumentObj = Beacon | GoogleCalendarEvent | GoogleDoc
+export type ImageBlockDocumentObj =
+  | Beacon
+  | GoogleCalendarEvent
+  | GoogleDoc
+  | TextDocument
 
 export type Mention = {
   __typename?: 'Mention'
@@ -4400,85 +7619,197 @@ export type Mention = {
   name: Scalars['String']['output']
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersAggregateAudioFileAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntry = {
+  __typename?: 'SubtitleEntry'
+  _additional: Maybe<SubtitleEntryAdditional>
+  document: Maybe<Array<Maybe<SubtitleEntryDocumentObj>>>
+  end: Maybe<Scalars['String']['output']>
+  order: Maybe<Scalars['Int']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  start: Maybe<Scalars['String']['output']>
+  text: Maybe<Scalars['String']['output']>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersAggregateGoogleCalendarEventAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditional = {
+  __typename?: 'SubtitleEntryAdditional'
+  certainty: Maybe<Scalars['Float']['output']>
+  classification: Maybe<SubtitleEntryAdditionalClassification>
+  creationTimeUnix: Maybe<Scalars['String']['output']>
+  distance: Maybe<Scalars['Float']['output']>
+  explainScore: Maybe<Scalars['String']['output']>
+  featureProjection: Maybe<SubtitleEntryAdditionalFeatureProjection>
+  group: Maybe<SubtitleEntryAdditionalGroup>
+  /** The UUID of a Object, assigned by its local Weaviate */
+  id: Maybe<Scalars['String']['output']>
+  lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
+  score: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersAggregateGoogleDocAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditionalFeatureProjectionArgs = {
+  algorithm?: InputMaybe<Scalars['String']['input']>
+  dimensions?: InputMaybe<Scalars['Int']['input']>
+  iterations?: InputMaybe<Scalars['Int']['input']>
+  learningRate?: InputMaybe<Scalars['Int']['input']>
+  perplexity?: InputMaybe<Scalars['Int']['input']>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersAggregateImageBlockAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditionalClassification = {
+  __typename?: 'SubtitleEntryAdditionalClassification'
+  basedOn: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  classifiedFields: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  completed: Maybe<Scalars['String']['output']>
+  id: Maybe<Scalars['String']['output']>
+  scope: Maybe<Array<Maybe<Scalars['String']['output']>>>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersAggregateTextBlockAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditionalFeatureProjection = {
+  __typename?: 'SubtitleEntryAdditionalFeatureProjection'
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersGetObjectsAudioFileAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditionalGroup = {
+  __typename?: 'SubtitleEntryAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<SubtitleEntryAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<SubtitleEntryAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersGetObjectsGoogleCalendarEventAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditionalGroupGroupedBy = {
+  __typename?: 'SubtitleEntryAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersGetObjectsGoogleDocAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditionalGroupHits = {
+  __typename?: 'SubtitleEntryAdditionalGroupHits'
+  _additional: Maybe<SubtitleEntryAdditionalGroupHitsAdditional>
+  document: Maybe<Array<Maybe<SubtitleEntryDocumentObj>>>
+  end: Maybe<Scalars['String']['output']>
+  order: Maybe<Scalars['Int']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  start: Maybe<Scalars['String']['output']>
+  text: Maybe<Scalars['String']['output']>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersGetObjectsImageBlockAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryAdditionalGroupHitsAdditional = {
+  __typename?: 'SubtitleEntryAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type QnATransformersGetObjectsTextBlockAskInpObj = {
-  /** Properties which contains text */
-  properties?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** Question to be answered */
-  question: Scalars['String']['input']
+export type SubtitleEntryDocumentObj = Beacon | SubtitleFile
+
+export type SubtitleFile = {
+  __typename?: 'SubtitleFile'
+  _additional: Maybe<SubtitleFileAdditional>
+  autogenerated: Maybe<Scalars['Boolean']['output']>
+  createdAt: Maybe<Scalars['String']['output']>
+  entries: Maybe<Array<Maybe<SubtitleFileEntriesObj>>>
+  format: Maybe<Scalars['String']['output']>
+  language: Maybe<Scalars['String']['output']>
+  media: Maybe<Array<Maybe<SubtitleFileMediaObj>>>
+  mimeType: Maybe<Scalars['String']['output']>
+  modifiedAt: Maybe<Scalars['String']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Int']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  url: Maybe<Scalars['String']['output']>
 }
+
+export type SubtitleFileAdditional = {
+  __typename?: 'SubtitleFileAdditional'
+  certainty: Maybe<Scalars['Float']['output']>
+  classification: Maybe<SubtitleFileAdditionalClassification>
+  creationTimeUnix: Maybe<Scalars['String']['output']>
+  distance: Maybe<Scalars['Float']['output']>
+  explainScore: Maybe<Scalars['String']['output']>
+  featureProjection: Maybe<SubtitleFileAdditionalFeatureProjection>
+  group: Maybe<SubtitleFileAdditionalGroup>
+  /** The UUID of a Object, assigned by its local Weaviate */
+  id: Maybe<Scalars['String']['output']>
+  lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
+  score: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type SubtitleFileAdditionalFeatureProjectionArgs = {
+  algorithm?: InputMaybe<Scalars['String']['input']>
+  dimensions?: InputMaybe<Scalars['Int']['input']>
+  iterations?: InputMaybe<Scalars['Int']['input']>
+  learningRate?: InputMaybe<Scalars['Int']['input']>
+  perplexity?: InputMaybe<Scalars['Int']['input']>
+}
+
+export type SubtitleFileAdditionalClassification = {
+  __typename?: 'SubtitleFileAdditionalClassification'
+  basedOn: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  classifiedFields: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  completed: Maybe<Scalars['String']['output']>
+  id: Maybe<Scalars['String']['output']>
+  scope: Maybe<Array<Maybe<Scalars['String']['output']>>>
+}
+
+export type SubtitleFileAdditionalFeatureProjection = {
+  __typename?: 'SubtitleFileAdditionalFeatureProjection'
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type SubtitleFileAdditionalGroup = {
+  __typename?: 'SubtitleFileAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<SubtitleFileAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<SubtitleFileAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type SubtitleFileAdditionalGroupGroupedBy = {
+  __typename?: 'SubtitleFileAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type SubtitleFileAdditionalGroupHits = {
+  __typename?: 'SubtitleFileAdditionalGroupHits'
+  _additional: Maybe<SubtitleFileAdditionalGroupHitsAdditional>
+  autogenerated: Maybe<Scalars['Boolean']['output']>
+  createdAt: Maybe<Scalars['String']['output']>
+  entries: Maybe<Array<Maybe<SubtitleFileEntriesObj>>>
+  format: Maybe<Scalars['String']['output']>
+  language: Maybe<Scalars['String']['output']>
+  media: Maybe<Array<Maybe<SubtitleFileMediaObj>>>
+  mimeType: Maybe<Scalars['String']['output']>
+  modifiedAt: Maybe<Scalars['String']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Int']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  url: Maybe<Scalars['String']['output']>
+}
+
+export type SubtitleFileAdditionalGroupHitsAdditional = {
+  __typename?: 'SubtitleFileAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type SubtitleFileEntriesObj = Beacon | SubtitleEntry
+
+export type SubtitleFileMediaObj = AudioFile | Beacon | VideoFile
 
 export type TextBlock = {
   __typename?: 'TextBlock'
@@ -4497,7 +7828,6 @@ export type TextBlock = {
 
 export type TextBlockAdditional = {
   __typename?: 'TextBlockAdditional'
-  answer: Maybe<TextBlockAdditionalAnswer>
   certainty: Maybe<Scalars['Float']['output']>
   classification: Maybe<TextBlockAdditionalClassification>
   creationTimeUnix: Maybe<Scalars['String']['output']>
@@ -4518,15 +7848,6 @@ export type TextBlockAdditionalFeatureProjectionArgs = {
   iterations?: InputMaybe<Scalars['Int']['input']>
   learningRate?: InputMaybe<Scalars['Int']['input']>
   perplexity?: InputMaybe<Scalars['Int']['input']>
-}
-
-export type TextBlockAdditionalAnswer = {
-  __typename?: 'TextBlockAdditionalAnswer'
-  endPosition: Maybe<Scalars['Int']['output']>
-  hasAnswer: Maybe<Scalars['Boolean']['output']>
-  property: Maybe<Scalars['String']['output']>
-  result: Maybe<Scalars['String']['output']>
-  startPosition: Maybe<Scalars['Int']['output']>
 }
 
 export type TextBlockAdditionalClassification = {
@@ -4580,7 +7901,118 @@ export type TextBlockAdditionalGroupHitsAdditional = {
   vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
 }
 
-export type TextBlockDocumentObj = Beacon | GoogleDoc
+export type TextBlockDocumentObj = Beacon | GoogleDoc | TextDocument
+
+export type TextDocument = {
+  __typename?: 'TextDocument'
+  _additional: Maybe<TextDocumentAdditional>
+  authors: Maybe<Scalars['String']['output']>
+  blocks: Maybe<Array<Maybe<TextDocumentBlocksObj>>>
+  createdAt: Maybe<Scalars['String']['output']>
+  description: Maybe<Scalars['String']['output']>
+  ext: Maybe<Scalars['String']['output']>
+  html: Maybe<Scalars['String']['output']>
+  mimeType: Maybe<Scalars['String']['output']>
+  modifiedAt: Maybe<Scalars['String']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  properties: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  subtitle: Maybe<Scalars['String']['output']>
+  tags: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  text: Maybe<Scalars['String']['output']>
+  title: Maybe<Scalars['String']['output']>
+  toc: Maybe<Scalars['String']['output']>
+}
+
+export type TextDocumentAdditional = {
+  __typename?: 'TextDocumentAdditional'
+  certainty: Maybe<Scalars['Float']['output']>
+  classification: Maybe<TextDocumentAdditionalClassification>
+  creationTimeUnix: Maybe<Scalars['String']['output']>
+  distance: Maybe<Scalars['Float']['output']>
+  explainScore: Maybe<Scalars['String']['output']>
+  featureProjection: Maybe<TextDocumentAdditionalFeatureProjection>
+  group: Maybe<TextDocumentAdditionalGroup>
+  /** The UUID of a Object, assigned by its local Weaviate */
+  id: Maybe<Scalars['String']['output']>
+  lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
+  score: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type TextDocumentAdditionalFeatureProjectionArgs = {
+  algorithm?: InputMaybe<Scalars['String']['input']>
+  dimensions?: InputMaybe<Scalars['Int']['input']>
+  iterations?: InputMaybe<Scalars['Int']['input']>
+  learningRate?: InputMaybe<Scalars['Int']['input']>
+  perplexity?: InputMaybe<Scalars['Int']['input']>
+}
+
+export type TextDocumentAdditionalClassification = {
+  __typename?: 'TextDocumentAdditionalClassification'
+  basedOn: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  classifiedFields: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  completed: Maybe<Scalars['String']['output']>
+  id: Maybe<Scalars['String']['output']>
+  scope: Maybe<Array<Maybe<Scalars['String']['output']>>>
+}
+
+export type TextDocumentAdditionalFeatureProjection = {
+  __typename?: 'TextDocumentAdditionalFeatureProjection'
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type TextDocumentAdditionalGroup = {
+  __typename?: 'TextDocumentAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<TextDocumentAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<TextDocumentAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type TextDocumentAdditionalGroupGroupedBy = {
+  __typename?: 'TextDocumentAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type TextDocumentAdditionalGroupHits = {
+  __typename?: 'TextDocumentAdditionalGroupHits'
+  _additional: Maybe<TextDocumentAdditionalGroupHitsAdditional>
+  authors: Maybe<Scalars['String']['output']>
+  blocks: Maybe<Array<Maybe<TextDocumentBlocksObj>>>
+  createdAt: Maybe<Scalars['String']['output']>
+  description: Maybe<Scalars['String']['output']>
+  ext: Maybe<Scalars['String']['output']>
+  html: Maybe<Scalars['String']['output']>
+  mimeType: Maybe<Scalars['String']['output']>
+  modifiedAt: Maybe<Scalars['String']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  properties: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  subtitle: Maybe<Scalars['String']['output']>
+  tags: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  text: Maybe<Scalars['String']['output']>
+  title: Maybe<Scalars['String']['output']>
+  toc: Maybe<Scalars['String']['output']>
+}
+
+export type TextDocumentAdditionalGroupHitsAdditional = {
+  __typename?: 'TextDocumentAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type TextDocumentBlocksObj = Beacon | ImageBlock | TextBlock
 
 export type TocItem = {
   __typename?: 'TocItem'
@@ -4591,7 +8023,7 @@ export type TocItem = {
   title: Scalars['String']['output']
 }
 
-export type Txt2VecOpenAiAggregateAudioFileMoveAwayFrom = {
+export type Txt2VecC11yAggregateAudioFileMoveAwayFrom = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
@@ -4599,34 +8031,32 @@ export type Txt2VecOpenAiAggregateAudioFileMoveAwayFrom = {
   /** objects */
   objects?: InputMaybe<
     Array<
-      InputMaybe<Txt2VecOpenAiAggregateAudioFileMoveAwayFromMovementObjectsInpObj>
+      InputMaybe<Txt2VecC11yAggregateAudioFileMoveAwayFromMovementObjectsInpObj>
     >
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiAggregateAudioFileMoveAwayFromMovementObjectsInpObj = {
+export type Txt2VecC11yAggregateAudioFileMoveAwayFromMovementObjectsInpObj = {
   /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
   beacon?: InputMaybe<Scalars['String']['input']>
   /** id of an object */
   id?: InputMaybe<Scalars['String']['input']>
 }
 
-export type Txt2VecOpenAiAggregateAudioFileMoveTo = {
+export type Txt2VecC11yAggregateAudioFileMoveTo = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
   force: Scalars['Float']['input']
   /** objects */
   objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiAggregateAudioFileMoveToMovementObjectsInpObj>
-    >
+    Array<InputMaybe<Txt2VecC11yAggregateAudioFileMoveToMovementObjectsInpObj>>
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiAggregateAudioFileMoveToMovementObjectsInpObj = {
+export type Txt2VecC11yAggregateAudioFileMoveToMovementObjectsInpObj = {
   /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
   beacon?: InputMaybe<Scalars['String']['input']>
   /** id of an object */
@@ -4634,19 +8064,19 @@ export type Txt2VecOpenAiAggregateAudioFileMoveToMovementObjectsInpObj = {
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiAggregateAudioFileNearTextInpObj = {
+export type Txt2VecC11yAggregateAudioFileNearTextInpObj = {
   /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
   certainty?: InputMaybe<Scalars['Float']['input']>
   concepts: Array<InputMaybe<Scalars['String']['input']>>
   /** The required degree of similarity between an object's characteristics and the provided filter values */
   distance?: InputMaybe<Scalars['Float']['input']>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiAggregateAudioFileMoveAwayFrom>
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateAudioFileMoveAwayFrom>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiAggregateAudioFileMoveTo>
+  moveTo?: InputMaybe<Txt2VecC11yAggregateAudioFileMoveTo>
 }
 
-export type Txt2VecOpenAiAggregateGoogleCalendarEventMoveAwayFrom = {
+export type Txt2VecC11yAggregateGoogleCalendarEventMoveAwayFrom = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
@@ -4654,13 +8084,13 @@ export type Txt2VecOpenAiAggregateGoogleCalendarEventMoveAwayFrom = {
   /** objects */
   objects?: InputMaybe<
     Array<
-      InputMaybe<Txt2VecOpenAiAggregateGoogleCalendarEventMoveAwayFromMovementObjectsInpObj>
+      InputMaybe<Txt2VecC11yAggregateGoogleCalendarEventMoveAwayFromMovementObjectsInpObj>
     >
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiAggregateGoogleCalendarEventMoveAwayFromMovementObjectsInpObj =
+export type Txt2VecC11yAggregateGoogleCalendarEventMoveAwayFromMovementObjectsInpObj =
   {
     /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
     beacon?: InputMaybe<Scalars['String']['input']>
@@ -4668,7 +8098,7 @@ export type Txt2VecOpenAiAggregateGoogleCalendarEventMoveAwayFromMovementObjects
     id?: InputMaybe<Scalars['String']['input']>
   }
 
-export type Txt2VecOpenAiAggregateGoogleCalendarEventMoveTo = {
+export type Txt2VecC11yAggregateGoogleCalendarEventMoveTo = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
@@ -4676,292 +8106,13 @@ export type Txt2VecOpenAiAggregateGoogleCalendarEventMoveTo = {
   /** objects */
   objects?: InputMaybe<
     Array<
-      InputMaybe<Txt2VecOpenAiAggregateGoogleCalendarEventMoveToMovementObjectsInpObj>
+      InputMaybe<Txt2VecC11yAggregateGoogleCalendarEventMoveToMovementObjectsInpObj>
     >
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiAggregateGoogleCalendarEventMoveToMovementObjectsInpObj =
-  {
-    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-    beacon?: InputMaybe<Scalars['String']['input']>
-    /** id of an object */
-    id?: InputMaybe<Scalars['String']['input']>
-  }
-
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiAggregateGoogleCalendarEventNearTextInpObj = {
-  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
-  certainty?: InputMaybe<Scalars['Float']['input']>
-  concepts: Array<InputMaybe<Scalars['String']['input']>>
-  /** The required degree of similarity between an object's characteristics and the provided filter values */
-  distance?: InputMaybe<Scalars['Float']['input']>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiAggregateGoogleCalendarEventMoveAwayFrom>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiAggregateGoogleCalendarEventMoveTo>
-}
-
-export type Txt2VecOpenAiAggregateGoogleDocMoveAwayFrom = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiAggregateGoogleDocMoveAwayFromMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiAggregateGoogleDocMoveAwayFromMovementObjectsInpObj = {
-  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-  beacon?: InputMaybe<Scalars['String']['input']>
-  /** id of an object */
-  id?: InputMaybe<Scalars['String']['input']>
-}
-
-export type Txt2VecOpenAiAggregateGoogleDocMoveTo = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiAggregateGoogleDocMoveToMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiAggregateGoogleDocMoveToMovementObjectsInpObj = {
-  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-  beacon?: InputMaybe<Scalars['String']['input']>
-  /** id of an object */
-  id?: InputMaybe<Scalars['String']['input']>
-}
-
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiAggregateGoogleDocNearTextInpObj = {
-  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
-  certainty?: InputMaybe<Scalars['Float']['input']>
-  concepts: Array<InputMaybe<Scalars['String']['input']>>
-  /** The required degree of similarity between an object's characteristics and the provided filter values */
-  distance?: InputMaybe<Scalars['Float']['input']>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiAggregateGoogleDocMoveAwayFrom>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiAggregateGoogleDocMoveTo>
-}
-
-export type Txt2VecOpenAiAggregateImageBlockMoveAwayFrom = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiAggregateImageBlockMoveAwayFromMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiAggregateImageBlockMoveAwayFromMovementObjectsInpObj =
-  {
-    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-    beacon?: InputMaybe<Scalars['String']['input']>
-    /** id of an object */
-    id?: InputMaybe<Scalars['String']['input']>
-  }
-
-export type Txt2VecOpenAiAggregateImageBlockMoveTo = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiAggregateImageBlockMoveToMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiAggregateImageBlockMoveToMovementObjectsInpObj = {
-  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-  beacon?: InputMaybe<Scalars['String']['input']>
-  /** id of an object */
-  id?: InputMaybe<Scalars['String']['input']>
-}
-
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiAggregateImageBlockNearTextInpObj = {
-  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
-  certainty?: InputMaybe<Scalars['Float']['input']>
-  concepts: Array<InputMaybe<Scalars['String']['input']>>
-  /** The required degree of similarity between an object's characteristics and the provided filter values */
-  distance?: InputMaybe<Scalars['Float']['input']>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiAggregateImageBlockMoveAwayFrom>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiAggregateImageBlockMoveTo>
-}
-
-export type Txt2VecOpenAiAggregateTextBlockMoveAwayFrom = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiAggregateTextBlockMoveAwayFromMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiAggregateTextBlockMoveAwayFromMovementObjectsInpObj = {
-  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-  beacon?: InputMaybe<Scalars['String']['input']>
-  /** id of an object */
-  id?: InputMaybe<Scalars['String']['input']>
-}
-
-export type Txt2VecOpenAiAggregateTextBlockMoveTo = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiAggregateTextBlockMoveToMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiAggregateTextBlockMoveToMovementObjectsInpObj = {
-  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-  beacon?: InputMaybe<Scalars['String']['input']>
-  /** id of an object */
-  id?: InputMaybe<Scalars['String']['input']>
-}
-
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiAggregateTextBlockNearTextInpObj = {
-  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
-  certainty?: InputMaybe<Scalars['Float']['input']>
-  concepts: Array<InputMaybe<Scalars['String']['input']>>
-  /** The required degree of similarity between an object's characteristics and the provided filter values */
-  distance?: InputMaybe<Scalars['Float']['input']>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiAggregateTextBlockMoveAwayFrom>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiAggregateTextBlockMoveTo>
-}
-
-export type Txt2VecOpenAiGetObjectsAudioFileMoveAwayFrom = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsAudioFileMoveAwayFromMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiGetObjectsAudioFileMoveAwayFromMovementObjectsInpObj =
-  {
-    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-    beacon?: InputMaybe<Scalars['String']['input']>
-    /** id of an object */
-    id?: InputMaybe<Scalars['String']['input']>
-  }
-
-export type Txt2VecOpenAiGetObjectsAudioFileMoveTo = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsAudioFileMoveToMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiGetObjectsAudioFileMoveToMovementObjectsInpObj = {
-  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-  beacon?: InputMaybe<Scalars['String']['input']>
-  /** id of an object */
-  id?: InputMaybe<Scalars['String']['input']>
-}
-
-/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiGetObjectsAudioFileNearTextInpObj = {
-  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
-  certainty?: InputMaybe<Scalars['Float']['input']>
-  concepts: Array<InputMaybe<Scalars['String']['input']>>
-  /** The required degree of similarity between an object's characteristics and the provided filter values */
-  distance?: InputMaybe<Scalars['Float']['input']>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiGetObjectsAudioFileMoveAwayFrom>
-  /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiGetObjectsAudioFileMoveTo>
-}
-
-export type Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveAwayFrom = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveAwayFromMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveAwayFromMovementObjectsInpObj =
-  {
-    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-    beacon?: InputMaybe<Scalars['String']['input']>
-    /** id of an object */
-    id?: InputMaybe<Scalars['String']['input']>
-  }
-
-export type Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveTo = {
-  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
-  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
-  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
-  force: Scalars['Float']['input']
-  /** objects */
-  objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveToMovementObjectsInpObj>
-    >
-  >
-}
-
-/** Movement Object */
-export type Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveToMovementObjectsInpObj =
+export type Txt2VecC11yAggregateGoogleCalendarEventMoveToMovementObjectsInpObj =
   {
     /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
     beacon?: InputMaybe<Scalars['String']['input']>
@@ -4970,19 +8121,19 @@ export type Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveToMovementObjectsInpOb
   }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiGetObjectsGoogleCalendarEventNearTextInpObj = {
+export type Txt2VecC11yAggregateGoogleCalendarEventNearTextInpObj = {
   /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
   certainty?: InputMaybe<Scalars['Float']['input']>
   concepts: Array<InputMaybe<Scalars['String']['input']>>
   /** The required degree of similarity between an object's characteristics and the provided filter values */
   distance?: InputMaybe<Scalars['Float']['input']>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveAwayFrom>
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateGoogleCalendarEventMoveAwayFrom>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleCalendarEventMoveTo>
+  moveTo?: InputMaybe<Txt2VecC11yAggregateGoogleCalendarEventMoveTo>
 }
 
-export type Txt2VecOpenAiGetObjectsGoogleDocMoveAwayFrom = {
+export type Txt2VecC11yAggregateGoogleDocMoveAwayFrom = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
@@ -4990,35 +8141,32 @@ export type Txt2VecOpenAiGetObjectsGoogleDocMoveAwayFrom = {
   /** objects */
   objects?: InputMaybe<
     Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocMoveAwayFromMovementObjectsInpObj>
+      InputMaybe<Txt2VecC11yAggregateGoogleDocMoveAwayFromMovementObjectsInpObj>
     >
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiGetObjectsGoogleDocMoveAwayFromMovementObjectsInpObj =
-  {
-    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-    beacon?: InputMaybe<Scalars['String']['input']>
-    /** id of an object */
-    id?: InputMaybe<Scalars['String']['input']>
-  }
+export type Txt2VecC11yAggregateGoogleDocMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
 
-export type Txt2VecOpenAiGetObjectsGoogleDocMoveTo = {
+export type Txt2VecC11yAggregateGoogleDocMoveTo = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
   force: Scalars['Float']['input']
   /** objects */
   objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocMoveToMovementObjectsInpObj>
-    >
+    Array<InputMaybe<Txt2VecC11yAggregateGoogleDocMoveToMovementObjectsInpObj>>
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiGetObjectsGoogleDocMoveToMovementObjectsInpObj = {
+export type Txt2VecC11yAggregateGoogleDocMoveToMovementObjectsInpObj = {
   /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
   beacon?: InputMaybe<Scalars['String']['input']>
   /** id of an object */
@@ -5026,19 +8174,19 @@ export type Txt2VecOpenAiGetObjectsGoogleDocMoveToMovementObjectsInpObj = {
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiGetObjectsGoogleDocNearTextInpObj = {
+export type Txt2VecC11yAggregateGoogleDocNearTextInpObj = {
   /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
   certainty?: InputMaybe<Scalars['Float']['input']>
   concepts: Array<InputMaybe<Scalars['String']['input']>>
   /** The required degree of similarity between an object's characteristics and the provided filter values */
   distance?: InputMaybe<Scalars['Float']['input']>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocMoveAwayFrom>
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateGoogleDocMoveAwayFrom>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocMoveTo>
+  moveTo?: InputMaybe<Txt2VecC11yAggregateGoogleDocMoveTo>
 }
 
-export type Txt2VecOpenAiGetObjectsImageBlockMoveAwayFrom = {
+export type Txt2VecC11yAggregateImageBlockMoveAwayFrom = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
@@ -5046,35 +8194,32 @@ export type Txt2VecOpenAiGetObjectsImageBlockMoveAwayFrom = {
   /** objects */
   objects?: InputMaybe<
     Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsImageBlockMoveAwayFromMovementObjectsInpObj>
+      InputMaybe<Txt2VecC11yAggregateImageBlockMoveAwayFromMovementObjectsInpObj>
     >
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiGetObjectsImageBlockMoveAwayFromMovementObjectsInpObj =
-  {
-    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
-    beacon?: InputMaybe<Scalars['String']['input']>
-    /** id of an object */
-    id?: InputMaybe<Scalars['String']['input']>
-  }
+export type Txt2VecC11yAggregateImageBlockMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
 
-export type Txt2VecOpenAiGetObjectsImageBlockMoveTo = {
+export type Txt2VecC11yAggregateImageBlockMoveTo = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
   force: Scalars['Float']['input']
   /** objects */
   objects?: InputMaybe<
-    Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsImageBlockMoveToMovementObjectsInpObj>
-    >
+    Array<InputMaybe<Txt2VecC11yAggregateImageBlockMoveToMovementObjectsInpObj>>
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiGetObjectsImageBlockMoveToMovementObjectsInpObj = {
+export type Txt2VecC11yAggregateImageBlockMoveToMovementObjectsInpObj = {
   /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
   beacon?: InputMaybe<Scalars['String']['input']>
   /** id of an object */
@@ -5082,19 +8227,19 @@ export type Txt2VecOpenAiGetObjectsImageBlockMoveToMovementObjectsInpObj = {
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiGetObjectsImageBlockNearTextInpObj = {
+export type Txt2VecC11yAggregateImageBlockNearTextInpObj = {
   /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
   certainty?: InputMaybe<Scalars['Float']['input']>
   concepts: Array<InputMaybe<Scalars['String']['input']>>
   /** The required degree of similarity between an object's characteristics and the provided filter values */
   distance?: InputMaybe<Scalars['Float']['input']>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiGetObjectsImageBlockMoveAwayFrom>
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateImageBlockMoveAwayFrom>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiGetObjectsImageBlockMoveTo>
+  moveTo?: InputMaybe<Txt2VecC11yAggregateImageBlockMoveTo>
 }
 
-export type Txt2VecOpenAiGetObjectsTextBlockMoveAwayFrom = {
+export type Txt2VecC11yAggregateSubtitleEntryMoveAwayFrom = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
@@ -5102,13 +8247,13 @@ export type Txt2VecOpenAiGetObjectsTextBlockMoveAwayFrom = {
   /** objects */
   objects?: InputMaybe<
     Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsTextBlockMoveAwayFromMovementObjectsInpObj>
+      InputMaybe<Txt2VecC11yAggregateSubtitleEntryMoveAwayFromMovementObjectsInpObj>
     >
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiGetObjectsTextBlockMoveAwayFromMovementObjectsInpObj =
+export type Txt2VecC11yAggregateSubtitleEntryMoveAwayFromMovementObjectsInpObj =
   {
     /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
     beacon?: InputMaybe<Scalars['String']['input']>
@@ -5116,7 +8261,7 @@ export type Txt2VecOpenAiGetObjectsTextBlockMoveAwayFromMovementObjectsInpObj =
     id?: InputMaybe<Scalars['String']['input']>
   }
 
-export type Txt2VecOpenAiGetObjectsTextBlockMoveTo = {
+export type Txt2VecC11yAggregateSubtitleEntryMoveTo = {
   /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
   concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
@@ -5124,13 +8269,13 @@ export type Txt2VecOpenAiGetObjectsTextBlockMoveTo = {
   /** objects */
   objects?: InputMaybe<
     Array<
-      InputMaybe<Txt2VecOpenAiGetObjectsTextBlockMoveToMovementObjectsInpObj>
+      InputMaybe<Txt2VecC11yAggregateSubtitleEntryMoveToMovementObjectsInpObj>
     >
   >
 }
 
 /** Movement Object */
-export type Txt2VecOpenAiGetObjectsTextBlockMoveToMovementObjectsInpObj = {
+export type Txt2VecC11yAggregateSubtitleEntryMoveToMovementObjectsInpObj = {
   /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
   beacon?: InputMaybe<Scalars['String']['input']>
   /** id of an object */
@@ -5138,16 +8283,917 @@ export type Txt2VecOpenAiGetObjectsTextBlockMoveToMovementObjectsInpObj = {
 }
 
 /** An object containing filter options for a local Get query, used to convert the result to the specified filters */
-export type Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj = {
+export type Txt2VecC11yAggregateSubtitleEntryNearTextInpObj = {
   /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
   certainty?: InputMaybe<Scalars['Float']['input']>
   concepts: Array<InputMaybe<Scalars['String']['input']>>
   /** The required degree of similarity between an object's characteristics and the provided filter values */
   distance?: InputMaybe<Scalars['Float']['input']>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveAwayFrom?: InputMaybe<Txt2VecOpenAiGetObjectsTextBlockMoveAwayFrom>
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateSubtitleEntryMoveAwayFrom>
   /** Move your search term closer to or further away from another vector described by keywords */
-  moveTo?: InputMaybe<Txt2VecOpenAiGetObjectsTextBlockMoveTo>
+  moveTo?: InputMaybe<Txt2VecC11yAggregateSubtitleEntryMoveTo>
+}
+
+export type Txt2VecC11yAggregateSubtitleFileMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yAggregateSubtitleFileMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateSubtitleFileMoveAwayFromMovementObjectsInpObj =
+  {
+    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+    beacon?: InputMaybe<Scalars['String']['input']>
+    /** id of an object */
+    id?: InputMaybe<Scalars['String']['input']>
+  }
+
+export type Txt2VecC11yAggregateSubtitleFileMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yAggregateSubtitleFileMoveToMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateSubtitleFileMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yAggregateSubtitleFileNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateSubtitleFileMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yAggregateSubtitleFileMoveTo>
+}
+
+export type Txt2VecC11yAggregateTextBlockMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yAggregateTextBlockMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateTextBlockMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yAggregateTextBlockMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yAggregateTextBlockMoveToMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateTextBlockMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yAggregateTextBlockNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateTextBlockMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yAggregateTextBlockMoveTo>
+}
+
+export type Txt2VecC11yAggregateTextDocumentMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yAggregateTextDocumentMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateTextDocumentMoveAwayFromMovementObjectsInpObj =
+  {
+    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+    beacon?: InputMaybe<Scalars['String']['input']>
+    /** id of an object */
+    id?: InputMaybe<Scalars['String']['input']>
+  }
+
+export type Txt2VecC11yAggregateTextDocumentMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yAggregateTextDocumentMoveToMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateTextDocumentMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yAggregateTextDocumentNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateTextDocumentMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yAggregateTextDocumentMoveTo>
+}
+
+export type Txt2VecC11yAggregateVideoFileMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yAggregateVideoFileMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateVideoFileMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yAggregateVideoFileMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yAggregateVideoFileMoveToMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yAggregateVideoFileMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yAggregateVideoFileNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yAggregateVideoFileMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yAggregateVideoFileMoveTo>
+}
+
+export type Txt2VecC11yExploreMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yExploreMoveAwayFromMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yExploreMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yExploreMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yExploreMoveToMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yExploreMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yExploreNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yExploreMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yExploreMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsAudioFileMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsAudioFileMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsAudioFileMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yGetObjectsAudioFileMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yGetObjectsAudioFileMoveToMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsAudioFileMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsAudioFileNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsAudioFileMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsAudioFileMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsGoogleCalendarEventMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsGoogleCalendarEventMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsGoogleCalendarEventMoveAwayFromMovementObjectsInpObj =
+  {
+    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+    beacon?: InputMaybe<Scalars['String']['input']>
+    /** id of an object */
+    id?: InputMaybe<Scalars['String']['input']>
+  }
+
+export type Txt2VecC11yGetObjectsGoogleCalendarEventMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsGoogleCalendarEventMoveToMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsGoogleCalendarEventMoveToMovementObjectsInpObj =
+  {
+    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+    beacon?: InputMaybe<Scalars['String']['input']>
+    /** id of an object */
+    id?: InputMaybe<Scalars['String']['input']>
+  }
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsGoogleCalendarEventNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsGoogleCalendarEventMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsGoogleCalendarEventMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsGoogleDocMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsGoogleDocMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsGoogleDocMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yGetObjectsGoogleDocMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yGetObjectsGoogleDocMoveToMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsGoogleDocMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsGoogleDocNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsGoogleDocMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsGoogleDocMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsImageBlockMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsImageBlockMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsImageBlockMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yGetObjectsImageBlockMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsImageBlockMoveToMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsImageBlockMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsImageBlockNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsImageBlockMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsImageBlockMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsSubtitleEntryMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsSubtitleEntryMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsSubtitleEntryMoveAwayFromMovementObjectsInpObj =
+  {
+    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+    beacon?: InputMaybe<Scalars['String']['input']>
+    /** id of an object */
+    id?: InputMaybe<Scalars['String']['input']>
+  }
+
+export type Txt2VecC11yGetObjectsSubtitleEntryMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsSubtitleEntryMoveToMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsSubtitleEntryMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsSubtitleEntryNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsSubtitleEntryMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsSubtitleEntryMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsSubtitleFileMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsSubtitleFileMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsSubtitleFileMoveAwayFromMovementObjectsInpObj =
+  {
+    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+    beacon?: InputMaybe<Scalars['String']['input']>
+    /** id of an object */
+    id?: InputMaybe<Scalars['String']['input']>
+  }
+
+export type Txt2VecC11yGetObjectsSubtitleFileMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsSubtitleFileMoveToMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsSubtitleFileMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsSubtitleFileNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsSubtitleFileMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsSubtitleFileMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsTextBlockMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsTextBlockMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsTextBlockMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yGetObjectsTextBlockMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yGetObjectsTextBlockMoveToMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsTextBlockMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsTextBlockNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsTextBlockMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsTextBlockMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsTextDocumentMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsTextDocumentMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsTextDocumentMoveAwayFromMovementObjectsInpObj =
+  {
+    /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+    beacon?: InputMaybe<Scalars['String']['input']>
+    /** id of an object */
+    id?: InputMaybe<Scalars['String']['input']>
+  }
+
+export type Txt2VecC11yGetObjectsTextDocumentMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsTextDocumentMoveToMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsTextDocumentMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsTextDocumentNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsTextDocumentMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsTextDocumentMoveTo>
+}
+
+export type Txt2VecC11yGetObjectsVideoFileMoveAwayFrom = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<
+      InputMaybe<Txt2VecC11yGetObjectsVideoFileMoveAwayFromMovementObjectsInpObj>
+    >
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsVideoFileMoveAwayFromMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+export type Txt2VecC11yGetObjectsVideoFileMoveTo = {
+  /** Keywords are a list of search terms. Array type, e.g. ["keyword 1", "keyword 2"] */
+  concepts?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+  /** The force to apply for a particular movements. Must be between 0 and 1 where 0 is equivalent to no movement and 1 is equivalent to largest movement possible */
+  force: Scalars['Float']['input']
+  /** objects */
+  objects?: InputMaybe<
+    Array<InputMaybe<Txt2VecC11yGetObjectsVideoFileMoveToMovementObjectsInpObj>>
+  >
+}
+
+/** Movement Object */
+export type Txt2VecC11yGetObjectsVideoFileMoveToMovementObjectsInpObj = {
+  /** Concept identifier in the beacon format, such as weaviate://<hostname>/<kind>/id */
+  beacon?: InputMaybe<Scalars['String']['input']>
+  /** id of an object */
+  id?: InputMaybe<Scalars['String']['input']>
+}
+
+/** An object containing filter options for a local Get query, used to convert the result to the specified filters */
+export type Txt2VecC11yGetObjectsVideoFileNearTextInpObj = {
+  /** Normalized Distance between the result item and the search vector. Normalized to be between 0 (identical vectors) and 1 (perfect opposite). */
+  certainty?: InputMaybe<Scalars['Float']['input']>
+  concepts: Array<InputMaybe<Scalars['String']['input']>>
+  /** The required degree of similarity between an object's characteristics and the provided filter values */
+  distance?: InputMaybe<Scalars['Float']['input']>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveAwayFrom?: InputMaybe<Txt2VecC11yGetObjectsVideoFileMoveAwayFrom>
+  /** Move your search term closer to or further away from another vector described by keywords */
+  moveTo?: InputMaybe<Txt2VecC11yGetObjectsVideoFileMoveTo>
+}
+
+export type VideoFile = {
+  __typename?: 'VideoFile'
+  _additional: Maybe<VideoFileAdditional>
+  animatedImageUrl: Maybe<VideoFile_AnimatedImageUrl_Object>
+  assetId: Maybe<Scalars['String']['output']>
+  blob: Maybe<Scalars['String']['output']>
+  duration: Maybe<Scalars['Float']['output']>
+  ext: Maybe<Scalars['String']['output']>
+  files: Maybe<Array<Maybe<VideoFile_Files_Object>>>
+  height: Maybe<Scalars['Float']['output']>
+  hlsUrl: Maybe<Scalars['String']['output']>
+  mimeType: Maybe<Scalars['String']['output']>
+  order: Maybe<Scalars['Int']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  playbackId: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Int']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  subtitles: Maybe<Array<Maybe<VideoFileSubtitlesObj>>>
+  thumbnailUrl: Maybe<VideoFile_ThumbnailUrl_Object>
+  url: Maybe<Scalars['String']['output']>
+  width: Maybe<Scalars['Float']['output']>
+}
+
+export type VideoFileAdditional = {
+  __typename?: 'VideoFileAdditional'
+  certainty: Maybe<Scalars['Float']['output']>
+  classification: Maybe<VideoFileAdditionalClassification>
+  creationTimeUnix: Maybe<Scalars['String']['output']>
+  distance: Maybe<Scalars['Float']['output']>
+  explainScore: Maybe<Scalars['String']['output']>
+  featureProjection: Maybe<VideoFileAdditionalFeatureProjection>
+  group: Maybe<VideoFileAdditionalGroup>
+  /** The UUID of a Object, assigned by its local Weaviate */
+  id: Maybe<Scalars['String']['output']>
+  lastUpdateTimeUnix: Maybe<Scalars['String']['output']>
+  score: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type VideoFileAdditionalFeatureProjectionArgs = {
+  algorithm?: InputMaybe<Scalars['String']['input']>
+  dimensions?: InputMaybe<Scalars['Int']['input']>
+  iterations?: InputMaybe<Scalars['Int']['input']>
+  learningRate?: InputMaybe<Scalars['Int']['input']>
+  perplexity?: InputMaybe<Scalars['Int']['input']>
+}
+
+export type VideoFileAdditionalClassification = {
+  __typename?: 'VideoFileAdditionalClassification'
+  basedOn: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  classifiedFields: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  completed: Maybe<Scalars['String']['output']>
+  id: Maybe<Scalars['String']['output']>
+  scope: Maybe<Array<Maybe<Scalars['String']['output']>>>
+}
+
+export type VideoFileAdditionalFeatureProjection = {
+  __typename?: 'VideoFileAdditionalFeatureProjection'
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type VideoFileAdditionalGroup = {
+  __typename?: 'VideoFileAdditionalGroup'
+  count: Maybe<Scalars['Int']['output']>
+  groupedBy: Maybe<VideoFileAdditionalGroupGroupedBy>
+  hits: Maybe<Array<Maybe<VideoFileAdditionalGroupHits>>>
+  id: Maybe<Scalars['Int']['output']>
+  maxDistance: Maybe<Scalars['Float']['output']>
+  minDistance: Maybe<Scalars['Float']['output']>
+}
+
+export type VideoFileAdditionalGroupGroupedBy = {
+  __typename?: 'VideoFileAdditionalGroupGroupedBy'
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  value: Maybe<Scalars['String']['output']>
+}
+
+export type VideoFileAdditionalGroupHits = {
+  __typename?: 'VideoFileAdditionalGroupHits'
+  _additional: Maybe<VideoFileAdditionalGroupHitsAdditional>
+  animatedImageUrl: Maybe<VideoFile_AnimatedImageUrl_Object>
+  assetId: Maybe<Scalars['String']['output']>
+  blob: Maybe<Scalars['String']['output']>
+  duration: Maybe<Scalars['Float']['output']>
+  ext: Maybe<Scalars['String']['output']>
+  files: Maybe<Array<Maybe<VideoFile_Files_Object>>>
+  height: Maybe<Scalars['Float']['output']>
+  hlsUrl: Maybe<Scalars['String']['output']>
+  mimeType: Maybe<Scalars['String']['output']>
+  order: Maybe<Scalars['Int']['output']>
+  originalName: Maybe<Scalars['String']['output']>
+  path: Maybe<Array<Maybe<Scalars['String']['output']>>>
+  pathString: Maybe<Scalars['String']['output']>
+  playbackId: Maybe<Scalars['String']['output']>
+  remoteId: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Int']['output']>
+  sourceId: Maybe<Scalars['String']['output']>
+  subtitles: Maybe<Array<Maybe<VideoFileSubtitlesObj>>>
+  thumbnailUrl: Maybe<VideoFile_ThumbnailUrl_Object>
+  url: Maybe<Scalars['String']['output']>
+  width: Maybe<Scalars['Float']['output']>
+}
+
+export type VideoFileAdditionalGroupHitsAdditional = {
+  __typename?: 'VideoFileAdditionalGroupHitsAdditional'
+  distance: Maybe<Scalars['Float']['output']>
+  id: Maybe<Scalars['String']['output']>
+  vector: Maybe<Array<Maybe<Scalars['Float']['output']>>>
+}
+
+export type VideoFileSubtitlesObj = Beacon | SubtitleFile
+
+export type VideoFile_AnimatedImageUrl_Object = {
+  __typename?: 'VideoFile_animatedImageUrl_object'
+  jpeg: Maybe<Scalars['String']['output']>
+  png: Maybe<Scalars['String']['output']>
+  webp: Maybe<Scalars['String']['output']>
+}
+
+export type VideoFile_Files_Object = {
+  __typename?: 'VideoFile_files_object'
+  bitrate: Maybe<Scalars['Float']['output']>
+  ext: Maybe<Scalars['String']['output']>
+  height: Maybe<Scalars['Float']['output']>
+  name: Maybe<Scalars['String']['output']>
+  size: Maybe<Scalars['Float']['output']>
+  url: Maybe<Scalars['String']['output']>
+  width: Maybe<Scalars['Float']['output']>
+}
+
+export type VideoFile_ThumbnailUrl_Object = {
+  __typename?: 'VideoFile_thumbnailUrl_object'
+  jpeg: Maybe<Scalars['String']['output']>
+  png: Maybe<Scalars['String']['output']>
+  webp: Maybe<Scalars['String']['output']>
 }
 
 /** Location of the root query */
@@ -5155,8 +9201,19 @@ export type WeaviateObj = {
   __typename?: 'WeaviateObj'
   /** Filter options for a local Aggregate query, used to convert the result to the specified filters */
   Aggregate: Maybe<AggregateObjectsObj>
+  /** Explore Concepts on a local weaviate with vector-aided search */
+  Explore: Maybe<Array<Maybe<ExploreObj>>>
   /** Get Objects on a local Weaviate */
   Get: Maybe<GetObjectsObj>
+}
+
+/** Location of the root query */
+export type WeaviateObjExploreArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>
+  nearObject?: InputMaybe<ExploreNearObjectInpObj>
+  nearText?: InputMaybe<Txt2VecC11yExploreNearTextInpObj>
+  nearVector?: InputMaybe<ExploreNearVectorInpObj>
+  offset?: InputMaybe<Scalars['Int']['input']>
 }
 
 export type TextBlockCommonFragment = {
@@ -5263,6 +9320,7 @@ export type SearchImageBlockFragment = {
           emailAddress: string
         }>
       }
+    | { __typename?: 'TextDocument' }
   >
 }
 
@@ -5302,6 +9360,7 @@ export type SearchTextBlockFragment = {
           emailAddress: string
         }>
       }
+    | { __typename?: 'TextDocument' }
   >
   footnotesObj: Array<{
     __typename?: 'Footnote'
@@ -5375,7 +9434,7 @@ export type GetPostsQueryVariables = Exact<{
     | InputMaybe<GetObjectsGoogleDocSortInpObj>
   >
   searchResult?: InputMaybe<Scalars['Boolean']['input']>
-  nearText?: InputMaybe<Txt2VecOpenAiGetObjectsGoogleDocNearTextInpObj>
+  nearText?: InputMaybe<Txt2VecC11yGetObjectsGoogleDocNearTextInpObj>
   hybrid?: InputMaybe<GetObjectsGoogleDocHybridInpObj>
   nearObject?: InputMaybe<GetObjectsGoogleDocNearObjectInpObj>
   skip?: InputMaybe<Scalars['Int']['input']>
@@ -5481,8 +9540,8 @@ export type GetAllTopicsQuery = {
 export type SearchBlocksQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>
   skip?: InputMaybe<Scalars['Int']['input']>
-  textNearText?: InputMaybe<Txt2VecOpenAiGetObjectsTextBlockNearTextInpObj>
-  imageNearText?: InputMaybe<Txt2VecOpenAiGetObjectsImageBlockNearTextInpObj>
+  textNearText?: InputMaybe<Txt2VecC11yGetObjectsTextBlockNearTextInpObj>
+  imageNearText?: InputMaybe<Txt2VecC11yGetObjectsImageBlockNearTextInpObj>
   textFilter?: InputMaybe<GetObjectsTextBlockWhereInpObj>
   imageFilter?: InputMaybe<GetObjectsImageBlockWhereInpObj>
   textHybrid?: InputMaybe<GetObjectsTextBlockHybridInpObj>
@@ -5534,6 +9593,7 @@ export type SearchBlocksQuery = {
               emailAddress: string
             }>
           }
+        | { __typename?: 'TextDocument' }
       >
       _additional: {
         __typename?: 'TextBlockAdditional'
@@ -5572,6 +9632,7 @@ export type SearchBlocksQuery = {
               emailAddress: string
             }>
           }
+        | { __typename?: 'TextDocument' }
       >
       _additional: {
         __typename?: 'ImageBlockAdditional'
@@ -6459,7 +10520,7 @@ export const GetPostsDocument = {
             kind: 'NamedType',
             name: {
               kind: 'Name',
-              value: 'Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj',
+              value: 'Txt2VecC11yGetObjectsGoogleDocNearTextInpObj',
             },
           },
         },
@@ -7233,7 +11294,7 @@ export const SearchBlocksDocument = {
             kind: 'NamedType',
             name: {
               kind: 'Name',
-              value: 'Txt2VecOpenAIGetObjectsTextBlockNearTextInpObj',
+              value: 'Txt2VecC11yGetObjectsTextBlockNearTextInpObj',
             },
           },
         },
@@ -7247,7 +11308,7 @@ export const SearchBlocksDocument = {
             kind: 'NamedType',
             name: {
               kind: 'Name',
-              value: 'Txt2VecOpenAIGetObjectsImageBlockNearTextInpObj',
+              value: 'Txt2VecC11yGetObjectsImageBlockNearTextInpObj',
             },
           },
         },

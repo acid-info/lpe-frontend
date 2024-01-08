@@ -21,6 +21,9 @@ const config: CodegenConfig = {
   ],
   documents: ['src/**/*.{ts,tsx}'],
   generates: {
+    'src/lib/unbody/unbody.graphql': {
+      plugins: ['schema-ast'],
+    },
     'src/lib/unbody/unbody.generated.ts': {
       plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
       presetConfig: {

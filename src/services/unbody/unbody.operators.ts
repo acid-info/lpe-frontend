@@ -16,7 +16,7 @@ export const GET_POSTS_QUERY = gql`
     $filter: GetObjectsGoogleDocWhereInpObj
     $sort: [GetObjectsGoogleDocSortInpObj]
     $searchResult: Boolean = false
-    $nearText: Txt2VecOpenAIGetObjectsGoogleDocNearTextInpObj
+    $nearText: Txt2VecC11yGetObjectsGoogleDocNearTextInpObj
     $hybrid: GetObjectsGoogleDocHybridInpObj
     $nearObject: GetObjectsGoogleDocNearObjectInpObj
     $skip: Int = 0
@@ -120,8 +120,8 @@ export const SEARCH_BLOCKS_QUERY = gql`
   query SearchBlocks(
     $limit: Int
     $skip: Int
-    $textNearText: Txt2VecOpenAIGetObjectsTextBlockNearTextInpObj
-    $imageNearText: Txt2VecOpenAIGetObjectsImageBlockNearTextInpObj
+    $textNearText: Txt2VecC11yGetObjectsTextBlockNearTextInpObj
+    $imageNearText: Txt2VecC11yGetObjectsImageBlockNearTextInpObj
     $textFilter: GetObjectsTextBlockWhereInpObj
     $imageFilter: GetObjectsImageBlockWhereInpObj
     $textHybrid: GetObjectsTextBlockHybridInpObj
