@@ -81,7 +81,7 @@ const PodcastsGrid = styled(Grid)`
   padding-top: 64px;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
-    padding-top: 24px;
+    padding-top: var(--lsd-spacing-8);
   }
 `
 
