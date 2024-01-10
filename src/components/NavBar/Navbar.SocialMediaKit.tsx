@@ -39,7 +39,7 @@ export const SocialMediaKit = () => {
                   title={`Join us on ${link.label}`}
                   target={'_blank'}
                 >
-                  <Icon />
+                  <Icon color="primary" />
                 </Link>
               </LinkContainer>
             )

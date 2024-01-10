@@ -1,5 +1,6 @@
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
+import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { lsdUtils } from '../../utils/lsd.utils'
@@ -15,18 +16,15 @@ export const NavbarLinks = ({ links }: Props) => {
   return (
     <Container>
       {links.map((link, idx) => (
-        <>
-          <LinkText variant={'label2'}>
-            <Link
-              href={link.href}
-              key={`navbar-link-${idx}`}
-              className={pathname === link.href ? 'active' : ''}
-            >
-              {link.label}
-            </Link>
-          </LinkText>
-          {idx !== links.length - 1 && <span className={'divider'} />}
-        </>
+        <Link
+          key={idx}
+          href={link.href}
+          className={clsx(pathname === link.href && 'active')}
+        >
+          <Typography variant="label1" component="span">
+            {link.label}
+          </Typography>
+        </Link>
       ))}
     </Container>
   )
@@ -36,6 +34,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0 var(--lsd-spacing-24);
 
   a {
     text-decoration: none;
@@ -48,15 +47,6 @@ const Container = styled.div`
     text-decoration: underline;
   }
 
-  .divider {
-    display: block;
-    width: 2px;
-    height: 2px;
-    background: rgb(var(--lsd-surface-secondary));
-    border-radius: 50%;
-    margin: 0 20px;
-  }
-
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     flex-direction: column;
     align-items: flex-start;
@@ -65,20 +55,5 @@ const Container = styled.div`
     padding-bottom: 16px;
     gap: 0;
     height: 100%;
-
-    > label {
-      padding: 14px 0;
-    }
-
-    .divider {
-      display: none;
-    }
-  }
-`
-
-const LinkText = styled(Typography)`
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    font-size: 20px; // LSD doesn't have this font size
-    line-height: 28px; // LSD doesn't have this line height
   }
 `

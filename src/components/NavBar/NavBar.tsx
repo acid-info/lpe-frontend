@@ -14,6 +14,7 @@ import {
 } from '@acid-info/lsd-react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -33,6 +34,7 @@ export default function NavBar({ defaultState }: NavBarProps) {
   const [hide, setHide] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
+  const isSearchPage = pathname === '/search'
   const className = pathname.split('/')[1] + '_page'
 
   const toggleMobileMenu = () => {
@@ -55,7 +57,10 @@ export default function NavBar({ defaultState }: NavBarProps) {
       </IconButton>
     ) : (
       <Link href={'/search'}>
-        <IconButton size={'small'}>
+        <IconButton
+          size={'small'}
+          variant={isSearchPage ? 'filled' : 'outlined'}
+        >
           <SearchIcon color={'primary'} />
         </IconButton>
       </Link>
@@ -63,7 +68,6 @@ export default function NavBar({ defaultState }: NavBarProps) {
 
   const buttons = (
     <>
-      <SubscribeButton />
       <Buttons>
         <ThemeSwitch
           toggle={themeState.toggleMode}
@@ -72,8 +76,6 @@ export default function NavBar({ defaultState }: NavBarProps) {
         {searchButton}
       </Buttons>
       <Buttons mobile>
-        {searchButton}
-
         <IconButton size={'small'} onClick={toggleMobileMenu}>
           {showMobileMenu ? (
             <CloseIcon color="primary" />
@@ -86,21 +88,26 @@ export default function NavBar({ defaultState }: NavBarProps) {
   )
 
   return (
-    <Container className={`${hide ? 'hide' : ''} ${className}`}>
+    <Container className={clsx(hide && 'hide', className)}>
       <NavBarContainer bordered={state.showTitle.get()}>
-        <LeftContainer href={'/'}>
-          <LogosIcon color="primary" />
-          <PressLogoType
-            variant={'h6'}
-            genericFontFamily={'serif'}
-            display={state.showTitle.get() || showMobileMenu}
-          >
-            {state.title.get()}
-          </PressLogoType>
-        </LeftContainer>
+        <Buttons mobile>{searchButton}</Buttons>
         <NavLinksContainer>
           <NavbarLinks links={NavLinksItems} />
+          <SubscribeButton />
         </NavLinksContainer>
+        <Centered>
+          <Logo href="/">
+            <LogosIcon color="primary" />
+            <PressLogoType
+              variant="h4"
+              component="span"
+              genericFontFamily="serif"
+              display={state.showTitle.get() || showMobileMenu}
+            >
+              {state.title.get()}
+            </PressLogoType>
+          </Logo>
+        </Centered>
         <ControlsContainer>
           <SocialMediaKitContainer>
             <SocialMediaKit />
@@ -118,8 +125,7 @@ const PressLogoType = styled(Typography)<{ display: boolean }>`
   ${(props) =>
     !props.display &&
     css`
-      opacity: 0;
-      visibility: hidden;
+      display: none;
     `}
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
@@ -137,7 +143,7 @@ const Container = styled.header<{
   bordered?: boolean
 }>`
   width: 100%;
-  height: 44px;
+  height: 60px;
 
   position: fixed;
   top: 0;
@@ -182,8 +188,11 @@ const NavBarContainer = styled.nav<{
   justify-content: space-between;
   position: relative;
   height: 100%;
-  border-bottom: ${(props) => (props.bordered ? '1px' : '0px')} solid
-    rgb(var(--lsd-theme-primary));
+  border-bottom: 1px solid
+    ${(props) =>
+      props.bordered
+        ? 'rgb(var(--lsd-theme-primary))'
+        : 'rgb(var(--lsd-theme-secondary))'};
 
   margin: auto;
 
@@ -193,8 +202,8 @@ const NavBarContainer = styled.nav<{
   box-sizing: border-box;
 
   > * {
-    display: flex;
     align-items: center;
+    flex: 0 1 auto;
   }
 
   style {
@@ -207,29 +216,30 @@ const NavBarContainer = styled.nav<{
 `
 
 const NavLinksContainer = styled.div`
-  flex: 1;
-  justify-content: center;
+  display: flex;
+  gap: 0 var(--lsd-spacing-32);
+  align-items: center;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     display: none !important;
   }
 `
 
-const LeftContainer = styled(Link)`
-  flex: 0 0 auto;
-  text-decoration: none;
+const Centered = styled.div`
   position: absolute;
-  left: 0;
-  display: flex;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`
 
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    position: relative;
-  }
+const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 0 var(--lsd-spacing-8);
 `
 
 const ControlsContainer = styled.div`
-  position: absolute;
-  right: 0;
   display: flex;
   align-items: center;
   gap: 24px;
