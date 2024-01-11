@@ -31,6 +31,7 @@ export default async function handler(request: NextRequest) {
   const alt = searchParams.get('alt') || ''
   const pagePath = searchParams.get('pagePath') || 'press.logos.co'
   const date = searchParams.get('date')
+  const authors = searchParams.get('authors')
 
   const imgSrc = image
   const hasImage = !!imgSrc?.length
@@ -44,7 +45,7 @@ export default async function handler(request: NextRequest) {
 
   const isArticle = contentType === 'article'
   const titleFontSize = isArticle && hasImage ? '54px' : '64px'
-  const subtitleFontSize = isArticle && hasImage ? '32px' : '36px'
+  const subtitleFontSize = isArticle && hasImage ? '26px' : '32px'
   const subtitleGap = isArticle && hasImage ? '16px' : '24px'
   const subtitleMargin = isArticle && hasImage ? '24px' : '40px'
 
@@ -139,13 +140,13 @@ export default async function handler(request: NextRequest) {
                 style={{
                   display: 'flex',
                   fontFamily: 'Lora',
-                  fontSize: '40px',
+                  fontSize: '26px',
                   whiteSpace: 'pre-wrap',
                   textTransform: 'uppercase',
-                  paddingLeft: '13px',
+                  paddingLeft: '3px',
                 }}
               >
-                <span>{siteConfigs.title.replace('Logos ', '')}</span>
+                <span>{siteConfigs.title}</span>
               </div>
             )}
           </div>
@@ -181,8 +182,10 @@ export default async function handler(request: NextRequest) {
               }}
             >
               <span>
-                {contentType ??
-                  pagePath.replace(/^\/+/, '').replace(/\/+/, ' | ')}
+                {contentType === 'article' && authors
+                  ? `By ${authors}`
+                  : contentType ??
+                    pagePath.replace(/^\/+/, '').replace(/\/+/, ' | ')}
               </span>
               {date && <span>∙</span>}
               {date && <span>{`${day} ${month} ${year}`}</span>}
