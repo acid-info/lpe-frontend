@@ -18,6 +18,7 @@ type Metadata = {
   date?: string | null
   contentType?: LPE.PostType
   noIndex?: boolean
+  authors?: string[]
 }
 
 const SITE_URL = getWebsiteUrl()
@@ -36,6 +37,7 @@ export default function SEO({
   date,
   contentType,
   noIndex = false,
+  authors,
 }: Metadata) {
   const title =
     _title && _title.length
@@ -51,6 +53,7 @@ export default function SEO({
       contentType,
       date,
       pagePath,
+      authors,
     })
 
   return (
