@@ -1,5 +1,4 @@
 import { siteConfigs } from '@/configs/site.configs'
-import { LPE } from '@/types/lpe.types'
 import { ImageResponse } from '@vercel/og'
 import { handleMethodNotAllowedResponse } from 'next/dist/server/future/route-modules/helpers/response-handlers'
 import { NextRequest } from 'next/server'
@@ -23,13 +22,14 @@ export default async function handler(request: NextRequest) {
     decodeURIComponent(request.nextUrl.searchParams.get('q') || ''),
   )
   const contentType = searchParams.get('contentType')
+
+  const domain = 'press.logos.co'
   const title =
-    contentType == null
-      ? siteConfigs.heroTitle.join('')
-      : searchParams.get('title')
+    contentType == null ? 'LOGOS → PRESS ENGINE' : searchParams.get('title')
+
   const image = searchParams.get('image') || ''
   const alt = searchParams.get('alt') || ''
-  const pagePath = searchParams.get('pagePath') || 'press.logos.co'
+  const pagePath = searchParams.get('pagePath') || domain
   const date = searchParams.get('date')
   const authors = searchParams.get('authors')
 
@@ -44,13 +44,16 @@ export default async function handler(request: NextRequest) {
   const titleMaxLength = 66
 
   const isArticle = contentType === 'article'
-  const titleFontSize = isArticle && hasImage ? '54px' : '64px'
-  const subtitleFontSize = isArticle && hasImage ? '26px' : '32px'
-  const subtitleGap = isArticle && hasImage ? '16px' : '24px'
-  const subtitleMargin = isArticle && hasImage ? '24px' : '40px'
+  const isPodcast = contentType === 'podcast'
+  const isArticleOrPodcast = isArticle || isPodcast
+
+  const titleFontSize = isArticleOrPodcast && hasImage ? '54px' : '64px'
+  const subtitleFontSize = isArticleOrPodcast && hasImage ? '32px' : '36px'
+  const subtitleGap = isArticleOrPodcast && hasImage ? '16px' : '24px'
+  const subtitleMargin = isArticleOrPodcast && hasImage ? '24px' : '40px'
 
   return new ImageResponse(
-    contentType === LPE.PostTypes.Podcast ? (
+    contentType === 'podcast' && pagePath?.includes('/hashing-it-out') ? (
       <img
         src={imgSrc}
         alt={alt}
@@ -79,8 +82,8 @@ export default async function handler(request: NextRequest) {
             display: 'flex',
             flexDirection: 'column',
             width: hasImage ? '600px' : '100%',
-            padding: '56px 48px',
-            justifyContent: 'space-between',
+            padding: hasImage ? '56px 48px' : '56px 48px 120px 48px',
+            justifyContent: isArticleOrPodcast ? 'flex-start' : 'space-between',
             height: '100%',
             position: 'relative',
           }}
@@ -92,7 +95,7 @@ export default async function handler(request: NextRequest) {
               alignItems: 'center',
             }}
           >
-            {isArticle ? (
+            {isArticleOrPodcast ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
@@ -135,7 +138,7 @@ export default async function handler(request: NextRequest) {
                 />
               </svg>
             )}
-            {contentType === 'article' && (
+            {isArticleOrPodcast && (
               <div
                 style={{
                   display: 'flex',
@@ -156,12 +159,13 @@ export default async function handler(request: NextRequest) {
               flexDirection: 'column',
               justifyContent: 'flex-end',
               gap: subtitleMargin,
+              marginTop: isArticleOrPodcast ? '80px' : '0',
             }}
           >
             <div
               style={{
                 display: 'flex',
-                fontFamily: 'Lora',
+                fontFamily: 'Georgia, serif;',
                 fontSize: titleFontSize,
                 lineHeight: '115%',
                 whiteSpace: 'pre-wrap',
@@ -177,13 +181,15 @@ export default async function handler(request: NextRequest) {
                 gap: subtitleGap,
                 fontSize: subtitleFontSize,
                 alignItems: 'center',
-                textTransform: 'capitalize',
+                textTransform: pagePath === domain ? 'unset' : 'capitalize',
                 fontFamily: 'Inter',
               }}
             >
               <span>
                 {contentType === 'article' && authors
-                  ? `By ${authors}`
+                  ? `${authors}`
+                  : contentType === 'podcast'
+                  ? 'Logos Podcast'
                   : contentType ??
                     pagePath.replace(/^\/+/, '').replace(/\/+/, ' | ')}
               </span>

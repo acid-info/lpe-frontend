@@ -28,6 +28,7 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
           showSlug: episode.show?.slug as string,
           postSlug: episode.slug as string,
         })}
+        date={episode.publishedAt}
         tags={[
           ...episode.tags,
           ...episode.authors.map((author) => author.name),
