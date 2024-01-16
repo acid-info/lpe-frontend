@@ -21,11 +21,9 @@ export default async function handler(request: NextRequest) {
   const searchParams = new URLSearchParams(
     decodeURIComponent(request.nextUrl.searchParams.get('q') || ''),
   )
-  const contentType = searchParams.get('contentType')
 
+  const contentType = searchParams.get('contentType')
   const domain = 'press.logos.co'
-  const title =
-    contentType == null ? 'LOGOS → PRESS ENGINE' : searchParams.get('title')
 
   const image = searchParams.get('image') || ''
   const alt = searchParams.get('alt') || ''
@@ -47,23 +45,45 @@ export default async function handler(request: NextRequest) {
   const isPodcast = contentType === 'podcast'
   const isArticleOrPodcast = isArticle || isPodcast
 
+  const isHashingItOut =
+    contentType === 'podcast' && pagePath?.includes('/hashing-it-out')
+  const isLogosState =
+    contentType === 'podcast' && pagePath?.includes('/logos-state')
+
+  const title =
+    contentType == null
+      ? 'LOGOS → PRESS ENGINE'
+      : isLogosState
+      ? searchParams.get('title')?.split(' | ')[0]
+      : searchParams.get('title')
+
   const titleFontSize = isArticleOrPodcast && hasImage ? '54px' : '64px'
   const subtitleFontSize = isArticleOrPodcast && hasImage ? '32px' : '36px'
   const subtitleGap = isArticleOrPodcast && hasImage ? '16px' : '24px'
   const subtitleMargin = isArticleOrPodcast && hasImage ? '24px' : '40px'
 
   return new ImageResponse(
-    contentType === 'podcast' && pagePath?.includes('/hashing-it-out') ? (
-      <img
-        src={imgSrc}
-        alt={alt}
+    isHashingItOut ? (
+      <div
         style={{
+          display: 'flex',
+          backgroundColor: '#000',
+          justifyContent: 'flex-start',
+          position: 'relative',
           width: '1200px',
           height: '630px',
-          objectFit: 'contain',
-          backgroundColor: '#000',
         }}
-      />
+      >
+        <img
+          src={imgSrc}
+          alt={alt}
+          style={{
+            height: '630px',
+            objectFit: 'contain',
+            backgroundColor: '#000',
+          }}
+        />
+      </div>
     ) : (
       <div
         style={{
@@ -199,7 +219,19 @@ export default async function handler(request: NextRequest) {
           </div>
         </div>
         {imgSrc && (
-          <div style={{ display: 'flex', width: '600px', height: '630px' }}>
+          <div
+            style={
+              isLogosState
+                ? {
+                    position: 'relative',
+                    display: 'flex',
+                    width: '1200px',
+                    height: '630px',
+                    left: '-50%',
+                  } // TODO: Temporary solution until backend is done
+                : { display: 'flex', width: '600px', height: '630px' }
+            }
+          >
             <img
               src={imgSrc}
               alt={alt}
@@ -208,6 +240,7 @@ export default async function handler(request: NextRequest) {
                 objectFit: 'cover',
                 width: '100%',
                 height: '100%',
+                clipPath: isLogosState ? 'inset(0 0 0 600px)' : 'none', // TODO: Temporary solution until backend is done
               }}
             />
           </div>
