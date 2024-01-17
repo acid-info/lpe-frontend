@@ -1784,8 +1784,8 @@ unbodyApi.onChange(async (oldData, data, changes, firstLoad) => {
           ...post.tags.map(
             (tag) =>
               ({
-                name: formatTagText(tag),
-                domain: formatTagText(tag),
+                name: formatTagText(tag.name),
+                domain: formatTagText(tag.name),
               } as Category),
           ),
         ],

@@ -39,6 +39,17 @@ export const RenderArticleBlock = ({
           case 'h6': {
             return <ArticleHeading block={block} />
           }
+          case 'blockquote':
+            return (
+              <Quote mode="indented-line" genericFontFamily="serif">
+                <Paragraph
+                  variant="body1"
+                  dangerouslySetInnerHTML={{
+                    __html: extractInnerHtml(block.html),
+                  }}
+                />
+              </Quote>
+            )
           case 'p': {
             const isIframe = block.embed && block.labels.includes('embed')
             if (block.embed && isIframe) {
@@ -53,22 +64,6 @@ export const RenderArticleBlock = ({
                     __html: block.embed.html,
                   }}
                 />
-              )
-            }
-
-            if (
-              block.classNames.includes('subtitle') &&
-              block.classNames.includes('u-with-margin-left')
-            ) {
-              return (
-                <Quote mode="indented-line" genericFontFamily="serif">
-                  <Paragraph
-                    variant="body1"
-                    dangerouslySetInnerHTML={{
-                      __html: extractInnerHtml(block.html),
-                    }}
-                  />
-                </Quote>
               )
             }
 

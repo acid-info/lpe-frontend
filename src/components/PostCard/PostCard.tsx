@@ -160,7 +160,7 @@ PostCard.toData = (post: LPE.Post.Document, shows: LPE.Podcast.Show[] = []) => {
     authors: post.type === 'article' ? post.authors : [],
     coverImage: post.coverImage,
     subtitle: (post.type === 'article' && post.subtitle) || '',
-    tags: post.tags,
+    tags: post.tags.map((tag) => tag.name),
     ...(post.type === 'podcast' && show
       ? {
           podcastShowDetails: {

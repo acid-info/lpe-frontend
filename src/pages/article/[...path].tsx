@@ -1,7 +1,7 @@
 import { SEO } from '@/components/SEO'
 import ArticleContainer from '@/containers/ArticleContainer'
 import { GetStaticPropsContext } from 'next'
-import unbodyApi from '../../services/unbody/unbody.service'
+import { strapiApi } from '../../services/strapi'
 import { LPE } from '../../types/lpe.types'
 
 type ArticleProps = {
@@ -24,7 +24,7 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
         pagePath={`/article/${data.data.slug}`}
         date={data.data.createdAt}
         tags={[
-          ...data.data.tags,
+          ...data.data.tags.map((tag) => tag.name),
           ...data.data.authors.map((author) => author.name),
         ]}
         contentType={LPE.PostTypes.Article}
@@ -35,17 +35,18 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
 }
 
 export async function getStaticPaths() {
-  const { data: posts, errors } = await unbodyApi.getArticles({
+  const { data, errors } = await strapiApi.getPosts({
     skip: 0,
     limit: 50,
-    includeDrafts: false,
     highlighted: 'include',
+    parseContent: false,
+    published: true,
   })
 
   return {
     paths: errors
       ? []
-      : posts.map((post) => ({ params: { path: [post.slug] } })),
+      : data.data.map((post) => ({ params: { path: [post.slug] } })),
     fallback: true,
   }
 }
@@ -68,13 +69,15 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
-  const { data, errors } = await unbodyApi.getArticle({
+  const { data, errors } = await strapiApi.getPosts({
     parseContent: true,
     slug: slug as string,
-    ...(id ? { id, includeDrafts: true } : {}),
+    highlighted: 'include',
+    published: true,
+    ...(id ? { id, published: false } : {}),
   })
 
-  if (!data) {
+  if (!data?.data || data.data.length === 0) {
     return {
       notFound: true,
       props: { why: 'no article' },
@@ -82,20 +85,23 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
-  const { data: relatedArticles } = await unbodyApi.getRelatedArticles({
-    id: data.id,
-  })
+  // const { data: relatedArticles } = await unbodyApi.getRelatedArticles({
+  //   id: data.id,
+  // })
 
-  const { data: articlesFromSameAuthors } =
-    await unbodyApi.getArticlesFromSameAuthors({
-      slug: slug as string,
-      authors: data.authors.map((author) => author.name),
-    })
+  // const { data: articlesFromSameAuthors } =
+  //   await unbodyApi.getArticlesFromSameAuthors({
+  //     slug: slug as string,
+  //     authors: data.authors.map((author) => author.name),
+  //   })
+
+  const relatedArticles = [] as any
+  const articlesFromSameAuthors = [] as any
 
   return {
     props: {
       data: {
-        data,
+        data: data.data[0],
         relatedArticles,
         articlesFromSameAuthors,
       },

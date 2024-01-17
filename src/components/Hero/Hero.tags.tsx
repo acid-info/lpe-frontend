@@ -1,10 +1,11 @@
 import { LPETag } from '@/components/LPETag'
 import styled from '@emotion/styled'
 import React from 'react'
+import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
 
 export type NavbarFilter = Partial<React.ComponentProps<typeof Container>> & {
-  tags?: string[]
+  tags?: LPE.Tag.Document[]
 }
 
 export const HeroTags: React.FC<NavbarFilter> = ({ tags = [], ...props }) => {
@@ -12,7 +13,7 @@ export const HeroTags: React.FC<NavbarFilter> = ({ tags = [], ...props }) => {
     <Container {...props}>
       <Tags>
         {tags.map((tag, index) => (
-          <LPETag tag={tag} key={`tag-${index}`} />
+          <LPETag tag={tag.name} key={`tag-${index}`} />
         ))}
       </Tags>
     </Container>

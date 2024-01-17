@@ -4,6 +4,8 @@ import { LPE } from '../../types/lpe.types'
 import EpisodeBlocks from './Episode.Blocks'
 
 const EpisodeTranscript = ({ episode }: { episode: LPE.Podcast.Document }) => {
+  if (episode.content.length === 0) return <></>
+
   return (
     <Container>
       <Title variant={'h5'} genericFontFamily={'serif'}>

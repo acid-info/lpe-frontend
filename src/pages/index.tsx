@@ -2,7 +2,7 @@ import { CustomNextPage, GetStaticProps } from 'next'
 import SEO from '../components/SEO/SEO'
 import { HomePage, HomePageProps } from '../containers/HomePage'
 import { DefaultLayout } from '../layouts/DefaultLayout'
-import unbodyApi from '../services/unbody/unbody.service'
+import { strapiApi } from '../services/strapi'
 
 type PageProps = Pick<HomePageProps, 'data'>
 
@@ -27,19 +27,26 @@ Page.getLayout = function getLayout(page: React.ReactNode) {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const { data: tags = [] } = await unbodyApi.getTopics(true)
-  const { data: highlighted } = await unbodyApi.getHighlightedPosts()
-  const { data: latest } = await unbodyApi.getRecentPosts({
-    skip: 0,
+  // const { data: tags = [] } = await unbodyApi.getTopics(true)
+  // const { data: highlighted } = await unbodyApi.getHighlightedPosts()
+  // const { data: latest } = await unbodyApi.getRecentPosts({
+  //   skip: 0,
+  //   limit: 15,
+  // })
+  const { data: latest } = await strapiApi.getRecentPosts({
+    highlighted: 'exclude',
     limit: 15,
   })
 
-  const { data: _shows = [] } = await unbodyApi.getPodcastShows({
+  const { data: highlighted } = await strapiApi.getHighlightedPosts()
+  const { data: _shows = [] } = await strapiApi.getPodcastShows({
     populateEpisodes: true,
     episodesLimit: 10,
   })
 
-  const shows = [..._shows].sort((a, b) => (a.title > b.title ? -1 : 1))
+  const shows = [...(_shows ?? [])].sort((a, b) => (a.title > b.title ? -1 : 1))
+
+  const { data: tags = [] } = await strapiApi.getTopics()
 
   return {
     props: {
