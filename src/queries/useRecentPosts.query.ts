@@ -44,7 +44,8 @@ export const useRecentPosts = ({
   )
 
   const posts = useMemo(
-    () => (query.data?.pages || []).flatMap((page) => page.posts),
+    () =>
+      (query.data?.pages || []).flatMap((page) => page.posts).filter(Boolean),
     [query.data],
   )
 

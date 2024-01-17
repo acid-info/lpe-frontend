@@ -6,10 +6,11 @@ import { useEffect, useRef } from 'react'
 import { useWindowScroll } from 'react-use'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useNavbarState } from '../../states/navbarState'
+import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
 
 export type HeroProps = Partial<React.ComponentProps<typeof Container>> & {
-  tags?: string[]
+  tags?: LPE.Tag.Document[]
 }
 
 export const Hero: React.FC<HeroProps> = ({ tags = [], ...props }) => {

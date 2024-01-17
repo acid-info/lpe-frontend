@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import unbodyApi from '../../../services/unbody/unbody.service'
 import { LPE } from '../../../types/lpe.types'
-import { parseInt } from '../../../utils/data.utils'
 
 export default async function handler(
   req: NextApiRequest,
@@ -61,31 +59,39 @@ export default async function handler(
   }
 
   if (postTypes.length > 0) {
-    const response = await unbodyApi.searchPosts({
-      tags,
-      query: Array.isArray(q) ? q.join(' ').trim() : q.trim(),
+    // const response = await unbodyApi.searchPosts({
+    //   tags,
+    //   query: Array.isArray(q) ? q.join(' ').trim() : q.trim(),
 
-      type: postTypes as LPE.PostType[],
+    //   type: postTypes as LPE.PostType[],
 
-      limit: parseInt(limit, 50),
-      skip: parseInt(skip, 0),
-    })
+    //   limit: parseInt(limit, 50),
+    //   skip: parseInt(skip, 0),
+    // })
+
+    const response = {
+      data: [],
+    }
 
     result.posts.push(...response.data)
   }
 
   if (blockTypes.length > 0) {
-    const response = await unbodyApi.searchPostBlocks({
-      tags,
-      query: Array.isArray(q) ? q.join(' ') : q,
+    // const response = await unbodyApi.searchPostBlocks({
+    //   tags,
+    //   query: Array.isArray(q) ? q.join(' ') : q,
 
-      postType: postTypes as LPE.PostType[],
-      type: blockTypes as LPE.Post.ContentBlockType[],
+    //   postType: postTypes as LPE.PostType[],
+    //   type: blockTypes as LPE.Post.ContentBlockType[],
 
-      method: 'hybrid',
-      limit: parseInt(limit, 50),
-      skip: parseInt(skip, 0),
-    })
+    //   method: 'hybrid',
+    //   limit: parseInt(limit, 50),
+    //   skip: parseInt(skip, 0),
+    // })
+
+    const response = {
+      data: [],
+    }
 
     result.blocks.push(...response.data)
   }

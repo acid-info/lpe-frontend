@@ -15,7 +15,7 @@ export type HomePageProps = React.DetailedHTMLProps<
   HTMLDivElement
 > & {
   data: {
-    tags: string[]
+    tags: LPE.Tag.Document[]
     shows: LPE.Podcast.Show[]
     latest: ApiPaginatedPayload<LPE.Post.Document[]>
     highlighted: LPE.Post.Document[]
@@ -46,6 +46,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             horizontal
             displayYear={false}
             pattern={[{ cols: 5, size: 'xxsmall' }]}
+            shows={shows}
             breakpoints={[
               {
                 breakpoint: 'xs',
@@ -68,6 +69,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           bordered
           posts={highlighted.slice(0, 1)}
           pattern={[{ cols: 1, size: 'large' }]}
+          shows={shows}
           breakpoints={[
             {
               breakpoint: 'xs',
@@ -76,6 +78,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           ]}
         />
         <PostsGrid
+          shows={shows}
           pattern={[
             { cols: 4, size: 'small' },
             {

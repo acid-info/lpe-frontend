@@ -65,6 +65,6 @@ export const ArticleDataType: UnbodyDataTypeConfig<
       highlighted: data.path.includes('highlighted'),
       isDraft: data.path.includes('draft'),
       type: LPE.PostTypes.Article,
-    }
+    } as any
   },
 }
