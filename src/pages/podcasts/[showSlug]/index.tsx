@@ -1,10 +1,10 @@
 import { SEO } from '@/components/SEO'
 import PodcastShowContainer from '@/containers/PodcastShowContainer'
-import unbodyApi from '@/services/unbody/unbody.service'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import { DefaultLayout } from '../../../layouts/DefaultLayout'
+import { strapiApi } from '../../../services/strapi'
 import { ApiPaginatedPayload } from '../../../types/data.types'
 import { LPE } from '../../../types/lpe.types'
 import { getPostLink } from '../../../utils/route.utils'
@@ -48,7 +48,7 @@ const PodcastShowPage = ({
 }
 
 export async function getStaticPaths() {
-  const { data } = await unbodyApi.getPodcastShows({ populateEpisodes: false })
+  const { data } = await strapiApi.getPodcastShows({ populateEpisodes: false })
 
   const paths = data.map((show) => {
     return {
@@ -76,30 +76,31 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   }
 
   // TODO : error handling
-  const { data: show, errors: podcastShowDataErrors } =
-    await unbodyApi.getPodcastShow({
-      showSlug: showSlug as string,
+  const { data: shows, errors: podcastShowDataErrors } =
+    await strapiApi.getPodcastShows({
+      slug: showSlug as string,
     })
 
   // TODO : error handling
   const { data: latestEpisodes, errors: latestEpisodesErros } =
-    await unbodyApi.getLatestEpisodes({
+    await strapiApi.getLatestEpisodes({
       showSlug: showSlug as string,
       limit: 8,
     })
 
   // TODO : error handling
   const { data: highlightedEpisodes, errors: highlightedEpisodesErrors } =
-    await unbodyApi.getHighlightedEpisodes({
-      showSlug: showSlug as string,
+    await strapiApi.getLatestEpisodes({
+      highlighted: 'only',
       limit: 2,
+      showSlug: showSlug as string,
     })
 
   return {
     props: {
-      show,
+      show: shows[0],
       latestEpisodes,
-      highlightedEpisodes,
+      highlightedEpisodes: highlightedEpisodes.data,
     },
     revalidate: 10,
   }

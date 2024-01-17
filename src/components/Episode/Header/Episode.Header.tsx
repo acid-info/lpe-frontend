@@ -54,7 +54,7 @@ const EpisodeHeader = ({
           </Show>
         </CustomLink>
       )}
-      <TagsAndSocial tags={tags} />
+      <TagsAndSocial tags={tags.map((tag) => tag.name)} />
       {channels && <EpisodeChannels channels={channels} />}
       {description && (
         <ArticleSummary summary={description} showLabel={false} />

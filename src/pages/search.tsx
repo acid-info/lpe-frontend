@@ -12,7 +12,6 @@ import { copyConfigs } from '../configs/copy.configs'
 import { GlobalSearchBox } from '../containers/GlobalSearchBox/GlobalSearchBox'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { api } from '../services/api.service'
-import unbodyApi from '../services/unbody/unbody.service'
 
 interface SearchPageProps {
   topics: string[]
@@ -118,11 +117,14 @@ SearchPage.getLayout = (page: ReactNode) => (
 )
 
 export async function getStaticProps() {
-  const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
-  const { data: shows = [] } = await unbodyApi.getPodcastShows({
-    populateEpisodes: true,
-    episodesLimit: 10,
-  })
+  // const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
+  // const { data: shows = [] } = await unbodyApi.getPodcastShows({
+  //   populateEpisodes: true,
+  //   episodesLimit: 10,
+  // })
+
+  const topics = [] as any
+  const shows = [] as any
 
   return {
     props: {

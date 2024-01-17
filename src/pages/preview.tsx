@@ -1,6 +1,5 @@
 import { CustomNextPage, GetServerSideProps } from 'next'
 import SEO from '../components/SEO/SEO'
-import unbodyApi from '../services/unbody/unbody.service'
 import { getPostLink } from '../utils/route.utils'
 
 type PageProps = {}
@@ -20,10 +19,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       notFound: true,
     }
 
-  const { data, errors } = await unbodyApi.getDocById({
-    id,
-    includeDrafts: true,
-  })
+  // const { data, errors } = await unbodyApi.getDocById({
+  //   id,
+  //   includeDrafts: true,
+  // })
+
+  const data = undefined as any
+  const errors = '' as string
 
   if (!data || errors) {
     return {

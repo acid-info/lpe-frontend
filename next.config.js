@@ -3,12 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      'images.cdn.unbody.io',
+      'localhost',
+      '127.0.0.1',
       'image.simplecastcdn.com',
       'img.youtube.com',
     ],
-    // loader: 'imgix',
-    // path: 'https://images.cdn.unbody.io',
   },
 }
 

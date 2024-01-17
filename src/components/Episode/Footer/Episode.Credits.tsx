@@ -24,9 +24,8 @@ const EpisodeCredits = ({
                 component="p"
                 variant="label1"
                 id={credit.id.replace('#', '')}
-              >
-                {credit.text}
-              </Typography>
+                dangerouslySetInnerHTML={{ __html: credit.html }}
+              />
             </Credit>
           ))}
         </Credits>

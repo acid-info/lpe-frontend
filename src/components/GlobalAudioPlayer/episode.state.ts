@@ -5,7 +5,7 @@ export type EpisodeState = {
   title: string
   podcast: string
   url: string
-  coverImage: LPE.Post.ImageBlock | null
+  coverImage: LPE.Image.Document | null
   path: string
 }
 

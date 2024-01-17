@@ -1,8 +1,7 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
 
-const graphqlEndpoint = 'https://graphql.unbody.io'
-const projectId = process.env.UNBODY_PROJECT_ID || ''
-const authorization = process.env.UNBODY_API_KEY || ''
+const graphqlEndpoint = process.env.STRAPI_GRAPHQL_URL || ''
+const token = process.env.STRAPI_API_KEY || ''
 
 const config: CodegenConfig = {
   overwrite: true,
@@ -10,21 +9,19 @@ const config: CodegenConfig = {
     {
       [graphqlEndpoint]: {
         headers: {
-          authorization,
-          'x-project-id': projectId,
+          authorization: token,
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
       },
     },
-    'src/lib/unbody/unbody.extend.graphql',
   ],
-  documents: ['src/**/*.{ts,tsx}'],
+  documents: ['src/services/strapi/*.{ts,tsx}'],
   generates: {
-    'src/lib/unbody/unbody.graphql': {
+    'src/lib/strapi/strapi.graphql': {
       plugins: ['schema-ast'],
     },
-    'src/lib/unbody/unbody.generated.ts': {
+    'src/lib/strapi/strapi.generated.ts': {
       plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
       presetConfig: {
         fragmentMasking: false,

@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import unbodyApi from '../../../../services/unbody/unbody.service'
 import { LPE } from '../../../../types/lpe.types'
-import { parseInt } from '../../../../utils/data.utils'
 
 export default async function handler(
   req: NextApiRequest,
@@ -27,26 +25,26 @@ export default async function handler(
     blocks: [],
   }
 
-  const query: Parameters<(typeof unbodyApi)['searchPostBlocks']>[0] = {
-    tags,
-    type: ['text', 'image'],
-    postId: Array.isArray(id) ? id[0] : id,
-    query: Array.isArray(q) ? q.join(' ') : q,
-    method: 'nearText',
-    certainty: 0.85,
+  // const query: Parameters<(typeof unbodyApi)['searchPostBlocks']>[0] = {
+  //   tags,
+  //   type: ['text', 'image'],
+  //   postId: Array.isArray(id) ? id[0] : id,
+  //   query: Array.isArray(q) ? q.join(' ') : q,
+  //   method: 'nearText',
+  //   certainty: 0.85,
 
-    limit: parseInt(limit, 50),
-    skip: parseInt(skip, 0),
-  }
+  //   limit: parseInt(limit, 50),
+  //   skip: parseInt(skip, 0),
+  // }
 
-  result.blocks = await unbodyApi
-    .searchPostBlocks(query)
-    .then((res) => res.data)
+  // result.blocks = await unbodyApi
+  //   .searchPostBlocks(query)
+  //   .then((res) => res.data)
 
-  if (result.blocks.length === 0)
-    result.blocks = await unbodyApi
-      .searchPostBlocks({ ...query, method: 'hybrid' })
-      .then((res) => res.data)
+  // if (result.blocks.length === 0)
+  //   result.blocks = await unbodyApi
+  //     .searchPostBlocks({ ...query, method: 'hybrid' })
+  //     .then((res) => res.data)
 
   res.status(200).json({
     data: result,

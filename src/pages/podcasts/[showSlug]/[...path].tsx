@@ -3,7 +3,7 @@ import EpisodeContainer from '@/containers/EpisodeContainer'
 import { GetStaticPropsContext } from 'next'
 import { LPE } from '../../../types/lpe.types'
 
-import unbodyApi from '@/services/unbody/unbody.service'
+import { strapiApi } from '../../../services/strapi'
 import { getPostLink } from '../../../utils/route.utils'
 
 type EpisodeProps = {
@@ -29,7 +29,7 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
           postSlug: episode.slug as string,
         })}
         tags={[
-          ...episode.tags,
+          ...episode.tags.map((tag) => tag.name),
           ...episode.authors.map((author) => author.name),
         ]}
         contentType={LPE.PostTypes.Podcast}
@@ -40,7 +40,7 @@ const EpisodePage = ({ episode, relatedEpisodes, errors }: EpisodeProps) => {
 }
 
 export async function getStaticPaths() {
-  const { data } = await unbodyApi.getPodcastShows({ populateEpisodes: true })
+  const { data } = await strapiApi.getPodcastShows({ populateEpisodes: true })
 
   const paths = data.flatMap((show) => {
     return (
@@ -81,25 +81,36 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   }
 
   // TODO : error handling
-  const { data: episode, errors: episodeErros } =
-    await unbodyApi.getPodcastEpisode({
-      showSlug: showSlug as string,
-      slug: epSlug as string,
-      textBlocks: true,
-      ...(id
-        ? {
-            id: id as string,
-            includeDraft: true,
-          }
-        : {}),
-    })
+  const { data: episode, errors: episodeErros } = await strapiApi.getEpisode({
+    showSlug: showSlug as string,
+    slug: epSlug as string,
+    published: true,
+    ...(id
+      ? {
+          id: id as string,
+          published: false,
+        }
+      : {}),
+  })
+
+  const { data: shows } = await strapiApi.getPodcastShows({})
 
   // TODO : error handlings
   const { data: relatedEpisodes, errors: relatedEpisodesErros } =
-    await unbodyApi.getRelatedEpisodes({
-      showSlug: showSlug as string,
-      id: episode?.id as string,
-    })
+    await strapiApi
+      .getRelatedPosts({
+        id: episode?.id as string,
+        type: LPE.PostTypes.Podcast,
+      })
+      .then((data) => ({
+        ...data,
+        data: data.data.map((post) => ({
+          ...post,
+          show: shows.find(
+            (show) => show.id === (post as LPE.Podcast.Document).showId,
+          ),
+        })),
+      }))
 
   if (!episode) {
     return {
@@ -112,7 +123,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   return {
     props: {
       episode,
-      relatedEpisodes,
+      relatedEpisodes: relatedEpisodes,
     },
     revalidate: 10,
   }

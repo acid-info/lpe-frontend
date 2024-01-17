@@ -41,6 +41,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <Container>
         <div>
           <PostsGrid
+            shows={shows}
             posts={highlighted.slice(0, 1)}
             pattern={[{ cols: 1, size: 'large' }]}
             breakpoints={[
@@ -56,6 +57,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           />
           <Section title="Latest posts">
             <PostsGrid
+              shows={shows}
               pattern={[{ cols: 4, size: 'small' }]}
               breakpoints={[
                 {
@@ -103,11 +105,11 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
           <Grid xs={{ cols: 1 }} sm={{ cols: 4 }}>
             {tags.map((tag) => (
-              <GridItem key={tag.value} cols={1}>
+              <GridItem key={tag.name} cols={1}>
                 <TagCard
-                  href={`/search?topic=${tag.value}`}
-                  name={formatTagText(tag.value)}
-                  count={tag.count}
+                  href={`/search?topic=${tag.name}`}
+                  name={formatTagText(tag.name)}
+                  count={tag.postsCount}
                 />
               </GridItem>
             ))}
