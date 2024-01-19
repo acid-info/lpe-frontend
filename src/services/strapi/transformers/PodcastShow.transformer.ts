@@ -15,7 +15,7 @@ export const podcastShowTransformer: Transformer<
   classes: ['podcast'],
   objectType: 'PodcastShow',
   isMatch: (helpers, object) => object.__typename === 'PodcastShowEntity',
-  transform: (helpers, data, original, root, ctx) => {
+  transform: async (helpers, data, original, root, ctx) => {
     const { id, attributes } = data
 
     return {
@@ -25,15 +25,15 @@ export const podcastShowTransformer: Transformer<
       numberOfEpisodes: 0,
       url: getPostLink('podcast', { showSlug: attributes.slug }),
       description: attributes.description,
-      descriptionText: transformStrapiHtmlContent({
+      descriptionText: await transformStrapiHtmlContent({
         html: attributes.description || '',
-      }).text,
+      }).then((h) => h.text),
       hosts: attributes.hosts.data.map((host) => ({
         id: '',
         name: host.attributes.name,
         emailAddress: host.attributes.email_address,
       })),
-      logo: transformStrapiImageData(attributes.logo),
+      logo: await transformStrapiImageData(attributes.logo),
     }
   },
 }

@@ -23,6 +23,7 @@ export namespace LPE {
       width: number
       height: number
       caption?: string
+      placeholder?: string
     }
   }
 

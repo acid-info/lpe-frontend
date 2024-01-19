@@ -38,3 +38,4 @@ next-env.d.ts
 
 public/rss.xml
 public/atom*.xml
+public/images/placeholders/*

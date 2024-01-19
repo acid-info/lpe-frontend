@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Image, { ImageLoader, ImageProps } from 'next/image'
+import Image, { ImageProps } from 'next/image'
 import React, { useState } from 'react'
 import { LPE } from '../../types/lpe.types'
 
@@ -8,15 +8,13 @@ export type ResponsiveImageProps = {
   nextImageProps?: Partial<ImageProps>
   fill?: boolean
   className?: string
+  loadDelay?: number
 }
 
 export type Props = {
   data: LPE.Image.Document
   alt?: string
 } & ResponsiveImageProps
-
-const unbodyImageLoader: ImageLoader = ({ src, width, quality }) =>
-  `${src}?w=${width}&q=${quality || 75}&auto=format`
 
 export const ResponsiveImage = ({
   data,
@@ -25,10 +23,9 @@ export const ResponsiveImage = ({
   nextImageProps,
   className,
   children,
+  loadDelay = 0,
 }: React.PropsWithChildren<Props>) => {
   const [loaded, setLoaded] = useState(false)
-
-  const lazyUrl = `${data.url}?blur=200&px=16&auto=format`
 
   const imageProps: ImageProps = {
     src: `${data.url}`,
@@ -36,11 +33,12 @@ export const ResponsiveImage = ({
     height: data.height,
     alt: data.alt,
     className: loaded ? 'loaded' : '',
-    onLoad: () => setLoaded(true),
+    onLoad: () => {
+      setTimeout(() => {
+        setLoaded(true)
+      }, loadDelay)
+    },
     loading: 'lazy',
-    ...(data.url.startsWith('https://images.cdn.unbody.io')
-      ? { loader: unbodyImageLoader }
-      : {}),
     ...(nextImageProps || {}),
     style: {
       width: '100%',
@@ -57,7 +55,11 @@ export const ResponsiveImage = ({
       }}
     >
       <div className="comment">
-        <img src={lazyUrl} alt={data.alt} title={data.alt} />
+        <img
+          src={data.placeholder?.replace('public/', '/')}
+          alt={data.alt}
+          title={data.alt}
+        />
         {children}
       </div>
       <div className={imageProps.className}>
@@ -94,7 +96,7 @@ const Container = styled.div`
 
     &:last-of-type {
       opacity: 0;
-      transition: opacity 250ms;
+      transition: opacity 500ms;
 
       &.loaded {
         opacity: 1;

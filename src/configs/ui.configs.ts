@@ -15,4 +15,10 @@ export const uiConfigs = {
     numberOfImagesShowInTopResult: 3,
     numberOfTotalBlocksInListView: 20,
   },
+  imageRender: {
+    placeholder: {
+      pixelation: 0.5,
+      blur: 0,
+    },
+  },
 }
