@@ -23,6 +23,7 @@ export namespace LPE {
       width: number
       height: number
       caption?: string
+      captionHTML?: string
     }
   }
 
@@ -31,13 +32,6 @@ export namespace LPE {
       id: string
       name: string
       emailAddress?: string
-    }
-  }
-
-  export namespace Tag {
-    export type Document = {
-      value: string
-      count: number
     }
   }
 
@@ -91,6 +85,7 @@ export namespace LPE {
       order: number
       labels: ContentBlockLabel[]
       document?: D
+      footnotes?: Post.Footnotes
     }
 
     export type TextBlockEmbed = {
@@ -104,7 +99,6 @@ export namespace LPE {
       tagName: string
       classNames: string[]
       type: Extract<ContentBlockType, 'text'>
-      footnotes: Post.Footnotes
       embed?: TextBlockEmbed
     }
 

@@ -56,6 +56,11 @@ export const transformStrapiHtmlContent = ({
 
   let root = htmlParser.parse(html, { parseNoneClosedTags: true })
 
+  // remove footnotes container as the content is already stored in sup tags
+  root.querySelectorAll('section.footnotes-container').forEach((node) => {
+    node.remove()
+  })
+
   let blockIndex = -1
 
   for (const child of root.childNodes) {
@@ -63,24 +68,34 @@ export const transformStrapiHtmlContent = ({
       continue
     }
 
-    const tagName = child.tagName.toLowerCase()
+    const { node, footnotes } = parseFootnotes(child)
+
+    // remove footnotes before parsing the text content
+    const clone = node.clone() as htmlParser.HTMLElement
+    clone.querySelectorAll('a.footnote').forEach((a) => {
+      a.remove()
+    })
+
+    const text = clone.textContent || ''
+
+    const tagName = node.tagName.toLowerCase()
     const isFigure = tagName === 'figure'
-    const isMedia = isFigure && !!child.querySelector('oembed')
-    const isImage = isFigure && !isMedia && !!child.querySelector('img')
-    const empty = child.text.length === 0
+    const isMedia = isFigure && !!node.querySelector('oembed')
+    const isImage = isFigure && !isMedia && !!node.querySelector('img')
+    const empty = node.text.length === 0
 
     if (!isFigure && empty) continue
 
     blockIndex++
 
     if (isImage) {
-      const image = child.querySelector('img')
+      const image = node.querySelector('img')
       if (!image) {
         blockIndex--
         continue
       }
 
-      const caption = child.textContent || ''
+      const caption = text
       const alt = image.getAttribute('alt') || ''
       const url = image.getAttribute('src') || ''
       const width = parseInt(image.getAttribute('width') || '0', 10)
@@ -89,6 +104,7 @@ export const transformStrapiHtmlContent = ({
       blocks.push({
         id: '',
         caption,
+        captionHTML: node.querySelector('figcaption')?.innerHTML || '',
         type: 'image',
         width,
         height,
@@ -96,6 +112,7 @@ export const transformStrapiHtmlContent = ({
         labels: [],
         order: blockIndex,
         url: url.startsWith('/') ? transformStrapiImageUrl(url) : url,
+        footnotes,
       })
 
       continue
@@ -104,7 +121,7 @@ export const transformStrapiHtmlContent = ({
     if (isMedia) {
       const labels: LPE.Post.ContentBlockLabel[] = ['embed']
 
-      const oembed = child.querySelector('oembed')
+      const oembed = node.querySelector('oembed')
       const url = oembed?.getAttribute('url') || ''
       if (!url) {
         blockIndex--
@@ -136,7 +153,7 @@ export const transformStrapiHtmlContent = ({
         type: 'text',
         classNames: [],
         footnotes: [],
-        html: child.outerHTML,
+        html: node.outerHTML,
         labels,
         tagName: 'p',
         text: url,
@@ -147,13 +164,12 @@ export const transformStrapiHtmlContent = ({
       })
     }
 
-    const text = child.text || ''
     const isHeading = tagName.startsWith('h')
     const id =
-      child.id ||
+      node.id ||
       (isHeading && slugify(text, { lower: true, trim: true })) ||
       `p-${blockIndex}`
-    child.setAttribute('id', id)
+    node.setAttribute('id', id)
 
     if (isHeading) {
       toc.push({
@@ -167,13 +183,13 @@ export const transformStrapiHtmlContent = ({
 
     blocks.push({
       id: '',
-      footnotes: [],
-      html: child.outerHTML,
+      text,
+      footnotes,
+      html: node.outerHTML,
       labels: [],
       tagName,
-      text,
       order: blockIndex,
-      classNames: Array.from(child.classList.values()),
+      classNames: Array.from(node.classList.values()),
       type: 'text',
     } as LPE.Post.TextBlock)
   }
@@ -183,5 +199,49 @@ export const transformStrapiHtmlContent = ({
     blocks,
     text: root.text,
     html: root.innerHTML,
+  }
+}
+
+const parseFootnotes = (
+  node: htmlParser.HTMLElement,
+): {
+  node: htmlParser.HTMLElement
+  footnotes: LPE.Post.Footnotes
+} => {
+  const footnotes = [] as LPE.Post.Footnotes
+
+  const clone = node.clone() as htmlParser.HTMLElement
+
+  clone.querySelectorAll('sup.footnote').forEach((sup, idx) => {
+    const id = sup.getAttribute('data-id') || ''
+    const index = parseInt(sup.getAttribute('data-index') || '', 10)
+    const footnote = htmlParser.parse(sup.getAttribute('data-content') || '')
+
+    const refId = `fntref-${id}`
+    const footnoteId = `fnt-${id}`
+
+    const anchor = htmlParser.parse(
+      `<a class="footnote" href="#${footnoteId}"><sup><span class="anchor" id="${refId}"></span><span>[${index}]</span></sup></a>`,
+    )
+
+    sup.replaceWith(anchor)
+
+    footnote.querySelectorAll('a').forEach((a) => {
+      a.setAttribute('target', '_blank')
+    })
+
+    footnotes.push({
+      id,
+      index,
+      refId,
+      refValue: anchor.textContent,
+      valueHTML: footnote.outerHTML,
+      valueText: footnote.textContent,
+    })
+  })
+
+  return {
+    footnotes,
+    node: clone,
   }
 }

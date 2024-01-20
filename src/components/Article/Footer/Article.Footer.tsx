@@ -10,10 +10,7 @@ const ArticleFooter = ({ data: post }: { data: LPE.Article.Document }) => {
   const { data, relatedArticles, articlesFromSameAuthors } = post
 
   const footnotes = useMemo(() => {
-    return data.content.flatMap((b) =>
-      // @ts-ignore
-      b.type === 'text' ? b.footnotes : [],
-    )
+    return data.content.flatMap((b) => b.footnotes || [])
   }, [data])
 
   return (
