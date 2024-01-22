@@ -21,6 +21,7 @@ import { PostCardLabel } from './PostCard.Label'
 
 export type PostAppearanceProps = {
   imageProps?: ResponsiveImageProps
+  loadDelay?: number
 }
 
 export type PostDataProps = {
@@ -47,7 +48,7 @@ export type PostCardProps = CommonProps &
 
 export const PostCard = (_props: PostCardProps) => {
   const {
-    appearance: { imageProps = {} } = {},
+    appearance: { imageProps = {}, loadDelay = 0 } = {},
     data: {
       coverImage = null,
       date,
@@ -77,6 +78,7 @@ export const PostCard = (_props: PostCardProps) => {
       imageProps={imageProps}
       imageData={coverImage}
       playIcon={contentType === LPE.PostTypes.Podcast}
+      loadDelay={loadDelay}
     />
   ) : (
     <div className="post-card__cover-image"></div>

@@ -4,7 +4,7 @@ import { SerializedStyles, css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { LPE } from '../../types/lpe.types'
-import { chunkArray } from '../../utils/array.utils'
+import { chunkArray, shuffleArray } from '../../utils/array.utils'
 import { lsdUtils } from '../../utils/lsd.utils'
 import { lcm } from '../../utils/math.utils'
 import { PostCard, PostCardProps } from '../PostCard'
@@ -54,6 +54,10 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
     [theme],
   )
 
+  const loadingDelayEffectIndexes = useMemo(() => {
+    return shuffleArray(items.map((_, i) => i))
+  }, [items])
+
   return (
     <Container
       {...props}
@@ -64,7 +68,7 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
       postCardStyles={postCardStyles}
     >
       <div className="row">
-        {items.map(({ post, size }) => (
+        {items.map(({ post, size }, index) => (
           <div key={post.id} className="post-card-wrapper">
             <PostCard
               size={size as any}
@@ -74,6 +78,9 @@ export const PostsGrid: React.FC<PostsGridProps> = ({
               displayYear={displayYear}
               displayPodcastShow={displayPodcastShow}
               data={PostCard.toData(post, shows)}
+              appearance={{
+                loadDelay: loadingDelayEffectIndexes[index] * 100,
+              }}
             />
           </div>
         ))}

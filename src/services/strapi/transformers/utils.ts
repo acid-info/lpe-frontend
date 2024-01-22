@@ -1,3 +1,5 @@
+import { PlaceholderService } from '@/services/images.service'
+import { isVercel } from '@/utils/env.utils'
 import * as htmlParser from 'node-html-parser'
 import slugify from 'slugify'
 import { UploadFileEntity } from '../../../lib/strapi/strapi.generated'
@@ -7,18 +9,27 @@ import { convertToIframe } from '../../../utils/string.utils'
 let assetsBaseUrl = process.env.NEXT_PUBLIC_ASSETS_BASE_URL ?? ''
 if (assetsBaseUrl.endsWith('/')) assetsBaseUrl = assetsBaseUrl.slice(1)
 
-export const transformStrapiImageUrl = (url: string): string =>
-  assetsBaseUrl + url
+const placeholderService = new PlaceholderService()
+placeholderService.emptyCache()
 
-export const transformStrapiImageData = (
-  image:
-    | Pick<UploadFileEntity, 'attributes'>
-    | {
-        data: {
-          attributes: Partial<UploadFileEntity['attributes']>
-        }
-      },
-): LPE.Image.Document => {
+// TODO: remove this and move it to a proper place
+type StrapiImage =
+  | Pick<UploadFileEntity, 'attributes'>
+  | {
+      data: {
+        attributes: Partial<UploadFileEntity['attributes']>
+      }
+    }
+
+export const getStrapiImageUrlBySize = (size: string, url: string): string =>
+  url.replace('/uploads/', `/uploads/${size}_`)
+
+export const transformStrapiImageUrl = (filePath: string): string =>
+  assetsBaseUrl + filePath
+
+export const transformStrapiImageData = async (
+  image: StrapiImage,
+): Promise<LPE.Image.Document> => {
   const attributes = 'data' in image ? image.data.attributes : image.attributes
 
   return {
@@ -27,19 +38,27 @@ export const transformStrapiImageData = (
     caption: attributes.caption || '',
     alt: attributes.caption || attributes.alternativeText || '',
     url: attributes.url ? transformStrapiImageUrl(attributes.url) : '',
+    placeholder: attributes.url
+      ? isVercel()
+        ? getStrapiImageUrlBySize(
+            'thumbnail',
+            transformStrapiImageUrl(attributes.url),
+          )
+        : await placeholderService.pixelate(attributes.url)
+      : '',
   }
 }
 
-export const transformStrapiHtmlContent = ({
+export const transformStrapiHtmlContent = async ({
   html,
 }: {
   html: string
-}): {
+}): Promise<{
   toc: LPE.Post.TocItem[]
   blocks: LPE.Post.ContentBlock[]
   html: string
   text: string
-} => {
+}> => {
   const toc: LPE.Post.TocItem[] = []
   const blocks: LPE.Post.ContentBlock[] = []
 

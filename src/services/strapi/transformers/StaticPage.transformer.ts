@@ -14,7 +14,7 @@ export const staticPageTransformer: Transformer<
   classes: ['static_page'],
   objectType: 'StaticPage',
   isMatch: (helpers, object) => object.__typename === 'PageEntity',
-  transform: (helpers, data, original, root, ctx) => {
+  transform: async (helpers, data, original, root, ctx) => {
     const { id, attributes } = data
 
     const title = attributes.title
@@ -22,7 +22,7 @@ export const staticPageTransformer: Transformer<
     const slug = attributes.slug
     const description = attributes.description
 
-    const { blocks: content } = transformStrapiHtmlContent({
+    const { blocks: content } = await transformStrapiHtmlContent({
       html: attributes.body || '',
     })
 

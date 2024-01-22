@@ -15,7 +15,7 @@ export const postTransformer: Transformer<
   classes: ['post'],
   objectType: 'Post',
   isMatch: (helpers, object) => object.__typename === 'PostEntity',
-  transform: (helpers, data, original, root, ctx) => {
+  transform: async (helpers, data, original, root, ctx) => {
     const { id, attributes } = data
 
     const type = attributes.type
@@ -26,7 +26,7 @@ export const postTransformer: Transformer<
     const isHighlighted = attributes.featured
     const isDraft = !attributes.publishedAt
     const coverImage: LPE.Post.Document['coverImage'] =
-      transformStrapiImageData(attributes.cover_image)
+      await transformStrapiImageData(attributes.cover_image)
     const tags: LPE.Tag.Document[] = attributes.tags.data.map((tag) => ({
       id: tag.id,
       name: tag.attributes.name,
@@ -38,15 +38,15 @@ export const postTransformer: Transformer<
       emailAddress: author.attributes.email_address,
     }))
 
-    const summary = transformStrapiHtmlContent({
+    const summary = await transformStrapiHtmlContent({
       html: attributes.summary || '',
-    }).text
+    }).then((h) => h.text)
 
     const {
       blocks: content,
       toc,
       text,
-    } = transformStrapiHtmlContent({
+    } = await transformStrapiHtmlContent({
       html: attributes.body || '',
     })
 

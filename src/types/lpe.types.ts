@@ -24,6 +24,7 @@ export namespace LPE {
       height: number
       caption?: string
       captionHTML?: string
+      placeholder?: string
     }
   }
 

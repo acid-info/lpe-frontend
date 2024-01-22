@@ -19,9 +19,9 @@ export const episodeTransformer: Transformer<
   transform: async (helpers, data, original, root, ctx) => {
     return {
       ...data,
-      credits: transformStrapiHtmlContent({
+      credits: await transformStrapiHtmlContent({
         html: original.attributes.credits || '',
-      }).blocks as LPE.Post.TextBlock[],
+      }).then((c) => c.blocks as LPE.Post.TextBlock[]),
       channels: original.attributes.channel
         ? await transformChannels(original.attributes.channel)
         : [],
