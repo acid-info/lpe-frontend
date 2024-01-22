@@ -1,4 +1,5 @@
 import { PlaceholderService } from '@/services/images.service'
+import { isVercel } from '@/utils/env.utils'
 import * as htmlParser from 'node-html-parser'
 import slugify from 'slugify'
 import { UploadFileEntity } from '../../../lib/strapi/strapi.generated'
@@ -30,6 +31,7 @@ export const transformStrapiImageData = async (
   image: StrapiImage,
 ): Promise<LPE.Image.Document> => {
   const attributes = 'data' in image ? image.data.attributes : image.attributes
+
   return {
     height: attributes.height || 0,
     width: attributes.width || 0,
@@ -37,7 +39,12 @@ export const transformStrapiImageData = async (
     alt: attributes.caption || attributes.alternativeText || '',
     url: attributes.url ? transformStrapiImageUrl(attributes.url) : '',
     placeholder: attributes.url
-      ? await placeholderService.pixelate(attributes.url)
+      ? isVercel()
+        ? getStrapiImageUrlBySize(
+            'thumbnail',
+            transformStrapiImageUrl(attributes.url),
+          )
+        : await placeholderService.pixelate(attributes.url)
       : '',
   }
 }
