@@ -4,17 +4,19 @@ import { SearchBox } from '../../components/SearchBox'
 import { uiConfigs } from '../../configs/ui.configs'
 import { usePostSearchQuery } from '../../queries/usePostSearch.query'
 import { useNavbarState } from '../../states/navbarState'
+import { LPE } from '../../types/lpe.types'
 import { useOnWindowResize } from '../../utils/ui.utils'
 import { PostSearchContext } from './PostSearch.context'
 
 export type PostSearchContainerProps = {
   postId?: string
   postTitle?: string
+  blocks: LPE.Post.ContentBlock[]
 }
 
 export const PostSearchContainer: React.FC<
   React.PropsWithChildren<PostSearchContainerProps>
-> = ({ postId = '', postTitle, children, ...props }) => {
+> = ({ postId = '', postTitle, blocks = [], children, ...props }) => {
   const navbarState = useNavbarState()
 
   const [prevQuery, setPrevQuery] = useState('')
@@ -27,6 +29,7 @@ export const PostSearchContainer: React.FC<
   const res = usePostSearchQuery({
     id: postId,
     query,
+    blocks,
     active: active && query.length > 0,
   })
 

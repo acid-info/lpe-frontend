@@ -31,16 +31,16 @@ const contentTypes = [
     value: PostTypes.Podcast,
     category: ContentTypesCategories.Post,
   },
-  {
-    label: 'Paragraphs',
-    value: ContentBlockTypes.Text,
-    category: ContentTypesCategories.Block,
-  },
-  {
-    label: 'Images',
-    value: ContentBlockTypes.Image,
-    category: ContentTypesCategories.Block,
-  },
+  // {
+  //   label: 'Paragraphs',
+  //   value: ContentBlockTypes.Text,
+  //   category: ContentTypesCategories.Block,
+  // },
+  // {
+  //   label: 'Images',
+  //   value: ContentBlockTypes.Image,
+  //   category: ContentTypesCategories.Block,
+  // },
 ]
 
 const allContentTypes = contentTypes.map((c) => c.value)

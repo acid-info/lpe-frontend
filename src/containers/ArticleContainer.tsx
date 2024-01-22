@@ -19,7 +19,11 @@ const ArticleContainer = (props: Props) => {
   const [tocId, setTocId] = useState<string | null>(null)
 
   return (
-    <PostSearchContainer postId={data.data.id} postTitle={data.data.title}>
+    <PostSearchContainer
+      postId={data.data.uuid}
+      postTitle={data.data.title}
+      blocks={props.data.data.content}
+    >
       <PostSearchContext.Consumer>
         {(search) => {
           const displaySearchResults = search.active && !search.isInitialLoading

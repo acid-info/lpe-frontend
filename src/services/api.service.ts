@@ -68,16 +68,19 @@ export class ApiService {
     tags?: string[]
     limit?: number
     skip?: number
-  }): Promise<ApiResponse<LPE.Search.Result>> =>
-    fetch(
-      `/api/search/post/${id}?skip=${skip}&limit=${limit}&q=${query}&tags=${tags.join(
-        ',',
-      )}`,
-    )
+  }): Promise<
+    ApiResponse<{
+      blocks: {
+        index: number
+        score: number
+      }[]
+    }>
+  > =>
+    fetch(`/api/search/post/${id}?q=${query}`)
       .then((res) => res.json())
       .catch((e) => {
         console.error(e)
-        return { data: { posts: [], blocks: [] }, errors: JSON.stringify(e) }
+        return { data: { blocks: [], posts: [] }, errors: JSON.stringify(e) }
       })
 
   subscribeToMailingList = async (payload: {

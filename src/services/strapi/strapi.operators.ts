@@ -152,6 +152,28 @@ export const GET_RELATED_POSTS_QUERY = gql`
   }
 `
 
+export const SEARCH_POSTS_QUERY = gql`
+  ${POST_COMMON_ATTRIBUTES}
+
+  query SearchPosts(
+    $query: String!
+    $filters: PostFiltersInput
+    $pagination: PaginationArg
+  ) {
+    search(query: $query) {
+      posts(filters: $filters, pagination: $pagination) {
+        data {
+          id
+          score
+          attributes {
+            ...PostCommonAttributes
+          }
+        }
+      }
+    }
+  }
+`
+
 export const GET_STATIC_PAGES = gql`
   query GetStaticPages(
     $filters: PageFiltersInput

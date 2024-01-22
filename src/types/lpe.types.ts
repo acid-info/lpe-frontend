@@ -153,6 +153,7 @@ export namespace LPE {
 
     export type Metadata = {
       id: string
+      uuid: string
       slug: string
       title: string
       summary: string
@@ -223,6 +224,7 @@ export namespace LPE {
 
     export type Metadata = {
       id: string
+      uuid: string
       slug: string
       title: string
       tags: Tag.Document[]

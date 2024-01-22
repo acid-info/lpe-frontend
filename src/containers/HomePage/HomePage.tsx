@@ -116,6 +116,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </Grid>
           <AllPosts title="All posts">
             <PostsGrid
+              shows={shows}
               pattern={[{ cols: 4, size: 'small' }]}
               breakpoints={[
                 {
