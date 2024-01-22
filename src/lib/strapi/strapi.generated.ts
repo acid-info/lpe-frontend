@@ -886,6 +886,7 @@ export type PostEntity = {
   __typename?: 'PostEntity'
   attributes: Maybe<Post>
   id: Maybe<Scalars['ID']['output']>
+  score: Maybe<Scalars['Float']['output']>
 }
 
 export type PostEntityResponse = {
@@ -968,6 +969,7 @@ export type Query = {
   podcastShows: Maybe<PodcastShowEntityResponseCollection>
   post: Maybe<PostEntityResponse>
   posts: Maybe<PostEntityResponseCollection>
+  search: Maybe<SearchResult>
   tag: Maybe<TagEntityResponse>
   tags: Maybe<TagEntityResponseCollection>
   uploadFile: Maybe<UploadFileEntityResponse>
@@ -1053,6 +1055,10 @@ export type QueryPostsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
 }
 
+export type QuerySearchArgs = {
+  query: Scalars['String']['input']
+}
+
 export type QueryTagArgs = {
   id?: InputMaybe<Scalars['ID']['input']>
 }
@@ -1106,6 +1112,16 @@ export type QueryUsersPermissionsUsersArgs = {
 export type ResponseCollectionMeta = {
   __typename?: 'ResponseCollectionMeta'
   pagination: Pagination
+}
+
+export type SearchResult = {
+  __typename?: 'SearchResult'
+  posts: Maybe<PostEntityResponseCollection>
+}
+
+export type SearchResultPostsArgs = {
+  filters?: InputMaybe<PostFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
 }
 
 export type StringFilterInput = {
@@ -1809,6 +1825,76 @@ export type GetRelatedPostsQuery = {
           }>
         }
       }
+    }
+  }
+}
+
+export type SearchPostsQueryVariables = Exact<{
+  query: Scalars['String']['input']
+  filters?: InputMaybe<PostFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+}>
+
+export type SearchPostsQuery = {
+  __typename?: 'Query'
+  search: {
+    __typename?: 'SearchResult'
+    posts: {
+      __typename?: 'PostEntityResponseCollection'
+      data: Array<{
+        __typename?: 'PostEntity'
+        id: string
+        score: number
+        attributes: {
+          __typename?: 'Post'
+          type: Enum_Post_Type
+          title: string
+          subtitle: string
+          summary: string
+          slug: string
+          featured: boolean
+          episode_number: number
+          publish_date: any
+          publishedAt: any
+          podcast_show: {
+            __typename?: 'PodcastShowEntityResponse'
+            data: { __typename?: 'PodcastShowEntity'; id: string }
+          }
+          cover_image: {
+            __typename?: 'UploadFileEntityResponse'
+            data: {
+              __typename?: 'UploadFileEntity'
+              attributes: {
+                __typename?: 'UploadFile'
+                url: string
+                width: number
+                height: number
+                caption: string
+              }
+            }
+          }
+          authors: {
+            __typename?: 'AuthorRelationResponseCollection'
+            data: Array<{
+              __typename?: 'AuthorEntity'
+              id: string
+              attributes: {
+                __typename?: 'Author'
+                name: string
+                email_address: string
+              }
+            }>
+          }
+          tags: {
+            __typename?: 'TagRelationResponseCollection'
+            data: Array<{
+              __typename?: 'TagEntity'
+              id: string
+              attributes: { __typename?: 'Tag'; name: string }
+            }>
+          }
+        }
+      }>
     }
   }
 }
@@ -2952,6 +3038,290 @@ export const GetRelatedPostsDocument = {
   GetRelatedPostsQuery,
   GetRelatedPostsQueryVariables
 >
+export const SearchPostsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'SearchPosts' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'query' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'filters' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'PostFiltersInput' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'pagination' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'PaginationArg' },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'search' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'query' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'query' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'posts' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'filters' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'filters' },
+                      },
+                    },
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'pagination' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'pagination' },
+                      },
+                    },
+                  ],
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'data' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'score' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'attributes' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'FragmentSpread',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'PostCommonAttributes',
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PostCommonAttributes' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Post' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'subtitle' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'summary' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'featured' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'episode_number' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'podcast_show' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'cover_image' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'attributes' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'url' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'width' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'height' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'caption' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'authors' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'attributes' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'email_address' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'publish_date' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'publishedAt' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'tags' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'attributes' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SearchPostsQuery, SearchPostsQueryVariables>
 export const GetStaticPagesDocument = {
   kind: 'Document',
   definitions: [

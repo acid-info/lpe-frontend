@@ -1,6 +1,8 @@
+import * as _uuid from 'uuid'
 import { Transformer } from '../../../lib/TransformPipeline/types'
 import { LPE } from '../../../types/lpe.types'
 import { calcReadingTime } from '../../../utils/string.utils'
+import postSearchService from '../../post-search.service'
 import { StrapiPostData } from '../strapi.types'
 import { transformStrapiHtmlContent, transformStrapiImageData } from './utils'
 
@@ -17,6 +19,7 @@ export const postTransformer: Transformer<
   isMatch: (helpers, object) => object.__typename === 'PostEntity',
   transform: (helpers, data, original, root, ctx) => {
     const { id, attributes } = data
+    const uuid = _uuid.v5(id, _uuid.v5.URL)
 
     const type = attributes.type
     const title = attributes.title
@@ -50,6 +53,13 @@ export const postTransformer: Transformer<
       html: attributes.body || '',
     })
 
+    if (attributes.body && content.length > 0) {
+      postSearchService.index({
+        id: uuid,
+        content,
+      })
+    }
+
     // add the title as the first toc item
     {
       toc.unshift({
@@ -64,6 +74,7 @@ export const postTransformer: Transformer<
     if (type === 'Article') {
       return {
         id,
+        uuid,
         title,
         subtitle,
         slug,
@@ -83,6 +94,7 @@ export const postTransformer: Transformer<
     } else {
       return {
         id,
+        uuid,
         title,
         subtitle,
         slug,

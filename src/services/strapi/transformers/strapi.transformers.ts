@@ -2,6 +2,7 @@ import { TransformPipeline } from '../../../lib/TransformPipeline/TransformPipel
 import { episodeTransformer } from './Episode.transformer'
 import { podcastShowTransformer } from './PodcastShow.transformer'
 import { postTransformer } from './Post.transformer'
+import { searchResultTransformer } from './SearchResult.transformer'
 import { staticPageTransformer } from './StaticPage.transformer'
 
 export const strapiTransformers = new TransformPipeline([
@@ -9,4 +10,5 @@ export const strapiTransformers = new TransformPipeline([
   staticPageTransformer,
   postTransformer,
   episodeTransformer,
+  searchResultTransformer,
 ])

@@ -16,8 +16,7 @@ const EpisodeFooter = ({ episode, relatedEpisodes }: Props) => {
     return (
       episode.content &&
       episode.content
-        .filter((b) => (b as LPE.Post.TextBlock).footnotes.length)
-        .map((b) => (b as LPE.Post.TextBlock).footnotes)
+        .map((b) => (b as LPE.Post.TextBlock).footnotes || [])
         .flat()
     )
   }, [episode])

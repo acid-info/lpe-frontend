@@ -117,7 +117,7 @@ export const PodcastEpisodeDataType: UnbodyDataTypeConfig<
       highlighted: data.highlighted,
       isDraft: data.isDraft,
       type: LPE.PostTypes.Podcast,
-    }
+    } as any
   },
 }
 

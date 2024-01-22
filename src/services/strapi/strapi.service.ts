@@ -8,6 +8,7 @@ import {
   GetStaticPagesDocument,
   PodcastShowFiltersInput,
   PostFiltersInput,
+  SearchPostsDocument,
 } from '../../lib/strapi/strapi.generated'
 import { ApiResponse } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
@@ -492,6 +493,79 @@ export class StrapiService {
         name: tag.name,
         postsCount: tag.posts?.count ?? 0,
       }))
+    })
+
+  searchPosts = async ({
+    query = '',
+    skip = 0,
+    limit = 10,
+    filters = {},
+    tags,
+    types = [LPE.PostTypes.Article, LPE.PostTypes.Podcast],
+  }: {
+    query?: string
+    skip?: number
+    limit?: number
+    filters?: PostFiltersInput
+    tags?: string[]
+    types?: LPE.PostType[]
+  }) =>
+    this.handleRequest<LPE.Search.ResultItem[]>(async () => {
+      const {
+        data: {
+          search: {
+            posts: { data },
+          },
+        },
+      } = await this.client.query({
+        query: SearchPostsDocument,
+        variables: {
+          query,
+          pagination: {
+            start: skip,
+            limit: limit,
+          },
+          filters: {
+            and: [
+              ...(filters ? [filters] : []),
+              {
+                publishedAt: {
+                  notNull: true,
+                },
+              },
+              ...(tags && tags.length > 0
+                ? [
+                    {
+                      tags: {
+                        name: {
+                          in: tags,
+                        },
+                      },
+                    },
+                  ]
+                : []),
+              ...(types && types.length > 0
+                ? [
+                    {
+                      type: {
+                        in: types.map((type) =>
+                          type === 'article' ? 'Article' : 'Episode',
+                        ),
+                      },
+                    },
+                  ]
+                : []),
+            ],
+          },
+        },
+      })
+
+      return await strapiTransformers.transformMany<LPE.Search.ResultItem>(
+        strapiTransformers.get({}),
+        data,
+        undefined,
+        undefined,
+      )
     })
 }
 

@@ -602,6 +602,7 @@ type Post {
 type PostEntity {
   attributes: Post
   id: ID
+  score: Float
 }
 
 type PostEntityResponse {
@@ -683,6 +684,10 @@ type Query {
   podcastShows(filters: PodcastShowFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PodcastShowEntityResponseCollection
   post(id: ID): PostEntityResponse
   posts(filters: PostFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): PostEntityResponseCollection
+  search(
+    """Search query"""
+    query: String!
+  ): SearchResult
   tag(id: ID): TagEntityResponse
   tags(filters: TagFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): TagEntityResponseCollection
   uploadFile(id: ID): UploadFileEntityResponse
@@ -697,6 +702,10 @@ type Query {
 
 type ResponseCollectionMeta {
   pagination: Pagination!
+}
+
+type SearchResult {
+  posts(filters: PostFiltersInput, pagination: PaginationArg): PostEntityResponseCollection
 }
 
 input StringFilterInput {

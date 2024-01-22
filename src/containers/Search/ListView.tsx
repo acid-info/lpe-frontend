@@ -1,8 +1,6 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import { SearchResultListBlocks } from '@/components/Search/SearchResult.Blocks'
 import { SearchResultTopPost } from '@/components/Search/SearchResult.TopPost'
 import { SearchResultListPosts } from '@/components/Search/SearchResultList.Posts'
-import { SearchResultsListHeader } from '@/components/Search/SearchResultsList.Header'
 import { copyConfigs } from '@/configs/copy.configs'
 import { uiConfigs } from '@/configs/ui.configs'
 import { LPE } from '@/types/lpe.types'
@@ -138,7 +136,7 @@ export const SearchResultsListView = (props: Props) => {
         </PostsListContent>
       </PostsList>
       <GridItem xs={{ cols: 0 }} md={{ cols: 1 }} cols={1} />
-      <BlocksList xs={{ cols: 8 }} md={{ cols: 3 }} lg={{ cols: 4 }} cols={4}>
+      {/* <BlocksList xs={{ cols: 8 }} md={{ cols: 3 }} lg={{ cols: 4 }} cols={4}>
         {!isMobile && (
           <BlockListSticky>
             <SearchResultsListHeader
@@ -147,7 +145,7 @@ export const SearchResultsListView = (props: Props) => {
             <SearchResultListBlocks blocks={renderBlocks} />
           </BlockListSticky>
         )}
-      </BlocksList>
+      </BlocksList> */}
     </Container>
   )
 }
