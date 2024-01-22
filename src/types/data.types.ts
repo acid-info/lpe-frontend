@@ -31,11 +31,7 @@ export type SearchHookDataPayload = {
 export type SearchResults = {
   articles: SearchHook<LPE.Article.ContentBlock>
   blocks: SearchHook<LPE.Article.ContentBlock>
-  search: (
-    query: string,
-    tags: string[],
-    docType: any, // TODO: @refactor UnbodyGraphQl.UnbodyDocumentTypeNames
-  ) => Promise<void>
+  search: (query: string, tags: string[], docType: any) => Promise<void>
   reset: (initialData: SearchHookDataPayload) => void
 }
 

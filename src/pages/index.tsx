@@ -27,12 +27,6 @@ Page.getLayout = function getLayout(page: React.ReactNode) {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  // const { data: tags = [] } = await unbodyApi.getTopics(true)
-  // const { data: highlighted } = await unbodyApi.getHighlightedPosts()
-  // const { data: latest } = await unbodyApi.getRecentPosts({
-  //   skip: 0,
-  //   limit: 15,
-  // })
   const { data: latest } = await strapiApi.getRecentPosts({
     highlighted: 'exclude',
     limit: 15,
