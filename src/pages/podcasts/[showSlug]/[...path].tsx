@@ -104,7 +104,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       })
       .then((data) => ({
         ...data,
-        data: data.data.map((post) => ({
+        data: (data.data || []).map((post) => ({
           ...post,
           show: shows.find(
             (show) => show.id === (post as LPE.Podcast.Document).showId,

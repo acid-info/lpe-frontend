@@ -1,5 +1,7 @@
 import { CustomNextPage, GetServerSideProps } from 'next'
 import SEO from '../components/SEO/SEO'
+import { strapiApi } from '../services/strapi'
+import { LPE } from '../types/lpe.types'
 import { getPostLink } from '../utils/route.utils'
 
 type PageProps = {}
@@ -13,37 +15,80 @@ const Page: CustomNextPage<PageProps> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const type = Array.isArray(ctx.query.type)
+    ? ctx.query.type[0]
+    : ctx.query.type
+
+  if (!type || !['page', 'post'].includes(type))
+    return {
+      notFound: true,
+    }
+
   const id = Array.isArray(ctx.query.id) ? ctx.query.id[0] : ctx.query.id
   if (!id)
     return {
       notFound: true,
     }
 
-  // const { data, errors } = await unbodyApi.getDocById({
-  //   id,
-  //   includeDrafts: true,
-  // })
+  if (type === 'post') {
+    const { data: shows } = await strapiApi.getPodcastShows({
+      populateEpisodes: false,
+    })
 
-  const data = undefined as any
-  const errors = '' as string
+    const {
+      data: { data = [] },
+    } = await strapiApi.getPosts({
+      id: id,
+      published: false,
+      parseContent: false,
+    })
 
-  if (!data || errors) {
-    return {
-      notFound: typeof errors === 'string' && errors.includes('Not found'),
-      props: {},
+    const post = data?.[0]
+    if (post) {
+      return {
+        props: {},
+        redirect: {
+          destination: getPostLink(post.type, {
+            id,
+            postSlug: post.slug,
+            showSlug:
+              (post.type === 'podcast' &&
+                shows.find(
+                  (show) => show.id === (post as LPE.Podcast.Document).showId,
+                )?.slug) ||
+              '',
+          }),
+          permanent: false,
+        },
+        notFound: false,
+      }
+    }
+  } else if (type === 'page') {
+    const { data: pages } = await strapiApi.getStaticPages({
+      id: id,
+      published: false,
+      parseContent: false,
+    })
+
+    const page = pages?.[0]
+
+    if (page) {
+      return {
+        props: {},
+        redirect: {
+          destination: getPostLink(page.type, {
+            id,
+            postSlug: page.slug,
+          }),
+          permanent: false,
+        },
+        notFound: false,
+      }
     }
   }
 
   return {
-    props: {},
-    redirect: {
-      destination: getPostLink(data.type, {
-        id,
-        postSlug: data.slug,
-        showSlug: (data.type === 'podcast' && data.show?.slug) || null,
-      }),
-      permanent: false,
-    },
+    notFound: true,
   }
 }
 

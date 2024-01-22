@@ -16,8 +16,7 @@ const ArticleFootnotes = ({
             component="a"
             variant="body3"
             href={`#${footnote.refId}`}
-            target="_blank"
-            id={footnote.id.replace('#', '')}
+            id={'fnt-' + footnote.id}
           >
             {footnote.refValue}
           </Typography>

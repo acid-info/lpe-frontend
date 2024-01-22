@@ -85,6 +85,16 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
             z-index: -1;
           }
 
+          .footnote {
+            position: relative;
+            display: inline-block;
+
+            .anchor {
+              position: absolute;
+              top: 0;
+            }
+          }
+
           [data-theme='light'] {
             .light-mode-hidden {
               display: none !important;

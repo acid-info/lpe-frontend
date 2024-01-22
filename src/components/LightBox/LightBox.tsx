@@ -240,9 +240,8 @@ export const LightBox = ({ children, caption }: LightBoxProps) => {
         }
         isActive={isActive}
         ref={captionRef}
-      >
-        {caption}
-      </LightBoxCaption>
+        dangerouslySetInnerHTML={{ __html: caption }}
+      ></LightBoxCaption>
     </>
   )
 }
