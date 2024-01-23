@@ -10,14 +10,17 @@ import {
   PostFiltersInput,
   SearchPostsDocument,
 } from '../../lib/strapi/strapi.generated'
+import { getWebhookData } from '../../pages/api/webhook'
 import { ApiResponse } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
+import { isVercel } from '../../utils/env.utils'
 import { settle } from '../../utils/promise.utils'
 import { strapiTransformers } from './transformers/strapi.transformers'
 
 export class StrapiService {
   client: ApolloClient<any> = null as any
   axios: Axios = null as any
+  lastUpdate = 0
 
   constructor(apiUrl: string, graphqlUrl: string, apiKey: string) {
     this.axios = axios.create({
@@ -68,6 +71,26 @@ export class StrapiService {
         Authorization: `Bearer ${apiKey}`,
       },
     })
+
+    if (!isVercel() && process.env.NODE_ENV !== 'development') {
+      this.checkForUpdate()
+    } else {
+      setInterval(this.clearCache.bind(this), 5000)
+    }
+  }
+
+  clearCache = async () => {
+    await this.client.cache.reset()
+  }
+
+  checkForUpdate = async () => {
+    const { lastUpdate } = await getWebhookData()
+    if (this.lastUpdate < lastUpdate) {
+      await this.clearCache()
+      this.lastUpdate = lastUpdate
+    }
+
+    setTimeout(() => this.checkForUpdate.bind(this), 5000)
   }
 
   handleResponse = <T>(
