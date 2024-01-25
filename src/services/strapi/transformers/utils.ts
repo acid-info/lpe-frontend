@@ -100,10 +100,10 @@ export const transformStrapiHtmlContent = async ({
     const tagName = node.tagName.toLowerCase()
     const isFigure = tagName === 'figure'
     const isMedia = isFigure && !!node.querySelector('oembed')
-    const isImage = isFigure && !isMedia && !!node.querySelector('img')
+    const isImage = !!node.querySelector('img')
     const empty = node.text.length === 0
 
-    if (!isFigure && empty) continue
+    if (!isFigure && !isImage && empty) continue
 
     blockIndex++
 
@@ -116,7 +116,8 @@ export const transformStrapiHtmlContent = async ({
 
       const caption = text
       const alt = image.getAttribute('alt') || ''
-      const url = image.getAttribute('src') || ''
+      let url = image.getAttribute('src') || ''
+      url = url.slice(url.indexOf('/uploads/'))
       const width = parseInt(image.getAttribute('width') || '0', 10)
       const height = parseInt(image.getAttribute('height') || '0', 10)
 
@@ -130,6 +131,9 @@ export const transformStrapiHtmlContent = async ({
         alt: alt || caption,
         labels: [],
         order: blockIndex,
+        placeholder: isVercel()
+          ? getStrapiImageUrlBySize('thumbnail', url)
+          : await placeholderService.pixelate(url),
         url: url.startsWith('/') ? transformStrapiImageUrl(url) : url,
         footnotes,
       })
