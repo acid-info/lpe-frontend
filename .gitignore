@@ -40,3 +40,5 @@ public/rss.xml
 public/atom*.xml
 public/images/placeholders/*
 !public/images/placeholders/.gitkeep
+
+public/rss/*.xml
