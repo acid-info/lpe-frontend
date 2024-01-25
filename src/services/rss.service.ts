@@ -113,7 +113,7 @@ export class LPERssFeed {
       category: [
         ...(post.type === 'article'
           ? [articleCategory]
-          : [showCategories[post.show!.id]]),
+          : [showCategories[post.showId as string]]),
         ...post.tags.map(
           (tag) =>
             ({

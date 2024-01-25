@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Logos Press Engine</title>
+    <link>https://dev-press.logos.co/rss/main.xml</link>
+    <description>Your Guide to Network States and the Technology Driving Sovereign Communities</description>
+    <lastBuildDate>Thu, 25 Jan 2024 12:37:56 GMT</lastBuildDate>
+    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <language>en</language>
+    <image>
+      <title>Logos Press Engine</title>
+      <url>https://dev-press.logos.co/logo.png</url>
+      <link>https://dev-press.logos.co/rss/main.xml</link>
+    </image>
+    <copyright>All rights reserved 2024, Logos Press Engine</copyright>
+    <category>Article</category>
+    <category>Podcast - Hashing It Out</category>
+    <category>Podcast - Logos Podcast</category>
+    <atom:link href="https://dev-press.logos.co/rss/main.xml" rel="self" type="application/rss+xml"></atom:link>
+    <item>
+      <title>Stella Assange: Human Rights and Alternative Modes of Organising | Logos Podcast with Jarrad Hope</title>
+      <link>https://dev-press.logos.co/podcasts/stella-assange-human-rights-and-alternative-modes-of-organising-logos-podcast-with-jarrad-hope/stella-assange-human-rights-and-alternative-modes-of-organising-logos-podcast-with-jarrad-hope</link>
+      <guid>4</guid>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 GMT</pubDate>
+      <description>Jarrad Hope, co-founder of Logos, sits down with Stella Assange – lawyer, human rights defender, and wife of Julian Assange – for an in-depth conversation about Wikileaks, Julian Assange, and the role technology has played in shaping the global socio-political landscape. Stella talks about her experience working on Julian Assange&apos;s legal team, her introduction to new technologies, including Bitcoin, and the current surveillance state that has emerged since the rise of the open internet.</description>
+      <category domain="https://dev-press.logos.co/podcasts/logos-podcast">Podcast - Logos Podcast</category>
+      <category domain="censorship">censorship</category>
+      <category domain="surveillance">surveillance</category>
+      <enclosure url="https://dev-press.logos.co/api/og?q=title%253DStella%252BAssange%25253A%252BHuman%252BRights%252Band%252BAlternative%252BModes%252Bof%252BOrganising%252B%25257C%252BLogos%252BPodcast%252Bwith%252BJarrad%252BHope%2526image%253Dhttp%25253A%25252F%25252F127.0.0.1%25253A1337%25252Fuploads%25252F72fb00b9_91bf_5f85_a6af_28e5a74bb424_a388379b72.png%2526contentType%253Dpodcast%2526date%253D2024-01-15T00%25253A00%25253A00.000Z" length="0" type="image//api/og"></enclosure>
+    </item>
+    <item>
+      <title>Robin Linus of ZeroSync and BITVM.org | Pioneering Proof Systems, Adoption in Bitcoin</title>
+      <link>https://dev-press.logos.co/podcasts/robin-linus-of-zero-sync-and-bitvm-org-pioneering-proof-systems-adoption-in-bitcoin/robin-linus-of-zero-sync-and-bitvm-org-pioneering-proof-systems-adoption-in-bitcoin</link>
+      <guid>1</guid>
+      <pubDate>Thu, 11 Jan 2024 00:00:00 GMT</pubDate>
+      <description>Corey, D, and Jessie sit down with Robin Linus of ZeroSync — the team spearheading the development of proof systems for Bitcoin for scalability, interoperability, and privacy. Robin discusses everything from the recently published BitVM white paper, challenges and tradeoffs of validation proofs on Bitcoin, ZK coins, and his birthday cake from Gisele Bündchen.</description>
+      <category domain="https://dev-press.logos.co/podcasts/hashing-it-out">Podcast - Hashing It Out</category>
+      <category domain="proofsystems">proofsystems</category>
+      <category domain="bitcoin">bitcoin</category>
+      <category domain="zero">zero</category>
+      <category domain="privacy">privacy</category>
+      <enclosure url="https://dev-press.logos.co/api/og?q=title%253DRobin%252BLinus%252Bof%252BZeroSync%252Band%252BBITVM.org%252B%25257C%252BPioneering%252BProof%252BSystems%25252C%252BAdoption%252Bin%252BBitcoin%2526image%253Dhttp%25253A%25252F%25252F127.0.0.1%25253A1337%25252Fuploads%25252F59f017b0_3fcb_5c83_a7a3_13d10d00a027_23bbe14bb6.png%2526contentType%253Dpodcast%2526date%253D2024-01-11T00%25253A00%25253A00.000Z" length="0" type="image//api/og"></enclosure>
+    </item>
+    <item>
+      <title>Edward Snowden: Censorship Resistance, Cyber States, Privacy | Logos Podcast with Jarrad Hope</title>
+      <link>https://dev-press.logos.co/podcasts/edward-snowden-censorship-resistance-cyber-states-privacy-logos-podcast-with-jarrad-hope/edward-snowden-censorship-resistance-cyber-states-privacy-logos-podcast-with-jarrad-hope</link>
+      <guid>3</guid>
+      <pubDate>Wed, 06 Dec 2023 00:00:00 GMT</pubDate>
+      <description>Edward Snowden is a former intelligence contractor and whistleblower, responsible for alerting the world to the existence of a pervasive, secret, illegal surveillance program conducted by the NSA against the American people.Jarrad Hope is the co-founder of Logos, a grassroots movement building the technology and community that will launch corruption-resistant institutions. </description>
+      <category domain="https://dev-press.logos.co/podcasts/logos-podcast">Podcast - Logos Podcast</category>
+      <category domain="privacy">privacy</category>
+      <category domain="decentralisation">decentralisation</category>
+      <enclosure url="https://dev-press.logos.co/api/og?q=title%253DEdward%252BSnowden%25253A%252BCensorship%252BResistance%25252C%252BCyber%252BStates%25252C%252BPrivacy%252B%25257C%252BLogos%252BPodcast%252Bwith%252BJarrad%252BHope%2526image%253Dhttp%25253A%25252F%25252F127.0.0.1%25253A1337%25252Fuploads%25252Faf073458_fb05_5112_ad6d_36c7485b70f9_93218b4a87.png%2526contentType%253Dpodcast%2526date%253D2023-12-06T00%25253A00%25253A00.000Z" length="0" type="image//api/og"></enclosure>
+    </item>
+    <item>
+      <title>State of the Logos Network: October 2023</title>
+      <link>https://dev-press.logos.co/article/state-of-the-logos-network-october-2023</link>
+      <guid>6</guid>
+      <pubDate>Wed, 01 Nov 2023 00:00:00 GMT</pubDate>
+      <description>Logos recently stepped into the public eye, embarking on the path toward a network-state future. Our ecosystem is a hive of activity, building, refining, and broadcasting the network state thesis and the tech to actualise it. Logos Press Engine rounds up the major developments of recent months in this inaugural edition of State of the Logos Network.</description>
+      <category domain="https://dev-press.logos.co">Article</category>
+      <category domain="logos">logos</category>
+      <enclosure url="https://dev-press.logos.co/api/og?q=title%253DState%252Bof%252Bthe%252BLogos%252BNetwork%25253A%252BOctober%252B2023%2526image%253Dhttp%25253A%25252F%25252F127.0.0.1%25253A1337%25252Fuploads%25252Fea570218_11b3_5d39_ba65_8005c69b2f05_0a6716ea37.png%2526contentType%253Darticle%2526date%253D2023-11-01T00%25253A00%25253A00.000Z" length="0" type="image//api/og"></enclosure>
+    </item>
+    <item>
+      <title>Logos: A Declaration of Independence in Cyberspace</title>
+      <link>https://dev-press.logos.co/article/logos-a-declaration-of-independence-in-cyberspace</link>
+      <guid>2</guid>
+      <pubDate>Wed, 18 Oct 2023 00:00:00 GMT</pubDate>
+      <description>Abstract: A fully decentralised, privacy-preserving, and politically neutral tech stack would provide the necessary support for self-sovereign virtual territories. Recent breakthroughs in distributed systems, leaderless consensus algorithms, and ZK encryption provide the technical foundation that makes such a base layer possible. By using these technologies to build solutions for communications, storage, and smart contracts, we can incentivise the formation of borderless public institutions based on voluntary consent. This opens the possibility for a culture of resilient parallel societies that maximise the costs of surveillance and coercion, while minimising the costs of exit, voice, and loyalty. Doing this requires a resilient grassroots movement to govern and sustain the network, thereby providing trust-minimised, corruption-resistant governing services and social institutions to underserved citizens.</description>
+      <category domain="https://dev-press.logos.co">Article</category>
+      <category domain="network state">network state</category>
+      <enclosure url="https://dev-press.logos.co/api/og?q=title%253DLogos%25253A%252BA%252BDeclaration%252Bof%252BIndependence%252Bin%252BCyberspace%2526image%253Dhttp%25253A%25252F%25252F127.0.0.1%25253A1337%25252Fuploads%25252Ff6dd25e8_8a84_5d44_ab4d_bf55e1e6bf30_225483f032.png%2526contentType%253Darticle%2526date%253D2023-10-18T00%25253A00%25253A00.000Z" length="0" type="image//api/og"></enclosure>
+    </item>
+  </channel>
+</rss>

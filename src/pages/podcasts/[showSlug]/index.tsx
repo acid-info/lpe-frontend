@@ -1,5 +1,6 @@
 import { SEO } from '@/components/SEO'
 import PodcastShowContainer from '@/containers/PodcastShowContainer'
+import { LPERssFeed } from '@/services/rss.service'
 import { GetStaticPropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
@@ -37,6 +38,7 @@ const PodcastShowPage = ({
         imageUrl={undefined}
         pagePath={getPostLink('podcast', { showSlug: showSlug as string })}
         tags={[]}
+        rssFileName={`${showSlug}.xml`}
       />
       <PodcastShowContainer
         show={show}
@@ -95,6 +97,20 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       limit: 2,
       showSlug: showSlug as string,
     })
+
+  const rss = new LPERssFeed(showSlug as string, {
+    title: shows[0].title,
+    description: shows[0].descriptionText,
+    image: shows[0].logo.url,
+    language: 'en',
+    id: shows[0].id ?? (showSlug as string),
+    copyright: `All rights reserved ${new Date().getFullYear()}, ${
+      shows[0].title
+    }`,
+  })
+  await rss.init()
+  latestEpisodes.data.forEach((post: LPE.Post.Document) => rss.addPost(post))
+  await rss.save()
 
   return {
     props: {

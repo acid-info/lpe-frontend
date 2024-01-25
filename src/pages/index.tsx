@@ -1,3 +1,4 @@
+import { LPERssFeed } from '@/services/rss.service'
 import { CustomNextPage, GetStaticProps } from 'next'
 import SEO from '../components/SEO/SEO'
 import { HomePage, HomePageProps } from '../containers/HomePage'
@@ -9,7 +10,7 @@ type PageProps = Pick<HomePageProps, 'data'>
 const Page: CustomNextPage<PageProps> = (props) => {
   return (
     <>
-      <SEO />
+      <SEO rssFileName={'main.rss'} />
       <HomePage data={props.data} />
     </>
   )
@@ -41,6 +42,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
   const shows = [...(_shows ?? [])].sort((a, b) => (a.title > b.title ? -1 : 1))
 
   const { data: tags = [] } = await strapiApi.getTopics()
+
+  const rss = new LPERssFeed('main')
+  await rss.init()
+  latest.data.forEach((post) => rss.addPost(post))
+  await rss.save()
 
   return {
     props: {

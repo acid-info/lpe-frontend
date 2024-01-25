@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hashing It Out</title>
+    <link>https://dev-press.logos.co/rss/hashing-it-out.xml</link>
+    <description>Hashing It Out is a highly-technical bi-weekly show that brings you the pioneering developers driving the Cypherpunk movement. In each show we take a deep dive through privacy, sovereignty, and network state technology with some of web3&apos;s most influential innovators.</description>
+    <lastBuildDate>Thu, 25 Jan 2024 12:37:56 GMT</lastBuildDate>
+    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <language>en</language>
+    <image>
+      <title>Hashing It Out</title>
+      <url>http://127.0.0.1:1337/uploads/hashing_it_out_logo_e7d74e7c13.svg</url>
+      <link>https://dev-press.logos.co/rss/hashing-it-out.xml</link>
+    </image>
+    <copyright>All rights reserved 2024, Hashing It Out</copyright>
+    <category>Article</category>
+    <category>Podcast - Hashing It Out</category>
+    <category>Podcast - Logos Podcast</category>
+    <atom:link href="https://dev-press.logos.co/rss/hashing-it-out.xml" rel="self" type="application/rss+xml"></atom:link>
+    <item>
+      <title>Robin Linus of ZeroSync and BITVM.org | Pioneering Proof Systems, Adoption in Bitcoin</title>
+      <link>https://dev-press.logos.co/podcasts/robin-linus-of-zero-sync-and-bitvm-org-pioneering-proof-systems-adoption-in-bitcoin/robin-linus-of-zero-sync-and-bitvm-org-pioneering-proof-systems-adoption-in-bitcoin</link>
+      <guid>1</guid>
+      <pubDate>Thu, 11 Jan 2024 00:00:00 GMT</pubDate>
+      <description>Corey, D, and Jessie sit down with Robin Linus of ZeroSync — the team spearheading the development of proof systems for Bitcoin for scalability, interoperability, and privacy. Robin discusses everything from the recently published BitVM white paper, challenges and tradeoffs of validation proofs on Bitcoin, ZK coins, and his birthday cake from Gisele Bündchen.</description>
+      <category domain="https://dev-press.logos.co/podcasts/hashing-it-out">Podcast - Hashing It Out</category>
+      <category domain="proofsystems">proofsystems</category>
+      <category domain="bitcoin">bitcoin</category>
+      <category domain="zero">zero</category>
+      <category domain="privacy">privacy</category>
+      <enclosure url="https://dev-press.logos.co/api/og?q=title%253DRobin%252BLinus%252Bof%252BZeroSync%252Band%252BBITVM.org%252B%25257C%252BPioneering%252BProof%252BSystems%25252C%252BAdoption%252Bin%252BBitcoin%2526image%253Dhttp%25253A%25252F%25252F127.0.0.1%25253A1337%25252Fuploads%25252F59f017b0_3fcb_5c83_a7a3_13d10d00a027_23bbe14bb6.png%2526contentType%253Dpodcast%2526date%253D2024-01-11T00%25253A00%25253A00.000Z" length="0" type="image//api/og"></enclosure>
+    </item>
+    <item>
+      <title>Ameen Soleimani of Privacy Pools | Unpacking Privacy Pools – Motivations, Mechanics, and Tradeoffs</title>
+      <link>https://dev-press.logos.co/podcasts/ameen-soleimani-of-privacy-pools-unpacking-privacy-pools-motivations-mechanics-and-tradeoffs/ameen-soleimani-of-privacy-pools-unpacking-privacy-pools-motivations-mechanics-and-tradeoffs</link>
+      <guid>5</guid>
+      <pubDate>Wed, 29 Nov 2023 00:00:00 GMT</pubDate>
+      <description>The Hashing it Out team speaks with Ameen Soleimani, co-author of the Privacy Pools paper - Blockchain Privacy and Regulatory Compliance: Towards a Practical Equilibrium. Ameen, along with Vitalik Buterin (Ethereum Foundation), Jacob Illum (Chainalysis), Matthias Nadler (University of Basel), and Fabian Schär (Center for Innovative Finance, University of Basel; University of Basel - Economics Department) describe a novel smart contract-based privacy-enhancing protocol. Corey, D, and Jesse chat with Ameen about the motivations behind Privacy Pools, historical references including Tornado Cash and Z Cash, as well as the mechanics and tradeoffs associated with the approach.</description>
+      <category domain="https://dev-press.logos.co/podcasts/hashing-it-out">Podcast - Hashing It Out</category>
+      <category domain="privacy">privacy</category>
+      <enclosure url="https://dev-press.logos.co/api/og?q=title%253DAmeen%252BSoleimani%252Bof%252BPrivacy%252BPools%252B%25257C%252BUnpacking%252BPrivacy%252BPools%252B%2525E2%252580%252593%252BMotivations%25252C%252BMechanics%25252C%252Band%252BTradeoffs%2526image%253Dhttp%25253A%25252F%25252F127.0.0.1%25253A1337%25252Fuploads%25252Fc6ba576c_67d8_5d88_9f1b_27baeca8305a_858899d4a7.png%2526contentType%253Dpodcast%2526date%253D2023-11-29T00%25253A00%25253A00.000Z" length="0" type="image//api/og"></enclosure>
+    </item>
+  </channel>
+</rss>
