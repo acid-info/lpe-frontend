@@ -87,6 +87,7 @@ export const FooterLinksItems: {
       key: 'info',
       links: [
         { label: 'Terms of Use', href: '/terms' },
+        { label: 'Privacy Policy', href: '/privacy-policy' },
         { label: 'about', href: '/about' },
       ],
     },
