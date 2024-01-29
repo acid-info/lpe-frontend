@@ -98,19 +98,23 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       showSlug: showSlug as string,
     })
 
-  const rss = new LPERssFeed(showSlug as string, {
-    title: shows[0].title,
-    description: shows[0].descriptionText,
-    image: shows[0].logo.url,
-    language: 'en',
-    id: shows[0].id ?? (showSlug as string),
-    copyright: `All rights reserved ${new Date().getFullYear()}, ${
-      shows[0].title
-    }`,
-  })
-  await rss.init()
-  latestEpisodes.data.forEach((post: LPE.Post.Document) => rss.addPost(post))
-  await rss.save()
+  try {
+    const rss = new LPERssFeed(showSlug as string, {
+      title: shows[0].title,
+      description: shows[0].descriptionText,
+      image: shows[0].logo.url,
+      language: 'en',
+      id: shows[0].id ?? (showSlug as string),
+      copyright: `All rights reserved ${new Date().getFullYear()}, ${
+        shows[0].title
+      }`,
+    })
+    await rss.init()
+    latestEpisodes.data.forEach((post: LPE.Post.Document) => rss.addPost(post))
+    await rss.save()
+  } catch (e) {
+    console.log('Error generating RSS feed', e)
+  }
 
   return {
     props: {
