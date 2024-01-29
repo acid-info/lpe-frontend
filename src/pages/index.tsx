@@ -43,10 +43,14 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
 
   const { data: tags = [] } = await strapiApi.getTopics()
 
-  const rss = new LPERssFeed('main')
-  await rss.init()
-  latest.data.forEach((post) => rss.addPost(post))
-  await rss.save()
+  try {
+    const rss = new LPERssFeed('main')
+    await rss.init()
+    latest.data.forEach((post) => rss.addPost(post))
+    await rss.save()
+  } catch (e) {
+    console.log('Error generating RSS feed', e)
+  }
 
   return {
     props: {
