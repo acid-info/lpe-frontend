@@ -1,8 +1,8 @@
 import { CustomNextPage, GetServerSideProps } from 'next'
-import SEO from '../components/SEO/SEO'
-import { strapiApi } from '../services/strapi'
-import { LPE } from '../types/lpe.types'
-import { getPostLink } from '../utils/route.utils'
+import { SEO } from '../../components/SEO'
+import { strapiApi } from '../../services/strapi'
+import { LPE } from '../../types/lpe.types'
+import { getPostLink } from '../../utils/route.utils'
 
 type PageProps = {}
 
@@ -15,17 +15,17 @@ const Page: CustomNextPage<PageProps> = (props) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const type = Array.isArray(ctx.query.type)
-    ? ctx.query.type[0]
-    : ctx.query.type
+  const path = ctx.query.path
 
-  if (!type || !['page', 'post'].includes(type))
+  if (!path || !Array.isArray(path) || path.length !== 2)
     return {
       notFound: true,
     }
 
-  const id = Array.isArray(ctx.query.id) ? ctx.query.id[0] : ctx.query.id
-  if (!id)
+  const type = path[0]
+  const id = path[1]
+
+  if (!['page', 'post'].includes(type))
     return {
       notFound: true,
     }
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const {
       data: { data = [] },
     } = await strapiApi.getPosts({
-      id: id,
+      slug: id,
       published: false,
       parseContent: false,
     })
@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         props: {},
         redirect: {
           destination: getPostLink(post.type, {
-            id,
+            id: post.id,
             postSlug: post.slug,
             showSlug:
               (post.type === 'podcast' &&
@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   } else if (type === 'page') {
     const { data: pages } = await strapiApi.getStaticPages({
-      id: id,
+      slug: id,
       published: false,
       parseContent: false,
     })
@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         props: {},
         redirect: {
           destination: getPostLink(page.type, {
-            id,
+            id: page.id,
             postSlug: page.slug,
           }),
           permanent: false,
