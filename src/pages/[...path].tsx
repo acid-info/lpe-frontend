@@ -1,37 +1,20 @@
 import { CustomNextPage, GetStaticPaths, GetStaticProps } from 'next'
-import Error from 'next/error'
-import SEO from '../components/SEO/SEO'
+import { SEO } from '../components/SEO'
 import { StaticPage, StaticPageProps } from '../containers/StaticPage'
 import { strapiApi } from '../services/strapi'
 
-type PageProps = Partial<Pick<StaticPageProps, 'data'>> & {
-  error?: string
-  notFound?: boolean
-}
+type PageProps = Pick<StaticPageProps, 'data'> & {}
 
-const Page: CustomNextPage<PageProps> = ({
-  data,
-  error,
-  notFound,
-  ...props
-}) => {
-  if (!data) {
-    if (notFound) {
-      return <Error statusCode={404} />
-    }
-
-    return <Error statusCode={500} />
-  }
-
+const Page: CustomNextPage<PageProps> = ({ data, ...props }) => {
   return (
     <>
       <SEO
-        title={data.page.title}
-        description={data.page.subtitle}
-        noIndex={data.page.isDraft}
-        pagePath={`/${data.page.slug}`}
+        title={data?.page?.title}
+        description={data?.page?.subtitle}
+        noIndex={data?.page?.isDraft}
+        pagePath={`/${data?.page?.slug}`}
       />
-      <StaticPage data={data} />
+      {data && <StaticPage data={data} />}
     </>
   )
 }
@@ -71,23 +54,13 @@ export const getStaticProps: GetStaticProps<PageProps> = async (ctx) => {
       : {}),
   })
 
-  if (!data || data.length === 0) {
-    if (errors && typeof errors === 'string' && errors.includes('not found')) {
-      return {
-        notFound: true,
-        props: {
-          notFound: true,
-        },
-        revalidate: 10,
-      }
-    }
+  if (errors) {
+    throw errors
+  }
 
-    console.error(errors)
+  if ((data || []).length === 0) {
     return {
-      props: {
-        error: 'Something went wrong!',
-      },
-      notFound: false,
+      notFound: true,
       revalidate: 10,
     }
   }
