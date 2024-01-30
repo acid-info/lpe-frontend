@@ -27,9 +27,11 @@ export default function EpisodeBody({ episode, relatedEpisodes }: Props) {
 
   return (
     <EpisodeContainer>
-      {!!channel && (
-        <EpisodeHeader {...episode} channel={channel} duration={duration} />
-      )}
+      <EpisodeHeader
+        {...episode}
+        duration={duration || 0}
+        channel={channel || undefined}
+      />
       <EpisodeTranscript episode={episode} />
       <EpisodeFooter episode={episode} relatedEpisodes={relatedEpisodes} />
     </EpisodeContainer>

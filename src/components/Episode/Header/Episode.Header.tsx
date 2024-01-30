@@ -12,8 +12,8 @@ import EpisodeChannels from './Episode.Channels'
 import EpisodePlayer from './Episode.Player'
 
 export type EpisodeHeaderProps = LPE.Podcast.Document & {
-  channel: LPE.Podcast.Channel
-  duration: number
+  channel?: LPE.Podcast.Channel
+  duration?: number
 }
 
 const EpisodeHeader = ({
@@ -31,13 +31,15 @@ const EpisodeHeader = ({
 
   return (
     <EpisodeHeaderContainer>
-      <EpisodePlayer
-        title={title}
-        showTitle={show?.title ?? ''}
-        channel={channel}
-        coverImage={coverImage}
-      />
-      <EpisodeStats date={date} duration={duration} />
+      {channel && (
+        <EpisodePlayer
+          title={title}
+          showTitle={show?.title ?? ''}
+          channel={channel}
+          coverImage={coverImage}
+        />
+      )}
+      <EpisodeStats date={date} duration={duration ?? 0} />
       <EpisodeTitle variant="h2" genericFontFamily="serif" component="h1">
         {title}
       </EpisodeTitle>
