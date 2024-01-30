@@ -213,6 +213,24 @@ PostCard.styles = {
 
       margin-top: var(--lsd-spacing-16);
     }
+
+    .post-card__cover-image {
+      & > div {
+        padding-top: calc(9 / 16 * 100%) !important;
+
+        & > div {
+          width: 100%;
+          height: 100%;
+        }
+
+        & > div > img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover;
+          object-position: center center;
+        }
+      }
+    }
   `,
   medium: (theme: Theme) => css`
     padding-bottom: var(--lsd-spacing-8);
