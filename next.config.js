@@ -7,7 +7,7 @@ const nextConfig = {
             '127.0.0.1',
             'image.simplecastcdn.com',
             'img.youtube.com',
-            'strapi.logos.co'
+            'cms-press.logos.co'
         ],
     },
 }
