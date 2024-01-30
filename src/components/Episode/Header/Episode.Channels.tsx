@@ -16,21 +16,21 @@ const renderChannel = (channel: LPE.Podcast.Channel) => {
     case LPE.Podcast.ChannelNames.Spotify:
       return (
         <Channel href={channel.url} target="_blank">
-          <SpotifyIcon width={16} height={16} />
+          <SpotifyIcon width={16} height={16} color="primary" />
           <ChannelName variant="body2">Spotify</ChannelName>
         </Channel>
       )
     case LPE.Podcast.ChannelNames.ApplePodcasts:
       return (
         <Channel href={channel.url} target="_blank">
-          <ApplePodcastsIcon width={16} height={16} />
+          <ApplePodcastsIcon width={16} height={16} color="primary" />
           <ChannelName variant="body2">Apple Podcasts</ChannelName>
         </Channel>
       )
     case LPE.Podcast.ChannelNames.GooglePodcasts:
       return (
         <Channel href={channel.url} target="_blank">
-          <GooglePodcastsIcon width={16} height={16} />
+          <GooglePodcastsIcon width={16} height={16} color="primary" />
           <ChannelName variant="body2">Google Podcasts</ChannelName>
         </Channel>
       )
