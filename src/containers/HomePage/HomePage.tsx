@@ -55,7 +55,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               },
             ]}
           />
-          <Section title="Latest posts">
+          <Section title="Latest posts" bordered={highlighted.length > 0}>
             <PostsGrid
               shows={shows}
               pattern={[{ cols: 4, size: 'small' }]}
