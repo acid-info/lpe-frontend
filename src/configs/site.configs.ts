@@ -20,6 +20,6 @@ export const siteConfigs = {
     'whistleblower',
   ],
   xHandle: 'logos_network',
-  youtubeHandle: '@NetworkStatePress',
+  youtubeHandle: '@LogosNetwork',
   githubHandle: 'logos-co',
 }
