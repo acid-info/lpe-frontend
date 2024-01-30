@@ -93,7 +93,16 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
       : {}),
   })
 
+  if (!episode) {
+    return {
+      notFound: true,
+      props: { why: 'no article' },
+      revalidate: 10,
+    }
+  }
+
   const { data: shows } = await strapiApi.getPodcastShows({})
+  episode.show = (shows || []).find((show) => show.id === episode.showId)
 
   // TODO : error handlings
   const { data: relatedEpisodes, errors: relatedEpisodesErros } =
@@ -111,14 +120,6 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
           ),
         })),
       }))
-
-  if (!episode) {
-    return {
-      notFound: true,
-      props: { why: 'no article' },
-      revalidate: 10,
-    }
-  }
 
   return {
     props: {
