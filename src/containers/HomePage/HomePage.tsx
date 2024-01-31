@@ -1,6 +1,6 @@
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Grid, GridItem } from '../../components/Grid/Grid'
 import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
@@ -28,10 +28,17 @@ export type HomePageProps = React.DetailedHTMLProps<
 
 export const HomePage: React.FC<HomePageProps> = ({
   data,
-  data: { highlighted = [], shows = [], tags = [], latest },
+  data: { highlighted = [], shows = [], tags: _tags = [], latest },
   ...props
 }) => {
   const query = useRecentPosts({ initialData: latest, limit: 12 })
+  const tags = useMemo(
+    () =>
+      _tags
+        .filter((t) => !!t.postsCount && t.postsCount > 0)
+        .sort((a, b) => (a.postsCount! > b.postsCount! ? -1 : 1)),
+    [_tags],
+  )
 
   return (
     <Root {...props}>
