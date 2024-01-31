@@ -66,7 +66,7 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
 
   return {
     props: {
-      shows: podcastShows,
+      shows: podcastShows.sort((a, b) => (a.title > b.title ? -1 : 1)),
       latestEpisodes: latestEpisodes.data,
       highlightedEpisodes: highlightedEpisodes.data,
       // errors,
