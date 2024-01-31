@@ -80,6 +80,7 @@ export const postTransformer: Transformer<
         slug,
         modifiedAt: publishedAt,
         createdAt: publishedAt,
+        publishedAt,
         coverImage,
         tags,
         content,

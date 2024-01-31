@@ -10,6 +10,8 @@ export default async function handler(
     query: { q = '', tags: tagsString = '', type: typeString = '' },
   } = req
 
+  const query = Array.isArray(q) ? q.join(' ').trim() : q.trim()
+
   const tags =
     typeof tagsString === 'string'
       ? tagsString
@@ -43,13 +45,21 @@ export default async function handler(
   if (postTypes.length > 0) {
     const response = await strapiApi.searchPosts({
       tags,
-      query: Array.isArray(q) ? q.join(' ').trim() : q.trim(),
+      query,
       types: postTypes as LPE.PostType[],
       limit: 15,
       skip: 0,
     })
 
     result.posts.push(...(response.data ?? []))
+  }
+
+  if (query.trim().length === 0) {
+    result.posts = result.posts.sort(
+      (a, b) =>
+        +new Date((b.data as LPE.Post.Document).publishedAt || 0) -
+        +new Date((a.data as LPE.Post.Document).publishedAt || 0),
+    )
   }
 
   res.status(200).json({

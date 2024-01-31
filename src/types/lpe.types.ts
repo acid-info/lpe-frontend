@@ -165,6 +165,7 @@ export namespace LPE {
 
       createdAt: string | null
       modifiedAt: string | null
+      publishedAt: string | null
       type: typeof LPE.PostTypes.Article
     }
 
