@@ -20,7 +20,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY . .
 
-RUN yarn install --production
+RUN NODE_ENV=development yarn install
 RUN yarn build
 
 CMD ["yarn", "start"]
