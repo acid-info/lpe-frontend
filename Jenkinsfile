@@ -34,7 +34,7 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = 'statusteam/logos-press-engine'
+    IMAGE_NAME = 'status-private/logos-press-engine'
   }
 
   stages {
@@ -80,7 +80,7 @@ pipeline {
     stage('Push') {
       steps { script {
         withDockerRegistry([
-          credentialsId: 'dockerhub-statusteam-auto', url: ''
+          credentialsId: 'harbor-status-private-robot', url: 'https://harbor.status.im'
         ]) {
           image.push()
         }
@@ -91,7 +91,7 @@ pipeline {
       when { expression { params.IMAGE_TAG != '' } }
       steps { script {
         withDockerRegistry([
-          credentialsId: 'dockerhub-statusteam-auto', url: ''
+          credentialsId: 'harbor-status-private-robot', url: 'https://harbor.status.im'
         ]) {
           image.push(params.IMAGE_TAG)
         }
