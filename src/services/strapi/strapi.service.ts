@@ -72,7 +72,7 @@ export class StrapiService {
       },
     })
 
-    if (!isVercel() && process.env.NODE_ENV !== 'development') {
+    if (!isVercel()) {
       this.checkForUpdate()
     } else {
       setInterval(this.clearCache.bind(this), 5000)
@@ -85,12 +85,15 @@ export class StrapiService {
 
   checkForUpdate = async () => {
     const { lastUpdate } = await getWebhookData()
+
     if (this.lastUpdate < lastUpdate) {
       await this.clearCache()
       this.lastUpdate = lastUpdate
     }
 
-    setTimeout(() => this.checkForUpdate.bind(this), 5000)
+    setTimeout(() => {
+      this.checkForUpdate()
+    }, 5000)
   }
 
   handleResponse = <T>(

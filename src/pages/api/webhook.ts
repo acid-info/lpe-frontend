@@ -19,7 +19,10 @@ export const getWebhookData = async (): Promise<WebhookData> =>
   JSON.parse((await readFile(WEBHOOK_DATA_PATH, 'utf-8')) || '{}')
 
 let initialized = false
-if (!IS_VERCEL && !initialized) writeWebhookData({ lastUpdate: +new Date() })
+if (!IS_VERCEL && !initialized) {
+  writeWebhookData({ lastUpdate: +new Date() })
+  initialized = true
+}
 
 export default async function handler(
   req: NextApiRequest,
