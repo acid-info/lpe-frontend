@@ -8,11 +8,10 @@ import NextAdapterPages from 'next-query-params'
 import { ReactNode, useState } from 'react'
 import { QueryParamProvider } from 'use-query-params'
 import SEO from '../components/SEO/SEO'
-import { copyConfigs } from '../configs/copy.configs'
 import { GlobalSearchBox } from '../containers/GlobalSearchBox/GlobalSearchBox'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { api } from '../services/api.service'
-import unbodyApi from '../services/unbody/unbody.service'
+import { strapiApi } from '../services/strapi'
 
 interface SearchPageProps {
   topics: string[]
@@ -76,10 +75,12 @@ export default function SearchPage({ topics, shows }: SearchPageProps) {
       <SEO title="Search" pagePath={`/search`} />
       <GlobalSearchBox
         view={view}
-        views={[
-          { key: 'list', label: copyConfigs.search.views.default },
-          { key: 'explore', label: copyConfigs.search.views.explore },
-        ]}
+        views={
+          [
+            // { key: 'list', label: copyConfigs.search.views.default },
+            // { key: 'explore', label: copyConfigs.search.views.explore },
+          ]
+        }
         tags={topics}
         onSearch={handleSearch}
         resultsNumber={resultsNumber}
@@ -118,16 +119,13 @@ SearchPage.getLayout = (page: ReactNode) => (
 )
 
 export async function getStaticProps() {
-  const { data: topics, errors: topicErrors } = await unbodyApi.getTopics()
-  const { data: shows = [] } = await unbodyApi.getPodcastShows({
-    populateEpisodes: true,
-    episodesLimit: 10,
-  })
+  const { data: shows } = await strapiApi.getPodcastShows({})
+  const { data: topics } = await strapiApi.getTopics()
 
   return {
     props: {
-      topics,
       shows,
+      topics: topics.map((topic) => topic.name),
     },
     revalidate: 10,
   }

@@ -1,8 +1,6 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import { SearchResultListBlocks } from '@/components/Search/SearchResult.Blocks'
 import { SearchResultTopPost } from '@/components/Search/SearchResult.TopPost'
 import { SearchResultListPosts } from '@/components/Search/SearchResultList.Posts'
-import { SearchResultsListHeader } from '@/components/Search/SearchResultsList.Header'
 import { copyConfigs } from '@/configs/copy.configs'
 import { uiConfigs } from '@/configs/ui.configs'
 import { LPE } from '@/types/lpe.types'
@@ -11,6 +9,7 @@ import useWindowSize from '@/utils/ui.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import { useMemo } from 'react'
+import { Section } from '../../components/Section/Section'
 
 interface Props {
   posts: LPE.Search.ResultItemBase<LPE.Post.Document>[]
@@ -106,10 +105,7 @@ export const SearchResultsListView = (props: Props) => {
     <Container xs={{ cols: 8 }} md={{ cols: 12 }} lg={{ cols: 16 }} cols={16}>
       <PostsList xs={{ cols: 8 }} md={{ cols: 8 }} lg={{ cols: 11 }}>
         {topPost && (
-          <PostsListHeader>
-            <SearchResultsListHeader
-              title={copyConfigs.search.labels.topResults}
-            />
+          <Section title={copyConfigs.search.labels.topResults}>
             <SearchResultTopPost
               post={topPost}
               shows={shows}
@@ -120,15 +116,14 @@ export const SearchResultsListView = (props: Props) => {
                 textBlocksInTopResult as LPE.Article.TextBlock[]
               }
             />
-          </PostsListHeader>
+          </Section>
         )}
         <PostsListContent>
           {renderPosts.length > 0 ? (
             <>
-              <SearchResultsListHeader
-                title={copyConfigs.search.labels.articlesAndPodcasts}
-              />
-              <SearchResultListPosts posts={renderPosts} shows={shows} />
+              <Section title={copyConfigs.search.labels.articlesAndPodcasts}>
+                <SearchResultListPosts posts={renderPosts} shows={shows} />
+              </Section>
             </>
           ) : (
             !busy &&
@@ -141,7 +136,7 @@ export const SearchResultsListView = (props: Props) => {
         </PostsListContent>
       </PostsList>
       <GridItem xs={{ cols: 0 }} md={{ cols: 1 }} cols={1} />
-      <BlocksList xs={{ cols: 8 }} md={{ cols: 3 }} lg={{ cols: 4 }} cols={4}>
+      {/* <BlocksList xs={{ cols: 8 }} md={{ cols: 3 }} lg={{ cols: 4 }} cols={4}>
         {!isMobile && (
           <BlockListSticky>
             <SearchResultsListHeader
@@ -150,7 +145,7 @@ export const SearchResultsListView = (props: Props) => {
             <SearchResultListBlocks blocks={renderBlocks} />
           </BlockListSticky>
         )}
-      </BlocksList>
+      </BlocksList> */}
     </Container>
   )
 }
@@ -164,16 +159,13 @@ const Container = styled(Grid)`
 `
 
 const PostsList = styled(GridItem)`
-  display: flex;
+  display: flex !important;
   flex-direction: column;
-  gap: 56px;
+  gap: 80px;
 
   ${({ theme }) => lsdUtils.breakpoint(theme, 'xs', 'exact')} {
-    gap: 32px;
+    gap: 64px;
   }
-`
-const PostsListHeader = styled.div`
-  margin-bottom: 56px;
 `
 const PostsListContent = styled.div``
 

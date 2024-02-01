@@ -12,7 +12,7 @@ The repository for [press.logos.co](https://press.logos.co/) website.
 
 - Emotion: CSS-in-JS
 
-- [Unbody](https://unbody.io/) : CMS
+- [Strapi](https://strapi.io/) : CMS
 
 
 ## Environment Variables
@@ -20,8 +20,6 @@ The repository for [press.logos.co](https://press.logos.co/) website.
 Please check the environment values in `.env` located in the root directory.
 
 ```
-UNBODY_API_KEY=
-UNBODY_PROJECT_ID=
 SIMPLECAST_ACCESS_TOKEN=
 REVALIDATE_WEBHOOK_TOKEN=
 NEXT_PUBLIC_SITE_URL=https://press.logos.co
@@ -29,8 +27,6 @@ FATHOM_SITE_ID=
 ```
 
 This is a template for `.env.local`, which is included in `.gitignore`.
-
-You can obtain an Unbody API key and project ID through your [Unbody project](https://app.unbody.io/).
 
 To find the Simplecast access token, follow these steps on the Simplecast dashboard:
 

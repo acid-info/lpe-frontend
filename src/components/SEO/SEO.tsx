@@ -18,6 +18,7 @@ type Metadata = {
   date?: string | null
   contentType?: LPE.PostType
   noIndex?: boolean
+  rssFileName?: string
   authors?: string[]
 }
 
@@ -37,6 +38,7 @@ export default function SEO({
   date,
   contentType,
   noIndex = false,
+  rssFileName,
   authors,
 }: Metadata) {
   const title =
@@ -78,12 +80,7 @@ export default function SEO({
       <link
         rel="alternate"
         type="application/rss+xml"
-        href={`${getWebsiteUrl()}/rss.xml`}
-      />
-      <link
-        rel="alternate"
-        type="application/atom+xml"
-        href={`${getWebsiteUrl()}/atom.xml`}
+        href={`${getWebsiteUrl()}/rss/${rssFileName ?? 'main.rss'}`}
       />
       {noIndex && (
         <>

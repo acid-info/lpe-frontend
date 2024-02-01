@@ -1,8 +1,8 @@
 import { Grid, GridItem } from '@/components/Grid/Grid'
-import EpisodesList from '@/components/Podcasts/Episodes.List'
-import PodcastSection from '@/components/Podcasts/Podcast.Section'
 import PodcastsLists from '@/components/Podcasts/Podcasts.Lists'
 import styled from '@emotion/styled'
+import { PodcastSection } from '../components/Podcasts/Podcast.Section'
+import { PostsGrid } from '../components/PostsGrid'
 import { LPE } from '../types/lpe.types'
 import { lsdUtils } from '../utils/lsd.utils'
 
@@ -35,19 +35,15 @@ const PodcastsContainer = (props: Props) => {
         <PodcastsLists shows={shows} />
 
         <Episodes>
-          <PodcastSection>
-            <EpisodesList
-              episodes={highlightPosts}
+          <PodcastSection title="Latest episodes">
+            <PostsGrid
+              posts={highlightPosts}
               shows={shows}
-              bordered="except-first-row"
-              header={<EpisodeListHeader>Latest Episodes</EpisodeListHeader>}
               pattern={[{ cols: 2, size: 'medium' }]}
               breakpoints={[
                 {
                   breakpoint: 'xs',
-                  pattern: [
-                    { cols: 1, size: 'small', rowBorder: 'except-first-row' },
-                  ],
+                  pattern: [{ cols: 1, size: 'small' }],
                 },
                 {
                   breakpoint: 'sm',
@@ -55,23 +51,19 @@ const PodcastsContainer = (props: Props) => {
                 },
               ]}
             />
-            <EpisodesList
-              bordered
+            <PostsGrid
               shows={shows}
-              episodes={latestPosts.slice(0, 4)}
+              bordered={false}
+              posts={latestPosts.slice(0, 4)}
               pattern={[{ cols: 4, size: 'small' }]}
               breakpoints={[
                 {
                   breakpoint: 'xs',
-                  pattern: [{ cols: 1, size: 'small', rowBorder: false }],
+                  pattern: [{ cols: 1, size: 'small' }],
                 },
                 {
                   breakpoint: 'sm',
-                  pattern: [{ cols: 4, size: 'xsmall' }],
-                },
-                {
-                  breakpoint: 'md',
-                  pattern: [{ cols: 4, size: 'xsmall' }],
+                  pattern: [{ cols: 2, size: 'small' }],
                 },
               ]}
             />
@@ -89,19 +81,16 @@ const PodcastsGrid = styled(Grid)`
   padding-top: 64px;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
-    padding-top: 24px;
+    padding-top: var(--lsd-spacing-8);
   }
 `
 
 const Episodes = styled.div`
-  margin-top: 64px;
-`
+  margin-top: var(--lsd-spacing-64);
 
-const EpisodeListHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    margin-top: 56px;
+  }
 `
 
 export default PodcastsContainer

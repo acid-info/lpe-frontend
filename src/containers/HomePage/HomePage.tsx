@@ -1,13 +1,17 @@
 import { Button, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
+import { Grid, GridItem } from '../../components/Grid/Grid'
 import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
+import { Section } from '../../components/Section/Section'
+import { TagCard } from '../../components/TagCard'
 import { uiConfigs } from '../../configs/ui.configs'
 import { useRecentPosts } from '../../queries/useRecentPosts.query'
 import { ApiPaginatedPayload } from '../../types/data.types'
 import { LPE } from '../../types/lpe.types'
 import { lsdUtils } from '../../utils/lsd.utils'
+import { formatTagText } from '../../utils/string.utils'
 import { PodcastShowsPreview } from '../PodcastShowsPreview'
 
 export type HomePageProps = React.DetailedHTMLProps<
@@ -15,7 +19,7 @@ export type HomePageProps = React.DetailedHTMLProps<
   HTMLDivElement
 > & {
   data: {
-    tags: string[]
+    tags: LPE.Tag.Document[]
     shows: LPE.Podcast.Show[]
     latest: ApiPaginatedPayload<LPE.Post.Document[]>
     highlighted: LPE.Post.Document[]
@@ -24,121 +28,150 @@ export type HomePageProps = React.DetailedHTMLProps<
 
 export const HomePage: React.FC<HomePageProps> = ({
   data,
-  data: { highlighted = [], shows = [], tags = [], latest },
+  data: { highlighted = [], shows = [], tags: _tags = [], latest },
   ...props
 }) => {
-  const query = useRecentPosts({ initialData: latest, limit: 10 })
-
-  const [group1, group2] = useMemo(
-    () => [query.posts.slice(0, 5), query.posts.slice(5)],
-    [query.posts],
+  const query = useRecentPosts({ initialData: latest, limit: 12 })
+  const tags = useMemo(
+    () =>
+      _tags
+        .filter((t) => !!t.postsCount && t.postsCount > 0)
+        .sort((a, b) => (a.postsCount! > b.postsCount! ? -1 : 1)),
+    [_tags],
   )
 
   return (
     <Root {...props}>
       <HeroContainer>
-        <Hero tags={tags} />
+        <Hero />
       </HeroContainer>
-      <MostRecentContainer>
-        <Container>
+      <Container>
+        <div>
           <PostsGrid
-            posts={group1}
-            horizontal
-            displayYear={false}
-            pattern={[{ cols: 5, size: 'xxsmall' }]}
+            shows={shows}
+            posts={highlighted.slice(0, 1)}
+            pattern={[{ cols: 1, size: 'large' }]}
             breakpoints={[
               {
                 breakpoint: 'xs',
-                pattern: [{ cols: 1.5, size: 'xxsmall', maxWidth: '192px' }],
-              },
-              {
-                breakpoint: 'sm',
-                pattern: [{ cols: 4, size: 'xxsmall' }],
+                pattern: [{ cols: 1, size: 'small' }],
               },
               {
                 breakpoint: 'md',
-                pattern: [{ cols: 4, size: 'xxsmall' }],
+                pattern: [{ cols: 1, size: 'large' }],
               },
             ]}
           />
-        </Container>
-      </MostRecentContainer>
-      <Container>
-        <PostsGrid
-          bordered
-          posts={highlighted.slice(0, 1)}
-          pattern={[{ cols: 1, size: 'large' }]}
-          breakpoints={[
-            {
-              breakpoint: 'xs',
-              pattern: [{ cols: 1, size: 'small' }],
-            },
-          ]}
-        />
-        <PostsGrid
-          pattern={[
-            { cols: 4, size: 'small' },
-            {
-              cols: 2,
-              size: 'medium',
-            },
-          ]}
-          breakpoints={[
-            {
-              breakpoint: 'xs',
-              pattern: [
+          <Section title="Latest posts" bordered={highlighted.length > 0}>
+            <PostsGrid
+              shows={shows}
+              pattern={[{ cols: 4, size: 'small' }]}
+              breakpoints={[
                 {
-                  cols: 1,
-                  size: 'small',
-                },
-              ],
-            },
-            {
-              breakpoint: 'sm',
-              pattern: [
-                {
-                  cols: 3,
-                  size: 'small',
+                  breakpoint: 'xs',
+                  pattern: [
+                    {
+                      cols: 1,
+                      size: 'small',
+                    },
+                  ],
                 },
                 {
-                  cols: 2,
-                  size: 'medium',
-                },
-              ],
-            },
-            {
-              breakpoint: 'md',
-              pattern: [
-                {
-                  cols: 3,
-                  size: 'small',
+                  breakpoint: 'sm',
+                  pattern: [
+                    {
+                      cols: 2,
+                      size: 'small',
+                    },
+                  ],
                 },
                 {
-                  cols: 2,
-                  size: 'medium',
+                  breakpoint: 'md',
+                  pattern: [
+                    {
+                      cols: 4,
+                      size: 'small',
+                    },
+                  ],
                 },
-              ],
-            },
-          ]}
-          posts={group2}
-          bordered
-        />
-
-        {query.hasNextPage && (
-          <div className="load-more">
-            <Button
-              onClick={() => query.fetchNextPage()}
-              size="large"
-              disabled={query.isLoading}
-            >
-              <Typography variant="label1">
-                {query.isFetchingNextPage ? 'Loading...' : 'See more posts'}
-              </Typography>
-            </Button>
-          </div>
-        )}
+              ]}
+              posts={query.posts
+                .filter((post) => !post.highlighted)
+                .slice(0, 8)}
+            />
+          </Section>
+        </div>
 
         <PodcastShowsPreview data={{ shows }} />
+
+        <BrowseAll title="Browser all" size="large">
+          <div>
+            <Typography component="h2" variant="body1">
+              Tags
+            </Typography>
+          </div>
+          <Grid xs={{ cols: 1 }} sm={{ cols: 4 }}>
+            {tags.map((tag) => (
+              <GridItem key={tag.name} cols={1}>
+                <TagCard
+                  href={`/search?topic=${tag.name}`}
+                  name={formatTagText(tag.name)}
+                  count={tag.postsCount}
+                />
+              </GridItem>
+            ))}
+          </Grid>
+          <AllPosts title="All posts">
+            <PostsGrid
+              shows={shows}
+              pattern={[{ cols: 4, size: 'small' }]}
+              breakpoints={[
+                {
+                  breakpoint: 'xs',
+                  pattern: [
+                    {
+                      cols: 1,
+                      size: 'small',
+                    },
+                  ],
+                },
+                {
+                  breakpoint: 'sm',
+                  pattern: [
+                    {
+                      cols: 2,
+                      size: 'small',
+                    },
+                  ],
+                },
+                {
+                  breakpoint: 'md',
+                  pattern: [
+                    {
+                      cols: 4,
+                      size: 'small',
+                    },
+                  ],
+                },
+              ]}
+              posts={query.posts}
+            />
+          </AllPosts>
+
+          {query.hasNextPage && (
+            <div className="load-more">
+              <Button
+                onClick={() => query.fetchNextPage()}
+                size="large"
+                disabled={query.isLoading}
+              >
+                <Typography variant="label1">
+                  {query.isFetchingNextPage ? 'Loading...' : 'See more posts'}
+                </Typography>
+              </Button>
+            </div>
+          )}
+        </BrowseAll>
       </Container>
     </Root>
   )
@@ -152,34 +185,14 @@ const Root = styled('div')`
   .load-more {
     width: 100%;
     text-align: center;
-
-    button {
-      width: 340px;
-    }
-
-    ${(props) => lsdUtils.breakpoint(props.theme, 'md', 'down')} {
-      button {
-        width: 236px;
-      }
-    }
+    margin-top: var(--lsd-spacing-24);
 
     ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+      margin-top: var(--lsd-spacing-16);
+
       button {
         width: 100%;
       }
-    }
-  }
-
-  .podcasts {
-    margin-top: 40px;
-  }
-`
-
-const MostRecentContainer = styled.div`
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
-    & > div {
-      padding: 0;
-      padding-left: var(--main-content-padding);
     }
   }
 `
@@ -196,5 +209,29 @@ const HeroContainer = styled.div`
 const Container = styled.div`
   @media (max-width: ${uiConfigs.maxContainerWidth}px) {
     padding: 0 var(--main-content-padding);
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--lsd-spacing-120) 0;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    gap: var(--lsd-spacing-80) 0;
+  }
+`
+
+const BrowseAll = styled(Section)`
+  & > .section__content {
+    & > div:first-of-type {
+      padding: var(--lsd-spacing-24) 0;
+    }
+  }
+`
+
+const AllPosts = styled(Section)`
+  margin-top: var(--lsd-spacing-64);
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    margin-top: var(--lsd-spacing-40);
   }
 `

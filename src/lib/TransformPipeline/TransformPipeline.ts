@@ -1,19 +1,14 @@
-import {
-  UnbodyDataTypeClass,
-  UnbodyDataTypeConfig,
-  UnbodyDataTypeConfigHelpers,
-  UnbodyDataTypeKey,
-} from './types'
+import { Helpers, Transformer } from './types'
 
-export class UnbodyDataTypes {
-  private dataTypes: UnbodyDataTypeConfig[] = []
-  private helpers: UnbodyDataTypeConfigHelpers
+export class TransformPipeline {
+  private transformers: Transformer[] = []
+  private helpers: Helpers
 
-  constructor(dataTypes: UnbodyDataTypeConfig<any>[]) {
-    this.dataTypes = dataTypes
+  constructor(transformers: Transformer<any>[]) {
+    this.transformers = transformers
 
     this.helpers = {
-      dataTypes: this,
+      transformers: this,
     }
   }
 
@@ -22,14 +17,14 @@ export class UnbodyDataTypes {
     classes,
     objectType,
   }: {
-    key?: UnbodyDataTypeKey
-    classes?: UnbodyDataTypeClass | UnbodyDataTypeClass[]
-    objectType?: UnbodyDataTypeConfig['objectType']
+    key?: string
+    classes?: string | string[]
+    objectType?: string
   }) => {
-    let dataTypes = this.dataTypes
+    let transformers = this.transformers
 
     if (key) {
-      return dataTypes.find((doc) => doc.key === key)
+      return transformers.find((doc) => doc.key === key)
     }
 
     return this.get({ classes, objectType })[0]
@@ -39,13 +34,13 @@ export class UnbodyDataTypes {
     classes: _classes,
     objectType,
   }: {
-    classes?: UnbodyDataTypeClass | UnbodyDataTypeClass[]
-    objectType?: UnbodyDataTypeConfig['objectType']
+    classes?: string | string[]
+    objectType?: string
   }) => {
-    let dataTypes = this.dataTypes
+    let transformers = this.transformers
 
     if (objectType)
-      dataTypes = dataTypes.filter(
+      transformers = transformers.filter(
         (dataType) => dataType.objectType === objectType,
       )
 
@@ -55,15 +50,15 @@ export class UnbodyDataTypes {
       ? _classes
       : [_classes]
     if (classes.length > 0)
-      dataTypes = dataTypes.filter((dataType) =>
+      transformers = transformers.filter((dataType) =>
         classes.every((cls) => dataType.classes.includes(cls)),
       )
 
-    return dataTypes
+    return transformers
   }
 
   transform = async <O = any, T = any>(
-    pipeline: UnbodyDataTypeConfig[],
+    pipeline: Transformer[],
     data: T,
     root?: any,
     context?: any,
@@ -80,7 +75,7 @@ export class UnbodyDataTypes {
   }
 
   transformMany = async <O = any, T = any>(
-    pipeline: UnbodyDataTypeConfig[],
+    pipeline: Transformer[],
     data: T[],
     root?: any,
     context?: any,

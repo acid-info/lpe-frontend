@@ -1,4 +1,4 @@
-import { Button, ChevronDownIcon, Typography } from '@acid-info/lsd-react'
+import { Button, ChevronRightIcon, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -29,32 +29,37 @@ export default function PodcastsLists({ shows }: Props) {
                     <ShowInfoContainer>
                       <Image
                         src={show.logo.url}
-                        width={38}
-                        height={38}
+                        width={36}
+                        height={36}
                         alt={show.logo.alt}
                       />
                       <ShowInfo>
-                        <ColoredText isEven={isEven} variant="body2">
+                        <ColoredText isEven={isEven} variant="subtitle2">
                           {show.title}
-                        </ColoredText>
-                        <ColoredText isEven={isEven} variant="body3">
-                          {show.numberOfEpisodes} EP
                         </ColoredText>
                       </ShowInfo>
                     </ShowInfoContainer>
                   </Top>
                   <ShowData isEven={isEven}>
                     <Description
+                      variant="h4"
                       dangerouslySetInnerHTML={{ __html: show.description }}
                     />
                     <PodcastHost show={show} />
                   </ShowData>
                 </div>
-                <ShowButton isEven={isEven}>
+                <ShowButton
+                  size="small"
+                  isEven={isEven}
+                  icon={
+                    <ChevronRightIcon
+                      color={isEven ? 'secondary' : 'primary'}
+                    />
+                  }
+                >
                   <ColoredText isEven={isEven} variant="body3">
                     Podcast page
                   </ColoredText>
-                  <ChevronDownIcon color={isEven ? 'secondary' : 'primary'} />
                 </ShowButton>
               </ShowCard>
             </ShowCardContainer>
@@ -65,12 +70,7 @@ export default function PodcastsLists({ shows }: Props) {
 }
 
 const PodcastListsContainer = styled(Grid)`
-  gap: 16px;
-
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    flex-direction: column;
-    gap: 24px 16px;
-  }
+  gap: var(--lsd-spacing-16);
 `
 
 const ShowCardContainer = styled(GridItem)``
@@ -82,6 +82,7 @@ const ShowCard = styled(Link)<{ isEven: boolean }>`
   padding: 24px;
   border: 1px solid rgb(var(--lsd-text-primary));
   box-sizing: border-box;
+  height: 100%;
   min-height: 516px;
   text-decoration: none;
   background-color: ${(props) =>
@@ -90,17 +91,14 @@ const ShowCard = styled(Link)<{ isEven: boolean }>`
       : 'rgb(var(--lsd-surface-primary))'};
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
-    min-height: 420px;
-  }
-
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    min-height: 374px;
+    min-height: unset;
   }
 `
 
 const ShowInfoContainer = styled.div`
   display: flex;
   gap: 16px;
+  align-items: center;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     gap: 8px;
@@ -137,8 +135,7 @@ const ShowData = styled.div<{ isEven: boolean }>`
   }
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    margin-top: 57px;
-    margin-bottom: 57px;
+    margin-bottom: var(--lsd-spacing-40);
   }
 `
 
@@ -150,40 +147,28 @@ const ColoredText = styled(Typography)<{ isEven: boolean }>`
 `
 
 const Description = styled(Typography)`
-  font-size: var(--lsd-h4-fontSize);
-  line-height: var(--lsd-h4-lineHeight);
-
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    font-size: var(--lsd-h6-fontSize);
-    line-height: var(--lsd-h6-lineHeight);
+    ${lsdUtils.typography('subtitle1')}
   }
 `
 
 const ShowButton = styled(Button)<{ isEven: boolean }>`
-  display: flex;
-  align-items: center;
-  padding: 0 10px 0 12px;
-  width: 122px;
-  height: 28px;
-  gap: 12px;
+  width: auto;
+  align-self: flex-start;
+
   border: 1px solid
     ${(props) =>
       props.isEven
         ? 'rgb(var(--lsd-border-secondary))'
         : 'rgb(var(--lsd-border-primary))'};
 
-  > span {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  svg {
-    transform: rotate(-90deg);
-  }
-
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
-    padding: 7px;
+    align-self: stretch;
+    justify-content: space-between;
+    padding: 10px 0px 10px 18px !important;
+
+    .lsd-button__text * {
+      ${lsdUtils.typography('label1', true)}
+    }
   }
 `

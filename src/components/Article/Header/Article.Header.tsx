@@ -15,6 +15,7 @@ import ArticleSummary from './Article.Summary'
 export type ArticleHeaderProps = LPE.Article.Data
 
 const ArticleHeader = ({
+  title,
   summary,
   subtitle,
   authors,
@@ -33,19 +34,15 @@ const ArticleHeader = ({
         date={modifiedAt ? new Date(modifiedAt) : null}
         readingLength={readingTime}
       />
-      <ArticleTitle
-        block={
-          content.find((block) =>
-            block.labels.includes(LPE.Article.ContentBlockLabels.Title),
-          ) as LPE.Article.TextBlock
-        }
-        typographyProps={{
-          variant: 'h1',
-          genericFontFamily: 'serif',
-          component: 'h1',
+      <span
+        id="title-anchor"
+        ref={(ref) => {
+          headingElementsRef.current['h-0'] = ref as HTMLHeadingElement
         }}
-        headingElementsRef={headingElementsRef}
-      />
+      ></span>
+      <Typography variant="h1" component="h1" genericFontFamily="serif">
+        {title}
+      </Typography>
       {subtitle && (
         <ArticleSubtitle
           variant="body1"
@@ -55,9 +52,12 @@ const ArticleHeader = ({
           {subtitle}
         </ArticleSubtitle>
       )}
-      <TagsAndSocial tags={tags} className={'articleTags'} />
+      <TagsAndSocial
+        tags={tags.map((tag) => tag.name)}
+        className={'articleTags'}
+      />
       <AuthorsContainer>
-        <Authors authors={authors} email={true} gap={12} />
+        <Authors authors={authors} />
       </AuthorsContainer>
       {coverImage && (
         <ArticleImageBlockWrapper
@@ -65,7 +65,9 @@ const ArticleHeader = ({
           order={ArticleBlocksOrders.cover}
         />
       )}
-      <ArticleSummary summary={summary} showLabel={false} />
+      {summary && summary.length > 0 && (
+        <ArticleSummary summary={summary} showLabel={false} />
+      )}
     </ArticleHeaderContainer>
   )
 }

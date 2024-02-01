@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react'
 export const PostCardSubTitle = ({ children }: PropsWithChildren) => (
   <Typography
     className="post-card__subtitle"
-    variant={'body1'}
+    variant={'body2'}
     genericFontFamily="sans-serif"
   >
     {children}

@@ -18,22 +18,12 @@ export const StaticPage: React.FC<StaticPageProps> = ({
   data: { page },
   ...props
 }) => {
-  const titleBlock = data.page.content.find((block) => {
-    return (
-      block.type === LPE.Post.ContentBlockTypes.Text &&
-      block.classNames &&
-      block.classNames.includes('title')
-    )
-  }) as LPE.Post.TextBlock | undefined
-
   return (
     <Root {...props}>
       <article>
-        {titleBlock && (
-          <Typography variant={'h1'} genericFontFamily={'serif'}>
-            {titleBlock.text}
-          </Typography>
-        )}
+        <Typography variant={'h1'} genericFontFamily={'serif'}>
+          {page.title}
+        </Typography>
         {data.page.content.map((block, idx) => (
           <RenderArticleBlock block={block} activeId={null} key={idx} />
         ))}

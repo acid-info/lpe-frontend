@@ -2,7 +2,7 @@ export const siteConfigs = {
   title: 'Logos Press Engine',
   heroTitle: ['Logos Press Engine'],
   description:
-    'Your Guide to Network States and the technology driving Sovereign Communities',
+    'Your Guide to Network States and the Technology Driving Sovereign Communities',
   keywords: [
     'book club',
     'censorship resistance',
@@ -20,6 +20,6 @@ export const siteConfigs = {
     'whistleblower',
   ],
   xHandle: 'logos_network',
-  youtubeHandle: '@NetworkStatePress',
+  youtubeHandle: '@LogosNetwork',
   githubHandle: 'logos-co',
 }

@@ -12,7 +12,7 @@ type Props = {
 export const ArticleImageBlockWrapper = ({ image, order }: Props) => {
   return (
     <Container id={`i-${order}`}>
-      <LightBox caption={image.alt}>
+      <LightBox caption={image.captionHTML || ''}>
         <ResponsiveImage data={image} />
       </LightBox>
     </Container>

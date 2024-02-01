@@ -16,8 +16,7 @@ const EpisodeFooter = ({ episode, relatedEpisodes }: Props) => {
     return (
       episode.content &&
       episode.content
-        .filter((b) => (b as LPE.Post.TextBlock).footnotes.length)
-        .map((b) => (b as LPE.Post.TextBlock).footnotes)
+        .map((b) => (b as LPE.Post.TextBlock).footnotes || [])
         .flat()
     )
   }, [episode])
@@ -26,7 +25,7 @@ const EpisodeFooter = ({ episode, relatedEpisodes }: Props) => {
     <EpisodeFooterContainer>
       {!!episode?.credits && <EpisodeCredits credits={episode.credits} />}
       {!!footnotes && <EpisodeFootnotes footnotes={footnotes} />}
-      {!!relatedEpisodes && (
+      {!!relatedEpisodes && relatedEpisodes.length > 0 && (
         <RelatedEpisodes
           podcastSlug={episode.show?.slug as string}
           relatedEpisodes={relatedEpisodes}

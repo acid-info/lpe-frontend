@@ -13,11 +13,13 @@ export type PostCardCoverProps = React.ComponentProps<typeof Link> & {
   imageProps: ResponsiveImageProps
   imageData: LPE.Image.Document
   playIcon?: boolean
+  loadDelay?: number
 }
 export const PostCardCover: FC<PostCardCoverProps> = ({
   imageProps,
   imageData,
   playIcon,
+  loadDelay = 0,
   ...props
 }) => {
   return (
@@ -25,7 +27,7 @@ export const PostCardCover: FC<PostCardCoverProps> = ({
       {...props}
       className={`post-card__cover-image ${props.className}`}
     >
-      <ResponsiveImage {...imageProps} data={imageData}>
+      <ResponsiveImage {...imageProps} data={imageData} loadDelay={loadDelay}>
         {playIcon && (
           <Icon size="small">
             <UnfilledPlayIcon />

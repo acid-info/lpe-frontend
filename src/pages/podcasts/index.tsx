@@ -1,9 +1,9 @@
 import { SEO } from '@/components/SEO'
 import PodcastsContainer from '@/containers/PodcastsContainer'
-import unbodyApi from '@/services/unbody/unbody.service'
 import { GetStaticPropsContext } from 'next'
 import { ReactNode } from 'react'
 import { DefaultLayout } from '../../layouts/DefaultLayout'
+import { strapiApi } from '../../services/strapi'
 import { LPE } from '../../types/lpe.types'
 import { getPostLink } from '../../utils/route.utils'
 
@@ -43,18 +43,17 @@ const PodcastShowPage = ({
 export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
   // TODO : error handling
   const { data: podcastShows, errors: podcastShowsErrors } =
-    await unbodyApi.getPodcastShows({
+    await strapiApi.getPodcastShows({
       populateEpisodes: true,
       episodesLimit: 6,
     })
 
   // TODO : error handling
   const { data: highlightedEpisodes, errors: highlightedEpisodesErrors } =
-    await unbodyApi.getHighlightedEpisodes({})
+    await strapiApi.getLatestEpisodes({ highlighted: 'only' })
 
-  const { data: latestEpisodes } = await unbodyApi.getPodcastEpisodes({
+  const { data: latestEpisodes } = await strapiApi.getLatestEpisodes({
     limit: 10,
-    populateShow: true,
     highlighted: 'exclude',
   })
 
@@ -65,20 +64,11 @@ export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
     }
   }
 
-  const latestEps = podcastShows
-    .flatMap((show) => show.episodes)
-    .sort((a, b) => {
-      const aDate = new Date(a!.publishedAt)
-      const bDate = new Date(b!.publishedAt)
-      return aDate > bDate ? -1 : 1
-    })
-    .filter((p) => p?.highlighted !== true)
-
   return {
     props: {
-      shows: podcastShows,
-      highlightedEpisodes,
-      latestEpisodes: latestEps,
+      shows: podcastShows.sort((a, b) => (a.title > b.title ? -1 : 1)),
+      latestEpisodes: latestEpisodes.data,
+      highlightedEpisodes: highlightedEpisodes.data,
       // errors,
     },
     revalidate: 10,

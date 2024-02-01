@@ -1,9 +1,8 @@
-import { Button, Typography } from '@acid-info/lsd-react'
+import { Typography } from '@acid-info/lsd-react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 import { ChevronRightIcon } from '../../components/Icons/ChevronRightIcon'
 import { PostsGrid } from '../../components/PostsGrid'
@@ -28,54 +27,47 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
   return (
     <Root {...props} className={clsx('podcasts', props.className)}>
       <div className="podcasts__header">
-        <Typography variant="subtitle1">Podcasts</Typography>
-        <Link href="/podcasts">
-          <Button variant="outlined" size="small">
-            Go to all podcasts
-          </Button>
-        </Link>
+        <Typography component="h2" variant="h2">
+          Podcasts
+        </Typography>
       </div>
-      <div
-        className={clsx(
-          'podcasts__shows',
-          shows.length > 1 && 'podcasts__shows--bordered',
-        )}
-      >
+      <div className={clsx('podcasts__shows')}>
         {shows.slice(0, 2).map((show) => (
           <div key={show.id} className={clsx('podcasts__show')}>
             <div className="podcasts__show-card">
-              <Image
-                width={56}
-                height={56}
-                alt={show.title}
-                src={show.logo.url}
-                className="podcasts__show-logo"
-              />
-              <Typography variant="h3" className="podcasts__show-title">
-                {show.title}
-              </Typography>
+              <div className="podcasts__show-info">
+                <Image
+                  width={32}
+                  height={32}
+                  alt={show.title}
+                  src={show.logo.url}
+                  className="podcasts__show-logo"
+                />
+                <Typography
+                  component="h3"
+                  variant="subtitle2"
+                  className="podcasts__show-title"
+                >
+                  {show.title}
+                </Typography>
+                <ChevronRightIcon color="primary" />
+                <Typography
+                  component="a"
+                  variant="body1"
+                  className="podcasts__show-link"
+                  href={getPostLink('podcast', { showSlug: show.slug })}
+                >
+                  See all
+                </Typography>
+              </div>
               {show.description && (
                 <Typography
-                  variant="subtitle2"
+                  variant="subtitle3"
                   className="podcasts__show-description"
                   dangerouslySetInnerHTML={{ __html: show.description }}
                 />
               )}
-
-              <Link
-                href={getPostLink('podcast', { showSlug: show.slug })}
-                className="podcasts__show-link"
-              >
-                <Button
-                  size="small"
-                  variant="outlined"
-                  icon={<ChevronRightIcon color="primary" />}
-                >
-                  Podcast page
-                </Button>
-              </Link>
-
-              <Typography className="podcasts__show-hosts">
+              <Typography variant="subtitle3" className="podcasts__show-hosts">
                 {show.hosts.length > 0 && (
                   <span>
                     Hosted by:{' '}
@@ -84,25 +76,31 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
                     ))}
                   </span>
                 )}
-                <span>{show.numberOfEpisodes} EP</span>
               </Typography>
             </div>
 
             <div className="podcasts__show-episodes">
               <PostsGrid
+                posts={(show.episodes || []).slice(0, 1)}
+                shows={shows}
+                displayPodcastShow
+                pattern={[
+                  {
+                    cols: 1,
+                    size: 'medium',
+                  },
+                ]}
+                style={{ marginBottom: 16 }}
+              />
+              <PostsGrid
                 posts={(show.episodes || [])
-                  .slice(0, 4)
+                  .slice(1, 3)
                   .map((ep) => ({ ...ep, show }))}
-                displayPodcastShow={false}
+                displayPodcastShow
                 pattern={[
                   {
                     cols: 2,
-                    size: 'xsmall',
-                  },
-                  {
-                    cols: 2,
-                    size: 'xsmall',
-                    rowBorder: true,
+                    size: 'small',
                   },
                 ]}
                 breakpoints={[
@@ -137,61 +135,57 @@ export const PodcastShowsPreview: React.FC<PodcastShowsPreviewProps> = ({
 const Root = styled('div')`
   & .podcasts {
     &__header {
-      padding: 16px 0;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid rgb(var(--lsd-border-primary));
+      padding-bottom: var(--lsd-spacing-24);
       border-bottom: 1px solid rgb(var(--lsd-border-primary));
     }
 
     &__shows {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      padding-top: 24px;
-
-      & > div:first-child {
-        border-right: 1px solid rgb(var(--lsd-border-primary));
-        padding-right: 16px;
-      }
-
-      &--bordered {
-        & > div:last-child {
-          padding-left: 16px;
-        }
-      }
+      margin-top: var(--lsd-spacing-24);
+      gap: 0 var(--lsd-spacing-16);
     }
 
     &__show-card {
-      margin-top: 24px;
+      margin: var(--lsd-spacing-24) 0;
       align-items: flex-start;
+
+      display: flex;
+      flex-direction: column;
+      gap: var(--lsd-spacing-24) 0;
+    }
+
+    &__show-info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0 8px;
     }
 
     &__show-logo {
-      width: 56px;
-      height: 56px;
+      width: 32px;
+      height: 32px;
       border-radius: 100%;
     }
 
     &__show-title {
-      margin-top: 16px;
+      margin-left: 8px;
     }
 
     &__show-description {
       display: block;
-      margin-top: 8px;
     }
 
     &__show-link {
       display: block;
-      margin-top: 24px;
-      text-decoration: none;
     }
 
     &__show-hosts {
       display: block;
-      margin-top: 200px;
 
       span:not(:last-child) {
         &:after {
@@ -204,9 +198,7 @@ const Root = styled('div')`
     }
 
     &__show-episodes {
-      > div:not(:last-child) {
-        border-bottom: 1px solid rgb(var(--lsd-border-primary));
-      }
+      padding-top: var(--lsd-spacing-24);
     }
   }
 
@@ -216,27 +208,34 @@ const Root = styled('div')`
       'xs',
       'exact',
     )(css`
-      .podcasts__shows {
-        padding-top: 0;
-        grid-template-columns: repeat(1, 1fr);
-      }
+      .podcasts__header {
+        padding-bottom: var(--lsd-spacing-16);
+        border-bottom: none;
 
-      .podcasts__show {
-        border-right: none !important;
-        padding: 0 !important;
-
-        &:not(:first-child) {
-          border-top: 1px solid rgb(var(--lsd-border-primary));
+        h2 {
+          ${lsdUtils.typography('h3')}
         }
       }
 
-      .podcasts__show-card {
+      .podcasts__shows {
+        display: flex;
+        flex-direction: column;
         margin-top: 0;
-        padding: 24px 0px 16px 0px;
+        gap: var(--lsd-spacing-32);
+      }
+
+      .podcasts__show {
+        border-top: 1px solid rgb(var(--lsd-border-primary));
+      }
+
+      .podcasts__show-card {
       }
 
       .podcasts__show-hosts {
-        margin-top: 80px;
+      }
+
+      .podcasts__show-episodes {
+        padding-top: var(--lsd-spacing-16);
       }
     `)}
 `

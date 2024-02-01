@@ -24,11 +24,15 @@ const ImageBlock = (props: Props) => {
         type={BlockType.IMAGE}
         date={document?.modifiedAt ? new Date(document?.modifiedAt) : null}
       />
-      {data.alt.length > 0 && (
+      {(data.caption || '').length > 0 && (
         <Caption>
-          <Typography variant={'body2'} component={'p'}>
-            {data.alt}
-          </Typography>
+          <Typography
+            variant={'body2'}
+            component={'p'}
+            dangerouslySetInnerHTML={{
+              __html: data.captionHTML || '',
+            }}
+          />
         </Caption>
       )}
       <ContentBlockFooter type="image" data={document} order={order} />

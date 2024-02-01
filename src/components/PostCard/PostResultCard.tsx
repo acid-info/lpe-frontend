@@ -9,7 +9,6 @@ import { PostCardSubTitle } from '@/components/PostCard/PostCard.Subtitle'
 import { PostCardTitle } from '@/components/PostCard/PostCard.Title'
 import { getPostLink } from '../../utils/route.utils'
 import { Authors } from '../Authors'
-import { AuthorsDirection } from '../Authors/Authors'
 import { PostCardLabel } from './PostCard.Label'
 
 type PostResultCardProps = Omit<PostCardProps, 'size'>
@@ -56,13 +55,7 @@ export const PostResultCard = (_props: PostResultCardProps) => {
       <PostCardTitle href={link}>{title}</PostCardTitle>
       <PostCardSubTitle>{subtitle}</PostCardSubTitle>
       {authors && authors.length > 0 && (
-        <Authors
-          className="post-card__authors"
-          authors={authors}
-          email={false}
-          flexDirection={AuthorsDirection.ROW}
-          gap={8}
-        />
+        <Authors className="post-card__authors" authors={authors} />
       )}
       {displayPodcastShow && podcastShowDetails && (
         <PostCardShowDetails

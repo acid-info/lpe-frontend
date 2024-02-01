@@ -67,7 +67,7 @@ export const PostsList = (props: Props) => {
                     title: post.title,
                     subtitle: post.subtitle,
                     coverImage: post.coverImage,
-                    tags: post.tags,
+                    tags: post.tags.map((tag) => tag.name),
                   }}
                   contentType={PostTypes.Article}
                 />

@@ -1,5 +1,5 @@
 export const uiConfigs = {
-  navbarRenderedHeight: 45,
+  navbarRenderedHeight: 60,
   postSectionMargin: 34,
   postSectionMobileMargin: 48,
   articleSectionMargin: 40,
@@ -14,5 +14,11 @@ export const uiConfigs = {
     numberOfParagraphsShowInTopResult: 3,
     numberOfImagesShowInTopResult: 3,
     numberOfTotalBlocksInListView: 20,
+  },
+  imageRender: {
+    placeholder: {
+      pixelation: 0.5,
+      blur: 0,
+    },
   },
 }

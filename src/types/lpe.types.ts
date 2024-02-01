@@ -8,17 +8,29 @@ export namespace LPE {
 
   export type PostType = DictValues<typeof PostTypes>
 
+  export namespace Tag {
+    export type Document = {
+      id: string
+      name: string
+      postsCount?: number
+    }
+  }
+
   export namespace Image {
     export type Document = {
       url: string
       alt: string
       width: number
       height: number
+      caption?: string
+      captionHTML?: string
+      placeholder?: string
     }
   }
 
   export namespace Author {
     export type Document = {
+      id: string
       name: string
       emailAddress?: string
     }
@@ -74,6 +86,7 @@ export namespace LPE {
       order: number
       labels: ContentBlockLabel[]
       document?: D
+      footnotes?: Post.Footnotes
     }
 
     export type TextBlockEmbed = {
@@ -87,7 +100,6 @@ export namespace LPE {
       tagName: string
       classNames: string[]
       type: Extract<ContentBlockType, 'text'>
-      footnotes: Post.Footnotes
       embed?: TextBlockEmbed
     }
 
@@ -141,17 +153,19 @@ export namespace LPE {
 
     export type Metadata = {
       id: string
+      uuid: string
       slug: string
       title: string
       summary: string
       subtitle: string
       authors: Author.Document[]
-      tags: string[]
+      tags: Tag.Document[]
       highlighted?: boolean
       isDraft?: boolean
 
       createdAt: string | null
       modifiedAt: string | null
+      publishedAt: string | null
       type: typeof LPE.PostTypes.Article
     }
 
@@ -211,9 +225,10 @@ export namespace LPE {
 
     export type Metadata = {
       id: string
+      uuid: string
       slug: string
       title: string
-      tags: string[]
+      tags: Tag.Document[]
       description: string
       authors: Author.Document[]
       publishedAt: string
@@ -222,7 +237,7 @@ export namespace LPE {
       showId?: string
       highlighted?: boolean
       isDraft?: boolean
-      coverImage?: Post.ImageBlock
+      coverImage?: Image.Document
       show?: Show
       type: typeof LPE.PostTypes.Podcast
     }
