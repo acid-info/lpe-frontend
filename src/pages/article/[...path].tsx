@@ -28,6 +28,7 @@ const ArticlePage = ({ data, errors, why }: ArticleProps) => {
           ...data.data.authors.map((author) => author.name),
         ]}
         contentType={LPE.PostTypes.Article}
+        authors={data.data.authors.map((author) => author.name)}
       />
       <ArticleContainer data={data} />
     </>

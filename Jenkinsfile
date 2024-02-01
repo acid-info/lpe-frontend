@@ -7,6 +7,21 @@ pipeline {
       defaultValue: params.IMAGE_TAG ?: '',
       description: 'Optional Docker image tag to push.'
     )
+    string(
+      name: 'STRAPI_API_URL',
+      description: 'URL of Strapi API',
+      defaultValue: params.STRAPI_API_URL ?: 'https://cms-press.logos.co/api',
+    )
+    string(
+      name: 'STRAPI_GRAPHQL_URL',
+      description: 'URL of Strapi GraphQL API',
+      defaultValue: params.STRAPI_GRAPHQL_URL ?: 'https://cms-press.logos.co/graphql',
+    )
+    string(
+      name: 'NEXT_PUBLIC_ASSETS_BASE_URL',
+      description: 'URL for public assets',
+      defaultValue: params.NEXT_PUBLIC_ASSETS_BASE_URL ?: 'https://cms-press.logos.co',
+    ) 
   }
 
   options {
@@ -40,6 +55,10 @@ pipeline {
               credentialsId: 'logos-press-engine-webhook-token',
               variable: 'REVALIDATE_WEBHOOK_TOKEN'
             ),
+            string(
+              credentialsId: 'logos-press-engine-strapi-api-key',
+              variable: 'STRAPI_API_KEY'
+            ),
           ]) {
             image = docker.build(
               "${IMAGE_NAME}:${GIT_COMMIT.take(8)}",
@@ -47,6 +66,10 @@ pipeline {
                "--build-arg='UNBODY_API_KEY=${env.UNBODY_API_KEY}'",
                "--build-arg='SIMPLECAST_ACCESS_TOKEN=${SIMPLECAST_ACCESS_TOKEN}'",
                "--build-arg='REVALIDATE_WEBHOOK_TOKEN=${REVALIDATE_WEBHOOK_TOKEN}'",
+               "--build-arg='STRAPI_API_URL=${params.STRAPI_API_URL}'",
+               "--build-arg='STRAPI_GRAPHQL_URL=${params.STRAPI_GRAPHQL_URL}'",
+               "--build-arg='NEXT_PUBLIC_ASSETS_BASE_URL=${params.NEXT_PUBLIC_ASSETS_BASE_URL}'",
+               "--build-arg='STRAPI_API_KEY=${STRAPI_API_KEY}'",
                "."].join(' ')
             )
           }

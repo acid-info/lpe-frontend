@@ -19,6 +19,7 @@ type Metadata = {
   contentType?: LPE.PostType
   noIndex?: boolean
   rssFileName?: string
+  authors?: string[]
 }
 
 const SITE_URL = getWebsiteUrl()
@@ -38,6 +39,7 @@ export default function SEO({
   contentType,
   noIndex = false,
   rssFileName,
+  authors,
 }: Metadata) {
   const title =
     _title && _title.length
@@ -53,6 +55,7 @@ export default function SEO({
       contentType,
       date,
       pagePath,
+      authors,
     })
 
   return (
