@@ -21,7 +21,12 @@ pipeline {
       name: 'NEXT_PUBLIC_ASSETS_BASE_URL',
       description: 'URL for public assets',
       defaultValue: params.NEXT_PUBLIC_ASSETS_BASE_URL ?: 'https://cms-press.logos.co',
-    ) 
+    )
+    string(
+      name: 'DOCKER_REGISTRY',
+      description: 'Docker registry ',
+      defaultValue: params.DOCKER_REGISTRY ?: 'harbor.status.im',
+    )
   }
 
   options {
@@ -34,7 +39,7 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = 'status-private/logos-press-engine'
+    IMAGE_NAME = 'acid-info-private/logos-press-engine'
   }
 
   stages {
@@ -61,7 +66,7 @@ pipeline {
             ),
           ]) {
             image = docker.build(
-              "${IMAGE_NAME}:${GIT_COMMIT.take(8)}",
+              "${DOCKER_REGISTRY}/${IMAGE_NAME}:${GIT_COMMIT.take(8)}",
               ["--build-arg='STRAPI_API_KEY=${env.UNBODY_PROJECT_ID}'",
                "--build-arg='UNBODY_API_KEY=${env.UNBODY_API_KEY}'",
                "--build-arg='SIMPLECAST_ACCESS_TOKEN=${SIMPLECAST_ACCESS_TOKEN}'",
@@ -80,7 +85,7 @@ pipeline {
     stage('Push') {
       steps { script {
         withDockerRegistry([
-          credentialsId: 'harbor-status-private-robot', url: 'https://harbor.status.im'
+          credentialsId: 'harbor-acid-info-private-robot', url: 'https://${DOCKER_REGISTRY}'
         ]) {
           image.push()
         }
@@ -91,7 +96,7 @@ pipeline {
       when { expression { params.IMAGE_TAG != '' } }
       steps { script {
         withDockerRegistry([
-          credentialsId: 'harbor-status-private-robot', url: 'https://harbor.status.im'
+          credentialsId: 'harbor-acid-info-private-robot', url: 'https://${DOCKER_REGISTRY}'
         ]) {
           image.push(params.IMAGE_TAG)
         }
@@ -138,7 +143,7 @@ def discordNotify(Map args=[:]) {
       title: opts.title,
       description: """
         ${opts.header}
-        Image: [`${env.IMAGE_NAME}:${params.IMAGE_TAG}`](https://hub.docker.com/r/${params.DOCKER_NAME}/tags?name=${params.IMAGE_TAG})
+        Image: [`${env.IMAGE_NAME}:${params.IMAGE_TAG}`](https://harbor.status.im/${params.IMAGE_NAME}/tags?name=${params.IMAGE_TAG})
         Branch: [`${repo.branch}`](${repo.url}/commits/${repo.branch})
         Commit: [`${repo.commit}`](${repo.url}/commit/${repo.commit})
         Diff: [`${repo.prev}...${repo.commit}`](${repo.url}/compare/${repo.prev}...${repo.commit})
