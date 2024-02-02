@@ -5,6 +5,7 @@ import {
   transformStrapiImageUrl,
 } from '@/services/strapi/transformers/utils'
 import axios from 'axios'
+import path from 'path'
 import sharp from 'sharp'
 
 export class PlaceholderService {
@@ -33,7 +34,12 @@ export class PlaceholderService {
     const thumbnailPath = getStrapiImageUrlBySize('thumbnail', imagePath)
 
     try {
-      const filePath = `${POSTS_IMAGE_PLACEHOLDER_DIR}/${fileName}`
+      const relativePath = path.join(POSTS_IMAGE_PLACEHOLDER_DIR, fileName)
+      const filePath = path.join(
+        process.env.SOURCE_DIR ?? process.cwd(),
+        relativePath,
+      )
+
       const imageUrl = transformStrapiImageUrl(thumbnailPath)
       const imageBuffer = (
         await axios({ url: imageUrl, responseType: 'arraybuffer' })
@@ -51,9 +57,9 @@ export class PlaceholderService {
         })
         .toFile(filePath)
 
-      this.add(fileName, filePath)
+      this.add(fileName, relativePath)
 
-      return filePath
+      return relativePath
     } catch (e) {
       console.log(e)
     }

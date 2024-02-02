@@ -56,7 +56,7 @@ export const ResponsiveImage = ({
     >
       <div className="comment">
         <img
-          src={data.placeholder?.replace('public/', '/')}
+          src={data.placeholder?.replace('/public/', '/')}
           alt={data.alt}
           title={data.alt}
         />
