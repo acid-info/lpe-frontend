@@ -30,7 +30,18 @@ export const transformStrapiImageUrl = (filePath: string): string =>
 export const transformStrapiImageData = async (
   image: StrapiImage,
 ): Promise<LPE.Image.Document> => {
-  const attributes = 'data' in image ? image.data.attributes : image.attributes
+  const attributes = 'data' in image ? image.data?.attributes : image.attributes
+
+  if (!attributes || !attributes.url) {
+    return {
+      height: 0,
+      width: 0,
+      caption: '',
+      alt: '',
+      url: '',
+      placeholder: '',
+    }
+  }
 
   return {
     height: attributes.height || 0,

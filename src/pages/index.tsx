@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
         shows,
         latest: {
           data: latest?.data || [],
-          hasMore: latest?.hasMore,
+          hasMore: latest?.hasMore ?? false,
         },
         highlighted: highlighted || [],
       },
