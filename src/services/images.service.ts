@@ -30,9 +30,10 @@ export class PlaceholderService {
 
     if (this.exists(fileName)) return this.cache.get(fileName) as string
 
+    const thumbnailPath = getStrapiImageUrlBySize('thumbnail', imagePath)
+
     try {
       const filePath = `${POSTS_IMAGE_PLACEHOLDER_DIR}/${fileName}`
-      const thumbnailPath = getStrapiImageUrlBySize('thumbnail', imagePath)
       const imageUrl = transformStrapiImageUrl(thumbnailPath)
       const imageBuffer = (
         await axios({ url: imageUrl, responseType: 'arraybuffer' })
@@ -57,6 +58,6 @@ export class PlaceholderService {
       console.log(e)
     }
 
-    return ''
+    return thumbnailPath
   }
 }
