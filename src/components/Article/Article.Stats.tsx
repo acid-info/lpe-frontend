@@ -22,6 +22,7 @@ const ArticleStats = ({
               day: 'numeric',
               month: 'short',
               year: 'numeric',
+              timeZone: 'EST',
             })}
         </Date>
       </>
