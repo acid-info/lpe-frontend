@@ -54,9 +54,9 @@ export default async function handler(request: NextRequest) {
       <img
         src={imgSrc}
         alt={alt}
+        width={1200}
+        height={630}
         style={{
-          width: '1200px',
-          height: '630px',
           objectFit: 'contain',
           backgroundColor: '#000',
         }}
