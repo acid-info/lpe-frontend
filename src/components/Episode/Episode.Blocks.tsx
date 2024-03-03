@@ -1,4 +1,3 @@
-import { lsdUtils } from '@/utils/lsd.utils'
 import useWindowSize from '@/utils/ui.utils'
 import { Button } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -37,7 +36,7 @@ const EpisodeBlocks = ({ data }: Props) => {
 const BlocksContainer = styled.div<{ n: number }>`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 
   > *:nth-of-type(n + ${({ n }) => n + 1}) {
     display: none;
@@ -47,10 +46,6 @@ const BlocksContainer = styled.div<{ n: number }>`
     > *:nth-of-type(n + ${({ n }) => n + 1}) {
       display: flex;
     }
-  }
-
-  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
-    gap: 16px;
   }
 `
 const ShowButton = styled(Button)`

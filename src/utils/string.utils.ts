@@ -69,18 +69,38 @@ export function convertToIframe(url: string) {
 const removeFootnoteReferences = (text: string) =>
   text.replaceAll(/\[\d+\]/g, '')
 
-export const parseTranscriptionText = (text: string) => {
-  const time = text.match(/^(\d{1,2}:?){2,3}/g)?.[0] ?? ''
-  const transcript = removeFootnoteReferences(
-    time ? text.replace(time, '') : text,
-  ).trim()
+// export const parseTranscriptionText = (text: string) => {
+//   const time = text.match(/^(\d{1,2}:?){2,3}/g)?.[0] ?? ''
+//   const transcript = removeFootnoteReferences(
+//     time ? text.replace(time, '') : text,
+//   ).trim()
 
-  const parsedTime = time.endsWith(':') ? time.slice(0, -1) : time
-  const parsedTranscript = transcript.replace(/^(-|\||\s)*/, '')
+//   const parsedTime = time.endsWith(':') ? time.slice(0, -1) : time
+//   const parsedTranscript = transcript.replace(/^(-|\||\s)*/, '')
+
+//   return {
+//     time: parsedTime,
+//     transcript: parsedTranscript,
+//   }
+// }
+
+export function parseTranscriptionText(transcript: string) {
+  const regex = /\[(\d{2}:\d{2}:\d{2})\]\s*(.*?):\s*(.*)/
+
+  const match = transcript.match(regex)
+
+  if (!match) {
+    return {
+      time: '',
+      speaker: '',
+      transcript: '',
+    }
+  }
 
   return {
-    time: parsedTime,
-    transcript: parsedTranscript,
+    time: match[1],
+    speaker: match[2],
+    transcript: removeFootnoteReferences(match[3]).trim(),
   }
 }
 
