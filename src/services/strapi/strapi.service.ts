@@ -552,6 +552,22 @@ export class StrapiService {
             limit: limit,
           },
           filters: {
+            or: [
+              ...(query && query?.length > 0
+                ? [
+                    {
+                      title: {
+                        containsi: query,
+                      },
+                    },
+                    {
+                      body: {
+                        containsi: query,
+                      },
+                    },
+                  ]
+                : []),
+            ],
             and: [
               ...(filters ? [filters] : []),
               {
