@@ -277,6 +277,7 @@ const TagsTitle = styled.div`
   gap: var(--lsd-spacing-8);
 
   span {
+    cursor: pointer;
     color: var(--lsd-color-primary);
     text-decoration: underline;
   }
@@ -293,4 +294,8 @@ const ShowMoreTagsButton = styled.div`
   box-sizing: border-box;
 
   margin-bottom: 66px;
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
+    display: none;
+  }
 `
