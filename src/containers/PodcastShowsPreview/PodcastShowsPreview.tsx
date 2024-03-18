@@ -157,6 +157,11 @@ const Root = styled('div')`
       display: flex;
       flex-direction: column;
       gap: var(--lsd-spacing-24) 0;
+
+      ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
+        min-height: 220px;
+        box-sizing: border-box;
+      }
     }
 
     &__show-info {
@@ -194,6 +199,10 @@ const Root = styled('div')`
           text-decoration: none;
           display: inline-block;
         }
+      }
+
+      ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
+        margin-top: auto;
       }
     }
 

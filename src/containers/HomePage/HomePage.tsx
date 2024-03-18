@@ -1,6 +1,7 @@
-import { Button, Typography } from '@acid-info/lsd-react'
+import { useIsMobile } from '@/utils/ui.utils'
+import { Button, ChevronRightIcon, Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Grid, GridItem } from '../../components/Grid/Grid'
 import { Hero } from '../../components/Hero'
 import { PostsGrid } from '../../components/PostsGrid'
@@ -26,6 +27,9 @@ export type HomePageProps = React.DetailedHTMLProps<
   }
 }
 
+const TAGS_DESKTOP_LIMIT = 12
+const TAGS_MOBILE_LIMIT = 6
+
 export const HomePage: React.FC<HomePageProps> = ({
   data,
   data: { highlighted = [], shows = [], tags: _tags = [], latest },
@@ -39,6 +43,27 @@ export const HomePage: React.FC<HomePageProps> = ({
         .sort((a, b) => (a.postsCount! > b.postsCount! ? -1 : 1)),
     [_tags],
   )
+  const isMobile = useIsMobile()
+
+  const [tagsLimit, setTagsLimit] = React.useState(
+    isMobile ? TAGS_MOBILE_LIMIT : TAGS_DESKTOP_LIMIT,
+  )
+
+  useEffect(() => {
+    setTagsLimit(isMobile ? TAGS_MOBILE_LIMIT : TAGS_DESKTOP_LIMIT)
+  }, [isMobile])
+
+  const handleTagsLimit = () => {
+    if (isMobile) {
+      setTagsLimit(
+        tagsLimit === TAGS_MOBILE_LIMIT ? tags?.length : TAGS_MOBILE_LIMIT,
+      )
+    } else {
+      setTagsLimit(
+        tagsLimit === TAGS_DESKTOP_LIMIT ? tags?.length : TAGS_DESKTOP_LIMIT,
+      )
+    }
+  }
 
   return (
     <Root {...props}>
@@ -105,13 +130,20 @@ export const HomePage: React.FC<HomePageProps> = ({
         <PodcastShowsPreview data={{ shows }} />
 
         <BrowseAll title="Browser all" size="large">
-          <div>
+          <TagsTitle>
             <Typography component="h2" variant="body1">
               Tags
             </Typography>
-          </div>
+            <ChevronRightIcon />
+            <span onClick={handleTagsLimit}>
+              {tagsLimit === TAGS_DESKTOP_LIMIT ||
+              tagsLimit === TAGS_MOBILE_LIMIT
+                ? 'See all'
+                : 'See less'}
+            </span>
+          </TagsTitle>
           <Grid xs={{ cols: 1 }} sm={{ cols: 4 }}>
-            {tags.map((tag) => (
+            {tags?.slice(0, tagsLimit)?.map((tag) => (
               <GridItem key={tag.name} cols={1}>
                 <TagCard
                   href={`/search?topic=${tag.name}`}
@@ -121,6 +153,9 @@ export const HomePage: React.FC<HomePageProps> = ({
               </GridItem>
             ))}
           </Grid>
+          <ShowMoreTagsButton onClick={handleTagsLimit}>
+            See {tagsLimit === TAGS_MOBILE_LIMIT ? 'more' : 'less'} tags
+          </ShowMoreTagsButton>
           <AllPosts title="All posts">
             <PostsGrid
               shows={shows}
@@ -234,4 +269,28 @@ const AllPosts = styled(Section)`
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
     margin-top: var(--lsd-spacing-40);
   }
+`
+
+const TagsTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: var(--lsd-spacing-8);
+
+  span {
+    color: var(--lsd-color-primary);
+    text-decoration: underline;
+  }
+`
+
+const ShowMoreTagsButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 40px;
+  border: 1px solid rgb(var(--lsd-border-primary));
+  margin-top: 40px;
+  height: 56px;
+  box-sizing: border-box;
+
+  margin-bottom: 66px;
 `

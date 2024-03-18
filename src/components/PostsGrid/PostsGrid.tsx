@@ -139,7 +139,7 @@ const createGridStyles = ({
     const firstRow = new Array(pattern?.[0]?.cols ?? 0)
       .fill(null)
       .map((v, i) => i + 1)
-      .map((i) => `&:nth-child(${i})`)
+      .map((i) => `&:nth-of-type(${i})`)
       .join(', ')
 
     return css`
@@ -165,10 +165,10 @@ const createGridStyles = ({
             const firstRow = new Array(p.cols)
               .fill(null)
               .map((v, i) => i + 1)
-              .map((i) => `&:nth-child(${i})`)
+              .map((i) => `&:nth-of-type(${i})`)
               .join(', ')
 
-            const rowSelectors = selectors[i].map((s) => `&:nth-child(${s})`)
+            const rowSelectors = selectors[i].map((s) => `&:nth-of-type(${s})`)
             const firstSelector = rowSelectors[0]
             const lastSelector = rowSelectors[rowSelectors.length - 1]
 

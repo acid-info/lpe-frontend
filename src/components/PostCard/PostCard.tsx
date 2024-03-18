@@ -186,7 +186,7 @@ PostCard.styles = {
       ${lsdUtils.typography('h5')}
 
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       max-height: calc(3 * var(--lsd-h5-lineHeight));
     }
@@ -198,7 +198,7 @@ PostCard.styles = {
     }
 
     .post-card__label {
-      margin-top: var(--lsd-spacing-8);
+      margin-top: var(--lsd-spacing-16);
 
       * {
         ${lsdUtils.typography('subtitle4')}
@@ -243,7 +243,7 @@ PostCard.styles = {
       ${lsdUtils.typography('h2')}
 
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       max-height: calc(3 * var(--lsd-h2-lineHeight));
     }
@@ -295,7 +295,7 @@ PostCard.styles = {
       ${lsdUtils.typography('h1')}
 
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       max-height: calc(3 * var(--lsd-h1-lineHeight));
     }
@@ -367,13 +367,13 @@ PostCard.styles = {
         ${lsdUtils.typography('h4')}
 
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         max-height: calc(3 * var(--lsd-h4-lineHeight));
       }
 
       .post-card__label {
-        margin-top: var(--lsd-spacing-8);
+        margin-top: var(--lsd-spacing-16);
 
         * {
           ${lsdUtils.typography('subtitle4')}
