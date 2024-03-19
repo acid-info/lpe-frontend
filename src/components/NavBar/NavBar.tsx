@@ -209,10 +209,6 @@ const NavBarContainer = styled.nav<{
   style {
     display: none !important;
   }
-
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
-    border-bottom: 1px solid rgb(var(--lsd-theme-primary));
-  }
 `
 
 const NavLinksContainer = styled.div`
