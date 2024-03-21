@@ -9,7 +9,7 @@ const ArticleFootnotes = ({
   footnotes: LPE.Article.Footnotes
 }) =>
   footnotes.length > 0 ? (
-    <Collapse label="Footenotes">
+    <Collapse label="Footnotes">
       {footnotes.map((footnote, idx) => (
         <Reference key={idx}>
           <Typography
