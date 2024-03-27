@@ -72,26 +72,11 @@ export const HomePage: React.FC<HomePageProps> = ({
       </HeroContainer>
       <Container>
         <div>
-          <PostsGrid
-            shows={shows}
-            posts={highlighted.slice(0, 1)}
-            pattern={[{ cols: 1, size: 'large' }]}
-            breakpoints={[
-              {
-                breakpoint: 'xs',
-                pattern: [{ cols: 1, size: 'small' }],
-              },
-              {
-                breakpoint: 'md',
-                pattern: [{ cols: 1, size: 'large' }],
-              },
-            ]}
-          />
-          <Featured>
+          <FeaturedFirst>
             <PostsGrid
               shows={shows}
-              posts={[...highlighted.slice(0, 1), ...highlighted.slice(0, 1)]}
-              pattern={[{ cols: 2, size: 'large' }]}
+              posts={highlighted.slice(0, 1)}
+              pattern={[{ cols: 1, size: 'large' }]}
               breakpoints={[
                 {
                   breakpoint: 'xs',
@@ -103,7 +88,24 @@ export const HomePage: React.FC<HomePageProps> = ({
                 },
               ]}
             />
-          </Featured>
+          </FeaturedFirst>
+          <FeaturedSecond>
+            <PostsGrid
+              shows={shows}
+              posts={[...highlighted.slice(0, 1), ...highlighted.slice(0, 1)]}
+              pattern={[{ cols: 2, size: 'large' }]}
+              breakpoints={[
+                {
+                  breakpoint: 'xs',
+                  pattern: [{ cols: 2, size: 'small' }],
+                },
+                {
+                  breakpoint: 'md',
+                  pattern: [{ cols: 2, size: 'large' }],
+                },
+              ]}
+            />
+          </FeaturedSecond>
           <Section title="Latest posts" bordered={highlighted.length > 0}>
             <PostsGrid
               shows={shows}
@@ -317,7 +319,15 @@ const ShowMoreTagsButton = styled.div`
   }
 `
 
-const Featured = styled.div`
+const FeaturedFirst = styled.div`
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'up')} {
+    .show-details {
+      margin-top: var(--lsd-spacing-32);
+    }
+  }
+`
+
+const FeaturedSecond = styled.div`
   margin-bottom: var(--lsd-spacing-64);
 
   h3 {
