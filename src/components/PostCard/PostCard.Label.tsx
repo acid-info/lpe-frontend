@@ -20,9 +20,9 @@ export const PostCardLabel: FC<Props> = ({
 }) => {
   return (
     <Container {...props} className={`post-card__label ${props.className}`}>
-      <Typography variant="subtitle2" genericFontFamily="sans-serif">
-        {contentType.toUpperCase()}
-      </Typography>
+      <ContentType variant="subtitle2" genericFontFamily="sans-serif">
+        {contentType}
+      </ContentType>
       {date && (
         <>
           <DotIcon color="primary" />
@@ -58,4 +58,8 @@ const Container = styled.div`
 
 const Date = styled(Typography)`
   text-transform: uppercase;
+`
+
+const ContentType = styled(Typography)`
+  text-transform: capitalize;
 `

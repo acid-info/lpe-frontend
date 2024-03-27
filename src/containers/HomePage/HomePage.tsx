@@ -87,6 +87,23 @@ export const HomePage: React.FC<HomePageProps> = ({
               },
             ]}
           />
+          <Featured>
+            <PostsGrid
+              shows={shows}
+              posts={[...highlighted.slice(0, 1), ...highlighted.slice(0, 1)]}
+              pattern={[{ cols: 2, size: 'large' }]}
+              breakpoints={[
+                {
+                  breakpoint: 'xs',
+                  pattern: [{ cols: 1, size: 'small' }],
+                },
+                {
+                  breakpoint: 'md',
+                  pattern: [{ cols: 1, size: 'large' }],
+                },
+              ]}
+            />
+          </Featured>
           <Section title="Latest posts" bordered={highlighted.length > 0}>
             <PostsGrid
               shows={shows}
@@ -297,5 +314,37 @@ const ShowMoreTagsButton = styled.div`
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
     display: none;
+  }
+`
+
+const Featured = styled.div`
+  margin-bottom: var(--lsd-spacing-64);
+
+  h3 {
+    font-size: var(--lsd-h3-fontSize) !important;
+    font-weight: var(--lsd-h3-fontWeight) !important;
+    line-height: var(--lsd-h3-lineHeight) !important;
+  }
+
+  .post-card-wrapper {
+    border-top: 1px solid rgb(var(--lsd-border-primary));
+  }
+
+  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
+    margin-top: var(--lsd-spacing-40);
+    margin-bottom: var(--lsd-spacing-80);
+
+    .post-card-wrapper {
+      width: 327px;
+
+      & > div {
+        width: 327px;
+      }
+    }
+
+    & > div > div {
+      display: flex !important;
+      overflow-x: auto !important;
+    }
   }
 `
