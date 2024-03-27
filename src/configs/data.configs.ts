@@ -80,6 +80,11 @@ export const FooterLinksItems: {
           href: `https://www.youtube.com/${siteConfigs.youtubeHandle}`,
           key: 'youtube',
         },
+        {
+          label: 'RSS',
+          href: `https://press.logos.co/rss/main.xml`,
+          key: 'rss',
+        },
       ],
     },
     {
@@ -88,7 +93,7 @@ export const FooterLinksItems: {
       links: [
         { label: 'Terms of Use', href: '/terms' },
         { label: 'Privacy Policy', href: '/privacy-policy' },
-        { label: 'about', href: '/about' },
+        { label: 'About', href: '/about' },
       ],
     },
   ],

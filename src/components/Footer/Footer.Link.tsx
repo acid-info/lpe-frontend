@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 
 export const FooterLink = styled(Typography)`
   width: fit-content;
-  text-transform: capitalize;
+
   &:not(:last-child) {
     &:after {
       width: 2px;
