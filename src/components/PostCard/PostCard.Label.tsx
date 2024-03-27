@@ -57,7 +57,7 @@ const Container = styled.div`
 `
 
 const Date = styled(Typography)`
-  text-transform: uppercase;
+  text-transform: capitalize;
 `
 
 const ContentType = styled(Typography)`
