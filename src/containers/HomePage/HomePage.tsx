@@ -320,9 +320,9 @@ const ShowMoreTagsButton = styled.div`
 `
 
 const FeaturedFirst = styled.div`
-  ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'up')} {
+  ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
     .show-details {
-      margin-top: var(--lsd-spacing-32);
+      margin-top: var(--lsd-spacing-32) !important;
     }
   }
 `
