@@ -330,10 +330,10 @@ const FeaturedFirst = styled.div`
 const FeaturedSecond = styled.div`
   margin-bottom: var(--lsd-spacing-64);
 
-  h3 {
-    font-size: var(--lsd-h3-fontSize) !important;
-    font-weight: var(--lsd-h3-fontWeight) !important;
-    line-height: var(--lsd-h3-lineHeight) !important;
+  .post-card__title-text {
+    font-size: var(--lsd-h5-fontSize) !important;
+    font-weight: var(--lsd-h5-fontWeight) !important;
+    line-height: var(--lsd-h5-lineHeight) !important;
   }
 
   .post-card-wrapper {

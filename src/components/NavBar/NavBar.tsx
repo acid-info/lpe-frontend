@@ -188,11 +188,6 @@ const NavBarContainer = styled.nav<{
   justify-content: space-between;
   position: relative;
   height: 100%;
-  border-bottom: 1px solid
-    ${(props) =>
-      props.bordered
-        ? 'rgb(var(--lsd-theme-primary))'
-        : 'rgb(var(--lsd-theme-secondary))'};
 
   margin: auto;
 
