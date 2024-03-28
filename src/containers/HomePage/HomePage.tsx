@@ -326,6 +326,10 @@ const ShowMoreTagsButton = styled.div`
 
 const FeaturedFirst = styled.div`
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'up')} {
+    .post-card {
+      gap: 0 var(--lsd-spacing-16) !important;
+    }
+
     .show-details {
       margin-top: var(--lsd-spacing-32) !important;
     }
