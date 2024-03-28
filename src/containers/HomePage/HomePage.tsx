@@ -92,7 +92,12 @@ export const HomePage: React.FC<HomePageProps> = ({
           <FeaturedSecond>
             <PostsGrid
               shows={shows}
-              posts={[...highlighted.slice(0, 1), ...highlighted.slice(0, 1)]}
+              posts={[
+                ...latest?.data
+                  .filter((item: any) => item?.type === 'article')
+                  .slice(0, 1),
+                ...highlighted.slice(0, 1),
+              ]}
               pattern={[{ cols: 2, size: 'large' }]}
               breakpoints={[
                 {
@@ -324,16 +329,38 @@ const FeaturedFirst = styled.div`
     .show-details {
       margin-top: var(--lsd-spacing-32) !important;
     }
+
+    .post-card__subtitle {
+      margin-top: var(--lsd-spacing-16) !important;
+    }
   }
 `
 
 const FeaturedSecond = styled.div`
   margin-bottom: var(--lsd-spacing-64);
 
+  .post-card {
+    gap: 0 var(--lsd-spacing-16) !important;
+  }
+
   .post-card__title-text {
     font-size: var(--lsd-h5-fontSize) !important;
     font-weight: var(--lsd-h5-fontWeight) !important;
     line-height: var(--lsd-h5-lineHeight) !important;
+  }
+
+  .post-card__label {
+    margin-top: var(--lsd-spacing-16) !important;
+  }
+
+  .post-card__label * {
+    font-size: var(--lsd-subtitle4-fontSize) !important;
+    font-weight: var(--lsd-subtitle4-fontWeight) !important;
+    line-height: var(--lsd-subtitle4-lineHeight) !important;
+  }
+
+  .post-card__subtitle {
+    margin-top: var(--lsd-spacing-16) !important;
   }
 
   .post-card-wrapper {
@@ -343,6 +370,11 @@ const FeaturedSecond = styled.div`
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'exact')} {
     margin-top: var(--lsd-spacing-40);
     margin-bottom: var(--lsd-spacing-80);
+
+    .row {
+      margin-right: -16px;
+      padding-right: 16px;
+    }
 
     .post-card-wrapper {
       width: 327px;
