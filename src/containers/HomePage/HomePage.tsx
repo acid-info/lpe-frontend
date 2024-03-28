@@ -365,6 +365,9 @@ const FeaturedSecond = styled.div`
 
   .post-card__subtitle {
     margin-top: var(--lsd-spacing-16) !important;
+    font-size: var(--lsd-subtitle4-fontSize) !important;
+    font-weight: var(--lsd-subtitle4-fontWeight) !important;
+    line-height: var(--lsd-subtitle4-lineHeight) !important;
   }
 
   .post-card-wrapper {
