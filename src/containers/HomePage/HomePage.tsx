@@ -65,6 +65,17 @@ export const HomePage: React.FC<HomePageProps> = ({
     }
   }
 
+  const firstFeaturedPost =
+    highlighted.sort(
+      (a, b) =>
+        new Date(b.publishedAt as string).getTime() -
+        new Date(a.publishedAt as string).getTime(),
+    )[0] ?? highlighted[0]
+
+  const secondFeaturedPosts = highlighted.filter(
+    (post) => post.id !== firstFeaturedPost?.id,
+  ) ?? [highlighted[1], highlighted[2]]
+
   return (
     <Root {...props}>
       <HeroContainer>
@@ -75,7 +86,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <FeaturedFirst>
             <PostsGrid
               shows={shows}
-              posts={highlighted.slice(0, 1)}
+              posts={[firstFeaturedPost]}
               pattern={[{ cols: 1, size: 'large' }]}
               breakpoints={[
                 {
@@ -92,7 +103,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <FeaturedSecond>
             <PostsGrid
               shows={shows}
-              posts={[highlighted[1], highlighted[2]]}
+              posts={secondFeaturedPosts}
               pattern={[{ cols: 2, size: 'large' }]}
               breakpoints={[
                 {
