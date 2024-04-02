@@ -92,12 +92,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           <FeaturedSecond>
             <PostsGrid
               shows={shows}
-              posts={[
-                ...latest?.data
-                  .filter((item: any) => item?.type === 'article')
-                  .slice(0, 1),
-                ...highlighted.slice(0, 1),
-              ]}
+              posts={[highlighted[1], highlighted[2]]}
               pattern={[{ cols: 2, size: 'large' }]}
               breakpoints={[
                 {
