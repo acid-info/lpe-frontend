@@ -14,14 +14,10 @@ export const FooterBuPanel = () => {
           genericFontFamily="sans-serif"
           variant="body2"
         >
-          Logos
-        </Typography>
-        <Typography
-          component="div"
-          genericFontFamily="sans-serif"
-          variant="body2"
-        >
-          Business Units:
+          Built by{' '}
+          <a href="https://free.technology/" target="_blank">
+            IFT
+          </a>
         </Typography>
       </BUInfo>
       <BUs>
