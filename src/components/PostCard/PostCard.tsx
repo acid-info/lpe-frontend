@@ -243,7 +243,7 @@ PostCard.styles = {
       ${lsdUtils.typography('h2')}
 
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       max-height: calc(3 * var(--lsd-h2-lineHeight));
     }
