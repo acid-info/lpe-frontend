@@ -30,6 +30,10 @@ const Reference = styled.div`
   display: flex;
   padding: 8px 14px;
   gap: 8px;
+
+  p {
+    word-break: break-word;
+  }
 `
 
 export default ArticleFootnotes
