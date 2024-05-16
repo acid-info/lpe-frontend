@@ -76,6 +76,7 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           }
 
           .anchor {
+            position: relative;
             margin-top: calc(-1 * var(--lpe-article-rendered-margin-top));
             padding-bottom: var(--lpe-article-rendered-margin-top);
             margin-bottom: -16px;
