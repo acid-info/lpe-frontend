@@ -85,16 +85,6 @@ pipeline {
       }
     }
 
-    stage('Push') {
-      steps { script {
-        withDockerRegistry([
-          credentialsId: 'harbor-acid-info-private-robot', url: 'https://${DOCKER_REGISTRY}'
-        ]) {
-          image.push()
-        }
-      } }
-    }
-
     stage('Deploy') {
       when { expression { params.IMAGE_TAG != '' } }
       steps { script {
