@@ -13,18 +13,16 @@ const getMaxRenderIndex = (isMobile: boolean) => (isMobile ? 7 : 20)
 
 const DEFUALT_RENDER_COUNT = 6
 
+const OFFSET = 20
+
 const EpisodeBlocks = ({ data }: Props) => {
-  const [showMore, setShowMore] = useState(false)
+  const [showMore, setShowMore] = useState(true)
   const blocks = data?.content as LPE.Post.TextBlock[]
   const isMobile = useWindowSize().width < 756
   const [count, setCount] = useState(DEFUALT_RENDER_COUNT)
 
   const handleShowMore = () => {
-    setCount((prev) =>
-      prev + DEFUALT_RENDER_COUNT > blocks.length
-        ? blocks.length
-        : prev + DEFUALT_RENDER_COUNT,
-    )
+    setCount((prev) => prev + OFFSET)
 
     if (count >= blocks.length) {
       setShowMore(false)
@@ -39,11 +37,7 @@ const EpisodeBlocks = ({ data }: Props) => {
       {blocks.slice(0, count).map((block, index) => (
         <RenderEpisodeBlock key={'block-' + index} block={block} />
       ))}
-      {blocks.length > getMaxRenderIndex(isMobile) && (
-        <ShowButton onClick={handleShowMore}>
-          {showMore ? 'Show Less' : 'Show More'}
-        </ShowButton>
-      )}
+      {showMore && <ShowButton onClick={handleShowMore}>Show More</ShowButton>}
     </BlocksContainer>
   )
 }
