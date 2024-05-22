@@ -111,6 +111,7 @@ export const postTransformer: Transformer<
         authors,
         content,
         episodeNumber: attributes.episode_number,
+        summary: attributes.summary,
         showId: attributes.podcast_show.data?.id || null,
         modifiedAt: publishedAt,
         // will be filled in later

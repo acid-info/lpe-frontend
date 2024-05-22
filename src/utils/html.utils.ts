@@ -80,3 +80,7 @@ export function extractContentFromHTML(htmlString: string) {
     return null
   }
 }
+
+export function removeDynamicSection(input: string) {
+  return input.replace(/<section[^>]*>.*?<\/section>/gs, '')
+}

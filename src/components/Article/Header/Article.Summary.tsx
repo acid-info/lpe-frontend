@@ -1,3 +1,4 @@
+import { removeDynamicSection } from '@/utils/html.utils'
 import { lsdUtils } from '@/utils/lsd.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -7,14 +8,20 @@ type Props = {
   className?: string
   showLabel?: boolean
 }
-const ArticleSummary = ({ summary, className, showLabel }: Props) => (
-  <ArticleSummaryContainer className={className}>
-    {showLabel && <Typography variant="body3">summary</Typography>}
-    <SummaryParagraph variant="h6" component={'p'}>
-      {summary}
-    </SummaryParagraph>
-  </ArticleSummaryContainer>
-)
+const ArticleSummary = ({ summary, className, showLabel }: Props) => {
+  return (
+    <ArticleSummaryContainer className={className}>
+      {showLabel && <Typography variant="body3">summary</Typography>}
+      <SummaryParagraph
+        variant="h6"
+        component={'div'}
+        dangerouslySetInnerHTML={{
+          __html: removeDynamicSection(summary),
+        }}
+      ></SummaryParagraph>
+    </ArticleSummaryContainer>
+  )
+}
 
 const ArticleSummaryContainer = styled('div')`
   display: block;
@@ -30,6 +37,7 @@ const ArticleSummaryContainer = styled('div')`
 const SummaryParagraph = styled(Typography)`
   display: block;
   padding: 24px 0;
+  white-space: pre-wrap;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'sm', 'down')} {
     ${lsdUtils.typography('subtitle1')}

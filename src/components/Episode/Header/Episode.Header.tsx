@@ -18,6 +18,7 @@ export type EpisodeHeaderProps = LPE.Podcast.Document & {
 
 const EpisodeHeader = ({
   channel,
+  summary,
   title,
   description,
   publishedAt,
@@ -59,7 +60,7 @@ const EpisodeHeader = ({
       <TagsAndSocial tags={tags.map((tag) => tag.name)} />
       {channels && <EpisodeChannels channels={channels} />}
       {description && (
-        <ArticleSummary summary={description} showLabel={false} />
+        <ArticleSummary summary={summary ?? description} showLabel={false} />
       )}
     </EpisodeHeaderContainer>
   )

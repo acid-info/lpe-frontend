@@ -239,6 +239,7 @@ export namespace LPE {
       isDraft?: boolean
       coverImage?: Image.Document
       show?: Show
+      summary?: string
       type: typeof LPE.PostTypes.Podcast
     }
 
