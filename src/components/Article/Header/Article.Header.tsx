@@ -52,13 +52,15 @@ const ArticleHeader = ({
           {subtitle}
         </ArticleSubtitle>
       )}
+      <AuthorsContainer>
+        <Authors authors={authors} />
+      </AuthorsContainer>
+
       <TagsAndSocial
         tags={tags.map((tag) => tag.name)}
         className={'articleTags'}
       />
-      <AuthorsContainer>
-        <Authors authors={authors} />
-      </AuthorsContainer>
+
       {coverImage && (
         <ArticleImageBlockWrapper
           image={coverImage}
@@ -73,6 +75,8 @@ const ArticleHeader = ({
 }
 
 const ArticleHeaderContainer = styled.header`
+  margin-bottom: 24px;
+
   .mobileSummary {
     display: none;
   }
@@ -123,7 +127,7 @@ const ArticleSubtitle = styled(CustomTypography)`
 
 const AuthorsContainer = styled.div`
   //margin-block: 24px;
-  margin-top: 24px;
+  margin-top: 16px;
   margin-bottom: 32px;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {

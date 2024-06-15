@@ -159,7 +159,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
         <PodcastShowsPreview data={{ shows }} />
 
-        <BrowseAll title="Browser all" size="large">
+        <BrowseAll title="Browse all" size="large">
           <TagsTitle>
             <Typography component="h2" variant="body1">
               Tags
@@ -340,6 +340,11 @@ const FeaturedFirst = styled.div`
       margin-top: var(--lsd-spacing-32) !important;
     }
 
+    .post-card__title h3 {
+      font-size: var(--lsd-h2-fontSize) !important;
+      line-height: var(--lsd-h2-lineHeight) !important;
+    }
+
     .post-card__subtitle {
       margin-top: var(--lsd-spacing-16) !important;
     }
@@ -354,9 +359,8 @@ const FeaturedSecond = styled.div`
   }
 
   .post-card__title-text {
-    font-size: var(--lsd-h5-fontSize) !important;
-    font-weight: var(--lsd-h5-fontWeight) !important;
-    line-height: var(--lsd-h5-lineHeight) !important;
+    font-size: var(--lsd-h4-fontSize) !important;
+    line-height: var(--lsd-h4-lineHeight) !important;
   }
 
   .post-card__label {
@@ -365,7 +369,6 @@ const FeaturedSecond = styled.div`
 
   .post-card__label * {
     font-size: var(--lsd-subtitle4-fontSize) !important;
-    font-weight: var(--lsd-subtitle4-fontWeight) !important;
     line-height: var(--lsd-subtitle4-lineHeight) !important;
   }
 

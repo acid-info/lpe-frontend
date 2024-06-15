@@ -250,8 +250,8 @@ const Root = styled('div')`
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     .post-card__title-text {
-      font-size: var(--lsd-h5-fontSize) !important;
-      line-height: var(--lsd-h5-lineHeight) !important;
+      font-size: var(--lsd-h4-fontSize) !important;
+      line-height: var(--lsd-h4-lineHeight) !important;
     }
   }
 `

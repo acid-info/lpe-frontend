@@ -65,6 +65,15 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           :root {
             --lpe-nav-rendered-height: ${uiConfigs.navbarRenderedHeight}px;
             --lpe-article-rendered-margin-top: ${uiConfigs.articleRenderedMT}px;
+
+            --lsd-h1-fontSize: 44px;
+            --lsd-h1-lineHeight: 54px;
+            --lsd-h2-fontSize: 36px;
+            --lsd-h2-lineHeight: 48px;
+            --lsd-h3-fontSize: 28px;
+            --lsd-h3-lineHeight: 42px;
+            --lsd-h4-fontSize: 20px;
+            --lsd-h4-lineHeight: 30px;
           }
 
           a,
@@ -113,6 +122,10 @@ export default function App({ Component, pageProps }: AppLayoutProps) {
           }
           .lsd-dropdown-item__label {
             text-transform: capitalize;
+          }
+
+          .lsd-quote {
+            margin-block: 8px;
           }
         `}
       />

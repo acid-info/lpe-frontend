@@ -28,7 +28,9 @@ export default function PodcastShowCard({
         height={show.logo.height}
       />
       <ShowData>
-        <Title variant="h3">{show.title}</Title>
+        <Title variant="h2" genericFontFamily="serif">
+          {show.title}
+        </Title>
         <PodcastHost show={show} />
         <Description
           variant="body2"

@@ -14,7 +14,7 @@ export const JoinDiscordCard: FC<JoinDiscordCardProps> = ({
 }) => {
   return (
     <JoinDiscordCardContainer {...props}>
-      <Typography variant="body1">Join the discussion</Typography>
+      <Typography variant="h3">Join the discussion</Typography>
       <Link
         href={discordHref}
         style={{

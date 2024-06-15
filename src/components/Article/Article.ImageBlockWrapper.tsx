@@ -20,7 +20,7 @@ export const ArticleImageBlockWrapper = ({ image, order }: Props) => {
 }
 
 const Container = styled.figure`
-  margin: 32px 0 32px 0;
+  margin: 40px 0 40px 0;
   padding: 0;
   display: flex;
   flex-direction: column;

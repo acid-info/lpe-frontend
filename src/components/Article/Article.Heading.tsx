@@ -62,7 +62,7 @@ export const ArticleHeading = ({
 
 const Headline = styled(Typography)`
   white-space: pre-wrap;
-  margin-top: 16px;
+  margin-top: 24px;
 
   ${(props) => lsdUtils.breakpoint(props.theme, 'xs', 'down')} {
     &.title {

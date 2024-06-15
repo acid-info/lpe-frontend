@@ -188,7 +188,7 @@ PostCard.styles = {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
-      max-height: calc(3 * var(--lsd-h5-lineHeight));
+      max-height: calc(3 * var(--lsd-h4-lineHeight));
     }
 
     .post-card__subtitle {

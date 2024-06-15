@@ -13,7 +13,7 @@ const ArticleSummary = ({ summary, className, showLabel }: Props) => {
     <ArticleSummaryContainer className={className}>
       {showLabel && <Typography variant="body3">summary</Typography>}
       <SummaryParagraph
-        variant="h6"
+        variant="h4"
         component={'div'}
         dangerouslySetInnerHTML={{
           __html: removeDynamicSection(summary),
