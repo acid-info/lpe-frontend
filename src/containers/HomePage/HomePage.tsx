@@ -348,6 +348,10 @@ const FeaturedFirst = styled.div`
     .post-card__subtitle {
       margin-top: var(--lsd-spacing-16) !important;
     }
+
+    .post-card-wrapper > div {
+      gap: 0 64px !important;
+    }
   }
 `
 

@@ -77,6 +77,10 @@ const ArticleHeader = ({
 const ArticleHeaderContainer = styled.header`
   margin-bottom: 24px;
 
+  h1 {
+    margin-bottom: 16px;
+  }
+
   .mobileSummary {
     display: none;
   }

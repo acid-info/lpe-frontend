@@ -31,4 +31,38 @@ const ArticleContainer = styled.article`
   gap: 16px;
   max-width: 700px;
   padding-bottom: 80px;
+
+  h2,
+  h3 {
+    margin-bottom: unset;
+  }
+
+  // p tag does not include strong tag as a child
+  h3 + span + p {
+    margin-top: 16px;
+  }
+
+  h3 + span + p:has(strong) {
+    margin-top: unset;
+  }
+
+  /* h3 + span + p:has(strong) + span + p {
+    margin-top: 16px;
+  } */
+
+  h2 + span + p {
+    margin-top: 16px;
+  }
+
+  h2 + span + p:has(strong) {
+    margin-top: unset;
+  }
+
+  /* h2 + span + p:has(strong) + span + p {
+    margin-top: 16px;
+  } */
+
+  h2 + span + h3 {
+    margin-top: unset;
+  }
 `

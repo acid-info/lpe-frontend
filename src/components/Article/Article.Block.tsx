@@ -181,6 +181,10 @@ const Paragraph = styled(Typography)`
   &.u-text-align-center {
     text-align: center;
   }
+
+  & > strong {
+    margin-bottom: 16px;
+  }
 `
 
 const IframeContainer = styled.div<{ isSimplecast?: boolean }>`
