@@ -1,7 +1,7 @@
 import { Head, Html, Main, NextScript } from 'next/document'
 import { defaultThemeState } from '../states/themeState'
 
-const fathom = process.env.FATHOM_SITE_ID || 'DFOUG'
+const fathom = 'DFOUG'
 
 export default function Document() {
   return (
