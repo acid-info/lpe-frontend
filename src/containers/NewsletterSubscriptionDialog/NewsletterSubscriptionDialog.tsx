@@ -2,7 +2,6 @@ import { FullscreenDialog } from '@/components/FullscreenDialog'
 import { LogosIcon } from '@/components/Icons/LogosIcon'
 import NewsletterSubscriptionForm from '@/components/NewsletterSubscriptionForm/NewsletterSubscriptionForm'
 import { copyConfigs } from '@/configs/copy.configs'
-import { api } from '@/services/api.service'
 import { lsdUtils } from '@/utils/lsd.utils'
 import { Typography } from '@acid-info/lsd-react'
 import styled from '@emotion/styled'
@@ -52,7 +51,7 @@ export default function NewsletterSubscriptionDialog({
     setSuccessMessage('')
 
     try {
-      const firstName = e.currentTarget.firstName.value || ''
+      // const firstName = e.currentTarget.firstName.value || ''
       const email = e.currentTarget.email.value
 
       if (email === 'successtest@successtest.com') {
@@ -60,12 +59,26 @@ export default function NewsletterSubscriptionDialog({
       } else if (email === 'errortest@errortest.com') {
         setErrorMessage(defaultErrorMessage)
       } else {
-        const apiResponse = await api.subscribeToMailingList({
-          email,
-          name: firstName,
-        })
+        const res = await fetch(
+          `https://odoo.logos.co/website_mass_mailing/subscribe_ghost`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              jsonrpc: '2.0',
+              method: 'call',
+              params: {
+                email: email,
+                type: 'operators',
+                subscription_type: 'email',
+              },
+            }),
+          },
+        )
 
-        setSuccessMessage(apiResponse.result.message)
+        setSuccessMessage('Thank you for subscribing!')
       }
     } catch (error) {
       setErrorMessage(defaultErrorMessage)

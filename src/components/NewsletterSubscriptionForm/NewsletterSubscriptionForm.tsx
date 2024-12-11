@@ -53,12 +53,12 @@ export default function NewsletterSubscriptionForm({
         onSubmit={handleFormSubmit}
         hideForm={!!successMessage}
       >
-        <StyledTextField
+        {/* <StyledTextField
           id="firstName"
           inputProps={{ name: 'firstName', disabled }}
           placeholder="First name or pseudonym"
           disabled={disabled}
-        />
+        /> */}
 
         <StyledTextField
           id="email"
