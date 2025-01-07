@@ -71,7 +71,7 @@ export default function NewsletterSubscriptionDialog({
               method: 'call',
               params: {
                 email: email,
-                type: 'operators',
+                type: 'logos',
                 subscription_type: 'email',
               },
             }),
