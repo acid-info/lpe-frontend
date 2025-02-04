@@ -73,10 +73,18 @@ export default function NewsletterSubscriptionDialog({
                 email: email,
                 type: 'logos',
                 subscription_type: 'email',
+                newsletter: '675af2e4deb47200012e22c4',
               },
             }),
           },
         )
+
+        const data = await res.json()
+
+        if (data?.result?.errors && data?.result?.errors[0]?.context?.length) {
+          setErrorMessage(data?.result?.errors[0].context)
+          return
+        }
 
         setSuccessMessage('Thank you for subscribing!')
       }
