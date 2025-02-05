@@ -103,7 +103,7 @@ export default function NewsletterSubscriptionDialog({
           {copyConfigs.navbar.title}
         </PressLogoType>
       </LogosIconAndTitleContainer>
-      <Typography variant="body2">Subscribe for update</Typography>
+      <Typography variant="body2">Subscribe for updates</Typography>
 
       <NewsletterSubscriptionForm
         handleFormSubmit={handleFormSubmit}
