@@ -73,7 +73,7 @@ export default function NewsletterSubscriptionDialog({
                 email: email,
                 type: 'logos',
                 subscription_type: 'email',
-                newsletter: '675af2e4deb47200012e22c4',
+                newsletter: '679a07eedeb47200012eebc5',
               },
             }),
           },
